@@ -251,6 +251,7 @@
 - A 用真实 Python worker 验证直接写入器扩展。旧补丁的 GeoPackage 与阈值 TIFF 残留均被回收，成功产物通过独立检查。主控合并五个隔离候选，88 项通过。前后比较工具读取六批真实归档并拒绝八种失配。 [原始结果](../../docs/round2/performance/p13-05-preflight.md)
 - 主控的面积布局复用增量通过 20 项专项。三个真实窗口的 18 次报告一致。DEM L 窗口的 NumPy 去重从 768 次降至 30 次，两个 DEM 窗口较首版候选快约三分之一，遥感窗口略慢。 [原始测量与 JUnit](../../docs/round2/performance/p13-05-preflight.md)
 - A 的线面裁剪候选通过 35 项专项及四次真实 L 小窗 CLI，主控合并七个补丁后 102 项通过。F 的前后对照工具修正经过归档及失配变体复验。 [复验与边界](../../docs/round2/performance/p13-05-preflight.md)
+- F 的栅格采集候选在停计时后读取归一化步骤请求。4 项专项通过，归档 DEM S 98 条请求及两个超时 run 的执行前缀与遥测一致。主控核对补丁、退出码及 JUnit。 [复验日志](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log)
 
 ## P13-06 复用证据准备
 

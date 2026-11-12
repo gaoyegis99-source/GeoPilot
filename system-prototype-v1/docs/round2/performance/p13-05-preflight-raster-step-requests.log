@@ -1,0 +1,29 @@
+workdir /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1
+source_commit feab265b22ad25ac6ae7e846a8eb88ee343afdc2
+command env PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF nice -n 19 taskset -c 31 .venv/bin/python -B -m pytest -q -p no:cacheprovider --basetemp=/dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/pytest --junitxml=/dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/pytest-junit.xml /dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/system-prototype-v1/tests/benchmarks/test_run_raster.py -k 'collects_actual_normalized_requests or status_observation or statistics_preserve'
+exit 0
+command env PYTHONDONTWRITEBYTECODE=1 nice -n 19 taskset -c 31 .venv/bin/python -B /dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/verify_profile.py docs/round2/performance
+exit 0
+command env PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF nice -n 19 taskset -c 31 .venv/bin/python -B /dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/archive_probe.py
+exit 0
+command git -C .. apply --check /dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/raster-step-requests.patch
+exit 0
+command patch --dry-run -d artifacts/test-results/p13-05-memory-comparator-reviewed.MnDC2U -p1 -i /dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/comparator-step-requests.patch
+exit 0
+....                                                                     [100%]
+=============================== warnings summary ===============================
+test_run_raster.py::test_statistics_preserve_failed_missing_and_warmup_samples
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /dev/shm/p13-05-f-raster-step-evidence-1tqymjr6/pytest-junit.xml -
+4 passed, 10 deselected, 1 warning in 2.05s
+{"case": "native-dem-s-archived", "runs": 14, "actual_step_requests": 98, "sample": "e9f9c835dde14eecaccd340053b03c98", "last": {"step_key": "calculate_area_with_equal_area_projection", "tool": {"id": "python-dem-area-stats", "version": 1}, "parameters": {"area_crs": "EPSG:6933"}, "status": "SUCCEEDED", "exit_code": 0}}
+{"case": "raster-method-l", "sample": "948656fd3bd74f3e8e63e7e89b77fdcf", "actual_step_requests": 7, "last": {"step_key": "calculate_area_with_equal_area_projection", "tool": {"id": "python-dem-area-stats", "version": 1}, "parameters": {"area_crs": "EPSG:6933"}, "status": "FAILED", "exit_code": -15}}
+{"case": "remote-method-l", "sample": "76d8024fbdb04797b0ab7222bd681626", "actual_step_requests": 8, "last": {"step_key": "calculate_change", "tool": {"id": "python-remote-sensing-calculate-change", "version": 1}, "parameters": {"change_threshold": 0.1, "area_crs": "EPSG:6933"}, "status": "FAILED", "exit_code": -15}}
+{"case": "archived-legacy-mode", "exit": 0, "parameter_evidence": "confirmed_options_only", "diagnosis": ""}
+{"case": "forensic-normalized-mode", "exit": 0, "parameter_evidence": "normalized_step_requests", "diagnosis": ""}
+{"case": "mixed-provenance", "exit": 1, "parameter_evidence": null, "diagnosis": "Incompatible benchmark evidence: Different recorded method options for ('S', 'method', 'process_cold', 'p13-01', 'method')"}
+{"case": "same-ToolRef-normalized-parameter-drift", "exit": 1, "parameter_evidence": null, "diagnosis": "Incompatible benchmark evidence: Inconsistent executed step configuration for calculate_slope_or_aspect"}
+{"case": "missing-actual-step-request", "exit": 1, "parameter_evidence": null, "diagnosis": "Incompatible benchmark evidence: Normalized step request identity differs from raster execution telemetry"}

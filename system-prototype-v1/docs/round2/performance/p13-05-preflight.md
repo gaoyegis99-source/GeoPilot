@@ -99,3 +99,5 @@ nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider \
 矢量目录使用 `summary.json`、`environment.json`、`command.log`、`inputs.json` 和 `samples.jsonl` 或其 gzip 归档。栅格和遥感使用 `--kind raster`，读取 `report.json` 和 `trials.jsonl` 或其 gzip 归档。比较仅涵盖原报告实际记录的环境身份，正式复测继续使用固定镜像及同一物理盘。工具退出 0 表示证据可对照，候选的成功次数单独记录。
 
 F 从真实归档构造变体，复现首版工具放行实际步骤参数漂移、报告计数矛盾和缺失持久终态。标为 unavailable 且带数值的 RSS 也被误算为差值。隔离修正核对原始计数、持久终态、共同已执行的步骤配置及 RSS 覆盖，拒绝这些变体。原运行超时而候选执行更多步骤时仍保留失败与成功各自统计，未以失败用时计算成功性能差值。主控从首版脚本重新应用补丁，两组验证输出均与 F 逐字节一致。旧栅格归档仅能对照已确认选项和实际工具版本。正式逐步比较还需留存实际请求与固定执行绑定。补丁及完整命令位于 `artifacts/test-results/p13-05-memory-comparator-reviewed.MnDC2U/SHA256SUMS`。 [复核原始结果](p13-05-preflight-comparator-review.log)
+
+F 的栅格采集增量在端到端墙钟停止、采样器退出后，只读获取适配器归一化步骤请求，保留工具、参数、状态及退出码。4 项专项通过。从真实归档副本核对 DEM S 的 14 个 run 共 98 条请求，以及 DEM L 和遥感 L 各一个超时 run 的 7 条和 8 条请求，均与遥测顺序和退出码一致。比较器按证据级别验证，接受同级对照，拒绝混用声明级与逐步请求级证据、同工具参数漂移及漏步。正式复测仍需固定或记录 QGIS provider 绑定与实际配置。两个补丁及复跑材料位于 `artifacts/test-results/p13-05-raster-step-requests.2FpacQ/SHA256SUMS`。 [命令、测试和归档复验](p13-05-preflight-raster-step-requests.log) · [JUnit](p13-05-preflight-raster-step-requests-junit.xml)
