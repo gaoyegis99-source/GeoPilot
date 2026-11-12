@@ -10,6 +10,22 @@ P13-05 等待矢量基准验收。本轮增加面积回归用例和小样本对�
 - A 在 `78b8174cb25a74ec74dc83db3ae3a5ccd09e15b4` 的独立副本实现批内投影坐标复用。18 项面积测试通过，8 个微型 GeoTIFF 的完整结果或错误与基线精确一致，输入指纹一致。密集 256 格样本的 PROJ 入点从 14,336 降至 4,097，收敛分段和逐格面积一致。隔离补丁、命令、JUnit、对照脚本和日志的校验清单保存在 `artifacts/test-results/p13-05-area-candidate.HU5Lhc/SHA256SUMS`。正式墙钟时间和峰值内存待测。
 - 主控加载固定原版和 A 的候选，以原生基准保留的三个分类窗口复跑逐格面积，退出 0。全部像元面积、各批收敛分段和变换点数与先前探针一致，输入 SHA-256 与便携清单一致。 [候选窗口原始对照](p13-05-preflight-area-candidate.log)
 
+主控再从三个已核验分类输入各提取一个 128 × 128 窗口。对基线 `3d19fe4` 和隔离面积候选各启动三个独立 Python 进程，交替先后次序，执行完整 `summarize_threshold_area`。18 次结果的对应报告逐项一致，窗口和原始输入 SHA-256 均保持。墙钟只计面积函数，峰值 RSS 来自 Linux `getrusage` 并包含 Python 进程加载开销。CPU31、nice 19、Python 3.13.13、NumPy 2.4.4、PROJ 9.5.1、GDAL 3.9.3。命令退出 0。 [原始报告与环境](p13-05-preflight-area-profile.log)
+
+| 窗口 | 选中像元 | 原版 / 候选耗时中位数（ms） | 原版 / 候选峰值 RSS 中位数（MiB） |
+|---|---:|---:|---:|
+| DEM M | 16,375 | 295.9 / 224.1 | 162.30 / 162.33 |
+| DEM L | 16,375 | 294.9 / 222.2 | 162.31 / 162.55 |
+| 遥感 L | 8,320 | 167.1 / 130.7 | 161.70 / 163.09 |
+
+窗口对照脚本为 `artifacts/test-results/p13-05-area-candidate.HU5Lhc/profile-windows.py`。运行时在隔离的 `3d19fe4` 源导出副本保留原 `area_stats.py` 为脚本同目录的 `baseline.py`，将候选补丁应用至副本的 `src`，从原型目录用该副本作 `PYTHONPATH`。将 `profile-windows.py` 复制至副本根目录后执行。整幅耗时、内存与方法结果仍待测。
+
+```bash
+env PYTHONPATH="$profile_tmp/src" PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 \
+  OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF \
+  nice -n 19 taskset -c 31 .venv/bin/python "$profile_tmp/profile-windows.py" "$PWD/benchmarks/raster/area-fixtures"
+```
+
 ## 暂存文件生命周期
 
 原生 P13-04 遥感 L 的 14 次超时均留下两份暂存栅格。主控用基线 `78b8174cb25a74ec74dc83db3ae3a5ccd09e15b4` 的 `capture_process` 启动真实 Python 子进程，调用实际 `_stage_outputs`，写入模拟差值和内层分类文件，再由父进程触发超时或取消。隔离候选由父进程在输出所在文件系统分配独占目录，等子进程退出后按目录身份回收。两次探针均退出 0。 [原始结果](p13-05-preflight-staging.log)
