@@ -464,6 +464,7 @@ function AnalysisWorkbench() {
     ? plan : null
   const canRecheck = runStatus?.execution_status === 'SUCCEEDED' && runStatus.check_status === 'NOT_CHECKED'
     && Boolean(runStatus.current_report_id)
+  const recheckInRun = canRecheck && runStatus.error?.phase === 'check' && runStatus.error.code === 'CHECK_CANCELLED'
   const canReplan = runId !== null && runStatus?.run_id === runId && (
     runStatus.execution_status === 'FAILED'
     || (runStatus.execution_status === 'SUCCEEDED' && runStatus.check_status === 'FAILED')
@@ -592,7 +593,8 @@ function AnalysisWorkbench() {
         {actionError?.phase === 'replan' && actionError.code === 'PLAN_VERSION_CONFLICT' && taskId && <a
           href={workbenchLocation(new URL(window.location.href), { taskId }).href}>打开任务最新版本</a>}
         {(recheckSubmitting || queuedReport) && <p role="status">已提交重新检查，等待后端处理。</p>}
-        {recheckError && <ProblemDetails problem={recheckError} actions={{ recheck: () => { void recheck() } }} />}
+        {recheckError && <ProblemDetails problem={recheckError}
+          actions={recheckInRun ? undefined : { recheck: () => { void recheck() } }} />}
       </RunPanel>}
       artifacts={runId ? <ArtifactsPanel
         key={runId} record={artifacts} loading={artifactsLoading} error={artifactError}
@@ -600,7 +602,8 @@ function AnalysisWorkbench() {
       /> : undefined}
       checks={runId ? <ChecksPanel
         key={runId} runId={runId} checkStatus={runStatus?.check_status} currentReportId={runStatus?.current_report_id}
-        onRecheck={canRecheck ? () => { void recheck() } : undefined} recheckPending={Boolean(recheckSubmitting || queuedReport)}
+        onRecheck={canRecheck && !recheckInRun ? () => { void recheck() } : undefined}
+        recheckPending={Boolean(recheckSubmitting || queuedReport)}
       /> : undefined}
       executionStatus={runStatus?.execution_status}
       checkStatus={runStatus?.check_status}

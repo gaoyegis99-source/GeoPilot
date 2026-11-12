@@ -47,12 +47,13 @@ export function ProblemDetails({ problem, actions = {}, logHref }: {
   logHref?: string
 }) {
   const action = relevantAction(problem)
+  const checkCancelled = problem.phase === 'check' && problem.code === 'CHECK_CANCELLED'
   return (
     <div className="workbench-problem">
       <div role="alert">
         {problem.phase && <span className="workbench-problem__phase">{phaseLabels[problem.phase] ?? problem.phase}</span>}
-        <p>{problem.message}</p>
-        {problem.suggestion && <p className="workbench-problem__suggestion">{problem.suggestion}</p>}
+        <p>{checkCancelled ? '成果检查已取消，已登记的成果仍然保留。' : problem.message}</p>
+        {!checkCancelled && problem.suggestion && <p className="workbench-problem__suggestion">{problem.suggestion}</p>}
       </div>
       <div className="workbench-problem__actions">
         {actions[action] && <button type="button" onClick={() => actions[action]?.()}>{actionLabels[action]}</button>}
