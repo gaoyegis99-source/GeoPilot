@@ -1,0 +1,5 @@
+['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', 'scripts/methods/method_cli.py', 'lint']: exit=0; original JSON reproduced byte-for-byte
+['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', 'scripts/methods/method_cli.py', 'lint', '--method', 'config/methods/road-buffer-statistics.v1.yaml']: exit=1; original JSON reproduced byte-for-byte
+....................                                                     [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/methods/p14-03-review-junit.xml -
+20 passed in 44.90s

@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "command": "lint",
+  "status": "ok",
+  "data": {
+    "scope": "method_static_lint",
+    "selection": "catalog",
+    "tools_checked": 40,
+    "methods": [
+      {
+        "id": "attribute-filter-export",
+        "version": 1,
+        "path": "config/methods/attribute-filter-export.v1.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "dem-terrain-analysis",
+        "version": 1,
+        "path": "config/methods/dem-terrain-analysis.v1.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "land-use-change",
+        "version": 1,
+        "path": "config/methods/land-use-change.v1.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "polygon-zone-statistics",
+        "version": 1,
+        "path": "config/methods/polygon-zone-statistics.v1.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "remote-sensing-index-change",
+        "version": 1,
+        "path": "config/methods/remote-sensing-index-change.v1.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "road-buffer-statistics",
+        "version": 2,
+        "path": "config/methods/road-buffer-statistics.v2.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "road-buffer-statistics",
+        "version": 3,
+        "path": "config/methods/road-buffer-statistics.v3.yaml",
+        "locked_order": true
+      },
+      {
+        "id": "spatial-select-and-clip",
+        "version": 1,
+        "path": "config/methods/spatial-select-and-clip.v1.yaml",
+        "locked_order": true
+      }
+    ],
+    "catalog_examples": [
+      {
+        "id": "road-buffer-statistics",
+        "version": 1,
+        "path": "config/methods/road-buffer-statistics.v1.yaml",
+        "locked_order": true,
+        "disposition": "catalog_example_only",
+        "diagnostics": [
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.0.tool",
+            "message": "Step 'expand_analysis_extent' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.1.tool",
+            "message": "Step 'select_roads_from_expanded_extent' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.2.tool",
+            "message": "Step 'choose_measurement_method' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.3.tool",
+            "message": "Step 'create_buffer' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.4.tool",
+            "message": "Step 'apply_spatial_relation' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.5.tool",
+            "message": "Step 'clip_back_to_analysis_extent' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_TOOL_BINDING",
+            "field": "steps.6.tool",
+            "message": "Step 'aggregate_by_zone' requires an exact tool reference",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_ARTIFACT_BINDING",
+            "field": "expected_artifacts.0",
+            "message": "Artifact role 'buffer_extent' requires a step, output and type",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_ARTIFACT_BINDING",
+            "field": "expected_artifacts.1",
+            "message": "Artifact role 'selected_targets' requires a step, output and type",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          },
+          {
+            "code": "MISSING_ARTIFACT_BINDING",
+            "field": "expected_artifacts.2",
+            "message": "Artifact role 'zone_statistics' requires a step, output and type",
+            "path": "config/methods/road-buffer-statistics.v1.yaml"
+          }
+        ]
+      }
+    ]
+  },
+  "errors": []
+}

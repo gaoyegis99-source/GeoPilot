@@ -20,10 +20,12 @@ from geopilot.checks.raster_checks import DEM_ARTIFACT_RULES
 from geopilot.methods.loader import _UniqueKeySafeLoader
 from geopilot.scripts.registration import RegistrationCandidate, RegistrationError, validate_manual_registration
 
+from lint import LintError, lint_methods
 from template import TemplateError, generate_template
 
 
 SCHEMA_VERSION = 1
+DEFAULT_CONFIG = Path(__file__).resolve().parents[2] / "config"
 REGISTERED_RULES = frozenset((*RUN_CHECKS, *LAND_USE_CHECKS, *REMOTE_SENSING_CHECKS, *DEM_ARTIFACT_RULES))
 
 
@@ -106,14 +108,21 @@ def build_parser() -> argparse.ArgumentParser:
     )
     template.add_argument("--tool", required=True, help="registered tool ID@VERSION")
     template.add_argument("--method", required=True, help="proposed method ID@VERSION")
-    template.add_argument("--config", type=Path, default=Path(__file__).resolve().parents[2] / "config",
+    template.add_argument("--config", type=Path, default=DEFAULT_CONFIG,
                           help="configuration root containing tools/")
+    lint = commands.add_parser(
+        "lint", help="Check a method draft or the local method catalog", allow_abbrev=False,
+    )
+    lint.add_argument("--config", type=Path, default=DEFAULT_CONFIG, help="configuration root")
+    lint.add_argument("--method", type=Path, help="single method definition to check strictly")
     return parser
 
 
 def execute(args: argparse.Namespace) -> dict:
     if args.command == "template":
         return generate_template(args.config, args.tool, args.method)
+    if args.command == "lint":
+        return lint_methods(args.config, args.method)
     candidate = read_candidate(args.candidate)
     normalized = json.loads(candidate.model_dump_json())
     if args.command == "inspect":
@@ -138,6 +147,9 @@ def main() -> int:
     args = build_parser().parse_args()
     try:
         data = execute(args)
+    except LintError as error:
+        emit(args.command, errors=error.errors)
+        return error.exit_code
     except TemplateError as error:
         emit(args.command, errors=[issue(error.code, error.field, str(error))])
         return error.exit_code
