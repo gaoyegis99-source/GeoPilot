@@ -23,3 +23,5 @@
 归档含三组动作记录、脚本、截图、4 份 CSV、启动和退出记录、只读运行核验。SHA-256 为 `ba4e18e1463d3184f9f0e19ca2012e4b705bc3f2ed7edcd5527994e8ba5dda9f`，解包后 `sha256sum -c SHA256SUMS` 校验 56 个文件通过。 [原始证据归档](p16-03-simulated-users-evidence.tar.gz)
 
 在新的临时目录解包候选源码，用锁定前端依赖执行 `npm ci --offline --include=dev --no-audit --no-fund`。创建 `first_use`、`gis_review`、`recovery` 三个子目录，从证据归档复制相应浏览器脚本。使用已验证原型的 `.venv/bin/python -B serve.py <临时目录> <原型目录>` 启动。它写入三份新的 `session.json`。按各自目录的脚本及记录操作，最后运行 `.venv/bin/python -B verify_runs.py <临时目录>`。原始端口、路径和运行 ID 记录在归档中，每次复跑生成新的值。
+
+[模拟测评后的工作台修复与复验](p16-ux-follow-up.md)
