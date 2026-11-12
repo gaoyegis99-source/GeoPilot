@@ -37,3 +37,7 @@ A 在与正式基准不同的物理盘上归档 Python venv、QGIS CLI 和对应
 ## 已提交证据的链接闭合
 
 主控对提交 `d2de13790c4b3a31b88d495fae5095c8acb1fee6` 的真实 Git 树调用清单生成器的链接校验。依据固定的历史审计索引，发布复现文档、验收总账和三份 P13-05 报告五个入口均通过。验收总账解析到 1,106 个路径，矢量 L 入口包含点相交原始证据归档。随后仅从 `git archive` 导出比较器、点相交归档、预期结果和历史样本。归档摘要、两侧样本及严格配对独立复算通过，结果逐字节一致，退出 0。最终候选包仍需完成阶段验收和同提交回归。 [链接和 Git 导出复验](p16-06-evidence-closure.log) · [点相交复测](../performance/p13-05-vector-l.md)
+
+## 集成预演收集
+
+主控以 `3728ce4dbcf5394b7ebccf390a5691f5d9d95ca9` 为起点，在独立工作树应用两个已冻结的性能候选提交。预演提交 `092fb2d6d09cf45277bea62454e0cae266b50873` 用发布验证入口的后端环境运行 `.venv/bin/python -m pytest -q -p no:cacheprovider --collect-only tests`。Python 3.13.13 和 Psycopg 3.3.4 上收集到 2,145 个唯一节点，JUnit 节点名称也唯一。T01–T16 的 82 个固定节点逐项匹配，退出 0。正式后端、前端和固定 GIS 回归待最终提交执行。 [收集摘要](p16-06-collection-preview.json) · [原始收集日志](p16-06-collection-preview.log.gz)

@@ -1,0 +1,11 @@
+{
+  "preview_commit": "092fb2d6d09cf45277bea62454e0cae266b50873",
+  "preview_tree": "41a6f398a6b302a267719977a9e71e41b4f8c389",
+  "source_commit": "3728ce4dbcf5394b7ebccf390a5691f5d9d95ca9",
+  "backend_nodes": 2145,
+  "fixed_cases": 16,
+  "fixed_nodes": 82,
+  "python": "3.13.13",
+  "psycopg": "3.3.4",
+  "exit_code": 0
+}
