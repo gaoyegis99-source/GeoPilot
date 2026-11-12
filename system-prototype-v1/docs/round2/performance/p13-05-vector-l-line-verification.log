@@ -1,0 +1,9 @@
+Offline archive checksum verification exit=0.
+base side independent replay byte-identical, exit=0. Container=1 logging=0.
+candidate side independent replay byte-identical, exit=0. Container=0 logging=0.
+Tracked strict comparator reproduced the live result byte-for-byte, exit=0.
+audit.py: 成功
+independent.json: 成功
+independent.log: 成功
+28 line and 28 point runs are distinct, with no intersection against 140 historical L runs.
+4b19a679f5cf5cbdf2a174c61b42b19679b8a1faced911b3519e89b41772cb8e  docs/round2/performance/p13-05-vector-l-line-evidence.tar.gz
