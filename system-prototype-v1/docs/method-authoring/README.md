@@ -5,6 +5,15 @@
 3. 按手工坐标、独立计算或独立参考文件填写 `reference.basis` 和全部输出端口。矢量参考使用已知 `crs` 和按 `source_feature_id` 索引的 `features` WKT，校验器比较精确 ID 和坐标。其他输出可以用 `geopilot.data.fingerprint.fingerprint_file` 对独立参考文件组计算 `fingerprint`。指纹适用于可精确比较字节的输出，地理数据的元数据、压缩和编码差异也会改变指纹。
 4. 使用只读校验器复核同一次真实运行。候选通过后，人工审查脚本本身、适用数据范围和固定样例。在隔离的工具配置中实现并核对正式适配协议，正式启用由维护者决定。
 
+从原型目录使用项目 Python 运行以下命令。候选结构预览和可保存的审查报告见 [CLI 命令契约](cli.md)。
+
+```bash
+python scripts/methods/method_cli.py validate --candidate review/manual-registration.yaml \
+  --database project.sqlite --workspace workspace
+```
+
+以下为直接调用同一 V1 校验器的 Python 接口。
+
 ```python
 from pathlib import Path
 

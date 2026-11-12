@@ -1,0 +1,18 @@
+SQLite file header bytes at offsets 18–19:  02 02
+Before: aecab11672e56a1bcd10060a49b35cc6efcd844483f6317feaa5ea137f1c769b  project.sqlite
+{
+  "schema_version": 1,
+  "command": "report",
+  "status": "error",
+  "data": null,
+  "errors": [
+    {
+      "code": "DATABASE_REVIEW_COPY_REQUIRED",
+      "field": "database",
+      "message": "Use a quiet rollback-journal SQLite review copy with no sidecars"
+    }
+  ]
+}
+CLI exit: 2
+After: aecab11672e56a1bcd10060a49b35cc6efcd844483f6317feaa5ea137f1c769b  project.sqlite
+Database SHA-256 identical; no WAL, SHM, or journal sidecars created.

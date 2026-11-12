@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "command": "report",
+  "status": "ok",
+  "data": {
+    "scope": "manual_registration",
+    "evidence": {
+      "script_run_id": "cli-trial",
+      "script_id": "select-building",
+      "script_version": 1,
+      "script_sha256": "6f189ffd363f345735c9d07ced7b1ce653a399bbfbedfc5dfbe953ce2409e888",
+      "tool": {
+        "id": "python-manual-filter-points",
+        "version": 1
+      },
+      "method": {
+        "id": "manual-point-filter",
+        "version": 1
+      },
+      "output_fingerprints": {
+        "selected": "d46877e8339feb330faf4027a3b80655c52a7ae74bedd88a3b0b3d74c3cad54d"
+      }
+    },
+    "candidate": {
+      "tool": {
+        "id": "python-manual-filter-points",
+        "version": 1,
+        "runner": "python",
+        "implementation": "geopilot.manual_filter_points",
+        "inputs": {
+          "source": "vector_point"
+        },
+        "outputs": {
+          "selected": "vector_point"
+        },
+        "parameters": {
+          "feature_id": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          }
+        },
+        "measurement_policy": {
+          "distance": "not_applicable",
+          "area": "not_applicable",
+          "forbid_web_mercator": true,
+          "forbid_geographic_planar": true
+        },
+        "preconditions": [
+          "crs_is_known",
+          "geometry_is_valid",
+          "source_feature_id_is_unique"
+        ],
+        "check_rules": [
+          "output_exists"
+        ]
+      },
+      "method": {
+        "id": "manual-point-filter",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "points": "vector_point"
+        },
+        "critical_options": {
+          "feature_id": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available"
+        ],
+        "steps": [
+          {
+            "key": "filter",
+            "tool": {
+              "id": "python-manual-filter-points",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "asset": "points"
+              }
+            },
+            "parameters": {
+              "feature_id": {
+                "option": "feature_id"
+              }
+            },
+            "outputs": {
+              "selected": "vector_point"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "filtered_points",
+            "step": "filter",
+            "output": "selected",
+            "type": "vector_point"
+          }
+        ],
+        "check_rules": [
+          "output_exists"
+        ]
+      },
+      "reference": {
+        "script_run_id": "cli-trial",
+        "script_sha256": "6f189ffd363f345735c9d07ced7b1ce653a399bbfbedfc5dfbe953ce2409e888",
+        "inputs": {
+          "source": {
+            "asset_id": "27176d592b8e4a658c58dfe4e57cf5c9",
+            "asset_version": 1
+          }
+        },
+        "parameters": {
+          "feature_id": "building-west"
+        },
+        "basis": "P0-05 source.json \u4e2d EPSG:32650 \u7684\u5efa\u7b51\u70b9 building-west \u624b\u5de5\u5750\u6807",
+        "outputs": {
+          "selected": {
+            "path": "outputs/selected.gpkg",
+            "layer": "selected",
+            "fingerprint": null,
+            "crs": "EPSG:32650",
+            "features": {
+              "building-west": "POINT (500750 4401500)"
+            }
+          }
+        }
+      }
+    },
+    "disposition": "manual_review_required"
+  },
+  "errors": []
+}

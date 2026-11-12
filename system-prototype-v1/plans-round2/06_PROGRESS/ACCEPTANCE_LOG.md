@@ -94,3 +94,9 @@
 - 按环境诊断提前准备范围交付 `python -m geopilot.diagnostics --json`。Ubuntu 20.04 宿主加 QGIS 3.44.15 隔离入口实测 12 项检查通过，退出 0；缺失 QGIS 的真实失败路径退出 1。
 - 修复首轮版本前后缀误报，复跑 13 项通过、0 失败、0 跳过。测试确认闭合 WAL 数据库未创建 sidecar，未创建指定 workspace。
 - 状态 ACCEPTED，干净环境矩阵等待 P16-02 实测。 [命令、环境、退出码、JUnit 与 JSON](../../docs/round2/deployment/p16-01.md)
+
+## P14-01 主控验收
+
+- Agent C/F 实现只读 `inspect`、`validate`、`report`，复用 V1 手工收录校验并冻结 JSON 契约。实际报告保留指纹与人工审查状态。
+- 原始 CLI 和 V1 各 12 项通过。主控合并复跑 24 项通过，退出 0。实际 WAL 文件在建立连接前被拒，前后指纹一致且未创建 sidecar。
+- 状态 ACCEPTED，放行 P14-02 至 P14-04。 [契约、命令、JUnit、报告和失败路径](../../docs/round2/methods/p14-01.md)

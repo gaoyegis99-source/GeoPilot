@@ -13,3 +13,5 @@
 P12 放行已通过严格复验。上表中的调度存活、延迟和历史交付风险按各行继续跟踪。 [阶段决议](../../docs/round2/audit/P12_FINAL_AUDIT.md)
 
 P16-01 本机诊断已通过。AUD-09 的多环境安装与启动仍由 P16-02 验证。 [诊断证据](../../docs/round2/deployment/p16-01.md)
+
+P14-01 审查入口要求静止的回滚日志模式 SQLite 副本。检测到 WAL 或现存 sidecar 时返回 `DATABASE_REVIEW_COPY_REQUIRED`。这是只读审查边界。 [WAL 实测与契约](../../docs/round2/methods/p14-01.md)
