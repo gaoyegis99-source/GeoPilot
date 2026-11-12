@@ -1,0 +1,116 @@
+Collecting affine==2.4.0 (from -r requirements.txt (line 2))
+  Downloading affine-2.4.0-py3-none-any.whl.metadata (4.0 kB)
+Collecting annotated-doc==0.0.4 (from -r requirements.txt (line 3))
+  Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+Collecting annotated-types==0.6.0 (from -r requirements.txt (line 4))
+  Downloading annotated_types-0.6.0-py3-none-any.whl.metadata (12 kB)
+Collecting anyio==4.16.0 (from -r requirements.txt (line 5))
+  Downloading anyio-4.16.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting attrs==26.1.0 (from -r requirements.txt (line 6))
+  Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting certifi==2026.10.23 (from -r requirements.txt (line 7))
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting click==8.4.2 (from -r requirements.txt (line 8))
+  Downloading click-8.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting click-plugins==1.1.1.2 (from -r requirements.txt (line 9))
+  Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl.metadata (6.5 kB)
+Collecting cligj==0.7.2 (from -r requirements.txt (line 10))
+  Downloading cligj-0.7.2-py3-none-any.whl.metadata (5.0 kB)
+Collecting fastapi==0.141.1 (from -r requirements.txt (line 11))
+  Downloading fastapi-0.141.1-py3-none-any.whl.metadata (27 kB)
+Collecting geopandas==1.1.3 (from -r requirements.txt (line 12))
+  Downloading geopandas-1.1.3-py3-none-any.whl.metadata (2.3 kB)
+Collecting h11==0.16.0 (from -r requirements.txt (line 13))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting idna==3.20 (from -r requirements.txt (line 14))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting numpy==2.4.4 (from -r requirements.txt (line 15))
+  Downloading numpy-2.4.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting packaging==26.0 (from -r requirements.txt (line 16))
+  Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pandas==3.0.2 (from -r requirements.txt (line 17))
+  Downloading pandas-3.0.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.5/79.5 kB 861.5 kB/s eta 0:00:00
+Collecting pydantic==2.13.5 (from -r requirements.txt (line 18))
+  Downloading pydantic-2.13.5-py3-none-any.whl.metadata (110 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 110.2/110.2 kB 3.7 MB/s eta 0:00:00
+Collecting pydantic-core==2.46.5 (from -r requirements.txt (line 19))
+  Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting pyogrio==0.12.1 (from -r requirements.txt (line 20))
+  Downloading pyogrio-0.12.1-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (5.9 kB)
+Collecting pyparsing==3.3.2 (from -r requirements.txt (line 21))
+  Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+Collecting pyproj==3.7.2 (from -r requirements.txt (line 22))
+  Downloading pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (31 kB)
+Collecting python-dateutil==2.9.0.post0 (from -r requirements.txt (line 23))
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting PyYAML==6.0.3 (from -r requirements.txt (line 24))
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting rasterio==1.4.3 (from -r requirements.txt (line 25))
+  Downloading rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.1 kB)
+Collecting shapely==2.1.2 (from -r requirements.txt (line 26))
+  Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.8 kB)
+Collecting six==1.17.0 (from -r requirements.txt (line 27))
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting starlette==1.6.0 (from -r requirements.txt (line 28))
+  Downloading starlette-1.6.0-py3-none-any.whl.metadata (6.4 kB)
+Collecting typing-extensions==4.16.0 (from -r requirements.txt (line 29))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection==0.4.2 (from -r requirements.txt (line 30))
+  Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting uvicorn==0.32.1 (from -r requirements.txt (line 31))
+  Downloading uvicorn-0.32.1-py3-none-any.whl.metadata (6.6 kB)
+Downloading affine-2.4.0-py3-none-any.whl (15 kB)
+Downloading annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+Downloading annotated_types-0.6.0-py3-none-any.whl (12 kB)
+Downloading anyio-4.16.0-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.5/134.5 kB 6.6 MB/s eta 0:00:00
+Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.5/67.5 kB 8.7 MB/s eta 0:00:00
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.1/135.1 kB 4.2 MB/s eta 0:00:00
+Downloading click-8.4.2-py3-none-any.whl (119 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 119.2/119.2 kB 233.0 MB/s eta 0:00:00
+Downloading click_plugins-1.1.1.2-py2.py3-none-any.whl (11 kB)
+Downloading cligj-0.7.2-py3-none-any.whl (7.1 kB)
+Downloading fastapi-0.141.1-py3-none-any.whl (131 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 132.0/132.0 kB 7.6 MB/s eta 0:00:00
+Downloading geopandas-1.1.3-py3-none-any.whl (342 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 342.5/342.5 kB 260.6 MB/s eta 0:00:00
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 kB 129.8 MB/s eta 0:00:00
+Downloading numpy-2.4.4-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 40.7 MB/s eta 0:00:00
+Downloading packaging-26.0-py3-none-any.whl (74 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 74.4/74.4 kB 102.2 MB/s eta 0:00:00
+Downloading pandas-3.0.2-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (10.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.9/10.9 MB 31.1 MB/s eta 0:00:00
+Downloading pydantic-2.13.5-py3-none-any.whl (472 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 472.6/472.6 kB 104.4 MB/s eta 0:00:00
+Downloading pydantic_core-2.46.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 76.1 MB/s eta 0:00:00
+Downloading pyogrio-0.12.1-cp312-cp312-manylinux_2_28_x86_64.whl (32.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 32.5/32.5 MB 40.8 MB/s eta 0:00:00
+Downloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 122.8/122.8 kB 142.8 MB/s eta 0:00:00
+Downloading pyproj-3.7.2-cp312-cp312-manylinux_2_28_x86_64.whl (9.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.6/9.6 MB 39.9 MB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 135.9 MB/s eta 0:00:00
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 91.3 MB/s eta 0:00:00
+Downloading rasterio-1.4.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (22.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 22.3/22.3 MB 34.9 MB/s eta 0:00:00
+Downloading shapely-2.1.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.1/3.1 MB 72.0 MB/s eta 0:00:00
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading starlette-1.6.0-py3-none-any.whl (75 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 76.0/76.0 kB 102.8 MB/s eta 0:00:00
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 127.8 MB/s eta 0:00:00
+Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading uvicorn-0.32.1-py3-none-any.whl (63 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 63.8/63.8 kB 98.6 MB/s eta 0:00:00
+Installing collected packages: typing-extensions, six, PyYAML, pyparsing, packaging, numpy, idna, h11, click, certifi, attrs, annotated-types, annotated-doc, affine, uvicorn, typing-inspection, shapely, python-dateutil, pyproj, pyogrio, pydantic-core, cligj, click-plugins, anyio, starlette, rasterio, pydantic, pandas, geopandas, fastapi
+Successfully installed PyYAML-6.0.3 affine-2.4.0 annotated-doc-0.0.4 annotated-types-0.6.0 anyio-4.16.0 attrs-26.1.0 certifi-2026.10.23 click-8.4.2 click-plugins-1.1.1.2 cligj-0.7.2 fastapi-0.141.1 geopandas-1.1.3 h11-0.16.0 idna-3.20 numpy-2.4.4 packaging-26.0 pandas-3.0.2 pydantic-2.13.5 pydantic-core-2.46.5 pyogrio-0.12.1 pyparsing-3.3.2 pyproj-3.7.2 python-dateutil-2.9.0.post0 rasterio-1.4.3 shapely-2.1.2 six-1.17.0 starlette-1.6.0 typing-extensions-4.16.0 typing-inspection-0.4.2 uvicorn-0.32.1

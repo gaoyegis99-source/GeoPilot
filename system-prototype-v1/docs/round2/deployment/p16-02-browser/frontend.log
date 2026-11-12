@@ -1,0 +1,8 @@
+
+> geopilot-workbench@1.0.0 dev
+> vite --host 127.0.0.1 --port 55485 --strictPort
+
+
+  VITE v8.3.5  ready in 278 ms
+
+  ➜  Local:   http://127.0.0.1:55485/

@@ -10,7 +10,7 @@
 | AUD-06 | P1 | 单活动运行约束。独立复现写锁等待耗尽后调度线程退出，HTTP 仍可用 | 维持单活动，先解决调度存活与可观测性 | P12/P13 | [P12 调度审计](../../docs/round2/audit/concurrency-model.md)。P13 压测证明锁恢复、无重复领取，再签署并发 ADR |
 | AUD-07 | P2 | provider 以 Ollama/mock 为主 | 扩展适配或正式界定支持范围 | P15 | provider contract 复用测试 |
 | AUD-08 | P2 | 方法收录依赖人工流程 | CLI/模板/验证报告，保留审批 | P14 | 新方法完整收录 |
-| AUD-09 | P2 | QGIS 本机环境依赖 | 本机 doctor 已交付，继续完成部署矩阵 | P16 | [实际环境诊断](../../docs/round2/deployment/p16-01.md)，P16-02 需干净环境安装与启动记录 |
+| AUD-09 | P2 | QGIS 本机环境依赖 | 本机 doctor、两种 Linux 后端和浏览器端实测均已通过 | P16 | [实际环境诊断](../../docs/round2/deployment/p16-01.md) · [干净安装与启动记录](../../docs/round2/deployment/p16-02.md) |
 | AUD-10 | P2 | 依赖治理自动化不足 | 依赖审计与受控升级 | P12/P16 | 依赖报告 |
 | AUD-11 | P2 | 真实用户研究不足 | 目标用户任务观察 | P16 | 用户研究报告 |
 | AUD-12 | P3 | 配置/Schema/文档漂移 | P12 已接入配置和 Schema 校验。P14 延伸至方法维护工具链 | P12/P14 | [本地与托管 CI 配置校验](../../docs/round2/audit/p12-09.md) |

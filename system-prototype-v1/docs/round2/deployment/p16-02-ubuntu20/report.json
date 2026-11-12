@@ -1,0 +1,412 @@
+{
+  "schema_version": 1,
+  "label": "ubuntu-20.04-host",
+  "os": {
+    "NAME": "Ubuntu",
+    "ID": "ubuntu",
+    "PRETTY_NAME": "Ubuntu 20.04.6 LTS",
+    "VERSION": "20.04.6 LTS (Focal Fossa)",
+    "ID_LIKE": "debian",
+    "VERSION_ID": "20.04",
+    "HOME_URL": "https://www.ubuntu.com/",
+    "SUPPORT_URL": "https://help.ubuntu.com/",
+    "BUG_REPORT_URL": "https://bugs.launchpad.net/ubuntu/",
+    "PRIVACY_POLICY_URL": "https://www.ubuntu.com/legal/terms-and-policies/privacy-policy",
+    "VERSION_CODENAME": "focal",
+    "UBUNTU_CODENAME": "focal"
+  },
+  "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+  "python_launcher": "3.13.13",
+  "steps": [
+    {
+      "name": "venv",
+      "argv": [
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+        "-m",
+        "venv",
+        "/tmp/geopilot-install-check-3vhh2xrh/venv"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1",
+      "log": "venv.log",
+      "exit_code": 0
+    },
+    {
+      "name": "pip-install",
+      "argv": [
+        "/tmp/geopilot-install-check-3vhh2xrh/venv/bin/python",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-cache-dir",
+        "--only-binary=:all:",
+        "-r",
+        "requirements.txt"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1",
+      "log": "pip-install.log",
+      "exit_code": 0
+    },
+    {
+      "name": "pip-check",
+      "argv": [
+        "/tmp/geopilot-install-check-3vhh2xrh/venv/bin/python",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1",
+      "log": "pip-check.log",
+      "exit_code": 0
+    },
+    {
+      "name": "npm-ci",
+      "argv": [
+        "npm",
+        "ci",
+        "--include=dev",
+        "--no-audit",
+        "--no-fund",
+        "--cache",
+        "/tmp/geopilot-install-check-3vhh2xrh/npm-cache"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1/frontend",
+      "log": "npm-ci.log",
+      "exit_code": 0
+    },
+    {
+      "name": "npm-build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1/frontend",
+      "log": "npm-build.log",
+      "exit_code": 0
+    },
+    {
+      "name": "doctor",
+      "argv": [
+        "/tmp/geopilot-install-check-3vhh2xrh/venv/bin/python",
+        "-m",
+        "geopilot.diagnostics",
+        "--json",
+        "--project-root",
+        "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1",
+        "--database",
+        "/tmp/geopilot-install-check-3vhh2xrh/data/project.sqlite",
+        "--workspace",
+        "/tmp/geopilot-install-check-3vhh2xrh/data/workspace",
+        "--qgis-process",
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
+        "--port",
+        "51121",
+        "--frontend-port",
+        "55043"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1",
+      "log": "doctor.log",
+      "exit_code": 0,
+      "stderr_log": "doctor.stderr.log"
+    },
+    {
+      "name": "backend",
+      "argv": [
+        "/tmp/geopilot-install-check-3vhh2xrh/venv/bin/python",
+        "-m",
+        "geopilot.api.server",
+        "--database",
+        "/tmp/geopilot-install-check-3vhh2xrh/data/project.sqlite",
+        "--workspace",
+        "/tmp/geopilot-install-check-3vhh2xrh/data/workspace",
+        "--config",
+        "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1/config",
+        "--qgis-process",
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
+        "--port",
+        "51121"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1",
+      "log": "backend.log",
+      "exit_code": -15
+    },
+    {
+      "name": "frontend",
+      "argv": [
+        "npm",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "55043",
+        "--strictPort"
+      ],
+      "cwd": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1/frontend",
+      "log": "frontend.log",
+      "exit_code": -15
+    }
+  ],
+  "status": "PASS",
+  "commit": "8bf0e15cd24468aa0f437bb466e839fcc2368c12",
+  "diagnostics": {
+    "schema_version": 1,
+    "status": "PASS",
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "checks": [
+      {
+        "name": "python",
+        "status": "PASS",
+        "message": "Matches the verified version.",
+        "details": {
+          "actual": "3.13.13",
+          "verified_version": "3.13.13"
+        }
+      },
+      {
+        "name": "python_dependencies",
+        "status": "PASS",
+        "message": "All pinned runtime packages are installed.",
+        "details": {
+          "packages": {
+            "affine": {
+              "expected": "2.4.0",
+              "actual": "2.4.0"
+            },
+            "annotated-doc": {
+              "expected": "0.0.4",
+              "actual": "0.0.4"
+            },
+            "annotated-types": {
+              "expected": "0.6.0",
+              "actual": "0.6.0"
+            },
+            "anyio": {
+              "expected": "4.16.0",
+              "actual": "4.16.0"
+            },
+            "attrs": {
+              "expected": "26.1.0",
+              "actual": "26.1.0"
+            },
+            "certifi": {
+              "expected": "2026.10.23",
+              "actual": "2026.10.23"
+            },
+            "click": {
+              "expected": "8.4.2",
+              "actual": "8.4.2"
+            },
+            "click-plugins": {
+              "expected": "1.1.1.2",
+              "actual": "1.1.1.2"
+            },
+            "cligj": {
+              "expected": "0.7.2",
+              "actual": "0.7.2"
+            },
+            "fastapi": {
+              "expected": "0.141.1",
+              "actual": "0.141.1"
+            },
+            "geopandas": {
+              "expected": "1.1.3",
+              "actual": "1.1.3"
+            },
+            "h11": {
+              "expected": "0.16.0",
+              "actual": "0.16.0"
+            },
+            "idna": {
+              "expected": "3.20",
+              "actual": "3.20"
+            },
+            "numpy": {
+              "expected": "2.4.4",
+              "actual": "2.4.4"
+            },
+            "packaging": {
+              "expected": "26.0",
+              "actual": "26.0"
+            },
+            "pandas": {
+              "expected": "3.0.2",
+              "actual": "3.0.2"
+            },
+            "pydantic": {
+              "expected": "2.13.5",
+              "actual": "2.13.5"
+            },
+            "pydantic-core": {
+              "expected": "2.46.5",
+              "actual": "2.46.5"
+            },
+            "pyogrio": {
+              "expected": "0.12.1",
+              "actual": "0.12.1"
+            },
+            "pyparsing": {
+              "expected": "3.3.2",
+              "actual": "3.3.2"
+            },
+            "pyproj": {
+              "expected": "3.7.2",
+              "actual": "3.7.2"
+            },
+            "python-dateutil": {
+              "expected": "2.9.0.post0",
+              "actual": "2.9.0.post0"
+            },
+            "pyyaml": {
+              "expected": "6.0.3",
+              "actual": "6.0.3"
+            },
+            "rasterio": {
+              "expected": "1.4.3",
+              "actual": "1.4.3"
+            },
+            "shapely": {
+              "expected": "2.1.2",
+              "actual": "2.1.2"
+            },
+            "six": {
+              "expected": "1.17.0",
+              "actual": "1.17.0"
+            },
+            "starlette": {
+              "expected": "1.6.0",
+              "actual": "1.6.0"
+            },
+            "typing-extensions": {
+              "expected": "4.16.0",
+              "actual": "4.16.0"
+            },
+            "typing-inspection": {
+              "expected": "0.4.2",
+              "actual": "0.4.2"
+            },
+            "uvicorn": {
+              "expected": "0.32.1",
+              "actual": "0.32.1"
+            }
+          },
+          "mismatches": []
+        }
+      },
+      {
+        "name": "gis_libraries",
+        "status": "PASS",
+        "message": "Required GDAL drivers and the PROJ CRS database are accessible.",
+        "details": {
+          "pyogrio_gdal": "3.11.4",
+          "rasterio_gdal": "3.9.3",
+          "pyproj_proj": "9.5.1",
+          "rasterio_proj": "9.4.1",
+          "proj_data_dir": "/tmp/geopilot-install-check-3vhh2xrh/venv/lib/python3.13/site-packages/pyproj/proj_dir/share/proj",
+          "drivers": {
+            "GPKG": "rw",
+            "GTiff": true
+          }
+        }
+      },
+      {
+        "name": "config",
+        "status": "PASS",
+        "message": "Configuration directories are readable.",
+        "details": {
+          "path": "/tmp/geopilot-install-check-3vhh2xrh/system-prototype-v1/config",
+          "unavailable": []
+        }
+      },
+      {
+        "name": "database",
+        "status": "PASS",
+        "message": "Storage path or its nearest parent is writable.",
+        "details": {
+          "path": "/tmp/geopilot-install-check-3vhh2xrh/data/project.sqlite",
+          "existing_parent": "/tmp/geopilot-install-check-3vhh2xrh/data",
+          "exists": false
+        }
+      },
+      {
+        "name": "workspace",
+        "status": "PASS",
+        "message": "Storage path or its nearest parent is writable.",
+        "details": {
+          "path": "/tmp/geopilot-install-check-3vhh2xrh/data/workspace",
+          "existing_parent": "/tmp/geopilot-install-check-3vhh2xrh/data",
+          "exists": false
+        }
+      },
+      {
+        "name": "frontend_dependencies",
+        "status": "PASS",
+        "message": "Installed direct frontend packages match the lock file.",
+        "details": {
+          "checked": 11
+        }
+      },
+      {
+        "name": "backend_port",
+        "status": "PASS",
+        "message": "Loopback bind succeeded at the time of the probe.",
+        "details": {
+          "host": "127.0.0.1",
+          "port": 51121
+        }
+      },
+      {
+        "name": "frontend_port",
+        "status": "PASS",
+        "message": "Loopback bind succeeded at the time of the probe.",
+        "details": {
+          "host": "127.0.0.1",
+          "port": 55043
+        }
+      },
+      {
+        "name": "qgis",
+        "status": "PASS",
+        "message": "Matches the verified version.",
+        "details": {
+          "executable": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
+          "versions": {
+            "qgis_version": "3.44.15-Solothurn",
+            "gdal_version": "3.8.4",
+            "proj_version": "Rel. 9.4.0, March 1st, 2024",
+            "geos_version": "3.12.1-CAPI-1.18.1",
+            "python_version": "3.12.3"
+          },
+          "actual": "3.44.15",
+          "verified_version": "3.44.15"
+        }
+      },
+      {
+        "name": "node",
+        "status": "PASS",
+        "message": "Matches the verified version.",
+        "details": {
+          "executable": "/home/mtd/.local/bin/node",
+          "actual": "22.23.1",
+          "verified_version": "22.23.1"
+        }
+      },
+      {
+        "name": "npm",
+        "status": "PASS",
+        "message": "Matches the verified version.",
+        "details": {
+          "executable": "/home/mtd/.local/bin/npm",
+          "actual": "10.9.8",
+          "verified_version": "10.9.8"
+        }
+      }
+    ]
+  },
+  "startup": {
+    "openapi": "PASS",
+    "workbench_html": "PASS",
+    "method_catalog_proxy": "PASS"
+  },
+  "exit_code": 0
+}

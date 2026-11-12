@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "chromium": "141.0.7390.37",
+  "client_qgis_on_path": false,
+  "fresh_browser_context": true,
+  "http_status": {
+    "workbench": 200,
+    "methods_proxy": 200
+  },
+  "methods": 9,
+  "available_methods": 8,
+  "selected": {
+    "id": "road-buffer-statistics",
+    "version": 3
+  },
+  "page_errors": [],
+  "external_requests": []
+}

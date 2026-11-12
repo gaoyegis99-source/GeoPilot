@@ -1,0 +1,54 @@
+{
+  "commit": "8bf0e15cd24468aa0f437bb466e839fcc2368c12",
+  "steps": [
+    {
+      "name": "backend",
+      "argv": [
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+        "-m",
+        "geopilot.api.server",
+        "--database",
+        "/tmp/geopilot-browser-check-cz7fvb79/data/project.sqlite",
+        "--workspace",
+        "/tmp/geopilot-browser-check-cz7fvb79/data/workspace",
+        "--config",
+        "/tmp/geopilot-browser-check-cz7fvb79/system-prototype-v1/config",
+        "--qgis-process",
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
+        "--port",
+        "45549"
+      ],
+      "cwd": "/tmp/geopilot-browser-check-cz7fvb79/system-prototype-v1",
+      "log": "backend.log",
+      "exit_code": -15
+    },
+    {
+      "name": "frontend",
+      "argv": [
+        "npm",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "42939",
+        "--strictPort"
+      ],
+      "cwd": "/tmp/geopilot-browser-check-cz7fvb79/system-prototype-v1/frontend",
+      "log": "frontend.log",
+      "exit_code": -15
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "node",
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/scripts/install-check/check_browser.mjs",
+        "http://127.0.0.1:42939"
+      ],
+      "cwd": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1",
+      "log": "browser.log",
+      "exit_code": 1,
+      "stderr_log": "browser.stderr.log"
+    }
+  ],
+  "exit_code": 1
+}

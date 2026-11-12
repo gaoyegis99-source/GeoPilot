@@ -1,0 +1,2752 @@
+{
+  "methods": [
+    {
+      "title": "属性筛选与导出",
+      "description": "按指定字段和值筛选要素，并保存匹配结果。",
+      "definition": {
+        "id": "attribute-filter-export",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "features": "vector_point"
+        },
+        "critical_options": {
+          "field_name": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "match_value": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available",
+          "selected_field_exists"
+        ],
+        "steps": [
+          {
+            "key": "filter_features",
+            "tool": {
+              "id": "qgis-extract-by-attribute",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "asset": "features"
+              }
+            },
+            "parameters": {
+              "field": {
+                "option": "field_name"
+              },
+              "operator": {
+                "literal": "equals"
+              },
+              "value": {
+                "option": "match_value"
+              }
+            },
+            "outputs": {
+              "filtered": "vector_point"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "filtered_features",
+            "step": "filter_features",
+            "output": "filtered",
+            "type": "vector_point"
+          }
+        ],
+        "check_rules": [
+          "output_exists"
+        ],
+        "input_context": {
+          "features": {
+            "required_fields": [],
+            "field_options": [
+              "field_name"
+            ],
+            "scopes": [
+              {
+                "reference_role": null,
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": false
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": []
+    },
+    {
+      "title": "DEM 地形分析",
+      "description": "计算坡度或坡向，按阈值分类并以等积投影统计面积。",
+      "definition": {
+        "id": "dem-terrain-analysis",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "analysis_extent": "vector_polygon",
+          "dem": "raster_elevation"
+        },
+        "critical_options": {
+          "terrain_output": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "slope",
+              "aspect"
+            ],
+            "required": true,
+            "default": null
+          },
+          "slope_unit": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "degree",
+              "percent"
+            ],
+            "required": true,
+            "default": "degree"
+          },
+          "band": {
+            "type": "integer",
+            "unit": null,
+            "minimum": 1,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": 1
+          },
+          "vertical_unit": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "metadata",
+              "meter",
+              "kilometer",
+              "centimeter",
+              "millimeter",
+              "foot",
+              "us_survey_foot"
+            ],
+            "required": true,
+            "default": "metadata"
+          },
+          "z_factor": {
+            "type": "number",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": 0,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "threshold": {
+            "type": "json",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "area_crs": {
+            "type": "reference",
+            "required_for": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available",
+          "terrain_inputs_are_consistent"
+        ],
+        "steps": [
+          {
+            "key": "expand_extent_by_algorithm_neighborhood",
+            "tool": {
+              "id": "python-dem-expand-extent",
+              "version": 1
+            },
+            "inputs": {
+              "dem": {
+                "asset": "dem"
+              },
+              "analysis_extent": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "radius_pixels": {
+                "literal": 1
+              }
+            },
+            "outputs": {
+              "windows": "json"
+            }
+          },
+          {
+            "key": "read_dem_for_expanded_extent",
+            "tool": {
+              "id": "python-dem-prepare",
+              "version": 1
+            },
+            "inputs": {
+              "dem": {
+                "asset": "dem"
+              },
+              "windows": {
+                "step": "expand_extent_by_algorithm_neighborhood",
+                "output": "windows"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "prepared_dem": "raster_elevation"
+            }
+          },
+          {
+            "key": "check_horizontal_vertical_units",
+            "tool": {
+              "id": "python-dem-unit-check",
+              "version": 1
+            },
+            "inputs": {
+              "dem": {
+                "step": "read_dem_for_expanded_extent",
+                "output": "prepared_dem"
+              }
+            },
+            "parameters": {
+              "band": {
+                "option": "band"
+              },
+              "vertical_unit": {
+                "option": "vertical_unit"
+              },
+              "z_factor": {
+                "option": "z_factor"
+              }
+            },
+            "outputs": {
+              "unit_report": "json"
+            }
+          },
+          {
+            "key": "calculate_slope_or_aspect",
+            "tool": {
+              "id": "python-dem-terrain",
+              "version": 1
+            },
+            "inputs": {
+              "dem": {
+                "step": "read_dem_for_expanded_extent",
+                "output": "prepared_dem"
+              },
+              "unit_report": {
+                "step": "check_horizontal_vertical_units",
+                "output": "unit_report"
+              }
+            },
+            "parameters": {
+              "terrain_output": {
+                "option": "terrain_output"
+              },
+              "slope_unit": {
+                "option": "slope_unit"
+              },
+              "band": {
+                "option": "band"
+              },
+              "z_factor": {
+                "option": "z_factor"
+              }
+            },
+            "outputs": {
+              "terrain_raster": "raster_terrain"
+            }
+          },
+          {
+            "key": "clip_back_to_analysis_extent",
+            "tool": {
+              "id": "python-dem-clip-back",
+              "version": 1
+            },
+            "inputs": {
+              "terrain_raster": {
+                "step": "calculate_slope_or_aspect",
+                "output": "terrain_raster"
+              },
+              "windows": {
+                "step": "expand_extent_by_algorithm_neighborhood",
+                "output": "windows"
+              },
+              "analysis_extent": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "terrain_raster": "raster_terrain"
+            }
+          },
+          {
+            "key": "extract_by_threshold",
+            "tool": {
+              "id": "python-dem-threshold",
+              "version": 1
+            },
+            "inputs": {
+              "terrain_raster": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "terrain_raster"
+              }
+            },
+            "parameters": {
+              "threshold": {
+                "option": "threshold"
+              }
+            },
+            "outputs": {
+              "threshold_regions": "raster_classification"
+            }
+          },
+          {
+            "key": "calculate_area_with_equal_area_projection",
+            "tool": {
+              "id": "python-dem-area-stats",
+              "version": 1
+            },
+            "inputs": {
+              "threshold_regions": {
+                "step": "extract_by_threshold",
+                "output": "threshold_regions"
+              }
+            },
+            "parameters": {
+              "area_crs": {
+                "option": "area_crs"
+              }
+            },
+            "outputs": {
+              "area_statistics": "json"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "terrain_raster",
+            "step": "clip_back_to_analysis_extent",
+            "output": "terrain_raster",
+            "type": "raster_terrain"
+          },
+          {
+            "role": "threshold_regions",
+            "step": "extract_by_threshold",
+            "output": "threshold_regions",
+            "type": "raster_classification"
+          },
+          {
+            "role": "area_statistics",
+            "step": "calculate_area_with_equal_area_projection",
+            "output": "area_statistics",
+            "type": "json"
+          }
+        ],
+        "check_rules": [
+          "dem_covers_expanded_extent",
+          "units_resolved",
+          "border_pixels_match_reference"
+        ],
+        "input_context": {
+          "dem": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": false
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": [
+        "z_factor"
+      ]
+    },
+    {
+      "title": "土地利用变化",
+      "description": "比较两期分类，生成变化图斑、转移矩阵和分区统计。",
+      "definition": {
+        "id": "land-use-change",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "first_classes": "vector_polygon",
+          "second_classes": "vector_polygon",
+          "zones": "vector_polygon",
+          "analysis_extent": "vector_polygon"
+        },
+        "critical_options": {
+          "first_class_field": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "second_class_field": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "first_class_mapping": {
+            "type": "json",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "second_class_mapping": {
+            "type": "json",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "first_period": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "second_period": {
+            "type": "string",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "area_crs": {
+            "type": "reference",
+            "required_for": null
+          },
+          "overlay_area_tolerance": {
+            "type": "number",
+            "unit": "square_meter",
+            "minimum": 0,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "boundary_assignment": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "split_by_area",
+              "centroid",
+              "largest_overlap"
+            ],
+            "required": true,
+            "default": null
+          },
+          "minimum_change_area": {
+            "type": "number",
+            "unit": "square_meter",
+            "minimum": 0,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "merge_adjacent_classes": {
+            "type": "boolean",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": false,
+            "default": false
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available"
+        ],
+        "steps": [
+          {
+            "key": "read_two_periods",
+            "tool": {
+              "id": "python-land-use-read",
+              "version": 1
+            },
+            "inputs": {
+              "first_classes": {
+                "asset": "first_classes"
+              },
+              "second_classes": {
+                "asset": "second_classes"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "first_classes": "vector_polygon",
+              "second_classes": "vector_polygon"
+            }
+          },
+          {
+            "key": "map_classification_systems",
+            "tool": {
+              "id": "python-land-use-map",
+              "version": 1
+            },
+            "inputs": {
+              "first_classes": {
+                "step": "read_two_periods",
+                "output": "first_classes"
+              },
+              "second_classes": {
+                "step": "read_two_periods",
+                "output": "second_classes"
+              }
+            },
+            "parameters": {
+              "first_class_field": {
+                "option": "first_class_field"
+              },
+              "second_class_field": {
+                "option": "second_class_field"
+              },
+              "first_class_mapping": {
+                "option": "first_class_mapping"
+              },
+              "second_class_mapping": {
+                "option": "second_class_mapping"
+              },
+              "first_period": {
+                "option": "first_period"
+              },
+              "second_period": {
+                "option": "second_period"
+              }
+            },
+            "outputs": {
+              "first_classes": "vector_polygon",
+              "second_classes": "vector_polygon"
+            }
+          },
+          {
+            "key": "choose_equal_area_projection",
+            "tool": {
+              "id": "python-land-use-project",
+              "version": 1
+            },
+            "inputs": {
+              "first_classes": {
+                "step": "map_classification_systems",
+                "output": "first_classes"
+              },
+              "second_classes": {
+                "step": "map_classification_systems",
+                "output": "second_classes"
+              },
+              "analysis_extent": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "target_crs": {
+                "option": "area_crs"
+              }
+            },
+            "outputs": {
+              "first_classes": "vector_polygon",
+              "second_classes": "vector_polygon",
+              "analysis_extent": "vector_polygon"
+            }
+          },
+          {
+            "key": "overlay",
+            "tool": {
+              "id": "python-land-use-overlay",
+              "version": 1
+            },
+            "inputs": {
+              "first_classes": {
+                "step": "choose_equal_area_projection",
+                "output": "first_classes"
+              },
+              "second_classes": {
+                "step": "choose_equal_area_projection",
+                "output": "second_classes"
+              },
+              "analysis_extent": {
+                "step": "choose_equal_area_projection",
+                "output": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "area_crs": {
+                "option": "area_crs"
+              },
+              "area_unit": {
+                "literal": "square_meter"
+              },
+              "area_tolerance": {
+                "option": "overlay_area_tolerance"
+              }
+            },
+            "outputs": {
+              "overlay_polygons": "vector_polygon",
+              "overlay_report": "json"
+            }
+          },
+          {
+            "key": "apply_boundary_assignment",
+            "tool": {
+              "id": "python-land-use-assign",
+              "version": 1
+            },
+            "inputs": {
+              "overlay_polygons": {
+                "step": "overlay",
+                "output": "overlay_polygons"
+              },
+              "first_classes": {
+                "step": "choose_equal_area_projection",
+                "output": "first_classes"
+              },
+              "second_classes": {
+                "step": "choose_equal_area_projection",
+                "output": "second_classes"
+              },
+              "zones": {
+                "asset": "zones"
+              }
+            },
+            "parameters": {
+              "area_crs": {
+                "option": "area_crs"
+              },
+              "area_unit": {
+                "literal": "square_meter"
+              },
+              "area_tolerance": {
+                "option": "overlay_area_tolerance"
+              },
+              "boundary_assignment": {
+                "option": "boundary_assignment"
+              },
+              "boundary_tie": {
+                "literal": "unassigned"
+              }
+            },
+            "outputs": {
+              "allocations": "json"
+            }
+          },
+          {
+            "key": "build_change_polygons",
+            "tool": {
+              "id": "python-land-use-build-changes",
+              "version": 1
+            },
+            "inputs": {
+              "overlay_polygons": {
+                "step": "overlay",
+                "output": "overlay_polygons"
+              }
+            },
+            "parameters": {
+              "area_crs": {
+                "option": "area_crs"
+              },
+              "area_unit": {
+                "literal": "square_meter"
+              },
+              "area_tolerance": {
+                "option": "overlay_area_tolerance"
+              },
+              "minimum_change_area": {
+                "option": "minimum_change_area"
+              },
+              "merge_adjacent_classes": {
+                "option": "merge_adjacent_classes"
+              }
+            },
+            "outputs": {
+              "change_polygons": "vector_polygon",
+              "change_report": "json"
+            }
+          },
+          {
+            "key": "build_transition_matrix",
+            "tool": {
+              "id": "python-land-use-transition-matrix",
+              "version": 1
+            },
+            "inputs": {
+              "overlay_polygons": {
+                "step": "overlay",
+                "output": "overlay_polygons"
+              },
+              "change_polygons": {
+                "step": "build_change_polygons",
+                "output": "change_polygons"
+              },
+              "allocations": {
+                "step": "apply_boundary_assignment",
+                "output": "allocations"
+              },
+              "change_report": {
+                "step": "build_change_polygons",
+                "output": "change_report"
+              }
+            },
+            "parameters": {
+              "area_crs": {
+                "option": "area_crs"
+              },
+              "area_unit": {
+                "literal": "square_meter"
+              },
+              "area_tolerance": {
+                "option": "overlay_area_tolerance"
+              }
+            },
+            "outputs": {
+              "transition_matrix": "json",
+              "zone_statistics": "json"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "change_polygons",
+            "step": "build_change_polygons",
+            "output": "change_polygons",
+            "type": "vector_polygon"
+          },
+          {
+            "role": "transition_matrix",
+            "step": "build_transition_matrix",
+            "output": "transition_matrix",
+            "type": "json"
+          },
+          {
+            "role": "zone_statistics",
+            "step": "build_transition_matrix",
+            "output": "zone_statistics",
+            "type": "json"
+          }
+        ],
+        "check_rules": [
+          "classification_mapping_complete",
+          "overlay_area_balanced",
+          "transition_totals_match"
+        ],
+        "input_context": {
+          "first_classes": {
+            "required_fields": [],
+            "field_options": [
+              "first_class_field"
+            ],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": false
+              }
+            ]
+          },
+          "second_classes": {
+            "required_fields": [],
+            "field_options": [
+              "second_class_field"
+            ],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": false
+              }
+            ]
+          },
+          "zones": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": []
+    },
+    {
+      "title": "跨区图斑统计",
+      "description": "在分析范围内按面积、质心或最大重叠分区统计。",
+      "definition": {
+        "id": "polygon-zone-statistics",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "targets": "vector_polygon",
+          "relation_area": "vector_polygon",
+          "analysis_extent": "vector_polygon",
+          "zones": "vector_polygon"
+        },
+        "critical_options": {
+          "spatial_relation": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "intersects",
+              "within"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_assignment": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "split_by_area",
+              "centroid",
+              "largest_overlap"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_tie": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "unassigned"
+            ],
+            "required": true,
+            "default": null
+          },
+          "area_crs": {
+            "type": "reference",
+            "required_for": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available"
+        ],
+        "steps": [
+          {
+            "key": "apply_spatial_relation",
+            "tool": {
+              "id": "python-select-spatial-relation",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "asset": "targets"
+              },
+              "area": {
+                "asset": "relation_area"
+              }
+            },
+            "parameters": {
+              "spatial_relation": {
+                "option": "spatial_relation"
+              }
+            },
+            "outputs": {
+              "targets": "vector"
+            }
+          },
+          {
+            "key": "clip_back_to_analysis_extent",
+            "tool": {
+              "id": "python-clip-vector-to-extent",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "step": "apply_spatial_relation",
+                "output": "targets"
+              },
+              "area": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "targets": "vector",
+              "original_targets": "vector"
+            }
+          },
+          {
+            "key": "aggregate_by_zone",
+            "tool": {
+              "id": "python-polygon-zone-statistics",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "targets"
+              },
+              "original_targets": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "original_targets"
+              },
+              "zones": {
+                "asset": "zones"
+              }
+            },
+            "parameters": {
+              "boundary_assignment": {
+                "option": "boundary_assignment"
+              },
+              "boundary_tie": {
+                "option": "boundary_tie"
+              },
+              "area_crs": {
+                "option": "area_crs"
+              },
+              "area_unit": {
+                "literal": "square_meter"
+              }
+            },
+            "outputs": {
+              "allocation_details": "table_csv",
+              "zone_statistics": "json"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "clipped_targets",
+            "step": "clip_back_to_analysis_extent",
+            "output": "targets",
+            "type": "vector"
+          },
+          {
+            "role": "original_targets",
+            "step": "clip_back_to_analysis_extent",
+            "output": "original_targets",
+            "type": "vector"
+          },
+          {
+            "role": "allocation_details",
+            "step": "aggregate_by_zone",
+            "output": "allocation_details",
+            "type": "table_csv"
+          },
+          {
+            "role": "zone_statistics",
+            "step": "aggregate_by_zone",
+            "output": "zone_statistics",
+            "type": "json"
+          }
+        ],
+        "check_rules": [
+          "output_exists"
+        ],
+        "input_context": {
+          "targets": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "relation_area",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              },
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          },
+          "zones": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": []
+    },
+    {
+      "title": "两期 NDVI 变化",
+      "description": "按产品元数据计算两期指数、共同有效差值和等积面积。",
+      "definition": {
+        "id": "remote-sensing-index-change",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "first_product": "raster_product",
+          "second_product": "raster_product",
+          "analysis_extent": "vector_polygon"
+        },
+        "critical_options": {
+          "resampling": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "nearest",
+              "bilinear"
+            ],
+            "required": true,
+            "default": null
+          },
+          "change_threshold": {
+            "type": "number",
+            "unit": null,
+            "minimum": 0,
+            "maximum": 2,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "area_crs": {
+            "type": "reference",
+            "required_for": null
+          },
+          "first_configuration": {
+            "type": "json",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "second_configuration": {
+            "type": "json",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available",
+          "remote_sensing_inputs_are_consistent"
+        ],
+        "steps": [
+          {
+            "key": "read_product_metadata",
+            "tool": {
+              "id": "python-remote-sensing-read-metadata",
+              "version": 1
+            },
+            "inputs": {
+              "first_product": {
+                "asset": "first_product"
+              },
+              "second_product": {
+                "asset": "second_product"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "product_metadata": "json"
+            }
+          },
+          {
+            "key": "lookup_sensor_configuration",
+            "tool": {
+              "id": "python-remote-sensing-lookup-configuration",
+              "version": 1
+            },
+            "inputs": {
+              "product_metadata": {
+                "step": "read_product_metadata",
+                "output": "product_metadata"
+              }
+            },
+            "parameters": {
+              "first_configuration": {
+                "option": "first_configuration"
+              },
+              "second_configuration": {
+                "option": "second_configuration"
+              }
+            },
+            "outputs": {
+              "sensor_configuration": "json"
+            }
+          },
+          {
+            "key": "map_band_roles",
+            "tool": {
+              "id": "python-remote-sensing-map-bands",
+              "version": 1
+            },
+            "inputs": {
+              "first_product": {
+                "asset": "first_product"
+              },
+              "second_product": {
+                "asset": "second_product"
+              },
+              "sensor_configuration": {
+                "step": "lookup_sensor_configuration",
+                "output": "sensor_configuration"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "band_mapping": "json"
+            }
+          },
+          {
+            "key": "apply_scale_and_offset",
+            "tool": {
+              "id": "python-remote-sensing-scale-reflectance",
+              "version": 1
+            },
+            "inputs": {
+              "first_product": {
+                "asset": "first_product"
+              },
+              "second_product": {
+                "asset": "second_product"
+              },
+              "sensor_configuration": {
+                "step": "lookup_sensor_configuration",
+                "output": "sensor_configuration"
+              },
+              "band_mapping": {
+                "step": "map_band_roles",
+                "output": "band_mapping"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "first_reflectance": "raster_reflectance",
+              "second_reflectance": "raster_reflectance",
+              "calibration_report": "json"
+            }
+          },
+          {
+            "key": "build_quality_mask",
+            "tool": {
+              "id": "python-remote-sensing-quality-mask",
+              "version": 1
+            },
+            "inputs": {
+              "first_product": {
+                "asset": "first_product"
+              },
+              "second_product": {
+                "asset": "second_product"
+              },
+              "sensor_configuration": {
+                "step": "lookup_sensor_configuration",
+                "output": "sensor_configuration"
+              },
+              "band_mapping": {
+                "step": "map_band_roles",
+                "output": "band_mapping"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "first_quality_mask": "raster_quality_mask",
+              "second_quality_mask": "raster_quality_mask"
+            }
+          },
+          {
+            "key": "calculate_ndvi",
+            "tool": {
+              "id": "python-remote-sensing-calculate-ndvi",
+              "version": 1
+            },
+            "inputs": {
+              "first_reflectance": {
+                "step": "apply_scale_and_offset",
+                "output": "first_reflectance"
+              },
+              "second_reflectance": {
+                "step": "apply_scale_and_offset",
+                "output": "second_reflectance"
+              },
+              "first_quality_mask": {
+                "step": "build_quality_mask",
+                "output": "first_quality_mask"
+              },
+              "second_quality_mask": {
+                "step": "build_quality_mask",
+                "output": "second_quality_mask"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "first_ndvi": "raster_ndvi",
+              "second_ndvi": "raster_ndvi"
+            }
+          },
+          {
+            "key": "align_two_dates",
+            "tool": {
+              "id": "python-remote-sensing-align-dates",
+              "version": 1
+            },
+            "inputs": {
+              "first_ndvi": {
+                "step": "calculate_ndvi",
+                "output": "first_ndvi"
+              },
+              "second_ndvi": {
+                "step": "calculate_ndvi",
+                "output": "second_ndvi"
+              },
+              "analysis_extent": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "resampling": {
+                "option": "resampling"
+              }
+            },
+            "outputs": {
+              "aligned_ndvi": "raster_ndvi_pair",
+              "alignment_report": "json"
+            }
+          },
+          {
+            "key": "calculate_change",
+            "tool": {
+              "id": "python-remote-sensing-calculate-change",
+              "version": 1
+            },
+            "inputs": {
+              "aligned_ndvi": {
+                "step": "align_two_dates",
+                "output": "aligned_ndvi"
+              }
+            },
+            "parameters": {
+              "change_threshold": {
+                "option": "change_threshold"
+              },
+              "area_crs": {
+                "option": "area_crs"
+              }
+            },
+            "outputs": {
+              "change_raster": "raster_ndvi_change",
+              "change_classes": "raster_classification",
+              "area_statistics": "json"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "sensor_configuration",
+            "step": "lookup_sensor_configuration",
+            "output": "sensor_configuration",
+            "type": "json"
+          },
+          {
+            "role": "calibration_report",
+            "step": "apply_scale_and_offset",
+            "output": "calibration_report",
+            "type": "json"
+          },
+          {
+            "role": "first_quality_mask",
+            "step": "build_quality_mask",
+            "output": "first_quality_mask",
+            "type": "raster_quality_mask"
+          },
+          {
+            "role": "second_quality_mask",
+            "step": "build_quality_mask",
+            "output": "second_quality_mask",
+            "type": "raster_quality_mask"
+          },
+          {
+            "role": "first_ndvi",
+            "step": "calculate_ndvi",
+            "output": "first_ndvi",
+            "type": "raster_ndvi"
+          },
+          {
+            "role": "second_ndvi",
+            "step": "calculate_ndvi",
+            "output": "second_ndvi",
+            "type": "raster_ndvi"
+          },
+          {
+            "role": "alignment_report",
+            "step": "align_two_dates",
+            "output": "alignment_report",
+            "type": "json"
+          },
+          {
+            "role": "change_raster",
+            "step": "calculate_change",
+            "output": "change_raster",
+            "type": "raster_ndvi_change"
+          },
+          {
+            "role": "change_classes",
+            "step": "calculate_change",
+            "output": "change_classes",
+            "type": "raster_classification"
+          },
+          {
+            "role": "area_statistics",
+            "step": "calculate_change",
+            "output": "area_statistics",
+            "type": "json"
+          }
+        ],
+        "check_rules": [
+          "product_configuration_matches",
+          "common_valid_pixels_aligned",
+          "change_direction_is_second_minus_first",
+          "ndvi_values_in_range"
+        ],
+        "input_context": {
+          "first_product": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": false
+              }
+            ]
+          },
+          "second_product": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": false
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": [
+        "first_configuration",
+        "second_configuration"
+      ]
+    },
+    {
+      "title": "道路缓冲统计",
+      "description": "计算道路影响范围，裁回分析区并按分区统计目标。",
+      "definition": {
+        "id": "road-buffer-statistics",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "analysis_extent": "vector_polygon",
+          "roads": "vector_line",
+          "targets": "vector_point_or_polygon",
+          "zones": "vector_polygon"
+        },
+        "critical_options": {
+          "distance_m": {
+            "type": "number",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": 0,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "distance_method": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "local_projected",
+              "geodesic"
+            ],
+            "required": true,
+            "default": null
+          },
+          "distance_crs_ref": {
+            "type": "reference",
+            "required_for": "local_projected"
+          },
+          "area_crs_ref": {
+            "type": "reference",
+            "required_for": "area_statistics"
+          },
+          "spatial_relation": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "intersects",
+              "within"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_assignment": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "split_by_area",
+              "centroid",
+              "largest_overlap"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_tie": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "unassigned"
+            ],
+            "required": true,
+            "default": null
+          },
+          "statistic": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "count",
+              "area"
+            ],
+            "required": true,
+            "default": null
+          },
+          "output_scope": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "clipped_to_analysis_extent"
+            ],
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available",
+          "selected_options_match_geometry_type"
+        ],
+        "steps": [
+          {
+            "key": "expand_analysis_extent",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          },
+          {
+            "key": "select_roads_from_expanded_extent",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          },
+          {
+            "key": "choose_measurement_method",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          },
+          {
+            "key": "create_buffer",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          },
+          {
+            "key": "apply_spatial_relation",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          },
+          {
+            "key": "clip_back_to_analysis_extent",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          },
+          {
+            "key": "aggregate_by_zone",
+            "tool": null,
+            "inputs": {},
+            "parameters": {},
+            "outputs": {}
+          }
+        ],
+        "expected_artifacts": [
+          "buffer_extent",
+          "selected_targets",
+          "zone_statistics"
+        ],
+        "check_rules": [
+          "measurement_policy_satisfied",
+          "outside_roads_within_influence_included",
+          "output_clipped_to_analysis_extent",
+          "detail_count_matches_summary"
+        ]
+      },
+      "available": false,
+      "issues": [
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.0.tool",
+          "message": "Step 'expand_analysis_extent' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.1.tool",
+          "message": "Step 'select_roads_from_expanded_extent' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.2.tool",
+          "message": "Step 'choose_measurement_method' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.3.tool",
+          "message": "Step 'create_buffer' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.4.tool",
+          "message": "Step 'apply_spatial_relation' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.5.tool",
+          "message": "Step 'clip_back_to_analysis_extent' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_TOOL_BINDING",
+          "field": "steps.6.tool",
+          "message": "Step 'aggregate_by_zone' requires an exact tool reference"
+        },
+        {
+          "code": "MISSING_ARTIFACT_BINDING",
+          "field": "expected_artifacts.0",
+          "message": "Artifact role 'buffer_extent' requires a step, output and type"
+        },
+        {
+          "code": "MISSING_ARTIFACT_BINDING",
+          "field": "expected_artifacts.1",
+          "message": "Artifact role 'selected_targets' requires a step, output and type"
+        },
+        {
+          "code": "MISSING_ARTIFACT_BINDING",
+          "field": "expected_artifacts.2",
+          "message": "Artifact role 'zone_statistics' requires a step, output and type"
+        }
+      ],
+      "derived_options": []
+    },
+    {
+      "title": "道路缓冲统计",
+      "description": "计算道路影响范围，裁回分析区并按分区统计目标。",
+      "definition": {
+        "id": "road-buffer-statistics",
+        "version": 2,
+        "locked_order": true,
+        "inputs": {
+          "analysis_extent": "vector_polygon",
+          "roads": "vector_line",
+          "targets": "vector_point",
+          "zones": "vector_polygon"
+        },
+        "critical_options": {
+          "distance_m": {
+            "type": "number",
+            "unit": "meter",
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": 0,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "distance_method": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "local_projected"
+            ],
+            "required": true,
+            "default": null
+          },
+          "distance_crs_ref": {
+            "type": "reference",
+            "required_for": "local_projected"
+          },
+          "spatial_relation": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "intersects",
+              "within"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_assignment": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "centroid"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_tie": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "unassigned"
+            ],
+            "required": true,
+            "default": null
+          },
+          "statistic": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "count"
+            ],
+            "required": true,
+            "default": null
+          },
+          "output_scope": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "clipped_to_analysis_extent"
+            ],
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available",
+          "selected_options_match_geometry_type",
+          "point_count_inputs_match_distance_crs"
+        ],
+        "steps": [
+          {
+            "key": "expand_analysis_extent",
+            "tool": {
+              "id": "qgis-expand-analysis-extent",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "distance": {
+                "option": "distance_m"
+              },
+              "segments": {
+                "literal": 16
+              },
+              "dissolve": {
+                "literal": true
+              },
+              "end_cap_style": {
+                "literal": "round"
+              },
+              "join_style": {
+                "literal": "round"
+              },
+              "miter_limit": {
+                "literal": 2
+              }
+            },
+            "outputs": {
+              "expanded_extent": "vector_polygon"
+            }
+          },
+          {
+            "key": "select_roads_from_expanded_extent",
+            "tool": {
+              "id": "qgis-select-roads-by-location",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "asset": "roads"
+              },
+              "area": {
+                "step": "expand_analysis_extent",
+                "output": "expanded_extent"
+              }
+            },
+            "parameters": {
+              "predicate": {
+                "literal": "intersects"
+              }
+            },
+            "outputs": {
+              "roads": "vector_line"
+            }
+          },
+          {
+            "key": "choose_measurement_method",
+            "tool": {
+              "id": "python-prepare-measurement-lines",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "step": "select_roads_from_expanded_extent",
+                "output": "roads"
+              }
+            },
+            "parameters": {
+              "method": {
+                "option": "distance_method"
+              },
+              "target_crs": {
+                "option": "distance_crs_ref"
+              }
+            },
+            "outputs": {
+              "roads": "vector_line"
+            }
+          },
+          {
+            "key": "create_buffer",
+            "tool": {
+              "id": "qgis-buffer",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "step": "choose_measurement_method",
+                "output": "roads"
+              }
+            },
+            "parameters": {
+              "distance": {
+                "option": "distance_m"
+              },
+              "segments": {
+                "literal": 16
+              },
+              "dissolve": {
+                "literal": true
+              },
+              "end_cap_style": {
+                "literal": "round"
+              },
+              "join_style": {
+                "literal": "round"
+              },
+              "miter_limit": {
+                "literal": 2
+              }
+            },
+            "outputs": {
+              "buffer": "vector_polygon"
+            }
+          },
+          {
+            "key": "apply_spatial_relation",
+            "tool": {
+              "id": "qgis-select-points-by-location",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "asset": "targets"
+              },
+              "area": {
+                "step": "create_buffer",
+                "output": "buffer"
+              }
+            },
+            "parameters": {
+              "predicate": {
+                "option": "spatial_relation"
+              }
+            },
+            "outputs": {
+              "targets": "vector_point"
+            }
+          },
+          {
+            "key": "clip_back_to_analysis_extent",
+            "tool": {
+              "id": "python-clip-points-to-extent",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "step": "apply_spatial_relation",
+                "output": "targets"
+              },
+              "extent": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "output_scope": {
+                "option": "output_scope"
+              }
+            },
+            "outputs": {
+              "targets": "vector_point",
+              "original_targets": "vector_point"
+            }
+          },
+          {
+            "key": "aggregate_by_zone",
+            "tool": {
+              "id": "python-count-points-by-zone",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "targets"
+              },
+              "original_targets": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "original_targets"
+              },
+              "zones": {
+                "asset": "zones"
+              }
+            },
+            "parameters": {
+              "boundary_assignment": {
+                "option": "boundary_assignment"
+              },
+              "boundary_tie": {
+                "option": "boundary_tie"
+              },
+              "statistic": {
+                "option": "statistic"
+              }
+            },
+            "outputs": {
+              "statistics": "table_csv"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "buffer_extent",
+            "step": "create_buffer",
+            "output": "buffer",
+            "type": "vector_polygon"
+          },
+          {
+            "role": "selected_targets",
+            "step": "clip_back_to_analysis_extent",
+            "output": "targets",
+            "type": "vector_point"
+          },
+          {
+            "role": "zone_statistics",
+            "step": "aggregate_by_zone",
+            "output": "statistics",
+            "type": "table_csv"
+          }
+        ],
+        "check_rules": [
+          "measurement_policy_satisfied",
+          "outside_roads_within_influence_included",
+          "output_clipped_to_analysis_extent",
+          "detail_count_matches_summary"
+        ],
+        "input_context": {
+          "roads": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": "distance_m",
+                "distance_crs_option": "distance_crs_ref",
+                "allow_empty": true
+              }
+            ]
+          },
+          "targets": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          },
+          "zones": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": []
+    },
+    {
+      "title": "道路缓冲统计",
+      "description": "计算道路影响范围，裁回分析区并按分区统计目标。",
+      "definition": {
+        "id": "road-buffer-statistics",
+        "version": 3,
+        "locked_order": true,
+        "inputs": {
+          "analysis_extent": "vector_polygon",
+          "roads": "vector_line",
+          "targets": "vector_point",
+          "zones": "vector_polygon"
+        },
+        "critical_options": {
+          "distance_m": {
+            "type": "number",
+            "unit": "meter",
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": 0,
+            "maximum_exclusive": null,
+            "values": null,
+            "required": true,
+            "default": null
+          },
+          "distance_method": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "local_projected",
+              "geodesic"
+            ],
+            "required": true,
+            "default": null
+          },
+          "distance_crs_ref": {
+            "type": "reference",
+            "required_for": "local_projected"
+          },
+          "spatial_relation": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "intersects",
+              "within"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_assignment": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "centroid"
+            ],
+            "required": true,
+            "default": null
+          },
+          "boundary_tie": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "unassigned"
+            ],
+            "required": true,
+            "default": null
+          },
+          "statistic": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "count"
+            ],
+            "required": true,
+            "default": null
+          },
+          "output_scope": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "clipped_to_analysis_extent"
+            ],
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available",
+          "selected_options_match_geometry_type",
+          "road_point_count_inputs_match_measurement"
+        ],
+        "steps": [
+          {
+            "key": "expand_analysis_extent",
+            "tool": null,
+            "inputs": {
+              "source": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "expanded_extent": "vector_polygon"
+            }
+          },
+          {
+            "key": "select_roads_from_expanded_extent",
+            "tool": null,
+            "inputs": {
+              "source": {
+                "asset": "roads"
+              },
+              "area": {
+                "step": "expand_analysis_extent",
+                "output": "expanded_extent"
+              }
+            },
+            "parameters": {
+              "predicate": {
+                "literal": "intersects"
+              }
+            },
+            "outputs": {
+              "roads": "vector_line"
+            }
+          },
+          {
+            "key": "choose_measurement_method",
+            "tool": null,
+            "inputs": {
+              "source": {
+                "step": "select_roads_from_expanded_extent",
+                "output": "roads"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "roads": "vector_line"
+            }
+          },
+          {
+            "key": "create_buffer",
+            "tool": null,
+            "inputs": {
+              "source": {
+                "step": "choose_measurement_method",
+                "output": "roads"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "buffer": "vector_polygon"
+            }
+          },
+          {
+            "key": "apply_spatial_relation",
+            "tool": {
+              "id": "qgis-select-points-by-location",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "asset": "targets"
+              },
+              "area": {
+                "step": "create_buffer",
+                "output": "buffer"
+              }
+            },
+            "parameters": {
+              "predicate": {
+                "option": "spatial_relation"
+              }
+            },
+            "outputs": {
+              "targets": "vector_point"
+            }
+          },
+          {
+            "key": "clip_back_to_analysis_extent",
+            "tool": {
+              "id": "python-clip-points-to-extent",
+              "version": 1
+            },
+            "inputs": {
+              "source": {
+                "step": "apply_spatial_relation",
+                "output": "targets"
+              },
+              "extent": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {
+              "output_scope": {
+                "option": "output_scope"
+              }
+            },
+            "outputs": {
+              "targets": "vector_point",
+              "original_targets": "vector_point"
+            }
+          },
+          {
+            "key": "aggregate_by_zone",
+            "tool": {
+              "id": "python-count-points-by-zone",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "targets"
+              },
+              "original_targets": {
+                "step": "clip_back_to_analysis_extent",
+                "output": "original_targets"
+              },
+              "zones": {
+                "asset": "zones"
+              }
+            },
+            "parameters": {
+              "boundary_assignment": {
+                "option": "boundary_assignment"
+              },
+              "boundary_tie": {
+                "option": "boundary_tie"
+              },
+              "statistic": {
+                "option": "statistic"
+              }
+            },
+            "outputs": {
+              "statistics": "table_csv"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "buffer_extent",
+            "step": "create_buffer",
+            "output": "buffer",
+            "type": "vector_polygon"
+          },
+          {
+            "role": "selected_targets",
+            "step": "clip_back_to_analysis_extent",
+            "output": "targets",
+            "type": "vector_point"
+          },
+          {
+            "role": "zone_statistics",
+            "step": "aggregate_by_zone",
+            "output": "statistics",
+            "type": "table_csv"
+          }
+        ],
+        "check_rules": [
+          "measurement_policy_satisfied",
+          "outside_roads_within_influence_included",
+          "output_clipped_to_analysis_extent",
+          "detail_count_matches_summary"
+        ],
+        "input_context": {
+          "roads": {
+            "required_fields": [
+              "source_feature_id"
+            ],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": "distance_m",
+                "distance_crs_option": "distance_crs_ref",
+                "distance_method_option": "distance_method",
+                "allow_empty": true
+              }
+            ]
+          },
+          "targets": {
+            "required_fields": [
+              "source_feature_id"
+            ],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          },
+          "zones": {
+            "required_fields": [
+              "source_feature_id"
+            ],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          }
+        },
+        "step_variants": {
+          "option": "distance_method",
+          "choices": {
+            "local_projected": {
+              "expand_analysis_extent": {
+                "tool": {
+                  "id": "qgis-expand-analysis-extent",
+                  "version": 1
+                },
+                "parameters": {
+                  "distance": {
+                    "option": "distance_m"
+                  },
+                  "segments": {
+                    "literal": 16
+                  },
+                  "dissolve": {
+                    "literal": true
+                  },
+                  "end_cap_style": {
+                    "literal": "round"
+                  },
+                  "join_style": {
+                    "literal": "round"
+                  },
+                  "miter_limit": {
+                    "literal": 2
+                  }
+                }
+              },
+              "select_roads_from_expanded_extent": {
+                "tool": {
+                  "id": "qgis-select-roads-by-location",
+                  "version": 1
+                }
+              },
+              "choose_measurement_method": {
+                "tool": {
+                  "id": "python-prepare-measurement-lines",
+                  "version": 1
+                },
+                "parameters": {
+                  "method": {
+                    "option": "distance_method"
+                  },
+                  "target_crs": {
+                    "option": "distance_crs_ref"
+                  }
+                }
+              },
+              "create_buffer": {
+                "tool": {
+                  "id": "qgis-buffer",
+                  "version": 1
+                },
+                "parameters": {
+                  "distance": {
+                    "option": "distance_m"
+                  },
+                  "segments": {
+                    "literal": 16
+                  },
+                  "dissolve": {
+                    "literal": true
+                  },
+                  "end_cap_style": {
+                    "literal": "round"
+                  },
+                  "join_style": {
+                    "literal": "round"
+                  },
+                  "miter_limit": {
+                    "literal": 2
+                  }
+                }
+              }
+            },
+            "geodesic": {
+              "expand_analysis_extent": {
+                "tool": {
+                  "id": "python-expand-wgs84-analysis-extent",
+                  "version": 1
+                },
+                "inputs": {
+                  "source": {
+                    "asset": "analysis_extent"
+                  },
+                  "targets": {
+                    "asset": "targets"
+                  },
+                  "zones": {
+                    "asset": "zones"
+                  }
+                },
+                "parameters": {
+                  "distance": {
+                    "option": "distance_m"
+                  },
+                  "target_crs": {
+                    "literal": "EPSG:4326"
+                  }
+                },
+                "outputs": {
+                  "expanded_extent": "vector_polygon",
+                  "analysis_extent": "vector_polygon",
+                  "targets": "vector_point",
+                  "zones": "vector_polygon"
+                }
+              },
+              "select_roads_from_expanded_extent": {
+                "tool": {
+                  "id": "python-select-wgs84-roads",
+                  "version": 1
+                }
+              },
+              "choose_measurement_method": {
+                "tool": {
+                  "id": "python-prepare-wgs84-measurement-lines",
+                  "version": 1
+                },
+                "parameters": {
+                  "method": {
+                    "option": "distance_method"
+                  },
+                  "target_crs": {
+                    "literal": "EPSG:4326"
+                  }
+                }
+              },
+              "create_buffer": {
+                "tool": {
+                  "id": "python-wgs84-geodesic-buffer",
+                  "version": 1
+                },
+                "parameters": {
+                  "distance": {
+                    "option": "distance_m"
+                  },
+                  "dissolve": {
+                    "literal": true
+                  }
+                }
+              },
+              "apply_spatial_relation": {
+                "tool": {
+                  "id": "qgis-select-points-by-location",
+                  "version": 1
+                },
+                "inputs": {
+                  "source": {
+                    "step": "expand_analysis_extent",
+                    "output": "targets"
+                  },
+                  "area": {
+                    "step": "create_buffer",
+                    "output": "buffer"
+                  }
+                }
+              },
+              "clip_back_to_analysis_extent": {
+                "tool": {
+                  "id": "python-clip-points-to-extent",
+                  "version": 1
+                },
+                "inputs": {
+                  "source": {
+                    "step": "apply_spatial_relation",
+                    "output": "targets"
+                  },
+                  "extent": {
+                    "step": "expand_analysis_extent",
+                    "output": "analysis_extent"
+                  }
+                }
+              },
+              "aggregate_by_zone": {
+                "tool": {
+                  "id": "python-count-points-by-zone",
+                  "version": 1
+                },
+                "inputs": {
+                  "targets": {
+                    "step": "clip_back_to_analysis_extent",
+                    "output": "targets"
+                  },
+                  "original_targets": {
+                    "step": "clip_back_to_analysis_extent",
+                    "output": "original_targets"
+                  },
+                  "zones": {
+                    "step": "expand_analysis_extent",
+                    "output": "zones"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": []
+    },
+    {
+      "title": "空间筛选与裁剪",
+      "description": "用完整对象判断空间关系，再裁回分析范围。",
+      "definition": {
+        "id": "spatial-select-and-clip",
+        "version": 1,
+        "locked_order": true,
+        "inputs": {
+          "targets": "vector",
+          "relation_area": "vector_polygon",
+          "analysis_extent": "vector_polygon"
+        },
+        "critical_options": {
+          "spatial_relation": {
+            "type": "enum",
+            "unit": null,
+            "minimum": null,
+            "maximum": null,
+            "minimum_exclusive": null,
+            "maximum_exclusive": null,
+            "values": [
+              "intersects",
+              "within"
+            ],
+            "required": true,
+            "default": null
+          }
+        },
+        "preconditions": [
+          "required_input_roles_available"
+        ],
+        "steps": [
+          {
+            "key": "apply_spatial_relation",
+            "tool": {
+              "id": "python-select-spatial-relation",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "asset": "targets"
+              },
+              "area": {
+                "asset": "relation_area"
+              }
+            },
+            "parameters": {
+              "spatial_relation": {
+                "option": "spatial_relation"
+              }
+            },
+            "outputs": {
+              "targets": "vector"
+            }
+          },
+          {
+            "key": "clip_back_to_analysis_extent",
+            "tool": {
+              "id": "python-clip-vector-to-extent",
+              "version": 1
+            },
+            "inputs": {
+              "targets": {
+                "step": "apply_spatial_relation",
+                "output": "targets"
+              },
+              "area": {
+                "asset": "analysis_extent"
+              }
+            },
+            "parameters": {},
+            "outputs": {
+              "targets": "vector",
+              "original_targets": "vector"
+            }
+          }
+        ],
+        "expected_artifacts": [
+          {
+            "role": "clipped_targets",
+            "step": "clip_back_to_analysis_extent",
+            "output": "targets",
+            "type": "vector"
+          },
+          {
+            "role": "original_targets",
+            "step": "clip_back_to_analysis_extent",
+            "output": "original_targets",
+            "type": "vector"
+          }
+        ],
+        "check_rules": [
+          "output_exists"
+        ],
+        "input_context": {
+          "targets": {
+            "required_fields": [],
+            "field_options": [],
+            "scopes": [
+              {
+                "reference_role": "relation_area",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              },
+              {
+                "reference_role": "analysis_extent",
+                "distance_option": null,
+                "distance_crs_option": null,
+                "allow_empty": true
+              }
+            ]
+          }
+        }
+      },
+      "available": true,
+      "issues": [],
+      "derived_options": []
+    }
+  ]
+}
