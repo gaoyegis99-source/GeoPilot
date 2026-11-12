@@ -117,3 +117,17 @@ bbfc1d8f6bca9259f004f6a95ca39dbe8a218dac: 1198 evidence links, generated manifes
 ```
 
 现有候选另用 `.venv/bin/python -B scripts/quality/verify_delivery_manifest.py --round2-manifest artifacts/reports/final/round2-delivery-manifest.json` 复核，退出 0，与封存核验 JSON 逐字节一致。候选归档与清单的 `sha256sum -c SHA256SUMS` 均退出 0。回滚可撤销历史链接修复和此记录。
+
+## 工作台修复后的技术候选
+
+主控、F 和 E 复核更新候选。源提交 `6ecdbca38671b28793244d90984d116411bb4e52`，证据提交 `3409fe7b3fecbe39d04b5cf353ca0aab0cd3faa7`。候选包含 CRS 定位、取消重跑、执行与检查状态区分、运行历史及成果归属。验证在净分离检出上使用 Linux 5.15、Python 3.13.13、pytest 8.3.4、QGIS 3.44.15、Psycopg 3.3.4、Node v22.23.1 和 npm 10.9.8，使用离线 npm 缓存及真实 QGIS 和 PostGIS。 [修复复验](../user-research/p16-ux-follow-up.md)
+
+| 套件 | 通过 | 失败／错误／跳过 | 退出码 |
+| --- | ---: | ---: | ---: |
+| 前端安装、构建与 Vitest | 75 项，16 文件 | 0／0／0 | 0 |
+| 后端全量 | 2,255 项，1,104.12 秒 | 0／0／0 | 0 |
+| T01–T16 独立固定 GIS | 82 项，97.17 秒 | 0／0／0 | 0 |
+
+独立审计逐项核对后端唯一节点和固定 GIS 映射。技术候选包含 946 个源码范围文件和 742 个证据文件。按 Git 及空目录解包的验证均退出 0，输出字节一致。交付归档 SHA-256 为 `981473df690bc043ff0e8aa7e2ebda44d4f5e613b07729cd84c1157fcf1bf103`。打包命令、原始测试报告和独立审计见证据归档，SHA-256 为 `5de81c19efc216b4d20f9d9c41b7002acb92b19e6daa866f42c833bf2a9da10a`。 [候选原始证据](p16-06-ux-candidate-evidence.tar.gz)
+
+P16-06 更新候选验收为 ACCEPTED。按原 Git 源提交与证据提交可复建上一候选 `44b17fc`。新版附主持人补充观察指南，P16-03 真实用户观察以及 P16-04、P16-05 的真实体验验收仍待完成。P16-07 实际前置核验退出 1，候选匹配，列出的未齐依赖仍为这三项。 [主持人补充指南](../user-research/moderator-ux-follow-up.md)

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "release": "GeoPilot round2 candidate",
-  "source_commit": "44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0",
-  "evidence_commit": "9ea45ec991547adf0b70e16710efb8f789450183",
-  "source_sha256": "d0dc3ff7c3d18d2e36dcd5622ca15e8ce65c7de04ad69667bdf3bdfd24c5da44",
+  "source_commit": "6ecdbca38671b28793244d90984d116411bb4e52",
+  "evidence_commit": "3409fe7b3fecbe39d04b5cf353ca0aab0cd3faa7",
+  "source_sha256": "c3f1d9f566c1117684c1a9b9b8b9c3bb4c9f767f727345ee8ba47506b94f0d44",
   "source_files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -819,7 +819,7 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/App.tsx",
-      "sha256": "466209945ba18184c4723f9f1feabacd35c7f9820bde3567f16a4abfcb0c6abf"
+      "sha256": "c4e70f0825b7a2b9c81bab5c7001d1b9c94f93dd339055c8b0d0e8d3dda8afe2"
     },
     {
       "path": "system-prototype-v1/frontend/src/api/plan-alternatives.ts",
@@ -827,7 +827,7 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/api/workbench.ts",
-      "sha256": "9bad388b783f347aaaf965883f3270db44de1ced917681c86f2e3a11d185364d"
+      "sha256": "1e40f6fec4e1c723be267a1f053f963df594a17525d6cef3a412b90b665cdd35"
     },
     {
       "path": "system-prototype-v1/frontend/src/components/errors/ProblemDetails.test.tsx",
@@ -843,11 +843,11 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/features/artifacts/ArtifactsPanel.test.tsx",
-      "sha256": "688a52b884b8a35291554d5abad82e17454e4f010a6cda446905c00ee28b6f47"
+      "sha256": "ee25557252f5ad0975ff8f4d9aeefe8760ee692e867e9d059dbbd2ae79466392"
     },
     {
       "path": "system-prototype-v1/frontend/src/features/artifacts/ArtifactsPanel.tsx",
-      "sha256": "679355e5bfdafdb0777ca706f32021491f37e6fcf949fff3ac8f0925d28581a4"
+      "sha256": "bbcc97628d660888627a276d46a4a240bd56ec3db207f9dbff2b8779d347220a"
     },
     {
       "path": "system-prototype-v1/frontend/src/features/artifacts/artifacts.css",
@@ -987,11 +987,11 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/features/runs/RunPanel.test.tsx",
-      "sha256": "feab1bd2c47b04419541167bfe72b09b7b86af3fdd82762d1536ad9484d8168e"
+      "sha256": "302c07e39c68a8b19e1367e1ae594f55c5a49798ee881b01829c889d850b1902"
     },
     {
       "path": "system-prototype-v1/frontend/src/features/runs/RunPanel.tsx",
-      "sha256": "00b2158406306e2cd7b35831e43496bdec6fbb3c87d90df6f50f613549f323c9"
+      "sha256": "44650d77c1b9d2ebe3e61d0c65e8fe98b1410b4f2b48a05319b925f943816799"
     },
     {
       "path": "system-prototype-v1/frontend/src/features/runs/runs.css",
@@ -1015,7 +1015,7 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/features/session/TaskHistory.tsx",
-      "sha256": "d36b077fca1e1405787a6ffe6a6f83e40758d117abd6ada454c638400eb6ec94"
+      "sha256": "f7caf12808756f1b799683ba0a5f066cdce206f0498a98bedb9b36f735f2b552"
     },
     {
       "path": "system-prototype-v1/frontend/src/features/session/session.css",
@@ -1299,19 +1299,19 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/ACCEPTANCE_LOG.md",
-      "sha256": "67609e9bbbae184aafeedce4875b168e19577cb95b7efdce49a545a77baa260b"
+      "sha256": "1f9aa12a44f1d921097da984286474e32e20e9d59ef928ea7c9cc7378cff1d9f"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/BLOCKERS.md",
-      "sha256": "0074dfef8c70f2cbc55cc206388174bcd7a3834880d9afd7099be0584d5ae912"
+      "sha256": "cb3554b2d0531927fee1266fde9815f547001cd8b5d1b8652ed6fbbe3ee86ad5"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/CHANGELOG.md",
-      "sha256": "25422e389c7d27f676c0d96b01144c4c493e9c7590d16d3d5b9e893599d6f32a"
+      "sha256": "db2e05751371160f09c54bd9bbf74aa921d5f40173def393f6b89e5d012835a8"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/TASK_BOARD.md",
-      "sha256": "318056f62b66927a967d48718a1dad121a69614d4d7e71f54829826da9068d30"
+      "sha256": "fcd754a3e91168aa34597048bd69b2b32db20befdd9ba6e9c09a1c864ea05742"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/task_inventory.json",
@@ -2115,7 +2115,7 @@
     },
     {
       "path": "system-prototype-v1/scripts/quality/summarize_user_trials.py",
-      "sha256": "b1cd3f95a1004754a4f60e263e93be2d01dc15f1bd9352814cc0b9bc550a4a21"
+      "sha256": "5f0738a678a14e5d973d231d3d24dd2d459f85741b81696fe776812525d392ab"
     },
     {
       "path": "system-prototype-v1/scripts/quality/validate_acceptance_consistency.py",
@@ -2130,8 +2130,12 @@
       "sha256": "96c33d43e98637531d1ad085a11ea35e27a06965ce9389838629f9c1f05f7d33"
     },
     {
+      "path": "system-prototype-v1/scripts/quality/validate_release_readiness.py",
+      "sha256": "29bc4483ad753677236cfc30eca3ceeb87fcef5f51658f173bf12f13f1f83ca0"
+    },
+    {
       "path": "system-prototype-v1/scripts/quality/validate_round2_status.py",
-      "sha256": "a02cbcf8522f5a5276f640b276405a03999182c2798c0984823463c92bd44b50"
+      "sha256": "0077b3d54e95e503c51f13ea1987970f807b080e17485d9693f33433d6b673d6"
     },
     {
       "path": "system-prototype-v1/scripts/quality/verify_delivery_manifest.py",
@@ -2159,7 +2163,7 @@
     },
     {
       "path": "system-prototype-v1/src/geopilot/api/artifact_routes.py",
-      "sha256": "370507f9471e2a0ebe3a4c2e3f4e81362373ac36e077f66901d5ce4114176f8c"
+      "sha256": "07e6af3f7d0dbe3867d51f8111b648cd95d385fd69f98f508731fcc34883b0dd"
     },
     {
       "path": "system-prototype-v1/src/geopilot/api/catalog_routes.py",
@@ -2247,7 +2251,7 @@
     },
     {
       "path": "system-prototype-v1/src/geopilot/application/task_context.py",
-      "sha256": "fbd7abfbaf52c74fa7ac987b7f973f3f28bdc4017618abd5eb974dcd864a821c"
+      "sha256": "0aef83e993f03b5825ce13cdb958cbce80658353f9ad6eed8cd7fb8b67203233"
     },
     {
       "path": "system-prototype-v1/src/geopilot/application/terrain_plan.py",
@@ -2727,7 +2731,7 @@
     },
     {
       "path": "system-prototype-v1/src/geopilot/plans/draft_builder.py",
-      "sha256": "9afb65262aa4b878a6547191ae1391737f0577ea3f2756ffdfe07c7f6327fdf0"
+      "sha256": "38e5e958e136fb493346f04a24dba213aacaaaf9af7390a855c1fb1733ee78df"
     },
     {
       "path": "system-prototype-v1/src/geopilot/plans/models.py",
@@ -2939,7 +2943,7 @@
     },
     {
       "path": "system-prototype-v1/tests/application/test_context_candidates.py",
-      "sha256": "6fb684f85dd99e0f99db376e081e299d0756de65b1199fc98491d2e09c722a36"
+      "sha256": "d77aa8d8b213af029b257001d24b4bbed5ca818e566be44dfaef5b1481c13adc"
     },
     {
       "path": "system-prototype-v1/tests/application/test_method_preconditions.py",
@@ -3579,7 +3583,11 @@
     },
     {
       "path": "system-prototype-v1/tests/quality/test_summarize_user_trials.py",
-      "sha256": "46c30b217a9984b0005b2701a2fa8e9436b0ac0a085a02d7543b47c668684e5e"
+      "sha256": "728fa96419088e7d91e9c63ebd527e7b34d733142249cb7d47f51e9d3a56fb67"
+    },
+    {
+      "path": "system-prototype-v1/tests/quality/test_validate_release_readiness.py",
+      "sha256": "854f9beb7334d5a068e8f7b97e1091791803a42cce0fbe234936a9bc8a404f7c"
     },
     {
       "path": "system-prototype-v1/tests/remote_sensing/conftest.py",
@@ -3699,7 +3707,7 @@
     },
     {
       "path": "system-prototype-v1/tests/runs/test_run_api.py",
-      "sha256": "2aab62896b74759407edcaeeab636afdd524c4a5fa757f8033e56c183ef88745"
+      "sha256": "90ac5285156c65ca058787aa86d3260cbc97abce2b8ba1675bd0ee63b48d88a5"
     },
     {
       "path": "system-prototype-v1/tests/runs/test_run_creation.py",
@@ -3793,8 +3801,8 @@
         "-p",
         "no:cacheprovider",
         "tests",
-        "--basetemp=/dev/shm/geopilot-p16-candidate.IqabDKTG/tmp/geopilot-round2-validation-ywwbxk3b/backend",
-        "--junitxml=/dev/shm/geopilot-p16-candidate.IqabDKTG/validation/round2-validation/backend.xml"
+        "--basetemp=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tmp/geopilot-round2-validation-id_7n3kk/backend",
+        "--junitxml=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/validation/round2-validation/backend.xml"
       ],
       "environment": {
         "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
@@ -3802,7 +3810,7 @@
         "pytest": "pytest 8.3.4",
         "qgis": "QGIS 3.44.15-Solothurn 'Solothurn' (44b4ef05178) QGIS code revision 44b4ef05178 Qt version 5.15.13 Python version 3.12.3 GDAL/OGR version 3.8.4 PROJ version 9.4.0 EPSG Registry database version v11.004 (2024-02-24) GEOS version 3.12.1-CAPI-1.18.1 SQLite version 3.45.1 OS Ubuntu 24.04.5 LTS",
         "qgis_executable": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
-        "pythonpath": "/dev/shm/geopilot-p16-candidate.IqabDKTG/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
+        "pythonpath": "/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
       },
       "exit_code": 0,
       "junit": "system-prototype-v1/artifacts/reports/final/round2-validation/backend.xml",
@@ -3821,8 +3829,8 @@
         "log": "system-prototype-v1/artifacts/reports/final/round2-validation/backend-collection.log"
       },
       "counts": {
-        "passed": 2228,
-        "tests": 2228,
+        "passed": 2255,
+        "tests": 2255,
         "failures": 0,
         "errors": 0,
         "skipped": 0
@@ -3919,8 +3927,8 @@
         "tests/runners/test_measurement_steps.py::test_fixed_T06_equal_area_polygons_match_manual_areas",
         "tests/runners/test_measurement_steps.py::test_fixed_distance_rejects_geographic_and_web_mercator_before_dispatch[T01-geographic]",
         "tests/runners/test_measurement_steps.py::test_fixed_distance_rejects_geographic_and_web_mercator_before_dispatch[T02-web-mercator]",
-        "--basetemp=/dev/shm/geopilot-p16-candidate.IqabDKTG/tmp/geopilot-round2-validation-ywwbxk3b/fixed_gis",
-        "--junitxml=/dev/shm/geopilot-p16-candidate.IqabDKTG/validation/round2-validation/fixed_gis.xml"
+        "--basetemp=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tmp/geopilot-round2-validation-id_7n3kk/fixed_gis",
+        "--junitxml=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/validation/round2-validation/fixed_gis.xml"
       ],
       "environment": {
         "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
@@ -3928,7 +3936,7 @@
         "pytest": "pytest 8.3.4",
         "qgis": "QGIS 3.44.15-Solothurn 'Solothurn' (44b4ef05178) QGIS code revision 44b4ef05178 Qt version 5.15.13 Python version 3.12.3 GDAL/OGR version 3.8.4 PROJ version 9.4.0 EPSG Registry database version v11.004 (2024-02-24) GEOS version 3.12.1-CAPI-1.18.1 SQLite version 3.45.1 OS Ubuntu 24.04.5 LTS",
         "qgis_executable": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
-        "pythonpath": "/dev/shm/geopilot-p16-candidate.IqabDKTG/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
+        "pythonpath": "/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
       },
       "exit_code": 0,
       "junit": "system-prototype-v1/artifacts/reports/final/round2-validation/fixed_gis.xml",
@@ -3950,7 +3958,7 @@
         "--run",
         "--reporter=default",
         "--reporter=junit",
-        "--outputFile.junit=/dev/shm/geopilot-p16-candidate.IqabDKTG/validation/round2-validation/frontend.xml"
+        "--outputFile.junit=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/validation/round2-validation/frontend.xml"
       ],
       "environment": {
         "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
@@ -3961,8 +3969,8 @@
       "junit": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.xml",
       "log": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.log",
       "counts": {
-        "passed": 73,
-        "tests": 73,
+        "passed": 75,
+        "tests": 75,
         "failures": 0,
         "errors": 0,
         "skipped": 0
@@ -4010,47 +4018,47 @@
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation.json",
-      "sha256": "7c75b11a9fd28ab433a3e97e67fa2c0a5940cc809af278e2d0896589b92aa8a2"
+      "sha256": "82871edf2b97ef0839e61104ea0a0532a63362fe8dd4afaf2e1f0e803b0b2455"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend-collection.log",
-      "sha256": "c19a57bfbb881b04627d276cd218629241b2af9f0d0153c4a87cebb3fd665af7"
+      "sha256": "a646329ea097bd93ecec88147fee2e04add81fc2b184dc3ceef90c28d4e1fe1e"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend-dependencies.log",
-      "sha256": "ebdc54c98795520e3d849d7898ebc6e18e497974977b0892958c5aadf3a9d3df"
+      "sha256": "b205d292beeabb6585a585ade0ac5ab94488218f4d40e3f0cc3a24f5718d50b3"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend.log",
-      "sha256": "c70c4f941895f1ffb270854e4ec963c409782f4d57d61317acf1299b15aeabc5"
+      "sha256": "12cd4fc1bfa00aa50cc4ad6e14fe22e313da21a9b9b5047cea363dc8349312d8"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend.xml",
-      "sha256": "cb8910e8fff0964a9902401d2053c1663616db5ffdefd6885a7120ec96370b5d"
+      "sha256": "b70c9d1f10bde2e9ea2d33be591f7f9ccf6a675a8ffa96542f5eee1de3ede0e4"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/fixed_gis.log",
-      "sha256": "fff40dd8b334112af1d5a066a64a4f1eb41d9d6484fdad45eb88d5a2c05de7b5"
+      "sha256": "2ea6b0d518ecdc2e68cd71c56bddeb023347bebe80e3707b1ce7fc7fed6a417b"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/fixed_gis.xml",
-      "sha256": "0174a2f1d5a7277a439f7ccbed037644b2d2529adfe204177f019daed147449e"
+      "sha256": "b9ecec828b06ad320dcd42257569ce27cfb0cdc1fa99cb4afb4b09243d5b05da"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend-build.log",
-      "sha256": "cb5cc566eed0f81a7fe70b83182976b34fd9bd91dba13c9051b7d487aa87a8b5"
+      "sha256": "b7b0d963b2717245eccc752e1cbb7b30f15272d0a300f689cd35f9eae6c03c13"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend-install.log",
-      "sha256": "cda8f5bdb3663b3bfa21e3b1c7ae088b51ad9fcda714e827a76de21997a037bc"
+      "sha256": "c9a47a42c781f9f4d76dd80c44859faa86191954cd29bc411e772f1a6d32fe94"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.log",
-      "sha256": "823517e9ba39e03eac710263047694c9b1d1d816153a7581506b80f409996bfa"
+      "sha256": "f55d00dcfac2b6b388192ee166d4d08f40676fc498eceb7d459f64018569ea8d"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.xml",
-      "sha256": "be4c009bc6b5a4abd6a26e54f73de5d213b4c23aa32bf10f8adf695cea1dff65"
+      "sha256": "b6f4c0f7fc6099029a1b965b3afb0f5b2a3227c6679aaa30bb265a0503943c29"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/methods/regression.md",
@@ -4985,6 +4993,10 @@
       "sha256": "ddf487f99e4df035a48393878b3ba11d162f673515b595ad5d4e9873e6216101"
     },
     {
+      "path": "system-prototype-v1/docs/round2/deployment/p16-06-candidate-verification-evidence.tar.gz",
+      "sha256": "57dfaf7f2190ea98d84502f93df27add9f11c0bce9d43ad7d1002be1bcafc5d5"
+    },
+    {
       "path": "system-prototype-v1/docs/round2/deployment/p16-06-collection-preview.json",
       "sha256": "03ef352dfea5ef1fe9896cb3a9e93021075ea51e1ba7b85e837e9f5efd989553"
     },
@@ -5062,7 +5074,7 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/deployment/p16-06-tooling.md",
-      "sha256": "4797bbc370960d886ca1a36d86c4fcd8c6cad52e97058f2b80f8dbce75131bf9"
+      "sha256": "783c36d438e34f5ef1737479e623d6401a81ac2ce37c7f05eeea41e1431605e3"
     },
     {
       "path": "system-prototype-v1/docs/round2/methods/p14-01-cli-junit.xml",
@@ -6857,12 +6869,24 @@
       "sha256": "5c104880892cdc4309baedcf196ccdcae99281486ac9d682ff4eb8abc346d852"
     },
     {
+      "path": "system-prototype-v1/docs/round2/release/p16-07-preflight-evidence.tar.gz",
+      "sha256": "6d1ebfbaa327bbf44f396538bf5f131f4f11380f3ce53404954df7a4e27cb7f3"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/release/p16-07-preflight.md",
+      "sha256": "56548372b13d1956ee486130cb7d64656b09fcf3725721c39884591eefaf33d6"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/moderator-ux-follow-up.md",
+      "sha256": "2a887aba729b1c1147a205b5ad110ea32a0d107bd09a2eb3155a094f57091c40"
+    },
+    {
       "path": "system-prototype-v1/docs/round2/user-research/moderator.md",
-      "sha256": "2a83bd9c0904608dc26e16d99faae801226af2cb48767b4562508c3e7b756cb2"
+      "sha256": "b558ca540e5757c5d00776f6683ca25b971bbefd21e863ca776a8e86fb0ae883"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/observations.md",
-      "sha256": "b546c8d096a3bed977111c8a27fe12260242761ebc41991cd4f8dfd912aa9088"
+      "sha256": "c9208d40f2117f4d0b0bbdae054aee5321830851c646a2c01942f19fa7bfd839"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-browser-os-junit.xml",
@@ -6882,11 +6906,15 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-preparation.md",
-      "sha256": "db2cbb5247ba57937a3672f263a9f5825cbfaceefd4ebfca0de9f1f83db7ab98"
+      "sha256": "0b20b8ce81d6cf7fcd31156940e2489b0e0b2a390647d3aec3a20faef253ab97"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-pytest.log",
       "sha256": "4c0814eb678123707bad1f422a8946723e3866427eb0474ad734a4d91ab2942f"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-03-rehearsal-evidence.tar.gz",
+      "sha256": "b9dc57cf375e1ab0c27f28190ffe875559f8c14c4e2bb2168dc071c79b611917"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-review-junit.xml",
@@ -6897,8 +6925,24 @@
       "sha256": "7e0bd851e7a9c466fbc047b8f7323f479b87a2a469c546bfada709be2a6495b6"
     },
     {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-03-simulated-users-evidence.tar.gz",
+      "sha256": "ba4e18e1463d3184f9f0e19ca2012e4b705bc3f2ed7edcd5527994e8ba5dda9f"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-03-simulated-users.md",
+      "sha256": "b9c5bb2280061bc181e5475e28eb345da80bb65730c04749c29d08e7fb7d08e9"
+    },
+    {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-synthetic-summary.json",
       "sha256": "6c34d48b67ac8ebade0168f38cdf2b5960634f3e70a3f1ad0137bc90b00bdc33"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-ux-follow-up-evidence.tar.gz",
+      "sha256": "6df099231bed8d88abd8c0aeea037fa29e6c27525d1e21f7f5e6bcc4eaaf24e1"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-ux-follow-up.md",
+      "sha256": "e892492cc5155c2717486dd1a99ae86d7d55e0a6cc6aa182b8d61ddd430295e2"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/participant-task.md",
@@ -6910,7 +6954,7 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/ACCEPTANCE_LOG.md",
-      "sha256": "67609e9bbbae184aafeedce4875b168e19577cb95b7efdce49a545a77baa260b"
+      "sha256": "1f9aa12a44f1d921097da984286474e32e20e9d59ef928ea7c9cc7378cff1d9f"
     }
   ]
 }
