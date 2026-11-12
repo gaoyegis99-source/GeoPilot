@@ -1,0 +1,19 @@
+b56fe904b76674dc505333f3c390e4f3626a2888
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
++ nice -n 19 taskset -c 31 .venv/bin/python -B -m pytest -q -p no:cacheprovider --basetemp=/dev/shm/geopilot-cache-preflight.aWQcvl/pytest --junitxml=docs/round2/performance/p13-06-preflight-junit.xml tests/assets/test_fingerprint.py::test_timestamp_only_and_same_metadata_content_changes_are_distinguished tests/assets/test_fingerprint.py::test_geopackage_wal_edits_are_detected_before_checkpoint tests/assets/test_fingerprint.py::test_geotiff_external_mask_and_pam_sidecars_change_identity tests/assets/test_asset_resolver.py::test_historical_ref_requires_matching_bytes_and_is_never_rebound_to_latest tests/assets/test_asset_registration.py::test_geopackage_layers_have_distinct_identity tests/plans/test_compiler.py::test_request_rejects_wrong_prior_result_or_reported_output tests/artifacts/test_registration.py::test_state_change_between_prepare_and_insert_is_rejected
+..............                                                           [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-06-preflight-junit.xml -
+14 passed, 1 warning in 1.44s
++ nice -n 19 taskset -c 31 .venv/bin/python -B /dev/shm/geopilot-cache-preflight.aWQcvl/probe.py
++ cmp /dev/shm/geopilot-cache-preflight.aWQcvl/probe.jsonl /dev/shm/p13-06-f-audit.pecjMA/request_probe.jsonl
++ set +x
+{"probe": "unchanged StepRequest and ToolRef, different valid binding", "tool": {"id": "qgis-select-points-by-location", "version": 1}, "provider_PREDICATE": [0, 6]}
+{"probe": "same file-group digest, different production provenance records", "records": [{"path": "inputs/0001/source.gpkg", "fingerprint": "bf0ecd4ea767b881e9c3cf03bd3e9e045fcd58e9419cd416cf5693479df79c43"}, {"path": "inputs/0002/source.gpkg", "fingerprint": "bf0ecd4ea767b881e9c3cf03bd3e9e045fcd58e9419cd416cf5693479df79c43"}]}
+Pytest and both actual-function probes exit 0
