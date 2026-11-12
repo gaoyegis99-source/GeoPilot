@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "release_ready": true,
+  "released": false,
+  "v1_commit": "80d724f35fba31cacb9d3f740265b2713c6be6f4",
+  "prerequisites_accepted": 11,
+  "audit_dispositions": {
+    "已修复": 4,
+    "暂缓": 2,
+    "未验证": 2,
+    "真实缺陷": 1,
+    "设计边界": 3
+  },
+  "v1_passed": {
+    "backend": 1670,
+    "frontend": 68,
+    "gis": 476,
+    "fixed_cases": 16
+  },
+  "hosted_ci": {
+    "run": 43148595202,
+    "head": "02ff664734605bbe05668d06e88778b3fc92e3ad",
+    "jobs": {
+      "Python and configuration": "success",
+      "Frontend test and build": "success",
+      "Real QGIS regression": "success"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+....................................................F................... [ 98%]
+.                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_release_rejects_incomplete_or_conflicting_evidence[file1-| \u4e3b\u63a7/F | \u65e0 | ACCEPTED |-| \u4e3b\u63a7/F | \u65e0 | REWORK |-P12-01: gate requires ACCEPTED] _
+
+release_root = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-12/test_release_rejects_incomplet1')
+file = PosixPath('plans-round2/06_PROGRESS/TASK_BOARD.md')
+old = '| 主控/F | 无 | ACCEPTED |', new = '| 主控/F | 无 | REWORK |'
+diagnostic = 'P12-01: gate requires ACCEPTED'
+
+    @pytest.mark.parametrize(
+        ("file", "old", "new", "diagnostic"),
+        [
+            (BOARD, "| P12-07 |", "| P12-06 |", "duplicate P12-06"),
+            (BOARD, "| 主控/F | 无 | ACCEPTED |", "| 主控/F | 无 | REWORK |", "P12-01: gate requires ACCEPTED"),
+            (REPORT, "| AUD-12 |", "| AUD-13 |", "exactly AUD-01 through AUD-12"),
+            (REPORT, "](concurrency-model.md)", "](missing.md)", "AUD-06: invalid evidence"),
+            (HOSTED, '"conclusion":"success"', '"conclusion":"failure"', "Hosted CI did not succeed"),
+        ],
+    )
+    def test_release_rejects_incomplete_or_conflicting_evidence(release_root, file, old, new, diagnostic):
+        path = release_root / file
+        content = path.read_text(encoding="utf-8")
+>       assert old in content
+E       AssertionError: assert '| 主控/F | 无 | ACCEPTED |' in '# 第二轮任务看板\n\n| Task | 阶段 | 名称 | Agent | 依赖 | 状态 | 证据 |\n|---|---|---|---|---|---|---|\n| P12-01 | P12 | 固定审计基线与仓库快照 |...、已选 P13/P14 | TODO | 待执行 |\n| P16-07 | P16 | V2 产品范围与发布决策 | 主控 | P13-08、P14-08、P15-08、P16-01 至 P16-06 | TODO | 待执行 |\n'
+
+tests/quality/test_round2_status.py:71: AssertionError
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/audit/p12-12-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/quality/test_round2_status.py::test_release_rejects_incomplete_or_conflicting_evidence[file1-| \u4e3b\u63a7/F | \u65e0 | ACCEPTED |-| \u4e3b\u63a7/F | \u65e0 | REWORK |-P12-01: gate requires ACCEPTED]
+1 failed, 72 passed in 20.56s
