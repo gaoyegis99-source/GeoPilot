@@ -1,0 +1,8 @@
+python 3.12.3 system Linux-5.15.0-139-generic-x86_64-with-glibc2.39 csv_limit 8388608
+L road warm probe 1 PASS
+Traceback (most recent call last):
+  File "/scratch/replay.py", line 57, in <module>
+    assert hashlib.sha256(download.content).hexdigest() == table.fingerprint == digest(table_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+exit 1 utc 2026-11-12T08:01:07Z

@@ -1,0 +1,45 @@
+{
+  "run_id": "d0ecdce527704eccbaa42d1024378e78",
+  "states": {
+    "run_id": "d0ecdce527704eccbaa42d1024378e78",
+    "execution_status": "SUCCEEDED",
+    "check_status": "PASSED",
+    "current_step": "aggregate_by_zone",
+    "cancel_requested": false,
+    "error": null,
+    "current_report_id": "bc1c396bddad4c73963420eefded1e07"
+  },
+  "file_sha256": "ac20667a8770c3c9e4f79ce8a99bad9166571b2f56f0cc895181ebde005291ef",
+  "artifact_fingerprint": "ba2c8b19077aedba6ccd7849b4353bccc40003c3230e6fa95e9b7f30bbe3e60b",
+  "input_sha256_before_and_after": "7211b7e75c9560acdab8198c555d62af732f1de3e9fe15317f9ab55706d21775",
+  "csv_rows": 32769,
+  "unassigned_id_count": 16384,
+  "unassigned_field_characters": 573440,
+  "preview_http": 200,
+  "preview_rows": 100,
+  "download_http": 200,
+  "download_bytes": 4325450,
+  "check_rules": {
+    "measurement_policy_satisfied": true,
+    "outside_roads_within_influence_included": true,
+    "output_clipped_to_analysis_extent": true,
+    "detail_count_matches_summary": true
+  },
+  "independent": {
+    "road_candidates": 32768,
+    "targets_before_clip": 114688,
+    "targets_after_clip": 98304,
+    "counts": {
+      "zone-east": 32768,
+      "zone-west": 49152,
+      "unassigned": 16384,
+      "total": 98304
+    },
+    "buffer": {
+      "area_m2": 64830445078.703735,
+      "max_bounds_error_m": 0.0,
+      "max_area_error_m2": 3.2177194952964783e-07,
+      "max_boundary_hausdorff_m": 4.799926683327254e-10
+    }
+  }
+}

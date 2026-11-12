@@ -21,4 +21,16 @@ nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider \
 .venv/bin/python scripts/quality/validate_ci_matrix.py
 ```
 
-完整大档道路复验使用同一份输入和原生 QGIS 环境，待 DEM 大档终态后执行。P13-03 正式基准继续使用冻结的原始生产源码。
+提交 `743252b91f9a5a63b08cea86fcb7ae763f64ba27` 的独立复跑同样为 19 项通过、18 项未选、退出 0。 [提交复跑日志](p13-03-csv-commit-pytest.log) · [提交复跑 JUnit](p13-03-csv-commit-junit.xml)
+
+## 同输入原生复验
+
+原生复验使用 Ubuntu 24.04、Python 3.12.3、QGIS 3.44.15、原基准镜像 `sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87` 及同一 ext4 文件系统。原基准源码 `37cb329` 和三份矢量基准脚本以只读方式挂载。用 `743252b` 的六个生产修复文件覆盖原 `src/geopilot` 对应位置，并逐文件核对差异。原校正 GPKG 及清单只读挂载，输入 SHA-256 首尾一致。
+
+复验脚本直接调用原基准 `run_batch`，仅执行一次 L 道路热探针。命令从原型目录执行 `bash /mnt/datab/geopilot-csv-fixed.vP1It6/launch.sh`。重放时可按命令日志准备同一输入路径、源码覆盖目录和新的可写证据目录，再在容器中运行随报告归档的脚本。 [实际命令和补丁摘要](p13-03-csv-native-command.log.gz) · [复验脚本](p13-03-csv-native-replay.py)
+
+- 首次复验的实际执行和独立验算均通过。复验脚本随后错误地把复合成果指纹与原始文件 SHA-256 直接比较，退出 1。 [首次日志](p13-03-csv-native-first.log) · [原始样本](p13-03-csv-native-first-samples.jsonl.gz)
+- 修正脚本后于 UTC 08:02:21 至 08:04:29 复跑，退出 0。运行 `d0ecdce527704eccbaa42d1024378e78` 的七步成功，终态 `SUCCEEDED / PASSED`，四条正式检查均通过。独立参考核对 98,304 个入选目标及分区归属，其中西区 49,152、东区 32,768、未归属 16,384。 [复跑日志](p13-03-csv-native-run.log) · [原始样本](p13-03-csv-native-samples.jsonl.gz) · [检查报告](p13-03-csv-native-check-report.json.gz)
+- 正式 CSV 含 32,769 行，未归属行含完整的 573,440 字符来源 ID 字段。工作台表格预览和原件下载均 HTTP 200。下载 4,325,450 字节，解压归档后 SHA-256 为 `ac20667a8770c3c9e4f79ce8a99bad9166571b2f56f0cc895181ebde005291ef`，与实际下载一致。 [复验结果](p13-03-csv-native-result.json) · [原始 CSV](p13-03-csv-native-zone-statistics.csv.gz)
+
+本次修复复验完成。P13-03 正式基准按冻结的原始生产源码继续测量，保留原错误及全部对照。
