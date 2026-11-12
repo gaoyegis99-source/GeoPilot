@@ -1,0 +1,100 @@
+Agent D red baseline ee094f0eaacade30d4a243b42d72d871cb65b5fd, selected regressions exit=1.
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_ test_worker_cancellation_poll_tolerates_exclusive_database_lock[successful-worker] _
+tests/scheduler/test_cancellation.py:38: in test_worker_cancellation_poll_tolerates_exclusive_database_lock
+    outcome = capture_process(
+src/geopilot/execution/process_manager.py:80: in capture_process
+    if cancel_requested is not None and cancel_requested():
+tests/scheduler/test_cancellation.py:40: in <lambda>
+    cancel_requested=lambda: cancellation.observe_cancellation(database, run_id, workdir, "cancel.flag"),
+src/geopilot/scheduler/cancellation.py:44: in observe_cancellation
+    run = get_run(connection, run_id)
+src/geopilot/persistence/run_repository.py:46: in get_run
+    row = connection.execute("SELECT * FROM run WHERE id = ?", (run_id,)).fetchone()
+E   sqlite3.OperationalError: database is locked
+_ test_worker_cancellation_poll_tolerates_exclusive_database_lock[worker-deadline] _
+tests/scheduler/test_cancellation.py:38: in test_worker_cancellation_poll_tolerates_exclusive_database_lock
+    outcome = capture_process(
+src/geopilot/execution/process_manager.py:80: in capture_process
+    if cancel_requested is not None and cancel_requested():
+tests/scheduler/test_cancellation.py:40: in <lambda>
+    cancel_requested=lambda: cancellation.observe_cancellation(database, run_id, workdir, "cancel.flag"),
+src/geopilot/scheduler/cancellation.py:44: in observe_cancellation
+    run = get_run(connection, run_id)
+src/geopilot/persistence/run_repository.py:46: in get_run
+    row = connection.execute("SELECT * FROM run WHERE id = ?", (run_id,)).fetchone()
+E   sqlite3.OperationalError: database is locked
+____ test_worker_observes_committed_cancellation_after_database_lock_clears ____
+tests/scheduler/test_cancellation.py:71: in test_worker_observes_committed_cancellation_after_database_lock_clears
+    assert polled.wait(3)
+E   assert False
+E    +  where False = wait(3)
+E    +    where wait = <threading.Event at 0x7f6beb56fb10: unset>.wait
+=============================== warnings summary ===============================
+../../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/scheduler/test_cancellation.py::test_worker_cancellation_poll_tolerates_exclusive_database_lock[successful-worker]
+FAILED tests/scheduler/test_cancellation.py::test_worker_cancellation_poll_tolerates_exclusive_database_lock[worker-deadline]
+FAILED tests/scheduler/test_cancellation.py::test_worker_observes_committed_cancellation_after_database_lock_clears
+3 failed, 6 deselected, 1 warning in 19.69s
+
+Agent D candidate 968e97b76591433c83a2184815035660294c3c75; isolated cancellation and process deadline tests exit=0.
+............                                                             [100%]
+=============================== warnings summary ===============================
+../../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+---------- generated xml file: /dev/shm/geopilot-p13-cancel-final.xml ----------
+============================= slowest 14 durations =============================
+5.04s call     tests/runners/test_process_timeout.py::test_timeout_stops_real_worker_group_and_keeps_evidence[stubborn-leader]
+3.05s call     tests/runners/test_process_timeout.py::test_timeout_stops_real_worker_group_and_keeps_evidence[quiet-descendant]
+2.87s call     tests/scheduler/test_cancellation.py::test_active_cancel_waits_for_real_gis_worker_exit_and_stops_dispatch
+2.50s call     tests/scheduler/test_cancellation.py::test_cancel_after_last_worker_exit_prevents_artifact_publication
+0.90s call     tests/scheduler/test_cancellation.py::test_cancel_between_successful_steps_preserves_the_first_result
+0.27s call     tests/scheduler/test_cancellation.py::test_worker_cancellation_poll_tolerates_exclusive_database_lock[worker-deadline]
+0.14s call     tests/scheduler/test_cancellation.py::test_queued_cancel_is_never_dispatched
+0.13s call     tests/scheduler/test_cancellation.py::test_worker_observes_committed_cancellation_after_database_lock_clears
+0.08s setup    tests/scheduler/test_cancellation.py::test_worker_observes_committed_cancellation_after_database_lock_clears
+0.08s setup    tests/scheduler/test_cancellation.py::test_worker_cancellation_poll_tolerates_exclusive_database_lock[successful-worker]
+0.08s setup    tests/scheduler/test_cancellation.py::test_cancellation_observation_handles_extended_lock_codes[517]
+0.08s setup    tests/scheduler/test_cancellation.py::test_cancel_after_last_worker_exit_prevents_artifact_publication
+0.07s setup    tests/scheduler/test_cancellation.py::test_cancel_between_successful_steps_preserves_the_first_result
+0.07s setup    tests/scheduler/test_cancellation.py::test_active_cancel_waits_for_real_gis_worker_exit_and_stops_dispatch
+12 passed, 1 warning in 16.03s
+
+Integrated host regression exit=0.
+71ae95d6fbe3f58348743f5697d235675beee790
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:19:41) [GCC 14.3.0]
+SQLite 3.51.2
+TMPDIR=/dev/shm PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest tests/scheduler tests/stress/scheduler tests/api/test_run_status.py tests/runners/test_process_timeout.py tests/checks/test_recheck_service.py -q -p no:cacheprovider --basetemp=<tmpfs> --junitxml=<evidence>
+.........................................................                [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-cancellation-integration.TInZmn/junit.xml -
+57 passed, 1 warning in 56.18s
+
+Integrated native cancellation regression exit=0.
+docker run --rm --pull=never --network none --user 1000:1000 --workdir /project --entrypoint /runtime/venv/bin/python --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1\,dst=/project\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/p13-native\,dst=/runtime\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-cancellation-integration.TInZmn\,dst=/proof --tmpfs /tmp:rw\,exec\,mode=1777 -e HOME=/tmp -e PYTHONPATH=/project/src -e PYTHONDONTWRITEBYTECODE=1 -e PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87 -B -m pytest tests/scheduler/test_cancellation.py -q -p no:cacheprovider --basetemp=/tmp/cancellation --junitxml=/proof/native-junit.xml
+3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]
+SQLite 3.45.1
+..........                                                               [100%]
+=============================== warnings summary ===============================
+../runtime/venv/lib/python3.12/site-packages/starlette/testclient.py:53
+  /runtime/venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+----------------- generated xml file: /proof/native-junit.xml ------------------
+10 passed, 1 warning in 8.50s

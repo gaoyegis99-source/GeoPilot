@@ -20,7 +20,7 @@
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
 | P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | DOING | 修正版 M 的 56 次新运行通过，DEM S 的 28 次前后测通过。L 矢量采样中，遥感 S 新配对和 DEM M/L、遥感 L 已排队。 [矢量 M](../../docs/round2/performance/p13-05-vector-m-revised.md) · [栅格 S](../../docs/round2/performance/p13-05-raster-s.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已实测同请求绑定变化、文件组及图层身份边界，等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
-| P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | [SQLite 锁恢复、队列取消与重启](../../docs/round2/performance/p13-07.md) |
+| P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | SQLite 锁恢复、队列取消与重启已验证。补充修复取消轮询遇锁，集成主机 57 项及原生 10 项通过。 [验收](../../docs/round2/performance/p13-07.md) |
 | P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待多档基准、内存与缓存验收。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |
 | P14-01 | P14 | 方法开发者 CLI 需求与接口设计 | C/F | P12-09 | ACCEPTED | [CLI 契约、实测和只读守卫](../../docs/round2/methods/p14-01.md) |
 | P14-02 | P14 | 方法配置模板生成 | C | P14-01 | ACCEPTED | [独立 Schema 核验与联合回归](../../docs/round2/methods/p14-02.md) |
