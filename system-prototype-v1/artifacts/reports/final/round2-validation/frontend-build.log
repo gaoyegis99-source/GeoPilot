@@ -1,5 +1,5 @@
-commit 44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0
-cwd /dev/shm/geopilot-p16-candidate.IqabDKTG/tree/system-prototype-v1/frontend
+commit 6ecdbca38671b28793244d90984d116411bb4e52
+cwd /dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tree/system-prototype-v1/frontend
 command npm run build
 
 > geopilot-workbench@1.0.0 build
@@ -13,9 +13,9 @@ computing gzip size...
 dist/index.html                                  0.40 kB │ gzip:   0.28 kB
 dist/assets/maplibre-gl-worker-CZtFQQIV.mjs    520.11 kB
 dist/assets/index-Dc8XWeCK.css                  96.60 kB │ gzip:  15.45 kB
-dist/assets/index-LGgEdOIf.js                1,388.21 kB │ gzip: 388.39 kB
+dist/assets/index-ByZmDPA8.js                1,389.74 kB │ gzip: 388.81 kB
 
-✓ built in 1.01s
+✓ built in 836ms
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application

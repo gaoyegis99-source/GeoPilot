@@ -1,5 +1,5 @@
-commit 44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0
-cwd /dev/shm/geopilot-p16-candidate.IqabDKTG/tree/system-prototype-v1/frontend
+commit 6ecdbca38671b28793244d90984d116411bb4e52
+cwd /dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tree/system-prototype-v1/frontend
 command npm ci --include=dev --no-audit --no-fund --offline --cache /home/mtd/.npm
 npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
