@@ -9,3 +9,33 @@
 - 两个性能候选提交在独立工作树应用通过。30 个变更文件与冻结候选逐字节相同，并核对了先前集成的取消轮询修复。性能代码集成仍待完整 P13-05 配对及回归。
 
 回滚可撤销 `b35660e`。正式基准输出保留在原有独立目录，当前测量沿用已冻结的运行器。
+
+## 从 Git 重建冻结源码
+
+主控在空的 tmpfs 目录导出原版和修正版，覆盖实际使用的五个运行文件，并单独导出严格比较器。重建所得 SHA-256 文件清单与运行前冻结清单逐字节一致，原版 1,466 个、修正版 1,473 个常规文件全部匹配，退出 0。两侧的原始清单随点相交证据归档提供。 [点相交归档](p13-05-vector-l-point-evidence.tar.gz)
+
+```bash
+p13_repo=$(git rev-parse --show-toplevel)
+p13_stage=$(mktemp -d)
+p13_overlay=b35660e3c1f932673020aada29454a98b68103e2
+mkdir "$p13_stage/base" "$p13_stage/candidate" "$p13_stage/runner"
+git -C "$p13_repo" archive 977ab412d9f6e7558d22a5c431fac0ada90b07be:system-prototype-v1 \
+  | tar -x -C "$p13_stage/base"
+git -C "$p13_repo" archive a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc:system-prototype-v1 \
+  | tar -x -C "$p13_stage/candidate"
+for p13_file in run_vector.py _vector_reference.py _vector_road_profile.py _runtime_config.py run_with_runtime_configuration.py; do
+  git -C "$p13_repo" show "$p13_overlay:system-prototype-v1/scripts/bench/$p13_file" > "$p13_stage/runner/$p13_file"
+  cp "$p13_stage/runner/$p13_file" "$p13_stage/base/scripts/bench/"
+  cp "$p13_stage/runner/$p13_file" "$p13_stage/candidate/scripts/bench/"
+done
+git -C "$p13_repo" show "$p13_overlay:system-prototype-v1/scripts/bench/run_memory_profile.py" \
+  > "$p13_stage/runner/run_memory_profile.py"
+mkdir "$p13_stage/seals"
+tar -xzf docs/round2/performance/p13-05-vector-l-point-evidence.tar.gz -C "$p13_stage/seals"
+p13_point="$p13_stage/seals/t13-points-intersects"
+for p13_role in base candidate; do
+  p13_attempt=$(cat "$p13_point/$p13_role/COMPLETED")
+  (cd "$p13_stage/$p13_role" && find . -type f -print0 | LC_ALL=C sort -z | xargs -0 sha256sum) \
+    | diff -u "$p13_point/$p13_role/$p13_attempt/source-tree.sha256" -
+done
+```

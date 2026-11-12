@@ -33,3 +33,19 @@ runtime configuration: benchmark exited 0; no receipt: [Errno 2] No such file or
 Verified vector native wrapper entrypoint and absent report
 runtime configuration: benchmark exited 0; no receipt: [Errno 2] No such file or directory: '/tmp/preview-raster/trials.jsonl'
 Verified raster native wrapper entrypoint and absent report
+
+Clean Git reconstruction of the frozen source trees and external runner, exit=0:
+Overlay Git commit b35660e3c1f932673020aada29454a98b68103e2
+run_vector.py: 成功
+_vector_reference.py: 成功
+_vector_road_profile.py: 成功
+run_with_runtime_configuration.py: 成功
+_runtime_config.py: 成功
+run_memory_profile.py: 成功
+base Git commit 977ab412d9f6e7558d22a5c431fac0ada90b07be
+1466 matching regular files
+19bf6a3df70aee71ea6bf87f690a7b13b28b2cfc08ad3e79aa01c3e72b6e4277  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-source-rebuild.sFpeQ0/base-rebuilt.sha256
+candidate Git commit a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc
+1473 matching regular files
+ff853a59c4dea94bd0cf1046c34d1980904a3661744ee3827e7911303b51fac7  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-source-rebuild.sFpeQ0/candidate-rebuilt.sha256
+Both frozen trees reconstructed byte-for-byte from Git objects and tracked overlay.
