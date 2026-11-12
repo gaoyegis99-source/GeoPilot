@@ -64,3 +64,19 @@ independent.log: 成功
 Standalone archive replay matched live evidence byte-for-byte, exit=0, 47 distinct runs.
 b8ab69983699966cedf5fb7e052ab97b2bd750fde967f3b7c214925aac663d82  docs/round2/performance/p13-05-raster-s-evidence.tar.gz
 d4d5898316efa2b4035c8056f5e98fa11cb64b0de84979ac8831c72de4ff136e  artifacts/test-results/p13-05-raster-audit.Fqwwa9/summary.json
+
+Controlled lock probe: frozen base 977ab412d9f6e7558d22a5c431fac0ada90b07be, .venv/bin/python -B, database copy on /dev/shm, exit=0.
+Unlocked child completed, exit=0.
+Exclusive holder: SQLITE_BUSY (5), elapsed=5.008s, child wrote result.
+Traceback (most recent call last):
+  File "<stdin>", line 31, in <module>
+  File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-revised-pair-source.a2d2e68/base/src/geopilot/execution/process_manager.py", line 80, in capture_process
+    if cancel_requested is not None and cancel_requested():
+                                        ~~~~~~~~~~~~~~~~^^
+  File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-revised-pair-source.a2d2e68/base/src/geopilot/scheduler/cancellation.py", line 44, in observe_cancellation
+    run = get_run(connection, run_id)
+  File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-revised-pair-source.a2d2e68/base/src/geopilot/persistence/run_repository.py", line 46, in get_run
+    row = connection.execute("SELECT * FROM run WHERE id = ?", (run_id,)).fetchone()
+          ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: database is locked
+Released lock: committed cancellation produced its marker.
