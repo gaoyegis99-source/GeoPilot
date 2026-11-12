@@ -36,7 +36,7 @@
 | P15-04 | P15 | 受约束的替代方案建议 | 主控/G/C | P14-03、P15-03 | ACCEPTED | [已登记候选对照与显式草稿选择](../../docs/round2/agent/p15-04.md) |
 | P15-05 | P15 | 失败后的计划修订闭环 | D/G/C | P15-02 至 P15-04 | TODO | 待执行 |
 | P15-06 | P15 | 代码型 GIS 工具生成隔离试点 | G/B/F | P14-04、P14-05、P15-03 | TODO | 待执行 |
-| P15-07 | P15 | 第二模型供应商适配决策 | G/主控 | P12-07、P15-01 | TODO | 待执行 |
+| P15-07 | P15 | 第二模型供应商适配决策 | 主控/G | P12-07、P15-01 | ACCEPTED | [本机兼容端点与契约复验](../../docs/round2/agent/p15-07.md) |
 | P15-08 | P15 | Agent 行为评估集 | F/G | P15-01 至 P15-07 | TODO | 待执行 |
 | P16-01 | P16 | 本机环境诊断命令 | 主控 | P12-05、P12-06 | ACCEPTED | [诊断 CLI、真实环境和失败路径](../../docs/round2/deployment/p16-01.md) |
 | P16-02 | P16 | 干净环境安装矩阵 | 主控/A/E/F | P16-01 | ACCEPTED | [两套 Linux 后端与独立 Chromium 实测](../../docs/round2/deployment/p16-02.md) |

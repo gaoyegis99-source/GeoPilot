@@ -4,19 +4,25 @@ import traceback
 from contextlib import ExitStack
 from dataclasses import dataclass, field
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from threading import Thread
 from time import sleep
 
 import pytest
+from fastapi.testclient import TestClient
 
+from geopilot.api.app import create_app
 from geopilot.llm.base import ModelErrorCode, ModelProviderError, ModelRequest, ModelResponse
 from geopilot.llm.client import request_model_suggestion
 from geopilot.llm.data_boundary import DataBoundaryError
+from geopilot.llm.providers.chat_completions import ChatCompletionsModelProvider
 from geopilot.llm.providers.ollama import OllamaModelProvider
 from geopilot.llm.response_parser import ModelResponseError, ModelSuggestion
+from geopilot.methods.loader import load_method_catalog
 from geopilot.persistence.schema import initialize_database, open_database
 from geopilot.plans.models import AnalysisPlan
 from geopilot.plans.service import load_plan, save_draft
+from geopilot.tools.registry import ToolRegistry
 
 
 SECRET = "test-private-model-diagnostic"
@@ -190,6 +196,72 @@ def http_server():
             return server.server_port, calls
 
         yield start
+
+
+def _chat_reply(*, finish="stop", content=RESPONSE_TEXT, **message):
+    return json.dumps({"choices": [{
+        "finish_reason": finish, "message": {"role": "assistant", "content": content, **message},
+    }]}).encode()
+
+
+def test_chat_completions_wire_reuses_checked_request_and_existing_parser(http_server, capsys, caplog):
+    port, calls = http_server(Reply(body=_chat_reply()))
+    request = _request()
+    provider = ChatCompletionsModelProvider("local-model", port=port, api_key=SECRET)
+    result = request_model_suggestion(provider, request, timeout=2)
+    assert result.method.id == "select-targets" and result.options == {"relation": "within"}
+    (path, headers, raw), = calls
+    wire = json.loads(raw)
+    assert path == "/v1/chat/completions" and headers["Host"] == f"127.0.0.1:{port}"
+    assert headers["Authorization"] == f"Bearer {SECRET}"
+    assert SECRET.encode() not in raw and wire["model"] == "local-model"
+    assert wire["stream"] is False and wire["response_format"] == {"type": "json_object"}
+    assert wire["max_tokens"] == 768
+    system, user = wire["messages"]
+    assert system["role"] == "system" and user == {"role": "user", "content": request.model_dump_json()}
+    captured = capsys.readouterr()
+    assert captured.out == captured.err == caplog.text == ""
+
+
+@pytest.mark.parametrize(("reply", "expected"), [
+    (Reply(status=429, body=SECRET.encode()), ModelErrorCode.RATE_LIMITED),
+    (Reply(status=401, body=SECRET.encode()), ModelErrorCode.INVALID_RESPONSE),
+    (Reply(status=307, headers={"Location": "http://example.invalid"}), ModelErrorCode.INVALID_RESPONSE),
+    (Reply(body=_chat_reply(finish="length")), ModelErrorCode.INVALID_RESPONSE),
+    (Reply(body=_chat_reply(tool_calls=[{"id": "candidate"}])), ModelErrorCode.INVALID_RESPONSE),
+    (Reply(body=_chat_reply(), delay=0.18), ModelErrorCode.TIMEOUT),
+])
+def test_chat_completions_returns_bounded_safe_provider_errors(http_server, reply, expected, capsys, caplog):
+    port, calls = http_server(reply)
+    provider = ChatCompletionsModelProvider("local-model", port=port, api_key=SECRET)
+    with pytest.raises(ModelProviderError) as error:
+        provider.generate(_request(), timeout=0.06 if expected == ModelErrorCode.TIMEOUT else 2)
+    assert error.value.code == expected and len(calls) == 1
+    _assert_hidden(error.value)
+    captured = capsys.readouterr()
+    assert captured.out == captured.err == caplog.text == ""
+
+
+def test_chat_rate_limit_leaves_manual_workbench_draft_available(http_server, tmp_path):
+    port, calls = http_server(*(Reply(status=429, body=SECRET.encode()) for _ in range(2)))
+    database = tmp_path / "project.sqlite"
+    initialize_database(database)
+    catalog = load_method_catalog(Path(__file__).resolve().parents[2] / "config/methods")
+    app = create_app(
+        database, catalog=catalog, registry=ToolRegistry(),
+        model_provider=ChatCompletionsModelProvider("local-model", port=port),
+    )
+    goal = {"summary": "按属性筛选目标"}
+    with TestClient(app) as client:
+        model = client.post("/api/model-assistance", json={"goal": goal})
+        assert model.status_code == 429 and model.json()["detail"]["code"] == ModelErrorCode.RATE_LIMITED.value
+        assert len(calls) == 2 and SECRET not in model.text
+        task = client.post("/api/tasks", json={"goal": goal})
+        assert task.status_code == 201
+        draft = client.post(f"/api/tasks/{task.json()['task_id']}/plans", json={
+            "goal": goal, "method": {"id": "attribute-filter-export", "version": 1},
+        })
+        assert draft.status_code == 200 and draft.json()["status"] == "draft"
 
 
 def test_actual_http_retry_posts_exact_scanned_prompt_with_fixed_envelope(http_server, monkeypatch):

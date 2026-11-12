@@ -1,5 +1,6 @@
 import json
 import socket
+import sys
 import traceback
 from datetime import UTC, datetime
 from pathlib import Path
@@ -8,6 +9,8 @@ import pytest
 from pydantic import ValidationError
 
 from geopilot.llm.base import ModelErrorCode, ModelProvider, ModelProviderError, ModelRequest, ModelResponse
+from geopilot.llm.data_boundary import DataBoundaryError
+from geopilot.llm.providers.chat_completions import ChatCompletionsModelProvider
 from geopilot.llm.providers.mock import MockModelProvider
 
 
@@ -132,3 +135,48 @@ def test_provider_revalidates_typed_request_without_accepting_raw_objects():
         provider.generate(request, timeout=1)
     with pytest.raises(ValueError, match="finite UTF-8 JSON object"):
         request.model_dump_json()
+
+
+def test_chat_completions_checks_payload_before_socket_and_hides_invalid_key(monkeypatch, capsys, caplog):
+    def no_network(*_args, **_kwargs):
+        pytest.fail("A rejected request attempted a network connection")
+
+    monkeypatch.setattr(socket.socket, "connect", no_network)
+    with pytest.raises(ValueError) as rejected:
+        ChatCompletionsModelProvider("local-model", api_key=SECRET + "\r\n")
+    assert SECRET not in "".join(traceback.format_exception(rejected.value))
+    provider: ModelProvider = ChatCompletionsModelProvider("local-model", api_key=SECRET)
+    unsafe = ModelRequest(payload={
+        "context": {"goal": "Open /private/source.gpkg", "roles": []},
+        "candidate_methods": [], "candidate_tools": [],
+    })
+    with pytest.raises(DataBoundaryError):
+        provider.generate(unsafe, timeout=1)
+    with pytest.raises(ValueError, match="timeout"):
+        provider.generate(unsafe, timeout=0)
+    assert SECRET not in repr(provider)
+    captured = capsys.readouterr()
+    assert captured.out == captured.err == caplog.text == ""
+
+
+def test_cli_uses_explicit_provider_and_reads_key_only_when_selected(monkeypatch, tmp_path, capsys):
+    from geopilot.api import server
+
+    supplied = []
+    monkeypatch.setattr(server, "create_local_app", lambda *args, **kwargs: supplied.append(kwargs["model_provider"]))
+    monkeypatch.setattr(server.uvicorn, "run", lambda *args, **kwargs: None)
+    monkeypatch.setenv("GEOPILOT_CHAT_COMPLETIONS_API_KEY", SECRET + "\n")
+    arguments = ["geopilot", "--database", str(tmp_path / "db"), "--workspace", str(tmp_path / "runs")]
+    monkeypatch.setattr(sys, "argv", arguments)
+    server.main()
+    assert supplied == [None]
+    monkeypatch.setenv("GEOPILOT_CHAT_COMPLETIONS_API_KEY", SECRET)
+    monkeypatch.setattr(sys, "argv", arguments + ["--chat-completions-model", "local-model"])
+    server.main()
+    assert isinstance(supplied[-1], ChatCompletionsModelProvider)
+    monkeypatch.setattr(sys, "argv", arguments + ["--chat-completions-model", "local-model", "--ollama-model", "local"])
+    with pytest.raises(SystemExit) as conflict:
+        server.main()
+    assert conflict.value.code == 2
+    captured = capsys.readouterr()
+    assert SECRET not in captured.out + captured.err

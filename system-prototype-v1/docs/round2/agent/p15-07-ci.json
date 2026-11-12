@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "events": [
+    "pull_request",
+    "push",
+    "workflow_dispatch"
+  ],
+  "jobs": [
+    "python",
+    "frontend",
+    "gis"
+  ],
+  "findings": []
+}

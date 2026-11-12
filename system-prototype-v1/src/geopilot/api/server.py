@@ -1,6 +1,7 @@
 """Start the GeoPilot API and GIS scheduler on the local loopback interface."""
 
 import argparse
+import os
 import re
 from pathlib import Path
 
@@ -117,8 +118,11 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=_PROJECT_ROOT / "config")
     parser.add_argument("--qgis-process", type=Path)
     parser.add_argument("--port", type=int, default=8000)
-    parser.add_argument("--ollama-model", help="Configured local Ollama model name")
+    models = parser.add_mutually_exclusive_group()
+    models.add_argument("--ollama-model", help="Configured local Ollama model name")
+    models.add_argument("--chat-completions-model", help="Configured model on a loopback Chat Completions server")
     parser.add_argument("--ollama-port", type=int, default=11434)
+    parser.add_argument("--chat-completions-port", type=int, default=8080)
     parser.add_argument("--model-timeout", type=float, default=30.0)
     args = parser.parse_args()
     provider = None
@@ -126,6 +130,13 @@ def main() -> None:
         from geopilot.llm.providers.ollama import OllamaModelProvider
 
         provider = OllamaModelProvider(args.ollama_model, port=args.ollama_port)
+    elif args.chat_completions_model:
+        from geopilot.llm.providers.chat_completions import ChatCompletionsModelProvider
+
+        provider = ChatCompletionsModelProvider(
+            args.chat_completions_model, port=args.chat_completions_port,
+            api_key=os.environ.get("GEOPILOT_CHAT_COMPLETIONS_API_KEY"),
+        )
     app = create_local_app(
         args.database, args.workspace, config=args.config, qgis_process=args.qgis_process,
         model_provider=provider, model_timeout=args.model_timeout,
