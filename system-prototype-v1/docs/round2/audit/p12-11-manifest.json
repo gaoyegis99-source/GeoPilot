@@ -1,0 +1,119 @@
+{
+  "status": "PASS",
+  "manifest": "benchmarks/manifest.yaml",
+  "tiers": {
+    "vector": {
+      "S": {
+        "tiles": 16,
+        "roads": {
+          "analysis_extent": 16,
+          "roads": 48,
+          "targets": 144,
+          "zones": 32
+        },
+        "relations": {
+          "area": 16,
+          "points": 96,
+          "lines": 160,
+          "polygons": 192
+        }
+      },
+      "M": {
+        "tiles": 1024,
+        "roads": {
+          "analysis_extent": 1024,
+          "roads": 3072,
+          "targets": 9216,
+          "zones": 2048
+        },
+        "relations": {
+          "area": 1024,
+          "points": 6144,
+          "lines": 10240,
+          "polygons": 12288
+        }
+      },
+      "L": {
+        "tiles": 16384,
+        "roads": {
+          "analysis_extent": 16384,
+          "roads": 49152,
+          "targets": 147456,
+          "zones": 32768
+        },
+        "relations": {
+          "area": 16384,
+          "points": 98304,
+          "lines": 163840,
+          "polygons": 196608
+        }
+      }
+    },
+    "raster": {
+      "S": {
+        "pixels": 262144,
+        "input_nodata_pixels": 16,
+        "valid_terrain_pixels": 259956,
+        "raw_input_bytes": 1048576
+      },
+      "M": {
+        "pixels": 4194304,
+        "input_nodata_pixels": 256,
+        "valid_terrain_pixels": 4183812,
+        "raw_input_bytes": 16777216
+      },
+      "L": {
+        "pixels": 67108864,
+        "input_nodata_pixels": 4096,
+        "valid_terrain_pixels": 67039236,
+        "raw_input_bytes": 268435456
+      }
+    },
+    "remote_sensing": {
+      "S": {
+        "landsat_pixels": 36864,
+        "sentinel_pixels": 334084,
+        "native_scl_pixels": 83521,
+        "expected_pixels_per_phase": 6144,
+        "common_valid_pixels": 18432,
+        "raw_input_bytes": 2299416
+      },
+      "M": {
+        "landsat_pixels": 589824,
+        "sentinel_pixels": 5317636,
+        "native_scl_pixels": 1329409,
+        "expected_pixels_per_phase": 98304,
+        "common_valid_pixels": 294912,
+        "raw_input_bytes": 36624408
+      },
+      "L": {
+        "landsat_pixels": 9437184,
+        "sentinel_pixels": 84971524,
+        "native_scl_pixels": 21242881,
+        "expected_pixels_per_phase": 1572864,
+        "common_valid_pixels": 4718592,
+        "raw_input_bytes": 585326616
+      }
+    }
+  },
+  "method_workloads": {
+    "vector": {
+      "method_path": "config/methods/road-buffer-statistics.v2.yaml",
+      "method_id": "road-buffer-statistics",
+      "version": 2,
+      "expected_steps": 7
+    },
+    "raster": {
+      "method_path": "config/methods/dem-terrain-analysis.v1.yaml",
+      "method_id": "dem-terrain-analysis",
+      "version": 1,
+      "expected_steps": 7
+    },
+    "remote_sensing": {
+      "method_path": "config/methods/remote-sensing-index-change.v1.yaml",
+      "method_id": "remote-sensing-index-change",
+      "version": 1,
+      "expected_steps": 8
+    }
+  }
+}

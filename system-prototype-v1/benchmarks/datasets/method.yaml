@@ -1,0 +1,17 @@
+family: method
+workloads:
+  vector:
+    method_path: config/methods/road-buffer-statistics.v2.yaml
+    method_id: road-buffer-statistics
+    version: 2
+    expected_steps: 7
+  raster:
+    method_path: config/methods/dem-terrain-analysis.v1.yaml
+    method_id: dem-terrain-analysis
+    version: 1
+    expected_steps: 7
+  remote_sensing:
+    method_path: config/methods/remote-sensing-index-change.v1.yaml
+    method_id: remote-sensing-index-change
+    version: 1
+    expected_steps: 8

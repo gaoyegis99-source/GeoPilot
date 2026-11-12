@@ -1,0 +1,14 @@
+family: vector
+format: GPKG
+crs: "EPSG:32650"
+tile_pitch_m: 4000
+origin_east_m: 244000
+origin_north_m: 4144000
+road_template: tests/fixtures/vector/source.json
+road_reference: tests/fixtures/vector/expected.json
+relations_template: tests/fixtures/vector/t13/source.json
+relations_reference: tests/fixtures/vector/t13/expected.json
+tiers:
+  S: {side_tiles: 4, road_vertices: 2, attribute_bytes: 16}
+  M: {side_tiles: 32, road_vertices: 9, attribute_bytes: 64}
+  L: {side_tiles: 128, road_vertices: 33, attribute_bytes: 256}

@@ -1,0 +1,18 @@
+family: remote_sensing
+format: GTiff
+crs: "EPSG:32632"
+origin_east_m: 500000
+origin_north_m: 5100000
+landsat_pixel_m: 30
+sentinel_pixel_m: 10
+scl_pixel_m: 20
+offset_m: 7
+phase_columns: 6
+block_pixels: 256
+dtype: uint16
+landsat_config: config/sensors/landsat-8-c2-l2sp.v1.yaml
+sentinel_config: config/sensors/sentinel-2-l2a-pb05-11.v1.yaml
+tiers:
+  S: {side_pixels: 192}
+  M: {side_pixels: 768}
+  L: {side_pixels: 3072}

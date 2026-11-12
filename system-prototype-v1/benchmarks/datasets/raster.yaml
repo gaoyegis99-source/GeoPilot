@@ -1,0 +1,16 @@
+family: raster
+format: GTiff
+crs: "EPSG:32650"
+origin_east_m: 500000
+origin_north_m: 4500000
+pixel_m: 10
+bands: 1
+dtype: float32
+nodata: -9999
+halo_pixels: 1
+block_pixels: 256
+nodata_period_pixels: 128
+tiers:
+  S: {side_pixels: 512}
+  M: {side_pixels: 2048}
+  L: {side_pixels: 8192}

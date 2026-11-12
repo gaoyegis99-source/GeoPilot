@@ -1,0 +1,196 @@
+{
+  "status": "PASS",
+  "manifest": "benchmarks/manifest.yaml",
+  "tiers": {
+    "vector": {
+      "S": {
+        "tiles": 16,
+        "roads": {
+          "analysis_extent": 16,
+          "roads": 48,
+          "targets": 144,
+          "zones": 32
+        },
+        "relations": {
+          "area": 16,
+          "points": 96,
+          "lines": 160,
+          "polygons": 192
+        }
+      },
+      "M": {
+        "tiles": 1024,
+        "roads": {
+          "analysis_extent": 1024,
+          "roads": 3072,
+          "targets": 9216,
+          "zones": 2048
+        },
+        "relations": {
+          "area": 1024,
+          "points": 6144,
+          "lines": 10240,
+          "polygons": 12288
+        }
+      },
+      "L": {
+        "tiles": 16384,
+        "roads": {
+          "analysis_extent": 16384,
+          "roads": 49152,
+          "targets": 147456,
+          "zones": 32768
+        },
+        "relations": {
+          "area": 16384,
+          "points": 98304,
+          "lines": 163840,
+          "polygons": 196608
+        }
+      }
+    },
+    "raster": {
+      "S": {
+        "pixels": 262144,
+        "input_nodata_pixels": 16,
+        "valid_terrain_pixels": 259956,
+        "raw_input_bytes": 1048576
+      },
+      "M": {
+        "pixels": 4194304,
+        "input_nodata_pixels": 256,
+        "valid_terrain_pixels": 4183812,
+        "raw_input_bytes": 16777216
+      },
+      "L": {
+        "pixels": 67108864,
+        "input_nodata_pixels": 4096,
+        "valid_terrain_pixels": 67039236,
+        "raw_input_bytes": 268435456
+      }
+    },
+    "remote_sensing": {
+      "S": {
+        "landsat_pixels": 36864,
+        "sentinel_pixels": 334084,
+        "native_scl_pixels": 83521,
+        "expected_pixels_per_phase": 6144,
+        "common_valid_pixels": 18432,
+        "raw_input_bytes": 2299416
+      },
+      "M": {
+        "landsat_pixels": 589824,
+        "sentinel_pixels": 5317636,
+        "native_scl_pixels": 1329409,
+        "expected_pixels_per_phase": 98304,
+        "common_valid_pixels": 294912,
+        "raw_input_bytes": 36624408
+      },
+      "L": {
+        "landsat_pixels": 9437184,
+        "sentinel_pixels": 84971524,
+        "native_scl_pixels": 21242881,
+        "expected_pixels_per_phase": 1572864,
+        "common_valid_pixels": 4718592,
+        "raw_input_bytes": 585326616
+      }
+    }
+  },
+  "method_workloads": {
+    "vector": {
+      "method_path": "config/methods/road-buffer-statistics.v2.yaml",
+      "method_id": "road-buffer-statistics",
+      "version": 2,
+      "expected_steps": 7
+    },
+    "raster": {
+      "method_path": "config/methods/dem-terrain-analysis.v1.yaml",
+      "method_id": "dem-terrain-analysis",
+      "version": 1,
+      "expected_steps": 7
+    },
+    "remote_sensing": {
+      "method_path": "config/methods/remote-sensing-index-change.v1.yaml",
+      "method_id": "remote-sensing-index-change",
+      "version": 1,
+      "expected_steps": 8
+    }
+  },
+  "fixture_probe": {
+    "status": "PASS",
+    "reopened": {
+      "road.gpkg": {
+        "crs": "EPSG:32650",
+        "layers": {
+          "analysis_extent": 1,
+          "roads": 3,
+          "targets": 9,
+          "zones": 2
+        }
+      },
+      "relations.gpkg": {
+        "crs": "EPSG:32650",
+        "layers": {
+          "area": 1,
+          "points": 6,
+          "lines": 10,
+          "polygons": 12
+        }
+      },
+      "dem-plane.tif": {
+        "shape": [
+          7,
+          7
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          500000.0,
+          0.0,
+          -10.0,
+          4400070.0
+        ],
+        "valid_pixels": 47
+      },
+      "first_product": {
+        "bands": 4,
+        "shape": [
+          3,
+          5
+        ],
+        "transform": [
+          30.0,
+          0.0,
+          500000.0,
+          0.0,
+          -30.0,
+          5100000.0
+        ]
+      },
+      "second_product": {
+        "bands": 3,
+        "shape": [
+          10,
+          16
+        ],
+        "transform": [
+          10.0,
+          0.0,
+          499993.0,
+          0.0,
+          -10.0,
+          5100007.0
+        ]
+      }
+    },
+    "sha256": {
+      "dem-plane.tif": "e107e63b8de034f98ce3c3ef580422dd05593b8d6b0aabd32003044fbb522139",
+      "relations.gpkg": "e8e778072a0c0475fa681bb22d7040780bf4bd39ffb632b231eee6fcc6e2a70e",
+      "remote/analysis-extent.gpkg": "0e8356f660b0a4db0b574abc1bcecc1ad1078f8b4df74246230a82a2b4f01068",
+      "remote/first-landsat.tif": "00ae32558ba3add20b8392dbafc202a802bd26ba550144671252c91ce535e304",
+      "remote/second-sentinel.tif": "88f1e33313f8fba977970b72fe1ed1ac640221c6d7bd6e7f0708712ca5e16ee2",
+      "road.gpkg": "a9fc644203568192f62b345d7a31a10ea96804ee4fb6dfa581191904d8d2da42",
+      "two-band.tif": "2dbad472ae74ad0d1804cb498eedee6d71ca122acaf380d15fc9144cb0dc3ade"
+    }
+  }
+}

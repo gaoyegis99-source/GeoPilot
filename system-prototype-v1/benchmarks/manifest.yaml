@@ -1,0 +1,13 @@
+version: 1
+protocol: benchmarks/README.md
+measurement:
+  repeats_per_cache_state: 5
+  warmup_runs: 2
+  cache_states: [process_cold, warm]
+  statistics: [median, p95_nearest_rank]
+  metrics: [wall_ns, cpu_ns, peak_rss_bytes, disk_read_bytes, disk_write_bytes, peak_temp_bytes, input_bytes, output_bytes]
+profiles:
+  vector: benchmarks/datasets/vector.yaml
+  raster: benchmarks/datasets/raster.yaml
+  remote_sensing: benchmarks/datasets/remote-sensing.yaml
+  method: benchmarks/datasets/method.yaml
