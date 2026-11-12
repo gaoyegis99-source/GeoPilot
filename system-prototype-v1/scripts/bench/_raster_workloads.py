@@ -204,7 +204,9 @@ def _response(response, code=200):
 
 def _terminal_state(client, endpoint, trial, deadline):
     consecutive_storage_errors = 0
+    request_index = 0
     while time.monotonic() < deadline:
+        request_index += 1
         request_started = time.monotonic_ns()
         response = client.get(endpoint)
         if response.status_code == 200:
@@ -222,6 +224,7 @@ def _terminal_state(client, endpoint, trial, deadline):
                 body = response.text
             trial.setdefault("status_poll_errors", []).append({
                 "http_status": response.status_code, "body": body, "elapsed_ns": elapsed_ns,
+                "request_index": request_index,
             })
             detail = body.get("detail", {}) if isinstance(body, dict) else {}
             if response.status_code != 500 or not isinstance(detail, dict) or detail.get("code") != "STORAGE_FAILED":

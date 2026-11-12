@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -227,7 +228,9 @@ def test_status_observation_preserves_storage_error_body_and_limits_reads(bench_
     )
     assert state == terminal
     assert trial == {
-        "run_state": terminal, "status_poll_errors": [{"http_status": 500, "body": body, "elapsed_ns": 70}],
+        "run_state": terminal, "status_poll_errors": [
+            {"http_status": 500, "body": body, "elapsed_ns": 70, "request_index": 1},
+        ],
     }
     trial = {}
     with pytest.raises(RuntimeError, match="Three consecutive"):
@@ -235,10 +238,29 @@ def test_status_observation_preserves_storage_error_body_and_limits_reads(bench_
             Client(error, error, error), "/api/runs/example", trial, time.monotonic() + 1,
         )
     assert trial["status_poll_errors"] == [
-        {"http_status": 500, "body": body, "elapsed_ns": elapsed} for elapsed in (10, 40, 120)
+        {"http_status": 500, "body": body, "elapsed_ns": elapsed, "request_index": index}
+        for index, elapsed in enumerate((10, 40, 120), start=1)
     ]
     summary = runner.summarize_trials([{"kind": "measurement", "status": "FAIL", **trial}], ["method"])["method"]
     assert summary == {"passed": 0, "failed": 1, "missing": 4}
+
+
+@pytest.mark.parametrize(("failed", "expected"), [((0, 2, 4), [1, 3, 5]), ((0, 1, 3), [1, 2, 4])])
+def test_status_poll_error_positions_distinguish_separated_and_consecutive_errors(
+    bench_modules, monkeypatch, failed, expected,
+):
+    workload = importlib.import_module("_raster_workloads")
+    monkeypatch.setattr(workload.time, "sleep", lambda _: None)
+    monkeypatch.setattr(workload.time, "monotonic_ns", lambda: 0)
+    error = Response(500, json={"detail": {"code": "STORAGE_FAILED"}})
+    running = Response(200, json={"execution_status": "RUNNING", "check_status": "NOT_CHECKED"})
+    terminal = {"execution_status": "SUCCEEDED", "check_status": "PASSED"}
+    responses = iter([error if index in failed else running for index in range(5)] + [Response(200, json=terminal)])
+    trial = {}
+    client = SimpleNamespace(get=lambda _: next(responses))
+    state = workload._terminal_state(client, "/api/runs/example", trial, time.monotonic() + 1)
+    assert state == terminal
+    assert [event["request_index"] for event in trial["status_poll_errors"]] == expected
 
 
 def test_cold_operation_records_exit_when_worker_sends_no_result(bench_modules, tmp_path):

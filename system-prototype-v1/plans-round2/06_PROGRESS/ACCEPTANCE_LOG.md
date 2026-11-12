@@ -315,6 +315,8 @@
 
 - 主控复算新增的遥感 L 和 T14 局部裁回配对。12 个正式配对共 322 个唯一运行、230 次正式计量，复用原版计一次。8 次状态观察失败的 GIS 成果均通过独立验算，70 次为 GIS 执行失败。重复 ID 和 RSS 篡改均被拒绝，复算退出 0。 [扩展资源复算](../../docs/round2/performance/p13-05-resource-coverage.md#遥感-l-与-t14-局部裁回配对补充)
 
+- 主控集成四项已有实测支持的性能修复，源码 `217320b`。478 项通过、22 项因 psycopg 或 QGIS 跳过，退出 0。D 复现冻结栅格采集器丢失失败序号，主控增加序号后 12 项专项通过。DEM M 原版重试冷态 7 轮为真实面积超时，无状态读取失败，分类 TIFF 复验通过。 [集成回归](../../docs/round2/performance/p13-05-staging-resources.md#四项性能修复集成) · [状态查询序号](../../docs/round2/performance/p13-05-runner-reproducibility.md#状态查询失败序号) · [重试冷态](../../docs/round2/performance/p13-05-raster-m-l.md#dem-m-原版重试冷态)
+
 ## P13-06 复用证据准备
 
 - F 与主控分别复跑 14 项现有验证及两个实际函数探针，退出 0。确认输入层、文件组摘要、实际执行绑定及来源记录均影响复用。正式缓存与失效测试待 P13-05 放行。 [命令和原始结果](../../docs/round2/performance/p13-06-preflight.md)

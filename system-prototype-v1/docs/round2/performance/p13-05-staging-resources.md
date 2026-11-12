@@ -113,3 +113,9 @@ with exclusive_local_lock(database.with_name(f"{database.name}.scheduler.lock"))
         print(f"Recovered owned staging for {run.id}/{step.step_key}")
 PY
 ```
+
+## 四项性能修复集成
+
+主控在审计分支依次重放 `e874a0f`、`a2d2e68`、`b126785` 和 `fff225f`。得到生产与测试提交 `217320baec299e4a66a34042fb353bad0d703749`。A 校验预演补丁及逐路径内容，主控复核与四项预演 `938dfd9` 的生产、配置、脚本和测试逐字节一致。后续两项投影布局候选继续等待各自的整幅或遥感证据。DEM M 重试仍使用原只读冻结源码。 [组合预演](p13-05-combined-preview-evidence.tar.gz) · [T14 大规模正式配对](p13-05-vector-l.md#t14-局部裁回候选完整配对)
+
+主控以 Linux 5.15、Python 3.13.13、Shapely 2.1.2、Rasterio 1.4.3 和 SQLite 3.51.2，执行 `tests/data_adapters`、`tests/gis`、`tests/runners`、取消和状态查询专项。共 478 通过、22 跳过、0 失败，退出 0。13 项跳过需要 psycopg，9 项需要 QGIS 原生运行时。命令、JUnit、原始日志、修改清单及跳过原因在归档中。可按 `217320b`、`6acd934`、`7848cd6`、`711e417` 的逆序逐项撤销。P13-05 等待剩余栅格证据，正式发布仍需最终提交的回归。 [同源码集成回归](p13-05-integrated-resource-regression-evidence.tar.gz)
