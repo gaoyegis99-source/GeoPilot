@@ -6,7 +6,7 @@ from os import PathLike
 from pathlib import Path
 
 from geopilot.domain.errors import ErrorDetail
-from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepResult
+from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepResult, StepReuse
 from geopilot.execution.runner import run_step
 from geopilot.execution.step_support import AdapterError, PreparedStep, resolve_step_path
 from geopilot.methods.models import StepOutputBinding
@@ -33,6 +33,8 @@ def execute_steps(
     qgis_process: str | PathLike[str] | None = None,
     timeout: float = 60,
     input_preflight: Callable[[PreparedStep], None] | None = None,
+    restore: Callable[[PreparedStep], tuple[StepReuse, dict] | None] | None = None,
+    capture: Callable[[PreparedStep, dict], None] | None = None,
 ) -> dict[str, StepResult]:
     """Persist each confirmed step and stop the chain on the first non-success."""
     workdir = workspace.path
@@ -56,6 +58,7 @@ def execute_steps(
             save_run_step(connection, record)
 
     results = {}
+    reuse_hooks = {} if restore is None else {"restore": restore, "capture": capture}
     for record, step in zip(records, plan.steps, strict=True):
         started_at = datetime.now(UTC)
         request = None
@@ -90,7 +93,7 @@ def execute_steps(
             result = run_step(
                 request, registry=registry, workdir=workdir, qgis_bindings=qgis_bindings,
                 python_implementations=python_implementations, qgis_process=qgis_process,
-                timeout=timeout, input_preflight=input_preflight, cancel_requested=cancel_requested,
+                timeout=timeout, input_preflight=input_preflight, cancel_requested=cancel_requested, **reuse_hooks,
             )
         except (PlanCompilationError, AdapterError, OSError) as error:
             failure = ErrorDetail(

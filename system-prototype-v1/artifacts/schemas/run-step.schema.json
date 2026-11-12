@@ -349,6 +349,17 @@
           },
           "title": "Environment",
           "type": "object"
+        },
+        "reuse": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StepReuse"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         }
       },
       "required": [
@@ -365,6 +376,45 @@
         "environment"
       ],
       "title": "StepResult",
+      "type": "object"
+    },
+    "StepReuse": {
+      "additionalProperties": false,
+      "properties": {
+        "cache_key": {
+          "maxLength": 64,
+          "minLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Cache Key",
+          "type": "string"
+        },
+        "source_run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Source Run Id",
+          "type": "string"
+        },
+        "source_step_key": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Source Step Key",
+          "type": "string"
+        },
+        "output_sha256": {
+          "maxLength": 64,
+          "minLength": 64,
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Output Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cache_key",
+        "source_run_id",
+        "source_step_key",
+        "output_sha256"
+      ],
+      "title": "StepReuse",
       "type": "object"
     },
     "ToolRef": {

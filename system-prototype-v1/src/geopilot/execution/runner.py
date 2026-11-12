@@ -14,7 +14,7 @@ from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.data.vector_reader import read_layer_metadata
 from geopilot.domain.data_asset import RasterMetadata, VectorMetadata
-from geopilot.domain.step_io import StepRequest, StepResult
+from geopilot.domain.step_io import StepRequest, StepResult, StepReuse
 from geopilot.execution.python_runner import invoke_python
 from geopilot.execution.qgis_runner import invoke_qgis
 from geopilot.execution.step_support import (
@@ -132,6 +132,8 @@ def run_step(
     input_preflight: Callable[[PreparedStep], None] | None = None,
     cancel_requested: Callable[[], bool] | None = None,
     timeout: float = 60,
+    restore: Callable[[PreparedStep], tuple[StepReuse, dict] | None] | None = None,
+    capture: Callable[[PreparedStep, dict], None] | None = None,
 ) -> StepResult:
     """Run the exact registered version and return the common typed result."""
     def preflight(step: PreparedStep) -> None:
@@ -147,6 +149,6 @@ def run_step(
     result = execute_adapter(
         request.model_dump(mode="json", exclude_unset=True),
         registry=registry, workdir=workdir, runner=None, invoke=invoke,
-        preflight=preflight, cancel_requested=cancel_requested,
+        preflight=preflight, cancel_requested=cancel_requested, restore=restore, capture=capture,
     )
     return StepResult.model_validate(result)

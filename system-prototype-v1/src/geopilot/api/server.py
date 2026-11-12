@@ -3,13 +3,16 @@
 import argparse
 import os
 import re
+from contextlib import ExitStack, asynccontextmanager, suppress
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import uvicorn
 import yaml
 from fastapi import FastAPI
 
 from geopilot.api.app import create_app
+from geopilot.artifacts.step_cache import StepCache
 from geopilot.application.land_use_checks import LAND_USE_CHECKS
 from geopilot.application.plan_runner import execute_claimed_recheck, execute_claimed_run
 from geopilot.application.remote_sensing_checks import REMOTE_SENSING_CHECKS
@@ -69,6 +72,7 @@ def _qgis_bindings(directory: Path) -> dict:
 def create_local_app(
     database: Path, workspace: Path, *, config: Path = _PROJECT_ROOT / "config", qgis_process: Path | None = None,
     model_provider: ModelProvider | None = None, model_timeout: float = 30.0,
+    enable_step_cache: bool = False,
 ) -> FastAPI:
     database = database.resolve()
     workspace = workspace.resolve()
@@ -90,12 +94,14 @@ def create_local_app(
     checks = {**RUN_CHECKS, **LAND_USE_CHECKS, **REMOTE_SENSING_CHECKS}
     sensor_config = config / "sensors"
     sensor_registry = load_sensor_registry(sensor_config) if sensor_config.is_dir() else None
+    cache = None
 
     def execute(run: Run) -> None:
+        cache_options = {} if cache is None else {"step_cache": cache}
         execute_claimed_run(
             database, run, workspace_root=workspace, registry=registry, qgis_bindings=qgis_bindings,
             python_implementations=python_paths, qgis_process=qgis_process, input_preflight=_preflight,
-            check_rules=checks, artifact_rules=DEM_ARTIFACT_RULES,
+            check_rules=checks, artifact_rules=DEM_ARTIFACT_RULES, **cache_options,
         )
 
     def recheck(run, attempt) -> None:
@@ -104,11 +110,31 @@ def create_local_app(
             python_implementations=python_paths, check_rules=checks, artifact_rules=DEM_ARTIFACT_RULES,
         )
 
-    return create_app(
+    app = create_app(
         database, workspace_root=workspace, catalog=catalog, registry=registry, execute_run=execute,
         execute_recheck=recheck, registered_rules=(*checks, *DEM_ARTIFACT_RULES),
         model_provider=model_provider, model_timeout=model_timeout, sensor_registry=sensor_registry,
     )
+    if enable_step_cache:
+        scheduler_lifespan = app.router.lifespan_context
+
+        @asynccontextmanager
+        async def cached_lifespan(application: FastAPI):
+            nonlocal cache
+            with ExitStack() as lifetime:
+                with suppress(OSError):
+                    location = lifetime.enter_context(TemporaryDirectory(
+                        prefix=".geopilot-step-cache-", dir=database.parent, ignore_cleanup_errors=True,
+                    ))
+                    cache = StepCache(Path(location) / "entries")
+                try:
+                    async with scheduler_lifespan(application):
+                        yield
+                finally:
+                    cache = None
+
+        app.router.lifespan_context = cached_lifespan
+    return app
 
 
 def main() -> None:
@@ -118,6 +144,7 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=_PROJECT_ROOT / "config")
     parser.add_argument("--qgis-process", type=Path)
     parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--step-cache", action="store_true", help="Reuse verified DEM area reports within this service session")
     models = parser.add_mutually_exclusive_group()
     models.add_argument("--ollama-model", help="Configured local Ollama model name")
     models.add_argument("--chat-completions-model", help="Configured model on a loopback Chat Completions server")
@@ -139,7 +166,7 @@ def main() -> None:
         )
     app = create_local_app(
         args.database, args.workspace, config=args.config, qgis_process=args.qgis_process,
-        model_provider=provider, model_timeout=args.model_timeout,
+        model_provider=provider, model_timeout=args.model_timeout, enable_step_cache=args.step_cache,
     )
     uvicorn.run(app, host="127.0.0.1", port=args.port)
 

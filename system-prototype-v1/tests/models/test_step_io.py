@@ -3,7 +3,7 @@ from datetime import datetime
 import pytest
 from pydantic import ValidationError
 
-from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepRequest, StepResult
+from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepRequest, StepResult, StepReuse
 
 
 def request_payload():
@@ -99,6 +99,50 @@ def test_terminal_result_round_trips_and_uses_distinct_execution_status_enum():
     assert StepResult.model_validate_json(result.model_dump_json()) == result
 
 
+def reuse_payload(**updates):
+    return result_payload(**{
+        "exit_code": None,
+        "outputs": {"summary": {"path": "outputs/summary.json", "layer": None, "type": "json"}},
+        "reuse": {
+            "cache_key": "a" * 64, "source_run_id": "prior-run", "source_step_key": "summarize",
+            "output_sha256": "b" * 64,
+        },
+        **updates,
+    })
+
+
+def test_reused_result_round_trips_without_a_process_exit_code():
+    payload = reuse_payload()
+    result = StepResult.model_validate(payload)
+    assert result.reuse == StepReuse.model_validate(payload["reuse"])
+    assert result.status is ExecutionStatus.SUCCEEDED and result.exit_code is None
+    assert result.model_dump(mode="json") == payload
+    assert StepResult.model_validate_json(result.model_dump_json()) == result
+
+
+@pytest.mark.parametrize("field", ["cache_key", "output_sha256"])
+@pytest.mark.parametrize("invalid_digest", ["a" * 63, "A" * 64, "g" * 64])
+def test_reuse_requires_lowercase_sha256_digests(field, invalid_digest):
+    payload = reuse_payload()
+    payload["reuse"][field] = invalid_digest
+    with pytest.raises(ValidationError):
+        StepResult.model_validate(payload)
+
+
+@pytest.mark.parametrize("updates", [
+    {"status": "CANCELLED"}, {"exit_code": 0}, {"log_path": None}, {"outputs": {}},
+    {"outputs": {"summary": {"path": "summary.json", "layer": "layer", "type": "json"}}},
+    {"outputs": result_payload()["outputs"]},
+    {"outputs": {
+        "one": {"path": "one.json", "layer": None, "type": "json"},
+        "two": {"path": "two.json", "layer": None, "type": "json"},
+    }},
+])
+def test_reuse_requires_success_with_a_log_and_one_json_output(updates):
+    with pytest.raises(ValidationError, match="A reused step requires"):
+        StepResult.model_validate(reuse_payload(**updates))
+
+
 @pytest.mark.parametrize("exit_code", [None, 0, 7, -15])
 def test_failed_envelope_retains_start_and_output_failure_exit_codes(exit_code):
     payload = failed_payload(exit_code)
@@ -110,7 +154,7 @@ def test_failed_envelope_retains_start_and_output_failure_exit_codes(exit_code):
 
 @pytest.mark.parametrize("updates", [
     {"status": "NOT_STARTED"}, {"status": "RUNNING"}, {"exit_code": True}, {"exit_code": "0"},
-    {"exit_code": 7}, {"log_path": None}, {"status": "FAILED"},
+    {"exit_code": 7}, {"exit_code": None}, {"log_path": None}, {"status": "FAILED"},
     {"started_at": "2026-11-11T10:00:08"}, {"started_at": 1780000000},
     {"finished_at": "2026-11-11T10:00:07Z"},
     {"outputs": {"buffer": {"path": "outputs/buffer.gpkg", "type": "vector_polygon"}}},

@@ -14,6 +14,7 @@ from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.data.vector_reader import read_vector_metadata
 from geopilot.domain.data_asset import TableMetadata, VectorMetadata
+from geopilot.domain.step_io import StepReuse
 from geopilot.domain.tool_contract import ToolContract, ToolRef
 from geopilot.execution.process_manager import capture_process
 from geopilot.observability.telemetry import StepTelemetry, start_step
@@ -279,6 +280,7 @@ def _write_json(path: Path, document: dict) -> None:
 
 
 def _record_failure(result: dict, failure: AdapterError) -> None:
+    result.pop("reuse", None)
     try:
         observed = json.loads(json.dumps(failure.observed, allow_nan=False))
     except (TypeError, ValueError):
@@ -301,6 +303,8 @@ def execute_adapter(
     invoke: Callable[[PreparedStep], dict[str, str]],
     preflight: Callable[[PreparedStep], None] | None = None,
     cancel_requested: Callable[[], bool] | None = None,
+    restore: Callable[[PreparedStep], tuple[StepReuse, dict] | None] | None = None,
+    capture: Callable[[PreparedStep, dict], None] | None = None,
 ) -> dict:
     """Validate and record one adapter call using the common step result shape."""
     identifiers = request if isinstance(request, Mapping) else {}
@@ -331,15 +335,24 @@ def execute_adapter(
             from geopilot.checks.input_checks import preflight_raster_nodata
 
             preflight_raster_nodata(step)
-        environment = invoke(step)
-        if any(not name.strip() or not version.strip() for name, version in environment.items()):
-            raise AdapterError(
-                "Environment names and versions must be nonempty",
-                code="OUTPUT_INVALID", field="environment", exit_code=0,
-            )
-        result["environment"] = environment
-        result["outputs"] = _verify_outputs(step)
-        result.update(status="SUCCEEDED", exit_code=0)
+        restored = restore(step) if restore is not None else None
+        if restored is None:
+            environment = invoke(step)
+            if any(not name.strip() or not version.strip() for name, version in environment.items()):
+                raise AdapterError(
+                    "Environment names and versions must be nonempty",
+                    code="OUTPUT_INVALID", field="environment", exit_code=0,
+                )
+            result["environment"] = environment
+            result["outputs"] = _verify_outputs(step)
+            result.update(status="SUCCEEDED", exit_code=0)
+            if capture is not None:
+                capture(step, result["outputs"])
+        else:
+            reuse, outputs = restored
+            with step.log_path.open("a", encoding="utf-8") as log:
+                log.write(f"cache reuse: {reuse.cache_key} from {reuse.source_run_id}/{reuse.source_step_key}\n")
+            result.update(status="SUCCEEDED", outputs=outputs, reuse=reuse.model_dump(mode="json"))
     except AdapterError as error:
         failure = error
     except OSError as error:

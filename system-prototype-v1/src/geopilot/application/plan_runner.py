@@ -18,9 +18,11 @@ from pydantic import JsonValue, TypeAdapter
 from geopilot.application.check_evidence import check_named_artifact_rule, collect_check_findings
 from geopilot.application.run_checks import RUN_CHECKS, RunCheck, RunCheckContext, RunCheckResult
 from geopilot.application.run_inputs import stage_run_inputs
+from geopilot.artifacts.dem_area_cache import DemAreaReuse
 from geopilot.artifacts.service import (
     ARTIFACT_MANIFEST_PATH, ArtifactRegistrationError, insert_artifacts, list_artifacts, prepare_artifacts,
 )
+from geopilot.artifacts.step_cache import StepCache
 from geopilot.checks.artifact_checks import ArtifactRule
 from geopilot.checks.attempt_reports import CHECK_REPORT_PATH, publish_unfinished_attempt
 from geopilot.checks.input_checks import preflight_step_inputs
@@ -483,6 +485,7 @@ def execute_claimed_run(
     rule_versions: Mapping[str, int] | None = None,
     input_preflight: Callable[[PreparedStep], None] = preflight_step_inputs,
     timeout: float = 60,
+    step_cache: StepCache | None = None,
 ) -> PlanRunResult:
     """Execute the staged snapshot published by run creation."""
     plan = load_plan(database_path, run.plan_id, run.plan_version)
@@ -494,11 +497,13 @@ def execute_claimed_run(
         raise ValueError("Claimed run workspace differs from its expected path")
     _check_record_paths(plan)
     asset_files = _read_run_snapshot(workdir, plan, run.id)
+    reuse = DemAreaReuse.for_plan(step_cache, database_path, plan, python_implementations or {}) if step_cache else None
+    hooks = {} if reuse is None else {"restore": reuse.restore, "capture": reuse.capture}
     with record_run(workdir, run.id, created_at=run.created_at) as telemetry:
         results = execute_steps(
             database_path, workspace, plan, asset_files, registry=registry, qgis_bindings=qgis_bindings,
             python_implementations=python_implementations, qgis_process=qgis_process, timeout=timeout,
-            input_preflight=input_preflight,
+            input_preflight=input_preflight, **hooks,
         )
         if telemetry is not None:
             telemetry.steps_finished()
@@ -509,6 +514,8 @@ def execute_claimed_run(
         )
         if telemetry is not None:
             telemetry.complete(result.execution_status.value, result.check_status)
+        if reuse is not None and result.execution_status is ExecutionStatus.SUCCEEDED and result.check_status == "PASSED":
+            reuse.publish()
         return result
 
 

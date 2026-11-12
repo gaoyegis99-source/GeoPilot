@@ -10,6 +10,7 @@ from typing import Literal, TypeVar
 
 from pydantic import BaseModel, ConfigDict, JsonValue, ValidationError
 
+from geopilot.checks.cache_reuse import reuse_output_sha256, verify_reuse_source
 from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepRequest, StepResult
 from geopilot.domain.tool_contract import ToolContract
 from geopilot.execution.python_runner import _unique_json_object
@@ -60,6 +61,7 @@ _SNAPSHOT = "run_snapshot_matches"
 _ORDER = "step_order_matches"
 _PROCESS = "step_process_matches"
 _ENVIRONMENT = "step_environment_matches"
+_REUSE = "step_cache_reuse_matches"
 _ABSENT = {"present": False}
 
 
@@ -277,6 +279,32 @@ def _check_process_log(
         checks.append(_finding(_PROCESS, key, field, request.log_path, "Readable calculation evidence", str(error)))
 
 
+def _check_cache_reuse(
+    checks: list[ProcessCheckResult], database_path: str | Path, workdir: Path,
+    request: StepRequest, result: StepResult,
+) -> None:
+    reuse = result.reuse
+    assert reuse is not None
+    key = request.step_key
+    marker = f"cache reuse: {reuse.cache_key} from {reuse.source_run_id}/{reuse.source_step_key}"
+    try:
+        log = _read_text(workdir, request.log_path, "log_path")
+    except (OSError, ValueError) as error:
+        checks.append(_finding(_REUSE, key, "log_path", request.log_path, "Readable reuse log", str(error)))
+    else:
+        markers = [line for line in log.splitlines() if line.startswith("cache reuse:")]
+        _compare(checks, _REUSE, key, "log.reuse_marker", markers, [marker])
+
+    output, = result.outputs.values()
+    try:
+        digest = reuse_output_sha256(workdir, output.path)
+    except (OSError, ValueError) as error:
+        checks.append(_finding(_REUSE, key, "reuse.output_sha256", None, reuse.output_sha256, str(error)))
+    else:
+        _compare(checks, _REUSE, key, "reuse.output_sha256", digest, reuse.output_sha256)
+    _compare(checks, _REUSE, key, "reuse.source", verify_reuse_source(database_path, reuse, request), True)
+
+
 def _check_result_references(checks: list[ProcessCheckResult], step: PlanStep, record: RunStep, result: StepResult) -> None:
     observed = {role: ref.model_dump(mode="json") for role, ref in result.outputs.items()}
     expected = {
@@ -368,10 +396,14 @@ def check_run_process(
             try:
                 contract = registry.get(step.tool.id, step.tool.version).contract
             except KeyError:
-                checks.append(_finding(_PROCESS, key, "tool", None, step.tool.model_dump(mode="json"),
+                rule = _REUSE if result.reuse is not None else _PROCESS
+                checks.append(_finding(rule, key, "tool", None, step.tool.model_dump(mode="json"),
                                        "The confirmed tool version is missing from the registry"))
             else:
-                _check_process_log(checks, workdir, reference, result, contract, qgis_bindings, python_implementations)
+                if result.reuse is not None:
+                    _check_cache_reuse(checks, database_path, workdir, reference, result)
+                else:
+                    _check_process_log(checks, workdir, reference, result, contract, qgis_bindings, python_implementations)
 
     for key, record in records.items():
         checks.append(_finding(_ORDER, key, "position", record.position, None, "Run step is absent from the confirmed plan"))
