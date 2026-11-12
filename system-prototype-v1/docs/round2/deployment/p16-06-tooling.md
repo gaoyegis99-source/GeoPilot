@@ -131,3 +131,17 @@ bbfc1d8f6bca9259f004f6a95ca39dbe8a218dac: 1198 evidence links, generated manifes
 独立审计逐项核对后端唯一节点和固定 GIS 映射。技术候选包含 946 个源码范围文件和 742 个证据文件。按 Git 及空目录解包的验证均退出 0，输出字节一致。交付归档 SHA-256 为 `981473df690bc043ff0e8aa7e2ebda44d4f5e613b07729cd84c1157fcf1bf103`。打包命令、原始测试报告和独立审计见证据归档，SHA-256 为 `5de81c19efc216b4d20f9d9c41b7002acb92b19e6daa866f42c833bf2a9da10a`。 [候选原始证据](p16-06-ux-candidate-evidence.tar.gz)
 
 P16-06 更新候选验收为 ACCEPTED。按原 Git 源提交与证据提交可复建上一候选 `44b17fc`。新版附主持人补充观察指南，P16-03 真实用户观察以及 P16-04、P16-05 的真实体验验收仍待完成。P16-07 实际前置核验退出 1，候选匹配，列出的未齐依赖仍为这三项。 [主持人补充指南](../user-research/moderator-ux-follow-up.md)
+
+## 检查取消恢复候选
+
+主控、E、F 复核候选源码 `6961ee3694694be24f58697fe666d8b0b67fee01`，证据提交 `b9fb0a19ff414644a8297c03e79193a089962286`。净分离检出在 Linux 5.15、Python 3.13.13、pytest 8.3.4、QGIS 3.44.15、Psycopg 3.3.4、Node 22.23.1 和 npm 10.9.8 下执行，使用离线 npm 缓存及真实 QGIS 和 PostGIS。独立 Chromium 对照验证了检查取消后的中文提示和唯一重查入口。 [交互复验](../user-research/p16-check-recovery.md)
+
+| 套件 | 通过 | 失败／错误／跳过 | 退出码 |
+| --- | ---: | ---: | ---: |
+| 前端安装、构建与 Vitest | 76 项，17 文件 | 0／0／0 | 0 |
+| 后端全量 | 2,255 项，1,096.39 秒 | 0／0／0 | 0 |
+| T01–T16 独立固定 GIS | 82 项，97.87 秒 | 0／0／0 | 0 |
+
+F 独立核对三套 JUnit 节点，后端与收集清单一致，固定 GIS 与 T01–T16 命令目标一致。包内 947 个源码范围文件、747 个证据文件，Git 和空目录解包的校验输出字节一致。交付归档 SHA-256 为 `29c5be0fefda1bc2742d020a9d1bcfdea70623bf4db3a163cb286bb5668f827e`。验证命令、回执、日志、JUnit 和两份独立审计见证据归档，SHA-256 为 `ca47408a5fbdaf982fc2f27b4aa7263f3bd8d04b9bc33d91cadd3ca638779494`，解包 67 个文件校验通过。 [候选原始证据](p16-06-check-recovery-candidate-evidence.tar.gz)
+
+P16-06 更新候选验收为 ACCEPTED。工作台检查取消恢复仅影响前端展示与入口。可按既有源码及证据提交重建候选 `6ecdbca`。P16-07 前置核验退出 1，当前候选匹配，未齐依赖为 P16-03 至 P16-05。 [发布前置核验](../release/p16-07-preflight.md)
