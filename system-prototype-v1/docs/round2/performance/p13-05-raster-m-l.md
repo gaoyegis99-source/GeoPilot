@@ -88,7 +88,7 @@ tar -xzf docs/round2/performance/p13-05-dem-l-pair-evidence.tar.gz -C "$p13_dem_
 
 五次正式失败样本的端到端中位数／P95 为 126.105／129.116 秒，变化计算步骤为 60.050／60.054 秒。整轮 RSS 均为部分采样，变化计算步 RSS 三次完整、两次部分采样。变化计算进程已采样 CPU 时间为 59.940 至 59.970 秒。五次临时空间峰值均有完整采样，中位数为 11,181,073 字节。
 
-每轮在变化计算步留下 311,039 字节的差值 TIFF 和 44,420 字节的分类 TIFF。两类文件各自在七轮间逐字节一致。分类 TIFF 与 P13-04 封存参考一致，在 EPSG:32632 的 3072 × 3072 网格中，类别 1、2、3 各 1,572,864 个像元，掩膜为 4,718,592 个像元。主控和 B 分别复算，均退出 0。B 复核七个新运行 ID 与此前核对的 212 个 ID 无交集。归档同时保存输入清单、原始请求、磁盘步骤结果及 P13-04 同负载原始记录。完整配对待两侧冷暖组及配置回执。 [P13-04 分类来源](p13-04-remote-l-classification-source.json)
+每轮在变化计算步留下 311,039 字节的差值 TIFF 和 44,420 字节的分类 TIFF。两类文件各自在七轮间逐字节一致。分类 TIFF 与 P13-04 封存参考一致，在 EPSG:32632 的 3072 × 3072 网格中，类别 1、2、3 各 1,572,864 个像元，掩膜为 4,718,592 个像元。主控和 B 分别复算，均退出 0。B 复核七个新运行 ID 与此前核对的 212 个 ID 无交集。归档同时保存输入清单、原始请求、磁盘步骤结果及 P13-04 同负载原始记录。 [P13-04 分类来源](p13-04-remote-l-classification-source.json)
 
 ```bash
 p13_remote_l=$(mktemp -d)
@@ -120,7 +120,7 @@ cmp "$p13_remote_base/replay.json" "$p13_remote_base/proof/replayed.json"
 
 ## 遥感 L 冻结修正版首轮
 
-首个冷态预热八步退出码均为 0，第八步变化计算用时 51.239 秒。生产运行和检查终态为 `SUCCEEDED/PASSED`。三次状态查询 HTTP 500 触发基准 `StatusObservationFailure`，该轮仍按基准记为失败。主控从该终态运行复制并复算 10 个正式成果文件组的登记指纹，合计 5,054,589 字节。变化与分类 TIFF 分别与原版暂存文件逐字节一致。三个分类各 1,572,864 像元，EPSG:6933 面积合计 4,249,836,701.624876 m²，与封存独立参考的最大单类绝对差约 0.007379 m²。归档含原始记录、检查报告及实际成果。该轮为预热，正式计量和两侧配对尚在运行。 [首个预热的完整成果复算](p13-05-remote-l-candidate-first-evidence.tar.gz)
+首个冷态预热八步退出码均为 0，第八步变化计算用时 51.239 秒。生产运行和检查终态为 `SUCCEEDED/PASSED`。三次状态查询 HTTP 500 触发基准 `StatusObservationFailure`，该轮仍按基准记为失败。主控从该终态运行复制并复算 10 个正式成果文件组的登记指纹，合计 5,054,589 字节。变化与分类 TIFF 分别与原版暂存文件逐字节一致。三个分类各 1,572,864 像元，EPSG:6933 面积合计 4,249,836,701.624876 m²，与封存独立参考的最大单类绝对差约 0.007379 m²。归档含原始记录、检查报告及实际成果。 [首个预热的完整成果复算](p13-05-remote-l-candidate-first-evidence.tar.gz)
 
 ```bash
 p13_remote_first=$(mktemp -d)
@@ -137,7 +137,7 @@ cmp "$p13_remote_first/replay.json" "$p13_remote_first/verified.json"
 
 两次预热及三次正式计量有状态观察失败，共记录 9 次 HTTP 500。五次正式计量中，两次基准通过，端到端原值为 121.180 秒和 114.131 秒，成功分位留空。三次观察失败的端到端中位数／P95 为 133.675／133.752 秒。五次正式计量的变化计算均成功，中位数／P95 为 51.175／51.409 秒。整轮 RSS 均部分采样，变化计算步骤的 RSS 和临时峰值均完整采样，临时峰值中位数为 11,181,073 字节。
 
-主控及 B 独立复算均退出 0，B 核对 7 个新 ID 与此前的 226 个运行 ID 无交集。主控向隔离副本中的面积 JSON 追加空行，登记指纹核验拒绝该副本，退出 1。原始冷态前缀已封存。冻结修正版暖态已接续，完整配置回执及严格配对待该侧结束。
+主控及 B 独立复算均退出 0，B 核对 7 个新 ID 与此前的 226 个运行 ID 无交集。主控向隔离副本中的面积 JSON 追加空行，登记指纹核验拒绝该副本，退出 1。原始冷态前缀已封存。
 
 ```bash
 p13_remote_candidate_cold=$(mktemp -d)
@@ -146,6 +146,30 @@ tar -xzf docs/round2/performance/p13-05-remote-l-candidate-cold-evidence.tar.gz 
 PYTHONPATH="$p13_remote_candidate_cold/proof" .venv/bin/python -B \
   "$p13_remote_candidate_cold/verify-cold.py" "$p13_remote_candidate_cold" > "$p13_remote_candidate_cold/replayed.json"
 cmp "$p13_remote_candidate_cold/replayed.json" "$p13_remote_candidate_cold/cold.json"
+```
+
+## 遥感 L 正式配对
+
+两侧各完成 14 轮，容器均退出 1。原版 14 轮均在变化计算步超时。冻结修正版 14 轮均为 `SUCCEEDED/PASSED`，八步退出码全为 0，完成四项检查与独立成果验算。修正版 140 个正式成果文件组全部重算通过，每个角色的指纹跨冷热保持一致。变化和分类 TIFF 分别与原版的暂存 TIFF 逐字节相同，等积面积合计 4,249,836,701.624876 m²。原版每轮留下两份共 355,459 字节的暂存 TIFF，修正版的变化计算目录只保留三个声明产物。 [完整原始记录、成果、回执及独立审计](p13-05-remote-l-pair-evidence.tar.gz)
+
+| 版本和正式计量组 | 基准通过／失败 | 成功端到端中位数／P95，秒 | 失败端到端中位数／P95，秒 | 变化计算中位数／P95，秒 |
+| --- | ---: | ---: | ---: | ---: |
+| 原版冷态 | 0／5 | — | 126.105／129.116 | 60.050／60.054 |
+| 原版暖态 | 0／5 | — | 122.782／130.107 | 60.047／60.048 |
+| 修正版冷态 | 2／3 | — | 133.675／133.752 | 51.175／51.409 |
+| 修正版暖态 | 3／2 | 122.828／132.368 | — | 51.302／51.743 |
+
+变化计算分位使用每组五条正式记录。原版均触发 60 秒时限，修正版均成功返回。修正版冷态两条成功样本、暖态两条观察失败样本不足三条，分位留空。修正版五次正式失败和两次冷态预热失败均为状态观察失败。两侧各有 13 次状态 GET HTTP 500。四组整轮 RSS 均为部分采样，临时峰值均有完整采样。基准成功样本差值为空。
+
+两侧配置回执一致，并各自绑定完整报告。主控解包重放两侧严格自比较及正式配对，与原输出逐字节一致，退出 0，返回 `MATCHED_EVIDENCE`。B 核对 28 个不同运行 ID 与此前 212 个 ID 无交集。现行比较器从同一封存记录识别全部五次正式观察失败，其他比较字段一致。配对于 16:56:07 UTC 完成，T14 局部裁回候选接续启动。 [冻结严格配对 JSON](p13-05-remote-l-comparison.json) · [T14 候选](p13-05-vector-l.md#按面积分配局部裁回候选)
+
+```bash
+p13_remote_pair=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-remote-l-pair-evidence.tar.gz -C "$p13_remote_pair"
+(cd "$p13_remote_pair" && sha256sum -c SHA256SUMS)
+PYTHONPATH="$p13_remote_pair/proof" .venv/bin/python -B \
+  "$p13_remote_pair/proof/verify-remote-pair.py" "$p13_remote_pair" > "$p13_remote_pair/replayed.json"
+cmp "$p13_remote_pair/replayed.json" "$p13_remote_pair/proof/verified.json"
 ```
 
 ## 相邻批次的投影复用预演
