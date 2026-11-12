@@ -1,0 +1,103 @@
+........................................................................ [  4%]
+........................................................................ [  8%]
+........................................................................ [ 12%]
+........................................................................ [ 17%]
+..............................................sssssssssssss............. [ 21%]
+........................................................................ [ 25%]
+........................................................................ [ 30%]
+........................................................................ [ 34%]
+........................................................................ [ 38%]
+........................................sF.............................. [ 43%]
+........................................................................ [ 47%]
+........................................................................ [ 51%]
+........................................................................ [ 56%]
+........................................................................ [ 60%]
+........................................................................ [ 64%]
+........................................................................ [ 68%]
+........................................................................ [ 73%]
+........................................................................ [ 77%]
+........................................................................ [ 81%]
+........................................................................ [ 86%]
+........................................................................ [ 90%]
+........................................................................ [ 94%]
+........................................................................ [ 99%]
+..............                                                           [100%]
+=================================== FAILURES ===================================
+__________________ test_model_and_manual_confirmed_runs_match __________________
+
+tmp_path = PosixPath('/home/mtd/liweigis/GeoPilot-p12-v1/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-0/test_model_and_manual_confirme0')
+qgis_process = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process')
+
+    def test_model_and_manual_confirmed_runs_match(tmp_path, qgis_process):
+        suggestion = {"method": METHOD, "goal": {"summary": "筛选建筑点。"},
+                      "options": {**OPTIONS, "match_value": "building-east"}, "missing": [],
+                      "explanation": "使用已登记的属性筛选方法。"}
+        provider = MockModelProvider(response_text=json.dumps(suggestion, ensure_ascii=False))
+        app, database, workspace, asset = _project(tmp_path, qgis_process, provider)
+        inputs = {"features": asset.ref.model_dump(mode="json")}
+    
+        with TestClient(app) as client:
+            manual = _save_draft(client, inputs, method=METHOD, options=OPTIONS)
+            assert _counts(database) == (1, 1, 0, 0, 0)
+            preview = _post(client, "/api/model-assistance", {"goal": GOAL, "method": METHOD, "inputs": inputs})
+            assert preview == {**suggestion, "explanation_issue": None, "issues": []}
+            assert _counts(database) == (1, 1, 0, 0, 0)
+            assert _get(client, f"/api/plans/{manual['id']}", params={"version": manual["version"]}) == manual
+    
+            user_changes = {"critical_options.match_value": {"suggested": preview["options"]["match_value"],
+                                                              "applied": "building-west"}}
+            edited_options = {**preview["options"], "match_value": user_changes["critical_options.match_value"]["applied"]}
+            assisted = _save_draft(client, inputs, method=preview["method"], options=edited_options)
+            assert _counts(database) == (2, 2, 0, 0, 0)
+            assert (manual["id"], manual["task_id"]) != (assisted["id"], assisted["task_id"])
+    
+>           manual_plan, manual_state = _confirm_and_run(client, manual)
+
+tests/llm/e2e/test_model_manual_equivalence.py:199: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+client = <starlette.testclient.TestClient object at 0x7f30da9e0e20>
+draft = {'check_rules': ['output_exists'], 'critical_options': {'field_name': 'source_feature_id', 'match_value': 'building-we...: 'filtered_features', 'step': 'filter_features', 'type': 'vector_point'}], 'goal': {'summary': '按标识筛选西侧建筑点并导出。'}, ...}
+
+    def _confirm_and_run(client, draft):
+        endpoint = f"/api/plans/{draft['id']}"
+        version = {"plan_version": draft["version"]}
+        confirmed = _post(client, f"{endpoint}/confirm", version)
+        assert confirmed == {**draft, "status": "confirmed"}
+        assert _get(client, endpoint, params={"version": draft["version"]}) == confirmed
+        assert _get(client, f"/api/tasks/{draft['task_id']}")["runs"] == []
+    
+        run_id = _post(client, f"{endpoint}/runs", version, status=202)["run_id"]
+        deadline = monotonic() + 30
+        while True:
+            state = _get(client, f"/api/runs/{run_id}")
+            terminal = state["execution_status"] in {"SUCCEEDED", "FAILED", "CANCELLED"}
+            if (terminal and state["check_status"] != "CHECKING") or monotonic() >= deadline:
+                break
+            sleep(0.05)
+>       assert (state["execution_status"], state["check_status"]) == ("SUCCEEDED", "PASSED"), state
+E       AssertionError: {'cancel_requested': False, 'check_status': 'NOT_CHECKED', 'current_report_id': None, 'current_step': 'filter_features', ...}
+E       assert ('RUNNING', 'NOT_CHECKED') == ('SUCCEEDED', 'PASSED')
+E         
+E         At index 0 diff: 'RUNNING' != 'SUCCEEDED'
+E         Use -v to get more diff
+
+tests/llm/e2e/test_model_manual_equivalence.py:102: AssertionError
+=============================== warnings summary ===============================
+../../GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/application/test_context_candidates.py::test_actual_candidates_use_task_geometry_field_and_scope_and_keep_selected_diagnosis
+tests/application/test_context_candidates.py::test_saved_explicit_scope_uses_the_exact_asset_version
+tests/application/test_context_candidates.py::test_selected_reference_role_reports_its_own_missing_crs
+tests/application/test_context_candidates.py::test_context_preview_and_saved_context_use_normal_http_with_legacy_shape
+tests/application/test_context_candidates.py::test_revising_only_candidate_scope_updates_the_task_context
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/pyogrio/geopandas.py:917: UserWarning: 'crs' was not provided.  The output dataset will not have projection information defined and may not be usable in other systems.
+    write(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/round2/backend.xml -
+=========================== short test summary info ============================
+FAILED tests/llm/e2e/test_model_manual_equivalence.py::test_model_and_manual_confirmed_runs_match
+1 failed, 1655 passed, 14 skipped, 6 warnings in 815.78s (0:13:35)

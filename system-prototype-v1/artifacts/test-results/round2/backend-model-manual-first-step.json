@@ -1,0 +1,27 @@
+{
+  "run_id": "0af9cbc51c7a469ab7ed8c7fbec9a155",
+  "step_key": "filter_features",
+  "status": "SUCCEEDED",
+  "exit_code": 0,
+  "outputs": {
+    "filtered": {
+      "path": "intermediate/filter_features/filtered.gpkg",
+      "layer": "filtered",
+      "type": "vector_point"
+    }
+  },
+  "log_path": "steps/filter_features/process.log",
+  "warnings": [],
+  "error": null,
+  "started_at": "2026-11-12T03:01:56.148621+00:00",
+  "finished_at": "2026-11-12T03:02:35.205519+00:00",
+  "environment": {
+    "qgis_version": "3.44.15-Solothurn",
+    "qgis_code_revision": "44b4ef05178",
+    "qt_version": "5.15.13",
+    "gdal_version": "3.8.4",
+    "proj_version": "Rel. 9.4.0, March 1st, 2024",
+    "geos_version": "3.12.1-CAPI-1.18.1",
+    "python_version": "3.12.3"
+  }
+}

@@ -25,3 +25,9 @@
 - P12-04 专项 10 通过、0 失败、0 跳过。主控运行 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider tests/quality`，25 通过，退出 0。
 - 固定 V1 源码 37 项内容变化、18 项未收录，证据 16 项缺失、5 项内容变化、15 项已入库但未收录。新旧清单验证命令均退出 1，新工具输出逐文件差异。已确认原清单与 V1 提交字节一致。
 - 状态 ACCEPTED。缺失证据和版本差异留待独立复跑及正式交付处理。 [命令、环境、JSON、原始日志与回滚](../../docs/round2/audit/p12-04.md)
+
+## 首批任务收口与产品回归
+
+- P12-02 主控签收 ACCEPTED。需求、固定用例、任务台账已对账。产品回归的真实失败独立列入 P12-05。
+- 首次全量后端针对 `80d724f35fba31cacb9d3f740265b2713c6be6f4` 执行，1,670 项，1,655 通过、1 失败、14 跳过，退出 1。14 个跳过编号和唯一失败编号分别在补跑中通过。
+- P12-05 状态 REWORK。产品复跑首次失败保留。 [命令、退出码、环境、原始 JUnit 与日志](../../docs/round2/audit/p12-05.md)

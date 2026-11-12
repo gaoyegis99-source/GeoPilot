@@ -1,0 +1,514 @@
+qgis-extract-by-attribute version 1 (qgis)
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.source.path","severity":"blocking","passed":true,"observed":{"path":"inputs/0001/source.gpkg","layer":"targets"},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.source","severity":"blocking","passed":true,"observed":"Point","expected":"vector_point","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.source.bounds","severity":"blocking","passed":true,"observed":[500200.0,4400300.0,501400.0,4403075.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"selected_field_exists","phase":"input","field":"inputs.source.fields","severity":"blocking","passed":true,"observed":["source_feature_id"],"expected":"source_feature_id","message":"Selected field exists"}
+$ /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process --json help native:extractbyattribute
+stdout:
+{
+  "algorithm_details": {
+    "can_cancel": true,
+    "deprecated": false,
+    "group": "Vector selection",
+    "has_known_issues": false,
+    "help_url": null,
+    "id": "native:extractbyattribute",
+    "name": "Extract by attribute",
+    "requires_matching_crs": false,
+    "short_description": "Creates a vector layer that only contains features matching an attribute value from an input layer.",
+    "tags": [
+      "extract",
+      "filter",
+      "attribute",
+      "value",
+      "contains",
+      "null",
+      "field"
+    ]
+  },
+  "gdal_version": "3.8.4",
+  "geos_version": "3.12.1-CAPI-1.18.1",
+  "outputs": {
+    "FAIL_OUTPUT": {
+      "description": "Extracted (non-matching)",
+      "type": "outputVector"
+    },
+    "OUTPUT": {
+      "description": "Extracted (attribute)",
+      "type": "outputVector"
+    }
+  },
+  "parameters": {
+    "FAIL_OUTPUT": {
+      "default_value": null,
+      "description": "Extracted (non-matching)",
+      "is_advanced": false,
+      "is_destination": true,
+      "name": "FAIL_OUTPUT",
+      "optional": true,
+      "raw_definition": {
+        "create_by_default": false,
+        "data_type": -1,
+        "default": null,
+        "defaultGui": null,
+        "description": "Extracted (non-matching)",
+        "flags": 8,
+        "help": null,
+        "metadata": {},
+        "name": "FAIL_OUTPUT",
+        "parameter_type": "sink",
+        "supports_append": false,
+        "supports_non_file_outputs": true
+      },
+      "type": {
+        "acceptable_values": [
+          "Path for new vector layer"
+        ],
+        "description": "A feature sink destination parameter.",
+        "id": "sink",
+        "metadata": {},
+        "name": "Feature Sink"
+      }
+    },
+    "FIELD": {
+      "default_value": null,
+      "description": "Selection attribute",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "FIELD",
+      "optional": false,
+      "raw_definition": {
+        "allow_multiple": false,
+        "data_type": -1,
+        "default": null,
+        "defaultGui": null,
+        "default_to_all_fields": false,
+        "description": "Selection attribute",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "FIELD",
+        "parameter_type": "field",
+        "parent_layer": "INPUT"
+      },
+      "type": {
+        "acceptable_values": [
+          "The name of an existing field",
+          "; delimited list of existing field names"
+        ],
+        "description": "A vector field parameter, for selecting an existing field from a vector source.",
+        "id": "field",
+        "metadata": {},
+        "name": "Vector Field"
+      }
+    },
+    "INPUT": {
+      "default_value": null,
+      "description": "Input layer",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "INPUT",
+      "optional": false,
+      "raw_definition": {
+        "data_types": [
+          5
+        ],
+        "default": null,
+        "defaultGui": null,
+        "description": "Input layer",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "INPUT",
+        "parameter_type": "source"
+      },
+      "type": {
+        "acceptable_values": [
+          "Path to a vector layer"
+        ],
+        "description": "A vector feature parameter, e.g. for algorithms which operate on the features within a layer.",
+        "id": "source",
+        "metadata": {},
+        "name": "Vector Features"
+      }
+    },
+    "OPERATOR": {
+      "available_options": {
+        "0": "=",
+        "1": "≠",
+        "10": "does not contain",
+        "2": ">",
+        "3": "≥",
+        "4": "<",
+        "5": "≤",
+        "6": "begins with",
+        "7": "contains",
+        "8": "is null",
+        "9": "is not null"
+      },
+      "default_value": 0,
+      "description": "Operator",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "OPERATOR",
+      "optional": false,
+      "raw_definition": {
+        "allow_multiple": false,
+        "default": 0,
+        "defaultGui": null,
+        "description": "Operator",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "OPERATOR",
+        "options": [
+          "=",
+          "≠",
+          ">",
+          "≥",
+          "<",
+          "≤",
+          "begins with",
+          "contains",
+          "is null",
+          "is not null",
+          "does not contain"
+        ],
+        "parameter_type": "enum",
+        "uses_static_strings": false
+      },
+      "type": {
+        "acceptable_values": [
+          "Number of selected option, e.g. '1'",
+          "Comma separated list of options, e.g. '1,3'"
+        ],
+        "description": "An enumerated type parameter.",
+        "id": "enum",
+        "metadata": {},
+        "name": "Enum"
+      }
+    },
+    "OUTPUT": {
+      "default_value": null,
+      "description": "Extracted (attribute)",
+      "is_advanced": false,
+      "is_destination": true,
+      "name": "OUTPUT",
+      "optional": false,
+      "raw_definition": {
+        "create_by_default": true,
+        "data_type": -1,
+        "default": null,
+        "defaultGui": null,
+        "description": "Extracted (attribute)",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "OUTPUT",
+        "parameter_type": "sink",
+        "supports_append": false,
+        "supports_non_file_outputs": true
+      },
+      "type": {
+        "acceptable_values": [
+          "Path for new vector layer"
+        ],
+        "description": "A feature sink destination parameter.",
+        "id": "sink",
+        "metadata": {},
+        "name": "Feature Sink"
+      }
+    },
+    "VALUE": {
+      "default_value": null,
+      "description": "Value",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "VALUE",
+      "optional": true,
+      "raw_definition": {
+        "default": null,
+        "defaultGui": null,
+        "description": "Value",
+        "flags": 8,
+        "help": null,
+        "metadata": {},
+        "multiline": false,
+        "name": "VALUE",
+        "parameter_type": "string"
+      },
+      "type": {
+        "acceptable_values": [
+          "String value",
+          "field:FIELD_NAME to use a data defined value taken from the FIELD_NAME field",
+          "expression:SOME EXPRESSION to use a data defined value calculated using a custom QGIS expression"
+        ],
+        "description": "A freeform string parameter.",
+        "id": "string",
+        "metadata": {},
+        "name": "String"
+      }
+    }
+  },
+  "proj_version": "Rel. 9.4.0, March 1st, 2024",
+  "provider_details": {
+    "can_be_activated": true,
+    "default_raster_file_extension": "tif",
+    "default_vector_file_extension": "gpkg",
+    "is_active": true,
+    "long_name": "QGIS (native c++)",
+    "name": "QGIS (native c++)",
+    "supported_output_raster_extensions": [
+      "tif",
+      "gpkg",
+      "bag",
+      "bil",
+      "bmp",
+      "bt",
+      "byn",
+      "ers",
+      "fits",
+      "gdb",
+      "gen",
+      "grd",
+      "gsb",
+      "gtx",
+      "hdr",
+      "img",
+      "kro",
+      "lbl",
+      "map",
+      "mbtiles",
+      "mpr",
+      "mrf",
+      "nc",
+      "ntf",
+      "pgm",
+      "pix",
+      "rgb",
+      "rst",
+      "rsw",
+      "sdat",
+      "ter",
+      "vrt",
+      "xml"
+    ],
+    "supported_output_table_extensions": [
+      "gpkg",
+      "shp",
+      "000",
+      "csv",
+      "dgn",
+      "dxf",
+      "fgb",
+      "gdb",
+      "geojson",
+      "geojsonl",
+      "geojsons",
+      "gml",
+      "gpkg.zip",
+      "gpx",
+      "gxt",
+      "ili",
+      "itf",
+      "json",
+      "kml",
+      "ods",
+      "sql",
+      "sqlite",
+      "tab",
+      "txt",
+      "xlsx",
+      "xml",
+      "xtf"
+    ],
+    "supported_output_vector_extensions": [
+      "gpkg",
+      "shp",
+      "000",
+      "csv",
+      "dgn",
+      "dxf",
+      "fgb",
+      "gdb",
+      "geojson",
+      "geojsonl",
+      "geojsons",
+      "gml",
+      "gpkg.zip",
+      "gpx",
+      "gxt",
+      "ili",
+      "itf",
+      "json",
+      "kml",
+      "ods",
+      "sql",
+      "sqlite",
+      "tab",
+      "txt",
+      "xlsx",
+      "xml",
+      "xtf"
+    ],
+    "supports_non_file_based_output": true,
+    "version": null
+  },
+  "python_version": "3.12.3",
+  "qgis_code_revision": "44b4ef05178",
+  "qgis_version": "3.44.15-Solothurn",
+  "qt_version": "5.15.13"
+}
+stderr:
+QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ubuntu'
+
+exit_code: 0
+$ /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process --json run native:extractbyattribute -
+stdout:
+{
+  "algorithm_details": {
+    "can_cancel": true,
+    "deprecated": false,
+    "group": "Vector selection",
+    "has_known_issues": false,
+    "help_url": null,
+    "id": "native:extractbyattribute",
+    "name": "Extract by attribute",
+    "requires_matching_crs": false,
+    "short_description": "Creates a vector layer that only contains features matching an attribute value from an input layer.",
+    "tags": [
+      "extract",
+      "filter",
+      "attribute",
+      "value",
+      "contains",
+      "null",
+      "field"
+    ]
+  },
+  "gdal_version": "3.8.4",
+  "geos_version": "3.12.1-CAPI-1.18.1",
+  "inputs": {
+    "FIELD": "source_feature_id",
+    "INPUT": "./inputs/0001/source.gpkg|layername=targets",
+    "OPERATOR": 0,
+    "OUTPUT": "ogr:dbname='./intermediate/filter_features/filtered.gpkg' table=\"filtered\" (geom)",
+    "VALUE": "building-west"
+  },
+  "log": {},
+  "proj_version": "Rel. 9.4.0, March 1st, 2024",
+  "provider_details": {
+    "can_be_activated": true,
+    "default_raster_file_extension": "tif",
+    "default_vector_file_extension": "gpkg",
+    "is_active": true,
+    "long_name": "QGIS (native c++)",
+    "name": "QGIS (native c++)",
+    "supported_output_raster_extensions": [
+      "tif",
+      "gpkg",
+      "bag",
+      "bil",
+      "bmp",
+      "bt",
+      "byn",
+      "ers",
+      "fits",
+      "gdb",
+      "gen",
+      "grd",
+      "gsb",
+      "gtx",
+      "hdr",
+      "img",
+      "kro",
+      "lbl",
+      "map",
+      "mbtiles",
+      "mpr",
+      "mrf",
+      "nc",
+      "ntf",
+      "pgm",
+      "pix",
+      "rgb",
+      "rst",
+      "rsw",
+      "sdat",
+      "ter",
+      "vrt",
+      "xml"
+    ],
+    "supported_output_table_extensions": [
+      "gpkg",
+      "shp",
+      "000",
+      "csv",
+      "dgn",
+      "dxf",
+      "fgb",
+      "gdb",
+      "geojson",
+      "geojsonl",
+      "geojsons",
+      "gml",
+      "gpkg.zip",
+      "gpx",
+      "gxt",
+      "ili",
+      "itf",
+      "json",
+      "kml",
+      "ods",
+      "sql",
+      "sqlite",
+      "tab",
+      "txt",
+      "xlsx",
+      "xml",
+      "xtf"
+    ],
+    "supported_output_vector_extensions": [
+      "gpkg",
+      "shp",
+      "000",
+      "csv",
+      "dgn",
+      "dxf",
+      "fgb",
+      "gdb",
+      "geojson",
+      "geojsonl",
+      "geojsons",
+      "gml",
+      "gpkg.zip",
+      "gpx",
+      "gxt",
+      "ili",
+      "itf",
+      "json",
+      "kml",
+      "ods",
+      "sql",
+      "sqlite",
+      "tab",
+      "txt",
+      "xlsx",
+      "xml",
+      "xtf"
+    ],
+    "supports_non_file_based_output": true,
+    "version": null
+  },
+  "python_version": "3.12.3",
+  "qgis_code_revision": "44b4ef05178",
+  "qgis_version": "3.44.15-Solothurn",
+  "qt_version": "5.15.13",
+  "results": {
+    "OUTPUT": "./intermediate/filter_features/filtered.gpkg|layername=filtered"
+  }
+}
+stderr:
+QStandardPaths: XDG_RUNTIME_DIR not set, defaulting to '/tmp/runtime-ubuntu'
+
+exit_code: 0
