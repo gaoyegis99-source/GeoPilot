@@ -1,0 +1,18 @@
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+env PYTHONDONTWRITEBYTECODE=1 nice -n 19 taskset -c 31 .venv/bin/python <evidence>/verify_profile.py docs/round2/performance
+{"case": "vector-S", "exit": 0, "groups": 20, "failed_measurements": 0, "control_same_source": true}
+{"case": "vector-L-formal", "exit": 0, "groups": 6, "failed_measurements": 30, "control_same_source": true}
+{"case": "raster-method-s", "exit": 0, "groups": 2, "failed_measurements": 0, "control_same_source": true}
+{"case": "raster-method-l", "exit": 0, "groups": 2, "failed_measurements": 10, "control_same_source": true}
+{"case": "remote-method-l", "exit": 0, "groups": 2, "failed_measurements": 10, "control_same_source": true}
+{"case": "raster-tools", "exit": 0, "groups": 42, "failed_measurements": 0, "control_same_source": true}
+{"case": "different-runtime", "exit": 1, "error": "Incompatible benchmark evidence: Different recorded benchmark environment: proj"}
+{"case": "different-fingerprints", "exit": 1, "error": "Incompatible benchmark evidence: The before and after input fingerprints differ"}
+{"case": "mutated-during-run", "exit": 1, "error": "Incompatible benchmark evidence: Input fingerprint evidence is incomplete or changed during the run"}
+{"case": "missing-repeat", "exit": 1, "error": "Incompatible benchmark evidence: Expected two warmups and five measurements for ('S', 't13-points-intersects', 'process_cold', 'p13-01')"}
+{"case": "duplicate-repeat", "exit": 1, "error": "Incompatible benchmark evidence: Duplicate sample in ('S', 't13-points-intersects', 'process_cold', 'p13-01'): ('warmup', 1)"}
+{"case": "unchecked-pass", "exit": 1, "error": "Incompatible benchmark evidence: A successful sample lacks independent output verification"}
+{"case": "invalid-metric", "exit": 1, "error": "Incompatible benchmark evidence: Invalid wall_ns observation"}
+{"case": "changed-options", "exit": 1, "error": "Incompatible benchmark evidence: Different recorded method options for ('S', 'road', 'process_cold', 'p13-01')"}
+Control and refusal checks exit: 0

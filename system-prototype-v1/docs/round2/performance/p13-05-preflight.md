@@ -45,7 +45,11 @@ env PYTHONPATH="$profile_tmp/src" PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS
 
 主控将面积、空间关系、点裁剪和暂存四个补丁应用到同一隔离副本，合跑 GIS、真实 Python 执行、进程终止和启动恢复用例。81 项通过、0 失败、0 错误、0 跳过，退出 0。补丁、完整命令与分项结果保存在 `artifacts/test-results/p13-05-staging-integration.bZKBpB/SHA256SUMS`，在原型目录可用同目录的 `reproduce-combined.sh` 重跑。 [合并日志](p13-05-preflight-staging-integration.log) · [JUnit](p13-05-preflight-staging-integration-junit.xml)
 
-隔离候选为声明输出提供通用暂存上下文，已接入使用 `_stage_outputs` 的发布路径。直接在目标旁创建临时目录的其他写入路径需逐项验证。回执写完整前强杀可能留下空目录或不完整回执，此时尚未启动子进程。普通终态后的清理 I/O 失败保留回执并记日志，当前启动恢复只处理被中断的运行。完整遥感复测及新增 I/O 开销待 P13-03 验收后执行。
+隔离候选为声明输出提供通用暂存上下文。回执写完整前强杀可能留下空目录或不完整回执，此时尚未启动子进程。普通终态后的清理 I/O 失败保留回执并记日志，当前启动恢复只处理被中断的运行。完整遥感复测及新增 I/O 开销待 P13-03 验收后执行。
+
+A 进一步将目标旁创建临时目录的矢量、DEM 和遥感写入器接入同一上下文。匹配使用完整声明输出路径，嵌套目标、未声明兄弟路径和直接调用继续使用原父目录。以实际 Python worker 在写完文件、发布硬链接前取消，旧暂存补丁分别残留 98,304 B 的 GeoPackage 和 1,313 B 的 DEM 阈值 GeoTIFF。扩展候选均回收，遥感嵌套差值在两版均回收。三种成功写入结果都通过各自独立参考。A 的写入器专项 7 项、含点裁剪与面积的联合测试 112 项通过。土地利用的临时投影区划、独立产品打包、PostGIS 导入、预览和发布账本仍走各自入口。补丁、未接入清单和前后原始输出保存在 `artifacts/test-results/p13-05-staging-writers.hOmmu7/SHA256SUMS`。
+
+主控在 `6f90b6f` 的独立源码副本合并面积、空间关系、点裁剪、暂存与写入器五个补丁，88 项通过、0 失败、0 错误、0 跳过，退出 0。联合范围涵盖进程组终止、服务启动恢复、矢量及栅格写入。在原型目录可运行同一证据目录的 `reproduce-combined-writers.sh`。全量性能与新增 I/O 成本待测。 [合并日志](p13-05-preflight-writers.log) · [JUnit](p13-05-preflight-writers-junit.xml)
 
 ## 矢量空间关系
 
@@ -70,3 +74,16 @@ nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider \
   -k 'coarse_sheared or collapsed_projected or projection_cut or union_across_seams' \
   --basetemp="$p13_guard_tmp/pytest" --junitxml="$p13_guard_tmp/junit.xml"
 ```
+
+## 全量前后测量的对照工具
+
+隔离候选 `run_memory_profile.py` 读取两侧的矢量或栅格基准报告及原始样本，核对记录中的输入文件组、磁盘、运行版本、采样规则及方法选项。成功与失败的墙钟、峰值 RSS 和峰值暂存各自汇总。成功统计不足三次时留空，存在 partial 观测的指标保留样本数但不输出前后差值。
+
+在本机 Python 3.13.13 上用六批真实归档做自对照，共 74 组，均退出 0。失败样本未计入成功分位。八个独立的本地副本分别修改运行版本、输入摘要、输入前后状态、重复次数、独立验算、墙钟或方法选项，全部退出 1。自对照验证计算与拒绝路径，全规模优化数据待正式阶段。脚本及校验清单在 `artifacts/test-results/p13-05-memory-comparator.xYZIT5/`。 [命令及原始结果](p13-05-preflight-memory-comparator.log)
+
+```bash
+.venv/bin/python artifacts/test-results/p13-05-memory-comparator.xYZIT5/run_memory_profile.py \
+  --kind vector --before "$baseline_evidence" --after "$candidate_evidence"
+```
+
+矢量目录使用 `summary.json`、`environment.json`、`command.log`、`inputs.json` 和 `samples.jsonl` 或其 gzip 归档。栅格和遥感使用 `--kind raster`，读取 `report.json` 和 `trials.jsonl` 或其 gzip 归档。比较仅涵盖原报告实际记录的环境身份，正式复测继续使用固定镜像及同一物理盘。工具退出 0 表示证据可对照，候选的成功次数单独记录。
