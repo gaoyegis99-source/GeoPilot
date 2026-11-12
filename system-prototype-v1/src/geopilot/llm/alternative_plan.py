@@ -1,12 +1,13 @@
 """Compare exact registered GIS methods and tool variants without persisting a plan."""
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping
 from pathlib import Path
 
 from pydantic import BaseModel, JsonValue
 
 from geopilot.application.draft_options import derived_method_options, resolve_draft_options
 from geopilot.application.task_context import ContextCriteria, build_task_context, current_task_criteria
+from geopilot.domain.data_asset import DataAssetRef
 from geopilot.domain.tool_contract import MeasurementPolicy, ParameterSpec
 from geopilot.llm.clarification import require_goal_clarification
 from geopilot.methods.loader import MethodCatalog
@@ -62,6 +63,31 @@ def _compatible_option(source, target) -> bool:
     return source == target
 
 
+def preview_plan_revision(
+    database_path: str | Path, plan: AnalysisPlan, method: MethodDefinition, *,
+    selected: Mapping[str, DataAssetRef], options: Mapping[str, JsonValue], criteria: ContextCriteria,
+    registry: ToolRegistry, sensor_registry: SensorConfigRegistry | None,
+) -> PlanComparison:
+    context = build_task_context(
+        database_path, task_id=plan.task_id, goal=plan.goal, method=method, selected=selected,
+        criteria=criteria, registry=registry, options=options,
+    )
+    context, resolved = resolve_draft_options(database_path, context, options, sensor_registry=sensor_registry)
+    candidate = build_draft(
+        context, method, plan_id=plan.id, version=plan.version, options=resolved, registry=registry,
+    )
+    if any(issue.code == GOAL_CLARIFICATION_ISSUE.code for issue in plan.issues):
+        candidate = require_goal_clarification(candidate)
+    if not candidate.issues:
+        try:
+            compile_plan_steps(candidate, method, registry=registry)
+        except PlanCompilationError as error:
+            candidate = candidate.model_copy(update={
+                "issues": (PlanIssue(code=error.code, field=error.field, message=error.message),),
+            })
+    return _comparison(candidate, method, criteria, registry)
+
+
 def compare_plan_alternatives(
     database_path: str | Path, plan: AnalysisPlan, *, catalog: MethodCatalog, registry: ToolRegistry,
     registered_rules: Iterable[str], sensor_registry: SensorConfigRegistry | None = None,
@@ -113,22 +139,10 @@ def compare_plan_alternatives(
             options = {name: value for name, value in options.items() if name not in method.inactive_variant_options(options)}
             if validate_method(method, registry=registry, registered_rules=rules, options=options):
                 continue
-            context = build_task_context(
-                database_path, task_id=plan.task_id, goal=plan.goal, method=method, selected=selected,
-                criteria=criteria, registry=registry, options=options,
-            )
-            context, resolved = resolve_draft_options(database_path, context, options, sensor_registry=sensor_registry)
-            candidate = build_draft(
-                context, method, plan_id=plan.id, version=plan.version, options=resolved, registry=registry,
-            )
-            if any(issue.code == GOAL_CLARIFICATION_ISSUE.code for issue in plan.issues):
-                candidate = require_goal_clarification(candidate)
-            if not candidate.issues:
-                try:
-                    compile_plan_steps(candidate, method, registry=registry)
-                except PlanCompilationError as error:
-                    candidate = candidate.model_copy(update={
-                        "issues": (PlanIssue(code=error.code, field=error.field, message=error.message),),
-                    })
-            alternatives.append(_comparison(candidate, method, criteria, registry))
-    return PlanAlternatives(baseline=_comparison(plan, source, saved, registry), alternatives=tuple(alternatives))
+            alternatives.append(preview_plan_revision(
+                database_path, plan, method, selected=selected, options=options, criteria=criteria,
+                registry=registry, sensor_registry=sensor_registry,
+            ))
+    return PlanAlternatives(
+        baseline=_comparison(plan, source, saved, registry), alternatives=tuple(alternatives),
+    )

@@ -103,3 +103,79 @@ it('saves the selected alternative as a new draft of the original plan', async (
   expect(confirm).not.toHaveBeenCalled()
   expect(run).not.toHaveBeenCalled()
 })
+
+it('keeps the failed run linked while reviewing a revision and starts only after confirmation', async () => {
+  const failed = {
+    run_id: 'failed-run', plan_id: plan.id, plan_version: plan.version,
+    execution_status: 'FAILED', check_status: 'NOT_CHECKED',
+  } as const
+  const newRun = {
+    run_id: 'revised-run', plan_id: plan.id, plan_version: 3,
+    execution_status: 'NOT_STARTED', check_status: 'NOT_CHECKED',
+  } as const
+  const draft: AnalysisPlan = { ...geographic.plan, version: 3 }
+  let current = plan
+  let queued = false
+  const method: MethodEntry = {
+    title: '道路缓冲', description: '根据道路距离生成缓冲区', available: true, issues: [],
+    definition: { ...plan.method, locked_order: true, inputs: { roads: 'vector_line' }, critical_options: {}, steps: [], check_rules: [] },
+  }
+  vi.spyOn(workbenchApi, 'assets').mockResolvedValue({ assets: [] })
+  vi.spyOn(workbenchApi, 'methods').mockResolvedValue({ methods: [method] })
+  vi.spyOn(workbenchApi, 'modelAvailability').mockResolvedValue({ available: false })
+  vi.spyOn(workbenchApi, 'task').mockImplementation(async () => ({
+    task_id: plan.task_id, goal: plan.goal, context: null,
+    plans: current === plan ? [plan] : [current, plan], runs: queued ? [newRun, failed] : [failed],
+  }))
+  vi.spyOn(workbenchApi, 'plan').mockResolvedValue(plan)
+  vi.spyOn(workbenchApi, 'runOrigin').mockResolvedValue({ ...failed, task_id: plan.task_id })
+  vi.spyOn(workbenchApi, 'run').mockImplementation(async id => ({
+    ...(id === failed.run_id ? failed : newRun),
+    current_step: null, current_report_id: null, cancel_requested: false, error: null,
+  }))
+  vi.spyOn(workbenchApi, 'steps').mockImplementation(async id => ({ run_id: id, steps: [] }))
+  vi.spyOn(workbenchApi, 'artifacts').mockImplementation(async id => ({
+    run_id: id, check_status: 'NOT_CHECKED', artifacts: [], diagnostics: [],
+  }))
+  vi.spyOn(workbenchApi, 'checks').mockImplementation(async id => ({
+    run_id: id, check_status: 'NOT_CHECKED', current_report: null, report_ids: [],
+  }))
+  vi.spyOn(workbenchApi, 'previewContext').mockResolvedValue({ task_id: 'preview', goal: plan.goal, method: plan.method, roles: {} })
+  const proposals = vi.spyOn(workbenchApi, 'replanning').mockResolvedValue({
+    ...failed, baseline, alternatives: [{ ...geographic, proposal_id: 'a'.repeat(64) }],
+  })
+  const apply = vi.spyOn(workbenchApi, 'applyReplan').mockImplementation(async () => {
+    current = draft
+    return current
+  })
+  const confirm = vi.spyOn(workbenchApi, 'confirm').mockImplementation(async () => {
+    current = { ...draft, status: 'confirmed' }
+    return current
+  })
+  const start = vi.spyOn(workbenchApi, 'start').mockImplementation(async () => {
+    queued = true
+    return { run_id: newRun.run_id }
+  })
+  window.history.replaceState(null, '', '/?task=roads-task&plan=roads-plan&version=2&run=failed-run')
+
+  render(<App />)
+  const summary = await screen.findByText('比较此失败运行的修订方案')
+  const disclosure = summary.closest('details')
+  if (!disclosure) throw new Error('Expected the run revision disclosure')
+  disclosure.open = true
+  fireEvent(disclosure, new Event('toggle'))
+  fireEvent.click(await screen.findByRole('button', { name: '采用并生成草稿' }))
+  await waitFor(() => expect(window.location.search).toContain('version=3'))
+  expect(proposals).toHaveBeenCalledWith(failed.run_id, expect.any(AbortSignal))
+  expect(apply).toHaveBeenCalledWith(failed.run_id, 'a'.repeat(64))
+  expect(window.location.search).toContain('run=failed-run')
+  expect((screen.getByRole('button', { name: '开始运行' }) as HTMLButtonElement).disabled).toBe(true)
+  expect(confirm).not.toHaveBeenCalled()
+  expect(start).not.toHaveBeenCalled()
+  fireEvent.click(screen.getByRole('button', { name: '确认方案' }))
+  await waitFor(() => expect((screen.getByRole('button', { name: '开始运行' }) as HTMLButtonElement).disabled).toBe(false))
+  fireEvent.click(screen.getByRole('button', { name: '开始运行' }))
+  await waitFor(() => expect(window.location.search).toContain('run=revised-run'))
+  expect(confirm).toHaveBeenCalledWith(plan.id, 3)
+  expect(start).toHaveBeenCalledWith(plan.id, 3)
+})

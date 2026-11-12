@@ -1,4 +1,4 @@
-import type { PlanAlternatives } from './plan-alternatives'
+import type { FailureReplanning, PlanAlternatives } from './plan-alternatives'
 
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json }
 export type ExecutionStatus = 'NOT_STARTED' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'CANCELLED'
@@ -389,6 +389,9 @@ export const workbenchApi = {
   run: (id: string, signal?: AbortSignal) => readJson<RunStatus>(runUrl(id), signal),
   runOrigin: (id: string, signal?: AbortSignal) => readJson<RunOrigin>(`${runUrl(id)}/origin`, signal),
   feedback: (id: string, signal?: AbortSignal) => readJson<ExecutionFeedback>(`${runUrl(id)}/feedback`, signal),
+  replanning: (id: string, signal?: AbortSignal) => readJson<FailureReplanning>(`${runUrl(id)}/replanning`, signal),
+  applyReplan: (id: string, proposalId: string) =>
+    sendJson<AnalysisPlan>(`${runUrl(id)}/replanning`, { proposal_id: proposalId }),
   cancel: (id: string) => sendJson<RunStatus>(`${runUrl(id)}/cancel`),
   steps: (id: string, signal?: AbortSignal) => readJson<{ run_id: string; steps: RunStep[] }>(`${runUrl(id)}/steps`, signal),
   logUrl: (id: string, step: string) => `${runUrl(id)}/steps/${segment(step)}/log`,

@@ -1,0 +1,23 @@
+v22.23.1
+10.9.8
+
+> geopilot-workbench@1.0.0 test
+> vitest --run src/features/plans/AlternativePlansPanel.test.tsx src/App.clarification.test.tsx src/features/runs/RunPanel.test.tsx src/features/session/workbench-session.test.ts --reporter=default --reporter=junit --outputFile.junit=../docs/round2/agent/p15-05-frontend-junit.xml
+
+
+ RUN  v5.0.5 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/frontend
+
+ ✓ src/features/session/workbench-session.test.ts (5 tests) 16ms
+ ✓ src/features/runs/RunPanel.test.tsx (4 tests) 330ms
+ ✓ src/App.clarification.test.tsx (1 test) 700ms
+   ✓ answers one field per version, restores the current draft, and keeps explicit confirmation 698ms
+ ✓ src/features/plans/AlternativePlansPanel.test.tsx (3 tests) 1009ms
+   ✓ saves the selected alternative as a new draft of the original plan 306ms
+   ✓ keeps the failed run linked while reviewing a revision and starts only after confirmation 401ms
+
+ Test Files  4 passed (4)
+      Tests  13 passed (13)
+   Start at  14:31:10
+   Duration  2.02s (environment 42%, tests 39%, import 12%, transform 7%, worker 1%)
+
+JUNIT report written to /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-05-frontend-junit.xml

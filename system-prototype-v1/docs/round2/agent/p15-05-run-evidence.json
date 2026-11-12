@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "test": "tests/agent/test_failure_replanning.py::test_actual_failure_revision_keeps_run_and_requires_new_confirmation",
+  "base_commit": "d580bf25abefa6775fdb1c427c2c23fee29409a7",
+  "plans": [
+    {
+      "id": "3671e44988b84dbd905ea7984c03a5a6",
+      "version": 1,
+      "method": {
+        "id": "prepare-roads",
+        "version": 1
+      },
+      "status": "confirmed",
+      "critical_options": {
+        "strategy": "local_projected",
+        "target_crs": "EPSG:4326"
+      },
+      "tools": [
+        {
+          "id": "python-prepare-measurement-lines",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "id": "3671e44988b84dbd905ea7984c03a5a6",
+      "version": 2,
+      "method": {
+        "id": "prepare-roads",
+        "version": 1
+      },
+      "status": "confirmed",
+      "critical_options": {
+        "strategy": "geodesic"
+      },
+      "tools": [
+        {
+          "id": "python-prepare-wgs84-measurement-lines",
+          "version": 1
+        }
+      ]
+    }
+  ],
+  "runs": [
+    {
+      "id": "4eccbf01452541808c60895fa8d99adf",
+      "plan_id": "3671e44988b84dbd905ea7984c03a5a6",
+      "plan_version": 1,
+      "execution_status": "FAILED",
+      "check_status": "NOT_CHECKED",
+      "workspace": "4eccbf01452541808c60895fa8d99adf",
+      "file_sha256": {
+        ".worker.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "inputs/0001/source.gpkg": "52bf921e66f43866e5dade81ae5b489a79dbbc7671f82c10cc50ec537c8ba39c",
+        "request.json": "7512eea15a89c3794efd0f23e589565a4a403e96a930d6f66e761c092a82c798",
+        "steps/prepare/process.log": "0b10a27bbc41b65b260035b35136aed92c4fd00f0f075572e3f6610932ca16ac",
+        "steps/prepare/request.json": "3c8f29d428a0a8a13f2b80ea1414cfa136f24c2a9d4099c0df4bd19957efc0de",
+        "steps/prepare/result.json": "3b7856e912a8aa830578533d9499d60f42843ba04eb09f1353782bdb18ffd4a0"
+      },
+      "error_code": "PROCESS_FAILED"
+    },
+    {
+      "id": "184e6790c0904cbc9a98298618cc3503",
+      "plan_id": "3671e44988b84dbd905ea7984c03a5a6",
+      "plan_version": 2,
+      "execution_status": "SUCCEEDED",
+      "check_status": "PASSED",
+      "workspace": "184e6790c0904cbc9a98298618cc3503",
+      "file_sha256": {
+        ".worker.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "checks/report.json": "3b33dfaa815ba40657ebac7872d991c75d545bc2b8e19367a4525490cef2a4c2",
+        "inputs/0001/source.gpkg": "52bf921e66f43866e5dade81ae5b489a79dbbc7671f82c10cc50ec537c8ba39c",
+        "intermediate/prepare/roads.gpkg": "de3bad1d0f2c358810407c6d68583eb0a7d4121fdcc39a5671c9d21a9ecb668a",
+        "outputs/manifest.json": "95c0a345267ce0c2c57ea5fb8872ccacfccbe1c352632795f4e9b39743f9f9f2",
+        "request.json": "596280bd238a32ce6abc798f7f2ac5c83151047ea5f39fd053a85921151f32a7",
+        "steps/prepare/process.log": "6a5f439d3f5ff58481ef140da08f8d1913db18e057e29100237d3ed76c9b0a13",
+        "steps/prepare/python-result.json": "26711928c7415d78e15b5af9d1dc04769ef18b2d09f83c78df9be6e1077b834a",
+        "steps/prepare/request.json": "928614b7ccbf3cfb9351675f30bbdac93a243d44dc7b15e3ad1941146ed28b47",
+        "steps/prepare/result.json": "fd7a7fd6a3ee5f1b7d4981bebdea97fe596cb7f4e3e3e4230cc0c1d35e886362"
+      },
+      "error_code": null
+    }
+  ],
+  "artifacts": [
+    {
+      "run_id": "184e6790c0904cbc9a98298618cc3503",
+      "role": "prepared_roads",
+      "fingerprint": "3f9f88e96806dbe75253dea08c96f99f74bd23bf3e3a7c72e9b422d542a55cac",
+      "crs": "EPSG:4326",
+      "feature_count": 3
+    }
+  ]
+}

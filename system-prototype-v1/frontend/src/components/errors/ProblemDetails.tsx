@@ -31,7 +31,7 @@ const actionLabels: Record<Action, string> = {
 }
 const phaseLabels: Record<string, string> = {
   data: '输入数据', preflight: '执行前检查', execute: '计算执行', check: '规则检查',
-  preview: '地图预览', plan: '方案', output: '成果验证', model: '模型建议',
+  preview: '地图预览', plan: '方案', replan: '方案修订', output: '成果验证', model: '模型建议',
 }
 
 function relevantAction(problem: Problem): Action {

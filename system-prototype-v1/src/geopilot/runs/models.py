@@ -45,6 +45,12 @@ class Run(_RunModel):
     current_report_id: _Text | None = None
     error: ErrorDetail | None = None
 
+    @property
+    def can_replan(self) -> bool:
+        return self.execution_status is ExecutionStatus.FAILED or (
+            self.execution_status is ExecutionStatus.SUCCEEDED and self.check_status is CheckStatus.FAILED
+        )
+
 
 class RunStep(_RunModel):
     run_id: _Text

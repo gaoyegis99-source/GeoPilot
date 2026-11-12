@@ -13,6 +13,7 @@ import { ConfirmPlanButton, StartPlanButton } from './features/plans/PlanActions
 import { AlternativePlansPanel } from './features/plans/AlternativePlansPanel'
 import { ClarificationPanel } from './features/plans/ClarificationPanel'
 import { PlanPreview } from './features/plans/preview/PlanPreview'
+import { FailureReplanPanel } from './features/runs/FailureReplanPanel'
 import { isRunActive, RunPanel } from './features/runs/RunPanel'
 import { ScriptRunsPage } from './features/scripts/ScriptRunsPage'
 import { TaskHistory } from './features/session/TaskHistory'
@@ -47,7 +48,7 @@ function AnalysisWorkbench() {
   const [draftDirty, setDraftDirty] = useState(false)
   const [preparing, setPreparing] = useState(false)
   const [taskError, setTaskError] = useState<Problem | null>(null)
-  const [actionPending, setActionPending] = useState<'confirm' | 'start' | 'answer' | 'alternative' | null>(null)
+  const [actionPending, setActionPending] = useState<'confirm' | 'start' | 'answer' | 'alternative' | 'replan' | null>(null)
   const [actionError, setActionError] = useState<Problem | null>(null)
   const methodForm = useRef<HTMLDivElement>(null)
   const methodCatalog = useRef<HTMLDivElement>(null)
@@ -393,6 +394,19 @@ function AnalysisWorkbench() {
     }
   }
 
+  async function applyFailureReplan(failedRunId: string, proposalId: string) {
+    if (runId !== failedRunId || draftDirty || preparing || actionPending) return
+    setActionPending('replan')
+    setActionError(null)
+    try {
+      await showSavedDraft(await workbenchApi.applyReplan(failedRunId, proposalId))
+    } catch (cause) {
+      setActionError(requestProblem(cause, 'replan', '无法保存失败运行的修订草稿。'))
+    } finally {
+      setActionPending(null)
+    }
+  }
+
   async function confirmPlan(ref: MethodRef) {
     setActionPending('confirm')
     setActionError(null)
@@ -450,6 +464,10 @@ function AnalysisWorkbench() {
     ? plan : null
   const canRecheck = runStatus?.execution_status === 'SUCCEEDED' && runStatus.check_status === 'NOT_CHECKED'
     && Boolean(runStatus.current_report_id)
+  const canReplan = runId !== null && runStatus?.run_id === runId && (
+    runStatus.execution_status === 'FAILED'
+    || (runStatus.execution_status === 'SUCCEEDED' && runStatus.check_status === 'FAILED')
+  )
   const startButton = <StartPlanButton plan={selectedPlan} dirty={draftDirty}
     busy={Boolean(preparing || actionPending || isRunActive(runStatus))} onStart={(ref) => { void startRun(ref) }} />
   const mapLayers: MapPreviewLayer[] = visibleAssets.flatMap((ref) => {
@@ -560,6 +578,16 @@ function AnalysisWorkbench() {
         )}
         {actionPending === 'start' && <p role="status">正在提交运行…</p>}
         {actionError?.phase === 'execute' && <ProblemDetails problem={actionError} />}
+        {canReplan && runId && runPlan && taskId && <>
+          <a href={workbenchLocation(new URL(window.location.href), { taskId, plan: runPlan, runId }).href}>打开本次运行方案</a>
+          <FailureReplanPanel key={runId} runId={runId} plan={runPlan}
+            disabled={draftDirty || preparing || actionPending !== null}
+            onApply={(proposalId) => { void applyFailureReplan(runId, proposalId) }} />
+        </>}
+        {actionPending === 'replan' && <p role="status">正在保存修订草稿…</p>}
+        {actionError?.phase === 'replan' && <ProblemDetails problem={actionError} />}
+        {actionError?.phase === 'replan' && actionError.code === 'PLAN_VERSION_CONFLICT' && taskId && <a
+          href={workbenchLocation(new URL(window.location.href), { taskId }).href}>打开任务最新版本</a>}
         {(recheckSubmitting || queuedReport) && <p role="status">已提交重新检查，等待后端处理。</p>}
         {recheckError && <ProblemDetails problem={recheckError} actions={{ recheck: () => { void recheck() } }} />}
       </RunPanel>}

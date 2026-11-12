@@ -1,4 +1,4 @@
-import type { AnalysisPlan, ContextCriteria, Json } from './workbench'
+import type { AnalysisPlan, CheckStatus, ContextCriteria, ExecutionStatus, Json } from './workbench'
 
 export interface PlanComparison {
   plan: AnalysisPlan
@@ -9,7 +9,17 @@ export interface PlanComparison {
   measurement: Record<string, Json>
 }
 
-export interface PlanAlternatives {
+export interface PlanAlternatives<T extends PlanComparison = PlanComparison> {
   baseline: PlanComparison
-  alternatives: PlanComparison[]
+  alternatives: T[]
+}
+
+export interface FailureProposal extends PlanComparison {
+  proposal_id: string
+}
+
+export interface FailureReplanning extends PlanAlternatives<FailureProposal> {
+  run_id: string
+  execution_status: ExecutionStatus
+  check_status: CheckStatus
 }

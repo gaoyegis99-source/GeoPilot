@@ -1,14 +1,16 @@
 import { useEffect, useId, useState, type ReactNode } from 'react'
 import type { PlanAlternatives, PlanComparison } from '../../api/plan-alternatives'
-import type { AnalysisPlan, Json } from '../../api/workbench'
+import type { AnalysisPlan, Json, MethodRef } from '../../api/workbench'
 import { enumLabels, optionLabels, roleLabels } from '../method-form/method-form-fields'
 import './preview/plan-preview.css'
 
-interface AlternativePlansPanelProps {
-  plan: AnalysisPlan
+interface AlternativePlansPanelProps<T extends PlanComparison> {
+  plan: MethodRef
   disabled: boolean
-  load: (id: string, version: number, signal: AbortSignal) => Promise<PlanAlternatives>
-  onSelect: (choice: PlanComparison) => void
+  load: (id: string, version: number, signal: AbortSignal) => Promise<PlanAlternatives<T>>
+  onSelect: (choice: T) => void
+  title?: string
+  emptyMessage?: string
 }
 
 function keys<T, U>(left: Record<string, T>, right: Record<string, U>) {
@@ -109,10 +111,12 @@ function choiceLabel(choice: PlanComparison, baseline: PlanComparison) {
   return `${method.id} · v${method.version}${typeof changedMode === 'string' ? ` · ${enumLabels[changedMode] ?? changedMode}` : ''}`
 }
 
-export function AlternativePlansPanel({ plan, disabled, load, onSelect }: AlternativePlansPanelProps) {
+export function AlternativePlansPanel<T extends PlanComparison>({
+  plan, disabled, load, onSelect, title = '比较替代方案', emptyMessage = '当前目录没有符合该任务的替代方法。',
+}: AlternativePlansPanelProps<T>) {
   const id = useId()
   const [open, setOpen] = useState(false)
-  const [report, setReport] = useState<PlanAlternatives>()
+  const [report, setReport] = useState<PlanAlternatives<T>>()
   const [failed, setFailed] = useState(false)
   const [selection, setSelection] = useState(0)
   useEffect(() => {
@@ -129,7 +133,7 @@ export function AlternativePlansPanel({ plan, disabled, load, onSelect }: Altern
   const choice = report?.alternatives[selection] ?? report?.alternatives[0]
   const valid = report?.baseline.plan.id === plan.id && report.baseline.plan.version === plan.version
   return <details className="plan-preview plan-preview__alternatives" onToggle={event => setOpen(event.currentTarget.open)}>
-    <summary>比较替代方案</summary>
+    <summary>{title}</summary>
     {open && failed && <p role="status">暂时无法读取替代方案。</p>}
     {open && !failed && !valid && <p role="status">正在检查已登记的方法…</p>}
     {open && valid && report && !failed && (choice ? <>
@@ -139,6 +143,6 @@ export function AlternativePlansPanel({ plan, disabled, load, onSelect }: Altern
       </select>
       <AlternativeComparison baseline={report.baseline} choice={choice} />
       <button type="button" disabled={disabled} onClick={() => onSelect(choice)}>采用并生成草稿</button>
-    </> : <p>当前目录没有符合该任务的替代方法。</p>)}
+    </> : <p>{emptyMessage}</p>)}
   </details>
 }

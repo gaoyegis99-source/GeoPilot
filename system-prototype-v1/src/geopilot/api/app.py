@@ -15,6 +15,7 @@ from geopilot.api.catalog_routes import catalog_routes
 from geopilot.api.check_routes import check_routes
 from geopilot.api.model_routes import model_routes
 from geopilot.api.plan_routes import plan_routes
+from geopilot.api.replanning_routes import replanning_routes
 from geopilot.api.run_step_routes import run_step_routes
 from geopilot.api.script_routes import script_routes
 from geopilot.api.task_routes import task_routes
@@ -77,6 +78,9 @@ def create_app(
     app.include_router(catalog_routes(database_path, catalog=catalog, registry=registry, registered_rules=rule_names))
     app.include_router(task_routes(database_path, catalog=catalog, registry=registry, sensor_registry=sensor_registry))
     app.include_router(run_step_routes(database_path))
+    app.include_router(replanning_routes(
+        database_path, catalog=catalog, registry=registry, registered_rules=rule_names, sensor_registry=sensor_registry,
+    ))
     app.include_router(artifact_routes(database_path))
     app.include_router(check_routes(database_path, versions))
     app.include_router(script_routes(root))

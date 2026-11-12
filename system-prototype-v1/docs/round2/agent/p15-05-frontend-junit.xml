@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="13" failures="0" errors="0" time="2.054058382">
+    <testsuite name="src/App.clarification.test.tsx" timestamp="2026-11-12T06:31:12.380Z" hostname="mtd-4028GR" tests="1" failures="0" errors="0" skipped="0" time="0.699695697">
+        <testcase classname="src/App.clarification.test.tsx" name="answers one field per version, restores the current draft, and keeps explicit confirmation" time="0.69812305">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/plans/AlternativePlansPanel.test.tsx" timestamp="2026-11-12T06:31:12.381Z" hostname="mtd-4028GR" tests="3" failures="0" errors="0" skipped="0" time="1.008626278">
+        <testcase classname="src/features/plans/AlternativePlansPanel.test.tsx" name="compares inputs, parameters and tools, then waits for explicit draft selection" time="0.299095967">
+        </testcase>
+        <testcase classname="src/features/plans/AlternativePlansPanel.test.tsx" name="saves the selected alternative as a new draft of the original plan" time="0.306415933">
+        </testcase>
+        <testcase classname="src/features/plans/AlternativePlansPanel.test.tsx" name="keeps the failed run linked while reviewing a revision and starts only after confirmation" time="0.401279068">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/runs/RunPanel.test.tsx" timestamp="2026-11-12T06:31:12.382Z" hostname="mtd-4028GR" tests="4" failures="0" errors="0" skipped="0" time="0.330169785">
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="polls actual statuses until both phases finish and allows a retained log to open" time="0.248943856">
+        </testcase>
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="shows a server cancellation request and waits for the terminal server state" time="0.044702297">
+        </testcase>
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="waits for a queued recheck to replace the previous report before stopping polling" time="0.007426657">
+        </testcase>
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="loads on demand and labels evidence separately from a possible cause" time="0.027548004">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/session/workbench-session.test.ts" timestamp="2026-11-12T06:31:12.383Z" hostname="mtd-4028GR" tests="5" failures="0" errors="0" skipped="0" time="0.015566622">
+        <testcase classname="src/features/session/workbench-session.test.ts" name="restores a run-only URL using its exact originating task and confirmed version" time="0.005701444">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="chooses the latest saved plan for a task-only URL and retains a separately specified run" time="0.001424698">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="rejects cross-task runs and foreign or incomplete plan links" time="0.003104906">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="writes exact links and preserves unrelated search entries" time="0.001614318">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="round trips exact visible asset versions independently of the active plan and run" time="0.001383553">
+        </testcase>
+    </testsuite>
+</testsuites>

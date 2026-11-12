@@ -9,10 +9,12 @@ from pydantic import JsonValue
 from geopilot.application.task_context import TaskContext
 from geopilot.methods.models import MethodDefinition
 from geopilot.persistence.plan_repository import insert_draft, plan_from_row, row_for_plan
+from geopilot.persistence.run_repository import get_run
 from geopilot.persistence.schema import open_database
 from geopilot.plans.compiler import _same_json
 from geopilot.plans.draft_builder import build_draft
 from geopilot.plans.models import GOAL_CLARIFICATION_ISSUE, AnalysisPlan, PlanStatus
+from geopilot.runs.models import Run
 from geopilot.tools.registry import ToolRegistry
 
 
@@ -40,6 +42,10 @@ class PlanAnswerError(ValueError):
     """The exact draft could not accept the proposed answer."""
 
 
+class FailedRunConflictError(ValueError):
+    """The failed run snapshot no longer matches the revision request."""
+
+
 def _refresh_current_context(connection: sqlite3.Connection, plan: AnalysisPlan, context: TaskContext) -> None:
     if context.criteria is None:
         return
@@ -64,6 +70,7 @@ def revise_plan(
     options: Mapping[str, JsonValue] | None = None,
     registry: ToolRegistry | None = None,
     answer_field: str | None = None,
+    failed_run: Run | None = None,
 ) -> AnalysisPlan:
     """Build an edited draft against an exact baseline and allocate its next version."""
     if not isinstance(plan_id, str) or not plan_id.strip() or type(version) is not int or version < 1:
@@ -79,6 +86,11 @@ def revise_plan(
         baseline = plan_from_row(row)
         if context.task_id != baseline.task_id:
             raise ValueError("A revision must belong to the original task")
+        if failed_run is not None and (
+            not failed_run.can_replan or (failed_run.plan_id, failed_run.plan_version) != (plan_id, version)
+            or get_run(connection, failed_run.id) != failed_run
+        ):
+            raise FailedRunConflictError("The run or its checks changed. Review the current failure evidence.")
         if answer_field is not None:
             current_plan = connection.execute(
                 "SELECT id FROM analysis_plan WHERE task_id = ? ORDER BY created_at DESC, version DESC, id LIMIT 1",
