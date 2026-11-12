@@ -1,0 +1,15 @@
+
+> geopilot-workbench@1.0.0 test
+> vitest --run src/features/runs/RunPanel.test.tsx --reporter=default --reporter=junit --outputFile.junit=../docs/round2/agent/p15-03-vitest-junit.xml
+
+
+ RUN  v5.0.5 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/frontend
+
+ ✓ src/features/runs/RunPanel.test.tsx (4 tests) 375ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  13:14:42
+   Duration  2.34s (transform 54%, environment 23%, tests 17%, import 6%)
+
+JUNIT report written to /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-03-vitest-junit.xml

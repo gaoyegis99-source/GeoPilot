@@ -1,0 +1,36 @@
+F...............                                                         [100%]
+=================================== FAILURES ===================================
+_______ test_endpoint_reads_persisted_step_and_only_summarizes_log_tail ________
+
+feedback_project = (PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-14/.../system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-14/test_endpoint_reads_persisted_0/runs/run-one'))
+
+    def test_endpoint_reads_persisted_step_and_only_summarizes_log_tail(feedback_project):
+        db, workdir = feedback_project
+        run, step = stored_failure(db, workdir)
+        log = workdir / "process.log"
+        log.write_text(f"exit_code: 8\n{_PRIVATE}\n" + ("x" * 10_000) + "\nexit_code: -15\n")
+        original = db.read_bytes(), log.read_bytes()
+    
+        with TestClient(create_app(db)) as client:
+            response = client.get(f"/api/runs/{run.id}/feedback")
+        assert response.status_code == 200, response.text
+        feedback = ExecutionFeedback.model_validate(response.json())
+        (summary,) = feedback.steps
+        assert (summary.step_key, summary.status, summary.error_code) == (
+            step.step_key, ExecutionStatus.FAILED, "PROCESS_TIMEOUT",
+        )
+>       assert summary.log_available and summary.exit_code == summary.recorded_exit_code == -15
+E       AssertionError: assert (False)
+E        +  where False = FeedbackStep(step_key='buffer', position=0, status=<ExecutionStatus.FAILED: 'FAILED'>, error_code='PROCESS_TIMEOUT', exit_code=-15, warning_count=1, log_available=False, recorded_exit_code=None).log_available
+
+tests/agent/test_execution_feedback.py:69: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-03-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/agent/test_execution_feedback.py::test_endpoint_reads_persisted_step_and_only_summarizes_log_tail
+1 failed, 15 passed, 1 warning in 12.60s

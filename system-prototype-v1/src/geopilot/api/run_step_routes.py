@@ -10,9 +10,11 @@ from fastapi import APIRouter, HTTPException, Query, Response
 from fastapi.responses import FileResponse, PlainTextResponse
 from pydantic import BaseModel, Field, ValidationError
 
+from geopilot.checks.report_service import get_current_report
 from geopilot.domain.errors import ErrorDetail
 from geopilot.domain.step_io import ExecutionStatus
 from geopilot.execution.step_support import AdapterError, resolve_step_path
+from geopilot.llm.execution_feedback import ExecutionFeedback, build_execution_feedback
 from geopilot.persistence.run_repository import get_run, get_run_step, list_run_steps
 from geopilot.persistence.schema import open_database
 from geopilot.runs.models import RunStep
@@ -42,6 +44,8 @@ class RunOrigin(BaseModel):
 
 def _log_file(workdir: Path, step: RunStep) -> Path | None:
     reference = step.log_path or (step.request.log_path if step.request is not None else None)
+    if reference is None and step.result is not None:
+        reference = step.result.log_path
     if reference is None:
         return None
     try:
@@ -96,6 +100,23 @@ def run_step_routes(database_path: str | Path) -> APIRouter:
                 error=step.result.error if step.result is not None else None,
             ) for step in steps
         ])
+
+    @router.get("/{run_id}/feedback")
+    def read_feedback(run_id: str) -> ExecutionFeedback:
+        try:
+            with open_database(database_path, read_only=True) as connection, connection:
+                connection.execute("BEGIN")
+                run = get_run(connection, run_id)
+                if run is None:
+                    raise HTTPException(status_code=404, detail={"code": "RUN_NOT_FOUND", "message": "The run does not exist."})
+                steps = list_run_steps(connection, run_id)
+                report = get_current_report(connection, run_id)
+            logs = {step.step_key: _log_file(Path(run.workdir), step) for step in steps}
+            return build_execution_feedback(run, steps, report, logs=logs)
+        except (sqlite3.Error, ValueError) as error:
+            raise HTTPException(status_code=500, detail={
+                "code": "STORAGE_FAILED", "message": "Could not read the execution feedback.",
+            }) from error
 
     @router.get("/{run_id}/steps/{step_key}/log", response_class=PlainTextResponse)
     def read_log(run_id: str, step_key: str, tail: Annotated[int | None, Query(ge=1, le=1000)] = None) -> Response:

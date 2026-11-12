@@ -194,6 +194,19 @@ export interface RunStep {
   error: RunError | null
 }
 
+export interface ExecutionFeedback {
+  run_id: string
+  steps: Array<{ step_key: string; exit_code: number | null }>
+  findings: Array<{ index: number; rule: string; severity: 'blocking' | 'warning' }>
+  statements: Array<{
+    kind: 'fact' | 'inference'
+    text: string
+    step_key: string | null
+    error_code: string | null
+    check_index: number | null
+  }>
+}
+
 export interface ArtifactEntry {
   id: string
   run_id: string
@@ -351,6 +364,7 @@ export const workbenchApi = {
   start: (id: string, version: number) => sendJson<{ run_id: string }>(`${planUrl(id)}/runs`, { plan_version: version }),
   run: (id: string, signal?: AbortSignal) => readJson<RunStatus>(runUrl(id), signal),
   runOrigin: (id: string, signal?: AbortSignal) => readJson<RunOrigin>(`${runUrl(id)}/origin`, signal),
+  feedback: (id: string, signal?: AbortSignal) => readJson<ExecutionFeedback>(`${runUrl(id)}/feedback`, signal),
   cancel: (id: string) => sendJson<RunStatus>(`${runUrl(id)}/cancel`),
   steps: (id: string, signal?: AbortSignal) => readJson<{ run_id: string; steps: RunStep[] }>(`${runUrl(id)}/steps`, signal),
   logUrl: (id: string, step: string) => `${runUrl(id)}/steps/${segment(step)}/log`,

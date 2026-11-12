@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="16" time="12.598" timestamp="2026-11-12T13:14:42.496076+08:00" hostname="mtd-4028GR"><testcase classname="tests.agent.test_execution_feedback" name="test_endpoint_reads_persisted_step_and_only_summarizes_log_tail" time="6.987"><failure message="AssertionError: assert (False)&#10; +  where False = FeedbackStep(step_key='buffer', position=0, status=&lt;ExecutionStatus.FAILED: 'FAILED'&gt;, error_code='PROCESS_TIMEOUT', exit_code=-15, warning_count=1, log_available=False, recorded_exit_code=None).log_available">feedback_project = (PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-14/.../system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-14/test_endpoint_reads_persisted_0/runs/run-one'))
+
+    def test_endpoint_reads_persisted_step_and_only_summarizes_log_tail(feedback_project):
+        db, workdir = feedback_project
+        run, step = stored_failure(db, workdir)
+        log = workdir / "process.log"
+        log.write_text(f"exit_code: 8\n{_PRIVATE}\n" + ("x" * 10_000) + "\nexit_code: -15\n")
+        original = db.read_bytes(), log.read_bytes()
+    
+        with TestClient(create_app(db)) as client:
+            response = client.get(f"/api/runs/{run.id}/feedback")
+        assert response.status_code == 200, response.text
+        feedback = ExecutionFeedback.model_validate(response.json())
+        (summary,) = feedback.steps
+        assert (summary.step_key, summary.status, summary.error_code) == (
+            step.step_key, ExecutionStatus.FAILED, "PROCESS_TIMEOUT",
+        )
+&gt;       assert summary.log_available and summary.exit_code == summary.recorded_exit_code == -15
+E       AssertionError: assert (False)
+E        +  where False = FeedbackStep(step_key='buffer', position=0, status=&lt;ExecutionStatus.FAILED: 'FAILED'&gt;, error_code='PROCESS_TIMEOUT', exit_code=-15, warning_count=1, log_available=False, recorded_exit_code=None).log_available
+
+tests/agent/test_execution_feedback.py:69: AssertionError</failure></testcase><testcase classname="tests.agent.test_execution_feedback" name="test_prompt_allowlists_codes_and_omits_names_paths_messages_and_data" time="1.516" /><testcase classname="tests.agent.test_execution_feedback" name="test_log_link_is_excluded_by_workspace_resolution" time="0.607" /><testcase classname="tests.agent.test_execution_feedback" name="test_report_keeps_execution_success_separate_from_failed_checks" time="0.393" /><testcase classname="tests.agent.test_execution_feedback" name="test_feedback_rejects_step_from_another_run" time="0.476" /><testcase classname="tests.agent.test_execution_feedback" name="test_missing_run_returns_existing_not_found_error" time="0.652" /><testcase classname="tests.agent.test_clarification_model" name="test_draft_reuses_issues_and_offers_only_ready_assets_and_declared_choices" time="0.135" /><testcase classname="tests.agent.test_clarification_model" name="test_local_goal_issue_is_persisted_and_blocks_v1_confirmation" time="0.497" /><testcase classname="tests.agent.test_clarification_model" name="test_ready_draft_still_requires_user_confirmation" time="0.079" /><testcase classname="tests.agent.test_clarification_model" name="test_stale_method_or_context_cannot_supply_choices" time="0.081" /><testcase classname="tests.agent.test_clarification_model" name="test_context_with_other_selected_assets_cannot_supply_choices" time="0.075" /><testcase classname="tests.agent.test_clarification_model" name="test_invalid_item_scope_is_rejected[input-confirmation-options0]" time="0.000" /><testcase classname="tests.agent.test_clarification_model" name="test_invalid_item_scope_is_rejected[goal-confirmation-options1]" time="0.000" /><testcase classname="tests.agent.test_clarification_model" name="test_invalid_item_scope_is_rejected[option-confirmation-options2]" time="0.000" /><testcase classname="tests.agent.test_clarification_model" name="test_invalid_item_scope_is_rejected[confirmation-confirmation-options3]" time="0.000" /><testcase classname="tests.agent.test_clarification_model" name="test_schema_matches_the_versioned_report" time="0.003" /></testsuite></testsuites>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ApiError, type RunStatus, type RunStep, workbenchApi } from '../../api/workbench'
 import { ProblemDetails, type ProblemActions } from '../../components/errors/ProblemDetails'
+import { ExecutionFeedbackPanel } from './ExecutionFeedbackPanel'
 import './runs.css'
 
 const stepLabels: Record<RunStep['status'], string> = {
@@ -150,6 +151,10 @@ export function RunPanel({
               problem={status.error} actions={actions}
               logHref={status.error.log_path ? workbenchApi.logUrl(runId, status.error.step_key) : undefined}
             />
+          )}
+          {status && !active && (status.error || status.execution_status === 'FAILED' || status.execution_status === 'CANCELLED'
+            || status.check_status === 'FAILED' || status.check_status === 'WARNING') && (
+            <ExecutionFeedbackPanel key={JSON.stringify([runId, status.current_report_id, status.check_status])} runId={runId} />
           )}
           {steps.length > 0 && (
             <ol className="run-panel__steps" aria-label="运行步骤">
