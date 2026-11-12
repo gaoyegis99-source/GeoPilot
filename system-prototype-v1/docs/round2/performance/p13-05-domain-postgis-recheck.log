@@ -1,0 +1,8 @@
+base exit 0
+candidate exit 0
+.                                                                        [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-postgis-recheck.1tTumE/base.xml -
+1 passed in 4.22s
+.                                                                        [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-postgis-recheck.1tTumE/candidate.xml -
+1 passed in 4.39s

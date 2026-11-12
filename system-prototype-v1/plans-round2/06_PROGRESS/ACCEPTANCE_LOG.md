@@ -263,6 +263,7 @@
 - A 固定 M 档八条正式配对命令并通过 dry-run。主控从持久归档重放，生成八条命令且未创建正式目录。 [预演结果](../../docs/round2/performance/p13-05-preflight-vector-m-launch.log)
 - 主控复核四个 M 档正式配对和 112 个实际运行，全部正确。实时、归档和解包复算结果一致。道路 v2 冷态中位数略增，所有 RSS 组有 partial，保持原始观测。A/B 的栅格与 L 矢量入口通过预演。P13-05 仍为 DOING。 [正式结果及复跑](../../docs/round2/performance/p13-05-vector-m.md)
 - A 的 45 次原生探针定位 Rasterio 间接导入。主控冻结最小修正版 `a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc`，20 项暂存与写入专项通过。主控在真实遥感写入后触发取消、超时，修正版均回收两份暂存 TIFF，保留终态和输入。 [探针及受控复验](../../docs/round2/performance/p13-05-staging-resources.md)
+- 修正版完整数据适配和 GIS 首次 360 通过、1 次 SQLite 锁失败。原版和修正版的同项复跑各通过，完整复跑 361 项全部通过，退出 0。修正版正式 M 复测已启动。 [完整复跑](../../docs/round2/performance/p13-05-domain-tests.log) · [JUnit](../../docs/round2/performance/p13-05-domain-tests-junit.xml)
 
 ## P13-06 复用证据准备
 

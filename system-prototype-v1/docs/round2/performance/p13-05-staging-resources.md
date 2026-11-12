@@ -21,3 +21,9 @@ M 档三个矢量负载的候选 RSS 观测中位数较高。原候选 `e874a0f`
 原版 `977ab41` 与修正版 `a2d2e68` 使用同一份四像元输入执行生产 `calculate_change` 工具。同步点验证差值 TIFF 和分类 TIFF 都可读，类别为 1、2、3 和 NoData。随后分别触发真实取消和 8 秒超时。两侧步骤均退出 -15，持久终态分别为 `CANCELLED/NOT_CHECKED` 和 `FAILED/NOT_CHECKED`，错误为 `PROCESS_CANCELLED` 和 `PROCESS_TIMEOUT`。
 
 两种失败下，原版分别残留两个 TIFF，共 3,671 字节。修正版均清除两份文件和暂存目录。四次运行均保留输入指纹和已有文件，无成果发布，进程已回收且租约释放。首次夹具以普通包的方式读取命名空间包路径，提前退出 1。修正路径核验后，四次真实运行及配对核对退出 0。源码固定信息、实际日志、SQLite、文件观测及脚本位于 `artifacts/test-results/p13-05-remote-stage-control.Gguami/`。 [实际配对结果](p13-05-remote-stage-control.json)
+
+## 数据适配和 GIS 回归
+
+从修正版固定源副本执行 `python -B -m pytest -q -p no:cacheprovider tests/data_adapters tests/gis`，Python 3.13.13、Psycopg 3.3.4 和原 P12 固定 PostGIS 镜像。首次单 CPU 低优先级运行通过 360 项，PostGIS 并发刷新在 SQLite `BEGIN IMMEDIATE` 遇到锁，退出 1。原版与修正版的 PostGIS 刷新和 SQLite 连接实现逐字节相同。两侧单独复跑该用例均通过。恢复正常 CPU 调度后，完整套件同样的 361 个用例全部通过，0 错误、0 跳过，退出 0。命令、源摘要及原始输出位于 `artifacts/test-results/p13-05-domain-tests.xmIqZI/`，入库的首次日志和 JUnit 去除行尾空格。 [首次日志](p13-05-domain-tests-initial.log) · [首次 JUnit](p13-05-domain-tests-initial-junit.xml) · [两侧专项复跑](p13-05-domain-postgis-recheck.log) · [完整复跑](p13-05-domain-tests.log) · [JUnit](p13-05-domain-tests-junit.xml)
+
+修正版 M 复测已从 `artifacts/test-results/p13-05-vector-m-revised-plan.qp9bS7/run-m-revised.py` 启动。四个原版分片已经用冻结比较器独立校验并保留，修正版另生成 56 个运行后按输入及环境回执逐组对照。输出根为 `/mnt/datab/geopilot-p13-05-vector-m-revised.a2d2e68`。L 矢量和栅格启动器也已固定同一修正版，分别位于 `artifacts/test-results/p13-05-vector-l-plan.a2d2e68.C905zE/` 与 `artifacts/test-results/p13-05-raster-plan-a2d2e68.TONYtP/`。三者共用正式测量锁。

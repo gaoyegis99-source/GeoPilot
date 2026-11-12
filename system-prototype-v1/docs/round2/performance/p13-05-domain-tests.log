@@ -1,0 +1,14 @@
+........................................................................ [ 19%]
+........................................................................ [ 39%]
+........................................................................ [ 59%]
+........................................................................ [ 79%]
+........................................................................ [ 99%]
+.                                                                        [100%]
+=============================== warnings summary ===============================
+tests/data_adapters/test_postgis_snapshot.py::test_unknown_srid_is_recorded_and_mixed_srids_are_rejected
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/pyogrio/geopandas.py:917: UserWarning: 'crs' was not provided.  The output dataset will not have projection information defined and may not be usable in other systems.
+    write(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-domain-tests.xmIqZI/replay.jg7sPS/junit.xml -
+361 passed, 1 warning in 144.92s (0:02:24)
