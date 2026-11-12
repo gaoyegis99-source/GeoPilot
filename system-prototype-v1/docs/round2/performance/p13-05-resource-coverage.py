@@ -156,7 +156,7 @@ def read_pair(documents, case):
 
 
 def case_summary(documents, case):
-    raster = case in {"dem-s", "dem-l", "remote-s", "remote-l"}
+    raster = case in {"dem-s", "dem-m", "dem-l", "remote-s", "remote-l"}
     raw_pair, pair = read_pair(documents, case)
     series = {}
     ids = set()
@@ -200,7 +200,7 @@ def case_summary(documents, case):
     }, ids
 
 
-def l_followups(directory, historical, historical_ids):
+def sealed_followups(directory, historical, historical_ids, include_dem_m):
     remote_name = "p13-05-remote-l-pair-evidence.tar.gz"
     remote_docs = archive_documents(directory / remote_name, {"remote-l"})
     remote, remote_ids = case_summary(remote_docs, "remote-l")
@@ -225,17 +225,27 @@ def l_followups(directory, historical, historical_ids):
 
     sides = [side for pair in historical.values() for side in pair["sides"].values()]
     sides.extend((remote["sides"]["base"], remote["sides"]["candidate"], t14["sides"]["candidate"]))
-    distinct = len(historical_ids | remote_ids | t14_ids)
+    distinct = historical_ids | remote_ids | t14_ids
+    pairs = {
+        "remote-l-pair/remote-l": {"archive": remote_name, **remote},
+        f"t14-local-clip-pair/{case}": {"archive": t14_name, **t14},
+    }
+    if include_dem_m:
+        dem_name = "p13-05-dem-m-retry-pair-evidence.tar.gz"
+        dem_docs = archive_documents(directory / dem_name, {"dem-m"})
+        dem, dem_ids = case_summary(dem_docs, "dem-m")
+        if distinct & dem_ids:
+            raise ValueError("Reused run identity in the DEM M retry pair")
+        distinct.update(dem_ids)
+        sides.extend(dem["sides"].values())
+        pairs["dem-m-retry-pair/dem-m"] = {"archive": dem_name, **dem}
     return {
         "schema_version": 1,
         "historical_pairs": len(historical),
-        "distinct_runs": distinct,
+        "distinct_runs": len(distinct),
         "reused_t14_original_runs": len(reused),
         "unique_measurements": measurement_totals(sides),
-        "pairs": {
-            "remote-l-pair/remote-l": {"archive": remote_name, **remote},
-            f"t14-local-clip-pair/{case}": {"archive": t14_name, **t14},
-        },
+        "pairs": pairs,
     }
 
 
@@ -265,7 +275,7 @@ def measurement_totals(sides):
     }
 
 
-def summarize(directory, include_l_followups=False):
+def summarize(directory, include_l_followups=False, include_dem_m=False):
     output = {}
     ids = set()
     for name, cases in ARCHIVES.items():
@@ -277,17 +287,20 @@ def summarize(directory, include_l_followups=False):
                 raise ValueError(f"Run identity reused across archives: {case}")
             ids.update(run_ids)
             output[f"{name}/{case}"] = {"archive": archive, **summary}
-    if include_l_followups:
-        return l_followups(directory, output, ids)
+    if include_l_followups or include_dem_m:
+        return sealed_followups(directory, output, ids, include_dem_m)
     return {"schema_version": 1, "distinct_runs": len(ids), "pairs": output}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("evidence_directory", type=Path)
-    parser.add_argument("--l-followups", action="store_true", help="Include remote L and the T14 local-clip comparison")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--l-followups", action="store_true", help="Include remote L and the T14 local-clip comparison")
+    scope.add_argument("--all-sealed", action="store_true", help="Include the L follow-ups and the DEM M retry pair")
     args = parser.parse_args()
-    print(json.dumps(summarize(args.evidence_directory, args.l_followups), indent=2, allow_nan=False))
+    summary = summarize(args.evidence_directory, include_l_followups=args.l_followups, include_dem_m=args.all_sealed)
+    print(json.dumps(summary, indent=2, allow_nan=False))
 
 
 if __name__ == "__main__":

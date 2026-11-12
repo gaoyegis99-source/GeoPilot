@@ -51,3 +51,24 @@ p13_l_resource=$(mktemp)
   docs/round2/performance > "$p13_l_resource"
 cmp "$p13_l_resource" docs/round2/performance/p13-05-resource-coverage-l-followups.json
 ```
+
+## 纳入 DEM M 重试的全部已封存配对
+
+主控以 `cf53e827a93ff4f56cca8541827b26ff858ed736` 归档为输入，将 DEM M 重试正式配对纳入复算。13 个配对共 350 个唯一运行、250 次唯一正式计量。DEM M 两侧 28 个运行与先前配对互异。T14 原版仍去重，遥感 S 使用正式重测。 [分组与总计](p13-05-resource-coverage-all-sealed.json) · [DEM M 正式配对](p13-05-raster-m-l.md#dem-m-原版重试正式配对)
+
+| 250 次唯一正式计量 | 数量 | 复核结果 |
+| --- | ---: | --- |
+| 基准通过 | 161 | `SUCCEEDED/PASSED` |
+| 状态观察失败 | 9 | `SUCCEEDED/PASSED`，独立成果验算通过 |
+| GIS 执行失败 | 80 | `FAILED/NOT_CHECKED` |
+| CPU、磁盘读与写 | 每项 250 | 均为已采样累计下界 |
+| 整轮 RSS | 80 完整、170 部分 | 26 个冷热配对组的成功样本 RSS 差值均为空 |
+
+主控直接读取十份归档的原始 JSONL 独立重算。终态、资源覆盖及 9 次状态观察失败逐项匹配。把新 DEM M 记录的运行 ID 改为封存遥感运行 ID 后，复算拒绝该副本。两个既有汇总模式仍与各自的 JSON 逐字节一致。Linux 5.15、Python 3.13.13，复算退出 0。 [独立检查脚本及日志](p13-05-resource-coverage-all-sealed-verification.tar.gz)
+
+```bash
+p13_sealed_resource=$(mktemp)
+.venv/bin/python -B docs/round2/performance/p13-05-resource-coverage.py --all-sealed \
+  docs/round2/performance > "$p13_sealed_resource"
+cmp "$p13_sealed_resource" docs/round2/performance/p13-05-resource-coverage-all-sealed.json
+```

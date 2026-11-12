@@ -119,3 +119,10 @@ PY
 主控在审计分支依次重放 `e874a0f`、`a2d2e68`、`b126785` 和 `fff225f`。得到生产与测试提交 `217320baec299e4a66a34042fb353bad0d703749`。A 校验预演补丁及逐路径内容，主控复核与四项预演 `938dfd9` 的生产、配置、脚本和测试逐字节一致。后续两项投影布局候选继续等待各自的整幅或遥感证据。DEM M 重试仍使用原只读冻结源码。 [组合预演](p13-05-combined-preview-evidence.tar.gz) · [T14 大规模正式配对](p13-05-vector-l.md#t14-局部裁回候选完整配对)
 
 主控以 Linux 5.15、Python 3.13.13、Shapely 2.1.2、Rasterio 1.4.3 和 SQLite 3.51.2，执行 `tests/data_adapters`、`tests/gis`、`tests/runners`、取消和状态查询专项。共 478 通过、22 跳过、0 失败，退出 0。13 项跳过需要 psycopg，9 项需要 QGIS 原生运行时。命令、JUnit、原始日志、修改清单及跳过原因在归档中。可按 `217320b`、`6acd934`、`7848cd6`、`711e417` 的逆序逐项撤销。P13-05 等待剩余栅格证据，正式发布仍需最终提交的回归。 [同源码集成回归](p13-05-integrated-resource-regression-evidence.tar.gz)
+
+## 宿主跳过节点的原生复跑
+
+A 和 B 从宿主回归的 JUnit 提取 22 个跳过节点，在精确源提交 `cf53e827a93ff4f56cca8541827b26ff858ed736` 的独立副本复跑。主控核验两次源提交之间相关生产、配置和测试文件逐字节一致。按 JUnit 类名和用例名逐项对照，两组分别覆盖原来的 13 项与 9 项跳过，均退出 0。宿主和两次复跑合计覆盖原 500 个节点。 [节点、实际命令、环境、JUnit 与复验程序](p13-05-integrated-environment-replays-evidence.tar.gz)
+
+- A 使用 Python 3.13.13 和 Psycopg 3.3.4，在 CPU 29 运行 13 个真实 PostGIS 节点。测试使用四个自有实例，镜像摘要与 P10 已验收版本一致。13 项通过，耗时 17.50 秒，四个实例均已退出。
+- B 使用固定原生镜像中的 Python 3.12.3 和 QGIS 3.44.15 CLI，在 CPU 30 执行 9 个真实 QGIS 节点。9 项通过，耗时 31.47 秒。首次预检因可选 `osgeo` 导入退出，pytest 尚未启动。正式复跑用 CLI 获取 GDAL 3.8.4 与 PROJ 9.4.0 版本。两次复跑的可写输出均位于隔离 tmpfs，DEM L 容量探针使用 CPU 31。
