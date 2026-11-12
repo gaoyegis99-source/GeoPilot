@@ -38,6 +38,16 @@ export GEOPILOT_QGIS_PROCESS="$PWD/.environments/qgis-deb/qgis_process"
 "$GEOPILOT_QGIS_PROCESS" --version
 ```
 
+### 启动前诊断
+
+安装依赖后，在原型根目录执行。诊断使用与启动命令相同的 QGIS 入口及数据目录设置。需要时用 `--config`、`--database`、`--workspace`、`--port` 或 `--frontend-port` 指定计划使用的设置。
+
+```bash
+PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m geopilot.diagnostics --json
+```
+
+输出检查实际 Python 运行依赖、QGIS Processing、GDAL/PROJ、前端安装、路径和两个回环端口。诊断不会打开或创建项目 SQLite，不安装软件。QGIS 探测在临时目录中运行。端口结果只代表探测时刻。`FAIL` 退出 1 并列出修复提示，版本与已验证环境不同时报告 `WARN` 并退出 0。
+
 ## 启动工作台
 
 终端一在原型根目录启动后端。`GEOPILOT_DATA_DIR` 可指向任何本机可写目录，首次启动时创建 SQLite。
