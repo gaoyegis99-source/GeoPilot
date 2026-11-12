@@ -1,0 +1,5 @@
+M launcher session 41394 exited 0, 8 containers exited 0 and 4 paired comparisons completed.
+All 112 raw rows independently verified. Live, relocated, and extracted archive audit output is byte-identical.
+Each of 8 groups contains five correct measurements on each side.
+Receipt byte mismatch and incorrect arithmetic in isolated variants both exited 1.
+4456db541620469fb7a6fb30bd51fe2f69a8abc65b9eec94573f0cfed73f7d04  artifacts/test-results/p13-05-vector-m-audit.TEhKtG/vector-m-evidence.tar.gz

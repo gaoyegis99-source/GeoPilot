@@ -261,6 +261,8 @@
 - A 对真实遥感 S 分类做同输入三版面积函数对照，21 次预热和计量均返回相同报告。主控核对文件摘要和五次计量的中位数，布局 71 次检查均无命中。正式方法复测待 P13-03。 [遥感 S 原始记录](../../docs/round2/performance/p13-05-preflight-remote-s.log)
 - C 的采集包装器通过 24 项隔离进程断言，四个完整报告回执通过正式比较器。主控用实际前测与候选的只读源码容器分别采集配置，快照逐字节一致。基准完整接入仍待 P13-03。 [包装器复验](../../docs/round2/performance/p13-05-preflight-runtime-wrapper.log) · [原生采集](../../docs/round2/performance/p13-05-preflight-native-configuration.log)
 - A 固定 M 档八条正式配对命令并通过 dry-run。主控从持久归档重放，生成八条命令且未创建正式目录。 [预演结果](../../docs/round2/performance/p13-05-preflight-vector-m-launch.log)
+- 主控复核四个 M 档正式配对和 112 个实际运行，全部正确。实时、归档和解包复算结果一致。道路 v2 冷态中位数略增，所有 RSS 组有 partial，保持原始观测。A/B 的栅格与 L 矢量入口通过预演。P13-05 仍为 DOING。 [正式结果及复跑](../../docs/round2/performance/p13-05-vector-m.md)
+- A 的 45 次原生探针定位 Rasterio 间接导入。主控冻结最小修正版 `a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc`，20 项暂存与写入专项通过。主控在真实遥感写入后触发取消、超时，修正版均回收两份暂存 TIFF，保留终态和输入。 [探针及受控复验](../../docs/round2/performance/p13-05-staging-resources.md)
 
 ## P13-06 复用证据准备
 

@@ -54,7 +54,7 @@ P13-05 的原版 L 线相交 14 轮均在关系判定超时。局部裁剪候选
 
 P13-05 已分别验证逐步请求采集、原生环境指纹及计时外配置回执。正式复测需要使用同一包装方式采集，比较时强制回执。当前镜像只有本机 ID。 [请求采集](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log) · [环境复验](../../docs/round2/performance/p13-05-preflight.md#原生运行时身份与配置对照)
 
-P13-05 已放行。首批 M 档执行入口已预演，正式正确性、耗时及峰值资源待采样。 [前后测范围](../../docs/round2/performance/p13-05-preflight.md#正式前后测范围)
+P13-05 的原候选 M 矢量四个配对已完成。原生导入探针定位启动 RSS 增量并验证修正版，正式峰值资源需用该版本复测。L 矢量与 DEM／遥感仍待正式采样。 [M 结果](../../docs/round2/performance/p13-05-vector-m.md) · [修正版证据](../../docs/round2/performance/p13-05-staging-resources.md)
 
 P16-06 的原生镜像及外部绑定已从归档在独立空镜像库恢复并断网验证。正式第二轮交付仍依赖阶段结果和最终同提交回执。 [恢复验证](../../docs/round2/deployment/p16-06-tooling.md#原生基准绑定文件恢复)
 
