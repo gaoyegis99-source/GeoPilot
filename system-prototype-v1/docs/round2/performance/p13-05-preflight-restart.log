@@ -1,0 +1,8 @@
+9f3f02138d93ec52ca0a9a0409d097c10eb1cb84
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+bash artifacts/test-results/p13-05-staging-preflight.B5CwoC/reproduce-restart.sh
+Output staging directory identity changed: .python-output-5k0d_i5_
+{"scenario": "owned-stage", "supervisor_exit": -9, "worker_signal": 15, "cleanup_denied_while_worker_holds_lease": true, "stage_removed": true, "diagnostic_hardlink_preserved": true, "published_source_and_history_preserved": true, "input_directory_receipt_rejected": true}
+{"scenario": "identity-changed", "supervisor_exit": -9, "worker_signal": 15, "cleanup_denied_while_worker_holds_lease": true, "stage_removed": false, "diagnostic_hardlink_preserved": true, "published_source_and_history_preserved": true, "input_directory_receipt_rejected": true}
+Probe exit: 0
