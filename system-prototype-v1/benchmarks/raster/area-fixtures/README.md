@@ -29,3 +29,21 @@ test_root="$(mktemp -d /dev/shm/geopilot-area-fixtures-pytest.XXXXXX)"
 ```
 
 原始输出包含独立面积、逐类计数和最大像元误差。 [复验原始输出](verification.log)
+
+## 固定密化的边界积分对照
+
+三份输入各取一个 32 × 32 窗口。把同类别相邻像元方向相反的公共边相消，再以每边八段计算投影面积，与现有逐像元面积逐类对照。两个 DEM 窗口包含 NoData 空洞，遥感窗口包含三个类别。全图只统计变换输入点数，块边界两侧均计入，边界方案每条保留边计九点。 [对照代码](compare_area_boundaries.py) · [原始输出](area-boundary-comparison.log)
+
+| 输入 | 窗口最大单类绝对面积差，m² | 全图逐像元点数 | 全图按边界点数 |
+|---|---:|---:|---:|
+| DEM M | 0 | 133,881,984 | 616,896 |
+| DEM L | 1.46 × 10⁻¹¹ | 2,145,255,552 | 9,877,248 |
+| 遥感 L | 1.14 × 10⁻⁹ | 150,994,944 | 85,266,432 |
+
+以上数值来自 `2dee24f2f837788cfe143fb867efb18d499dfb65` 加本对照脚本，Python 3.13.13、PROJ 9.5.1、GDAL 3.9.3，退出 0。数值精度仅覆盖这三个窗口，全图记录为固定密化的点数。P13-05 的生产候选仍需完整输入上的精度、收敛、投影边界、耗时和 RSS 证据。
+
+```bash
+export PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+export GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF
+nice -n 19 taskset -c 31 .venv/bin/python benchmarks/raster/area-fixtures/compare_area_boundaries.py
+```

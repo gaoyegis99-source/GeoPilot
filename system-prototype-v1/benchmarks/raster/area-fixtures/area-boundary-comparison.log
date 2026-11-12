@@ -1,0 +1,10 @@
+2dee24f2f837788cfe143fb867efb18d499dfb65
+Python 3.13.13
+PROJ 9.5.1 GDAL 3.9.3
+{"case": "dem-m", "window_offset": [48, 48], "shape": [32, 32], "selected_cells": 1015, "original_points_at_eight_segments": 32480, "projected_boundary_points_at_eight_segments": 1260, "absolute_area_error_by_class_m2": {"7": 0.0}}
+{"case": "dem-l", "window_offset": [4144, 4144], "shape": [32, 32], "selected_cells": 1015, "original_points_at_eight_segments": 32480, "projected_boundary_points_at_eight_segments": 1260, "absolute_area_error_by_class_m2": {"7": 1.4551915228366852e-11}}
+{"case": "remote-l", "window_offset": [0, 0], "shape": [32, 32], "selected_cells": 544, "original_points_at_eight_segments": 17408, "projected_boundary_points_at_eight_segments": 10098, "absolute_area_error_by_class_m2": {"3": 1.1350493878126144e-09, "1": 1.1059455573558807e-09, "2": 1.4551915228366852e-10}}
+{"case": "dem-m", "tile_shape": [256, 256], "selected_cells": 4183812, "original_points_at_eight_segments": 133881984, "projected_boundary_points_at_eight_segments": 616896}
+{"case": "dem-l", "tile_shape": [256, 256], "selected_cells": 67039236, "original_points_at_eight_segments": 2145255552, "projected_boundary_points_at_eight_segments": 9877248}
+{"case": "remote-l", "tile_shape": [256, 256], "selected_cells": 4718592, "original_points_at_eight_segments": 150994944, "projected_boundary_points_at_eight_segments": 85266432}
+exit 0
