@@ -24,6 +24,7 @@ _CELL_BATCH_SIZE = 256
 _ABSOLUTE_TOLERANCE_M2 = 1e-6
 _RELATIVE_TOLERANCE = 1e-8
 _SEGMENTS_PER_EDGE = (2, 4, 8, 16, 32, 64, 128, 256)
+_SHARED_BATCH_SEGMENTS = _SEGMENTS_PER_EDGE[2]
 
 
 def _tiles(width: int, height: int) -> Iterator[Window]:
@@ -77,6 +78,15 @@ class _ProjectionLevel:
     new_cols: np.ndarray
 
 
+@dataclass(frozen=True)
+class _SharedLevel:
+    source: np.ndarray
+    destination: np.ndarray
+    unshared: np.ndarray
+    rows: np.ndarray
+    cols: np.ndarray
+
+
 class _BatchLayout:
     """Keep the small refinement indices for the most recent shape in a tile."""
 
@@ -87,6 +97,7 @@ class _BatchLayout:
         self._stride = (int(col_offsets.max()) + 1) * scale + 1
         self._cell_keys = (row_offsets * self._stride + col_offsets) * scale
         self._levels: dict[int, _ProjectionLevel] = {}
+        self._shared_levels: dict[int, _SharedLevel] = {}
 
     def matches(self, row_offsets: np.ndarray, col_offsets: np.ndarray) -> bool:
         return np.array_equal(self.row_offsets, row_offsets) and np.array_equal(self.col_offsets, col_offsets)
@@ -113,9 +124,25 @@ class _BatchLayout:
             self._levels[segments] = level
         return level
 
+    def shared_level(self, segments: int) -> _SharedLevel:
+        if segments not in self._shared_levels:
+            level = self._levels[segments]
+            previous_keys = self._levels[_SHARED_BATCH_SEGMENTS].keys
+            missing = np.flatnonzero(level.missing)
+            # Same layout, one grid row later. A current vertex at local row r
+            # was at local row r + 1 in the preceding batch.
+            shifted = level.keys[missing] + self._stride * _SEGMENTS_PER_EDGE[-1]
+            indexes = np.searchsorted(previous_keys, shifted)
+            found = indexes < previous_keys.size
+            found[found] = previous_keys[indexes[found]] == shifted[found]
+            self._shared_levels[segments] = _SharedLevel(
+                indexes[found], missing[found], missing[~found], level.new_rows[~found], level.new_cols[~found],
+            )
+        return self._shared_levels[segments]
+
 
 class _BatchProjection:
-    """Reuse dyadic boundary vertices within one tile-local convergence batch."""
+    """Reuse dyadic boundary vertices while preserving each convergence batch."""
 
     def __init__(
         self, rows: np.ndarray, cols: np.ndarray, affine: Affine, transformer: Transformer,
@@ -127,16 +154,32 @@ class _BatchProjection:
         self._keys = np.empty(0, dtype=np.int64)
         self._x, self._y = np.empty(0), np.empty(0)
 
-    def areas(self, segments: int) -> np.ndarray:
+    def shared_from(self, previous: "_BatchProjection | None") -> tuple[np.ndarray, np.ndarray] | None:
+        """Reuse a preceding eight-segment batch whose layout moves down one row."""
+        if (
+            previous is not None and previous._layout is self._layout
+            and previous._affine is self._affine and previous._transformer is self._transformer
+            and self._row_origin == previous._row_origin + 1 and self._col_origin == previous._col_origin
+        ):
+            return previous._x, previous._y
+        return None
+
+    def areas(self, segments: int, previous: tuple[np.ndarray, np.ndarray] | None = None) -> np.ndarray:
         level = self._layout.level(segments, self._keys)
+        shared = None
+        if previous is not None and segments <= _SHARED_BATCH_SEGMENTS:
+            shared = self._layout.shared_level(segments)
+        rows, cols, missing = (level.new_rows, level.new_cols, level.missing) if shared is None else (
+            shared.rows, shared.cols, shared.unshared,
+        )
         new_x, new_y = _project_points(
-            self._row_origin + level.new_rows,
-            self._col_origin + level.new_cols,
-            self._affine, self._transformer,
+            self._row_origin + rows, self._col_origin + cols, self._affine, self._transformer,
         )
         x, y = np.empty(level.keys.size), np.empty(level.keys.size)
         x[level.reused], y[level.reused] = self._x, self._y
-        x[level.missing], y[level.missing] = new_x, new_y
+        x[missing], y[missing] = new_x, new_y
+        if shared is not None:
+            x[shared.destination], y[shared.destination] = previous[0][shared.source], previous[1][shared.source]
         self._keys, self._x, self._y = level.keys, x, y
         return _cell_areas(x[level.inverse], y[level.inverse])
 
@@ -145,11 +188,16 @@ def _converged_areas(
     rows: np.ndarray, cols: np.ndarray, affine: Affine, transformer: Transformer,
     *, layout: _BatchLayout | None = None,
 ) -> tuple[np.ndarray, int]:
-    projection = _BatchProjection(rows, cols, affine, transformer, layout)
-    previous = projection.areas(_SEGMENTS_PER_EDGE[0])
+    return _converge_projection(_BatchProjection(rows, cols, affine, transformer, layout))
+
+
+def _converge_projection(
+    projection: _BatchProjection, shared: tuple[np.ndarray, np.ndarray] | None = None,
+) -> tuple[np.ndarray, int]:
+    previous = projection.areas(_SEGMENTS_PER_EDGE[0], shared)
     previous_converged = False
     for segments in _SEGMENTS_PER_EDGE[1:]:
-        areas = projection.areas(segments)
+        areas = projection.areas(segments, shared)
         tolerance = np.maximum(_ABSOLUTE_TOLERANCE_M2, areas * _RELATIVE_TOLERANCE)
         converged = bool(np.all(np.abs(areas - previous) <= tolerance))
         if converged and previous_converged:
@@ -167,14 +215,17 @@ def _sum_projected_tile(
     rows += int(tile.row_off)
     cols += int(tile.col_off)
     max_segments = 0
-    layout = None
+    layout = previous = None
     for start in range(0, class_ids.size, _CELL_BATCH_SIZE):
         batch = slice(start, start + _CELL_BATCH_SIZE)
         batch_rows, batch_cols = rows[batch], cols[batch]
         row_offsets, col_offsets = batch_rows - batch_rows.min(), batch_cols - batch_cols.min()
         if layout is None or not layout.matches(row_offsets, col_offsets):
             layout = _BatchLayout(row_offsets, col_offsets)
-        areas, segments = _converged_areas(batch_rows, batch_cols, affine, transformer, layout=layout)
+        projection = _BatchProjection(batch_rows, batch_cols, affine, transformer, layout)
+        areas, segments = _converge_projection(projection, projection.shared_from(previous))
+        # Retain one early-converged batch. Finer projections can be much larger.
+        previous = projection if segments == _SHARED_BATCH_SEGMENTS else None
         sums += np.bincount(class_ids[batch], weights=areas, minlength=NODATA_CLASS + 1)
         max_segments = max(max_segments, segments)
     return max_segments
