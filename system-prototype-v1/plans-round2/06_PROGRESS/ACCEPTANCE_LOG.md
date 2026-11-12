@@ -257,6 +257,7 @@
 - C 的配置指纹候选在复制件中识别同版本 QGIS 绑定和 Python PROJ 数据变化。主控复跑 15 条探针记录，结果与指纹一致。原生 QGIS/GDAL 的数据路径仍需正式测量固定。 [配置复验](../../docs/round2/performance/p13-05-preflight-runtime-config.jsonl)
 - 主控两次启动同镜像复核实际绑定、原生 QGIS/GDAL/PROJ 数据和三个算法参数定义，环境指纹逐字节一致。C 在隔离比较器上验证 26 项断言，包含报告字节绑定和两侧配置漂移拒绝。正式全规模复测仍待 P13-03。 [原生环境证据](../../docs/round2/performance/p13-05-preflight-native-identity.json) · [比较器复跑](../../docs/round2/performance/p13-05-preflight-runtime-comparator.log)
 - A 对真实遥感 S 分类做同输入三版面积函数对照，21 次预热和计量均返回相同报告。主控核对文件摘要和五次计量的中位数，布局 71 次检查均无命中。正式方法复测待 P13-03。 [遥感 S 原始记录](../../docs/round2/performance/p13-05-preflight-remote-s.log)
+- C 的采集包装器通过 24 项隔离进程断言，四个完整报告回执通过正式比较器。主控用实际前测与候选的只读源码容器分别采集配置，快照逐字节一致。基准完整接入仍待 P13-03。 [包装器复验](../../docs/round2/performance/p13-05-preflight-runtime-wrapper.log) · [原生采集](../../docs/round2/performance/p13-05-preflight-native-configuration.log)
 
 ## P13-06 复用证据准备
 

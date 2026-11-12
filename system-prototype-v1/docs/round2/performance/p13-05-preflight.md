@@ -129,6 +129,10 @@ F 的栅格采集增量在端到端墙钟停止、采样器退出后，只读获
 
 C 的隔离比较器增加 `--require-runtime-configuration`，要求两侧报告各有 `runtime-configuration.json`。比较器对实际读到的报告字节重算摘要，校验一次运行起止的配置捕获并核对两侧指纹。归档上的 26 项断言符合预期，含 4 次匹配和 22 次预期拒绝。旧报告仍可双侧比较，配置级别记为 `unrecorded`。测试中用归档报告和新采集的配置验证协议，历史运行的实际配置身份仍以历史记录为准。候选补丁和字段样例在 `artifacts/test-results/p13-05-runtime-comparator.DtRzWy/`，正式接入待 P13-03。 [隔离复跑](p13-05-preflight-runtime-comparator.log)
 
+配置采集包装器在同一固定源码内启动矢量或栅格基准，计时外独立采集两次，并对完整正式报告原子写入回执。普通及嵌套可写配置挂载被拒绝。24 项轻量进程断言通过，四个完整 PASS/FAIL 夹具回执都通过比较器正式模式。包装器保留子进程退出码，即使配置漂移或写回执失败，基准原退出 0 也保持 0，因此正式核验必须使用 `--require-runtime-configuration`。真实入口验证到 `--help`。主控从持久归档复跑夹具和两个入口，退出 0。补丁和复跑在 `artifacts/test-results/p13-05-runtime-wrapper.7SL9QE/`。 [隔离验证日志](p13-05-preflight-runtime-wrapper.log)
+
+主控分别在原版和候选的真实原生容器中运行包装器的采集入口。两份只读源码挂载的采集命令均退出 0，59 个应用配置文件及 16 个 Python PROJ 数据文件的快照逐字节相同。此次容器采集未启动基准。原始命令和快照在 `artifacts/test-results/p13-05-native-configuration.tlbT7N/`。 [原生采集复验](p13-05-preflight-native-configuration.log)
+
 ## 遥感 S 稀疏分类复验
 
 A 从 P13-04 的真实遥感 S 冷进程首个计量 run 复制 192 × 192 分类 GeoTIFF，三版读取同一文件。原版、面积首版和完整候选各预热 2 次、实测 5 次，在同一进程轮换调用面积函数。三版报告逐项相等，包含 3 类各 6,144 格、18,432 个 NoData 和 16,602,074.59679892 m² 等积面积。独立面积校验通过。三种布局在 72 批内交替，完整候选检查 71 次，命中 0 次。 [原始计时、计数和报告](p13-05-preflight-remote-s.log)

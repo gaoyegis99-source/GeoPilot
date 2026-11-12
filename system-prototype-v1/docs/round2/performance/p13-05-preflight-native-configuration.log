@@ -1,0 +1,12 @@
+main worktree commit: 812772cddf02d6831e23ba62119ce573febaedda
+fixed input source commits:
+977ab412d9f6e7558d22a5c431fac0ada90b07be refs/heads/codex/p13-05-preflight-base
+e874a0f7510ad7d99e0e623f211e0f5afeb411cd refs/heads/codex/p13-05-preflight-candidate
+capture implementation SHA-256:
+5a9a838b955f88aeddc5ec44e8627247bf5e0eb1289f55bd1a525012cee35d98  /dev/shm/p13-runtime-wrapper.PwLfW2/run_with_runtime_configuration.py
+70df5d4dd1eca53f43b229851b24a3d83f098dd07c6a54c49566529350d7e00d  /dev/shm/p13-runtime-wrapper.PwLfW2/_runtime_config.py
+base and candidate each ran a new native container, CPU31, nice19, readonly /project and /runtime, no network
+both independent configuration capture commands exited 0; stderr empty
+byte-identical snapshot content fingerprint: f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3
+application config files: 59
+Python PROJ files: 16
