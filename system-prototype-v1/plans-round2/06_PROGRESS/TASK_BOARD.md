@@ -42,6 +42,6 @@
 | P16-02 | P16 | 干净环境安装矩阵 | 主控/A/E/F | P16-01 | ACCEPTED | [两套 Linux 后端与独立 Chromium 实测](../../docs/round2/deployment/p16-02.md) |
 | P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 新候选包已可用。标准浏览器任务与恢复补充观察待真实会话、匿名记录和下载 CSV。 [主持人补充指南](../../docs/round2/user-research/moderator-ux-follow-up.md) |
 | P16-04 | P16 | 错误信息与恢复路径优化 | E/D | P16-03 | BLOCKED | CRS 定位和取消后按原方案重跑通过实际浏览器复验，待 P16-03 真实观察。 [工作台复验](../../docs/round2/user-research/p16-ux-follow-up.md) |
-| P16-05 | P16 | 长任务用户体验 | E/D | P13-02、P16-03 | BLOCKED | 刷新、阶段区分及运行历史已实测，待 P16-03 真实观察和长任务体验验收。 [工作台复验](../../docs/round2/user-research/p16-ux-follow-up.md) |
+| P16-05 | P16 | 长任务用户体验 | E/D | P13-02、P16-03 | BLOCKED | 实际 DEM 长任务刷新、计算取消和检查取消后重查均已技术复验，待 P16-03 真实观察和体验验收。 [长任务复验](../../docs/round2/user-research/p16-05-long-task-verification.md) |
 | P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | ACCEPTED | 候选 `6ecdbca` 前端 75、后端 2,255、独立固定 GIS 82 项全部通过，Git 和离线校验一致。 [更新候选验收](../../docs/round2/deployment/p16-06-tooling.md#工作台修复后的技术候选) |
 | P16-07 | P16 | V2 产品范围与发布决策 | 主控 | P13-08、P14-08、P15-08、P16-01 至 P16-06 | BLOCKED | 已核对候选。待 P16-03 真实浏览器观察和 P16-04、P16-05 体验改进。 [发布前置核验](../../docs/round2/release/p16-07-preflight.md) |

@@ -370,3 +370,7 @@
 ## P16-06 工作台修复后的技术候选验收
 
 - 主控、F 独立核对源码 `6ecdbca` 的前端 75、后端 2,255、固定 GIS 82 项，0 失败、错误或跳过。证据提交 `3409fe7`，Git 和离线校验均退出 0。E 补充主持材料。P16-06 已验收更新候选。 [更新候选验收](../../docs/round2/deployment/p16-06-tooling.md#工作台修复后的技术候选) · [主持人补充指南](../../docs/round2/user-research/moderator-ux-follow-up.md)
+
+## P16-05 长任务技术复验
+
+- 主控、B、F 使用候选 `6ecdbca` 实测中档 DEM 的刷新恢复与计算取消，并复验检查取消、报告历史和重查。面积步骤 30.565 秒，刷新后继续计时，取消运行无登记成果。重查复用原计算及成果。前端 10 项、后端 18 项均通过。P16-05 仍为 BLOCKED，待 P16-03 真实用户观察。 [复验及原始证据](../../docs/round2/user-research/p16-05-long-task-verification.md)
