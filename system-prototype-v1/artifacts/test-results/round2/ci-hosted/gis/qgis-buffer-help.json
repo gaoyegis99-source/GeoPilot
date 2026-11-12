@@ -1,0 +1,440 @@
+{
+  "algorithm_details": {
+    "can_cancel": true,
+    "deprecated": false,
+    "documentation_flags": [
+      "regenerates_primary_key_in_some_scenarios"
+    ],
+    "group": "Vector geometry",
+    "has_known_issues": false,
+    "help_url": null,
+    "id": "native:buffer",
+    "name": "Buffer",
+    "requires_matching_crs": false,
+    "short_description": "Computes a buffer area for all the features in an input layer, using a fixed or dynamic distance.",
+    "tags": [
+      "buffer",
+      "grow",
+      "fixed",
+      "variable",
+      "distance"
+    ]
+  },
+  "gdal_version": "3.8.4",
+  "geos_version": "3.12.1-CAPI-1.18.1",
+  "outputs": {
+    "OUTPUT": {
+      "description": "Buffered",
+      "type": "outputVector"
+    }
+  },
+  "parameters": {
+    "DISSOLVE": {
+      "default_value": false,
+      "description": "Dissolve result",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "DISSOLVE",
+      "optional": false,
+      "raw_definition": {
+        "default": false,
+        "defaultGui": null,
+        "description": "Dissolve result",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "DISSOLVE",
+        "parameter_type": "boolean"
+      },
+      "type": {
+        "acceptable_values": [
+          "1 for true/yes",
+          "0 for false/no",
+          "field:FIELD_NAME to use a data defined value taken from the FIELD_NAME field",
+          "expression:SOME EXPRESSION to use a data defined value calculated using a custom QGIS expression"
+        ],
+        "description": "A boolean parameter, for true/false values.",
+        "id": "boolean",
+        "metadata": {},
+        "name": "Boolean"
+      }
+    },
+    "DISTANCE": {
+      "default_value": 10,
+      "description": "Distance",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "DISTANCE",
+      "optional": false,
+      "raw_definition": {
+        "data_type": 1,
+        "default": 10,
+        "defaultGui": null,
+        "default_unit": 49,
+        "description": "Distance",
+        "flags": 0,
+        "help": null,
+        "max": 1.7976931348623157e+308,
+        "metadata": {},
+        "min": -1.7976931348623157e+308,
+        "name": "DISTANCE",
+        "parameter_type": "distance",
+        "parent": "INPUT"
+      },
+      "type": {
+        "acceptable_values": [
+          "A numeric value",
+          "field:FIELD_NAME to use a data defined value taken from the FIELD_NAME field",
+          "expression:SOME EXPRESSION to use a data defined value calculated using a custom QGIS expression"
+        ],
+        "description": "A numeric parameter representing a distance measure.",
+        "id": "distance",
+        "metadata": {},
+        "name": "Distance"
+      }
+    },
+    "END_CAP_STYLE": {
+      "available_options": {
+        "0": "Round",
+        "1": "Flat",
+        "2": "Square"
+      },
+      "default_value": 0,
+      "description": "End cap style",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "END_CAP_STYLE",
+      "optional": false,
+      "raw_definition": {
+        "allow_multiple": false,
+        "default": 0,
+        "defaultGui": null,
+        "description": "End cap style",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "END_CAP_STYLE",
+        "options": [
+          "Round",
+          "Flat",
+          "Square"
+        ],
+        "parameter_type": "enum",
+        "uses_static_strings": false
+      },
+      "type": {
+        "acceptable_values": [
+          "Number of selected option, e.g. '1'",
+          "Comma separated list of options, e.g. '1,3'"
+        ],
+        "description": "An enumerated type parameter.",
+        "id": "enum",
+        "metadata": {},
+        "name": "Enum"
+      }
+    },
+    "INPUT": {
+      "default_value": null,
+      "description": "Input layer",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "INPUT",
+      "optional": false,
+      "raw_definition": {
+        "data_types": [],
+        "default": null,
+        "defaultGui": null,
+        "description": "Input layer",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "INPUT",
+        "parameter_type": "source"
+      },
+      "type": {
+        "acceptable_values": [
+          "Path to a vector layer"
+        ],
+        "description": "A vector feature parameter, e.g. for algorithms which operate on the features within a layer.",
+        "id": "source",
+        "metadata": {},
+        "name": "Vector Features"
+      }
+    },
+    "JOIN_STYLE": {
+      "available_options": {
+        "0": "Round",
+        "1": "Miter",
+        "2": "Bevel"
+      },
+      "default_value": 0,
+      "description": "Join style",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "JOIN_STYLE",
+      "optional": false,
+      "raw_definition": {
+        "allow_multiple": false,
+        "default": 0,
+        "defaultGui": null,
+        "description": "Join style",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "JOIN_STYLE",
+        "options": [
+          "Round",
+          "Miter",
+          "Bevel"
+        ],
+        "parameter_type": "enum",
+        "uses_static_strings": false
+      },
+      "type": {
+        "acceptable_values": [
+          "Number of selected option, e.g. '1'",
+          "Comma separated list of options, e.g. '1,3'"
+        ],
+        "description": "An enumerated type parameter.",
+        "id": "enum",
+        "metadata": {},
+        "name": "Enum"
+      }
+    },
+    "MITER_LIMIT": {
+      "default_value": 2,
+      "description": "Miter limit",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "MITER_LIMIT",
+      "optional": false,
+      "raw_definition": {
+        "data_type": 1,
+        "default": 2,
+        "defaultGui": null,
+        "description": "Miter limit",
+        "flags": 0,
+        "help": null,
+        "max": 1.7976931348623157e+308,
+        "metadata": {},
+        "min": 1.0,
+        "name": "MITER_LIMIT",
+        "parameter_type": "number"
+      },
+      "type": {
+        "acceptable_values": [
+          "A numeric value",
+          "field:FIELD_NAME to use a data defined value taken from the FIELD_NAME field",
+          "expression:SOME EXPRESSION to use a data defined value calculated using a custom QGIS expression"
+        ],
+        "description": "A numeric parameter, including float or integer values.",
+        "id": "number",
+        "metadata": {},
+        "name": "Number"
+      }
+    },
+    "OUTPUT": {
+      "default_value": null,
+      "description": "Buffered",
+      "is_advanced": false,
+      "is_destination": true,
+      "name": "OUTPUT",
+      "optional": false,
+      "raw_definition": {
+        "create_by_default": true,
+        "data_type": 2,
+        "default": null,
+        "defaultGui": null,
+        "description": "Buffered",
+        "flags": 0,
+        "help": null,
+        "metadata": {},
+        "name": "OUTPUT",
+        "parameter_type": "sink",
+        "supports_append": true,
+        "supports_non_file_outputs": true
+      },
+      "type": {
+        "acceptable_values": [
+          "Path for new vector layer"
+        ],
+        "description": "A feature sink destination parameter.",
+        "id": "sink",
+        "metadata": {},
+        "name": "Feature Sink"
+      }
+    },
+    "SEGMENTS": {
+      "default_value": 5,
+      "description": "Segments",
+      "help": "The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.",
+      "is_advanced": false,
+      "is_destination": false,
+      "name": "SEGMENTS",
+      "optional": false,
+      "raw_definition": {
+        "data_type": 0,
+        "default": 5,
+        "defaultGui": null,
+        "description": "Segments",
+        "flags": 0,
+        "help": "The segments parameter controls the number of line segments to use to approximate a quarter circle when creating rounded offsets.",
+        "max": 1.7976931348623157e+308,
+        "metadata": {},
+        "min": 1.0,
+        "name": "SEGMENTS",
+        "parameter_type": "number"
+      },
+      "type": {
+        "acceptable_values": [
+          "A numeric value",
+          "field:FIELD_NAME to use a data defined value taken from the FIELD_NAME field",
+          "expression:SOME EXPRESSION to use a data defined value calculated using a custom QGIS expression"
+        ],
+        "description": "A numeric parameter, including float or integer values.",
+        "id": "number",
+        "metadata": {},
+        "name": "Number"
+      }
+    },
+    "SEPARATE_DISJOINT": {
+      "default_value": false,
+      "description": "Keep disjoint results separate",
+      "help": "If checked, then any disjoint parts in the buffer results will be output as separate single-part features.",
+      "is_advanced": true,
+      "is_destination": false,
+      "name": "SEPARATE_DISJOINT",
+      "optional": false,
+      "raw_definition": {
+        "default": false,
+        "defaultGui": null,
+        "description": "Keep disjoint results separate",
+        "flags": 2,
+        "help": "If checked, then any disjoint parts in the buffer results will be output as separate single-part features.",
+        "metadata": {},
+        "name": "SEPARATE_DISJOINT",
+        "parameter_type": "boolean"
+      },
+      "type": {
+        "acceptable_values": [
+          "1 for true/yes",
+          "0 for false/no",
+          "field:FIELD_NAME to use a data defined value taken from the FIELD_NAME field",
+          "expression:SOME EXPRESSION to use a data defined value calculated using a custom QGIS expression"
+        ],
+        "description": "A boolean parameter, for true/false values.",
+        "id": "boolean",
+        "metadata": {},
+        "name": "Boolean"
+      }
+    }
+  },
+  "proj_version": "Rel. 9.4.0, March 1st, 2024",
+  "provider_details": {
+    "can_be_activated": true,
+    "default_raster_file_extension": "tif",
+    "default_vector_file_extension": "gpkg",
+    "is_active": true,
+    "long_name": "QGIS (native c++)",
+    "name": "QGIS (native c++)",
+    "supported_output_raster_extensions": [
+      "tif",
+      "gpkg",
+      "bag",
+      "bil",
+      "bmp",
+      "bt",
+      "byn",
+      "ers",
+      "fits",
+      "gdb",
+      "gen",
+      "grd",
+      "gsb",
+      "gtx",
+      "hdr",
+      "img",
+      "kro",
+      "lbl",
+      "map",
+      "mbtiles",
+      "mpr",
+      "mrf",
+      "nc",
+      "ntf",
+      "pgm",
+      "pix",
+      "rgb",
+      "rst",
+      "rsw",
+      "sdat",
+      "ter",
+      "vrt",
+      "xml"
+    ],
+    "supported_output_table_extensions": [
+      "gpkg",
+      "shp",
+      "000",
+      "csv",
+      "dgn",
+      "dxf",
+      "fgb",
+      "gdb",
+      "geojson",
+      "geojsonl",
+      "geojsons",
+      "gml",
+      "gpkg.zip",
+      "gpx",
+      "gxt",
+      "ili",
+      "itf",
+      "json",
+      "kml",
+      "ods",
+      "sql",
+      "sqlite",
+      "tab",
+      "txt",
+      "xlsx",
+      "xml",
+      "xtf"
+    ],
+    "supported_output_vector_extensions": [
+      "gpkg",
+      "shp",
+      "000",
+      "csv",
+      "dgn",
+      "dxf",
+      "fgb",
+      "gdb",
+      "geojson",
+      "geojsonl",
+      "geojsons",
+      "gml",
+      "gpkg.zip",
+      "gpx",
+      "gxt",
+      "ili",
+      "itf",
+      "json",
+      "kml",
+      "ods",
+      "sql",
+      "sqlite",
+      "tab",
+      "txt",
+      "xlsx",
+      "xml",
+      "xtf"
+    ],
+    "supports_non_file_based_output": true,
+    "version": null
+  },
+  "python_version": "3.12.3",
+  "qgis_code_revision": "44b4ef05178",
+  "qgis_version": "3.44.15-Solothurn",
+  "qt_version": "5.15.13"
+}

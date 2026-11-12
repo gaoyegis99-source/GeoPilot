@@ -9,11 +9,11 @@
 | P12-05 | P12 | 后端全量回归复跑 | 主控/F | P12-01、P12-02；QGIS CLI 可用 | ACCEPTED | [同提交 1,670 项全部通过](../../docs/round2/audit/p12-05.md) |
 | P12-06 | P12 | 前端测试与构建基线 | E/F | P12-01 | ACCEPTED | [同提交前端测试与构建](../../docs/round2/audit/p12-06.md) |
 | P12-07 | P12 | T01—T16 固定用例独立复跑 | B/F | P12-05；QGIS CLI 可用 | ACCEPTED | [独立 476 项与 T01–T16 映射](../../docs/round2/audit/p12-07.md) |
-| P12-08 | P12 | GitHub Actions 分层 CI | F/主控 | P12-05、P12-06；依赖策略冻结 | REVIEW | [本地证据、托管两项通过，GIS 运行中](../../docs/round2/audit/p12-08.md) |
+| P12-08 | P12 | GitHub Actions 分层 CI | F/主控 | P12-05、P12-06；依赖策略冻结 | ACCEPTED | [首次托管三项作业通过](../../docs/round2/audit/p12-08.md) |
 | P12-09 | P12 | 配置与 Schema 漂移检查 | C/F | P12-01 | ACCEPTED | [本地回归及托管校验均通过](../../docs/round2/audit/p12-09.md) |
 | P12-10 | P12 | 调度单活动约束与并发安全审计 | D/F | P12-01 | ACCEPTED | [并发模型、专项回归与缺陷复现](../../docs/round2/audit/concurrency-model.md) |
 | P12-11 | P12 | 数据规模与性能基准方案 | B/F/A | P12-01、P12-05 | ACCEPTED | [三档方案、样本探测与 13 项测试](../../docs/round2/audit/p12-11.md) |
-| P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | TODO | 待执行 |
+| P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | DOING | 主控（逐项审计与阶段放行） |
 | P13-01 | P13 | GIS 数据规模分级生成器 | B/F | P12-11 | TODO | 待执行 |
 | P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | TODO | 待执行 |
 | P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | TODO | 待执行 |

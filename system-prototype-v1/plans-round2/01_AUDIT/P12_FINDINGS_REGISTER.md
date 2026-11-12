@@ -5,7 +5,7 @@
 | AUD-01 | P1 | 最终报告与 40/40 最新矩阵不一致 | 更新报告并绑定 commit | P12 | 40/40 对账通过 |
 | AUD-02 | P1 | 测试总数属于不同轮次 | 同 commit 重跑后端/前端/固定用例 | P12 | JUnit 汇总 + SHA |
 | AUD-03 | P1 | 证据引用未自动校验 | Markdown 链接/证据存在性扫描 | P12 | 无未解释断链 |
-| AUD-04 | P1 | 缺可见 GitHub Actions | 建分层 CI | P12 | CI 首次通过 |
+| AUD-04 | P1 | 缺可见 GitHub Actions | Python、前端、原生 QGIS 三层已接入 | P12 | [首次托管三项作业通过](../../docs/round2/audit/p12-08.md) |
 | AUD-05 | P1 | 缺性能基准 | P12 已固定规模矩阵、独立参考与资源协议。P13 批量生成并实测 | P12/P13 | [P12 基准方案](../../docs/round2/audit/p12-11.md)。P13 需真实多规模结果 |
 | AUD-06 | P1 | 单活动运行约束。独立复现写锁等待耗尽后调度线程退出，HTTP 仍可用 | 维持单活动，先解决调度存活与可观测性 | P12/P13 | [P12 调度审计](../../docs/round2/audit/concurrency-model.md)。P13 压测证明锁恢复、无重复领取，再签署并发 ADR |
 | AUD-07 | P2 | provider 以 Ollama/mock 为主 | 扩展适配或正式界定支持范围 | P15 | provider contract 复用测试 |
