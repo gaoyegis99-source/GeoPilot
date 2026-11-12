@@ -131,6 +131,23 @@ PYTHONPATH="$p13_remote_first/proof" .venv/bin/python -B \
 cmp "$p13_remote_first/replay.json" "$p13_remote_first/verified.json"
 ```
 
+## 遥感 L 冻结修正版冷态
+
+冷态两次预热和五次正式计量均完成八步，持久终态为 `SUCCEEDED/PASSED`。7 轮的 70 个正式成果文件组均重新计算指纹并与登记一致，每个角色在各轮之间的指纹相同。变化及分类 TIFF 与原版暂存文件分别逐字节一致。三个分类各 1,572,864 像元，NoData 为 4,718,592 像元，面积合计 4,249,836,701.624876 m²，最大单类面积差约 0.007379 m²。独立像元验算记录的最大误差均为 0。变化计算目录逐轮只保留三个声明产物。 [原始记录、70 份成果文件组与独立复算](p13-05-remote-l-candidate-cold-evidence.tar.gz)
+
+两次预热及三次正式计量有状态观察失败，共记录 9 次 HTTP 500。五次正式计量中，两次基准通过，端到端原值为 121.180 秒和 114.131 秒，成功分位留空。三次观察失败的端到端中位数／P95 为 133.675／133.752 秒。五次正式计量的变化计算均成功，中位数／P95 为 51.175／51.409 秒。整轮 RSS 均部分采样，变化计算步骤的 RSS 和临时峰值均完整采样，临时峰值中位数为 11,181,073 字节。
+
+主控及 B 独立复算均退出 0，B 核对 7 个新 ID 与此前的 226 个运行 ID 无交集。主控向隔离副本中的面积 JSON 追加空行，登记指纹核验拒绝该副本，退出 1。原始冷态前缀已封存。冻结修正版暖态已接续，完整配置回执及严格配对待该侧结束。
+
+```bash
+p13_remote_candidate_cold=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-remote-l-candidate-cold-evidence.tar.gz -C "$p13_remote_candidate_cold"
+(cd "$p13_remote_candidate_cold" && sha256sum -c SHA256SUMS)
+PYTHONPATH="$p13_remote_candidate_cold/proof" .venv/bin/python -B \
+  "$p13_remote_candidate_cold/verify-cold.py" "$p13_remote_candidate_cold" > "$p13_remote_candidate_cold/replayed.json"
+cmp "$p13_remote_candidate_cold/replayed.json" "$p13_remote_candidate_cold/cold.json"
+```
+
 ## 相邻批次的投影复用预演
 
 隔离候选 `b49025453794331f0a42cb9390a7ed0708c0e7d7` 基于冻结修正版 `a2d2e68`。上一批恰好在 8 段收敛时，当前批与上一批具有相同布局、仿射变换、投影器及列原点，且原点向下移动一行，才复用共同顶点的投影坐标。细化至 16 段起沿用批内复用。三个真实窗口及剪切、列移、退化、非有限坐标和切缝反例的批次顺序、各级坐标、逐格面积、累加或错误均与冻结修正版一致。 [源码补丁、命令、逐次记录与 JUnit](p13-05-cross-batch-area-evidence.tar.gz)
