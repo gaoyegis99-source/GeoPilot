@@ -1,0 +1,4362 @@
+{
+  "schema_version": 1,
+  "distinct_runs": 280,
+  "pairs": {
+    "vector-m-revised/road": {
+      "archive": "p13-05-vector-m-revised-evidence.tar.gz",
+      "strict_comparison_sha256": "c8e3187f663e4cb3bbe0a1993c435fcf7ef80312808bb31258182a580e959440",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {
+          "wall_ns": {
+            "median": 164300524,
+            "p95_nearest_rank": -451060380
+          }
+        },
+        "warm": {
+          "wall_ns": {
+            "median": -272550235,
+            "p95_nearest_rank": -159236307
+          }
+        }
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "5cb52dc37f3ed327f791079ba412e1b676ddee68d50584c4dc39ec63d0e986be",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 12790000000,
+                      "median": 12980000000,
+                      "p95_nearest_rank": 13590000000,
+                      "maximum": 13590000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 300261376,
+                      "median": 304058368,
+                      "p95_nearest_rank": 304984064,
+                      "maximum": 304984064
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 15564800,
+                      "median": 17887232,
+                      "p95_nearest_rank": 20840448,
+                      "maximum": 20840448
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4493312,
+                    "median": 4493312,
+                    "p95_nearest_rank": 4493312,
+                    "maximum": 4493312
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 3747913,
+                    "median": 3747913,
+                    "p95_nearest_rank": 3747913,
+                    "maximum": 3747913
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 12930000000,
+                      "median": 13390000000,
+                      "p95_nearest_rank": 13590000000,
+                      "maximum": 13590000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 301760512,
+                      "median": 304226304,
+                      "p95_nearest_rank": 305176576,
+                      "maximum": 305176576
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 16924672,
+                      "median": 18898944,
+                      "p95_nearest_rank": 21204992,
+                      "maximum": 21204992
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4493312,
+                    "median": 4493312,
+                    "p95_nearest_rank": 4493312,
+                    "maximum": 4493312
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 3747913,
+                    "median": 3747913,
+                    "p95_nearest_rank": 3747913,
+                    "maximum": 3747913
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "fcc5874c2431cc01af25158ce4dcb568b1345e866a393903b3aaa41a30494f94",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 13110000000,
+                      "median": 13230000000,
+                      "p95_nearest_rank": 13340000000,
+                      "maximum": 13340000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 304189440,
+                      "median": 304455680,
+                      "p95_nearest_rank": 304660480,
+                      "maximum": 304660480
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 15634432,
+                      "median": 19070976,
+                      "p95_nearest_rank": 21643264,
+                      "maximum": 21643264
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4493312,
+                    "median": 4493312,
+                    "p95_nearest_rank": 4493312,
+                    "maximum": 4493312
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 3747913,
+                    "median": 3747913,
+                    "p95_nearest_rank": 3747913,
+                    "maximum": 3747913
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 12850000000,
+                      "median": 13010000000,
+                      "p95_nearest_rank": 13340000000,
+                      "maximum": 13340000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 304271360,
+                      "median": 304660480,
+                      "p95_nearest_rank": 304848896,
+                      "maximum": 304848896
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          11,
+                          11
+                        ]
+                      ],
+                      "minimum": 15015936,
+                      "median": 18227200,
+                      "p95_nearest_rank": 21778432,
+                      "maximum": 21778432
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4493312,
+                    "median": 4493312,
+                    "p95_nearest_rank": 4493312,
+                    "maximum": 4493312
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 3747913,
+                    "median": 3747913,
+                    "p95_nearest_rank": 3747913,
+                    "maximum": 3747913
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "vector-m-revised/t13-lines-within": {
+      "archive": "p13-05-vector-m-revised-evidence.tar.gz",
+      "strict_comparison_sha256": "9a511982d0e1332afb8587a49df95b022d042aa2696d56523cf942cad0c8e3e1",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {
+          "wall_ns": {
+            "median": -1308928074,
+            "p95_nearest_rank": -1258737332
+          },
+          "peak_temp_bytes": {
+            "median": -4,
+            "p95_nearest_rank": -1046516
+          }
+        },
+        "warm": {
+          "wall_ns": {
+            "median": -1204996101,
+            "p95_nearest_rank": -1554841879
+          }
+        }
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "8b54a7fe6d15cd92655d09d71acd06ad216db97a7706cb790c3709b1afece7a4",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3130000000,
+                      "median": 3230000000,
+                      "p95_nearest_rank": 3400000000,
+                      "maximum": 3400000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 1,
+                        "sampled": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 151699456,
+                      "median": 153067520,
+                      "p95_nearest_rank": 153448448,
+                      "maximum": 153448448
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3538944,
+                      "median": 3538944,
+                      "p95_nearest_rank": 3538944,
+                      "maximum": 3538944
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 1982464,
+                    "median": 1982464,
+                    "p95_nearest_rank": 1982464,
+                    "maximum": 1982464
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3190000000,
+                      "median": 3240000000,
+                      "p95_nearest_rank": 3440000000,
+                      "maximum": 3440000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 152584192,
+                      "median": 152616960,
+                      "p95_nearest_rank": 153026560,
+                      "maximum": 153026560
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3538944,
+                      "median": 3538944,
+                      "p95_nearest_rank": 3538944,
+                      "maximum": 3538944
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 1982464,
+                    "median": 1982464,
+                    "p95_nearest_rank": 1982464,
+                    "maximum": 1982464
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "cc19c56e0d1913d6a1f186918e0ea909b964a41c8456a62569da9104f3e2ef2f",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 1910000000,
+                      "median": 1960000000,
+                      "p95_nearest_rank": 2020000000,
+                      "maximum": 2020000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 1,
+                        "sampled": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 152436736,
+                      "median": 152875008,
+                      "p95_nearest_rank": 153313280,
+                      "maximum": 153313280
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3538944,
+                      "median": 3538944,
+                      "p95_nearest_rank": 3538944,
+                      "maximum": 3538944
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 1982464,
+                    "median": 1982464,
+                    "p95_nearest_rank": 1982464,
+                    "maximum": 1982464
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 1920000000,
+                      "median": 1970000000,
+                      "p95_nearest_rank": 2020000000,
+                      "maximum": 2020000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 1,
+                        "sampled": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 152510464,
+                      "median": 152616960,
+                      "p95_nearest_rank": 153079808,
+                      "maximum": 153079808
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3538944,
+                      "median": 3538944,
+                      "p95_nearest_rank": 3538944,
+                      "maximum": 3538944
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 1982464,
+                    "median": 1982464,
+                    "p95_nearest_rank": 1982464,
+                    "maximum": 1982464
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "vector-m-revised/t13-points-intersects": {
+      "archive": "p13-05-vector-m-revised-evidence.tar.gz",
+      "strict_comparison_sha256": "51ca4f12a78977a0e0aa0a62c076ce34e147d7719fde57370af33e00da409a0c",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {
+          "wall_ns": {
+            "median": -5190080059,
+            "p95_nearest_rank": -5355007445
+          }
+        },
+        "warm": {
+          "wall_ns": {
+            "median": -5033187570,
+            "p95_nearest_rank": -4682416138
+          },
+          "peak_temp_bytes": {
+            "median": 48,
+            "p95_nearest_rank": -1027958
+          }
+        }
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "4a4c6cc0e20da0121aef6b910a7829371c5a3addc81da1575c54c40f1700d34a",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 6600000000,
+                      "median": 6770000000,
+                      "p95_nearest_rank": 6850000000,
+                      "maximum": 6850000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 148836352,
+                      "median": 149237760,
+                      "p95_nearest_rank": 149745664,
+                      "maximum": 149745664
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3649536,
+                      "median": 3649536,
+                      "p95_nearest_rank": 3649536,
+                      "maximum": 3649536
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 2056192,
+                    "median": 2056192,
+                    "p95_nearest_rank": 2056192,
+                    "maximum": 2056192
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 6600000000,
+                      "median": 6750000000,
+                      "p95_nearest_rank": 6820000000,
+                      "maximum": 6820000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "sampled": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 148996096,
+                      "median": 149413888,
+                      "p95_nearest_rank": 150421504,
+                      "maximum": 150421504
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3649536,
+                      "median": 3649536,
+                      "p95_nearest_rank": 3649536,
+                      "maximum": 3649536
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 2056192,
+                    "median": 2056192,
+                    "p95_nearest_rank": 2056192,
+                    "maximum": 2056192
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "28d3e248db8735d9f75aef9d1a4192f1916ce0ee9c620f20a3ce57553986c24b",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 1610000000,
+                      "median": 1650000000,
+                      "p95_nearest_rank": 1710000000,
+                      "maximum": 1710000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 149389312,
+                      "median": 149610496,
+                      "p95_nearest_rank": 150028288,
+                      "maximum": 150028288
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3649536,
+                      "median": 3649536,
+                      "p95_nearest_rank": 3649536,
+                      "maximum": 3649536
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 2056192,
+                    "median": 2056192,
+                    "p95_nearest_rank": 2056192,
+                    "maximum": 2056192
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 1650000000,
+                      "median": 1650000000,
+                      "p95_nearest_rank": 1710000000,
+                      "maximum": 1710000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 148979712,
+                      "median": 149495808,
+                      "p95_nearest_rank": 150351872,
+                      "maximum": 150351872
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 3649536,
+                      "median": 3649536,
+                      "p95_nearest_rank": 3649536,
+                      "maximum": 3649536
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 9469952,
+                    "median": 9469952,
+                    "p95_nearest_rank": 9469952,
+                    "maximum": 9469952
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 2056192,
+                    "median": 2056192,
+                    "p95_nearest_rank": 2056192,
+                    "maximum": 2056192
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "vector-m-revised/t14-split_by_area": {
+      "archive": "p13-05-vector-m-revised-evidence.tar.gz",
+      "strict_comparison_sha256": "65b14825c688508c570153edac4580286ade9657f5570686e854043ce6081643",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {
+          "wall_ns": {
+            "median": -4022875182,
+            "p95_nearest_rank": -4299659522
+          },
+          "peak_temp_bytes": {
+            "median": -6,
+            "p95_nearest_rank": -2115944
+          }
+        },
+        "warm": {
+          "wall_ns": {
+            "median": -4090274368,
+            "p95_nearest_rank": -4164420378
+          },
+          "peak_temp_bytes": {
+            "median": -8,
+            "p95_nearest_rank": 942218
+          }
+        }
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "c6a422a78a3fca1de103ebaaf09ea822424bc335c2063ddfd874b9ee54720083",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 9450000000,
+                      "median": 9560000000,
+                      "p95_nearest_rank": 9760000000,
+                      "maximum": 9760000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 159469568,
+                      "median": 160382976,
+                      "p95_nearest_rank": 160616448,
+                      "maximum": 160616448
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 9494528,
+                      "median": 9494528,
+                      "p95_nearest_rank": 9494528,
+                      "maximum": 9494528
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4730880,
+                    "median": 4730880,
+                    "p95_nearest_rank": 4730880,
+                    "maximum": 4730880
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6162883,
+                    "median": 6162883,
+                    "p95_nearest_rank": 6162883,
+                    "maximum": 6162883
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 9230000000,
+                      "median": 9300000000,
+                      "p95_nearest_rank": 9560000000,
+                      "maximum": 9560000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 159424512,
+                      "median": 160448512,
+                      "p95_nearest_rank": 161001472,
+                      "maximum": 161001472
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 9494528,
+                      "median": 9494528,
+                      "p95_nearest_rank": 9494528,
+                      "maximum": 9494528
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4730880,
+                    "median": 4730880,
+                    "p95_nearest_rank": 4730880,
+                    "maximum": 4730880
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6162883,
+                    "median": 6162883,
+                    "p95_nearest_rank": 6162883,
+                    "maximum": 6162883
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "985c9cd6417e0003afbd520875ad365506e0e733491ec9d1467539557d1315c1",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 5290000000,
+                      "median": 5520000000,
+                      "p95_nearest_rank": 5540000000,
+                      "maximum": 5540000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 160198656,
+                      "median": 160702464,
+                      "p95_nearest_rank": 160940032,
+                      "maximum": 160940032
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 9494528,
+                      "median": 9494528,
+                      "p95_nearest_rank": 9494528,
+                      "maximum": 9494528
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4730880,
+                    "median": 4730880,
+                    "p95_nearest_rank": 4730880,
+                    "maximum": 4730880
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6162883,
+                    "median": 6162883,
+                    "p95_nearest_rank": 6162883,
+                    "maximum": 6162883
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 5170000000,
+                      "median": 5210000000,
+                      "p95_nearest_rank": 5320000000,
+                      "maximum": 5320000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 159854592,
+                      "median": 160346112,
+                      "p95_nearest_rank": 161116160,
+                      "maximum": 161116160
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 9494528,
+                      "median": 9494528,
+                      "p95_nearest_rank": 9494528,
+                      "maximum": 9494528
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4730880,
+                    "median": 4730880,
+                    "p95_nearest_rank": 4730880,
+                    "maximum": 4730880
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6162883,
+                    "median": 6162883,
+                    "p95_nearest_rank": 6162883,
+                    "maximum": 6162883
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "vector-l-point/t13-points-intersects": {
+      "archive": "p13-05-vector-l-point-evidence.tar.gz",
+      "strict_comparison_sha256": "f1e4bc885cad7165310209118268e5facb9888eb7ad00136692abb6e0cf8ee8a",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "ec5dab4005f733d110032edbe462ae0e218f9df62a6a01cb6ca56bab2719f8f1",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 88890000000,
+                      "median": 88970000000,
+                      "p95_nearest_rank": 89710000000,
+                      "maximum": 89710000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 341323776,
+                      "median": 341499904,
+                      "p95_nearest_rank": 342380544,
+                      "maximum": 342380544
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 30326784,
+                      "median": 30326784,
+                      "p95_nearest_rank": 30326784,
+                      "maximum": 30326784
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 88680000000,
+                      "median": 88780000000,
+                      "p95_nearest_rank": 89220000000,
+                      "maximum": 89220000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 341118976,
+                      "median": 341975040,
+                      "p95_nearest_rank": 342507520,
+                      "maximum": 342507520
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 30326784,
+                      "median": 30326784,
+                      "p95_nearest_rank": 30326784,
+                      "maximum": 30326784
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "925214be0037dc12d98734830ac158158aedf3fac0a2c4d534fb51cd0e0ec7a8",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 26160000000,
+                      "median": 26690000000,
+                      "p95_nearest_rank": 27220000000,
+                      "maximum": 27220000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 341856256,
+                      "median": 342417408,
+                      "p95_nearest_rank": 342921216,
+                      "maximum": 342921216
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 90980352,
+                      "median": 90980352,
+                      "p95_nearest_rank": 90980352,
+                      "maximum": 90980352
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 60276736,
+                    "median": 60276736,
+                    "p95_nearest_rank": 60276736,
+                    "maximum": 60276736
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 25930000000,
+                      "median": 26130000000,
+                      "p95_nearest_rank": 26540000000,
+                      "maximum": 26540000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 341278720,
+                      "median": 341889024,
+                      "p95_nearest_rank": 342515712,
+                      "maximum": 342515712
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 90980352,
+                      "median": 90980352,
+                      "p95_nearest_rank": 90980352,
+                      "maximum": 90980352
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 60276736,
+                    "median": 60276736,
+                    "p95_nearest_rank": 60276736,
+                    "maximum": 60276736
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "vector-l-line/t13-lines-intersects": {
+      "archive": "p13-05-vector-l-line-evidence.tar.gz",
+      "strict_comparison_sha256": "3afd09cb9663bc2a9d35460c313bcd9c37de721f0e3b63b0e0021178be366ceb",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "2f8ea53bd07e8c995cc9b7f3fa31d4f00428dec4397cfb42902106d950b05aaf",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 59920000000,
+                      "median": 59940000000,
+                      "p95_nearest_rank": 59950000000,
+                      "maximum": 59950000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 1,
+                        "sampled": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 411385856,
+                      "median": 411799552,
+                      "p95_nearest_rank": 411889664,
+                      "maximum": 411889664
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 59920000000,
+                      "median": 59950000000,
+                      "p95_nearest_rank": 59970000000,
+                      "maximum": 59970000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 410648576,
+                      "median": 411643904,
+                      "p95_nearest_rank": 411742208,
+                      "maximum": 411742208
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "30db1c3703b758c51b42562a5780444fc29a4394337c43fd61ab8e0c9f5e6d2f",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 31670000000,
+                      "median": 32400000000,
+                      "p95_nearest_rank": 33320000000,
+                      "maximum": 33320000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 411578368,
+                      "median": 412020736,
+                      "p95_nearest_rank": 412372992,
+                      "maximum": 412372992
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 190889984,
+                      "median": 190889984,
+                      "p95_nearest_rank": 190910464,
+                      "maximum": 190910464
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 126910464,
+                    "median": 126910464,
+                    "p95_nearest_rank": 126910464,
+                    "maximum": 126910464
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 31410000000,
+                      "median": 32850000000,
+                      "p95_nearest_rank": 33680000000,
+                      "maximum": 33680000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 411373568,
+                      "median": 411697152,
+                      "p95_nearest_rank": 412360704,
+                      "maximum": 412360704
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 190889984,
+                      "median": 190889984,
+                      "p95_nearest_rank": 190889984,
+                      "maximum": 190889984
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 251162624,
+                    "median": 251162624,
+                    "p95_nearest_rank": 251162624,
+                    "maximum": 251162624
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 126910464,
+                    "median": 126910464,
+                    "p95_nearest_rank": 126910464,
+                    "maximum": 126910464
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "vector-l-area/t14-split_by_area": {
+      "archive": "p13-05-vector-l-area-evidence.tar.gz",
+      "strict_comparison_sha256": "e5ed6b1b9614de43bb89223efd6fc3617ec556f8858b216e7021d92158b672bb",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": false,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "52f899e03926d5ecf24e4b1a12cc37777bd8dca8b1f6247685283a6693b7533a",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 59940000000,
+                      "median": 59960000000,
+                      "p95_nearest_rank": 59980000000,
+                      "maximum": 59980000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 328474624,
+                      "median": 334204928,
+                      "p95_nearest_rank": 334336000,
+                      "maximum": 334336000
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 59970000000,
+                      "median": 59980000000,
+                      "p95_nearest_rank": 59990000000,
+                      "maximum": 59990000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 328048640,
+                      "median": 328798208,
+                      "p95_nearest_rank": 329035776,
+                      "maximum": 329035776
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "c4e1234e9ab4e5fff2f4e58e69f7d81831938092a612bcd39dffd3ef4a9b3256",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 65380000000,
+                      "median": 65420000000,
+                      "p95_nearest_rank": 65850000000,
+                      "maximum": 65850000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 466849792,
+                      "median": 467742720,
+                      "p95_nearest_rank": 468189184,
+                      "maximum": 468189184
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 69656576,
+                      "median": 69656576,
+                      "p95_nearest_rank": 69656576,
+                      "maximum": 69656576
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 65200000000,
+                      "median": 65280000000,
+                      "p95_nearest_rank": 65530000000,
+                      "maximum": 65530000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2,
+                        "sampled": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 466903040,
+                      "median": 467144704,
+                      "p95_nearest_rank": 467742720,
+                      "maximum": 467742720
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "minimum": 69656576,
+                      "median": 69656576,
+                      "p95_nearest_rank": 69656576,
+                      "maximum": 69656576
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "raster-s/dem-s": {
+      "archive": "p13-05-raster-s-evidence.tar.gz",
+      "strict_comparison_sha256": "4f2bfc555a383b43669a4bbfa646df95684c0dc689915d8a728fd9fc34ec5c32",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {
+          "wall_ns": {
+            "median": -1423464346,
+            "p95_nearest_rank": -639286869
+          },
+          "peak_temp_bytes": {
+            "median": 0,
+            "p95_nearest_rank": -4558
+          }
+        },
+        "warm": {
+          "wall_ns": {
+            "median": -1226975202,
+            "p95_nearest_rank": -1227930062
+          },
+          "peak_temp_bytes": {
+            "median": -146,
+            "p95_nearest_rank": 0
+          }
+        }
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "89952de63dbe730ef50fcf85d2effd5f81912edc3435abe3e2cc2f1124322692",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 8540000000,
+                      "median": 8580000000,
+                      "p95_nearest_rank": 8680000000,
+                      "maximum": 8680000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 176660480,
+                      "median": 177569792,
+                      "p95_nearest_rank": 178536448,
+                      "maximum": 178536448
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 94208,
+                      "median": 94208,
+                      "p95_nearest_rank": 94208,
+                      "maximum": 94208
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1147480,
+                    "median": 1147480,
+                    "p95_nearest_rank": 1147480,
+                    "maximum": 1147480
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1048576,
+                    "median": 1048576,
+                    "p95_nearest_rank": 1048576,
+                    "maximum": 1048576
+                  },
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6542,
+                    "median": 6542,
+                    "p95_nearest_rank": 6542,
+                    "maximum": 6542
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 8530000000,
+                      "median": 8620000000,
+                      "p95_nearest_rank": 8800000000,
+                      "maximum": 8800000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 175489024,
+                      "median": 178360320,
+                      "p95_nearest_rank": 179585024,
+                      "maximum": 179585024
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 94208,
+                      "median": 94208,
+                      "p95_nearest_rank": 94208,
+                      "maximum": 94208
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1147480,
+                    "median": 1147480,
+                    "p95_nearest_rank": 1147480,
+                    "maximum": 1147480
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1048576,
+                    "median": 1048576,
+                    "p95_nearest_rank": 1048576,
+                    "maximum": 1048576
+                  },
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6542,
+                    "median": 6542,
+                    "p95_nearest_rank": 6542,
+                    "maximum": 6542
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "b3ff873246c82f20a602c13ba762d747ddd6c0280146f52d5ffc25b5478073b8",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 7180000000,
+                      "median": 7200000000,
+                      "p95_nearest_rank": 7290000000,
+                      "maximum": 7290000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 176025600,
+                      "median": 177225728,
+                      "p95_nearest_rank": 178237440,
+                      "maximum": 178237440
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 94208,
+                      "median": 94208,
+                      "p95_nearest_rank": 94208,
+                      "maximum": 94208
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1147480,
+                    "median": 1147480,
+                    "p95_nearest_rank": 1147480,
+                    "maximum": 1147480
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1048576,
+                    "median": 1048576,
+                    "p95_nearest_rank": 1048576,
+                    "maximum": 1048576
+                  },
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6542,
+                    "median": 6542,
+                    "p95_nearest_rank": 6542,
+                    "maximum": 6542
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 7280000000,
+                      "median": 7360000000,
+                      "p95_nearest_rank": 7510000000,
+                      "maximum": 7510000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 176590848,
+                      "median": 177221632,
+                      "p95_nearest_rank": 179830784,
+                      "maximum": 179830784
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 94208,
+                      "median": 94208,
+                      "p95_nearest_rank": 94208,
+                      "maximum": 94208
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1147480,
+                    "median": 1147480,
+                    "p95_nearest_rank": 1147480,
+                    "maximum": 1147480
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 1048576,
+                    "median": 1048576,
+                    "p95_nearest_rank": 1048576,
+                    "maximum": 1048576
+                  },
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 6542,
+                    "median": 6542,
+                    "p95_nearest_rank": 6542,
+                    "maximum": 6542
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "remote-s-rerun/remote-s": {
+      "archive": "p13-05-remote-s-rerun-evidence.tar.gz",
+      "strict_comparison_sha256": "a2a2aa2a42e3ba5367557b9559429b7f8d669e2ac3f79d5184d6c5d7db23ef9d",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "bb8087881f317b71f71cc4fdc7bfd21cd93565814f8896087222f809089897cb",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 3,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 3
+                  },
+                  "independent_verification_recorded": 3,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 7050000000,
+                      "median": 7120000000,
+                      "p95_nearest_rank": 7220000000,
+                      "maximum": 7220000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 190095360,
+                      "median": 195203072,
+                      "p95_nearest_rank": 195567616,
+                      "maximum": 195567616
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262144,
+                      "median": 262144,
+                      "p95_nearest_rank": 262144,
+                      "maximum": 262144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 3,
+                    "minimum": 4170045,
+                    "median": 4170045,
+                    "p95_nearest_rank": 4170045,
+                    "maximum": 4170045
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 3,
+                    "minimum": 2299416,
+                    "median": 2299416,
+                    "p95_nearest_rank": 2299416,
+                    "maximum": 2299416
+                  },
+                  "output_bytes": {
+                    "recorded": 3,
+                    "minimum": 58857,
+                    "median": 58857,
+                    "p95_nearest_rank": 58857,
+                    "maximum": 58857
+                  }
+                },
+                "FAIL": {
+                  "rows": 2,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 2
+                  },
+                  "independent_verification_recorded": 2,
+                  "status_observation_failures": 2,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 7680000000,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 8020000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 195182592,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 195747840
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262144,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 262144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 2,
+                    "minimum": 4170045,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 4170045
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 2,
+                    "minimum": 2299416,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 2299416
+                  },
+                  "output_bytes": {
+                    "recorded": 2,
+                    "minimum": 58857,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 58857
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 4,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 4
+                  },
+                  "independent_verification_recorded": 4,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 7350000000,
+                      "median": 7600000000.0,
+                      "p95_nearest_rank": 7650000000,
+                      "maximum": 7650000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 189677568,
+                      "median": 194971648.0,
+                      "p95_nearest_rank": 195833856,
+                      "maximum": 195833856
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0.0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 4
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262144,
+                      "median": 262144.0,
+                      "p95_nearest_rank": 262144,
+                      "maximum": 262144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 4,
+                    "minimum": 4170045,
+                    "median": 4170045.0,
+                    "p95_nearest_rank": 4170045,
+                    "maximum": 4170045
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 4,
+                    "minimum": 2299416,
+                    "median": 2299416.0,
+                    "p95_nearest_rank": 2299416,
+                    "maximum": 2299416
+                  },
+                  "output_bytes": {
+                    "recorded": 4,
+                    "minimum": 58857,
+                    "median": 58857.0,
+                    "p95_nearest_rank": 58857,
+                    "maximum": 58857
+                  }
+                },
+                "FAIL": {
+                  "rows": 1,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 1
+                  },
+                  "independent_verification_recorded": 1,
+                  "status_observation_failures": 1,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 8040000000,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 8040000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 197255168,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 197255168
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262144,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 262144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 1,
+                    "minimum": 4170045,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 4170045
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 1,
+                    "minimum": 2299416,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 2299416
+                  },
+                  "output_bytes": {
+                    "recorded": 1,
+                    "minimum": 58857,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 58857
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "2743221a12252c91a4a7e00540a3a7b89fa2ffe1996fa10f03eff875a14b3565",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 6890000000,
+                      "median": 6930000000,
+                      "p95_nearest_rank": 7060000000,
+                      "maximum": 7060000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 192368640,
+                      "median": 194822144,
+                      "p95_nearest_rank": 195887104,
+                      "maximum": 195887104
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262144,
+                      "median": 262144,
+                      "p95_nearest_rank": 262144,
+                      "maximum": 262144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4170045,
+                    "median": 4170045,
+                    "p95_nearest_rank": 4170045,
+                    "maximum": 4170045
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 2299416,
+                    "median": 2299416,
+                    "p95_nearest_rank": 2299416,
+                    "maximum": 2299416
+                  },
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 58857,
+                    "median": 58857,
+                    "p95_nearest_rank": 58857,
+                    "maximum": 58857
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 7100000000,
+                      "median": 7320000000,
+                      "p95_nearest_rank": 7720000000,
+                      "maximum": 7720000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 187973632,
+                      "median": 190763008,
+                      "p95_nearest_rank": 195788800,
+                      "maximum": 195788800
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262144,
+                      "median": 262144,
+                      "p95_nearest_rank": 262144,
+                      "maximum": 262144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 4170045,
+                    "median": 4170045,
+                    "p95_nearest_rank": 4170045,
+                    "maximum": 4170045
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 2299416,
+                    "median": 2299416,
+                    "p95_nearest_rank": 2299416,
+                    "maximum": 2299416
+                  },
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 58857,
+                    "median": 58857,
+                    "p95_nearest_rank": 58857,
+                    "maximum": 58857
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "dem-l-pair/dem-l": {
+      "archive": "p13-05-dem-l-pair-evidence.tar.gz",
+      "strict_comparison_sha256": "2d2d06350c9102bfd1137e327e7a2dc083113421284e30e5e3c54f41d107873a",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": false,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "7df85cee993741bbbd0ce21cbc23dede1007992442bfb66563d0b84ae1224363",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 82750000000,
+                      "median": 82920000000,
+                      "p95_nearest_rank": 83180000000,
+                      "maximum": 83180000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 249147392,
+                      "median": 249741312,
+                      "p95_nearest_rank": 249843712,
+                      "maximum": 249843712
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 2822144,
+                      "median": 2822144,
+                      "p95_nearest_rank": 2822144,
+                      "maximum": 2822144
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268542520,
+                    "median": 268542520,
+                    "p95_nearest_rank": 268542520,
+                    "maximum": 268542520
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268435456,
+                    "median": 268435456,
+                    "p95_nearest_rank": 268435456,
+                    "maximum": 268435456
+                  },
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 82600000000,
+                      "median": 83200000000,
+                      "p95_nearest_rank": 83500000000,
+                      "maximum": 83500000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 249053184,
+                      "median": 250114048,
+                      "p95_nearest_rank": 250601472,
+                      "maximum": 250601472
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 954368,
+                      "maximum": 954368
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 2822144,
+                      "median": 2846720,
+                      "p95_nearest_rank": 2871296,
+                      "maximum": 2871296
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268542520,
+                    "median": 268542520,
+                    "p95_nearest_rank": 268542520,
+                    "maximum": 268542520
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268435456,
+                    "median": 268435456,
+                    "p95_nearest_rank": 268435456,
+                    "maximum": 268435456
+                  },
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "053ec30ab23a715b5e2db5f7a27969d938f80dc7886e12bb8762b25238e7da5e",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 83060000000,
+                      "median": 83080000000,
+                      "p95_nearest_rank": 83300000000,
+                      "maximum": 83300000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 248397824,
+                      "median": 249548800,
+                      "p95_nearest_rank": 250314752,
+                      "maximum": 250314752
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 61440,
+                      "maximum": 61440
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 2822144,
+                      "median": 2846720,
+                      "p95_nearest_rank": 2859008,
+                      "maximum": 2859008
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268542520,
+                    "median": 268542520,
+                    "p95_nearest_rank": 268542520,
+                    "maximum": 268542520
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268435456,
+                    "median": 268435456,
+                    "p95_nearest_rank": 268435456,
+                    "maximum": 268435456
+                  },
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 82510000000,
+                      "median": 82880000000,
+                      "p95_nearest_rank": 83390000000,
+                      "maximum": 83390000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 248426496,
+                      "median": 249335808,
+                      "p95_nearest_rank": 249634816,
+                      "maximum": 249634816
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          7,
+                          7
+                        ]
+                      ],
+                      "minimum": 2822144,
+                      "median": 2846720,
+                      "p95_nearest_rank": 2863104,
+                      "maximum": 2863104
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268542520,
+                    "median": 268542520,
+                    "p95_nearest_rank": 268542520,
+                    "maximum": 268542520
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 268435456,
+                    "median": 268435456,
+                    "p95_nearest_rank": 268435456,
+                    "maximum": 268435456
+                  },
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
