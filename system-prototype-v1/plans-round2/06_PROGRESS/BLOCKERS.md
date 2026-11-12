@@ -26,7 +26,7 @@ P13-02 已通过固定用例门禁。首轮扩展 GIS 回归的单次 DEM 状态
 
 P14-06 已交付精确版本兼容检查。现有传感器选择拒绝同产品键的歧义，已有记录按精确引用追溯。P14-05 已交付隔离报告，发布流程可使用实际试跑证据。 [兼容证据](../../docs/round2/methods/p14-06.md) · [隔离试跑证据](../../docs/round2/methods/p14-05.md)
 
-P13-07 关闭了 SQLite 写锁使后台调度退出的问题。首轮 DEM 状态缺字段的原因尚未复现。Docker 客户端强制退出后的外部计算终止边界继续由 P13-08 核验。 [压力证据](../../docs/round2/performance/p13-07.md)
+P13-07 关闭了 SQLite 写锁使后台调度退出的问题。首轮 DEM 状态缺字段的原因尚未复现。P13-08 探针中三种客户端终止后，Docker daemon 仍持有活动容器，按本次容器身份显式回收后均确认移除。 [压力证据](../../docs/round2/performance/p13-07.md) · [容器生命周期](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md)
 
 P15-01 已冻结本地澄清报告契约。P15-02 已验证浏览器逐项回答、多轮草案修订和刷新恢复。 [澄清契约](../../docs/round2/agent/p15-01.md) · [多轮验收](../../docs/round2/agent/p15-02.md)
 

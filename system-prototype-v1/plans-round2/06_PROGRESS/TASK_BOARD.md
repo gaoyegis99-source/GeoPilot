@@ -21,7 +21,7 @@
 | P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | BLOCKED | 面积窗口完成耗时与 RSS 对照。四个候选隔离合并通过 81 项，含真实执行、取消和启动恢复。待 P13-03 验收后复跑完整方法。 [复验准备](../../docs/round2/performance/p13-05-preflight.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已实测同请求绑定变化、文件组及图层身份边界，等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
 | P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | [SQLite 锁恢复、队列取消与重启](../../docs/round2/performance/p13-07.md) |
-| P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 待多档基准、内存与缓存验收。 |
+| P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待多档基准、内存与缓存验收。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |
 | P14-01 | P14 | 方法开发者 CLI 需求与接口设计 | C/F | P12-09 | ACCEPTED | [CLI 契约、实测和只读守卫](../../docs/round2/methods/p14-01.md) |
 | P14-02 | P14 | 方法配置模板生成 | C | P14-01 | ACCEPTED | [独立 Schema 核验与联合回归](../../docs/round2/methods/p14-02.md) |
 | P14-03 | P14 | 方法配置静态 lint | C/F | P14-01、P12-09 | ACCEPTED | [目录、失败路径、原 CLI 回归和复验](../../docs/round2/methods/p14-03.md) |
