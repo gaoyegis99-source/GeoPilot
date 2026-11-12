@@ -82,6 +82,23 @@ tar -xzf docs/round2/performance/p13-05-dem-l-pair-evidence.tar.gz -C "$p13_dem_
 .venv/bin/python -B "$p13_dem_l_pair/proof/verify-dem-l-pair.py" "$p13_dem_l_pair"
 ```
 
+## 遥感 L 原版冷态
+
+原版两次预热和五次正式计量均完成前七步。第八步 `calculate_change` 在生产 60 秒限制触发 `PROCESS_TIMEOUT`，子进程退出 -15，七轮均取得 `FAILED/NOT_CHECKED`。共记录 10 次状态查询 HTTP 500。未生成正式成果清单或该步骤三个目标文件，完整成果正确性验证未启动。原版暖态继续运行。 [原始冷态前缀、步骤请求及结果](p13-05-remote-l-base-cold-evidence.tar.gz)
+
+五次正式失败样本的端到端中位数／P95 为 126.105／129.116 秒，变化计算步骤为 60.050／60.054 秒。整轮 RSS 均为部分采样，变化计算步 RSS 三次完整、两次部分采样。变化计算进程已采样 CPU 时间为 59.940 至 59.970 秒。五次临时空间峰值均有完整采样，中位数为 11,181,073 字节。
+
+每轮在变化计算步留下 311,039 字节的差值 TIFF 和 44,420 字节的分类 TIFF。两类文件各自在七轮间逐字节一致。分类 TIFF 与 P13-04 封存参考一致，在 EPSG:32632 的 3072 × 3072 网格中，类别 1、2、3 各 1,572,864 个像元，掩膜为 4,718,592 个像元。主控和 B 分别复算，均退出 0。B 复核七个新运行 ID 与此前核对的 212 个 ID 无交集。归档同时保存输入清单、原始请求、磁盘步骤结果及 P13-04 同负载原始记录。完整配对待两侧冷暖组及配置回执。 [P13-04 分类来源](p13-04-remote-l-classification-source.json)
+
+```bash
+p13_remote_l=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-remote-l-base-cold-evidence.tar.gz -C "$p13_remote_l"
+(cd "$p13_remote_l" && sha256sum -c SHA256SUMS)
+env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF \
+  .venv/bin/python -B "$p13_remote_l/verify-remote-cold.py" "$p13_remote_l" > "$p13_remote_l/replay.json"
+cmp "$p13_remote_l/replay.json" "$p13_remote_l/full-cold.json"
+```
+
 ## 相邻批次的投影复用预演
 
 隔离候选 `b49025453794331f0a42cb9390a7ed0708c0e7d7` 基于冻结修正版 `a2d2e68`。上一批恰好在 8 段收敛时，当前批与上一批具有相同布局、仿射变换、投影器及列原点，且原点向下移动一行，才复用共同顶点的投影坐标。细化至 16 段起沿用批内复用。三个真实窗口及剪切、列移、退化、非有限坐标和切缝反例的批次顺序、各级坐标、逐格面积、累加或错误均与冻结修正版一致。 [源码补丁、命令、逐次记录与 JUnit](p13-05-cross-batch-area-evidence.tar.gz)
