@@ -1,0 +1,35 @@
+docs/round2/performance/p13-03-S-summary.json: 成功
+docs/round2/performance/p13-03-S-environment.json: 成功
+docs/round2/performance/p13-03-S-inputs.json: 成功
+docs/round2/performance/p13-03-S-samples.jsonl.gz: 成功
+docs/round2/performance/p13-03-S-command.log: 成功
+docs/round2/performance/p13-04-raster-method-s-report.json: 成功
+docs/round2/performance/p13-04-raster-method-s-trials.jsonl: 成功
+{"case": "real-captured-binding-change", "tool_ref": "qgis-select-points-by-location@1", "before_enum": 0, "after_enum": 6, "before_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3", "after_sha256": "08a43ab46763e70e40752ac30977f3f9c5c6a46efba6dcf7dbf9cd453285272f"}
+{"case": "raster-legacy-self", "exit": 0, "frozen_comparison_payload_unchanged": true, "groups": 2, "proof": {"level": "unrecorded"}, "require": false}
+{"case": "raster-legacy-strict", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence is required in /dev/shm/p13-runtime-comparator-replay.swZL5h/cases/raster-legacy", "exit": 1, "require": true}
+{"case": "raster-verified-self", "exit": 0, "frozen_comparison_payload_unchanged": true, "groups": 2, "proof": {"level": "application_config_and_python_proj", "schema_version": 1, "sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3"}, "require": true}
+{"case": "raster-mixed-legacy-and-verified", "diagnosis": "Incompatible benchmark evidence: Different runtime configuration evidence levels", "exit": 1, "require": false}
+{"case": "raster-mixed-strict", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence is required in /dev/shm/p13-runtime-comparator-replay.swZL5h/cases/raster-legacy", "exit": 1, "require": true}
+{"case": "vector-legacy-self", "exit": 0, "frozen_comparison_payload_unchanged": true, "groups": 20, "proof": {"level": "unrecorded"}, "require": false}
+{"case": "vector-legacy-strict", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence is required in /dev/shm/p13-runtime-comparator-replay.swZL5h/cases/vector-legacy", "exit": 1, "require": true}
+{"case": "vector-verified-self", "exit": 0, "frozen_comparison_payload_unchanged": true, "groups": 20, "proof": {"level": "application_config_and_python_proj", "schema_version": 1, "sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3"}, "require": true}
+{"case": "vector-mixed-legacy-and-verified", "diagnosis": "Incompatible benchmark evidence: Different runtime configuration evidence levels", "exit": 1, "require": false}
+{"case": "vector-mixed-strict", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence is required in /dev/shm/p13-runtime-comparator-replay.swZL5h/cases/vector-legacy", "exit": 1, "require": true}
+{"case": "binding-drift-across-reports", "diagnosis": "Incompatible benchmark evidence: Different recorded runtime configuration fingerprints", "exit": 1, "require": true}
+{"case": "binding-drift-during-one-run", "diagnosis": "Incompatible benchmark evidence: Runtime configuration changed between the before and after captures", "exit": 1, "require": true}
+{"case": "tampered-before-digest", "diagnosis": "Incompatible benchmark evidence: Runtime configuration snapshot digest differs from its contents", "exit": 1, "require": false}
+{"case": "tampered-after-content", "diagnosis": "Incompatible benchmark evidence: Runtime configuration snapshot digest differs from its contents", "exit": 1, "require": false}
+{"case": "partial-receipt", "diagnosis": "Incompatible benchmark evidence: Invalid runtime configuration evidence fields", "exit": 1, "require": false}
+{"case": "unknown-receipt-version", "diagnosis": "Incompatible benchmark evidence: Unsupported runtime configuration evidence version", "exit": 1, "require": false}
+{"case": "unknown-snapshot-version", "diagnosis": "Incompatible benchmark evidence: Unsupported runtime configuration snapshot version", "exit": 1, "require": false}
+{"case": "invalid-proj-shape", "diagnosis": "Incompatible benchmark evidence: Invalid Python PROJ fingerprints", "exit": 1, "require": false}
+{"case": "invalid-basename", "diagnosis": "Incompatible benchmark evidence: Invalid runtime configuration file fingerprints", "exit": 1, "require": false}
+{"case": "invalid-json", "diagnosis": "Incompatible benchmark evidence: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)", "exit": 1, "require": false}
+{"case": "duplicate-json-field", "diagnosis": "Incompatible benchmark evidence: Duplicate field in runtime configuration evidence: schema_version", "exit": 1, "require": false}
+{"case": "dangling-sidecar-symlink", "diagnosis": "Incompatible benchmark evidence: [Errno 40] Too many levels of symbolic links: '/dev/shm/p13-runtime-comparator-replay.swZL5h/cases/dangling-sidecar-symlink/runtime-configuration.json'", "exit": 1, "require": false}
+{"case": "fifo-sidecar", "diagnosis": "Incompatible benchmark evidence: Expected a regular runtime configuration file in /dev/shm/p13-runtime-comparator-replay.swZL5h/cases/fifo-sidecar", "exit": 1, "require": false}
+{"case": "raster-different-original-report.json", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence does not match the report files", "exit": 1, "require": false}
+{"case": "vector-different-original-environment.json", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence does not match the report files", "exit": 1, "require": false}
+{"case": "vector-different-original-summary.json", "diagnosis": "Incompatible benchmark evidence: Runtime configuration evidence does not match the report files", "exit": 1, "require": false}
+{"case": "complete", "status": "PASS", "scope": "comparison of archived reports using synthetic receipt attachments"}

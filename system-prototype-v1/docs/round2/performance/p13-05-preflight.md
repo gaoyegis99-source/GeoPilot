@@ -120,3 +120,17 @@ F 的栅格采集增量在端到端墙钟停止、采样器退出后，只读获
 隔离采集模块读取实际方法、工具契约、QGIS 参数绑定和传感器配置，纳入方法发布台账与 Python pyproj 解析的数据根。本地实测覆盖 59 个应用配置文件和 16 个 PROJ 数据文件。配置搬目录后摘要相同。单独改变 QGIS 枚举绑定、道路方法参数、Landsat nodata、发布台账或 PROJ 数据库内容时，摘要均变化。数据库变体保留原 EPSG 版本。无效配置及选中的文件或目录符号链接被拒绝。两次隔离运行的 15 条记录在结果及指纹上吻合。 [复验原始记录](p13-05-preflight-runtime-config.jsonl)
 
 候选补丁、采集脚本和校验清单位于 `artifacts/test-results/p13-05-runtime-config.Tq8YGO/`。正式接入需在计时外采集并复核，原版和候选共用同一采集实现。QGIS 与 GDAL 原生运行时及其数据目录仍需固定。本探针未执行 GIS 算法。
+
+## 原生运行时身份与配置对照
+
+主控在两次新启动的容器中获取逐文件指纹，两次原始 JSON 逐字节相同。范围包括 `/runtime` 的 6,738 个条目、QGIS 插件与资源、系统 GDAL 和 PROJ 数据。QGIS 三个已配置算法的参数定义分别从 `qgis_process --json help` 获取，覆盖 `native:buffer`、`native:extractbylocation` 和 `native:extractbyattribute`。原生 GDAL 3.8.4 通过 Python OSGeo 确认数据位于 `/usr/share/gdal`，原生 PROJ 9.4.0 的搜索顺序为用户目录、`/usr/share/proj`，探针的用户目录不存在。Python pyproj 与 Rasterio 使用各自轮包的 PROJ 数据。 [运行时指纹与算法参数](p13-05-preflight-native-identity.json)
+
+探针与正在运行的 P13-03 容器使用同一镜像和三份只读绑定。两份 QGIS CLI 文件逐字节匹配原生运行环境记录及已有的 QGIS LTR Debian 包。镜像 `groundwater-v7-spatial-qgis:0.15.5` 只有本机镜像 ID，来源构建使用固定 Ubuntu 基础镜像、LTR 系统包和项目轮包。相同的本机镜像可复跑，跨机器交付还需归档该镜像及外部绑定。脚本、两次逐文件指纹与 Debian 包验证见 `artifacts/test-results/p13-05-native-identity.0YMBk6/SHA256SUMS`。探针未执行 GIS 算法。 [QGIS 包来源](../../baseline/ENVIRONMENT.md)
+
+C 的隔离比较器增加 `--require-runtime-configuration`，要求两侧报告各有 `runtime-configuration.json`。比较器对实际读到的报告字节重算摘要，校验一次运行起止的配置捕获并核对两侧指纹。归档上的 26 项断言符合预期，含 4 次匹配和 22 次预期拒绝。旧报告仍可双侧比较，配置级别记为 `unrecorded`。测试中用归档报告和新采集的配置验证协议，历史运行的实际配置身份仍以历史记录为准。候选补丁和字段样例在 `artifacts/test-results/p13-05-runtime-comparator.DtRzWy/`，正式接入待 P13-03。 [隔离复跑](p13-05-preflight-runtime-comparator.log)
+
+## 遥感 S 稀疏分类复验
+
+A 从 P13-04 的真实遥感 S 冷进程首个计量 run 复制 192 × 192 分类 GeoTIFF，三版读取同一文件。原版、面积首版和完整候选各预热 2 次、实测 5 次，在同一进程轮换调用面积函数。三版报告逐项相等，包含 3 类各 6,144 格、18,432 个 NoData 和 16,602,074.59679892 m² 等积面积。独立面积校验通过。三种布局在 72 批内交替，完整候选检查 71 次，命中 0 次。 [原始计时、计数和报告](p13-05-preflight-remote-s.log)
+
+三版函数墙钟中位数分别为 304.31、245.35、235.29 ms。这个样本未复现遥感 L 局部窗口中布局候选的轻微变慢，计时变化无法归因于布局复用。正式遥感 S/L 的端到端、步骤耗时和峰值资源仍待测。分类输入、归档 run 请求、脚本和校验清单在 `artifacts/test-results/p13-05-remote-s-probe.qPGkpT/`。

@@ -1,0 +1,24 @@
+{"input_sha256": "d8636a5c678d05c579ebcfc32bc8c569482de2c53cdd0e3c315dff0d781c874c", "bytes": 1668, "source_run": "45c862a188ba4cfabfe7b79d1ed61e9a", "shape": [192, 192], "selected": 18432, "nodata": 18432, "layouts": 72, "distinct_layouts": 3, "consecutive_matches": 0, "runtime": {"python": "3.13.13", "numpy": "2.4.4", "proj": "9.5.1", "gdal": "3.9.3", "cpu": [31], "nice": 19}}
+{"phase": "warmup", "round": 1, "revision": "original", "wall_ns": 322407178, "cpu_ns": 322191423}
+{"phase": "warmup", "round": 1, "revision": "first", "wall_ns": 232110872, "cpu_ns": 231971167}
+{"phase": "warmup", "round": 1, "revision": "full", "wall_ns": 234719835, "cpu_ns": 234581892}
+{"phase": "warmup", "round": 2, "revision": "first", "wall_ns": 264075802, "cpu_ns": 263891943}
+{"phase": "warmup", "round": 2, "revision": "full", "wall_ns": 235662254, "cpu_ns": 235438093}
+{"phase": "warmup", "round": 2, "revision": "original", "wall_ns": 310750316, "cpu_ns": 310506098}
+{"phase": "measurement", "round": 3, "revision": "full", "wall_ns": 255588000, "cpu_ns": 255413358}
+{"phase": "measurement", "round": 3, "revision": "original", "wall_ns": 311766730, "cpu_ns": 311577412}
+{"phase": "measurement", "round": 3, "revision": "first", "wall_ns": 235586005, "cpu_ns": 235422311}
+{"phase": "measurement", "round": 4, "revision": "full", "wall_ns": 235290598, "cpu_ns": 235136170}
+{"phase": "measurement", "round": 4, "revision": "first", "wall_ns": 250941090, "cpu_ns": 250755551}
+{"phase": "measurement", "round": 4, "revision": "original", "wall_ns": 302430024, "cpu_ns": 302216475}
+{"phase": "measurement", "round": 5, "revision": "first", "wall_ns": 233056732, "cpu_ns": 232910416}
+{"phase": "measurement", "round": 5, "revision": "original", "wall_ns": 311881621, "cpu_ns": 311672861}
+{"phase": "measurement", "round": 5, "revision": "full", "wall_ns": 229597277, "cpu_ns": 229425844}
+{"phase": "measurement", "round": 6, "revision": "original", "wall_ns": 298336703, "cpu_ns": 298174876}
+{"phase": "measurement", "round": 6, "revision": "full", "wall_ns": 236035205, "cpu_ns": 235885695}
+{"phase": "measurement", "round": 6, "revision": "first", "wall_ns": 250097479, "cpu_ns": 249916302}
+{"phase": "measurement", "round": 7, "revision": "original", "wall_ns": 304310288, "cpu_ns": 304060176}
+{"phase": "measurement", "round": 7, "revision": "first", "wall_ns": 245345812, "cpu_ns": 245160018}
+{"phase": "measurement", "round": 7, "revision": "full", "wall_ns": 234442137, "cpu_ns": 234291255}
+{"status": "PASS", "exact_three_revision_report": {"source_crs": "EPSG:32632", "area_crs": "EPSG:6933", "area_method": "equal_area", "area_unit": "square_meter", "cell_area_method": "projected_cell_boundary", "resampling": "none", "valid_pixel_count": 18432, "selected_pixel_count": 18432, "unselected_pixel_count": 0, "nodata_pixel_count": 18432, "classes": [{"class_id": 1, "pixel_count": 6144, "area_m2": 5534024.865681255}, {"class_id": 2, "pixel_count": 6144, "area_m2": 5534024.842405765}, {"class_id": 3, "pixel_count": 6144, "area_m2": 5534024.888711899}], "total_area_m2": 16602074.59679892, "boundary_convergence": {"absolute_tolerance_m2": 1e-06, "relative_tolerance": 1e-08, "max_segments_per_edge_used": 8}}, "unique_calls_off_clock": {"original": 0, "first": 216, "full": 216}, "layout_cache_off_clock": {"checks": 71, "hits": 0}, "median_ms": {"original": {"wall_ns": 304.310288, "cpu_ns": 304.060176}, "first": {"wall_ns": 245.345812, "cpu_ns": 245.160018}, "full": {"wall_ns": 235.290598, "cpu_ns": 235.13617}}}
+elapsed=7.04s exit=0
