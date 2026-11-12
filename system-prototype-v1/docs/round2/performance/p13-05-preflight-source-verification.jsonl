@@ -1,0 +1,2 @@
+{"case": "measurement-base", "commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be", "runtime_files": 233, "sha256": "88e9b30d1842a1b27c382bfa64a42726b2c13f305f7d3dd19786362a3938b714", "scratch_backups": []}
+{"case": "candidate", "commit": "e874a0f7510ad7d99e0e623f211e0f5afeb411cd", "runtime_files": 234, "sha256": "71631892e364394313bcc69a2cb5434c07f084a78b49bcf8fc811e984607c07f", "scratch_backups": []}

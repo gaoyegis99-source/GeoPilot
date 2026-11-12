@@ -252,6 +252,8 @@
 - 主控的面积布局复用增量通过 20 项专项。三个真实窗口的 18 次报告一致。DEM L 窗口的 NumPy 去重从 768 次降至 30 次，两个 DEM 窗口较首版候选快约三分之一，遥感窗口略慢。 [原始测量与 JUnit](../../docs/round2/performance/p13-05-preflight.md)
 - A 的线面裁剪候选通过 35 项专项及四次真实 L 小窗 CLI，主控合并七个补丁后 102 项通过。F 的前后对照工具修正经过归档及失配变体复验。 [复验与边界](../../docs/round2/performance/p13-05-preflight.md)
 - F 的栅格采集候选在停计时后读取归一化步骤请求。4 项专项通过，归档 DEM S 98 条请求及两个超时 run 的执行前缀与遥测一致。主控核对补丁、退出码及 JUnit。 [复验日志](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log)
+- 主控固定前测与七补丁候选提交，候选 104 项回归通过。A 在同一原生镜像运行原版和候选各两项 S 矢量冒烟，四次独立验算通过。主控逐文件确认探针运行源码和配置与隔离提交相同。状态 BLOCKED，正式性能待 P13-03。 [提交与冒烟证据](../../docs/round2/performance/p13-05-preflight.md#隔离提交与原生冒烟)
+- C 的配置指纹候选在复制件中识别同版本 QGIS 绑定和 Python PROJ 数据变化。主控复跑 15 条探针记录，结果与指纹一致。原生 QGIS/GDAL 的数据路径仍需正式测量固定。 [配置复验](../../docs/round2/performance/p13-05-preflight-runtime-config.jsonl)
 
 ## P13-06 复用证据准备
 

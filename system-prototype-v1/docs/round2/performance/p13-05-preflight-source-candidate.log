@@ -1,0 +1,28 @@
+e874a0f7510ad7d99e0e623f211e0f5afeb411cd
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
++ nice -n 19 taskset -c 31 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python -m pytest -q -p no:cacheprovider tests/gis/raster/test_area_stats.py tests/gis/raster/test_area_stats_shared_projection.py tests/gis/test_intersects.py tests/gis/test_within.py tests/gis/test_prepared_spatial_relations.py tests/gis/test_source_feature_identity.py tests/runners/test_clip_points_to_extent.py tests/runners/test_output_staging.py tests/scheduler/test_restart_recovery.py tests/runners/test_process_timeout.py tests/runners/test_managed_gis_writers.py tests/runners/test_clip_vector_components.py tests/benchmarks/test_run_raster.py::test_collects_actual_normalized_requests_for_executed_steps --basetemp=/dev/shm/geopilot-p13-preflight-tree.uVfu18/pytest --junitxml=/dev/shm/geopilot-p13-preflight-tree.uVfu18/junit.xml
+........................................................................ [ 69%]
+................................                                         [100%]
+=============================== warnings summary ===============================
+../../../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+-- generated xml file: /dev/shm/geopilot-p13-preflight-tree.uVfu18/junit.xml ---
+104 passed, 1 warning in 53.49s
++ /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/run_memory_profile.py --help
+usage: run_memory_profile.py [-h] --kind {vector,raster} --before BEFORE
+                             --after AFTER
+
+Compare resource observations from two completed GeoPilot benchmark
+directories.
+
+options:
+  -h, --help            show this help message and exit
+  --kind {vector,raster}
+  --before BEFORE
+  --after AFTER
++ set +x
+Detached source candidate checks exit: 0

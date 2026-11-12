@@ -101,3 +101,22 @@ nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider \
 F 从真实归档构造变体，复现首版工具放行实际步骤参数漂移、报告计数矛盾和缺失持久终态。标为 unavailable 且带数值的 RSS 也被误算为差值。隔离修正核对原始计数、持久终态、共同已执行的步骤配置及 RSS 覆盖，拒绝这些变体。原运行超时而候选执行更多步骤时仍保留失败与成功各自统计，未以失败用时计算成功性能差值。主控从首版脚本重新应用补丁，两组验证输出均与 F 逐字节一致。旧栅格归档仅能对照已确认选项和实际工具版本。正式逐步比较还需留存实际请求与固定执行绑定。补丁及完整命令位于 `artifacts/test-results/p13-05-memory-comparator-reviewed.MnDC2U/SHA256SUMS`。 [复核原始结果](p13-05-preflight-comparator-review.log)
 
 F 的栅格采集增量在端到端墙钟停止、采样器退出后，只读获取适配器归一化步骤请求，保留工具、参数、状态及退出码。4 项专项通过。从真实归档副本核对 DEM S 的 14 个 run 共 98 条请求，以及 DEM L 和遥感 L 各一个超时 run 的 7 条和 8 条请求，均与遥测顺序和退出码一致。比较器按证据级别验证，接受同级对照，拒绝混用声明级与逐步请求级证据、同工具参数漂移及漏步。正式复测仍需固定或记录 QGIS provider 绑定与实际配置。两个补丁及复跑材料位于 `artifacts/test-results/p13-05-raster-step-requests.2FpacQ/SHA256SUMS`。 [命令、测试和归档复验](p13-05-preflight-raster-step-requests.log) · [JUnit](p13-05-preflight-raster-step-requests-junit.xml)
+
+## 隔离提交与原生冒烟
+
+| 用途 | 本地 Git 引用 | 提交 |
+| --- | --- | --- |
+| 前测源码及对照工具 | `codex/p13-05-preflight-base` | `977ab412d9f6e7558d22a5c431fac0ada90b07be` |
+| 七项优化候选 | `codex/p13-05-preflight-candidate` | `e874a0f7510ad7d99e0e623f211e0f5afeb411cd` |
+
+前测提交在 `b75090b` 上加入栅格请求采集、测试及前后比较工具，生产源码与应用配置逐文件相同。候选是前测的直接后继，两侧基准脚本、应用配置和依赖清单相同。候选的隔离回归通过 104 项，包含栅格采集测试。比较工具命令行帮助退出 0。 [测试日志](p13-05-preflight-source-candidate.log) · [JUnit](p13-05-preflight-source-candidate-junit.xml)
+
+原版及候选在同一 Ubuntu 24.04.5 镜像中各执行一次 S 级 T13 线相交和 T14 按面积分配。四次均通过独立验算。T13 裁回 128 条线，保留 3,936 m。T14 核验 96 个对象、144 条分配记录和 35,200 m²。输入文件逐字节相同，归一化步骤参数相同。两侧 GeoPackage 均通过登记指纹与独立内容核验，文件指纹跨运行有差异。T14 的 CSV、JSON 指纹一致。 [探针原始汇总](p13-05-preflight-native-probe.json)
+
+隔离提交与原生探针的 `src/`、`config/` 分别逐文件复核，原版 233 个文件、候选 234 个文件，路径及内容均吻合。原生环境提供 Python 3.12.3 和 QGIS 3.44.15，两个方法均经生产 Python CLI 执行。这四次为单次 S 冒烟，正式规模的运行分布仍待复测。完整命令、输入、样本和校验清单位于 `artifacts/test-results/p13-05-native-smoke.uPJ6d1/proof/`。 [源码校验](p13-05-preflight-source-verification.jsonl)
+
+## 运行配置指纹探针
+
+隔离采集模块读取实际方法、工具契约、QGIS 参数绑定和传感器配置，纳入方法发布台账与 Python pyproj 解析的数据根。本地实测覆盖 59 个应用配置文件和 16 个 PROJ 数据文件。配置搬目录后摘要相同。单独改变 QGIS 枚举绑定、道路方法参数、Landsat nodata、发布台账或 PROJ 数据库内容时，摘要均变化。数据库变体保留原 EPSG 版本。无效配置及选中的文件或目录符号链接被拒绝。两次隔离运行的 15 条记录在结果及指纹上吻合。 [复验原始记录](p13-05-preflight-runtime-config.jsonl)
+
+候选补丁、采集脚本和校验清单位于 `artifacts/test-results/p13-05-runtime-config.Tq8YGO/`。正式接入需在计时外采集并复核，原版和候选共用同一采集实现。QGIS 与 GDAL 原生运行时及其数据目录仍需固定。本探针未执行 GIS 算法。

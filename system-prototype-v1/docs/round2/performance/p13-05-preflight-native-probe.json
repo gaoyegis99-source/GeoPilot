@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "samples_passed": 4,
+  "same_runtime": {
+    "source_commit": "feab265b22ad25ac6ae7e846a8eb88ee343afdc2",
+    "cpu_affinity": [
+      31
+    ],
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "python_packages": {
+      "geopandas": "1.1.3",
+      "numpy": "2.4.4",
+      "pyogrio": "0.12.1",
+      "pyproj": "3.7.2",
+      "rasterio": "1.4.3",
+      "shapely": "2.1.2",
+      "fastapi": "0.141.1",
+      "starlette": "1.6.0"
+    },
+    "qgis_process": "/usr/bin/qgis_process",
+    "qgis_process_sha256": "4d3593bac0500aaf4097b739052728aec92545c5a939e53d7b3cf0a63950c663",
+    "qgis_process_binary_sha256": "7f5e51331df13a1b7ba2ff74002d4646a2f5b697beb8f6157b0bfa13b9f60b73",
+    "qgis_version": {
+      "exit_code": 0,
+      "stdout": "QGIS 3.44.15-Solothurn 'Solothurn' (44b4ef05178)\nQGIS code revision 44b4ef05178\nQt version 5.15.13\nPython version 3.12.3\nGDAL/OGR version 3.8.4\nPROJ version 9.4.0\nEPSG Registry database version v11.004 (2024-02-24)\nGEOS version 3.12.1-CAPI-1.18.1\nSQLite version 3.45.1\nOS Ubuntu 24.04.5 LTS",
+      "stderr": ""
+    },
+    "pyogrio_gdal": "3.11.4",
+    "geos": "3.13.1",
+    "proj": "9.5.1",
+    "proj_data": "1.20",
+    "protocol_sha256": "d0517e6572a6e246bd26a99ca009e6cd5af9eeb4edd252deefb49ed2c0cbd4e7",
+    "profile_sha256": "b162af1c69c4a4b3adba67f1fbed1b47e6d75367915fd700226736f7973b6a5b",
+    "runner_sha256": {
+      "run_vector.py": "52b254fcd93b08521ae7347c44e27f9dda3979bcda7fd8b97f1d72a5cd232063",
+      "_vector_reference.py": "2aad7d57adba3a9a98cf93e68c40e60d717268b6fd5f229ad54e59bfd46d41f1",
+      "_vector_road_profile.py": "31aefb282de59a63882e7b1bcca436fe1f10204bf60e6c07f0f8c6d0d5117232"
+    },
+    "storage_filesystem": {
+      "exit_code": 0,
+      "stdout": "tmpfs",
+      "stderr": ""
+    },
+    "thread_and_cache_settings": {
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "GDAL_NUM_THREADS": "1",
+      "GDAL_CACHEMAX": null,
+      "MKL_NUM_THREADS": "1",
+      "QT_QPA_PLATFORM": "offscreen",
+      "QGIS_CUSTOM_CONFIG_PATH": "/tmp/geopilot-qgis",
+      "GEOPILOT_TELEMETRY": "1",
+      "GEOPILOT_TELEMETRY_QGIS_SCOPE": null
+    }
+  },
+  "same_inputs": {
+    "relations.gpkg": {
+      "bytes": 274432,
+      "sha256": "ec61bf63b999c2fb2ec6e2e21d1a41485769e0cc1d1db9b64fbf6782bdea179b"
+    },
+    "road.gpkg": {
+      "bytes": 204800,
+      "sha256": "2dc8036995e1385f710d429567bb59593ea23dab007671c94593213d1a1d1939"
+    },
+    "t14.gpkg": {
+      "bytes": 217088,
+      "sha256": "b661950112a53c1f2ccccccb6ac9d72adc18ef238849247416f74c80bc977b4e"
+    },
+    "manifest.json": {
+      "bytes": 34463,
+      "sha256": "2f3f54dd48ffe353a5c0b9f4ef2e5d62f2fe4aa8429d133b88bdb8d26efd05ea"
+    }
+  },
+  "independent_results": {
+    "t13-lines-intersects": {
+      "independent_reference": {
+        "selected": 128,
+        "clipped": 128,
+        "retained_line_length_m": 3936.0,
+        "retained_area_m2": 0.0
+      },
+      "steps": [
+        {
+          "key": "apply_spatial_relation",
+          "status": "SUCCEEDED",
+          "exit_code": 0,
+          "tool": {
+            "id": "python-select-spatial-relation",
+            "version": 1
+          },
+          "parameters": {
+            "spatial_relation": "intersects"
+          },
+          "error": null
+        },
+        {
+          "key": "clip_back_to_analysis_extent",
+          "status": "SUCCEEDED",
+          "exit_code": 0,
+          "tool": {
+            "id": "python-clip-vector-to-extent",
+            "version": 1
+          },
+          "parameters": {},
+          "error": null
+        }
+      ],
+      "check_rules": {
+        "output_exists": true
+      },
+      "run_ids": {
+        "original": "fd35b72fe988487dae3e8648472cc55a",
+        "candidate": "9776fc9c4d214ccb8cf82f284f0bc563"
+      },
+      "artifact_fingerprints": {
+        "original": {
+          "clipped_targets": "8591054ad9257de6705e7544a03bae7d3ed28e47b61b11ba7c1f28a8b58e82d5",
+          "original_targets": "a44d8ced7f9bfa93c11ed80ec331103a82b2624c1edabe1766f7fca35a68e6a4"
+        },
+        "candidate": {
+          "clipped_targets": "fdb3d63d54c3e01dbdef1dd1e70923d8a7f0beb135d672b5b700f754d51d16b9",
+          "original_targets": "77e07943db265c7fbb180646cba0a180542f3ec6507792f0ed70f67f73595071"
+        }
+      },
+      "telemetry_status": {
+        "original": "recorded",
+        "candidate": "recorded"
+      }
+    },
+    "t14-split_by_area": {
+      "independent_reference": {
+        "selected": 128,
+        "clipped": 112,
+        "counts": {
+          "total": 96,
+          "assigned": 64,
+          "unassigned": 32
+        },
+        "areas_m2": {
+          "total": 35200.0,
+          "assigned": 30400.0,
+          "unassigned": 4800.0,
+          "uncovered": 4800.0
+        },
+        "allocation_rows": 144,
+        "zones": 32
+      },
+      "steps": [
+        {
+          "key": "apply_spatial_relation",
+          "status": "SUCCEEDED",
+          "exit_code": 0,
+          "tool": {
+            "id": "python-select-spatial-relation",
+            "version": 1
+          },
+          "parameters": {
+            "spatial_relation": "intersects"
+          },
+          "error": null
+        },
+        {
+          "key": "clip_back_to_analysis_extent",
+          "status": "SUCCEEDED",
+          "exit_code": 0,
+          "tool": {
+            "id": "python-clip-vector-to-extent",
+            "version": 1
+          },
+          "parameters": {},
+          "error": null
+        },
+        {
+          "key": "aggregate_by_zone",
+          "status": "SUCCEEDED",
+          "exit_code": 0,
+          "tool": {
+            "id": "python-polygon-zone-statistics",
+            "version": 1
+          },
+          "parameters": {
+            "boundary_assignment": "split_by_area",
+            "boundary_tie": "unassigned",
+            "area_crs": "EPSG:6933",
+            "area_unit": "square_meter"
+          },
+          "error": null
+        }
+      ],
+      "check_rules": {
+        "output_exists": true
+      },
+      "run_ids": {
+        "original": "9ba4d8247583450ba21bb34743016192",
+        "candidate": "cb607a8d115b4e24a24ba7f0d5ee7e32"
+      },
+      "artifact_fingerprints": {
+        "original": {
+          "allocation_details": "d1aa0f55a3ad5e7adaaee6717f4a78b4350014940f480cc9ea0fa6fef9015be4",
+          "clipped_targets": "4d934860ae6f25bc624688649425ba8496b160f03fbf5b8b916fef3f10ef0a0b",
+          "original_targets": "4134029c6e11b1fc4b2561acf2358e07624f8609227585f59be83ad5c439e421",
+          "zone_statistics": "8955bbe2eada7a6c97f812e70b1d36bcc44e21cd36dcb4b1e9cfe058ad49be04"
+        },
+        "candidate": {
+          "allocation_details": "d1aa0f55a3ad5e7adaaee6717f4a78b4350014940f480cc9ea0fa6fef9015be4",
+          "clipped_targets": "f4f5ee7aef224a7bfcaefe16a98e08d03b4dc0d4d929c56ae7ba650d29d2806b",
+          "original_targets": "9722dc55addbcaf91bfeaa9b2bb42544c3398159dc5e0fd8d58c45772bdb8321",
+          "zone_statistics": "8955bbe2eada7a6c97f812e70b1d36bcc44e21cd36dcb4b1e9cfe058ad49be04"
+        }
+      },
+      "telemetry_status": {
+        "original": "recorded",
+        "candidate": "recorded"
+      }
+    }
+  }
+}

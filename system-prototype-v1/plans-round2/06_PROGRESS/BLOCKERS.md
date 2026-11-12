@@ -52,6 +52,8 @@ P13-05 的布局复用增量在两个 DEM 窗口上较首版候选再降约三�
 
 P13-05 的原版 L 线相交 14 轮均在关系判定超时。局部裁剪候选已通过真实线面窗口对照，Z/M 保留全并集处理，正式前后耗时和峰值内存待测。 [候选证据](../../docs/round2/performance/p13-05-preflight.md)
 
-P13-05 的栅格前后测采集候选已在归档副本核对实际步骤请求，正式测量还需固定实际执行绑定。 [采集验证](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log)
+P13-05 的栅格前后测采集候选已在归档副本核对实际步骤请求，配置指纹探针可识别同版本的绑定与 Python PROJ 数据变化。正式测量还需固定实际执行绑定及 QGIS/GDAL 原生数据目录。 [请求采集](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log) · [配置复验](../../docs/round2/performance/p13-05-preflight-runtime-config.jsonl)
+
+P13-05 已固定前测和七补丁候选的独立提交，并用同一原生镜像通过四次 S 矢量正确性冒烟。正式全规模前后测继续等待 P13-03。 [提交与冒烟证据](../../docs/round2/performance/p13-05-preflight.md#隔离提交与原生冒烟)
 
 P13-06 仍待 P13-05。实际 QGIS 参数探针确认请求和工具版本相同的情况下，绑定变化会改变计算参数。正式缓存还需验证复用来源及本次输出。 [证据准备](../../docs/round2/performance/p13-06-preflight.md)
