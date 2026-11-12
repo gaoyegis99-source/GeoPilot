@@ -56,7 +56,9 @@ P13-05 已分别验证逐步请求采集、原生环境指纹及计时外配置�
 
 P13-05 修正版 M 矢量和 DEM S 配对已完成。遥感 S 原版在第 5 次冷态试次中止，持久库记录 `align_two_dates` 的 SQLite 锁冲突。受控 `BEGIN EXCLUSIVE` 复现状态 GET 的 `SQLITE_BUSY` 与 500。遥感 S 新配对、DEM M/L 和遥感 L 已排队，等待 L 矢量释放测量锁。 [修正版 M 复测](../../docs/round2/performance/p13-05-vector-m-revised.md) · [栅格 S 证据](../../docs/round2/performance/p13-05-raster-s.md)
 
-L 点、线相交配对已完成，两组修正版各 14 次通过。点相交原版 14 次裁回超时，线相交原版 14 次空间关系判定超时。L 按面积分配原版冷态 7 次空间关系判定超时，暖态仍在采集。四组栅格继续等待测量锁。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
+L 点、线相交配对已完成，两组修正版各 14 次通过。L 按面积分配原版 14 次空间关系判定超时，修正版已观测到裁回超时。冻结批次继续采集，局部裁回另行验证。四组栅格继续等待测量锁。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
+
+暂存与取消的组合回归 23 项通过。土地利用分区重投影的暂存修补已在隔离分支验证。终态删除失败的回执保留和显式恢复已独立复现。 [组合回归](../../docs/round2/performance/p13-05-staging-resources.md#暂存与取消的组合回归)
 
 P16-06 的 Git 证据链接闭合、L 点相交净导出复算和集成预演固定节点收集已核验。正式归档等待 P13 阶段结果和最终源码提交的验证回执。 [证据预检](../../docs/round2/deployment/p16-06-tooling.md)
 

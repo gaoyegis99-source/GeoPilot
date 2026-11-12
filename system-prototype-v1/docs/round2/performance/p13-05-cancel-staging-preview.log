@@ -1,0 +1,15 @@
+base 0371589578b6c2dbf985f61298552a170a562a40
+preview ca55a233a84f3c2171ea4a6af8d08ec6b52e6264
+34ba431821eaad112062ed9c738b2a5b1c1b3eab
+3.13.13
+3.51.2
+nice -n 19 taskset -c 31 .venv/bin/python -B -m pytest tests/runners/test_output_staging.py tests/scheduler/test_cancellation.py -q -p no:cacheprovider --basetemp=<tmpfs> --junitxml=<evidence>
+.......................                                                  [100%]
+=============================== warnings summary ===============================
+../../../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-cancel-staging-preview.0c8gnH/junit.xml -
+23 passed, 1 warning in 15.75s

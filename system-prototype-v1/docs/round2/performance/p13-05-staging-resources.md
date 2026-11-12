@@ -31,3 +31,66 @@ M 档三个矢量负载的候选 RSS 观测中位数较高。原候选 `e874a0f`
 首个修正版点相交分片 14 次全部通过。与原版对照的冷态墙钟中位数为 8.08 → 2.89 秒，暖态为 8.11 → 3.08 秒。原版与修正版的观测 RSS 中位数约为 142 MiB，冷热组均有 partial，仍不计算 RSS 差值。独立重跑冻结比较器，输出与启动器保存的结果逐字节相同。原始证据在上述输出根，复跑结果在启动器目录的 `first-pair-recheck.json`。
 
 后续三个修正版分片均已完成，四组共 56 次新运行通过。 [修正版 M 完整结果](p13-05-vector-m-revised.md)
+
+## 暂存与取消的组合回归
+
+主控在 `0371589578b6c2dbf985f61298552a170a562a40` 的独立工作树叠加两个性能候选提交，得到预演 `ca55a233a84f3c2171ea4a6af8d08ec6b52e6264`。Python 3.13.13、SQLite 3.51.2 上运行 `tests/runners/test_output_staging.py` 和 `tests/scheduler/test_cancellation.py`，23 项通过，0 失败、0 跳过，退出 0。覆盖真实子进程取消和超时、租约及重启恢复、SQLite 锁竞争下取消观察与发布边界。 [命令与日志](p13-05-cancel-staging-preview.log) · [JUnit](p13-05-cancel-staging-preview-junit.xml)
+
+D 核对了两个改动的调用链。标准服务路径持有同一工作进程租约直到暂存清理完成，取消观察和恢复获取租约均采用非阻塞策略。
+
+## 分区重投影与终态回执
+
+A 在注册的 `python-land-use-assign` 工具执行真实 CRS 重投影时触发取消。冻结候选留下 98,304 字节的临时 GeoPackage。独立提交 `b126785a5d51ecff2a27bbb2c6cbefc4171e55ad` 使用现有受管目录定位器。修补后子进程仍以 -15 退出，临时文件及目录被回收，分配成果未发布。正常执行及独立 CLI 均得到预期的 100 m² 分配。主机小型回归 10 项通过，固定原生镜像专项 3 项通过，均退出 0。补丁尚在隔离分支。 [分区重投影入口](../../../src/geopilot/gis/tools/land_use_transition.py#L52)
+
+D 在生产 worker 正常退出后注入一次 `EBUSY` 删除错误，运行仍 `SUCCEEDED/PASSED`，留下受管空目录和所有权回执。恢复删除能力后，启动恢复扫描跳过该终态运行。独立复验在服务停止、取得调度与工作进程租约、读取该运行的持久步骤请求后调用现有恢复函数，清除了已核对设备和 inode 的目录及回执。正式 GeoPackage、成果清单、数据库终态和同名前缀的未登记目录均保持原字节或记录。两次探针各 1 项通过，退出 0。回执尚未写成的目录和持续删除失败的情形仍需单独核查。 [红绿测试、补丁及终态恢复探针](p13-05-staging-edge-evidence.tar.gz)
+
+### 按终态步骤回执定向恢复
+
+停止对应项目服务后，从包含暂存修复的原型目录执行。将 `python_bin`、`db`、`workspace`、`run_id` 和 `step_key` 设为实际解释器、项目库、工作区、运行和步骤。命令经第三个隔离样本原样复跑，退出 0。结果清单与数据库摘要均未变化。完整命令输出随上面的原始证据归档提供。
+
+```bash
+PYTHONPATH=src PYTHONDONTWRITEBYTECODE=1 "$python_bin" - "$db" "$workspace" "$run_id" "$step_key" <<'PY'
+from pathlib import Path
+import sys
+
+from geopilot.execution.output_staging import recover_output_staging
+from geopilot.execution.step_support import output_staging_receipt_path
+from geopilot.execution.worker_lease import exclusive_local_lock, worker_lease
+from geopilot.persistence.plan_repository import row_for_plan
+from geopilot.persistence.run_repository import get_run, get_run_step
+from geopilot.persistence.schema import open_database
+from geopilot.persistence.workspace import RunWorkspace
+
+database_path, workspace_root, run_id, step_key = sys.argv[1:]
+database = Path(database_path).resolve(strict=True)
+workspace = Path(workspace_root).resolve(strict=True)
+if not database.is_file() or not workspace.is_dir():
+    raise SystemExit("Expected an existing project database and workspace")
+terminal = {"SUCCEEDED", "FAILED", "CANCELLED"}
+with exclusive_local_lock(database.with_name(f"{database.name}.scheduler.lock")):
+    with open_database(database, read_only=True) as connection:
+        run = get_run(connection, run_id)
+        step = get_run_step(connection, run_id, step_key)
+        if (run is None or step is None or run.execution_status not in terminal
+                or run.check_status == "CHECKING" or step.status not in terminal
+                or step.request is None or not step.request.output_targets):
+            raise SystemExit("Expected an exact terminal run and step with persisted output targets")
+        plan = row_for_plan(connection, run.plan_id, run.plan_version)
+        if plan is None:
+            raise SystemExit("The exact confirmed plan is unavailable")
+        workdir = RunWorkspace(workspace, plan["task_id"], run.id).path
+        if workdir != Path(run.workdir) or workdir.resolve(strict=True) != workdir:
+            raise SystemExit("Recorded run directory does not match the configured workspace")
+        request = step.request.model_dump(mode="json")
+        if (request["run_id"], request["step_key"]) != (run.id, step.step_key):
+            raise SystemExit("Persisted request does not identify the selected run and step")
+    with worker_lease(workdir):
+        receipt = output_staging_receipt_path(workdir, request)
+        if receipt.is_symlink() or not receipt.is_file():
+            raise SystemExit("No eligible regular ownership receipt. Leave the files in place.")
+        recover_output_staging(workdir, request)
+        if receipt.exists() or receipt.is_symlink():
+            raise SystemExit("Cleanup incomplete. Preserve the receipt and inspect the filesystem error.")
+        print(f"Recovered owned staging for {run.id}/{step.step_key}")
+PY
+```
