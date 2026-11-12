@@ -1,0 +1,14 @@
+Preflight on committed source using scripts/quality/round2_release_manifest.py _scope and _reproduction_links with the committed historical audit index, Python 3.13.13, exit=0.
+Source d2de13790c4b3a31b88d495fae5095c8acb1fee6. 1604 committed paths, 929 in release source scope.
+system-prototype-v1/docs/release/ROUND2_REPRODUCTION.md: 554 reachable paths resolved
+system-prototype-v1/plans-round2/06_PROGRESS/ACCEPTANCE_LOG.md: 1106 reachable paths resolved
+system-prototype-v1/docs/round2/performance/p13-05-vector-l.md: 34 reachable paths resolved
+system-prototype-v1/docs/round2/performance/p13-05-raster-s.md: 24 reachable paths resolved
+system-prototype-v1/docs/round2/performance/p13-05-runner-reproducibility.md: 5 reachable paths resolved
+The L point evidence archive is included in the resolved evidence set.
+
+Replay using a clean git archive export. Strict vector comparator, archive SHA-256 verification, and independent before/after sample audits, exit=0.
+git source d2de13790c4b3a31b88d495fae5095c8acb1fee6
+efb1bb22c92ffd42eab53292dc41868b30f61cf4b9f7473fba82efaa25e2804c  /dev/shm/geopilot-clean-point-replay.rTs8cZ/system-prototype-v1/scripts/bench/run_memory_profile.py
+787a307337d3eb7de92c99e15ba22a7d700e82eff7fc5b244156f914837f493d  /dev/shm/geopilot-clean-point-replay.rTs8cZ/system-prototype-v1/docs/round2/performance/p13-05-vector-l-point-evidence.tar.gz
+Clean Git export: byte-identical paired comparison and both independent sample audits, exit=0.

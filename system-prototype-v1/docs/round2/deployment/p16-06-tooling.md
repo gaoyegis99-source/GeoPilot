@@ -33,3 +33,7 @@ A 在与正式基准不同的物理盘上归档 Python venv、QGIS CLI 和对应
 归档为 `artifacts/test-results/p16-06-native-bindings.BdbMRw/p13-native-readonly-bindings.tar.gz`，共 142,078,689 字节，SHA-256 为 `e26482ebf553a85cb572a37fe9adc4bb0c224c4e096e7b2fbdf047dbd22bdef0`。同目录的 `proof/` 保留打包、恢复、容器命令与校验日志。
 
 正式矢量基准结束后，主控用 `docker image save --platform linux/amd64` 导出该固定镜像，归档 `artifacts/test-results/p16-06-native-image.HGV83q/p13-native-image.tar` 共 1,720,453,120 字节，SHA-256 为 `db2d9f1e7e72a3d848a357df5c903278280b6e0d19156c84188e7d770ae41ec3`。同宿主启动初始镜像数为 0 的独立 rootless Docker，导入后镜像 ID 和五个层摘要一致。使用从绑定归档重新解包的文件，断网运行 QGIS/Python 版本及指纹检查，退出 0。宿主 rootless AppArmor 配置查询在合成夹具上报权限错误，隔离复验容器显式指定其 AppArmor 设置后通过。原生复验覆盖镜像、绑定和版本，正式第二轮候选包仍待阶段证据和最终同提交回执。 [离线导入和运行报告](p16-06-native-image-verification.json)
+
+## 已提交证据的链接闭合
+
+主控对提交 `d2de13790c4b3a31b88d495fae5095c8acb1fee6` 的真实 Git 树调用清单生成器的链接校验。依据固定的历史审计索引，发布复现文档、验收总账和三份 P13-05 报告五个入口均通过。验收总账解析到 1,106 个路径，矢量 L 入口包含点相交原始证据归档。随后仅从 `git archive` 导出比较器、点相交归档、预期结果和历史样本。归档摘要、两侧样本及严格配对独立复算通过，结果逐字节一致，退出 0。最终候选包仍需完成阶段验收和同提交回归。 [链接和 Git 导出复验](p16-06-evidence-closure.log) · [点相交复测](../performance/p13-05-vector-l.md)
