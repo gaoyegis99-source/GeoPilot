@@ -1,0 +1,63 @@
+clean_directory /tmp/geopilot-area-fixtures.tR4Fcg
+Python 3.13.13
+command /usr/bin/time -p nice -n 19 taskset -c 31 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/verify_area_fixtures.py
+{
+  "status": "PASS",
+  "area_crs": "EPSG:6933",
+  "fixtures": [
+    {
+      "id": "dem-m",
+      "sha256": "86ed819fd97018a0bc063ae21b5a28e9ef683da9e3ecad399a76085e9536e372",
+      "bytes": 11527,
+      "valid_class_counts": {
+        "7": 4183812
+      },
+      "masked_pixels": 2304,
+      "maximum_absolute_pixel_error": 0.0,
+      "area_m2": {
+        "7": 418714664.9057954
+      }
+    },
+    {
+      "id": "dem-l",
+      "sha256": "7a62aed10a269d83989d10d9f35b12527ef4be1be523e51bd0300649549213e8",
+      "bytes": 128239,
+      "valid_class_counts": {
+        "7": 67039236
+      },
+      "masked_pixels": 36864,
+      "maximum_absolute_pixel_error": 0.0,
+      "area_m2": {
+        "7": 6708920388.833747
+      }
+    },
+    {
+      "id": "remote-l",
+      "sha256": "b62b6a92e1ac5d88afb7c92c9c45ec8cd3bee72a13b65bd73ab9ea318cd1e199",
+      "bytes": 44420,
+      "valid_class_counts": {
+        "1": 1572864,
+        "2": 1572864,
+        "3": 1572864
+      },
+      "masked_pixels": 4718592,
+      "maximum_absolute_pixel_error": 0.0,
+      "area_m2": {
+        "1": 1416612233.9032466,
+        "2": 1416612137.6309156,
+        "3": 1416612330.112834
+      }
+    }
+  ]
+}
+real 6.19
+user 5.78
+sys 0.40
+verify_exit 0
+command /usr/bin/time -p nice -n 19 taskset -c 31 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python -m pytest -q -p no:cacheprovider --basetemp=/dev/shm/geopilot-area-fixtures-pytest.jwqzU7/pytest tests/benchmarks/test_verify_area_fixtures.py
+..                                                                       [100%]
+2 passed in 0.30s
+real 0.48
+user 0.40
+sys 0.07
+pytest_exit 0

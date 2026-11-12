@@ -138,8 +138,10 @@ jobs:
           "$GEOPILOT_QGIS_PROCESS" --json help native:buffer > "$RUNNER_TEMP/qgis-buffer-help.json"
       - name: Run GIS suites and fixed-case nodes
         run: |
+          python scripts/bench/verify_area_fixtures.py > "$RUNNER_TEMP/area-fixtures.json"
           python -m pytest -q -p no:cacheprovider \
             tests/smoke/test_qgis_smoke.py tests/golden tests/gis tests/methods \
+            tests/benchmarks/test_run_raster.py tests/benchmarks/test_verify_area_fixtures.py \
             tests/runners/test_measurement_steps.py \
             tests/application/test_plan_run.py::test_road_workflow_passes_fixed_road_cases_and_reproduces_in_an_independent_run \
             tests/llm/test_data_boundary.py \
@@ -162,4 +164,5 @@ jobs:
           path: |
             ${{ runner.temp }}/qgis-version.txt
             ${{ runner.temp }}/qgis-buffer-help.json
+            ${{ runner.temp }}/area-fixtures.json
             ${{ runner.temp }}/gis-junit.xml
