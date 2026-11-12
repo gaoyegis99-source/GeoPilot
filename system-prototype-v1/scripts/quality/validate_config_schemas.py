@@ -25,6 +25,7 @@ from geopilot.domain.step_io import ExecutionStatus, StepRequest, StepResult
 from geopilot.domain.tool_contract import ToolContract
 from geopilot.execution.qgis_runner import _validate_binding
 from geopilot.execution.step_support import AdapterError
+from geopilot.llm.clarification import ClarificationReport
 from geopilot.llm.response_parser import ModelSuggestion
 from geopilot.methods.loader import _UniqueKeySafeLoader, load_method_catalog
 from geopilot.methods.models import MethodDefinition, MethodRef
@@ -40,6 +41,7 @@ from geopilot.tools.registry import ToolRegistry
 
 SCHEMAS = {
     "analysis-plan": AnalysisPlan,
+    "clarification-report": ClarificationReport,
     "error-detail": ErrorDetail,
     "execution-status": ExecutionStatus,
     "method-definition": MethodDefinition,

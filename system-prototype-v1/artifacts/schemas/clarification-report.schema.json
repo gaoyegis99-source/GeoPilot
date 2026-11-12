@@ -1,0 +1,178 @@
+{
+  "$defs": {
+    "ClarificationItem": {
+      "additionalProperties": false,
+      "properties": {
+        "blocks": {
+          "enum": [
+            "confirmation",
+            "execution"
+          ],
+          "title": "Blocks",
+          "type": "string"
+        },
+        "code": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Code",
+          "type": "string"
+        },
+        "field": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Field",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "goal",
+            "input",
+            "option",
+            "validation",
+            "confirmation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "options": {
+          "default": [],
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/DataAssetRef"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "title": "Options",
+          "type": "array"
+        },
+        "reason": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Reason",
+          "type": "string"
+        },
+        "required": {
+          "const": true,
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "kind",
+        "code",
+        "field",
+        "reason",
+        "blocks"
+      ],
+      "title": "ClarificationItem",
+      "type": "object"
+    },
+    "DataAssetRef": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "asset_version": {
+          "exclusiveMinimum": 0,
+          "title": "Asset Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "asset_id",
+        "asset_version"
+      ],
+      "title": "DataAssetRef",
+      "type": "object"
+    },
+    "MethodRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "MethodRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/ClarificationItem"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "method": {
+      "$ref": "#/$defs/MethodRef"
+    },
+    "plan_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Plan Id",
+      "type": "string"
+    },
+    "plan_version": {
+      "exclusiveMinimum": 0,
+      "title": "Plan Version",
+      "type": "integer"
+    },
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "status": {
+      "enum": [
+        "blocked",
+        "ready_for_confirmation",
+        "confirmed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "task_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Task Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "task_id",
+    "plan_id",
+    "plan_version",
+    "method",
+    "status",
+    "items"
+  ],
+  "title": "ClarificationReport",
+  "type": "object"
+}
