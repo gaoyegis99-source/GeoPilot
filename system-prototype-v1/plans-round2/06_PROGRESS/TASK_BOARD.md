@@ -18,10 +18,10 @@
 | P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | ACCEPTED | [旁路采样、真实运行及 T01–T16 复验](../../docs/round2/performance/p13-02.md) |
 | P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | ACCEPTED | S/M/L 各完成 20 个冷热组。S/M 正式样本各 100 通过，L 140 次实际失败，保留失败分位及资源观测。 [基准报告](../../docs/round2/performance/p13-03.md) · [独立复算](../../docs/round2/performance/p13-03-L-final-audit.log) |
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
-| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | DOING | 遥感 L 正式配对完成，原版 14 轮超时，修正版 14 轮 GIS 与验算通过，5 次正式计量有状态观察失败。T14 局部裁回候选冷暖 14 轮全通过，正式配对与回执已复算。四项已验证修复集成，宿主 478 项通过，原生补跑通过全部 22 项原跳过节点。DEM M 正式配对完成，原版重试 14 轮面积超时，修正版 14 轮成果验算通过。DEM L 原版和冻结修正版整幅直接探针通过，结果逐字节一致，跨批候选运行中。 [350 个运行的配对资源复算](../../docs/round2/performance/p13-05-resource-coverage.md#纳入-dem-m-重试的全部已封存配对) · [矢量 M](../../docs/round2/performance/p13-05-vector-m-revised.md) · [矢量 L](../../docs/round2/performance/p13-05-vector-l.md) · [栅格 S](../../docs/round2/performance/p13-05-raster-s.md) · [栅格 M/L](../../docs/round2/performance/p13-05-raster-m-l.md) · [暂存复验](../../docs/round2/performance/p13-05-staging-resources.md) |
-| P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已复核正式栅格指纹、实际 GDAL 配置和 GeoPackage 时间戳反例，以及多文件组回退和租约边界。等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
+| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | ACCEPTED | 同输入同环境严格复算 13 个配对、350 个运行，DEM L 三侧整幅结果字节一致，最终源码 367 项数据适配与 GIS 回归通过。生产 DEM L 60 秒限时仍全超时。 [主控验收](../../docs/round2/performance/p13-05-staging-resources.md#p13-05-主控验收) |
+| P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | TODO | 前置已通过。已复核指纹、实际 GDAL 配置、时间戳、多文件组回退及租约边界。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
 | P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | SQLite 锁恢复、队列取消与重启已验证。正常并发探针共 724 次状态 GET 成功，20 次实际提交锁窗口已复算。固定原生镜像的 ext4 与 tmpfs 对照另有 206 次状态 GET 成功，冻结批底层原因仍待确认。 [验收](../../docs/round2/performance/p13-07.md) |
-| P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待多档基准、内存与缓存验收。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |
+| P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待缓存验收及并发 ADR。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |
 | P14-01 | P14 | 方法开发者 CLI 需求与接口设计 | C/F | P12-09 | ACCEPTED | [CLI 契约、实测和只读守卫](../../docs/round2/methods/p14-01.md) |
 | P14-02 | P14 | 方法配置模板生成 | C | P14-01 | ACCEPTED | [独立 Schema 核验与联合回归](../../docs/round2/methods/p14-02.md) |
 | P14-03 | P14 | 方法配置静态 lint | C/F | P14-01、P12-09 | ACCEPTED | [目录、失败路径、原 CLI 回归和复验](../../docs/round2/methods/p14-03.md) |
