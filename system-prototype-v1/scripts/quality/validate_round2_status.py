@@ -54,15 +54,21 @@ def check_links(root, source, cell, identifier):
         require(target.is_relative_to(root) and target.is_file(), f"{identifier}: invalid evidence {link}")
 
 
-def check_board(root, require_released):
+def load_board(root):
     inventory = json.loads((root / INVENTORY).read_bytes())
     planned = {task["id"]: task["phase"] for task in inventory["tasks"]}
     require(len(planned) == len(inventory["tasks"]) == inventory["task_count"], "Invalid task inventory count")
     require(dict(Counter(planned.values())) == inventory["phase_counts"], "Invalid phase counts")
     board = rows(root / BOARD, TASK, 7)
     require(board.keys() == planned.keys(), "Task board and inventory IDs differ")
-    for identifier, (phase, _, _, _, status, evidence) in board.items():
+    for identifier, (phase, _, _, _, status, _) in board.items():
         require(phase == planned[identifier] and status in STATES, f"{identifier}: invalid phase or status")
+    return board
+
+
+def check_board(root, require_released):
+    board = load_board(root)
+    for identifier, (phase, _, _, _, status, evidence) in board.items():
         if phase == "P12" and (identifier != "P12-12" or require_released):
             require(status == "ACCEPTED", f"{identifier}: gate requires ACCEPTED, found {status}")
         if phase == "P12" and status == "ACCEPTED":
