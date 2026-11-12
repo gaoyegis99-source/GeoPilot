@@ -1,0 +1,1679 @@
+{
+  "verification": "different",
+  "manifest": {
+    "path": "artifacts/reports/final/delivery-manifest.json",
+    "release": "GeoPilot system prototype v1",
+    "acceptance_date": "2026-11-12",
+    "sha256": "f4a32a3ca58d5fe0171b2dfedf3501c73a7a81a89ac7c1d466be255bf85b750e",
+    "source_index": {
+      "stored": "14a7ed5f906d19cd4e82173396b84d4ecf1b3a62e9372a45fb88e20acc3f573f",
+      "computed": "14a7ed5f906d19cd4e82173396b84d4ecf1b3a62e9372a45fb88e20acc3f573f",
+      "matches": true
+    }
+  },
+  "pinned": {
+    "commit": "80d724f35fba31cacb9d3f740265b2713c6be6f4",
+    "source": {
+      "counts": {
+        "matched": 380,
+        "added": 18,
+        "missing": 0,
+        "changed": 37,
+        "invalid": 0
+      },
+      "differences": [
+        {
+          "path": "config/methods/attribute-filter-export.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "593473010fb7939f3a0bf742d768446fba94dc3d342fced03e3ad08047c8dbbe",
+          "observed_sha256": "c96a5d7f256bd216c23b981b923546d77c92e6b8824f8268f4bf7342a093a28f"
+        },
+        {
+          "path": "config/methods/dem-terrain-analysis.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "dabdc060bc8c4a1b3cf506582701e8fa23e7f7070be76f4c0b526079e9013f43",
+          "observed_sha256": "ed2a696d6f6fe72f5a401c7e6a84a8491210978f48c991e511369fca12515973"
+        },
+        {
+          "path": "config/methods/land-use-change.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "e6ca0be63c785dbd8f6f1bbdef065b69bc9226a5138b2e95a02d725290f5d937",
+          "observed_sha256": "e11f93a602c48d88cb82bf5f5f1b4abfb989b050c3548b934d087ed5150393f2"
+        },
+        {
+          "path": "config/methods/polygon-zone-statistics.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "7a6e04a6ec5e97c7f71c578fbad9ddd1c288a203485527299c587a6f2a828f8a",
+          "observed_sha256": "26110b799517b62fce605d31d4054a19ff78ab77f47ce2f2a770898290d8e828"
+        },
+        {
+          "path": "config/methods/remote-sensing-index-change.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "b84ee16c6ded506bc724d1777409fdd1a9f931507931c77ff223cefd8c49ca57",
+          "observed_sha256": "e5331572ffe08c7f366ed5b510ea5ec76c509a1545800b835a616371f7a13355"
+        },
+        {
+          "path": "config/methods/road-buffer-statistics.v2.yaml",
+          "status": "changed",
+          "manifest_sha256": "f42a1ba43ce1d4819369ddab6f06f3b6a3750011c26029d012cc36d35bf7df70",
+          "observed_sha256": "87758b005dce881c5824b801e77ad109f56338b3a90b8609fe51b83f1822cd0e"
+        },
+        {
+          "path": "config/methods/road-buffer-statistics.v3.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "298e82e52dc653be8e6487bfd39afe1f5ec9a18a9a12d71036abecaf4674607a"
+        },
+        {
+          "path": "config/methods/spatial-select-and-clip.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "93a9ab6801b2e92ea96bc5a13f1be441ff93eee2900b79c16d25485429f53df3",
+          "observed_sha256": "8a9622573e453e25d5600975d14bbbabfd568e99656b5d93ccbf7db97eb48031"
+        },
+        {
+          "path": "config/tools/python-expand-wgs84-analysis-extent.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "43f5369c0c5d8fc6531e4ae14ff177fba4ebed0f1119a8854dbdfd15b001d888"
+        },
+        {
+          "path": "config/tools/python-prepare-wgs84-measurement-lines.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "17f92fe29562ac91b5500c7f5e8a3dbd09b5bf60fa0ac3557bd83adb796e5801"
+        },
+        {
+          "path": "config/tools/python-remote-sensing-calculate-ndvi.yaml",
+          "status": "changed",
+          "manifest_sha256": "132746c71a627586f209437f8e1aacd57e732f236e131c1b55e471febdd41d61",
+          "observed_sha256": "8738c32fcb9b88ec8731d4afcc5d4b391282f057c9a66cb21497bb0cb3fb7f95"
+        },
+        {
+          "path": "config/tools/python-select-wgs84-roads.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "dd66309a5566504e87517a10e7633c265974c6c349f1da6c6cb0e206cc843ce7"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "status": "changed",
+          "manifest_sha256": "01a51da9e027e1f52f82d49ac76d215713e30d1e1295ece28e4a7f76bd0232bb",
+          "observed_sha256": "633740d3f1a85ddcabdc9a7ae39556b74551fc2054cba9d25562cbf8ce78d447"
+        },
+        {
+          "path": "frontend/src/api/workbench.ts",
+          "status": "changed",
+          "manifest_sha256": "b0bac837d83d972f7b542290f8272d26e7cc449ae00f28e64d4a54074148b073",
+          "observed_sha256": "5d55c8e283e5e6875de3035148c7fbdbc7e2aa91cab7dc4943efbc054d9224f3"
+        },
+        {
+          "path": "frontend/src/features/method-form/MethodForm.test.tsx",
+          "status": "changed",
+          "manifest_sha256": "e8a364ce177d8b30fd118072a00189aa0a778baaa5bb2ebe2404e776ca82debd",
+          "observed_sha256": "37cb6f2f29e1306d8c5bb9213c0b3f2dbd90f8a4b26089077b2f80469751822f"
+        },
+        {
+          "path": "frontend/src/features/method-form/MethodForm.tsx",
+          "status": "changed",
+          "manifest_sha256": "664d8452afd934a44772782e43e012e7db6a988199e6505441a2d1de8370ce80",
+          "observed_sha256": "e74876ec2c481f50581b1697ea0d7b177b911f492d8dd8f6fbdada60468861d6"
+        },
+        {
+          "path": "frontend/src/features/method-form/method-form-fields.ts",
+          "status": "changed",
+          "manifest_sha256": "fce2534483cd6515547ecf2ef667f8b78a8a1974a2c8bc0c8f4c963c88806e49",
+          "observed_sha256": "2fb8179eb66d411504ff5a5ca5204b35d707b94bd10b5a14ed411c02c40853f6"
+        },
+        {
+          "path": "src/geopilot/api/task_routes.py",
+          "status": "changed",
+          "manifest_sha256": "1a88bcae47d7052dd7a351679ccc0cec4fc8b7ebfad5afb25343505a1e068ee2",
+          "observed_sha256": "88abd6b55f6958973c0b1372ffb430f88adb743a071738589629325ded13558a"
+        },
+        {
+          "path": "src/geopilot/application/method_preconditions.py",
+          "status": "changed",
+          "manifest_sha256": "3ad402c20d607c23168adae027dc90a9acd1dbd931fe5662adee07e52714c7f8",
+          "observed_sha256": "60dd9e140d1ee017e7b64eb48c340b0e8db66b7323c93f881343f507284dfcd0"
+        },
+        {
+          "path": "src/geopilot/application/plan_runner.py",
+          "status": "changed",
+          "manifest_sha256": "ef52eade51dfce9d9b3d8101adfcfbcedbb0c00eac8084cb7eaf7531ae119087",
+          "observed_sha256": "00f9ac118160d33709c34c6946d7bd6117e247b9410ac35859da97b4364da704"
+        },
+        {
+          "path": "src/geopilot/application/run_checks.py",
+          "status": "changed",
+          "manifest_sha256": "5fd595b4a2c2fcc65249172417b38c301b6ea90596f06265be289370c3744942",
+          "observed_sha256": "647af0ee55e7b38738e169923d39fa1e81c8d8e6167de6061cc99ee646ddd3c9"
+        },
+        {
+          "path": "src/geopilot/application/task_context.py",
+          "status": "changed",
+          "manifest_sha256": "370d532639aaba51331130d44dd68ba6cb1a29fdaf43e079c831a657dd1986fc",
+          "observed_sha256": "965bb9547a257a259c0a6bc62ffaff04df14d1267b0780b402f3282db8a1168d"
+        },
+        {
+          "path": "src/geopilot/checks/attempt_reports.py",
+          "status": "changed",
+          "manifest_sha256": "7ed615b9cfb74089d6b5a51e3efc04928b9d5e76767935f1d52f77e6dfc44148",
+          "observed_sha256": "95676b2df639e64f71b8e923b2efc2892d26f347b78bc0c7cc610b19ddf07a64"
+        },
+        {
+          "path": "src/geopilot/checks/input_checks.py",
+          "status": "changed",
+          "manifest_sha256": "f74704f5c2a4c308690ccbb71d3e8e240c553a9e051ee9f64e6e08dca3dc8915",
+          "observed_sha256": "fd9518a44310bbc9d9f4f9986d61bc88ba40737eb204f4bdc27a105f8303a92d"
+        },
+        {
+          "path": "src/geopilot/checks/raster_nodata.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6b3c06aff9045b53249ffa23640d5c591a01fb5c90bad5b85d1921380dcaa995"
+        },
+        {
+          "path": "src/geopilot/checks/recheck_service.py",
+          "status": "changed",
+          "manifest_sha256": "bdf3af1de714da14091adda620e412f1a45306ce9177d1ab83b94e032a10a0cc",
+          "observed_sha256": "86c273927a397cdc3db42760e90fe5caf346d6eeca7d37dfac851afd7e348450"
+        },
+        {
+          "path": "src/geopilot/checks/tool_checks.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "11a05e4af2079823f8d14a165115ee8899872e67f8ea78e985b37d9893a7e963"
+        },
+        {
+          "path": "src/geopilot/domain/tool_contract.py",
+          "status": "changed",
+          "manifest_sha256": "4c976fb470e8e1324246f8f1e091a2d3654055236b3b2d0b3ddcd7d70fc4165e",
+          "observed_sha256": "4fb28487824de2373e398f1d03f812ee2f1f8247252836cf84dd600d61928ca9"
+        },
+        {
+          "path": "src/geopilot/execution/runner.py",
+          "status": "changed",
+          "manifest_sha256": "5c2c8caf1dc8a8f2fe97a6cafede76689e36795451540f927aa606a8b34d510e",
+          "observed_sha256": "1e57d936aee6fccc2cc3fdb9ac1a5544ae9a5c2f4b43e7ebd4438324160132de"
+        },
+        {
+          "path": "src/geopilot/execution/step_support.py",
+          "status": "changed",
+          "manifest_sha256": "38df72416bf1c4d5ac2133f87fe31b4d45dfad32ed9b21b9b729da4c765970fe",
+          "observed_sha256": "5eb293f679576ba4cea4697036b967a549884007773014cd83228f42937b3fb3"
+        },
+        {
+          "path": "src/geopilot/gis/measurement/distance.py",
+          "status": "changed",
+          "manifest_sha256": "354f8c1afda776a65f638f2e52928c2378097571f5864112e739709d13a042a8",
+          "observed_sha256": "316a75531942c6f754eaa7905193d04a53ecd88e3f7af5e6bda87b55a3a9f788"
+        },
+        {
+          "path": "src/geopilot/gis/measurement/geodesic_buffer.py",
+          "status": "changed",
+          "manifest_sha256": "4c2bc78ca3cb92cc2cb084f738a76011540718746aa936a0cdd15b67c9c6ff19",
+          "observed_sha256": "3d09f1c18f7350868446a3f3f771a3e47208fe9cdfdcaab396c117037cc15d9b"
+        },
+        {
+          "path": "src/geopilot/gis/measurement/geodesic_road_scope.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "be2bdbca5abe94bb3bcbe207847ba60ad0668ad89aa5aa0b6fbb663300154d60"
+        },
+        {
+          "path": "src/geopilot/gis/tools/expand_wgs84_analysis_extent.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "23dc67cf41c61983c881745b1f8c411c8d8c07a0aa7d74b055289f3303cba8a3"
+        },
+        {
+          "path": "src/geopilot/gis/tools/prepare_wgs84_measurement_lines.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "e74bced8a7a53cc4f0cae2de590a14084cdcce1696d337de868f5a0ecbd0b16c"
+        },
+        {
+          "path": "src/geopilot/gis/tools/select_wgs84_roads.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "828af91c0e7ed48e8e4a225c71de7a5146a4ac16b71b0da3c1bec8d6d6eb1ac4"
+        },
+        {
+          "path": "src/geopilot/gis/tools/wgs84_geodesic_buffer.py",
+          "status": "changed",
+          "manifest_sha256": "eb79290a1f06067d3b3cc5c31eff2599e15598b02503a05b524dcf60ad0ce8b5",
+          "observed_sha256": "cbdf4e3524f53a752209bb431cda8a8ac35eb2b021c510deb940bf91bc678d02"
+        },
+        {
+          "path": "src/geopilot/gis/tools/wgs84_road_io.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "8c60e9eaa56c6ac69c8f4ac7a715a0613b70396222208e6a5191c11487fa04e0"
+        },
+        {
+          "path": "src/geopilot/methods/models.py",
+          "status": "changed",
+          "manifest_sha256": "761774d450e6971383d57f7471113f84643677387d2f92bb1939deab5e6c2524",
+          "observed_sha256": "2b2273a91f8043891d0dc8b069819b90175c55e92ed5a611ecf6d899207c193e"
+        },
+        {
+          "path": "src/geopilot/methods/validator.py",
+          "status": "changed",
+          "manifest_sha256": "a37de440e7fa98d670a052ef808922d33e02ca812103bc45372df52ff6b54b22",
+          "observed_sha256": "257ce4fbdf290aee345fa84bd2678882963fbd814b21a970eeb7d1c02d363ca1"
+        },
+        {
+          "path": "src/geopilot/plans/compiler.py",
+          "status": "changed",
+          "manifest_sha256": "20dc92a849610ed62ef653b688410928ff4e8af075e2959cb1892062639017f8",
+          "observed_sha256": "ccfdd0406cd71147550ca863f51e6a1c65a74351b5d174b8ebc84f4c3f94ecfc"
+        },
+        {
+          "path": "src/geopilot/plans/draft_builder.py",
+          "status": "changed",
+          "manifest_sha256": "f45b291f3e8f7f7c61cfa0d2ec1160c1365106abee88e870683e07be9eda5285",
+          "observed_sha256": "9afb65262aa4b878a6547191ae1391737f0577ea3f2756ffdfe07c7f6327fdf0"
+        },
+        {
+          "path": "src/geopilot/plans/models.py",
+          "status": "changed",
+          "manifest_sha256": "454ab3daf6221447443cb5d31c345598e216e0e05fc80ecd8d81b66551da77c3",
+          "observed_sha256": "cd664123522a843e31527966165e4cad22a926a935d84d0f320804013c8060df"
+        },
+        {
+          "path": "src/geopilot/plans/service.py",
+          "status": "changed",
+          "manifest_sha256": "f74cd01f25b31a473dbc9ff4870207c2804d06d4e9e69d5b06465b67d302d151",
+          "observed_sha256": "3e2d51390546f3422e1c977a4c5340726404af925b678579c065a47c1033e0c6"
+        },
+        {
+          "path": "src/geopilot/plans/versioning.py",
+          "status": "changed",
+          "manifest_sha256": "6aefac4f8a8dd806bdc6cde148a7c64bee5d641ca70c5cf940310f67c81ae3c3",
+          "observed_sha256": "0f6273d63ac17f97d9fb5f5bf4eea2da4c9760864d71d78b4905e153f47afb1a"
+        },
+        {
+          "path": "src/geopilot/runs/service.py",
+          "status": "changed",
+          "manifest_sha256": "702c5bfa234c198994debd0dc6a407e844a4d0738f4c729f5a48bbb329be9b22",
+          "observed_sha256": "6295ac6bd0d816512b00c6901930fb69d3aacbcfb5f8e936f56c610712bbdea0"
+        },
+        {
+          "path": "tests/application/test_context_candidates.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6fb684f85dd99e0f99db376e081e299d0756de65b1199fc98491d2e09c722a36"
+        },
+        {
+          "path": "tests/checks/test_raster_nodata_preflight.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "866fb590aa9de7b8f6dec4498d4054e1fd4d6a89aefa55209618f4cf5fca3b32"
+        },
+        {
+          "path": "tests/checks/test_tool_checks.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "42e8beddead24f4f108e70499eb667bf9aea4adafd900307cd484f5efad8042b"
+        },
+        {
+          "path": "tests/e2e/test_geodesic_road_workflow.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "4b23b38797511154d205a12369971de00661af3bf774f526790e46781eb79b88"
+        },
+        {
+          "path": "tests/fixtures/geodesic/road_workflow.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6bbc6e163703712549cab950502b8607b973ce4d793432bf96d716c44467331b"
+        },
+        {
+          "path": "tests/gis/test_geodesic_road_scope.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6facd93ca3c3941764f9cbf638dd68f229b8bd3ddcab40eb5358d8b0396a7129"
+        },
+        {
+          "path": "tests/methods/test_road_distance_modes.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "32ce96206ebb884043f54b75f1b07760d1ada05b283ebef9912fbfa446f4e906"
+        },
+        {
+          "path": "tests/plans/test_confirmation.py",
+          "status": "changed",
+          "manifest_sha256": "25920137e9be051bee5251e23dba09edea19f246c8d32cc467cc24871f79135f",
+          "observed_sha256": "adac103d31b73d115ad24ea76777f426ce84404ef2e35ce4839f8ab338ad3cdf"
+        },
+        {
+          "path": "tests/runners/test_process_timeout.py",
+          "status": "changed",
+          "manifest_sha256": "e38ec00a749426b4f690d5ca638929f08be583100d54ffcf46c1214d8809cbea",
+          "observed_sha256": "05b1e802fed7f417a04ef7b555816c36484cf94cd4b50967b9596f9fa8dece17"
+        }
+      ]
+    },
+    "evidence": {
+      "counts": {
+        "matched": 10,
+        "added": 15,
+        "missing": 16,
+        "changed": 5,
+        "invalid": 0
+      },
+      "differences": [
+        {
+          "path": "README.md",
+          "status": "changed",
+          "manifest_sha256": "856590574f4135f61530ed21ec9543f996462a7de93b2ab1d5c2f9301e2b0a5b",
+          "observed_sha256": "6130c6dd322d9de8b4977b9f61b2b85a8083ebce009d84665657b42364103c99",
+          "group": "startup"
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/README.md",
+          "status": "missing",
+          "manifest_sha256": "ef18b68a364beaa6f7b172066a0a075800c0467fb00a90e639381682f0bad510",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "3",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "18",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/plans/05_ACCEPTANCE/05_FINAL_ACCEPTANCE_CHECKLIST.md",
+              "line": "12",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/api.SmO0UpPt/pytest/test_real_workbench_replays_ro0/comparison.json",
+          "status": "missing",
+          "manifest_sha256": "1bdb4a04def0ab20c7778bd8472b035bfa5bd945a15a12444c3c71846a29da3c",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "11",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/verify-workbench.mjs",
+          "status": "missing",
+          "manifest_sha256": "59a4a8c2a2fe475bfd1ce9d248a43afb1336fad09ba5824fa068da17676b655e",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "28",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/workbench.KavlOq7U/browser.json",
+          "status": "missing",
+          "manifest_sha256": "06fc45790c4a1ef5066c2901b47827766b47f866eecdc79c7be5b50cffb7aea4",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "11",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/workbench.KavlOq7U/filtered-features.gpkg",
+          "status": "missing",
+          "manifest_sha256": "c591b3e27f89e3bdb2cda30f40ccae7fd333f8c05c5ba453985fd7e7c1904322",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": []
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/workbench.KavlOq7U/zone-statistics.csv",
+          "status": "missing",
+          "manifest_sha256": "bcafe59ce122f53f287a647de2c00981bbae164cd23305b1ad120dc596c67564",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": []
+        },
+        {
+          "path": "artifacts/smoke/p11-04/run.or1ZGlPX/verification.json",
+          "status": "missing",
+          "manifest_sha256": "faf5764a394fc121f12b3e460ea84af6ea3bc192b7231619bbe6b6a1b8630a62",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "3",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "9",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "26",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-06/run.1HiQwqlr/verification.json",
+          "status": "missing",
+          "manifest_sha256": "6835be64ecb6231aa2efadf362f5de7929fea57b73240f56735cb0feedbac487",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/lifecycle.md",
+              "line": "36",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-07/clean-smoke-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "47b6287b474e9ee9ed542ad8ecc944ec5d6cc356e55206ba2ca7470575982861",
+          "observed_sha256": null,
+          "group": "startup",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "15",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-07/live-road/summary.json",
+          "status": "missing",
+          "manifest_sha256": "3ae89d411a69d17f5a7b4f2d755f5b20f659d062ac99ddb595cc391ddba34e48",
+          "observed_sha256": null,
+          "group": "startup",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "51",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-07/npm-build-final.log",
+          "status": "missing",
+          "manifest_sha256": "a3f79da4d9285ec464c40f06e29e1303a2098d553fa69412ea5a839876f0d693",
+          "observed_sha256": null,
+          "group": "startup",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "13",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "26",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p8-10/browser.7TgLX6/topmost-raster.json",
+          "status": "missing",
+          "manifest_sha256": "8114302363f848beeb2afe1dc0d518722beb799f8b1cf8e7c25f728113f7cd9b",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "24",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p8-native-workbench-verified/browser.json",
+          "status": "missing",
+          "manifest_sha256": "f07bab791881b0f94554d245b8f786a05b1551e28607e964ef310acb27ebba80",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/artifacts/reports/methods/regression.md",
+              "line": "13",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/P8-10.md",
+              "line": "44",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/P8.md",
+              "line": "3",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "19",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "21",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/coverage.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "d51dc9e8d8a1fb0511e0ed5bf2a8e49a053635ea80ede8023c282c159dcf1acc",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/current-collection.txt",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "fbd82d8fcd7461201aaa40409803185602f02a0ef826565a18cd39d302d256a1",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/scope-high-latitude-reference.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "91a8c145483a820690aac8c43944972ae940f33334cf088427fd3434ee420263",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/verify-downloads.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "a8d6da60a4f65545d9d99877af0a5832ae2240c9b325fb324530bb7d57b9424e",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/verify-workbench.mjs",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "09c7faea8e590e9560e273a3b74b46d36a06a64549438d3e2afce5882f064ca3",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/browser.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "d917a06a39d8e6921fabfbacb5df9ece3cc7e2eb572001fce0405c34d2a94ec3",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/download-verification.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "9c5a1e1d3ea8ee2037f907c5b4793dcc7c46a23957222f96a3a0005cc3953b96",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/geodesic-v3.png",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "a5f82721fbbcae78b9017b87416405cf0ef52905079266a640a694902f4e9f2d",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/local-projected-v3.png",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "5ae73fbf7feb1182a45cd2a909ee021987cbe44ef23ad89d3df4dca4d0f915b3",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/geodesic-road-workflow-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "7ee56a980427f3222cd79513d359410671e5f3a1f89fa171dd788bf5cb68a400",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/p11-04-frontend-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "42358b7edc038893b783a9ca446ecc76713d76bb22a5e95a18d09374a52980e1",
+          "observed_sha256": null,
+          "group": "regression",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "23",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "36",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "39",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "13",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/test-results/p11-05-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "74adc0238bdcd2a039b4140dc59b3869b7132218bcba2ce96ff4a0083d35d628",
+          "observed_sha256": null,
+          "group": "regression",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "20",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "23",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "12",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/test-results/p11-complete-backend-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "2737426bc7991e85d0072692795423225acc622c48035e54270fa88280c53ed5",
+          "observed_sha256": null,
+          "group": "regression",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "17",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "12",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "34",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-frontend-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "5260f0b10c7c101ff48209faa29ca697476a381a2922a95b51bbb87826249d40",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-application-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "5c2ccc4690ce066696c29305f2e8d91ce167dd2075ff104583ad0c8c171c9980",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-execution-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "e16d174c7016dcee1af332b6b5c573e2d6216b9f6e68b75c45dfa3a8b314cdcb",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-methods-final-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "833e269deb3747ee75c7f356c5e88d5bdb9d2a0e7b55360d880482bb33fdf1e6",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-spatial-final-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "10c99ee0acdff95e192f222ef22176639ea534a7615302401f73056d7a4ec00d",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "docs/acceptance/FIXED_CASES.md",
+          "status": "changed",
+          "manifest_sha256": "3d80b943b55fd8336605a48e29aa7d768135825b59ca0d81b3d7b070c33e0f68",
+          "observed_sha256": "72c85668f8bfaa60937b0f57e8c9a7939f0f49843b6a83dbad86b4c238115436",
+          "group": "acceptance"
+        },
+        {
+          "path": "docs/release/FINAL_ACCEPTANCE.md",
+          "status": "changed",
+          "manifest_sha256": "958724755e0d2fef87b78380281becbef4c062a63657a3b2e3a927bf1f761632",
+          "observed_sha256": "848b13c36ed75867542df81c7af41b46593787f018a4c3fe3a93d0c720788440",
+          "group": "acceptance"
+        },
+        {
+          "path": "docs/traceability/requirements-matrix.md",
+          "status": "changed",
+          "manifest_sha256": "e7e93fc8799adf79bdc15218c6ce24a4ee02d772a926a7aa5bfa0509deb9dbd7",
+          "observed_sha256": "0b0f5479cbdd5f32e28542d72ee44b351055acc6e54f6c3f6bb71b85ef8aa318",
+          "group": "acceptance"
+        },
+        {
+          "path": "docs/user-guide/workbench.md",
+          "status": "changed",
+          "manifest_sha256": "ae7eebdddea5685dc9502875e1081372f2f02e11afd57b2264ed0bd9a1e4a785",
+          "observed_sha256": "2a28a7ec30050e70f4aec59a49d7cdc66d824946b6be823fa3a242b981b25078",
+          "group": "startup"
+        }
+      ]
+    }
+  },
+  "worktree": {
+    "head": "70ddcdfedc0f3739ebcaf2726fda2b0ef9faeaa3",
+    "dirty": true,
+    "manifest": {
+      "counts": {
+        "matched": 1,
+        "added": 0,
+        "missing": 0,
+        "changed": 0,
+        "invalid": 0
+      },
+      "differences": []
+    },
+    "source": {
+      "counts": {
+        "matched": 380,
+        "added": 26,
+        "missing": 0,
+        "changed": 37,
+        "invalid": 0
+      },
+      "differences": [
+        {
+          "path": "config/methods/attribute-filter-export.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "593473010fb7939f3a0bf742d768446fba94dc3d342fced03e3ad08047c8dbbe",
+          "observed_sha256": "c96a5d7f256bd216c23b981b923546d77c92e6b8824f8268f4bf7342a093a28f"
+        },
+        {
+          "path": "config/methods/dem-terrain-analysis.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "dabdc060bc8c4a1b3cf506582701e8fa23e7f7070be76f4c0b526079e9013f43",
+          "observed_sha256": "ed2a696d6f6fe72f5a401c7e6a84a8491210978f48c991e511369fca12515973"
+        },
+        {
+          "path": "config/methods/land-use-change.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "e6ca0be63c785dbd8f6f1bbdef065b69bc9226a5138b2e95a02d725290f5d937",
+          "observed_sha256": "e11f93a602c48d88cb82bf5f5f1b4abfb989b050c3548b934d087ed5150393f2"
+        },
+        {
+          "path": "config/methods/polygon-zone-statistics.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "7a6e04a6ec5e97c7f71c578fbad9ddd1c288a203485527299c587a6f2a828f8a",
+          "observed_sha256": "26110b799517b62fce605d31d4054a19ff78ab77f47ce2f2a770898290d8e828"
+        },
+        {
+          "path": "config/methods/remote-sensing-index-change.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "b84ee16c6ded506bc724d1777409fdd1a9f931507931c77ff223cefd8c49ca57",
+          "observed_sha256": "e5331572ffe08c7f366ed5b510ea5ec76c509a1545800b835a616371f7a13355"
+        },
+        {
+          "path": "config/methods/road-buffer-statistics.v2.yaml",
+          "status": "changed",
+          "manifest_sha256": "f42a1ba43ce1d4819369ddab6f06f3b6a3750011c26029d012cc36d35bf7df70",
+          "observed_sha256": "87758b005dce881c5824b801e77ad109f56338b3a90b8609fe51b83f1822cd0e"
+        },
+        {
+          "path": "config/methods/road-buffer-statistics.v3.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "298e82e52dc653be8e6487bfd39afe1f5ec9a18a9a12d71036abecaf4674607a"
+        },
+        {
+          "path": "config/methods/spatial-select-and-clip.v1.yaml",
+          "status": "changed",
+          "manifest_sha256": "93a9ab6801b2e92ea96bc5a13f1be441ff93eee2900b79c16d25485429f53df3",
+          "observed_sha256": "8a9622573e453e25d5600975d14bbbabfd568e99656b5d93ccbf7db97eb48031"
+        },
+        {
+          "path": "config/tools/python-expand-wgs84-analysis-extent.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "43f5369c0c5d8fc6531e4ae14ff177fba4ebed0f1119a8854dbdfd15b001d888"
+        },
+        {
+          "path": "config/tools/python-prepare-wgs84-measurement-lines.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "17f92fe29562ac91b5500c7f5e8a3dbd09b5bf60fa0ac3557bd83adb796e5801"
+        },
+        {
+          "path": "config/tools/python-remote-sensing-calculate-ndvi.yaml",
+          "status": "changed",
+          "manifest_sha256": "132746c71a627586f209437f8e1aacd57e732f236e131c1b55e471febdd41d61",
+          "observed_sha256": "8738c32fcb9b88ec8731d4afcc5d4b391282f057c9a66cb21497bb0cb3fb7f95"
+        },
+        {
+          "path": "config/tools/python-select-wgs84-roads.yaml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "dd66309a5566504e87517a10e7633c265974c6c349f1da6c6cb0e206cc843ce7"
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "status": "changed",
+          "manifest_sha256": "01a51da9e027e1f52f82d49ac76d215713e30d1e1295ece28e4a7f76bd0232bb",
+          "observed_sha256": "633740d3f1a85ddcabdc9a7ae39556b74551fc2054cba9d25562cbf8ce78d447"
+        },
+        {
+          "path": "frontend/src/api/workbench.ts",
+          "status": "changed",
+          "manifest_sha256": "b0bac837d83d972f7b542290f8272d26e7cc449ae00f28e64d4a54074148b073",
+          "observed_sha256": "5d55c8e283e5e6875de3035148c7fbdbc7e2aa91cab7dc4943efbc054d9224f3"
+        },
+        {
+          "path": "frontend/src/features/method-form/MethodForm.test.tsx",
+          "status": "changed",
+          "manifest_sha256": "e8a364ce177d8b30fd118072a00189aa0a778baaa5bb2ebe2404e776ca82debd",
+          "observed_sha256": "37cb6f2f29e1306d8c5bb9213c0b3f2dbd90f8a4b26089077b2f80469751822f"
+        },
+        {
+          "path": "frontend/src/features/method-form/MethodForm.tsx",
+          "status": "changed",
+          "manifest_sha256": "664d8452afd934a44772782e43e012e7db6a988199e6505441a2d1de8370ce80",
+          "observed_sha256": "e74876ec2c481f50581b1697ea0d7b177b911f492d8dd8f6fbdada60468861d6"
+        },
+        {
+          "path": "frontend/src/features/method-form/method-form-fields.ts",
+          "status": "changed",
+          "manifest_sha256": "fce2534483cd6515547ecf2ef667f8b78a8a1974a2c8bc0c8f4c963c88806e49",
+          "observed_sha256": "2fb8179eb66d411504ff5a5ca5204b35d707b94bd10b5a14ed411c02c40853f6"
+        },
+        {
+          "path": "scripts/quality/build_source_inventory.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "0125761c2cfbd3ce6f722f8076b7c5f058420ffaf244866b3ebe804319cebed7"
+        },
+        {
+          "path": "scripts/quality/check_doc_evidence_links.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "7178e1e1c91fa66061c4e7b7eb62ac799a79a8f548311ba019b9a04dc0d9284c"
+        },
+        {
+          "path": "scripts/quality/validate_acceptance_consistency.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "27a8e19b26453e1cced98f4f141771945f4868b84d5c6dd2240bf976ae48d7b9"
+        },
+        {
+          "path": "scripts/quality/verify_delivery_manifest.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "ba3e3600062973951ecae3a06cb37346883a6d9eec7aaeff0c3cefd7c494aedb"
+        },
+        {
+          "path": "src/geopilot/api/task_routes.py",
+          "status": "changed",
+          "manifest_sha256": "1a88bcae47d7052dd7a351679ccc0cec4fc8b7ebfad5afb25343505a1e068ee2",
+          "observed_sha256": "88abd6b55f6958973c0b1372ffb430f88adb743a071738589629325ded13558a"
+        },
+        {
+          "path": "src/geopilot/application/method_preconditions.py",
+          "status": "changed",
+          "manifest_sha256": "3ad402c20d607c23168adae027dc90a9acd1dbd931fe5662adee07e52714c7f8",
+          "observed_sha256": "60dd9e140d1ee017e7b64eb48c340b0e8db66b7323c93f881343f507284dfcd0"
+        },
+        {
+          "path": "src/geopilot/application/plan_runner.py",
+          "status": "changed",
+          "manifest_sha256": "ef52eade51dfce9d9b3d8101adfcfbcedbb0c00eac8084cb7eaf7531ae119087",
+          "observed_sha256": "00f9ac118160d33709c34c6946d7bd6117e247b9410ac35859da97b4364da704"
+        },
+        {
+          "path": "src/geopilot/application/run_checks.py",
+          "status": "changed",
+          "manifest_sha256": "5fd595b4a2c2fcc65249172417b38c301b6ea90596f06265be289370c3744942",
+          "observed_sha256": "647af0ee55e7b38738e169923d39fa1e81c8d8e6167de6061cc99ee646ddd3c9"
+        },
+        {
+          "path": "src/geopilot/application/task_context.py",
+          "status": "changed",
+          "manifest_sha256": "370d532639aaba51331130d44dd68ba6cb1a29fdaf43e079c831a657dd1986fc",
+          "observed_sha256": "965bb9547a257a259c0a6bc62ffaff04df14d1267b0780b402f3282db8a1168d"
+        },
+        {
+          "path": "src/geopilot/checks/attempt_reports.py",
+          "status": "changed",
+          "manifest_sha256": "7ed615b9cfb74089d6b5a51e3efc04928b9d5e76767935f1d52f77e6dfc44148",
+          "observed_sha256": "95676b2df639e64f71b8e923b2efc2892d26f347b78bc0c7cc610b19ddf07a64"
+        },
+        {
+          "path": "src/geopilot/checks/input_checks.py",
+          "status": "changed",
+          "manifest_sha256": "f74704f5c2a4c308690ccbb71d3e8e240c553a9e051ee9f64e6e08dca3dc8915",
+          "observed_sha256": "fd9518a44310bbc9d9f4f9986d61bc88ba40737eb204f4bdc27a105f8303a92d"
+        },
+        {
+          "path": "src/geopilot/checks/raster_nodata.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6b3c06aff9045b53249ffa23640d5c591a01fb5c90bad5b85d1921380dcaa995"
+        },
+        {
+          "path": "src/geopilot/checks/recheck_service.py",
+          "status": "changed",
+          "manifest_sha256": "bdf3af1de714da14091adda620e412f1a45306ce9177d1ab83b94e032a10a0cc",
+          "observed_sha256": "86c273927a397cdc3db42760e90fe5caf346d6eeca7d37dfac851afd7e348450"
+        },
+        {
+          "path": "src/geopilot/checks/tool_checks.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "11a05e4af2079823f8d14a165115ee8899872e67f8ea78e985b37d9893a7e963"
+        },
+        {
+          "path": "src/geopilot/domain/tool_contract.py",
+          "status": "changed",
+          "manifest_sha256": "4c976fb470e8e1324246f8f1e091a2d3654055236b3b2d0b3ddcd7d70fc4165e",
+          "observed_sha256": "4fb28487824de2373e398f1d03f812ee2f1f8247252836cf84dd600d61928ca9"
+        },
+        {
+          "path": "src/geopilot/execution/runner.py",
+          "status": "changed",
+          "manifest_sha256": "5c2c8caf1dc8a8f2fe97a6cafede76689e36795451540f927aa606a8b34d510e",
+          "observed_sha256": "1e57d936aee6fccc2cc3fdb9ac1a5544ae9a5c2f4b43e7ebd4438324160132de"
+        },
+        {
+          "path": "src/geopilot/execution/step_support.py",
+          "status": "changed",
+          "manifest_sha256": "38df72416bf1c4d5ac2133f87fe31b4d45dfad32ed9b21b9b729da4c765970fe",
+          "observed_sha256": "5eb293f679576ba4cea4697036b967a549884007773014cd83228f42937b3fb3"
+        },
+        {
+          "path": "src/geopilot/gis/measurement/distance.py",
+          "status": "changed",
+          "manifest_sha256": "354f8c1afda776a65f638f2e52928c2378097571f5864112e739709d13a042a8",
+          "observed_sha256": "316a75531942c6f754eaa7905193d04a53ecd88e3f7af5e6bda87b55a3a9f788"
+        },
+        {
+          "path": "src/geopilot/gis/measurement/geodesic_buffer.py",
+          "status": "changed",
+          "manifest_sha256": "4c2bc78ca3cb92cc2cb084f738a76011540718746aa936a0cdd15b67c9c6ff19",
+          "observed_sha256": "3d09f1c18f7350868446a3f3f771a3e47208fe9cdfdcaab396c117037cc15d9b"
+        },
+        {
+          "path": "src/geopilot/gis/measurement/geodesic_road_scope.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "be2bdbca5abe94bb3bcbe207847ba60ad0668ad89aa5aa0b6fbb663300154d60"
+        },
+        {
+          "path": "src/geopilot/gis/tools/expand_wgs84_analysis_extent.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "23dc67cf41c61983c881745b1f8c411c8d8c07a0aa7d74b055289f3303cba8a3"
+        },
+        {
+          "path": "src/geopilot/gis/tools/prepare_wgs84_measurement_lines.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "e74bced8a7a53cc4f0cae2de590a14084cdcce1696d337de868f5a0ecbd0b16c"
+        },
+        {
+          "path": "src/geopilot/gis/tools/select_wgs84_roads.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "828af91c0e7ed48e8e4a225c71de7a5146a4ac16b71b0da3c1bec8d6d6eb1ac4"
+        },
+        {
+          "path": "src/geopilot/gis/tools/wgs84_geodesic_buffer.py",
+          "status": "changed",
+          "manifest_sha256": "eb79290a1f06067d3b3cc5c31eff2599e15598b02503a05b524dcf60ad0ce8b5",
+          "observed_sha256": "cbdf4e3524f53a752209bb431cda8a8ac35eb2b021c510deb940bf91bc678d02"
+        },
+        {
+          "path": "src/geopilot/gis/tools/wgs84_road_io.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "8c60e9eaa56c6ac69c8f4ac7a715a0613b70396222208e6a5191c11487fa04e0"
+        },
+        {
+          "path": "src/geopilot/methods/models.py",
+          "status": "changed",
+          "manifest_sha256": "761774d450e6971383d57f7471113f84643677387d2f92bb1939deab5e6c2524",
+          "observed_sha256": "2b2273a91f8043891d0dc8b069819b90175c55e92ed5a611ecf6d899207c193e"
+        },
+        {
+          "path": "src/geopilot/methods/validator.py",
+          "status": "changed",
+          "manifest_sha256": "a37de440e7fa98d670a052ef808922d33e02ca812103bc45372df52ff6b54b22",
+          "observed_sha256": "257ce4fbdf290aee345fa84bd2678882963fbd814b21a970eeb7d1c02d363ca1"
+        },
+        {
+          "path": "src/geopilot/plans/compiler.py",
+          "status": "changed",
+          "manifest_sha256": "20dc92a849610ed62ef653b688410928ff4e8af075e2959cb1892062639017f8",
+          "observed_sha256": "ccfdd0406cd71147550ca863f51e6a1c65a74351b5d174b8ebc84f4c3f94ecfc"
+        },
+        {
+          "path": "src/geopilot/plans/draft_builder.py",
+          "status": "changed",
+          "manifest_sha256": "f45b291f3e8f7f7c61cfa0d2ec1160c1365106abee88e870683e07be9eda5285",
+          "observed_sha256": "9afb65262aa4b878a6547191ae1391737f0577ea3f2756ffdfe07c7f6327fdf0"
+        },
+        {
+          "path": "src/geopilot/plans/models.py",
+          "status": "changed",
+          "manifest_sha256": "454ab3daf6221447443cb5d31c345598e216e0e05fc80ecd8d81b66551da77c3",
+          "observed_sha256": "cd664123522a843e31527966165e4cad22a926a935d84d0f320804013c8060df"
+        },
+        {
+          "path": "src/geopilot/plans/service.py",
+          "status": "changed",
+          "manifest_sha256": "f74cd01f25b31a473dbc9ff4870207c2804d06d4e9e69d5b06465b67d302d151",
+          "observed_sha256": "3e2d51390546f3422e1c977a4c5340726404af925b678579c065a47c1033e0c6"
+        },
+        {
+          "path": "src/geopilot/plans/versioning.py",
+          "status": "changed",
+          "manifest_sha256": "6aefac4f8a8dd806bdc6cde148a7c64bee5d641ca70c5cf940310f67c81ae3c3",
+          "observed_sha256": "0f6273d63ac17f97d9fb5f5bf4eea2da4c9760864d71d78b4905e153f47afb1a"
+        },
+        {
+          "path": "src/geopilot/runs/service.py",
+          "status": "changed",
+          "manifest_sha256": "702c5bfa234c198994debd0dc6a407e844a4d0738f4c729f5a48bbb329be9b22",
+          "observed_sha256": "6295ac6bd0d816512b00c6901930fb69d3aacbcfb5f8e936f56c610712bbdea0"
+        },
+        {
+          "path": "tests/application/test_context_candidates.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6fb684f85dd99e0f99db376e081e299d0756de65b1199fc98491d2e09c722a36"
+        },
+        {
+          "path": "tests/checks/test_raster_nodata_preflight.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "866fb590aa9de7b8f6dec4498d4054e1fd4d6a89aefa55209618f4cf5fca3b32"
+        },
+        {
+          "path": "tests/checks/test_tool_checks.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "42e8beddead24f4f108e70499eb667bf9aea4adafd900307cd484f5efad8042b"
+        },
+        {
+          "path": "tests/e2e/test_geodesic_road_workflow.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "4b23b38797511154d205a12369971de00661af3bf774f526790e46781eb79b88"
+        },
+        {
+          "path": "tests/fixtures/geodesic/road_workflow.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6bbc6e163703712549cab950502b8607b973ce4d793432bf96d716c44467331b"
+        },
+        {
+          "path": "tests/gis/test_geodesic_road_scope.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "6facd93ca3c3941764f9cbf638dd68f229b8bd3ddcab40eb5358d8b0396a7129"
+        },
+        {
+          "path": "tests/methods/test_road_distance_modes.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "32ce96206ebb884043f54b75f1b07760d1ada05b283ebef9912fbfa446f4e906"
+        },
+        {
+          "path": "tests/plans/test_confirmation.py",
+          "status": "changed",
+          "manifest_sha256": "25920137e9be051bee5251e23dba09edea19f246c8d32cc467cc24871f79135f",
+          "observed_sha256": "adac103d31b73d115ad24ea76777f426ce84404ef2e35ce4839f8ab338ad3cdf"
+        },
+        {
+          "path": "tests/quality/test_acceptance_consistency.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "38be890ab0d4b8c7b1e5ea9f8fc9ab82e1777893c4aff997d1edfe1f6d620f19"
+        },
+        {
+          "path": "tests/quality/test_delivery_manifest.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "fdf94c202f9e906de40f6b344f0d04207ea24c429757df4c6c6bc7606e5ef119"
+        },
+        {
+          "path": "tests/quality/test_doc_evidence_links.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "0c8f168663163933b67cb38a1239bf7ed6e6887ba35cee832d33273f9eca12af"
+        },
+        {
+          "path": "tests/quality/test_source_inventory.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "f468c6d90d7293c2cc86500fdd785011a85b5b7e7a8ccc0c061c451ceced2a58"
+        },
+        {
+          "path": "tests/runners/test_process_timeout.py",
+          "status": "changed",
+          "manifest_sha256": "e38ec00a749426b4f690d5ca638929f08be583100d54ffcf46c1214d8809cbea",
+          "observed_sha256": "05b1e802fed7f417a04ef7b555816c36484cf94cd4b50967b9596f9fa8dece17"
+        }
+      ]
+    },
+    "evidence": {
+      "counts": {
+        "matched": 10,
+        "added": 15,
+        "missing": 16,
+        "changed": 5,
+        "invalid": 0
+      },
+      "differences": [
+        {
+          "path": "README.md",
+          "status": "changed",
+          "manifest_sha256": "856590574f4135f61530ed21ec9543f996462a7de93b2ab1d5c2f9301e2b0a5b",
+          "observed_sha256": "6130c6dd322d9de8b4977b9f61b2b85a8083ebce009d84665657b42364103c99",
+          "group": "startup"
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/README.md",
+          "status": "missing",
+          "manifest_sha256": "ef18b68a364beaa6f7b172066a0a075800c0467fb00a90e639381682f0bad510",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "3",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "18",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/plans/05_ACCEPTANCE/05_FINAL_ACCEPTANCE_CHECKLIST.md",
+              "line": "12",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/api.SmO0UpPt/pytest/test_real_workbench_replays_ro0/comparison.json",
+          "status": "missing",
+          "manifest_sha256": "1bdb4a04def0ab20c7778bd8472b035bfa5bd945a15a12444c3c71846a29da3c",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "11",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/verify-workbench.mjs",
+          "status": "missing",
+          "manifest_sha256": "59a4a8c2a2fe475bfd1ce9d248a43afb1336fad09ba5824fa068da17676b655e",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "28",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/workbench.KavlOq7U/browser.json",
+          "status": "missing",
+          "manifest_sha256": "06fc45790c4a1ef5066c2901b47827766b47f866eecdc79c7be5b50cffb7aea4",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "11",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/workbench.KavlOq7U/filtered-features.gpkg",
+          "status": "missing",
+          "manifest_sha256": "c591b3e27f89e3bdb2cda30f40ccae7fd333f8c05c5ba453985fd7e7c1904322",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": []
+        },
+        {
+          "path": "artifacts/reproduction/p11-05/workbench.KavlOq7U/zone-statistics.csv",
+          "status": "missing",
+          "manifest_sha256": "bcafe59ce122f53f287a647de2c00981bbae164cd23305b1ad120dc596c67564",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": []
+        },
+        {
+          "path": "artifacts/smoke/p11-04/run.or1ZGlPX/verification.json",
+          "status": "missing",
+          "manifest_sha256": "faf5764a394fc121f12b3e460ea84af6ea3bc192b7231619bbe6b6a1b8630a62",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "3",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "9",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "26",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-06/run.1HiQwqlr/verification.json",
+          "status": "missing",
+          "manifest_sha256": "6835be64ecb6231aa2efadf362f5de7929fea57b73240f56735cb0feedbac487",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/lifecycle.md",
+              "line": "36",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-07/clean-smoke-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "47b6287b474e9ee9ed542ad8ecc944ec5d6cc356e55206ba2ca7470575982861",
+          "observed_sha256": null,
+          "group": "startup",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "15",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-07/live-road/summary.json",
+          "status": "missing",
+          "manifest_sha256": "3ae89d411a69d17f5a7b4f2d755f5b20f659d062ac99ddb595cc391ddba34e48",
+          "observed_sha256": null,
+          "group": "startup",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "51",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p11-07/npm-build-final.log",
+          "status": "missing",
+          "manifest_sha256": "a3f79da4d9285ec464c40f06e29e1303a2098d553fa69412ea5a839876f0d693",
+          "observed_sha256": null,
+          "group": "startup",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "13",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "26",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p8-10/browser.7TgLX6/topmost-raster.json",
+          "status": "missing",
+          "manifest_sha256": "8114302363f848beeb2afe1dc0d518722beb799f8b1cf8e7c25f728113f7cd9b",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "24",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/p8-native-workbench-verified/browser.json",
+          "status": "missing",
+          "manifest_sha256": "f07bab791881b0f94554d245b8f786a05b1551e28607e964ef310acb27ebba80",
+          "observed_sha256": null,
+          "group": "reproduction",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/artifacts/reports/methods/regression.md",
+              "line": "13",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/P8-10.md",
+              "line": "44",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/P8.md",
+              "line": "3",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "19",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "21",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/coverage.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "d51dc9e8d8a1fb0511e0ed5bf2a8e49a053635ea80ede8023c282c159dcf1acc",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/current-collection.txt",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "fbd82d8fcd7461201aaa40409803185602f02a0ef826565a18cd39d302d256a1",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/scope-high-latitude-reference.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "91a8c145483a820690aac8c43944972ae940f33334cf088427fd3434ee420263",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/verify-downloads.py",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "a8d6da60a4f65545d9d99877af0a5832ae2240c9b325fb324530bb7d57b9424e",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/verify-workbench.mjs",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "09c7faea8e590e9560e273a3b74b46d36a06a64549438d3e2afce5882f064ca3",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/browser.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "d917a06a39d8e6921fabfbacb5df9ece3cc7e2eb572001fce0405c34d2a94ec3",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/download-verification.json",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "9c5a1e1d3ea8ee2037f907c5b4793dcc7c46a23957222f96a3a0005cc3953b96",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/geodesic-v3.png",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "a5f82721fbbcae78b9017b87416405cf0ef52905079266a640a694902f4e9f2d",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/local-projected-v3.png",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "5ae73fbf7feb1182a45cd2a909ee021987cbe44ef23ad89d3df4dca4d0f915b3",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/geodesic-road-workflow-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "7ee56a980427f3222cd79513d359410671e5f3a1f89fa171dd788bf5cb68a400",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/p11-04-frontend-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "42358b7edc038893b783a9ca446ecc76713d76bb22a5e95a18d09374a52980e1",
+          "observed_sha256": null,
+          "group": "regression",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "23",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "36",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/interface-audit.md",
+              "line": "39",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "13",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/test-results/p11-05-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "74adc0238bdcd2a039b4140dc59b3869b7132218bcba2ce96ff4a0083d35d628",
+          "observed_sha256": null,
+          "group": "regression",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "20",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-05.md",
+              "line": "23",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "12",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/test-results/p11-complete-backend-junit.xml",
+          "status": "missing",
+          "manifest_sha256": "2737426bc7991e85d0072692795423225acc622c48035e54270fa88280c53ed5",
+          "observed_sha256": null,
+          "group": "regression",
+          "historical_classification": "run_output_absent_from_pinned_commit",
+          "p12_03_references": [
+            {
+              "source": "system-prototype-v1/docs/acceptance/P11-07.md",
+              "line": "17",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "12",
+              "status": "untracked_run_output"
+            },
+            {
+              "source": "system-prototype-v1/docs/release/FINAL_ACCEPTANCE.md",
+              "line": "34",
+              "status": "untracked_run_output"
+            }
+          ]
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-frontend-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "5260f0b10c7c101ff48209faa29ca697476a381a2922a95b51bbb87826249d40",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-application-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "5c2ccc4690ce066696c29305f2e8d91ce167dd2075ff104583ad0c8c171c9980",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-execution-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "e16d174c7016dcee1af332b6b5c573e2d6216b9f6e68b75c45dfa3a8b314cdcb",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-methods-final-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "833e269deb3747ee75c7f356c5e88d5bdb9d2a0e7b55360d880482bb33fdf1e6",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "artifacts/test-results/road-workflow-full-spatial-final-junit.xml",
+          "status": "added",
+          "manifest_sha256": null,
+          "observed_sha256": "10c99ee0acdff95e192f222ef22176639ea534a7615302401f73056d7a4ec00d",
+          "group": "unlisted_run_output"
+        },
+        {
+          "path": "docs/acceptance/FIXED_CASES.md",
+          "status": "changed",
+          "manifest_sha256": "3d80b943b55fd8336605a48e29aa7d768135825b59ca0d81b3d7b070c33e0f68",
+          "observed_sha256": "72c85668f8bfaa60937b0f57e8c9a7939f0f49843b6a83dbad86b4c238115436",
+          "group": "acceptance"
+        },
+        {
+          "path": "docs/release/FINAL_ACCEPTANCE.md",
+          "status": "changed",
+          "manifest_sha256": "958724755e0d2fef87b78380281becbef4c062a63657a3b2e3a927bf1f761632",
+          "observed_sha256": "bfc38f8c648f16c443901073d4f8c59e247e3619c38936684d02ffaa79295482",
+          "group": "acceptance"
+        },
+        {
+          "path": "docs/traceability/requirements-matrix.md",
+          "status": "changed",
+          "manifest_sha256": "e7e93fc8799adf79bdc15218c6ce24a4ee02d772a926a7aa5bfa0509deb9dbd7",
+          "observed_sha256": "0b0f5479cbdd5f32e28542d72ee44b351055acc6e54f6c3f6bb71b85ef8aa318",
+          "group": "acceptance"
+        },
+        {
+          "path": "docs/user-guide/workbench.md",
+          "status": "changed",
+          "manifest_sha256": "ae7eebdddea5685dc9502875e1081372f2f02e11afd57b2264ed0bd9a1e4a785",
+          "observed_sha256": "2a28a7ec30050e70f4aec59a49d7cdc66d824946b6be823fa3a242b981b25078",
+          "group": "startup"
+        }
+      ]
+    }
+  }
+}

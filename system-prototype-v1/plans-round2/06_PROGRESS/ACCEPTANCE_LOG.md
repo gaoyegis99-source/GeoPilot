@@ -19,3 +19,9 @@
 - 基线提交 `80d724f35fba31cacb9d3f740265b2713c6be6f4`。315 份 Markdown、3,257 处引用已分类。旧追踪校验的 63 条诊断与历史输出分类逐条相等。
 - 扫描、确定性复验和 3 项专项测试退出 0。主控复跑专项 3 项全过，复核 11 处缺失裸路径的语境。
 - 状态 ACCEPTED。放行 P12-04，历史运行数据缺失继续作为交付证据缺口。 [命令、CSV、原始日志与回滚](../../docs/round2/audit/p12-03-review.md)
+
+## P12-04 主控验收
+
+- P12-04 专项 10 通过、0 失败、0 跳过。主控运行 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 .venv/bin/python -m pytest -q -p no:cacheprovider tests/quality`，25 通过，退出 0。
+- 固定 V1 源码 37 项内容变化、18 项未收录，证据 16 项缺失、5 项内容变化、15 项已入库但未收录。新旧清单验证命令均退出 1，新工具输出逐文件差异。已确认原清单与 V1 提交字节一致。
+- 状态 ACCEPTED。缺失证据和版本差异留待独立复跑及正式交付处理。 [命令、环境、JSON、原始日志与回滚](../../docs/round2/audit/p12-04.md)
