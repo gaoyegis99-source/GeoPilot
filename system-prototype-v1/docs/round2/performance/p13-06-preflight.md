@@ -17,6 +17,21 @@ P13-06 等待 P13-05 验收。F 和主控核对现有确认方案、步骤请求
 
 主控与 A 从已归档的 P13-05 修正版证据核对 M 档四组和 L 档两组的 84 个通过样本，其中 60 个为正式计量。每个负载的独立验算报告和检查规则结果在 14 次运行中一致。各 GeoPackage 成果角色的 14 个登记指纹均不同。按面积分配的分配明细 CSV、分区统计 JSON 和道路统计 CSV 则各自只有一个指纹。已验证三份证据归档及可用的文件清单，复算退出 0。 [复算脚本](p13-06-output-fingerprints-audit.py) · [实际样本统计](p13-06-output-fingerprints.json)
 
+## 栅格成果文件组复算
+
+主控读取冻结修正版 `a2d2e68` 的 DEM S、DEM M 和遥感 S 三个已封存分片。每组冷暖各 7 轮，共 42 个不同运行，均取得 `SUCCEEDED/PASSED`。DEM M 中三轮保留正式基准的状态观测失败标签，同时具有已核对的成果和检查报告。每个负载的确认参数、实际执行参数、独立正确性报告和规则结果一致。
+
+从登记清单定位并重算 224 个实际成果文件组，全部与登记指纹相同。同一负载的每个成果角色在 14 次运行中各有一个指纹。DEM S 与 DEM M 每组包含三项成果，遥感 S 包含十项，覆盖 GeoTIFF 和 JSON。原始报告、配置回执、登记清单及文件组随归档提供，离线复算退出 0。 [原始输入、复算命令及结果](p13-06-raster-output-fingerprints-evidence.tar.gz)
+
+在隔离的阈值 GeoTIFF 副本中加入 `.tif.aux.xml`，主 TIFF 的 SHA-256 一致，文件组指纹改变。移除辅助文件后恢复原指纹。修改另一份解包副本中的 TIFF 内容后，审计拒绝该成果，退出 1。后续缓存命中需重算已登记文件组并复验成果。P13-06 等待 P13-05 验收。
+
+```bash
+p13_raster_cache=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-06-raster-output-fingerprints-evidence.tar.gz -C "$p13_raster_cache"
+(cd "$p13_raster_cache" && sha256sum -c SHA256SUMS)
+.venv/bin/python -B "$p13_raster_cache/proof/verify.py" "$p13_raster_cache"
+```
+
 L 点相交与线相交使用同一 `relations.gpkg` 文件和输入清单，同一方法、工具版本及记录的步骤参数。28 次实际输入检查日志分别记录打开 `points` 和 `lines`。两组独立验算分别确认保留 65,536 个点和 131,072 条线，后者总长 4,030,464 米。 [点相交原始样本](p13-05-vector-l-point-evidence.tar.gz) · [线相交原始样本](p13-05-vector-l-line-evidence.tar.gz) · [M 档原始样本](p13-05-vector-m-revised-evidence.tar.gz)
 
 缓存键需要包含每个输入角色的实际图层及文件组指纹。命中时可复用现有 `copy_file_group`，按缓存条目登记的物理指纹校验副本，再按本次运行重新打开成果、核验来源和独立正确性。运行日志证明图层与物理指纹存在差异，GeoPackage 中导致物理差异的字段未核对。P13-06 仍等待 P13-05 验收。 [文件组复制](../../../src/geopilot/data/fingerprint.py#L132) · [成果重新打开与登记](../../../src/geopilot/artifacts/service.py#L137)
