@@ -12,7 +12,7 @@ from validate_round2_status import BOARD, ROOT, check_links, load_board, require
 
 TASK = "P16-07"
 PREREQUISITES = (
-    "P13-08", "P14-08", "P15-08", "P16-01", "P16-02", "P16-03", "P16-04", "P16-05", "P16-06",
+    "P13-08", "P14-08", "P15-08", "P16-01", "P16-02", "P16-04", "P16-05", "P16-06",
 )
 
 

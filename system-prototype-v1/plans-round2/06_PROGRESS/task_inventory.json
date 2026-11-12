@@ -357,16 +357,16 @@
       "phase": "P16",
       "title": "工作台用户任务可用性测试",
       "agent": "E/F",
-      "deps": "P12-12、至少一个稳定方法",
-      "command": "python scripts/quality/summarize_user_trials.py（创建）",
-      "acceptance": "建议至少 5 名目标用户并说明样本限制；记录完成率、求助、错误、耗时；开发者自测不算用户研究。"
+      "deps": "无（已废弃）",
+      "command": "不适用",
+      "acceptance": "NOT_APPLICABLE，依用户决定撤销真实 GIS 用户浏览器测评。"
     },
     {
       "id": "P16-04",
       "phase": "P16",
       "title": "错误信息与恢复路径优化",
       "agent": "E/D",
-      "deps": "P16-03",
+      "deps": "无",
       "command": "cd frontend && npm test -- --run && npm run build；后端相关 tests",
       "acceptance": "能区分修草稿/重跑/重查/重登记；不隐藏日志；状态语义不变。"
     },
@@ -375,7 +375,7 @@
       "phase": "P16",
       "title": "长任务用户体验",
       "agent": "E/D",
-      "deps": "P13-02、P16-03",
+      "deps": "P13-02",
       "command": "前端 Vitest + 浏览器 E2E；后端 run status tests",
       "acceptance": "只展示可观测状态，不造伪百分比；刷新状态一致。"
     },
@@ -393,7 +393,7 @@
       "phase": "P16",
       "title": "V2 产品范围与发布决策",
       "agent": "主控",
-      "deps": "P13-08、P14-08、P15-08、P16-01 至 P16-06",
+      "deps": "P13-08、P14-08、P15-08、P16-01、P16-02、P16-04 至 P16-06",
       "command": "python scripts/quality/validate_release_readiness.py（创建）",
       "acceptance": "逐项列出已验证/部分验证/未验证；性能阈值来自用户需求；发布阻断明确；主控签署。"
     }

@@ -40,8 +40,8 @@
 | P15-08 | P15 | Agent 行为评估集 | F/G/主控 | P15-01 至 P15-07 | ACCEPTED | 固定行为 18/18，本机建议严格 0/3、越权护栏 1/1。 [评估结果](../../docs/round2/agent/p15-08.md) |
 | P16-01 | P16 | 本机环境诊断命令 | 主控 | P12-05、P12-06 | ACCEPTED | [诊断 CLI、真实环境和失败路径](../../docs/round2/deployment/p16-01.md) |
 | P16-02 | P16 | 干净环境安装矩阵 | 主控/A/E/F | P16-01 | ACCEPTED | [两套 Linux 后端与独立 Chromium 实测](../../docs/round2/deployment/p16-02.md) |
-| P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 新候选包已可用。标准浏览器任务与恢复补充观察待真实会话、匿名记录和下载 CSV。 [主持人补充指南](../../docs/round2/user-research/moderator-ux-follow-up.md) |
-| P16-04 | P16 | 错误信息与恢复路径优化 | E/D | P16-03 | BLOCKED | CRS 定位、按原方案重跑及检查取消后的中文提示与唯一重查入口已通过实际浏览器复验，待 P16-03 真实观察。 [工作台复验](../../docs/round2/user-research/p16-ux-follow-up.md) |
-| P16-05 | P16 | 长任务用户体验 | E/D | P13-02、P16-03 | BLOCKED | 实际 DEM 长任务刷新、计算取消及从运行区重查均已技术复验，待 P16-03 真实观察和体验验收。 [长任务复验](../../docs/round2/user-research/p16-05-long-task-verification.md) · [重查入口](../../docs/round2/user-research/p16-check-recovery.md) |
+| P16-03 | P16 | 工作台用户任务可用性测试 | E/F | 无（已废弃） | NOT_APPLICABLE | 依用户决定撤销真实 GIS 用户浏览器测评。 [范围决定](../04_TASKS/P16/P16-03.md) |
+| P16-04 | P16 | 错误信息与恢复路径优化 | E/D | 无 | DOING | 修草稿、重跑和重查已实际复验。输入变化后的重新登记和改选版本需要交互补齐与验证。 [工作台复验](../../docs/round2/user-research/p16-ux-follow-up.md) |
+| P16-05 | P16 | 长任务用户体验 | E/D | P13-02 | ACCEPTED | 实际 DEM 计算刷新保持运行及计时，计算取消与检查取消后重查均通过技术复验。 [长任务复验](../../docs/round2/user-research/p16-05-long-task-verification.md) · [重查入口](../../docs/round2/user-research/p16-check-recovery.md) |
 | P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | ACCEPTED | 候选 `6961ee3` 前端 76、后端 2,255、独立固定 GIS 82 项全部通过，Git 和离线校验一致。 [候选验收](../../docs/round2/deployment/p16-06-tooling.md#检查取消恢复候选) |
-| P16-07 | P16 | V2 产品范围与发布决策 | 主控 | P13-08、P14-08、P15-08、P16-01 至 P16-06 | BLOCKED | 已核对候选。待 P16-03 真实浏览器观察和 P16-04、P16-05 体验改进。 [发布前置核验](../../docs/round2/release/p16-07-preflight.md) |
+| P16-07 | P16 | V2 产品范围与发布决策 | 主控 | P13-08、P14-08、P15-08、P16-01、P16-02、P16-04 至 P16-06 | BLOCKED | 待 P16-04 技术验收、性能阈值和最终发布范围签署。 [发布前置核验](../../docs/round2/release/p16-07-preflight.md) |

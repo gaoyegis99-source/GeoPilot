@@ -17,7 +17,6 @@ DEPENDENCIES = {
     "P15-08": "ACCEPTED",
     "P16-01": "ACCEPTED",
     "P16-02": "ACCEPTED",
-    "P16-03": "DOING",
     "P16-04": "BLOCKED",
     "P16-05": "BLOCKED",
     "P16-06": "ACCEPTED",
@@ -59,6 +58,7 @@ def release_root(tmp_path):
             accept_task(tmp_path, task)
         else:
             set_task(tmp_path, task, status, "Awaiting acceptance")
+    set_task(tmp_path, "P16-03", "NOT_APPLICABLE", "Participant browser study retired")
     set_task(tmp_path, "P16-07", "BLOCKED", "Awaiting dependencies")
     return tmp_path
 
@@ -81,7 +81,7 @@ def test_blocked_prerequisites_still_verify_accepted_candidate(release_root, rea
         "status": "BLOCKED",
         "decision_status": "BLOCKED",
         "prerequisites": DEPENDENCIES,
-        "blockers": ["P16-03", "P16-04", "P16-05"],
+        "blockers": ["P16-04", "P16-05"],
         "candidate": CANDIDATE,
     }
     assert list(report["prerequisites"]) == list(DEPENDENCIES)
@@ -95,7 +95,7 @@ def test_blocked_prerequisites_still_verify_accepted_candidate(release_root, rea
 
 def test_prerequisites_met_preserves_decision_status(release_root, readiness, capsys):
     module, verify = readiness
-    for task in ("P16-03", "P16-04", "P16-05"):
+    for task in ("P16-04", "P16-05"):
         accept_task(release_root, task)
     set_task(release_root, "P16-07", "TODO", "Awaiting release decision")
 
@@ -122,7 +122,7 @@ def test_unaccepted_candidate_skips_manifest_verification(release_root, readines
 
     assert report["candidate"] is None
     assert report["prerequisites"]["P16-06"] == "REVIEW"
-    assert report["blockers"] == ["P16-03", "P16-04", "P16-05", "P16-06"]
+    assert report["blockers"] == ["P16-04", "P16-05", "P16-06"]
     verify.assert_not_called()
 
 
@@ -176,7 +176,7 @@ def test_rejects_accepted_decision_with_unmet_prerequisites(release_root, readin
 
 def test_rejects_accepted_decision_without_linked_evidence(release_root, readiness):
     module, verify = readiness
-    for task in ("P16-03", "P16-04", "P16-05"):
+    for task in ("P16-04", "P16-05"):
         accept_task(release_root, task)
     set_task(release_root, "P16-07", "ACCEPTED", "Release approved")
 

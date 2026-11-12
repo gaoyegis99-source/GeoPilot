@@ -382,3 +382,9 @@
 ## P16-06 检查取消恢复候选验收
 
 - 主控、F 独立核对源码 `6961ee3`、证据提交 `b9fb0a1`。前端 76、后端 2,255、固定 GIS 82 项均通过，0 失败、错误或跳过。Git、离线及独立审计均退出 0，P16-06 更新候选 ACCEPTED。 [候选验收](../../docs/round2/deployment/p16-06-tooling.md#检查取消恢复候选)
+
+## P16 范围调整与长任务验收
+
+- 2026-11-13，主控依用户决定将 P16-03 标为 NOT_APPLICABLE，撤销真实 GIS 用户浏览器测评及会话、记录和下载文件要求。历史准备材料和模拟测评留档。 [范围决定](../04_TASKS/P16/P16-03.md)
+- 主控和 F 复核 P16-05。自然 DEM 计算中刷新保持同一运行和计时，另次实际计算可取消，独立复验确认取消检查后可在原运行上重查。P13-02 已验收，P16-05 签收 ACCEPTED。 [自然长任务](../../docs/round2/user-research/p16-05-long-task-verification.md) · [重查复验](../../docs/round2/user-research/p16-check-recovery.md)
+- P16-04 的重登记链仍待交互修正与复验。P16-07 的技术前置仅余 P16-04，用户性能阈值及发布范围另待签署。 [当前发布前置](../../docs/round2/release/p16-07-preflight.md)
