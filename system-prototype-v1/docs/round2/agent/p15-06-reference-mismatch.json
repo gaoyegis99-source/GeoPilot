@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "status": "FAILED",
+  "candidate_sha256": "9a705f59687aff461cbff17233e70bc285f7676f0baea6e55b8cd3d8d614102b",
+  "worker_sha256": "e5251ec726118d6a4bc9e1c301b41e83f3bed3731d2276c59fae5911bb4eff4f",
+  "limits": {
+    "memory_bytes": 67108864,
+    "memory_and_swap_bytes": 67108864,
+    "cpus": 0.5,
+    "pids": 16,
+    "open_files": 64,
+    "cpu_seconds": 4,
+    "wall_seconds": 4,
+    "output_bytes": 1024,
+    "source_bytes": 4096,
+    "ast_nodes": 256,
+    "input_values": 4096
+  },
+  "sample": {
+    "case_id": "equal-area-dem-threshold-v1",
+    "package_manifest_sha256": "e788319f86cae92a4f9a1e215e0cf6a8476593ca7b2f85174bd38500ebc98a93",
+    "geotiff_sha256": "e208d5868728a26255248340480fa325b053a079413bdf6c4cc5a0d73a6183e8",
+    "crs": "EPSG:6933",
+    "bands": 1,
+    "grid": [
+      7,
+      7
+    ],
+    "nodata_count": 2,
+    "cell_area_m2": 100.0,
+    "rasterio": "1.4.3",
+    "gdal": "3.9.3"
+  },
+  "reference": [
+    {
+      "threshold": 100,
+      "expected": {
+        "valid_count": 47,
+        "selected_count": 47,
+        "selected_area_m2": 4700
+      },
+      "actual": {
+        "valid_count": 47,
+        "selected_count": 41,
+        "selected_area_m2": 4100.0
+      },
+      "matched": false
+    },
+    {
+      "threshold": 130,
+      "expected": {
+        "valid_count": 47,
+        "selected_count": 27,
+        "selected_area_m2": 2700
+      },
+      "actual": {
+        "valid_count": 47,
+        "selected_count": 20,
+        "selected_area_m2": 2000.0
+      },
+      "matched": false
+    },
+    {
+      "threshold": 161,
+      "expected": {
+        "valid_count": 47,
+        "selected_count": 0,
+        "selected_area_m2": 0
+      },
+      "actual": {
+        "valid_count": 47,
+        "selected_count": 0,
+        "selected_area_m2": 0.0
+      },
+      "matched": true
+    }
+  ],
+  "execution": {
+    "image": "sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87",
+    "engine": "28.1.1",
+    "container_name": "geopilot-generated-tool-a96d508a986a4d7ea046d369d15ce306",
+    "container_id": "57c1690827f4ad56c7233b21dca497a8e13dfebdf29a917cd1414e8d5cbe5900",
+    "policy": {
+      "image": "sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87",
+      "network": "none",
+      "ipc": "none",
+      "cgroup_namespace": "private",
+      "read_only_root": true,
+      "read_only_stage": true,
+      "capabilities_dropped": [
+        "ALL"
+      ],
+      "no_new_privileges": true,
+      "privileged": false,
+      "mount_count": 1,
+      "memory_bytes": 67108864,
+      "memory_and_swap_bytes": 67108864,
+      "cpu_nanocpus": 500000000,
+      "pids": 16,
+      "ulimits": {
+        "core": [
+          0,
+          0
+        ],
+        "cpu": [
+          4,
+          4
+        ],
+        "nofile": [
+          64,
+          64
+        ]
+      }
+    },
+    "client_exit_code": 0,
+    "timed_out": false,
+    "cancelled": false,
+    "elapsed_seconds": 0.26547,
+    "container_exit_code": 0,
+    "oom_killed": false,
+    "running_before_cleanup": false,
+    "worker": {
+      "python": "3.12.3",
+      "uid": 65534,
+      "gid": 65534,
+      "effective_capabilities": 0,
+      "no_new_privileges": true,
+      "seccomp_filter": true,
+      "clean_environment": true,
+      "open_files": [
+        64,
+        64
+      ],
+      "read_only_root": true,
+      "read_only_stage": true
+    }
+  },
+  "cleanup": {
+    "attempted": true,
+    "verified": true
+  },
+  "error": {
+    "code": "REFERENCE_MISMATCH",
+    "phase": "verify",
+    "message": "Candidate counts differ from the independent reference",
+    "line": null
+  }
+}

@@ -1,0 +1,14 @@
+baseline d580bf25abefa6775fdb1c427c2c23fee29409a7
+source /tmp/geopilot-p15-06-source.AD3k4o/system-prototype-v1
+sandbox test evidence root /dev/shm/geopilot-p15-06-tests.XntJ12
+start_utc 2026-11-12T06:31:30Z
+Python 3.13.13
+some avg10=0.00 avg60=0.00 avg300=0.35 total=89538264696
+full avg10=0.00 avg60=0.00 avg300=0.34 total=83787775331
+.........................                                                [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-06-junit.xml -
+25 passed in 10.37s
+end_utc 2026-11-12T06:31:41Z
+some avg10=0.00 avg60=0.00 avg300=0.34 total=89538268103
+full avg10=0.00 avg60=0.00 avg300=0.33 total=83787778683
+pytest exit 0

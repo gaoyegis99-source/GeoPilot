@@ -1,0 +1,38 @@
+{
+  "contract": {
+    "schema_version": 1,
+    "function": "count_threshold",
+    "inputs": {
+      "values": {
+        "type": "list[number]",
+        "max_items": 4096,
+        "nodata": "omitted"
+      },
+      "threshold": {
+        "type": "number",
+        "comparison": "greater_than_or_equal"
+      }
+    },
+    "result": {
+      "selected_count": "nonnegative integer",
+      "valid_count": "nonnegative integer"
+    },
+    "constraints": {
+      "source_bytes": 4096,
+      "ast_nodes": 256,
+      "syntax": "local numeric assignment, arithmetic, comparison, branching, loops, list and result literals",
+      "calls": false,
+      "imports": false,
+      "attributes": false,
+      "indexing": false
+    }
+  },
+  "generator": "deterministic_local_reference",
+  "candidate_sha256": "856b3bd56056fa2229e6a56aaac1dad32013ba876648e7be7c51ce9593abe7d1",
+  "exit_codes": {
+    "describe": 0,
+    "generate": 0,
+    "review": 0
+  },
+  "tool_project_and_source_fingerprints_unchanged": true
+}

@@ -35,9 +35,9 @@
 | P15-03 | P15 | 执行反馈结构化解释 | 主控/G/D | P13-02、P15-01 | ACCEPTED | [本地反馈接口、事实与推断、脱敏提示](../../docs/round2/agent/p15-03.md) |
 | P15-04 | P15 | 受约束的替代方案建议 | 主控/G/C | P14-03、P15-03 | ACCEPTED | [已登记候选对照与显式草稿选择](../../docs/round2/agent/p15-04.md) |
 | P15-05 | P15 | 失败后的计划修订闭环 | 主控/D/G | P15-02 至 P15-04 | ACCEPTED | [真实失败、方案修订和成功新运行](../../docs/round2/agent/p15-05.md) |
-| P15-06 | P15 | 代码型 GIS 工具生成隔离试点 | G/B/F | P14-04、P14-05、P15-03 | TODO | 待执行 |
+| P15-06 | P15 | 代码型 GIS 工具生成隔离试点 | C/主控 | P14-04、P14-05、P15-03 | ACCEPTED | [固定 GeoTIFF、候选生成和真实容器限制](../../docs/round2/agent/p15-06.md) |
 | P15-07 | P15 | 第二模型供应商适配决策 | 主控/G | P12-07、P15-01 | ACCEPTED | [本机兼容端点与契约复验](../../docs/round2/agent/p15-07.md) |
-| P15-08 | P15 | Agent 行为评估集 | F/G | P15-01 至 P15-07 | TODO | 待执行 |
+| P15-08 | P15 | Agent 行为评估集 | F/G/主控 | P15-01 至 P15-07 | DOING | 前置全部通过，启动固定提示与候选评估 |
 | P16-01 | P16 | 本机环境诊断命令 | 主控 | P12-05、P12-06 | ACCEPTED | [诊断 CLI、真实环境和失败路径](../../docs/round2/deployment/p16-01.md) |
 | P16-02 | P16 | 干净环境安装矩阵 | 主控/A/E/F | P16-01 | ACCEPTED | [两套 Linux 后端与独立 Chromium 实测](../../docs/round2/deployment/p16-02.md) |
 | P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 用户可安排参与者，待真实浏览器会话和匿名观察记录。[主持手册](../../docs/round2/user-research/moderator.md) |
