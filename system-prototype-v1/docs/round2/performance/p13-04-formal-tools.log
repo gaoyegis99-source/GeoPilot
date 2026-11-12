@@ -1,0 +1,82 @@
+start_utc 2026-11-12T04:44:45Z
+source_sha a0c465d85d3a6b31fcd091ea4e913867bfc596df
+scratch /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-formal-tools.pN5DMz
+image sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87
+start_family raster 2026-11-12T04:44:45Z container geopilot-p13-04-raster-tools-pN5DMz
+raster/S/tools/process_cold/01 warmup PASS 9491187079
+raster/S/tools/process_cold/02 warmup PASS 9727126787
+raster/S/tools/process_cold/03 measurement PASS 9641815574
+raster/S/tools/process_cold/04 measurement PASS 9412024918
+raster/S/tools/process_cold/05 measurement PASS 9620030669
+raster/S/tools/process_cold/06 measurement PASS 9626319506
+raster/S/tools/process_cold/07 measurement PASS 9680099015
+raster/S/tools/warm/01 warmup PASS 188813478
+raster/S/tools/warm/02 warmup PASS 162642432
+raster/S/tools/warm/03 measurement PASS 186947973
+raster/S/tools/warm/04 measurement PASS 162754294
+raster/S/tools/warm/05 measurement PASS 159579099
+raster/S/tools/warm/06 measurement PASS 160146285
+raster/S/tools/warm/07 measurement PASS 180174723
+raster/M/tools/process_cold/01 warmup PASS 11282151893
+raster/M/tools/process_cold/02 warmup PASS 11299420344
+raster/M/tools/process_cold/03 measurement PASS 11007725755
+raster/M/tools/process_cold/04 measurement PASS 11900517818
+raster/M/tools/process_cold/05 measurement PASS 12657097398
+raster/M/tools/process_cold/06 measurement PASS 12056006455
+raster/M/tools/process_cold/07 measurement PASS 11571504409
+raster/M/tools/warm/01 warmup PASS 1780520117
+raster/M/tools/warm/02 warmup PASS 1698446003
+raster/M/tools/warm/03 measurement PASS 1815644700
+raster/M/tools/warm/04 measurement PASS 1726274623
+raster/M/tools/warm/05 measurement PASS 1754996307
+raster/M/tools/warm/06 measurement PASS 1801146212
+raster/M/tools/warm/07 measurement PASS 1736760588
+raster/L/tools/process_cold/01 warmup PASS 39097596646
+raster/L/tools/process_cold/02 warmup PASS 37269507374
+raster/L/tools/process_cold/03 measurement PASS 36917736053
+raster/L/tools/process_cold/04 measurement PASS 36910555729
+raster/L/tools/process_cold/05 measurement PASS 44407868690
+raster/L/tools/process_cold/06 measurement PASS 48172097923
+raster/L/tools/process_cold/07 measurement PASS 43131525194
+raster/L/tools/warm/01 warmup PASS 33426974189
+raster/L/tools/warm/02 warmup PASS 36024063277
+raster/L/tools/warm/03 measurement PASS 31797931010
+raster/L/tools/warm/04 measurement PASS 34480723260
+raster/L/tools/warm/05 measurement PASS 37523558166
+raster/L/tools/warm/06 measurement PASS 33524363772
+raster/L/tools/warm/07 measurement PASS 35909995572
+PASS /scratch/raster/report.json
+end_family raster exit=0 utc=2026-11-12T05:03:01Z
+start_family remote-sensing 2026-11-12T05:03:01Z container geopilot-p13-04-remote-sensing-tools-pN5DMz
+remote_sensing/S/tools/process_cold/01 warmup PASS 6015142041
+remote_sensing/S/tools/process_cold/02 warmup PASS 6858872764
+remote_sensing/S/tools/process_cold/03 measurement PASS 12590026191
+remote_sensing/S/tools/process_cold/04 measurement PASS 13619669509
+remote_sensing/S/tools/process_cold/05 measurement PASS 10771435482
+remote_sensing/S/tools/process_cold/06 measurement PASS 14809874696
+remote_sensing/S/tools/process_cold/07 measurement PASS 10869194670
+remote_sensing/S/tools/warm/01 warmup PASS 2541701172
+remote_sensing/S/tools/warm/02 warmup PASS 334302008
+remote_sensing/S/tools/warm/03 measurement PASS 5342756729
+remote_sensing/S/tools/warm/04 measurement PASS 323858826
+remote_sensing/S/tools/warm/05 measurement PASS 336884152
+remote_sensing/S/tools/warm/06 measurement PASS 349353519
+remote_sensing/S/tools/warm/07 measurement PASS 335338964
+remote_sensing/M/tools/process_cold/01 warmup PASS 20304607760
+remote_sensing/M/tools/process_cold/02 warmup PASS 31304106607
+remote_sensing/M/tools/process_cold/03 measurement PASS 17915035746
+remote_sensing/M/tools/process_cold/04 measurement PASS 22689291292
+remote_sensing/M/tools/process_cold/05 measurement PASS 17665076037
+remote_sensing/M/tools/process_cold/06 measurement PASS 19780874051
+remote_sensing/M/tools/process_cold/07 measurement PASS 13001371518
+remote_sensing/M/tools/warm/01 warmup PASS 6469656371
+remote_sensing/M/tools/warm/02 warmup PASS 4678493727
+remote_sensing/M/tools/warm/03 measurement PASS 2722606353
+remote_sensing/M/tools/warm/04 measurement PASS 2982975578
+remote_sensing/M/tools/warm/05 measurement PASS 2735027511
+remote_sensing/M/tools/warm/06 measurement PASS 2617991804
+remote_sensing/M/tools/warm/07 measurement PASS 2668414944
+remote_sensing/L/tools/process_cold/01 warmup FAIL None
+remote_sensing/L/tools/process_cold/02 warmup FAIL None
+FAIL /scratch/remote-sensing/report.json
+end_family remote-sensing exit=1 utc=2026-11-12T05:08:55Z

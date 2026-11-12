@@ -1,0 +1,14 @@
+python-dem-area-stats version 1 (python)
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.threshold_regions.path","severity":"blocking","passed":true,"observed":{"path":"intermediate/extract_by_threshold/threshold_regions.tif","layer":null},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.threshold_regions","severity":"blocking","passed":true,"observed":"raster","expected":"raster_classification","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.threshold_regions.bounds","severity":"blocking","passed":true,"observed":[500010.0,4479530.0,520470.0,4499990.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"crs_is_known","phase":"input","field":"inputs.threshold_regions.crs","severity":"blocking","passed":true,"observed":"EPSG:32650","expected":"Known declared CRS","message":"Input CRS is known"}
+input_check: {"rule":"equal_area_crs_suitable_for_extent","phase":"input","field":"inputs.threshold_regions.crs","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","bounds":[500010.0,4479530.0,520470.0,4499990.0],"unit":"square_meter","measurement_crs":"EPSG:6933"},"expected":{"method":"equal_area","unit":"square_meter"},"message":"Measurement policy is suitable for the input extent"}
+measurement: {"role": "threshold_regions", "method": "equal_area", "crs": "EPSG:6933", "unit": "square_meter"}
+$ /runtime/venv/bin/python /project/src/geopilot/gis/tools/summarize_dem_area.py --request steps/calculate_area_with_equal_area_projection/request.json --result steps/calculate_area_with_equal_area_projection/python-result.json
+stdout:
+
+stderr:
+
+exit_code: -15
+execute: PROCESS_TIMEOUT: Process exceeded 60 seconds

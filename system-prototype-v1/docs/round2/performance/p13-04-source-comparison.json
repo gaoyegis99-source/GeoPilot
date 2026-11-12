@@ -1,0 +1,171 @@
+{
+  "observed_utc": "2026-11-12T04:48:48.123653+00:00",
+  "recorded_tool_baseline": "a0c465d85d3a6b31fcd091ea4e913867bfc596df",
+  "checked_out_commit_at_comparison": "37cb329be04eaddfeb23ac62789926d0fcdb63aa",
+  "all_unchanged": true,
+  "changes_to_src_config_between_commits": [
+    "system-prototype-v1/src/geopilot/scheduler/loop.py"
+  ],
+  "uncommitted_src_config_at_comparison": [
+    "?? src/geopilot/llm/clarification.py"
+  ],
+  "scheduler_not_invoked_by_tools": {
+    "path": "src/geopilot/scheduler/loop.py",
+    "baseline_sha256": "790e817ad7a938e480be6aa2499e8678adb3d7669434eeab15eaf393a08d8eeb",
+    "working_tree_sha256": "4e69aa5c12b6c590294b4ada58759db2f0a5f647acae5a8d77c9af65a04e5d28"
+  },
+  "verified_files": {
+    "benchmarks/datasets/raster.yaml": {
+      "baseline_sha256": "62cd09f5afbbd70e00efbf393ba60df05fc86dcdd7a086c915bd74500c69b5df",
+      "working_tree_sha256": "62cd09f5afbbd70e00efbf393ba60df05fc86dcdd7a086c915bd74500c69b5df"
+    },
+    "benchmarks/datasets/remote-sensing.yaml": {
+      "baseline_sha256": "7856d1177f073bf37615756ef7ca4ffcbf8017c91ca8b239c7a5e23d5cc0db41",
+      "working_tree_sha256": "7856d1177f073bf37615756ef7ca4ffcbf8017c91ca8b239c7a5e23d5cc0db41"
+    },
+    "benchmarks/manifest.yaml": {
+      "baseline_sha256": "d0517e6572a6e246bd26a99ca009e6cd5af9eeb4edd252deefb49ed2c0cbd4e7",
+      "working_tree_sha256": "d0517e6572a6e246bd26a99ca009e6cd5af9eeb4edd252deefb49ed2c0cbd4e7"
+    },
+    "config/methods/dem-terrain-analysis.v1.yaml": {
+      "baseline_sha256": "ed2a696d6f6fe72f5a401c7e6a84a8491210978f48c991e511369fca12515973",
+      "working_tree_sha256": "ed2a696d6f6fe72f5a401c7e6a84a8491210978f48c991e511369fca12515973"
+    },
+    "config/methods/remote-sensing-index-change.v1.yaml": {
+      "baseline_sha256": "e5331572ffe08c7f366ed5b510ea5ec76c509a1545800b835a616371f7a13355",
+      "working_tree_sha256": "e5331572ffe08c7f366ed5b510ea5ec76c509a1545800b835a616371f7a13355"
+    },
+    "config/sensors/landsat-8-c2-l2sp.v1.yaml": {
+      "baseline_sha256": "254b6d9687a4c833b93a3ea147843f0e8ffc0eaed25ffa748cb9bd3e8e0335d7",
+      "working_tree_sha256": "254b6d9687a4c833b93a3ea147843f0e8ffc0eaed25ffa748cb9bd3e8e0335d7"
+    },
+    "config/sensors/landsat-8-c2-l2sr.v1.yaml": {
+      "baseline_sha256": "499adde0b098281cf739ac969adda623df1d2ab3d65732223e8db3172b4ea686",
+      "working_tree_sha256": "499adde0b098281cf739ac969adda623df1d2ab3d65732223e8db3172b4ea686"
+    },
+    "config/sensors/landsat-9-c2-l2sp.v1.yaml": {
+      "baseline_sha256": "b04392de2500e356c3f4cccc4ef3790069033f29779f3e1e3b7e272ec769f4ca",
+      "working_tree_sha256": "b04392de2500e356c3f4cccc4ef3790069033f29779f3e1e3b7e272ec769f4ca"
+    },
+    "config/sensors/landsat-9-c2-l2sr.v1.yaml": {
+      "baseline_sha256": "6a8cf7cc475b1d1ac4a984f8e0800236082b8cdab18b84bd7b0410183dca1606",
+      "working_tree_sha256": "6a8cf7cc475b1d1ac4a984f8e0800236082b8cdab18b84bd7b0410183dca1606"
+    },
+    "config/sensors/sentinel-2-l2a-pb05-11.v1.yaml": {
+      "baseline_sha256": "61d979500f687f4e0e1b765177ecb1a03c10359193c19f6d986ac5e5f3b4e583",
+      "working_tree_sha256": "61d979500f687f4e0e1b765177ecb1a03c10359193c19f6d986ac5e5f3b4e583"
+    },
+    "scripts/bench/_raster_fixtures.py": {
+      "baseline_sha256": "72173794e87121deb0b5051e1f5cd6be1205e71ad35b5bb228c7af09e992673d",
+      "working_tree_sha256": "72173794e87121deb0b5051e1f5cd6be1205e71ad35b5bb228c7af09e992673d"
+    },
+    "scripts/bench/generate_raster.py": {
+      "baseline_sha256": "4c29ae2184a2f0a0c6c6f4540d5e7f25ae6b0ba1ee1bb3513385fbf0797021d6",
+      "working_tree_sha256": "4c29ae2184a2f0a0c6c6f4540d5e7f25ae6b0ba1ee1bb3513385fbf0797021d6"
+    },
+    "scripts/bench/generate_remote_sensing.py": {
+      "baseline_sha256": "3d4d42f6553cde99309df0d69fde68e0b07c398a17c5c20590aa3dff7506fc84",
+      "working_tree_sha256": "3d4d42f6553cde99309df0d69fde68e0b07c398a17c5c20590aa3dff7506fc84"
+    },
+    "scripts/bench/validate_benchmark_manifest.py": {
+      "baseline_sha256": "30670ad74638e291ad3f52b458647e8f97a4aca1f1fbebf2b8b5ed6af7b7b465",
+      "working_tree_sha256": "30670ad74638e291ad3f52b458647e8f97a4aca1f1fbebf2b8b5ed6af7b7b465"
+    },
+    "src/geopilot/data/fingerprint.py": {
+      "baseline_sha256": "89d0bbb5026f6e816ad262bc6bc00cdee339c33b637f4b23c6cb8255aae66aae",
+      "working_tree_sha256": "89d0bbb5026f6e816ad262bc6bc00cdee339c33b637f4b23c6cb8255aae66aae"
+    },
+    "src/geopilot/data/raster_reader.py": {
+      "baseline_sha256": "5786157a772b0e055b876195e48158b0b9c13ad6921b7ee4d62cf0220b8232d0",
+      "working_tree_sha256": "5786157a772b0e055b876195e48158b0b9c13ad6921b7ee4d62cf0220b8232d0"
+    },
+    "src/geopilot/gis/raster/area_stats.py": {
+      "baseline_sha256": "f64f55ed7e601922d63fc0467084ea6fca9764c65e8d0c4b9310e264eeda4afb",
+      "working_tree_sha256": "f64f55ed7e601922d63fc0467084ea6fca9764c65e8d0c4b9310e264eeda4afb"
+    },
+    "src/geopilot/gis/raster/aspect.py": {
+      "baseline_sha256": "b642901d7afc381db03285a672550e4f07f83a7488350db414d6e90cda4c4178",
+      "working_tree_sha256": "b642901d7afc381db03285a672550e4f07f83a7488350db414d6e90cda4c4178"
+    },
+    "src/geopilot/gis/raster/clip_back.py": {
+      "baseline_sha256": "dfa5caed4a6fa70325598f06cefe35ccf07f28254e3ebde8d625727a18778800",
+      "working_tree_sha256": "dfa5caed4a6fa70325598f06cefe35ccf07f28254e3ebde8d625727a18778800"
+    },
+    "src/geopilot/gis/raster/dem_prepare.py": {
+      "baseline_sha256": "4460c910583da0ebaac95925a2db76d75cfd281d779189d7100a263c01beb02a",
+      "working_tree_sha256": "4460c910583da0ebaac95925a2db76d75cfd281d779189d7100a263c01beb02a"
+    },
+    "src/geopilot/gis/raster/extent_expansion.py": {
+      "baseline_sha256": "0cca74c8637874546674b054639c4ea0fff3599fdf5d0bbf4b3c6cbf6b37559f",
+      "working_tree_sha256": "0cca74c8637874546674b054639c4ea0fff3599fdf5d0bbf4b3c6cbf6b37559f"
+    },
+    "src/geopilot/gis/raster/terrain.py": {
+      "baseline_sha256": "f13e45a55200755a3f9b6299b6b23e2ba92628cdc41d6546f4957cffc530d463",
+      "working_tree_sha256": "f13e45a55200755a3f9b6299b6b23e2ba92628cdc41d6546f4957cffc530d463"
+    },
+    "src/geopilot/gis/raster/threshold.py": {
+      "baseline_sha256": "04557b690945a6d395415880518fb3b9e69030b22ec4d4de15edc74919f11dfa",
+      "working_tree_sha256": "04557b690945a6d395415880518fb3b9e69030b22ec4d4de15edc74919f11dfa"
+    },
+    "src/geopilot/gis/raster/units.py": {
+      "baseline_sha256": "b5dacc370756e867ec5b1da8cb7888c573011dd696cf29021d6f11203b5898fe",
+      "working_tree_sha256": "b5dacc370756e867ec5b1da8cb7888c573011dd696cf29021d6f11203b5898fe"
+    },
+    "src/geopilot/gis/raster/window_io.py": {
+      "baseline_sha256": "20562d2c8d7afb68775cbc6dedac0a58c30522a89ae751ef090b0283979a67d0",
+      "working_tree_sha256": "20562d2c8d7afb68775cbc6dedac0a58c30522a89ae751ef090b0283979a67d0"
+    },
+    "src/geopilot/gis/tools/vector_step_files.py": {
+      "baseline_sha256": "2e810b9dd28d4498f5b3d9a9060edcb6492204110ccc60de42ce619c9d6ea24a",
+      "working_tree_sha256": "2e810b9dd28d4498f5b3d9a9060edcb6492204110ccc60de42ce619c9d6ea24a"
+    },
+    "src/geopilot/gis/validation/crs_validator.py": {
+      "baseline_sha256": "aabce2703615d6e5eebae1e4c9baedefa316a4fc1ea29812d289f7697cda0df5",
+      "working_tree_sha256": "aabce2703615d6e5eebae1e4c9baedefa316a4fc1ea29812d289f7697cda0df5"
+    },
+    "src/geopilot/remote_sensing/alignment.py": {
+      "baseline_sha256": "bc5c7672fa34590c7e01b0d3f5b21754587c849f280235aaa572f02a0d6860a0",
+      "working_tree_sha256": "bc5c7672fa34590c7e01b0d3f5b21754587c849f280235aaa572f02a0d6860a0"
+    },
+    "src/geopilot/remote_sensing/band_mapper.py": {
+      "baseline_sha256": "2575ff91c4f0ed8baa99816b99a71c177d7b3f14cae179af2f5ede0885789b12",
+      "working_tree_sha256": "2575ff91c4f0ed8baa99816b99a71c177d7b3f14cae179af2f5ede0885789b12"
+    },
+    "src/geopilot/remote_sensing/change.py": {
+      "baseline_sha256": "1bd3eb01b026d17d6ff6c19a3f145b98c159ac566896450955daf701e9ca0c31",
+      "working_tree_sha256": "1bd3eb01b026d17d6ff6c19a3f145b98c159ac566896450955daf701e9ca0c31"
+    },
+    "src/geopilot/remote_sensing/classification.py": {
+      "baseline_sha256": "9196c4ce6326f5d2f4f31b12c06a1a2a7cc1872a3d01405be71e6f51084777b6",
+      "working_tree_sha256": "9196c4ce6326f5d2f4f31b12c06a1a2a7cc1872a3d01405be71e6f51084777b6"
+    },
+    "src/geopilot/remote_sensing/config_models.py": {
+      "baseline_sha256": "f7a36453689205f35b6f7f6e79f715e187de3858921775f58157799ae450e40b",
+      "working_tree_sha256": "f7a36453689205f35b6f7f6e79f715e187de3858921775f58157799ae450e40b"
+    },
+    "src/geopilot/remote_sensing/config_registry.py": {
+      "baseline_sha256": "dff62aaa2e2520e8718bf92af7273c31f76526b8aecbf589b42b1792eca6da70",
+      "working_tree_sha256": "dff62aaa2e2520e8718bf92af7273c31f76526b8aecbf589b42b1792eca6da70"
+    },
+    "src/geopilot/remote_sensing/indices.py": {
+      "baseline_sha256": "b432fd791d7e2f7f58932866321986210e3f9ec6eb2850fd7cfcbc933afc74dd",
+      "working_tree_sha256": "b432fd791d7e2f7f58932866321986210e3f9ec6eb2850fd7cfcbc933afc74dd"
+    },
+    "src/geopilot/remote_sensing/product_metadata.py": {
+      "baseline_sha256": "415c186b35c4e097c153e2a299f8448850b784abd9113db319adeea8832daacf",
+      "working_tree_sha256": "415c186b35c4e097c153e2a299f8448850b784abd9113db319adeea8832daacf"
+    },
+    "src/geopilot/remote_sensing/product_pack.py": {
+      "baseline_sha256": "159a9fdcf8f80e388254571903c08fccb5c3fe6d2b4061b909b0ebcac71c5117",
+      "working_tree_sha256": "159a9fdcf8f80e388254571903c08fccb5c3fe6d2b4061b909b0ebcac71c5117"
+    },
+    "src/geopilot/remote_sensing/quality_mask.py": {
+      "baseline_sha256": "6becce98e4736d1e9d1b8d0a09f5d83f6a570607b70b75f2c5d5cdbc3c66a76f",
+      "working_tree_sha256": "6becce98e4736d1e9d1b8d0a09f5d83f6a570607b70b75f2c5d5cdbc3c66a76f"
+    },
+    "src/geopilot/remote_sensing/scaling.py": {
+      "baseline_sha256": "980300a0988a5fa5a27d3361634600faf330cb85a8a2654cd85f05c36ed55138",
+      "working_tree_sha256": "980300a0988a5fa5a27d3361634600faf330cb85a8a2654cd85f05c36ed55138"
+    }
+  }
+}

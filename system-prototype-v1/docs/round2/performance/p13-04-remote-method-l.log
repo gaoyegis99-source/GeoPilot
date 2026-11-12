@@ -1,0 +1,22 @@
+start_utc 2026-11-12T06:56:23Z
+source_sha 37cb329be04eaddfeb23ac62789926d0fcdb63aa
+snapshot /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-source.2bOEIU
+input /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-formal-tools.pN5DMz/remote-sensing/inputs
+scratch /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-remote-l.x1rFKz
+container geopilot-p13-04-method-remote-l.x1rFKz
+remote_sensing/L/method/process_cold/01 warmup FAIL 117961062550
+remote_sensing/L/method/process_cold/02 warmup FAIL 111683538671
+remote_sensing/L/method/process_cold/03 measurement FAIL 128187636971
+remote_sensing/L/method/process_cold/04 measurement FAIL 131677183682
+remote_sensing/L/method/process_cold/05 measurement FAIL 136217421460
+remote_sensing/L/method/process_cold/06 measurement FAIL 127377594756
+remote_sensing/L/method/process_cold/07 measurement FAIL 127255355455
+remote_sensing/L/method/warm/01 warmup FAIL 139950199744
+remote_sensing/L/method/warm/02 warmup FAIL 120193510650
+remote_sensing/L/method/warm/03 measurement FAIL 135516169258
+remote_sensing/L/method/warm/04 measurement FAIL 138411716956
+remote_sensing/L/method/warm/05 measurement FAIL 164809670923
+remote_sensing/L/method/warm/06 measurement FAIL 135993671714
+remote_sensing/L/method/warm/07 measurement FAIL 140194374542
+FAIL /scratch/remote-L/report.json
+end_remote_method_l exit=1 utc=2026-11-12T07:30:36Z

@@ -1,0 +1,74 @@
+{
+  "source_commit": "37cb329be04eaddfeb23ac62789926d0fcdb63aa",
+  "fixture_manifest_sha256": "7ca5d30de46b40955845aadb312ff02b6653a11fc708d8aeaaf8d404fb769e04",
+  "method": {
+    "id": "remote-sensing-index-change",
+    "version": 1
+  },
+  "source_run_id": "76d8024fbdb04797b0ab7222bd681626",
+  "source_task_id": "4c3556fc31f64ac39ce2b91a49fd9e3e",
+  "source_plan_id": "2967678083e34776bf633e5574999f91",
+  "source_step": "calculate_change",
+  "source_tool": {
+    "id": "python-remote-sensing-calculate-change",
+    "version": 1,
+    "runner": "python"
+  },
+  "source_file": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-remote-l.x1rFKz/remote-L/samples/L/method/process_cold/01-warmup/service/workspace/tasks/4c3556fc31f64ac39ce2b91a49fd9e3e/runs/76d8024fbdb04797b0ab7222bd681626/intermediate/calculate_change/.land-use-e_i96g95/.ndvi-classification-ris_cm3r/classes.tif",
+  "source_run_terminal_state": {
+    "run_id": "76d8024fbdb04797b0ab7222bd681626",
+    "execution_status": "FAILED",
+    "check_status": "NOT_CHECKED",
+    "current_step": "calculate_change",
+    "cancel_requested": false,
+    "error": {
+      "code": "PROCESS_TIMEOUT",
+      "phase": "execute",
+      "step_key": "calculate_change",
+      "field": null,
+      "message": "Process exceeded 60 seconds",
+      "suggestion": "Check the step inputs, local tool and process log.",
+      "log_path": "steps/calculate_change/process.log",
+      "observed": null
+    },
+    "current_report_id": null
+  },
+  "staged_producer_paths": [
+    ".land-use-e_i96g95",
+    ".land-use-e_i96g95/.ndvi-classification-ris_cm3r",
+    ".land-use-e_i96g95/.ndvi-classification-ris_cm3r/classes.tif",
+    ".land-use-lswzluq5",
+    ".land-use-zfud4xhe",
+    ".land-use-zfud4xhe/change_raster.tif"
+  ],
+  "retained_file": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-remote-l.x1rFKz/p13-05-area-input/classes.tif",
+  "sha256": "b62b6a92e1ac5d88afb7c92c9c45ec8cd3bee72a13b65bd73ab9ea318cd1e199",
+  "bytes": 44420,
+  "crs": "EPSG:32632",
+  "transform": [
+    30.0,
+    0.0,
+    500000.0,
+    0.0,
+    -30.0,
+    5100000.0
+  ],
+  "shape": [
+    3072,
+    3072
+  ],
+  "blocks": [
+    [
+      256,
+      256
+    ]
+  ],
+  "dtype": "uint8",
+  "nodata": 255.0,
+  "valid_class_counts": {
+    "1": 1572864,
+    "2": 1572864,
+    "3": 1572864
+  },
+  "masked_pixels": 4718592
+}

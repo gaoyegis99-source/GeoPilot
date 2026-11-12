@@ -1,0 +1,10 @@
+pilot scratch /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-pilot.qbvv2N family raster
+raster/S/tools/warm/01 pilot PASS 180184639
+raster/S/method/warm/01 pilot PASS 9443854652
+PASS /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-pilot.qbvv2N/raster/report.json
+family raster exit=0
+pilot scratch /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-pilot.qbvv2N family remote-sensing
+remote_sensing/S/tools/warm/01 pilot PASS 343693397
+remote_sensing/S/method/warm/01 pilot FAIL None
+FAIL /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-pilot.qbvv2N/remote-sensing/report.json
+family remote-sensing exit=1

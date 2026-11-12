@@ -1,0 +1,40 @@
+2026-11-12 05:08:23.887878901 +0000 src/geopilot/methods/loader.py
+2026-11-12 05:07:56.831179945 +0000 artifacts/test-results/p13-04-formal-tools.pN5DMz/remote-sensing/samples/M/tools/warm/07-measurement/trial.json
+2026-11-12 05:08:48.480491235 +0000 artifacts/test-results/p13-04-formal-tools.pN5DMz/remote-sensing/samples/L/tools/process_cold/01-warmup/trial.json
+ M src/geopilot/api/catalog_routes.py
+ M src/geopilot/api/model_routes.py
+ M src/geopilot/api/run_step_routes.py
+ M src/geopilot/api/task_routes.py
+ M src/geopilot/llm/candidate_validator.py
+ M src/geopilot/llm/prompt_builder.py
+ M src/geopilot/methods/loader.py
+ M src/geopilot/plans/service.py
+?? src/geopilot/llm/execution_feedback.py
+?? src/geopilot/methods/release_ledger.py
+system-prototype-v1/src/geopilot/api/catalog_routes.py
+system-prototype-v1/src/geopilot/api/model_routes.py
+system-prototype-v1/src/geopilot/api/run_step_routes.py
+system-prototype-v1/src/geopilot/api/task_routes.py
+system-prototype-v1/src/geopilot/llm/candidate_validator.py
+system-prototype-v1/src/geopilot/llm/clarification.py
+system-prototype-v1/src/geopilot/llm/prompt_builder.py
+system-prototype-v1/src/geopilot/methods/loader.py
+system-prototype-v1/src/geopilot/plans/service.py
+system-prototype-v1/src/geopilot/scheduler/loop.py
+working source mtimes inspected 2026-11-12T05:11:57Z
+2026-11-12 05:08:23.911879510 +0000 src/geopilot/api/catalog_routes.py
+2026-11-12 05:08:28.579997383 +0000 src/geopilot/api/model_routes.py
+2026-11-12 05:07:28.938430210 +0000 src/geopilot/api/run_step_routes.py
+2026-11-12 05:08:23.899879206 +0000 src/geopilot/api/task_routes.py
+2026-11-12 05:08:26.471944249 +0000 src/geopilot/llm/candidate_validator.py
+2026-11-12 04:53:30.507361683 +0000 src/geopilot/llm/clarification.py
+2026-11-12 05:08:26.771951821 +0000 src/geopilot/llm/prompt_builder.py
+2026-11-12 05:10:31.694845331 +0000 src/geopilot/methods/loader.py
+2026-11-12 05:08:23.923879814 +0000 src/geopilot/plans/service.py
+2026-11-12 04:39:02.218694875 +0000 src/geopilot/scheduler/loop.py
+reconstructed captured loader revision after working tree moved again
+baseline_loader_sha256 6adb3487f1a51f9aca8361c5e616623f15c76e887d415ec9cf9747cf44fb78c1  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-provenance.wC04W4/baseline-loader.py
+failing_loader_git_blob 18346ae9c01b25b06bb1f706183d0b69a92e9994
+failing_loader_sha256 3e76711f1feec4bee091089d948de5e634f3728eef447f11629566f4a4330bd4  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-provenance.wC04W4/failing-loader.py
+captured_diff_sha256 42b3b9410ac8c7fb38af2800ceaf1b085815df77dde89445531c0ca4d9b90bd8  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-provenance.wC04W4/loader.diff
+raw_source_diff_backup /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-provenance.wC04W4/live-source-change-with-diff.log

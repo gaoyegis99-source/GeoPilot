@@ -1,0 +1,22 @@
+start_utc 2026-11-12T06:32:03Z
+source_sha 37cb329be04eaddfeb23ac62789926d0fcdb63aa
+snapshot /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-source.2bOEIU
+input /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-formal-tools.pN5DMz/raster/inputs
+scratch /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-dem-m.IFDcl6
+container geopilot-p13-04-method-dem-m.IFDcl6
+raster/M/method/process_cold/01 warmup FAIL 66226747408
+raster/M/method/process_cold/02 warmup FAIL 66784435500
+raster/M/method/process_cold/03 measurement FAIL 66416574078
+raster/M/method/process_cold/04 measurement FAIL 65938474077
+raster/M/method/process_cold/05 measurement FAIL 68942814522
+raster/M/method/process_cold/06 measurement FAIL 72941236212
+raster/M/method/process_cold/07 measurement FAIL 66222468132
+raster/M/method/warm/01 warmup FAIL 68876550472
+raster/M/method/warm/02 warmup FAIL 81539848037
+raster/M/method/warm/03 measurement FAIL 85043196693
+raster/M/method/warm/04 measurement FAIL 66771916512
+raster/M/method/warm/05 measurement FAIL 69022205674
+raster/M/method/warm/06 measurement FAIL 66503237710
+raster/M/method/warm/07 measurement FAIL 68154442694
+FAIL /scratch/raster-M/report.json
+end_dem_method_m exit=1 utc=2026-11-12T06:49:04Z

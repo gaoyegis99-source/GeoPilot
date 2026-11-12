@@ -1,0 +1,5 @@
+remote_sensing/S/tools/process_cold/01 pilot PASS 5206649932
+remote_sensing/S/tools/warm/01 pilot PASS 345463221
+remote_sensing/S/method/process_cold/01 pilot PASS 7661476565
+remote_sensing/S/method/warm/01 pilot PASS 7863894057
+PASS /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-repilot.BTWhAn/remote-sensing/report.json

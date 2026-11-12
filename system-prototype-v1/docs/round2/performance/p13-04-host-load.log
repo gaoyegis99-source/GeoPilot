@@ -1,0 +1,182 @@
+utc=2026-11-12T05:00:00Z phase=between_dem_and_remote
+11.67 9.79 6.45 4/1967 2822905
+MemTotal:       528238836 kB
+MemAvailable:   514438660 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.01 avg300=0.00 total=135781632978
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+utc=2026-11-12T05:03:01Z phase=before_remote_tools
+8.65 8.72 6.59 2/1965 2836324
+MemTotal:       528238836 kB
+MemAvailable:   514260452 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135782219815
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+utc=2026-11-12T05:06:15Z phase=remote_m_process_cold
+11.44 9.90 7.45 1/2006 2847134
+MemTotal:       528238836 kB
+MemAvailable:   513693568 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135782585835
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+STAT %CPU COMMAND
+D    38.3 python
+Ss   32.0 python
+S    23.4 python
+D    11.4 python
+Ssl   7.2 uvicorn
+Ssl   7.0 dockerd
+SLl   5.8 ckg_server
+utc=2026-11-12T05:09:12Z phase=remote_l_setup
+10.50 10.24 8.03 1/1955 2856942
+MemTotal:       528238836 kB
+MemAvailable:   514121932 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135782918162
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=65.51 avg60=56.27 avg300=51.74 total=88881627792
+full avg10=64.52 avg60=55.24 avg300=50.70 total=83146930736
+utc=2026-11-12T05:33:01Z phase=before_fixed_remote_tools
+4.56 6.25 7.72 6/1909 2986483
+MemTotal:       528238836 kB
+MemAvailable:   514371656 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.05 total=135789290346
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=6.65 avg60=19.09 avg300=22.63 total=89326605105
+full avg10=6.59 avg60=18.69 avg300=22.08 total=83580166812
+utc=2026-11-12T05:36:54Z phase=fixed_remote_l_cold
+3.22 4.67 6.75 4/2085 3001214
+MemTotal:       528238836 kB
+MemAvailable:   513950880 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135789839897
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=3.58 avg60=3.89 avg300=12.68 total=89338758476
+full avg10=3.58 avg60=3.84 avg300=12.41 total=83592169852
+utc=2026-11-12T05:44:43Z phase=fixed_remote_l_warm
+6.71 4.93 5.93 2/2023 3034346
+MemTotal:       528238836 kB
+MemAvailable:   513906016 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135791353165
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=60.21 avg60=46.57 avg300=21.29 total=89413917073
+full avg10=59.15 avg60=45.77 avg300=20.91 total=83665986421
+utc=2026-11-12T06:09:21Z phase=before_method_small
+2.49 2.40 3.75 1/1836 3155478
+MemTotal:       528238836 kB
+MemAvailable:   514661880 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.07 avg60=0.12 avg300=0.03 total=135795691071
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.00 avg60=0.00 avg300=0.84 total=89520144271
+full avg10=0.00 avg60=0.00 avg300=0.82 total=83769889566
+utc=2026-11-12T06:09:50Z phase=before_method_small
+1.69 2.22 3.65 1/1833 3157143
+MemTotal:       528238836 kB
+MemAvailable:   514664756 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.07 avg300=0.02 total=135795755430
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.00 avg60=0.00 avg300=0.76 total=89520152939
+full avg10=0.00 avg60=0.00 avg300=0.74 total=83769898157
+utc=2026-11-12T06:16:31Z phase=remote_method_m
+1.91 2.04 3.07 3/1862 3179207
+MemTotal:       528238836 kB
+MemAvailable:   514462660 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135796573202
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.10 avg60=0.13 avg300=0.75 total=89524996280
+full avg10=0.10 avg60=0.13 avg300=0.74 total=83774707167
+utc=2026-11-12T06:32:03Z phase=before_dem_method_m
+1.60 1.83 2.30 3/1893 3231555
+MemTotal:       528238836 kB
+MemAvailable:   514612480 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.71 avg60=0.82 avg300=0.22 total=135799258689
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.00 avg60=0.00 avg300=0.31 total=89538273323
+full avg10=0.00 avg60=0.00 avg300=0.30 total=83787783812
+utc=2026-11-12T06:40:38Z phase=dem_method_m_late_cold
+8.54 5.57 3.62 8/2524 3277348
+MemTotal:       528238836 kB
+MemAvailable:   512793656 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.65 avg60=0.79 avg300=0.31 total=135801551078
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=7.25 avg60=9.89 avg300=9.43 total=89583602383
+full avg10=7.06 avg60=9.69 avg300=9.25 total=83832220796
+utc=2026-11-12T06:45:28Z phase=dem_method_m_warm
+9.90 9.58 5.95 6/2976 3320316
+MemTotal:       528238836 kB
+MemAvailable:   511713284 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.31 avg60=0.28 avg300=0.21 total=135802942098
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.06 avg60=15.97 avg300=21.56 total=89673315315
+full avg10=0.06 avg60=15.47 avg300=20.85 total=83918678543
+utc=2026-11-12T06:56:23Z phase=before_remote_method_l
+2.78 7.58 7.34 2/2028 3420808
+MemTotal:       528238836 kB
+MemAvailable:   514228676 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.28 avg60=0.18 avg300=0.19 total=135807325241
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.00 avg60=2.58 avg300=10.13 total=89752402685
+full avg10=0.00 avg60=2.51 avg300=9.42 total=83991262936
+utc=2026-11-12T07:06:34Z phase=remote_method_l_mid_cold
+3.46 3.98 5.56 2/1902 3468102
+MemTotal:       528238836 kB
+MemAvailable:   514119556 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.03 total=135809140908
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=43.78 avg60=19.41 avg300=12.95 total=89818521273
+full avg10=43.01 avg60=19.02 avg300=12.64 total=84056202242
+utc=2026-11-12T07:28:27Z phase=remote_method_l_late_warm
+5.71 6.34 5.74 9/2471 3586748
+MemTotal:       528238836 kB
+MemAvailable:   512285092 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135814374122
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.99 avg60=9.94 avg300=22.57 total=90095546316
+full avg10=0.97 avg60=9.60 avg300=22.03 total=84326658637
+utc=2026-11-12T07:34:31Z phase=before_dem_method_l
+1.43 3.79 4.92 1/1872 3612670
+MemTotal:       528238836 kB
+MemAvailable:   514450556 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135815196235
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.00 avg60=0.38 avg300=9.91 total=90126349203
+full avg10=0.00 avg60=0.37 avg300=9.65 total=84356524434
+utc=2026-11-12T07:47:32Z phase=dem_method_l_warm_begin
+2.09 2.71 3.66 3/1915 3657249
+MemTotal:       528238836 kB
+MemAvailable:   514017452 kB
+SwapTotal:       2097148 kB
+SwapFree:        1652888 kB
+some avg10=0.00 avg60=0.00 avg300=0.00 total=135816674528
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=2.19 avg60=6.30 avg300=7.43 total=90184206328
+full avg10=2.16 avg60=6.24 avg300=7.31 total=84413273638

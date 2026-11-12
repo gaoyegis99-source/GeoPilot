@@ -1,0 +1,60 @@
+{
+  "source_commit": "37cb329be04eaddfeb23ac62789926d0fcdb63aa",
+  "fixture_manifest_sha256": "24e15649d2777503ff2c3ca7544de9b6ca038d4ffaf04f6fa16b01ba271169f7",
+  "source_run_id": "a7d15785f493403d921389f684e97ef9",
+  "source_task_id": "1e3400782d874e9baaa17fc53e5781bd",
+  "source_plan_id": "ef91f2594d184780b92e60b6a4baa7a4",
+  "source_step": "extract_by_threshold",
+  "source_tool": {
+    "id": "python-dem-threshold",
+    "version": 1,
+    "runner": "python"
+  },
+  "source_file": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-dem-m.IFDcl6/raster-M/samples/M/method/process_cold/01-warmup/service/workspace/tasks/1e3400782d874e9baaa17fc53e5781bd/runs/a7d15785f493403d921389f684e97ef9/intermediate/extract_by_threshold/threshold_regions.tif",
+  "source_run_terminal_state": {
+    "run_id": "a7d15785f493403d921389f684e97ef9",
+    "execution_status": "FAILED",
+    "check_status": "NOT_CHECKED",
+    "current_step": "calculate_area_with_equal_area_projection",
+    "cancel_requested": false,
+    "error": {
+      "code": "PROCESS_TIMEOUT",
+      "phase": "execute",
+      "step_key": "calculate_area_with_equal_area_projection",
+      "field": null,
+      "message": "Process exceeded 60 seconds",
+      "suggestion": "Check the step inputs, local tool and process log.",
+      "log_path": "steps/calculate_area_with_equal_area_projection/process.log",
+      "observed": null
+    },
+    "current_report_id": null
+  },
+  "retained_file": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-dem-m.IFDcl6/p13-05-area-input/threshold_regions.tif",
+  "sha256": "86ed819fd97018a0bc063ae21b5a28e9ef683da9e3ecad399a76085e9536e372",
+  "bytes": 11527,
+  "crs": "EPSG:32650",
+  "transform": [
+    10.0,
+    0.0,
+    500010.0,
+    0.0,
+    -10.0,
+    4499990.0
+  ],
+  "shape": [
+    2046,
+    2046
+  ],
+  "blocks": [
+    [
+      256,
+      256
+    ]
+  ],
+  "dtype": "uint8",
+  "nodata": 255.0,
+  "valid_class_counts": {
+    "7": 4183812
+  },
+  "masked_pixels": 2304
+}

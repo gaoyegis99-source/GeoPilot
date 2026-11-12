@@ -1,0 +1,15 @@
+python-remote-sensing-calculate-change version 1 (python)
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.aligned_ndvi.path","severity":"blocking","passed":true,"observed":{"path":"intermediate/align_two_dates/aligned_ndvi.tif","layer":null},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.aligned_ndvi","severity":"blocking","passed":true,"observed":"raster","expected":"raster_ndvi_pair","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.aligned_ndvi.bounds","severity":"blocking","passed":true,"observed":[500000.0,5007840.0,592160.0,5100000.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"crs_is_known","phase":"input","field":"inputs.aligned_ndvi.crs","severity":"blocking","passed":true,"observed":"EPSG:32632","expected":"Known declared CRS","message":"Input CRS is known"}
+input_check: {"rule":"equal_area_crs_suitable_for_extent","phase":"input","field":"inputs.aligned_ndvi.crs","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32632","bounds":[500000.0,5007840.0,592160.0,5100000.0],"unit":"square_meter","measurement_crs":"EPSG:6933"},"expected":{"method":"equal_area","unit":"square_meter"},"message":"Measurement policy is suitable for the input extent"}
+measurement: {"role": "aligned_ndvi", "method": "equal_area", "crs": "EPSG:6933", "unit": "square_meter"}
+$ /runtime/venv/bin/python /project/src/geopilot/gis/tools/remote_sensing_workflow.py --request steps/calculate_change/request.json --result steps/calculate_change/python-result.json
+stdout:
+remote_sensing_environment: {"gdal": "3.9.3", "numpy": "2.4.4", "rasterio": "1.4.3", "tool": "python-remote-sensing-calculate-change", "version": 1}
+
+stderr:
+
+exit_code: -15
+execute: PROCESS_TIMEOUT: Process exceeded 60 seconds

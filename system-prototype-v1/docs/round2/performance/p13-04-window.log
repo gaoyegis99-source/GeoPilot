@@ -1,0 +1,3 @@
+2026-11-12T04:47:55Z stopped coordinator pid=2765821, DEM Docker CLI remains running
+2026-11-12T04:57:48Z DEM container exited; C can start; remote coordinator remains stopped
+2026-11-12T05:03:01Z resumed coordinator pid=2765821 after C, main, B released

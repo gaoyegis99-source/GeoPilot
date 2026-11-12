@@ -1,0 +1,62 @@
+start_utc 2026-11-12T06:09:50Z
+source_sha 37cb329be04eaddfeb23ac62789926d0fcdb63aa
+snapshot /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-source.2bOEIU
+scratch /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-04-method-small.Oa90t9
+............                                                             [100%]
+=============================== warnings summary ===============================
+tests/benchmarks/test_run_raster.py::test_reference_detects_wrong_values_grid_or_mask[mask]
+  /runtime/venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+---------------- generated xml file: /scratch/p13-04-junit.xml -----------------
+12 passed, 1 warning in 52.78s
+pytest exit=0 utc=2026-11-12T06:10:44Z
+start_family raster 2026-11-12T06:10:44Z
+raster/S/method/process_cold/01 warmup PASS 9680202017
+raster/S/method/process_cold/02 warmup PASS 9668321076
+raster/S/method/process_cold/03 measurement PASS 9659030505
+raster/S/method/process_cold/04 measurement PASS 9663786280
+raster/S/method/process_cold/05 measurement PASS 9664573107
+raster/S/method/process_cold/06 measurement PASS 9481439956
+raster/S/method/process_cold/07 measurement PASS 9659545803
+raster/S/method/warm/01 warmup PASS 9874036251
+raster/S/method/warm/02 warmup PASS 9841658035
+raster/S/method/warm/03 measurement PASS 9860296152
+raster/S/method/warm/04 measurement PASS 9835372110
+raster/S/method/warm/05 measurement PASS 9630889974
+raster/S/method/warm/06 measurement PASS 9867822441
+raster/S/method/warm/07 measurement PASS 9844207997
+PASS /scratch/raster/report.json
+end_family raster exit=0 utc=2026-11-12T06:13:39Z
+start_family remote-sensing 2026-11-12T06:13:39Z
+remote_sensing/S/method/process_cold/01 warmup PASS 8086506772
+remote_sensing/S/method/process_cold/02 warmup PASS 8076240424
+remote_sensing/S/method/process_cold/03 measurement PASS 8080948386
+remote_sensing/S/method/process_cold/04 measurement PASS 8072218523
+remote_sensing/S/method/process_cold/05 measurement PASS 8055411549
+remote_sensing/S/method/process_cold/06 measurement PASS 7867337497
+remote_sensing/S/method/process_cold/07 measurement PASS 8205509110
+remote_sensing/S/method/warm/01 warmup PASS 8063123348
+remote_sensing/S/method/warm/02 warmup PASS 8244510497
+remote_sensing/S/method/warm/03 measurement PASS 8051262637
+remote_sensing/S/method/warm/04 measurement PASS 8054916622
+remote_sensing/S/method/warm/05 measurement PASS 8052977624
+remote_sensing/S/method/warm/06 measurement PASS 8040360670
+remote_sensing/S/method/warm/07 measurement PASS 8071170740
+remote_sensing/M/method/process_cold/01 warmup PASS 15876042522
+remote_sensing/M/method/process_cold/02 warmup PASS 15928628028
+remote_sensing/M/method/process_cold/03 measurement PASS 17188157379
+remote_sensing/M/method/process_cold/04 measurement PASS 15528906373
+remote_sensing/M/method/process_cold/05 measurement PASS 16582154670
+remote_sensing/M/method/process_cold/06 measurement PASS 16365715699
+remote_sensing/M/method/process_cold/07 measurement PASS 15757022548
+remote_sensing/M/method/warm/01 warmup PASS 15929142521
+remote_sensing/M/method/warm/02 warmup PASS 17857438323
+remote_sensing/M/method/warm/03 measurement PASS 15694021670
+remote_sensing/M/method/warm/04 measurement PASS 21476966525
+remote_sensing/M/method/warm/05 measurement PASS 15924570353
+remote_sensing/M/method/warm/06 measurement PASS 21142125031
+remote_sensing/M/method/warm/07 measurement PASS 17639490350
+PASS /scratch/remote-sensing/report.json
+end_family remote-sensing exit=0 utc=2026-11-12T06:20:51Z
