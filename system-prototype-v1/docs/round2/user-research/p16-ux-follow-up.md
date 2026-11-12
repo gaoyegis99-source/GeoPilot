@@ -11,4 +11,4 @@
 
 后端相关回归 326 项、前端全量 75 项通过，TypeScript 与生产构建成功。实际 Chromium 141.0.7390.37 和 QGIS 3.44.15 验证退出 0，无页面异常。构建保留 Vite 包体积提示。测试环境、命令、退出码、JUnit、动作记录、截图及样本下载见证据归档。归档 SHA-256 为 `6df099231bed8d88abd8c0aeea037fa29e6c27525d1e21f7f5e6bcc4eaaf24e1`，解包逐项校验退出 0。 [原始复验归档](p16-ux-follow-up-evidence.tar.gz)
 
-[长任务与检查取消浏览器复验](p16-05-long-task-verification.md) · [检查取消后的恢复入口](p16-check-recovery.md) · [历史补充观察指南](moderator-ux-follow-up.md)
+[长任务与检查取消浏览器复验](p16-05-long-task-verification.md) · [检查取消后的恢复入口](p16-check-recovery.md) · [输入变更后的重新登记](p16-input-recovery.md) · [历史补充观察指南](moderator-ux-follow-up.md)

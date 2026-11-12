@@ -388,3 +388,7 @@
 - 2026-11-13，主控依用户决定将 P16-03 标为 NOT_APPLICABLE，撤销真实 GIS 用户浏览器测评及会话、记录和下载文件要求。历史准备材料和模拟测评留档。 [范围决定](../04_TASKS/P16/P16-03.md)
 - 主控和 F 复核 P16-05。自然 DEM 计算中刷新保持同一运行和计时，另次实际计算可取消，独立复验确认取消检查后可在原运行上重查。P13-02 已验收，P16-05 签收 ACCEPTED。 [自然长任务](../../docs/round2/user-research/p16-05-long-task-verification.md) · [重查复验](../../docs/round2/user-research/p16-check-recovery.md)
 - P16-04 的重登记链仍待交互修正与复验。P16-07 的技术前置仅余 P16-04，用户性能阈值及发布范围另待签署。 [当前发布前置](../../docs/round2/release/p16-07-preflight.md)
+
+## P16-04 输入变更恢复验收
+
+- E 在 `2a34e96` 补齐 `INPUT_CHANGED` 的中文说明和登记入口。F 独立 Chromium 与实际 QGIS 验证旧方案被拒绝时不创建新运行，手动登记、改选并确认 v2 后新运行通过，旧记录、成果、日志及 33 份文件可核验。主控复核前端 78 项、生产构建和后端专项 24 项均通过，签收 ACCEPTED。 [证据与命令](../../docs/round2/user-research/p16-input-recovery.md)
