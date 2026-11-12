@@ -1,6 +1,5 @@
 """Check actual artifacts and process evidence for the initial local methods."""
 
-import csv
 import json
 import math
 from collections import Counter
@@ -19,6 +18,7 @@ from pyproj import CRS
 from pyproj.exceptions import ProjError
 from shapely.errors import GEOSException
 
+from geopilot.data import csv_output
 from geopilot.data.errors import SourceReadError
 from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.vector_reader import read_layer_metadata
@@ -59,7 +59,7 @@ class RunCheckResult:
 
 RunCheck = Callable[[RunCheckContext], RunCheckResult]
 _DATA_ERRORS = (
-    KeyError, OSError, ValueError, csv.Error, SourceReadError,
+    KeyError, OSError, ValueError, csv_output.Error, SourceReadError,
     DataLayerError, DataSourceError, ProjError, GEOSException,
 )
 _ID = "source_feature_id"
@@ -574,7 +574,7 @@ def _point_count_summary(
     assigned_count = 0
     unassigned_count = None
     with path.open(encoding="utf-8", newline="") as stream:
-        reader = csv.DictReader(stream, strict=True)
+        reader = csv_output.DictReader(stream, strict=True)
         if reader.fieldnames is None or len(reader.fieldnames) != len(_SUMMARY_COLUMNS) or set(reader.fieldnames) != _SUMMARY_COLUMNS:
             raise ValueError("Zone statistics CSV has unexpected columns")
         for row_number, row in enumerate(reader, start=2):

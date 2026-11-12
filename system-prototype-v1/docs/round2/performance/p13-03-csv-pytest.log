@@ -1,0 +1,12 @@
+740e7f356fa906ce2437f25ba9faeb30d16d075e
+Python 3.13.13
+...................                                                      [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+---- generated xml file: /dev/shm/geopilot-csv-regression.1qQMS1/junit.xml -----
+19 passed, 18 deselected, 1 warning in 3.78s
+exit 0

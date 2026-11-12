@@ -47,6 +47,7 @@ jobs:
           python -m pytest -q -p no:cacheprovider \
             tests/assets tests/contracts tests/scheduler tests/llm/test_data_boundary.py \
             tests/llm/test_provider_contract.py tests/llm/test_error_handling.py \
+            tests/artifacts/test_registration.py tests/application/test_run_checks.py::test_csv_check_reconciles_a_field_above_the_default_reader_limit \
             tests/agent/test_clarification_model.py tests/agent/test_multi_turn_revision.py tests/agent/test_alternative_plan.py \
             tests/agent/test_failure_replanning.py tests/agent/test_generated_tool_sandbox.py tests/agent/evals \
             tests/quality/test_ci_matrix.py tests/quality/test_config_schemas.py tests/quality/test_round2_release_manifest.py \

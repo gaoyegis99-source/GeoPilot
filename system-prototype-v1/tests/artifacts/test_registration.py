@@ -1,3 +1,5 @@
+import csv
+import json
 import sqlite3
 from pathlib import Path
 from shutil import copyfile
@@ -5,7 +7,9 @@ from shutil import copyfile
 import pyogrio
 import pytest
 import rasterio
+from fastapi.testclient import TestClient
 
+from geopilot.api.app import create_app
 from geopilot.artifacts.service import (
     ArtifactRegistrationError,
     get_artifact,
@@ -131,7 +135,42 @@ def test_reopens_actual_outputs_and_atomically_records_lineage(completed):
         assert records["elevation"].metadata["height"] == raster.height
 
 
-@pytest.mark.parametrize("fault", ["missing", "invalid_csv", "broken_raster", "wrong_layer", "wrong_geometry", "symlink"])
+def test_registers_previews_and_downloads_a_large_source_id_list(completed, monkeypatch):
+    database, workdir, _, _ = completed
+    ids = [f"r{row:03}c{column:03}/building-zone-boundary" for row in range(128) for column in range(128)]
+    field = json.dumps(ids, ensure_ascii=False)
+    assert len(field) == 573_440
+    path = workdir / "intermediate/scores.csv"
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(("zone_id", "assignment_status", "count", "source_feature_ids"))
+        writer.writerow(("", "unassigned", len(ids), field))
+    original = path.read_bytes()
+
+    prepared = _prepare(completed)
+    with open_database(database) as connection, connection:
+        connection.execute("BEGIN IMMEDIATE")
+        summary = next(record for record in insert_artifacts(connection, prepared) if record.role == "summary")
+    assert summary.metadata["row_count"] == 1
+    assert summary.fingerprint == fingerprint_file(path).digest
+    with TestClient(create_app(database)) as client:
+        url = f"/api/artifacts/{summary.id}"
+        preview = client.get(f"{url}/table")
+        assert preview.status_code == 200, preview.text
+        assert preview.json()["rows"] == [["", "unassigned", str(len(ids)), field]]
+        assert preview.json()["truncated"] is False
+        monkeypatch.setattr("geopilot.api.artifact_routes._MAX_TABLE_PREVIEW_CELL_BYTES", 128)
+        limited = client.get(f"{url}/table")
+        assert limited.status_code == 200, limited.text
+        assert limited.json()["rows"] == [] and limited.json()["truncated"] is True
+        download = client.get(f"{url}/file")
+        assert download.status_code == 200
+        assert download.content == original
+
+
+@pytest.mark.parametrize("fault", [
+    "missing", "invalid_csv", "oversized_csv", "broken_raster", "wrong_layer", "wrong_geometry", "symlink",
+])
 def test_invalid_files_block_the_whole_batch(completed, fault):
     database, workdir, plan, results = completed
     code, role = "OUTPUT_INVALID", "summary"
@@ -140,6 +179,9 @@ def test_invalid_files_block_the_whole_batch(completed, fault):
         code = "OUTPUT_MISSING"
     elif fault == "invalid_csv":
         (workdir / "intermediate/scores.csv").write_text('road,count\n"unclosed\n', encoding="utf-8")
+    elif fault == "oversized_csv":
+        field = "x" * (csv.field_size_limit() + 1)
+        (workdir / "intermediate/scores.csv").write_text(f"road,count\n{field},1\n", encoding="utf-8")
     elif fault == "broken_raster":
         (workdir / "intermediate/grid.tif").write_bytes(b"not a TIFF")
         role = "elevation"
@@ -153,9 +195,9 @@ def test_invalid_files_block_the_whole_batch(completed, fault):
         path.unlink()
         pyogrio.write_dataframe(pyogrio.read_dataframe(VECTOR, layer="targets"), path, layer="roads")
     else:
-        csv = workdir / "intermediate/scores.csv"
-        csv.unlink()
-        csv.symlink_to(VECTOR)
+        path = workdir / "intermediate/scores.csv"
+        path.unlink()
+        path.symlink_to(VECTOR)
 
     with pytest.raises(ArtifactRegistrationError) as error:
         prepare_artifacts("run-1", plan, workdir, results)

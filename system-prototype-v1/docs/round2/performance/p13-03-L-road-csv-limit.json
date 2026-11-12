@@ -1,0 +1,28 @@
+{
+  "actual_run_id": "a950e8765e8f4c07a6ab6e1711850817",
+  "input_profile": "road-l-utm50n-south@1",
+  "actual_run_status": {
+    "run_id": "a950e8765e8f4c07a6ab6e1711850817",
+    "execution_status": "FAILED",
+    "check_status": "NOT_CHECKED",
+    "current_step": "aggregate_by_zone",
+    "cancel_requested": false,
+    "error": {
+      "code": "OUTPUT_INVALID",
+      "phase": "execute",
+      "step_key": "aggregate_by_zone",
+      "field": "artifacts.zone_statistics.path",
+      "message": "field larger than field limit (131072)",
+      "suggestion": "Review the confirmed plan, run files and process logs.",
+      "log_path": null,
+      "observed": null
+    },
+    "current_report_id": null
+  },
+  "actual_aggregate_log_observation": "Counted 98304 retained target(s) across 32768 zone(s), 16384 unassigned",
+  "modeled_unassigned_json_field_characters": 573440,
+  "modeled_unassigned_ids": 16384,
+  "unchanged_python_csv_field_limit": 131072,
+  "modeled_strict_csv_reader_error": "field larger than field limit (131072)",
+  "method": "Independently expand the frozen unassigned template ID per L tile and serialize the same JSON/CSV field in memory."
+}

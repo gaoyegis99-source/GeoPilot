@@ -1,8 +1,6 @@
 """Expose the formal artifact register and separate diagnostic files."""
 
-import csv
 import sqlite3
-from itertools import islice
 from pathlib import Path
 from typing import Annotated
 from urllib.parse import quote, urlencode
@@ -16,6 +14,7 @@ from geopilot.artifacts.models import Artifact
 from geopilot.artifacts.raster_source import ArtifactRasterError, open_artifact_raster
 from geopilot.artifacts.service import artifact_by_id, list_artifacts
 from geopilot.artifacts.value_query import RasterValue, RasterValueError, query_raster_value
+from geopilot.data import csv_output
 from geopilot.execution.step_support import AdapterError, resolve_step_path
 from geopilot.persistence.run_repository import get_run
 from geopilot.persistence.schema import open_database
@@ -56,6 +55,7 @@ _PreviewBand = Annotated[int, Query(gt=0)]
 _PreviewFingerprint = Annotated[str | None, Query(pattern=r"^[0-9a-f]{64}$")]
 _Longitude = Annotated[float, Query(ge=-180, le=180, allow_inf_nan=False)]
 _Latitude = Annotated[float, Query(ge=-90, le=90, allow_inf_nan=False)]
+_MAX_TABLE_PREVIEW_CELL_BYTES = 8 * 1024 * 1024
 
 
 def artifact_routes(database_path: str | Path) -> APIRouter:
@@ -233,15 +233,27 @@ def artifact_routes(database_path: str | Path) -> APIRouter:
             })
         try:
             with path.open(encoding="utf-8-sig", newline="") as stream:
-                reader = csv.reader(stream, strict=True)
+                reader = csv_output.reader(stream, strict=True)
                 columns = next(reader, [])
-                rows = list(islice((row for row in reader if row), limit + 1))
-            if not columns or any(len(row) != len(columns) for row in rows):
-                raise ValueError("The CSV values do not match their header.")
-        except (OSError, csv.Error, ValueError) as error:
+                if not columns:
+                    raise ValueError("The CSV values do not match their header.")
+                remaining_bytes = _MAX_TABLE_PREVIEW_CELL_BYTES - sum(len(cell.encode("utf-8")) for cell in columns)
+                if remaining_bytes < 0:
+                    raise ValueError("The CSV header is too large to preview.")
+                rows = []
+                for row in reader:
+                    if not row:
+                        continue
+                    if len(row) != len(columns):
+                        raise ValueError("The CSV values do not match their header.")
+                    remaining_bytes -= sum(len(cell.encode("utf-8")) for cell in row)
+                    if len(rows) == limit or remaining_bytes < 0:
+                        return ArtifactTable(columns=columns, rows=rows, truncated=True)
+                    rows.append(row)
+        except (OSError, csv_output.Error, ValueError) as error:
             raise HTTPException(status_code=422, detail={
                 "code": "TABLE_PREVIEW_FAILED", "message": str(error),
             }) from error
-        return ArtifactTable(columns=columns, rows=rows[:limit], truncated=len(rows) > limit)
+        return ArtifactTable(columns=columns, rows=rows, truncated=False)
 
     return router

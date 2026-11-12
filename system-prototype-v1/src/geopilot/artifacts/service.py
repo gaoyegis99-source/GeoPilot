@@ -1,6 +1,5 @@
 """Validate final artifacts and insert the complete batch in a run transaction."""
 
-import csv
 import json
 import sqlite3
 from collections.abc import Mapping
@@ -13,6 +12,7 @@ from pydantic import JsonValue
 
 from geopilot.artifacts.models import Artifact, ArtifactKind, ArtifactSource
 from geopilot.artifacts.raster_metadata import read_raster_artifact_metadata
+from geopilot.data import csv_output
 from geopilot.data.fingerprint import _sidecars, capture_file_state, fingerprint_file
 from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.vector_reader import read_vector_metadata
@@ -89,7 +89,7 @@ def _file_state(workdir: Path, uri: str, field: str, step_key: str) -> tuple[Pat
 
 def _csv_metadata(path: Path) -> TableMetadata:
     with path.open(encoding="utf-8-sig", newline="") as stream:
-        reader = csv.reader(stream, strict=True)
+        reader = csv_output.reader(stream, strict=True)
         header = next(reader, [])
         if not header:
             raise ValueError("CSV output requires a header")
@@ -146,7 +146,7 @@ def _reopen_artifact(workdir: Path, role: str, output: StepOutput, source: Artif
         raise ArtifactRegistrationError(error.message, code=error.code, field=field, step_key=source.step_key) from error
     except FileNotFoundError as error:
         raise ArtifactRegistrationError(str(error), code="OUTPUT_MISSING", field=field, step_key=source.step_key) from error
-    except (OSError, RuntimeError, ValueError, csv.Error) as error:
+    except (OSError, RuntimeError, ValueError, csv_output.Error) as error:
         raise ArtifactRegistrationError(str(error), code="OUTPUT_INVALID", field=field, step_key=source.step_key) from error
     _, after = _file_state(workdir, output.path, field, source.step_key)
     if before != after or original.digest != verified.digest:

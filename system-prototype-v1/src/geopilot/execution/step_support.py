@@ -1,6 +1,5 @@
 """Shared local paths, process capture and persisted results for step adapters."""
 
-import csv
 import json
 import math
 import shlex
@@ -9,6 +8,7 @@ from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
+from geopilot.data import csv_output
 from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.data.vector_reader import read_vector_metadata
@@ -206,7 +206,11 @@ def _inspect_output(path: Path, expected: str, layer: str | None) -> str | None:
         if expected == "json":
             raise ValueError("Expected JSON output")
         with path.open(encoding="utf-8", newline="") as stream:
-            if not next(csv.reader(stream), []):
+            try:
+                header = next(csv_output.reader(stream), [])
+            except csv_output.Error as error:
+                raise ValueError(str(error)) from error
+            if not header:
                 raise ValueError("CSV output must have a header")
     elif expected in {"json", "table"} and path.suffix.lower() == ".json":
         with path.open(encoding="utf-8") as stream:

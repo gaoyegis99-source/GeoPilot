@@ -203,6 +203,22 @@ def test_csv_counts_are_reconciled_to_unique_real_selected_ids(run_files):
     assert (result.observed["assigned_count"], result.observed["unassigned_count"]) == (5, 1)
 
 
+def test_csv_check_reconciles_a_field_above_the_default_reader_limit(run_files):
+    output = run_files.artifacts["selected_targets"]
+    selected = pyogrio.read_dataframe(run_files.workdir / output.path, layer=output.layer)
+    expanded = {identifier: identifier + ("-来源" * 50_000) for identifier in selected.source_feature_id}
+    selected["source_feature_id"] = selected.source_feature_id.map(expanded)
+    _write_layer(run_files.workdir, output, selected)
+    rows = [(zone, status, count, [expanded[identifier] for identifier in ids])
+            for zone, status, count, ids in _summary_rows()]
+    _write_summary(run_files.workdir / run_files.artifacts["zone_statistics"].path, rows)
+
+    result = RUN_CHECKS["detail_count_matches_summary"](run_files)
+
+    assert result.passed
+    assert result.observed["summary_total_count"] == len(selected)
+
+
 @pytest.mark.parametrize("tamper", ["count", "duplicate", "same_count_wrong_id"])
 def test_csv_detects_row_count_mismatch_duplicates_and_wrong_ids(run_files, tamper):
     rows = _summary_rows()

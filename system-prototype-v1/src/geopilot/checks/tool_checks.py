@@ -1,6 +1,5 @@
 """Evaluate versioned tool rules against the concrete inputs and outputs of one step."""
 
-import csv
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from pathlib import Path
@@ -10,6 +9,7 @@ from pyproj import CRS
 from pyproj.exceptions import CRSError
 
 from geopilot.application.run_checks import RunCheckContext, _DATA_ERRORS, _point_count_summary
+from geopilot.data import csv_output
 from geopilot.data.fingerprint import fingerprint_file
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.data.vector_reader import read_layer_metadata
@@ -126,7 +126,7 @@ def _area_csv_matches(context: ToolCheckContext, column: str) -> tuple[ToolFindi
             values = set()
             rows = 0
             with path.open(encoding="utf-8-sig", newline="") as stream:
-                reader = csv.DictReader(stream, strict=True)
+                reader = csv_output.DictReader(stream, strict=True)
                 if not reader.fieldnames or reader.fieldnames.count(column) != 1:
                     raise ValueError(f"The area CSV must contain one {column} column")
                 for row in reader:
