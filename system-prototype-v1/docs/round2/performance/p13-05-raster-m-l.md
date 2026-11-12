@@ -84,7 +84,7 @@ tar -xzf docs/round2/performance/p13-05-dem-l-pair-evidence.tar.gz -C "$p13_dem_
 
 ## 遥感 L 原版冷态
 
-原版两次预热和五次正式计量均完成前七步。第八步 `calculate_change` 在生产 60 秒限制触发 `PROCESS_TIMEOUT`，子进程退出 -15，七轮均取得 `FAILED/NOT_CHECKED`。共记录 10 次状态查询 HTTP 500。未生成正式成果清单或该步骤三个目标文件，完整成果正确性验证未启动。原版暖态继续运行。 [原始冷态前缀、步骤请求及结果](p13-05-remote-l-base-cold-evidence.tar.gz)
+原版两次预热和五次正式计量均完成前七步。第八步 `calculate_change` 在生产 60 秒限制触发 `PROCESS_TIMEOUT`，子进程退出 -15，七轮均取得 `FAILED/NOT_CHECKED`。共记录 10 次状态查询 HTTP 500。未生成正式成果清单或该步骤三个目标文件，完整成果正确性验证未启动。 [原始冷态前缀、步骤请求及结果](p13-05-remote-l-base-cold-evidence.tar.gz)
 
 五次正式失败样本的端到端中位数／P95 为 126.105／129.116 秒，变化计算步骤为 60.050／60.054 秒。整轮 RSS 均为部分采样，变化计算步 RSS 三次完整、两次部分采样。变化计算进程已采样 CPU 时间为 59.940 至 59.970 秒。五次临时空间峰值均有完整采样，中位数为 11,181,073 字节。
 
@@ -99,6 +99,38 @@ env OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF
 cmp "$p13_remote_l/replay.json" "$p13_remote_l/full-cold.json"
 ```
 
+## 遥感 L 原版完成
+
+原版完成 14 轮，容器退出 1，全部在第八步 `calculate_change` 触发 60 秒超时。暖态三次状态查询 HTTP 500 后均取得超时终态，两组合计 13 次。14 份分类 TIFF 均与 P13-04 参考逐字节一致，14 份差值 TIFF 也各自一致。每轮保留两份暂存 TIFF 共 355,459 字节，未生成正式成果，完整成果验算未启动。冷组 JSONL 前缀与原封存逐字节相同。主控及 B 独立复算均退出 0，B 确认 14 个运行 ID 与先前核对的 212 个 ID 无交集。 [完整原始记录、回执、TIFF 和独立审计](p13-05-remote-l-base-evidence.tar.gz)
+
+| 正式失败计量组 | 端到端中位数／P95，秒 | 变化计算中位数／P95，秒 | 整轮 RSS 部分采样 | 临时峰值中位数，字节 |
+| --- | ---: | ---: | ---: | ---: |
+| 冷态 | 126.105／129.116 | 60.050／60.054 | 5 / 5 | 11,181,073 |
+| 暖态 | 122.782／130.107 | 60.047／60.048 | 5 / 5 | 11,181,073 |
+
+两组正式临时峰值均有完整采样。暖态变化计算步 RSS 为两次完整、三次部分采样。配置回执绑定完整报告。严格自比较离线重放与现场输出逐字节一致，退出 0，成功样本差值为空。冻结修正版于 16:22:03 UTC 接续启动。
+
+```bash
+p13_remote_base=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-remote-l-base-evidence.tar.gz -C "$p13_remote_base"
+(cd "$p13_remote_base" && sha256sum -c SHA256SUMS)
+.venv/bin/python -B "$p13_remote_base/proof/verify-remote-original.py" "$p13_remote_base" > "$p13_remote_base/replay.json"
+cmp "$p13_remote_base/replay.json" "$p13_remote_base/proof/replayed.json"
+```
+
+## 遥感 L 冻结修正版首轮
+
+首个冷态预热八步退出码均为 0，第八步变化计算用时 51.239 秒。生产运行和检查终态为 `SUCCEEDED/PASSED`。三次状态查询 HTTP 500 触发基准 `StatusObservationFailure`，该轮仍按基准记为失败。主控从该终态运行复制并复算 10 个正式成果文件组的登记指纹，合计 5,054,589 字节。变化与分类 TIFF 分别与原版暂存文件逐字节一致。三个分类各 1,572,864 像元，EPSG:6933 面积合计 4,249,836,701.624876 m²，与封存独立参考的最大单类绝对差约 0.007379 m²。归档含原始记录、检查报告及实际成果。该轮为预热，正式计量和两侧配对尚在运行。 [首个预热的完整成果复算](p13-05-remote-l-candidate-first-evidence.tar.gz)
+
+```bash
+p13_remote_first=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-remote-l-candidate-first-evidence.tar.gz -C "$p13_remote_first"
+(cd "$p13_remote_first" && sha256sum -c SHA256SUMS)
+PYTHONPATH="$p13_remote_first/proof" .venv/bin/python -B \
+  "$p13_remote_first/verify-first.py" "$p13_remote_first" > "$p13_remote_first/replay.json"
+cmp "$p13_remote_first/replay.json" "$p13_remote_first/verified.json"
+```
+
 ## 相邻批次的投影复用预演
 
 隔离候选 `b49025453794331f0a42cb9390a7ed0708c0e7d7` 基于冻结修正版 `a2d2e68`。上一批恰好在 8 段收敛时，当前批与上一批具有相同布局、仿射变换、投影器及列原点，且原点向下移动一行，才复用共同顶点的投影坐标。细化至 16 段起沿用批内复用。三个真实窗口及剪切、列移、退化、非有限坐标和切缝反例的批次顺序、各级坐标、逐格面积、累加或错误均与冻结修正版一致。 [源码补丁、命令、逐次记录与 JUnit](p13-05-cross-batch-area-evidence.tar.gz)
@@ -110,6 +142,31 @@ cmp "$p13_remote_l/replay.json" "$p13_remote_l/full-cold.json"
 | 遥感 L | 722,787／722,787 | 397.298／396.710 | 397.589／396.926 | −0.16 MiB |
 
 每侧各运行五个独立子进程，交替执行，Python 3.13.13、NumPy 2.4.4、PROJ 9.5.1。两份 DEM 小窗 CPU 中位数下降约 24%，遥感窗口未命中复用。A 的 26 项专项通过，主控在含先前四项性能候选的预演 `c001411c539961be3f27e870633b5747efe5c166` 复跑面积和受管写入 39 项通过，两次 pytest 均退出 0。当前正式批次继续使用冻结修正版，整幅 L 档在 60 秒限制内的结果仍待测量。
+
+## 有界栅格布局索引预研
+
+A 在 `b49025453794331f0a42cb9390a7ed0708c0e7d7` 上隔离提交 `2d14c810000bc04d469a3f70f6638c07c1affc23`。遥感 L 封存首窗的 129 个批次布局各异，一次插桩记录布局索引占 407.7 毫秒 CPU 的 142.5 毫秒。候选在 2、4、8 段层级用占用槽位恢复原整数键顺序和逆索引，每层限 65,536 个槽，且不超过当前环顶点数量的八倍。较稀疏、较宽及更高细化继续走排序。改动限于面积模块和专项测试，公开接口及投影和收敛规则沿用原实现。 [候选提交、补丁与原始证据](p13-05-bounded-raster-topology-evidence.tar.gz)
+
+| 256 × 256 窗口 | A 的 CPU 中位数，毫秒 | 主控复跑 CPU 中位数，毫秒 | 主控复跑墙钟中位数／P95，毫秒 |
+| --- | ---: | ---: | ---: |
+| DEM M 首窗 | 394.60 → 397.16 | 394.34 → 388.38 | 394.53／407.89 → 388.67／405.82 |
+| 遥感 L 首窗 | 397.06 → 344.93 | 393.62 → 333.86 | 393.83／394.91 → 334.03／342.40 |
+
+每次对照在单 CPU 上交替启动每侧三个独立进程，计时覆盖窗口计算。主控复跑的遥感小窗 CPU 中位数下降 15.18%，A 的对照下降 13.13%。DEM M 的差值方向在两次对照中不同。遥感小窗的峰值 RSS 两次对照约在 165 MiB，各自变动不足 1 MiB。环境为 Linux 5.15、Python 3.13.13、NumPy 2.4.4、PROJ 9.5.1、GDAL 3.9.3。
+
+A 与主控在三个封存窗口及合成反例上核对批次顺序、投影点数、坐标、逐格面积、累加结果与错误，复算日志逐字节一致。主控另验证 48 种固定种子布局、192 层的整数键、逆索引及待投影坐标逐字节一致。A 的 29 项面积专项通过，主控将候选补丁应用到 `c001411` 源码后，面积及受管写入 39 项通过，两次退出均为 0。候选保持隔离，可通过撤销该补丁回退。当前证据只覆盖小窗，整幅栅格容量与正式 60 秒配对仍使用排队的固定源码。
+
+```bash
+p13_topology=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-bounded-raster-topology-evidence.tar.gz -C "$p13_topology"
+(cd "$p13_topology" && sha256sum -c SHA256SUMS)
+mkdir "$p13_topology/source"
+tar -xf "$p13_topology/independent/integration-source.tar" -C "$p13_topology/source"
+env PYTHONPATH="$p13_topology/source/src" GEOPILOT_TOPOLOGY_FIXTURES="$PWD/benchmarks/raster/area-fixtures" \
+  OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 GDAL_NUM_THREADS=1 PROJ_NETWORK=OFF \
+  .venv/bin/python -B "$p13_topology/independent/verify.py" > "$p13_topology/replayed.log"
+cmp "$p13_topology/replayed.log" "$p13_topology/independent/verify.log"
+```
 
 ## DEM L 整幅面积容量探针
 
