@@ -20,6 +20,8 @@ from geopilot.checks.raster_checks import DEM_ARTIFACT_RULES
 from geopilot.methods.loader import _UniqueKeySafeLoader
 from geopilot.scripts.registration import RegistrationCandidate, RegistrationError, validate_manual_registration
 
+from template import TemplateError, generate_template
+
 
 SCHEMA_VERSION = 1
 REGISTERED_RULES = frozenset((*RUN_CHECKS, *LAND_USE_CHECKS, *REMOTE_SENSING_CHECKS, *DEM_ARTIFACT_RULES))
@@ -99,10 +101,19 @@ def build_parser() -> argparse.ArgumentParser:
         if name != "inspect":
             command.add_argument("--database", type=Path, required=True, help="existing rollback-mode SQLite database")
             command.add_argument("--workspace", type=Path, required=True, help="existing trial workspace root")
+    template = commands.add_parser(
+        "template", help="Generate a method draft for an exact local tool", allow_abbrev=False,
+    )
+    template.add_argument("--tool", required=True, help="registered tool ID@VERSION")
+    template.add_argument("--method", required=True, help="proposed method ID@VERSION")
+    template.add_argument("--config", type=Path, default=Path(__file__).resolve().parents[2] / "config",
+                          help="configuration root containing tools/")
     return parser
 
 
 def execute(args: argparse.Namespace) -> dict:
+    if args.command == "template":
+        return generate_template(args.config, args.tool, args.method)
     candidate = read_candidate(args.candidate)
     normalized = json.loads(candidate.model_dump_json())
     if args.command == "inspect":
@@ -127,6 +138,9 @@ def main() -> int:
     args = build_parser().parse_args()
     try:
         data = execute(args)
+    except TemplateError as error:
+        emit(args.command, errors=[issue(error.code, error.field, str(error))])
+        return error.exit_code
     except InputPathError as error:
         emit(args.command, errors=[issue(error.code, error.field, str(error))])
         return 2

@@ -1,0 +1,206 @@
+{
+  "schema_version": 1,
+  "command": "template",
+  "status": "ok",
+  "data": {
+    "scope": "method_template",
+    "tool": {
+      "id": "qgis-buffer",
+      "version": 1,
+      "runner": "qgis",
+      "implementation": "native:buffer",
+      "inputs": {
+        "source": "vector_line"
+      },
+      "outputs": {
+        "buffer": "vector_polygon"
+      },
+      "parameters": {
+        "distance": {
+          "type": "number",
+          "unit": "meter",
+          "minimum_exclusive": 0,
+          "required": true
+        },
+        "segments": {
+          "type": "integer",
+          "minimum": 1,
+          "required": true
+        },
+        "dissolve": {
+          "type": "boolean",
+          "required": true
+        },
+        "end_cap_style": {
+          "type": "enum",
+          "values": [
+            "round",
+            "flat",
+            "square"
+          ],
+          "required": true
+        },
+        "join_style": {
+          "type": "enum",
+          "values": [
+            "round",
+            "miter",
+            "bevel"
+          ],
+          "required": true
+        },
+        "miter_limit": {
+          "type": "number",
+          "minimum": 1,
+          "required": true
+        }
+      },
+      "measurement_policy": {
+        "distance": "local_projected",
+        "area": "not_applicable",
+        "forbid_web_mercator": true,
+        "forbid_geographic_planar": true
+      },
+      "preconditions": [
+        "crs_is_known",
+        "projected_crs_suitable_for_extent",
+        "horizontal_unit_is_meter",
+        "geometry_is_valid"
+      ],
+      "check_rules": [
+        "output_exists",
+        "output_crs_expected"
+      ]
+    },
+    "method": {
+      "id": "buffer-review",
+      "version": 1,
+      "locked_order": true,
+      "inputs": {
+        "source": "vector_line"
+      },
+      "critical_options": {
+        "distance": {
+          "type": "number",
+          "unit": "meter",
+          "minimum_exclusive": 0,
+          "required": true
+        },
+        "segments": {
+          "type": "integer",
+          "minimum": 1,
+          "required": true
+        },
+        "dissolve": {
+          "type": "boolean",
+          "required": true
+        },
+        "end_cap_style": {
+          "type": "enum",
+          "values": [
+            "round",
+            "flat",
+            "square"
+          ],
+          "required": true
+        },
+        "join_style": {
+          "type": "enum",
+          "values": [
+            "round",
+            "miter",
+            "bevel"
+          ],
+          "required": true
+        },
+        "miter_limit": {
+          "type": "number",
+          "minimum": 1,
+          "required": true
+        }
+      },
+      "preconditions": [
+        "required_input_roles_available"
+      ],
+      "steps": [
+        {
+          "key": "run_tool",
+          "tool": {
+            "id": "qgis-buffer",
+            "version": 1
+          },
+          "inputs": {
+            "source": {
+              "asset": "source"
+            }
+          },
+          "parameters": {
+            "distance": {
+              "option": "distance"
+            },
+            "segments": {
+              "option": "segments"
+            },
+            "dissolve": {
+              "option": "dissolve"
+            },
+            "end_cap_style": {
+              "option": "end_cap_style"
+            },
+            "join_style": {
+              "option": "join_style"
+            },
+            "miter_limit": {
+              "option": "miter_limit"
+            }
+          },
+          "outputs": {
+            "buffer": "vector_polygon"
+          }
+        }
+      ],
+      "expected_artifacts": [
+        {
+          "role": "buffer",
+          "step": "run_tool",
+          "output": "buffer",
+          "type": "vector_polygon"
+        }
+      ],
+      "check_rules": []
+    },
+    "todos": [
+      {
+        "code": "REQUIRED_OPTION_VALUE",
+        "field": "tool.parameters.distance",
+        "message": "Supply a value for the plan option 'distance'; the contract has no default."
+      },
+      {
+        "code": "REQUIRED_OPTION_VALUE",
+        "field": "tool.parameters.segments",
+        "message": "Supply a value for the plan option 'segments'; the contract has no default."
+      },
+      {
+        "code": "REQUIRED_OPTION_VALUE",
+        "field": "tool.parameters.dissolve",
+        "message": "Supply a value for the plan option 'dissolve'; the contract has no default."
+      },
+      {
+        "code": "REQUIRED_OPTION_VALUE",
+        "field": "tool.parameters.end_cap_style",
+        "message": "Supply a value for the plan option 'end_cap_style'; the contract has no default."
+      },
+      {
+        "code": "REQUIRED_OPTION_VALUE",
+        "field": "tool.parameters.join_style",
+        "message": "Supply a value for the plan option 'join_style'; the contract has no default."
+      },
+      {
+        "code": "REQUIRED_OPTION_VALUE",
+        "field": "tool.parameters.miter_limit",
+        "message": "Supply a value for the plan option 'miter_limit'; the contract has no default."
+      }
+    ]
+  },
+  "errors": []
+}
