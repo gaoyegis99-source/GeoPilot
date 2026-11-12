@@ -63,3 +63,19 @@ A 在与正式基准不同的物理盘上归档 Python venv、QGIS CLI 和对应
 在干净分离检出 `d1a9d4a68dc73ca355d13d013925d5e0fe518972`，正式验证入口退出 0。前端离线依赖安装、TypeScript 检查和 Vite 构建通过。后端 2,171 项、前端 73 项、独立固定 GIS 82 项通过，各套件均为 0 失败、0 跳过。后端耗时 1,042.71 秒，固定 GIS 97.71 秒。 [原始日志、命令、JUnit 和独立复算](p16-06-corrected-full-source-preview-evidence.tar.gz)
 
 B 将后端 JUnit 与 2,171 个收集节点逐一核对，将固定 GIS JUnit 与 T01–T16 的 82 个唯一映射节点核对。前端 73 条记录对应 16 个测试文件，其中两组参数化测试复用了显示标题，独立审核保留参数化记录计数。主控从便携包重放退出 0。该源码早于 `f16f72d` 跨批复用合入及 P13-06 缓存实现。正式发布仍需在最终源码复跑。
+
+## 同提交技术候选包验收
+
+主控与 B 在净分离检出 `44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0` 验证，原始证据提交为 `9ea45ec991547adf0b70e16710efb8f789450183`。P13 与 P14 已选范围均已通过。验证使用 Linux 5.15、Python 3.13.13、pytest 8.3.4、QGIS 3.44.15、Psycopg 3.3.4、Node v22.23.1 和 npm 10.9.8，固定离线 npm 缓存，真实 QGIS 与 PostGIS。启动脚本、CPU 限制包装器和各套实际命令随证据封存。 [验证回执](../../../artifacts/reports/final/round2-validation.json)
+
+| 套件 | 通过 | 失败／错误／跳过 | 退出码 |
+| --- | ---: | ---: | ---: |
+| 前端离线安装、TypeScript、Vite 构建及 Vitest | 73 项，16 文件 | 0／0／0 | 0 |
+| 后端完整收集与回归 | 2,228 项，1,088.86 秒 | 0／0／0 | 0 |
+| T01–T16 独立固定 GIS | 82 项，97.17 秒 | 0／0／0 | 0 |
+
+独立复核逐项匹配 2,228 个唯一后端节点和 82 个唯一固定 GIS 节点。前端的两组参数化测试保留相同展示名称，按 Vitest 和 JUnit 的实际执行条数核对。Vite 保留构建体积提示，后端保留依赖弃用提示和地理数据写入警告。 [独立审计、原始命令和回执](p16-06-candidate-verification-evidence.tar.gz)
+
+主控运行 `delivery_manifest.py --round2 --source-ref … --evidence-ref … --archive … --write` 生成清单与确定性归档。按提交核验与空目录解包后无 Git 核验均退出 0，JSON 字节一致。包内有 944 个源码范围文件、733 个证据文件，附版本、锁定依赖、测试、样本和离线复现文档。发布归档的 SHA-256 为 `7971fce3e321224a8a7dc6f9dc7c365ffd4cff90de79e18fec5e417b971cfbc3`。源码和证据文件按各自精确提交保存。可按固定引用重建；撤销本次交付文档和清单提交可从开发分支移除候选引用。 [固定清单](../../../artifacts/reports/final/round2-delivery-manifest.json) · [复现说明](../../release/ROUND2_REPRODUCTION.md)
+
+P16-06 主控 ACCEPTED。该归档为已验证技术候选。真实用户观察与后续体验改进仍是 P16-07 发布决策的前置，若源码变化需对届时版本重跑并更新包。
