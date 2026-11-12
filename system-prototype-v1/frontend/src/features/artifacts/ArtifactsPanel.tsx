@@ -53,7 +53,8 @@ export function ArtifactsPanel({ record, loading, error, selectedArtifactId, onL
       {loading && <p role="status">正在读取成果…</p>}
       {error && <p role="alert" className="artifacts-panel__error">{error}</p>}
       {!loading && !error && !record?.artifacts.length && <p className="workbench__placeholder">暂无正式成果</p>}
-      {record && record.artifacts.length > 0 && (
+      {record && record.artifacts.length > 0 && <>
+        <p>成果所属运行 <code title={record.run_id}>{record.run_id.slice(0, 8)}</code></p>
         <ul className="artifacts-panel__list" aria-label="正式成果">
           {record.artifacts.map((artifact) => {
             const canReadStatistics = artifact.kind === 'json' || (artifact.kind === 'table' && artifact.format.toUpperCase() === 'CSV')
@@ -90,6 +91,7 @@ export function ArtifactsPanel({ record, loading, error, selectedArtifactId, onL
                   <summary>来源详情</summary>
                   <dl>
                     <dt>成果编号</dt><dd>{artifact.id}</dd>
+                    <dt>运行编号</dt><dd>{artifact.run_id}</dd>
                     <dt>方案</dt><dd>{artifact.source.plan_id} · v{artifact.source.plan_version}</dd>
                     <dt>步骤</dt><dd>{artifact.source.step_key}</dd>
                     <dt>工具</dt><dd>{artifact.source.tool.id} · v{artifact.source.tool.version}</dd>
@@ -104,7 +106,7 @@ export function ArtifactsPanel({ record, loading, error, selectedArtifactId, onL
             )
           })}
         </ul>
-      )}
+      </>}
       {record && record.diagnostics.length > 0 && (
         <details className="artifacts-panel__diagnostics">
           <summary>排错文件</summary>

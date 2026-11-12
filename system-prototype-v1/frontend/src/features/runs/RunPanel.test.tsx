@@ -96,3 +96,40 @@ it('loads on demand and labels evidence separately from a possible cause', async
   expect(screen.getByText('area_sanity')).toBeTruthy()
   expect(feedback).toHaveBeenCalledWith('run-1', expect.any(AbortSignal))
 })
+
+it('labels cancellation of checks and stops calling a completed calculation the current step', async () => {
+  const checking = { ...running, execution_status: 'SUCCEEDED', check_status: 'CHECKING' } as const
+  vi.spyOn(workbenchApi, 'run').mockResolvedValue(checking)
+  vi.spyOn(workbenchApi, 'steps').mockResolvedValue({
+    run_id: 'run-1', steps: [{ ...step, status: 'SUCCEEDED', finished_at: '2026-11-11T00:00:04Z' }],
+  })
+  const cancel = vi.spyOn(workbenchApi, 'cancel').mockResolvedValue({ ...checking, cancel_requested: true })
+  render(<RunPanel runId="run-1" />)
+
+  expect(await screen.findByText('正在检查成果…')).toBeTruthy()
+  expect(await screen.findByText(/最后完成的计算步骤/)).toBeTruthy()
+  expect(screen.queryByText(/当前步骤/)).toBeNull()
+  expect(screen.queryByRole('button', { name: '取消运行' })).toBeNull()
+  await act(async () => { fireEvent.click(screen.getByRole('button', { name: '取消检查' })) })
+  expect(cancel).toHaveBeenCalledWith('run-1')
+  expect(screen.getByRole('button', { name: '已请求取消检查' })).toHaveProperty('disabled', true)
+})
+
+it('offers the original plan and its logs when a worker was cancelled in preflight', async () => {
+  vi.spyOn(workbenchApi, 'run').mockResolvedValue({
+    ...running, execution_status: 'CANCELLED', cancel_requested: true,
+    error: {
+      phase: 'preflight', code: 'PROCESS_CANCELLED', step_key: 'prepare', field: 'tool',
+      message: 'Cancelled.', suggestion: 'Check the inputs.', log_path: 'steps/prepare/process.log',
+    },
+  })
+  vi.spyOn(workbenchApi, 'steps').mockResolvedValue({ run_id: 'run-1', steps: [] })
+  const retry = vi.fn()
+  render(<RunPanel runId="run-1" actions={{ edit: vi.fn(), retry }} />)
+
+  const rerun = await screen.findByRole('button', { name: '按原方案重新运行' })
+  expect(screen.queryByRole('button', { name: '返回草稿' })).toBeNull()
+  expect(screen.getByRole('link', { name: '查看完整日志' }).getAttribute('href')).toContain('/prepare/log')
+  fireEvent.click(rerun)
+  expect(retry).toHaveBeenCalledOnce()
+})

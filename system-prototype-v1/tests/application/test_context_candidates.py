@@ -94,6 +94,30 @@ def test_road_scope_uses_confirmed_distance_and_output_lineage(project):
     assert {"targets", "zones"} <= assessed.roles.keys()
 
 
+@pytest.mark.parametrize(("crs", "code"), [
+    ("EPSG:3857", "MEASUREMENT_POLICY_REJECTED"),
+    ("EPSG:4326", "MEASUREMENT_POLICY_REJECTED"),
+    ("invalid-crs", "CRS_UNKNOWN"),
+])
+def test_invalid_road_measurement_crs_points_the_draft_to_the_option(project, crs, code):
+    database, catalog, add = project
+    area = add("extent", [box(500000, 5100000, 500100, 5100100)])
+    roads = add("roads", [LineString([(500010, 5100010), (500090, 5100090)])],
+                fields={"source_feature_id": ["road"]})
+    method = catalog.get("road-buffer-statistics", 3)
+    options = {"distance_method": "local_projected", "distance_m": 500, "distance_crs_ref": crs}
+    context = build_task_context(
+        database, task_id="task", goal=GOAL, method=method, criteria=ContextCriteria(),
+        selected={"analysis_extent": area, "roads": roads}, options=options,
+    )
+
+    assessment = context.roles["roads"]
+    assert (assessment.asset, assessment.code, assessment.field) == (roads, code, "critical_options.distance_crs_ref")
+    issues = build_draft(context, method, plan_id="bad-measurement-crs", options=options).issues
+    assert any(issue.code == code and issue.field == assessment.field for issue in issues)
+    assert all(issue.field != "inputs.roads" for issue in issues)
+
+
 def test_independent_reference_polygons_are_not_required_to_overlap(project):
     database, catalog, add = project
     relation = add("relation", [box(500000, 5100000, 500100, 5100100)])

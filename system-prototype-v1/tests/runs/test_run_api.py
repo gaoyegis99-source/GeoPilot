@@ -95,7 +95,8 @@ def test_artifact_query_reports_registered_source_and_current_readability(projec
         artifact_url = f"/api/artifacts/{artifact['id']}"
         raw = client.get(f"{artifact_url}/file")
         assert raw.status_code == 200 and raw.content == (workdir / artifact["uri"]).read_bytes()
-        assert "attachment" in raw.headers["content-disposition"]
+        original = Path(artifact["uri"])
+        assert f'filename="{original.stem}-{run_id}{original.suffix}"' in raw.headers["content-disposition"]
         preview = client.get(f"{artifact_url}/preview")
         assert preview.status_code == 200 and preview.headers["content-type"].startswith("application/geo+json")
         assert preview.json()["type"] == "FeatureCollection"

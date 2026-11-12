@@ -116,6 +116,7 @@ export interface InputAssessment {
   status: 'READY' | 'CONDITIONAL' | 'BLOCKED' | 'UNKNOWN'
   code: string | null
   message: string | null
+  field?: string
 }
 
 export interface TaskContext {

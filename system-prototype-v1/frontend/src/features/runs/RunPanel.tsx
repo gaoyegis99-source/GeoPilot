@@ -127,9 +127,22 @@ export function RunPanel({
     }
   }
 
-  const step = steps.find((entry) => entry.step_key === status?.current_step)
+  const processing = status?.execution_status === 'RUNNING'
+  const checking = status?.check_status === 'CHECKING'
+  const cancelled = status?.execution_status === 'CANCELLED'
+  const step = processing ? steps.find((entry) => entry.step_key === status?.current_step)
+    : [...steps].reverse().find((entry) => entry.status === 'SUCCEEDED')
+  const stepKey = processing ? status?.current_step : step?.step_key
   const duration = elapsed(step)
   const active = isRunActive(status)
+  const cancelLabel = checking
+    ? { idle: '取消检查', requested: '已请求取消检查' }
+    : { idle: '取消运行', requested: '已请求取消' }
+  const error = status?.error
+  const problem = error && (cancelled ? {
+    ...error, phase: 'execute', message: '本次运行已取消。',
+    suggestion: '可以按原方案重新运行，或查看步骤日志。',
+  } : error)
 
   return (
     <div className="run-panel">
@@ -137,20 +150,25 @@ export function RunPanel({
       {runId && (
         <>
           {status === null && !requestError && <p role="status">正在读取运行…</p>}
-          {status?.current_step && (
-            <p>当前步骤 <code>{status.current_step}</code>{duration !== null && <> · {duration} 秒</>}</p>
+          {stepKey && (
+            <p>{processing ? '当前步骤' : '最后完成的计算步骤'} <code>{stepKey}</code>{duration !== null && <> · {duration} 秒</>}</p>
           )}
+          {checking && <p role="status">正在检查成果…</p>}
           {active && (
             <button type="button" disabled={cancelPending || status?.cancel_requested} onClick={cancel}>
-              {status?.cancel_requested ? '已请求取消' : cancelPending ? '正在提交…' : '取消运行'}
+              {status?.cancel_requested ? cancelLabel.requested : cancelPending ? '正在提交…' : cancelLabel.idle}
             </button>
           )}
           {requestError && <p role="alert" className="run-panel__error">{requestError}</p>}
-          {status?.error && (
+          {problem && (
             <ProblemDetails
-              problem={status.error} actions={actions}
-              logHref={status.error.log_path ? workbenchApi.logUrl(runId, status.error.step_key) : undefined}
+              problem={problem} actions={cancelled ? undefined : actions}
+              logHref={error?.log_path ? workbenchApi.logUrl(runId, error.step_key) : undefined}
             />
+          )}
+          {cancelled && !problem && <p role="status">本次运行已取消。</p>}
+          {cancelled && actions?.retry && (
+            <button type="button" onClick={actions.retry}>按原方案重新运行</button>
           )}
           {status && !active && (status.error || status.execution_status === 'FAILED' || status.execution_status === 'CANCELLED'
             || status.check_status === 'FAILED' || status.check_status === 'WARNING') && (

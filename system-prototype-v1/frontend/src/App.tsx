@@ -16,7 +16,7 @@ import { PlanPreview } from './features/plans/preview/PlanPreview'
 import { FailureReplanPanel } from './features/runs/FailureReplanPanel'
 import { isRunActive, RunPanel } from './features/runs/RunPanel'
 import { ScriptRunsPage } from './features/scripts/ScriptRunsPage'
-import { TaskHistory } from './features/session/TaskHistory'
+import { RunHistory, TaskHistory } from './features/session/TaskHistory'
 import { hasWorkbenchLocation, mapLayersLocation, readMapLayers, readWorkbenchSession, SessionLinkError, workbenchLocation } from './features/session/workbench-session'
 import { WorkbenchPage } from './pages/WorkbenchPage'
 
@@ -468,7 +468,9 @@ function AnalysisWorkbench() {
     runStatus.execution_status === 'FAILED'
     || (runStatus.execution_status === 'SUCCEEDED' && runStatus.check_status === 'FAILED')
   )
-  const startButton = <StartPlanButton plan={selectedPlan} dirty={draftDirty}
+  const retryCurrentPlan = runStatus?.execution_status === 'CANCELLED' && runPlan !== null
+    && runPlan.id === selectedPlan?.id && runPlan.version === selectedPlan.version
+  const startButton = !retryCurrentPlan && <StartPlanButton plan={selectedPlan} dirty={draftDirty}
     busy={Boolean(preparing || actionPending || isRunActive(runStatus))} onStart={(ref) => { void startRun(ref) }} />
   const mapLayers: MapPreviewLayer[] = visibleAssets.flatMap((ref) => {
     const asset = assets.find((entry) => assetKey(entry) === assetKey(ref))
@@ -507,7 +509,7 @@ function AnalysisWorkbench() {
       map={<MapPanel layers={mapLayers} focusLayerId={focusLayerId} focusRevision={focusRevision} onArtifactSelect={setSelectedArtifactId} />}
       task={<>
         {(taskId || restoreError) && <a href={newTaskUrl.href} className="task-reset">新建任务</a>}
-        {taskRecord && <TaskHistory task={taskRecord} currentPlan={plan} currentRunId={runId} />}
+        {taskRecord && <TaskHistory task={taskRecord} currentPlan={plan} />}
         {restoring && <p role="status">正在恢复任务…</p>}
         {restoreError && <ProblemDetails problem={restoreError} />}
         {!restoring && !restoreError && <ModelAssistPanel
@@ -568,10 +570,11 @@ function AnalysisWorkbench() {
         runId={runId} onStatus={receiveStatus} pendingReportId={queuedReport}
         actions={{
           edit: method ? editDraft : undefined,
-          retry: runPlan && !actionPending ? () => { void startRun(runPlan) } : undefined,
+          retry: runPlan && !preparing && !actionPending && !isRunActive(runStatus) ? () => { void startRun(runPlan) } : undefined,
           recheck: canRecheck && !recheckSubmitting && !queuedReport ? () => { void recheck() } : undefined,
         }}
       >
+        {taskRecord && <RunHistory task={taskRecord} currentRunId={runId} />}
         {startButton}
         {runPlan && (runPlan.id !== selectedPlan?.id || runPlan.version !== selectedPlan.version) && (
           <p>本次运行方案 <code>{runPlan.id}</code> · v{runPlan.version}</p>

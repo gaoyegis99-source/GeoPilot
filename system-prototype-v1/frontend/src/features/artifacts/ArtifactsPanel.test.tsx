@@ -27,6 +27,7 @@ it('keeps formal downloads, source versions, map selection and diagnostics tied 
   expect(within(formal).getByRole('link', { name: '下载原文件' }).getAttribute('href')).toBe('/api/artifacts/artifact-1/file')
   expect(within(formal).queryByText('steps/filter/process.log')).toBeNull()
   fireEvent.click(within(formal).getByText('来源详情'))
+  expect(within(formal).getByText('run-1')).toBeTruthy()
   expect(within(formal).getByText('plan-1 · v2')).toBeTruthy()
   expect(within(formal).getByText('asset-1 · v3')).toBeTruthy()
   fireEvent.click(within(formal).getByRole('button', { name: '地图定位' }))

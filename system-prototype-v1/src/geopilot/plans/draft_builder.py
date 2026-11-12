@@ -46,7 +46,7 @@ def _selected_inputs(
         inputs[role] = assessment.asset
         if assessment.status is not InputReadiness.READY:
             issues.append(PlanIssue(
-                code=assessment.code or "INPUT_NOT_READY", field=field,
+                code=assessment.code or "INPUT_NOT_READY", field=assessment.field or field,
                 message=assessment.message or f"The selected asset is {assessment.status.value.lower()}",
             ))
     return inputs

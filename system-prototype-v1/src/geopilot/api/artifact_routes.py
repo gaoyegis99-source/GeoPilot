@@ -171,8 +171,8 @@ def artifact_routes(database_path: str | Path) -> APIRouter:
 
     @router.get("/artifacts/{artifact_id}/file")
     def read_file(artifact_id: str) -> FileResponse:
-        _, _, path = locate_artifact(artifact_id)
-        return FileResponse(path, filename=path.name)
+        artifact, _, path = locate_artifact(artifact_id)
+        return FileResponse(path, filename=f"{path.stem}-{artifact.run_id}{path.suffix}")
 
     @router.get("/artifacts/{artifact_id}/preview")
     def read_preview(artifact_id: str) -> Response:

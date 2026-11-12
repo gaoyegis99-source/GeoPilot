@@ -59,6 +59,7 @@ class InputAssessment(BaseModel):
     status: InputReadiness
     code: _Text | None = None
     message: _Text | None = None
+    field: _Text | None = Field(default=None, exclude_if=lambda value: value is None)
 
 
 class ContextCriteria(BaseModel):
@@ -271,15 +272,18 @@ def _scope_distance(
     method: MethodDefinition, rule: InputScopeRule, scope: DataAsset, options: Mapping[str, JsonValue],
 ) -> tuple[float, CRS]:
     distance = _scope_distance_value(method, rule, options)
+    if distance <= 0:
+        raise ValueError("The scope distance needs a positive value")
     chosen_crs = options.get(rule.distance_crs_option)
-    if not isinstance(chosen_crs, str) or distance <= 0:
-        raise ValueError("The scope distance needs a positive value and a confirmed measurement CRS")
-    metadata = scope.metadata.model_copy(update={"crs": chosen_crs})
-    return distance, inspect_crs(metadata, require_projected_metres=True).crs.to_2d()
+    field = f"critical_options.{rule.distance_crs_option}"
+    metadata = scope.metadata.model_copy(update={"crs": chosen_crs if isinstance(chosen_crs, str) else None})
+    return distance, inspect_crs(metadata, field=field, require_projected_metres=True).crs.to_2d()
 
 
-def _assessment(ref: DataAssetRef, status: InputReadiness, code: str, message: str) -> InputAssessment:
-    return InputAssessment(asset=ref, status=status, code=code, message=message)
+def _assessment(
+    ref: DataAssetRef, status: InputReadiness, code: str, message: str, *, field: str | None = None,
+) -> InputAssessment:
+    return InputAssessment(asset=ref, status=status, code=code, message=message, field=field)
 
 
 def build_task_context(
@@ -426,6 +430,12 @@ def build_task_context(
                         raise ValueError("The reference layer contains no geometry")
                     matches = source_geometry.distance(scope_geometry) <= distance if distance else source_geometry.intersects(scope_geometry)
             except (OSError, OverflowError, RuntimeError, ValueError, ProjError, GEOSException) as error:
+                if isinstance(error, CRSValidationError) and error.field.startswith("critical_options."):
+                    return _assessment(
+                        ref, InputReadiness.UNKNOWN, error.code,
+                        "请选择适用于分析范围的米制投影坐标参考系，再核验输入范围。",
+                        field=error.field,
+                    )
                 return _assessment(ref, InputReadiness.UNKNOWN, "INPUT_SCOPE_UNVERIFIED", f"无法核验 {label}：{error}")
             if not matches:
                 status = baseline.status if allow_empty else InputReadiness.BLOCKED
