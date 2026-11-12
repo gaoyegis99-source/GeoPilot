@@ -60,3 +60,8 @@
 - Agent B/F 在 V1 提交 `80d724f35fba31cacb9d3f740265b2713c6be6f4` 独立运行 476 个唯一节点，全部通过，0 失败、0 错误、0 跳过，退出 0，257.06 秒。
 - 主控对照原始 JUnit 核对 82 个唯一映射节点和 T01–T16 逐项结果，16 PASS、0 FAIL、0 NOT_RUN。映射记录的三份证据 SHA-256 均匹配。
 - 状态 ACCEPTED。 [命令、实际 GIS 断言、JUnit、映射与回滚](../../docs/round2/audit/p12-07.md)
+
+## P12-09 主控验收
+
+- GitHub Actions Python 作业在 CI-only 提交 `02ff664734605bbe05668d06e88778b3fc92e3ad` 完成 Schema 校验，作业 194 项全部通过。校验器源码和测试与本地版本逐文件一致，托管 JSON 与本地复核结果逐字节一致。
+- 状态 ACCEPTED。 [命令、托管运行及原始配置报告](../../docs/round2/audit/p12-09.md)
