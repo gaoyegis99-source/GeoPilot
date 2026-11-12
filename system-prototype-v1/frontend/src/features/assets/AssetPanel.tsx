@@ -1,4 +1,4 @@
-import { useId, useState, type FormEvent } from 'react'
+import { useEffect, useId, useImperativeHandle, useRef, useState, type FormEvent, type Ref } from 'react'
 import { ApiError, type AssetEntry, type AssetRef, type LayerEntry } from '../../api/workbench'
 import './assets.css'
 
@@ -15,7 +15,12 @@ function assetName(asset: AssetEntry) {
   return asset.source.layer ?? asset.source.path.split(/[\\/]/).at(-1) ?? asset.asset_id
 }
 
+export interface AssetPanelHandle {
+  openRegistration: () => void
+}
+
 interface AssetPanelProps {
+  ref?: Ref<AssetPanelHandle>
   assets: AssetEntry[]
   visible: AssetRef[]
   assigned: Readonly<Partial<Record<string, AssetRef>>>
@@ -26,11 +31,13 @@ interface AssetPanelProps {
   onListLayers: (path: string) => Promise<LayerEntry[]>
 }
 
-export function AssetPanel({ assets, visible, assigned, loading, error, onToggle, onRegister, onListLayers }: AssetPanelProps) {
+export function AssetPanel({ ref, assets, visible, assigned, loading, error, onToggle, onRegister, onListLayers }: AssetPanelProps) {
   const pathId = useId()
   const layerId = useId()
   const formId = useId()
   const [open, setOpen] = useState(false)
+  const pathInput = useRef<HTMLInputElement>(null)
+  const focusOnOpen = useRef(false)
   const [path, setPath] = useState('')
   const [layer, setLayer] = useState('')
   const [layers, setLayers] = useState<LayerEntry[] | null>(null)
@@ -38,6 +45,24 @@ export function AssetPanel({ assets, visible, assigned, loading, error, onToggle
   const [failure, setFailure] = useState<{ message: string; field?: string } | null>(null)
   const geopackage = path.trim().toLowerCase().endsWith('.gpkg')
   const visibleKeys = new Set(visible.map(assetKey))
+
+  useImperativeHandle(ref, () => ({
+    openRegistration() {
+      if (pathInput.current) {
+        pathInput.current.focus()
+      } else {
+        focusOnOpen.current = true
+        setOpen(true)
+      }
+    },
+  }), [])
+
+  useEffect(() => {
+    if (open && focusOnOpen.current) {
+      focusOnOpen.current = false
+      pathInput.current?.focus()
+    }
+  }, [open])
 
   function showFailure(cause: unknown) {
     if (cause instanceof ApiError) {
@@ -140,7 +165,7 @@ export function AssetPanel({ assets, visible, assigned, loading, error, onToggle
           <form id={formId} className="asset-panel__form" onSubmit={register}>
             <label htmlFor={pathId}>本机文件路径</label>
             <input
-              id={pathId} value={path} disabled={pending !== null} required
+              ref={pathInput} id={pathId} value={path} disabled={pending !== null} required
               onChange={(event) => { setPath(event.target.value); setLayer(''); setLayers(null); setFailure(null) }}
             />
             {geopackage && (

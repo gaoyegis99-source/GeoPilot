@@ -3,7 +3,7 @@ import type { PlanComparison } from './api/plan-alternatives'
 import { type AnalysisPlan, type AssetEntry, type AssetRef, type ContextCriteria, type Json, type MethodEntry, type MethodRef, type ModelPreview, type RunArtifacts, type RunStatus, type TaskContext, type TaskRecord, workbenchApi } from './api/workbench'
 import { ProblemDetails, requestProblem, type Problem } from './components/errors/ProblemDetails'
 import { ArtifactsPanel, artifactTitle } from './features/artifacts/ArtifactsPanel'
-import { AssetPanel, assetKey } from './features/assets/AssetPanel'
+import { AssetPanel, assetKey, type AssetPanelHandle } from './features/assets/AssetPanel'
 import { ChecksPanel } from './features/checks/ChecksPanel'
 import { MethodCatalogPanel } from './features/methods/MethodCatalogPanel'
 import { MethodForm, type MethodFormRequest } from './features/method-form/MethodForm'
@@ -50,6 +50,7 @@ function AnalysisWorkbench() {
   const [taskError, setTaskError] = useState<Problem | null>(null)
   const [actionPending, setActionPending] = useState<'confirm' | 'start' | 'answer' | 'alternative' | 'replan' | null>(null)
   const [actionError, setActionError] = useState<Problem | null>(null)
+  const assetPanel = useRef<AssetPanelHandle>(null)
   const methodForm = useRef<HTMLDivElement>(null)
   const methodCatalog = useRef<HTMLDivElement>(null)
   const [modelAvailable, setModelAvailable] = useState<boolean | null>(null)
@@ -452,7 +453,8 @@ function AnalysisWorkbench() {
         taskId, plan, runId: id,
       }))
     } catch (cause) {
-      setActionError(requestProblem(cause, 'execute', '无法启动运行。'))
+      const problem = requestProblem(cause, 'execute', '无法启动运行。')
+      setActionError(problem.code === 'INPUT_CHANGED' ? { ...problem, phase: 'data' } : problem)
     } finally {
       setActionPending(null)
     }
@@ -503,7 +505,7 @@ function AnalysisWorkbench() {
     <WorkbenchPage
       scriptRunsHref={scriptsUrl.pathname + scriptsUrl.search + scriptsUrl.hash}
       assets={<AssetPanel
-        assets={assets} visible={visibleAssets} assigned={inputs} loading={assetsLoading} error={assetError}
+        ref={assetPanel} assets={assets} visible={visibleAssets} assigned={inputs} loading={assetsLoading} error={assetError}
         onToggle={toggleAsset} onRegister={registerAsset}
         onListLayers={async (path) => (await workbenchApi.layers(path)).layers}
       />}
@@ -581,7 +583,8 @@ function AnalysisWorkbench() {
           <p>本次运行方案 <code>{runPlan.id}</code> · v{runPlan.version}</p>
         )}
         {actionPending === 'start' && <p role="status">正在提交运行…</p>}
-        {actionError?.phase === 'execute' && <ProblemDetails problem={actionError} />}
+        {(actionError?.phase === 'execute' || actionError?.phase === 'data') && <ProblemDetails
+          problem={actionError} actions={{ register: () => assetPanel.current?.openRegistration() }} />}
         {canReplan && runId && runPlan && taskId && <>
           <a href={workbenchLocation(new URL(window.location.href), { taskId, plan: runPlan, runId }).href}>打开本次运行方案</a>
           <FailureReplanPanel key={runId} runId={runId} plan={runPlan}

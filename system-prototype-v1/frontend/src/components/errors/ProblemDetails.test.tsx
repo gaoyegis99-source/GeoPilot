@@ -29,11 +29,13 @@ it('keeps the diagnosis, relevant action and log available while details are col
 
 it.each([
   ['CHECK_INTERRUPTED', 'check', '重新检查'],
+  ['ARTIFACT_CHANGED', 'check', '重新检查'],
   ['METHOD_PRECONDITION_FAILED', 'preflight', '返回草稿'],
   ['PREVIEW_FAILED', 'preview', '重新加载预览'],
 ])('offers the action that matches %s', (code, phase, name) => {
   render(<ProblemDetails problem={{ code, phase, message: '操作未完成' }} actions={{
-    edit: vi.fn(), retry: vi.fn(), recheck: vi.fn(), preview: vi.fn(),
+    edit: vi.fn(), retry: vi.fn(), recheck: vi.fn(), preview: vi.fn(), register: vi.fn(),
   }} />)
   expect(screen.getByRole('button', { name })).toBeTruthy()
+  expect(screen.queryByRole('button', { name: '打开资产登记' })).toBeNull()
 })
