@@ -16,7 +16,7 @@
 | P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | ACCEPTED | [最终审计与放行证据](../../docs/round2/audit/P12_FINAL_AUDIT.md) |
 | P13-01 | P13 | GIS 数据规模分级生成器 | B/A/F | P12-11 | ACCEPTED | [S/M/L 实际生成、独立参考和联合复验](../../docs/round2/performance/p13-01.md) |
 | P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | ACCEPTED | [旁路采样、真实运行及 T01–T16 复验](../../docs/round2/performance/p13-02.md) |
-| P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | DOING | S、M 各 20 组和 L 首批 42 轮已独立复算，S/M 原驱动归档。L 后续批次继续正式采样。 [独立复算](../../docs/round2/performance/p13-03-SM-reproduction.md) · [道路修复](../../docs/round2/performance/p13-03-large-csv.md) |
+| P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | DOING | S、M 各 20 组和 L 首批 42 轮已独立复算。L 后续批次完成五项 T13 的 70 轮，正在采样两项 T14。 [独立复算](../../docs/round2/performance/p13-03-SM-reproduction.md) · [道路修复](../../docs/round2/performance/p13-03-large-csv.md) |
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
 | P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | BLOCKED | 已固定前测及七补丁候选提交，104 项回归和四次原生 S 冒烟通过。原生环境复跑和配置比较器复验通过，完整方法待 P13-03。 [复验准备](../../docs/round2/performance/p13-05-preflight.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已实测同请求绑定变化、文件组及图层身份边界，等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
