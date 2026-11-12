@@ -1,0 +1,827 @@
+{
+  "actual_runs": 84,
+  "identical_l_identity_without_layers": true,
+  "workloads": [
+    {
+      "archive": "p13-05-vector-l-line",
+      "run_ids": 14,
+      "raw_sha256": "30db1c3703b758c51b42562a5780444fc29a4394337c43fd61ab8e0c9f5e6d2f",
+      "workload": "t13-lines-intersects",
+      "tier": "L",
+      "all_runs": {
+        "actual_runs": 14,
+        "distinct_recorded_inputs_and_parameters": 1,
+        "output_byte_counts": [
+          126910464
+        ],
+        "distinct_independent_correctness_reports": 1,
+        "distinct_check_rule_sets": 1,
+        "artifact_fingerprint_distribution": {
+          "clipped_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "original_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "groups": {
+        "process_cold": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            126910464
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "warm": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            126910464
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        }
+      },
+      "opened_target_layer": "lines"
+    },
+    {
+      "archive": "p13-05-vector-l-point",
+      "run_ids": 14,
+      "raw_sha256": "925214be0037dc12d98734830ac158158aedf3fac0a2c4d534fb51cd0e0ec7a8",
+      "workload": "t13-points-intersects",
+      "tier": "L",
+      "all_runs": {
+        "actual_runs": 14,
+        "distinct_recorded_inputs_and_parameters": 1,
+        "output_byte_counts": [
+          60276736
+        ],
+        "distinct_independent_correctness_reports": 1,
+        "distinct_check_rule_sets": 1,
+        "artifact_fingerprint_distribution": {
+          "clipped_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "original_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "groups": {
+        "process_cold": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            60276736
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "warm": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            60276736
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        }
+      },
+      "opened_target_layer": "points"
+    },
+    {
+      "archive": "p13-05-vector-m-revised",
+      "run_ids": 14,
+      "raw_sha256": "fcc5874c2431cc01af25158ce4dcb568b1345e866a393903b3aaa41a30494f94",
+      "workload": "road",
+      "tier": "M",
+      "all_runs": {
+        "actual_runs": 14,
+        "distinct_recorded_inputs_and_parameters": 1,
+        "output_byte_counts": [
+          3747913
+        ],
+        "distinct_independent_correctness_reports": 1,
+        "distinct_check_rule_sets": 1,
+        "artifact_fingerprint_distribution": {
+          "buffer_extent": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "selected_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "zone_statistics": {
+            "file_extension": ".csv",
+            "distinct_fingerprints": 1,
+            "frequency": [
+              14
+            ]
+          }
+        }
+      },
+      "groups": {
+        "process_cold": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            3747913
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "buffer_extent": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "selected_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "zone_statistics": {
+              "file_extension": ".csv",
+              "distinct_fingerprints": 1,
+              "frequency": [
+                5
+              ]
+            }
+          }
+        },
+        "warm": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            3747913
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "buffer_extent": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "selected_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "zone_statistics": {
+              "file_extension": ".csv",
+              "distinct_fingerprints": 1,
+              "frequency": [
+                5
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "archive": "p13-05-vector-m-revised",
+      "run_ids": 14,
+      "raw_sha256": "cc19c56e0d1913d6a1f186918e0ea909b964a41c8456a62569da9104f3e2ef2f",
+      "workload": "t13-lines-within",
+      "tier": "M",
+      "all_runs": {
+        "actual_runs": 14,
+        "distinct_recorded_inputs_and_parameters": 1,
+        "output_byte_counts": [
+          1982464
+        ],
+        "distinct_independent_correctness_reports": 1,
+        "distinct_check_rule_sets": 1,
+        "artifact_fingerprint_distribution": {
+          "clipped_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "original_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "groups": {
+        "process_cold": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            1982464
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "warm": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            1982464
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "archive": "p13-05-vector-m-revised",
+      "run_ids": 14,
+      "raw_sha256": "28d3e248db8735d9f75aef9d1a4192f1916ce0ee9c620f20a3ce57553986c24b",
+      "workload": "t13-points-intersects",
+      "tier": "M",
+      "all_runs": {
+        "actual_runs": 14,
+        "distinct_recorded_inputs_and_parameters": 1,
+        "output_byte_counts": [
+          2056192
+        ],
+        "distinct_independent_correctness_reports": 1,
+        "distinct_check_rule_sets": 1,
+        "artifact_fingerprint_distribution": {
+          "clipped_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "original_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "groups": {
+        "process_cold": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            2056192
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        },
+        "warm": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            2056192
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "archive": "p13-05-vector-m-revised",
+      "run_ids": 14,
+      "raw_sha256": "985c9cd6417e0003afbd520875ad365506e0e733491ec9d1467539557d1315c1",
+      "workload": "t14-split_by_area",
+      "tier": "M",
+      "all_runs": {
+        "actual_runs": 14,
+        "distinct_recorded_inputs_and_parameters": 1,
+        "output_byte_counts": [
+          6162883
+        ],
+        "distinct_independent_correctness_reports": 1,
+        "distinct_check_rule_sets": 1,
+        "artifact_fingerprint_distribution": {
+          "allocation_details": {
+            "file_extension": ".csv",
+            "distinct_fingerprints": 1,
+            "frequency": [
+              14
+            ]
+          },
+          "clipped_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "original_targets": {
+            "file_extension": ".gpkg",
+            "distinct_fingerprints": 14,
+            "frequency": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "zone_statistics": {
+            "file_extension": ".json",
+            "distinct_fingerprints": 1,
+            "frequency": [
+              14
+            ]
+          }
+        }
+      },
+      "groups": {
+        "process_cold": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            6162883
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "allocation_details": {
+              "file_extension": ".csv",
+              "distinct_fingerprints": 1,
+              "frequency": [
+                5
+              ]
+            },
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "zone_statistics": {
+              "file_extension": ".json",
+              "distinct_fingerprints": 1,
+              "frequency": [
+                5
+              ]
+            }
+          }
+        },
+        "warm": {
+          "actual_runs": 5,
+          "distinct_recorded_inputs_and_parameters": 1,
+          "output_byte_counts": [
+            6162883
+          ],
+          "distinct_independent_correctness_reports": 1,
+          "distinct_check_rule_sets": 1,
+          "artifact_fingerprint_distribution": {
+            "allocation_details": {
+              "file_extension": ".csv",
+              "distinct_fingerprints": 1,
+              "frequency": [
+                5
+              ]
+            },
+            "clipped_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "original_targets": {
+              "file_extension": ".gpkg",
+              "distinct_fingerprints": 5,
+              "frequency": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ]
+            },
+            "zone_statistics": {
+              "file_extension": ".json",
+              "distinct_fingerprints": 1,
+              "frequency": [
+                5
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
