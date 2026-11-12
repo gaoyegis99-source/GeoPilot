@@ -1,5 +1,5 @@
-commit 6961ee3694694be24f58697fe666d8b0b67fee01
-cwd /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1/frontend
+commit f85c3c8b6f214840efd188d08409087c17668834
+cwd /dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tree/system-prototype-v1/frontend
 command npm run build
 
 > geopilot-workbench@1.0.0 build
@@ -13,13 +13,13 @@ computing gzip size...
 dist/index.html                                  0.40 kB │ gzip:   0.28 kB
 dist/assets/maplibre-gl-worker-CZtFQQIV.mjs    520.11 kB
 dist/assets/index-Dc8XWeCK.css                  96.60 kB │ gzip:  15.45 kB
-dist/assets/index-Vixl4Rvy.js                1,389.94 kB │ gzip: 388.91 kB
+dist/assets/index-CWahFLBx.js                1,390.79 kB │ gzip: 389.26 kB
 
-✓ built in 879ms
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 893ms
 
 exit 0

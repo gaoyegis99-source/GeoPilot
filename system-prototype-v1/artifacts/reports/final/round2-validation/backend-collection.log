@@ -1,5 +1,5 @@
-commit 6961ee3694694be24f58697fe666d8b0b67fee01
-cwd /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1
+commit f85c3c8b6f214840efd188d08409087c17668834
+cwd /dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tree/system-prototype-v1
 command /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python -m pytest -q -p no:cacheprovider --collect-only tests
 tests/agent/evals/test_agent_behavior.py::test_fixed_mock_behavior[understand-shortest-route]
 tests/agent/evals/test_agent_behavior.py::test_fixed_mock_behavior[understand-sanitized-local-reference]
@@ -2263,6 +2263,6 @@ tests/workspace/test_workspace.py::test_partial_cleanup_leaves_unexpected_nonemp
     _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-2255 tests collected in 5.40s
+2255 tests collected in 5.30s
 
 exit 0

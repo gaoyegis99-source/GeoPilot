@@ -1,6 +1,6 @@
-commit 6961ee3694694be24f58697fe666d8b0b67fee01
-cwd /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1
-command /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python -m pytest -q -p no:cacheprovider tests --basetemp=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tmp/geopilot-round2-validation-rwd1og7y/backend --junitxml=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/backend.xml
+commit f85c3c8b6f214840efd188d08409087c17668834
+cwd /dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tree/system-prototype-v1
+command /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python -m pytest -q -p no:cacheprovider tests --basetemp=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tmp/geopilot-round2-validation-r7fcnjc9/backend --junitxml=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/validation/round2-validation/backend.xml
 ........................................................................ [  3%]
 ........................................................................ [  6%]
 ........................................................................ [  9%]
@@ -52,7 +52,7 @@ tests/methods/test_selected_complex_method.py::test_requires_one_point_an_explic
     return object.__setattr__(self, name, value)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-- generated xml file: /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/backend.xml -
-2255 passed, 8 warnings in 1096.39s (0:18:16)
+- generated xml file: /dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/validation/round2-validation/backend.xml -
+2255 passed, 8 warnings in 1134.38s (0:18:54)
 
 exit 0
