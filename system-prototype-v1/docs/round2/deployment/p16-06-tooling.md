@@ -10,6 +10,8 @@
 
 补充复验基于 `ddf4e6074b265626690aef3986d013776acb5bec` 和本项变更。生成及离线核验逐一检查固定 GIS JUnit 中的 T01–T16 映射节点。缺失或重复节点时拒绝归档。按同一测试文件复跑 41 项通过、0 失败、0 跳过，退出 0。历史 JUnit 中的 476 个节点包含映射要求的 82 个唯一节点，逐项匹配。正式候选仍待同源提交复验。 [日志](p16-06-coverage-pytest.log) · [JUnit](p16-06-coverage-junit.xml)
 
+验证入口复验基于 `41f2c3e6ff534ae4e5a495c6a952dccc3ce1bd21` 和本项变更。真实 Git 夹具从独立的精确提交调用模拟 Python、QGIS 和 npm，生成回执后再提交证据并生成清单。校验会拒绝命令失配、末行失败、后端 JUnit 与完整收集不符、回归测试材料变动及工作树 QGIS 冲突。首次夹具脚本首行语法错误，退出 1，3 项失败。修正后复跑 50 项通过，0 失败、0 错误、0 跳过，退出 0。历史 V1 后端收集的 1,670 个唯一节点与其 JUnit 一致，用于验证节点解析。模拟执行覆盖验证入口，正式后端、前端和 GIS 复验等待最终源提交。 [首次日志](p16-06-runner-initial.log) · [首次 JUnit](p16-06-runner-initial-junit.xml) · [复跑日志](p16-06-runner-pytest.log) · [复跑 JUnit](p16-06-runner-junit.xml)
+
 ```bash
 p16_manifest_tmp=$(mktemp -d /dev/shm/geopilot-p16-06.XXXXXX)
 export PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1
@@ -20,4 +22,4 @@ export PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1
 .venv/bin/python scripts/quality/validate_ci_matrix.py
 ```
 
-新增第二轮清单模块、复现说明和专项测试。原生成器新增 `--round2`，原校验器新增 `--round2-manifest` 与可选 `--offline-root`。CI 增加新清单专项。撤销工具提交可撤回第二轮候选打包能力。
+新增第二轮清单模块、候选验证入口、复现说明和专项测试。原生成器新增 `--round2`，原校验器新增 `--round2-manifest` 与可选 `--offline-root`。CI 增加新清单专项。撤销工具提交可撤回第二轮候选打包能力。

@@ -5,6 +5,7 @@ import io
 import json
 import posixpath
 import re
+import shlex
 import tarfile
 from collections import Counter
 from pathlib import Path, PurePosixPath, PureWindowsPath
@@ -18,10 +19,18 @@ from verify_delivery_manifest import committed_file_states, committed_files, rea
 
 MANIFEST = Path("artifacts/reports/final/round2-delivery-manifest.json")
 RECEIPT = "artifacts/reports/final/round2-validation.json"
-_SOURCE_DIRECTORIES = ("src", "config", "frontend", "scripts", "tests", "benchmarks", "artifacts/schemas")
 _FIXED_GIS_MAPPING = "docs/round2/audit/p12-07-mapping.json"
-_SOURCE_FILES = ("README.md", "pyproject.toml", "requirements.txt", "requirements-test.txt",
-                 "artifacts/reports/final/delivery_manifest.py", _FIXED_GIS_MAPPING)
+_SOURCE_DIRECTORIES = (
+    "src", "config", "frontend", "scripts", "tests", "benchmarks", "artifacts/schemas",
+    "plans", "plans-round2", "docs/round2/audit", "artifacts/test-results/round2",
+)
+_SOURCE_FILES = (
+    "README.md", "pyproject.toml", "requirements.txt", "requirements-test.txt",
+    "artifacts/reports/final/delivery_manifest.py",
+    "docs/method-authoring/manual-registration.yaml", "docs/traceability/requirements-matrix.md",
+    "docs/acceptance/FIXED_CASES.md", "docs/acceptance/traceability-follow-up.md", "docs/release/FINAL_ACCEPTANCE.md",
+    "docs/round2/user-research/observations.blank.json", "docs/round2/user-research/observations.synthetic.json",
+)
 _WORKFLOW = ".github/workflows/ci.yml"
 _REQUIRED_SUITES = {"backend", "frontend", "fixed_gis"}
 _FIXED_CASES = {f"T{number:02}" for number in range(1, 17)}
@@ -106,41 +115,90 @@ def _junit_report(data: bytes) -> tuple[ElementTree.Element, dict[str, int]]:
     return document, counts
 
 
-def _check_fixed_gis(document: ElementTree.Element, mapping: bytes) -> None:
+def fixed_gis_cases(mapping: bytes) -> dict[str, list[str]]:
     content = json.loads(mapping, object_pairs_hook=_json_object)
     cases = content.get("fixed_cases") if isinstance(content, dict) else None
     if not isinstance(cases, dict) or cases.keys() != _FIXED_CASES:
         raise ValueError("Fixed GIS mapping must cover T01 through T16")
-    observed = Counter((node.get("classname"), node.get("name")) for node in document.iter("testcase"))
+    selected = {}
     for case_id, case in sorted(cases.items()):
         nodes = case.get("nodes") if isinstance(case, dict) else None
         if not isinstance(nodes, list) or not nodes:
             raise ValueError(f"Fixed GIS mapping has no nodes for {case_id}")
+        selected[case_id] = []
         for node in nodes:
             node_id = node.get("id") if isinstance(node, dict) else None
             if not isinstance(node_id, str):
                 raise ValueError(f"Invalid fixed GIS node for {case_id}")
             file, separator, test = node_id.partition("::")
-            if not separator or not file.startswith("tests/") or not file.endswith(".py") or not test:
+            if not separator or not _file_path(file).startswith("tests/") or not file.endswith(".py") or not test:
                 raise ValueError(f"Invalid fixed GIS node for {case_id}: {node_id}")
-            module = file.removesuffix(".py").replace("/", ".")
-            test_function, bracket, parameters = test.partition("[")
-            test_class, _, function_name = test_function.rpartition("::")
-            classname = f"{module}.{test_class.replace('::', '.')}" if test_class else module
-            name = function_name + bracket + parameters
-            if observed[classname, name] != 1:
+            selected[case_id].append(node_id)
+    return selected
+
+
+def _junit_name(node_id: str) -> tuple[str, str]:
+    file, _, test = node_id.partition("::")
+    module = file.removesuffix(".py").replace("/", ".")
+    test_function, bracket, parameters = test.partition("[")
+    test_class, _, function_name = test_function.rpartition("::")
+    classname = f"{module}.{test_class.replace('::', '.')}" if test_class else module
+    return classname, function_name + bracket + parameters
+
+
+def _observed_nodes(document: ElementTree.Element) -> Counter:
+    return Counter((node.get("classname"), node.get("name")) for node in document.iter("testcase"))
+
+
+def _check_fixed_gis(document: ElementTree.Element, mapping: bytes) -> None:
+    observed = _observed_nodes(document)
+    for case_id, nodes in fixed_gis_cases(mapping).items():
+        for node_id in nodes:
+            if observed[_junit_name(node_id)] != 1:
                 raise ValueError(f"Missing or duplicate fixed GIS node for {case_id}: {node_id}")
 
 
-def _observed_suite(name: str, junit: bytes, log: bytes, source_commit: str, fixed_mapping: bytes) -> dict:
+def _successful_log(name: str, log: bytes, source_commit: str, command: list[str]) -> list[str]:
     log_lines = log.decode("utf-8").splitlines()
-    if f"commit {source_commit}" not in log_lines or "exit 0" not in log_lines:
+    if len(log_lines) < 4 or log_lines[0] != f"commit {source_commit}" or log_lines[-1] != "exit 0":
         raise ValueError(f"Test log does not bind the successful suite to the source commit: {name}")
+    if not log_lines[1].startswith("cwd ") or log_lines[2] != f"command {shlex.join(command)}":
+        raise ValueError(f"Test log does not match the recorded command: {name}")
+    return log_lines[3:-1]
+
+
+def _command(value: object) -> bool:
+    return isinstance(value, list) and bool(value) and all(isinstance(item, str) and item for item in value)
+
+
+def _collection_spec(suite: dict) -> tuple[str, list[str]]:
+    value = suite.get("collection")
+    if (
+        not isinstance(value, dict) or set(value) != {"log", "command"}
+        or not _command(value["command"]) or "--collect-only" not in value["command"]
+    ):
+        raise ValueError("Backend validation requires the full pytest collection log")
+    return _file_path(value["log"]), value["command"]
+
+
+def _observed_suite(
+    name: str, junit: bytes, log: bytes, source_commit: str, command: list[str], fixed_mapping: bytes,
+    collection: tuple[bytes, list[str]] | None = None,
+) -> dict:
+    _successful_log(name, log, source_commit, command)
     document, counts = _junit_report(junit)
     if counts["failures"] or counts["errors"] or not counts["passed"] or (name == "fixed_gis" and counts["skipped"]):
         raise ValueError(f"Release suite has failures, errors or incomplete fixed GIS coverage: {name}")
     if name == "fixed_gis":
         _check_fixed_gis(document, fixed_mapping)
+    if name == "backend":
+        if collection is None:
+            raise ValueError("Backend validation requires the full pytest collection log")
+        collection_log, collection_command = collection
+        lines = _successful_log("backend collection", collection_log, source_commit, collection_command)
+        expected = Counter(_junit_name(line) for line in lines if line.startswith("tests/") and "::" in line)
+        if not expected or _observed_nodes(document) != expected or any(count != 1 for count in expected.values()):
+            raise ValueError("Backend JUnit differs from the collected pytest nodes")
     return counts
 
 
@@ -150,24 +208,34 @@ def _suites(repo: Path, tree: dict, receipt: dict, source_commit: str, fixed_map
         raise ValueError("Validation requires a suites array")
     results, evidence = {}, set()
     for suite in entries:
-        if not isinstance(suite, dict) or set(suite) != {"name", "command", "environment", "exit_code", "junit", "log"}:
+        fields = {"name", "command", "environment", "exit_code", "junit", "log"}
+        if isinstance(suite, dict) and suite.get("name") == "backend":
+            fields.add("collection")
+        if not isinstance(suite, dict) or set(suite) != fields:
             raise ValueError("Invalid release validation suite")
         name, command, environment, exit_code = (suite[key] for key in ("name", "command", "environment", "exit_code"))
         if not isinstance(name, str) or not re.fullmatch(r"[a-z][a-z0-9_]*", name) or name in results:
             raise ValueError("Release suite names must be unique identifiers")
         if (
-            not isinstance(command, list) or not command or not all(isinstance(item, str) and item for item in command)
+            not _command(command)
             or not isinstance(environment, dict) or not environment
             or not all(isinstance(item, str) and item.strip() for item in environment.values())
             or type(exit_code) is not int or exit_code != 0
         ):
             raise ValueError(f"Incomplete command, environment or successful exit evidence for suite {name}")
         junit, log = _file_path(suite["junit"]), _file_path(suite["log"])
-        if junit == log or {junit, log} & evidence:
+        suite_paths = [junit, log]
+        collection = None
+        if name == "backend":
+            collection_log, collection_command = _collection_spec(suite)
+            suite_paths.append(collection_log)
+            collection = (_read_file(repo, tree, collection_log), collection_command)
+        if len(suite_paths) != len(set(suite_paths)) or evidence.intersection(suite_paths):
             raise ValueError(f"Release suites must use distinct reports and logs: {name}")
-        counts = _observed_suite(name, _read_file(repo, tree, junit), _read_file(repo, tree, log), source_commit, fixed_mapping)
+        counts = _observed_suite(name, _read_file(repo, tree, junit), _read_file(repo, tree, log),
+                                 source_commit, command, fixed_mapping, collection)
         results[name] = {**suite, "counts": counts}
-        evidence.update((junit, log))
+        evidence.update(suite_paths)
     if not _REQUIRED_SUITES <= results.keys():
         raise ValueError("Release validation requires backend, frontend and fixed_gis suites")
     return [results[name] for name in sorted(results)], evidence
@@ -328,10 +396,20 @@ def verify_round2_files(root: Path, manifest_path: Path) -> dict:
         if not isinstance(suite, dict) or not isinstance(name := suite.get("name"), str) or name in observed:
             raise ValueError("Invalid release validation suite")
         junit, log = _file_path(suite.get("junit")), _file_path(suite.get("log"))
-        if junit not in evidence or log not in evidence or type(suite.get("exit_code")) is not int or suite["exit_code"] != 0:
+        command = suite.get("command")
+        if (
+            junit not in evidence or log not in evidence or type(suite.get("exit_code")) is not int or suite["exit_code"] != 0
+            or not _command(command)
+        ):
             raise ValueError(f"Release suite evidence is incomplete: {name}")
+        collection = None
+        if name == "backend":
+            collection_log, collection_command = _collection_spec(suite)
+            if collection_log not in evidence or collection_log in {junit, log}:
+                raise ValueError("Backend collection log is missing from evidence")
+            collection = ((root / collection_log).read_bytes(), collection_command)
         counts = _observed_suite(name, (root / junit).read_bytes(), (root / log).read_bytes(),
-                                 manifest["source_commit"], fixed_mapping)
+                                 manifest["source_commit"], command, fixed_mapping, collection)
         if json.dumps(counts, sort_keys=True) != json.dumps(suite.get("counts"), sort_keys=True):
             raise ValueError(f"Extracted suite counts differ from manifest: {name}")
         observed[name] = counts

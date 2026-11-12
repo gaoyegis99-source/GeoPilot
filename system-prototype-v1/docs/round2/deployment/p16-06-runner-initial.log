@@ -1,0 +1,68 @@
+41f2c3e6ff534ae4e5a495c6a952dccc3ce1bd21
+Python 3.13.13
+...........FFF...............................                            [100%]
+=================================== FAILURES ===================================
+_______ test_validates_from_detached_commit_and_produces_usable_receipt ________
+
+delivery = (PosixPath('/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validates_from_detached_c0/repo'), PosixPath('/dev/shm/...docs/release/reproduction.md'], 'schema_version': 1, 'source_commit': 'f7e56dc26b310fa69b2119716c6b341f65c00864', ...})
+validation_checkout = (PosixPath('/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validates_from_detached_c0/candidate'), PosixPath('/dev...gis-process', '/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validates_from_detached_c0/tools/fixture-qgis', ...))
+
+    def test_validates_from_detached_commit_and_produces_usable_receipt(delivery, validation_checkout):
+        repo, _, source, _, _ = delivery
+        checkout, root, output, options = validation_checkout
+        result = _invoke(root, VALIDATOR, *options)
+>       assert result.returncode == 0, result.stderr
+E       AssertionError: Version probe failed for /dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validates_from_detached_c0/tools/fixture-python --version (exit 1)
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-B', '/dev/shm/geop...ev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validates_from_detached_c0/tools/fixture-python --version (exit 1)\n').returncode
+
+tests/quality/test_round2_release_manifest.py:266: AssertionError
+_ test_validation_preserves_failed_evidence_without_receipt[RELEASE_FIXTURE_FAIL-fixed_gis exited 5] _
+
+validation_checkout = (PosixPath('/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail0/candidate'), PosixPath('/dev...gis-process', '/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail0/tools/fixture-qgis', ...))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f6eeb7b8c30>
+key = 'RELEASE_FIXTURE_FAIL', diagnosis = 'fixed_gis exited 5'
+
+    @pytest.mark.parametrize(("key", "diagnosis"), [
+        ("RELEASE_FIXTURE_FAIL", "fixed_gis exited 5"),
+        ("RELEASE_FIXTURE_MISSING", "Missing or duplicate fixed GIS node for T16"),
+    ])
+    def test_validation_preserves_failed_evidence_without_receipt(validation_checkout, monkeypatch, key, diagnosis):
+        _, root, output, options = validation_checkout
+        monkeypatch.setenv(key, "fixed_gis")
+        result = _invoke(root, VALIDATOR, *options)
+>       assert result.returncode == 1 and diagnosis in result.stderr
+E       AssertionError: assert (1 == 1 and 'fixed_gis exited 5' in 'Version probe failed for /dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail0/tools/fixture-python --version (exit 1)\n')
+E        +  where 1 = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-B', '/dev/shm/geop...ev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail0/tools/fixture-python --version (exit 1)\n').returncode
+E        +  and   'Version probe failed for /dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail0/tools/fixture-python --version (exit 1)\n' = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-B', '/dev/shm/geop...ev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail0/tools/fixture-python --version (exit 1)\n').stderr
+
+tests/quality/test_round2_release_manifest.py:298: AssertionError
+_ test_validation_preserves_failed_evidence_without_receipt[RELEASE_FIXTURE_MISSING-Missing or duplicate fixed GIS node for T16] _
+
+validation_checkout = (PosixPath('/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail1/candidate'), PosixPath('/dev...gis-process', '/dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail1/tools/fixture-qgis', ...))
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f6eeb78fbf0>
+key = 'RELEASE_FIXTURE_MISSING'
+diagnosis = 'Missing or duplicate fixed GIS node for T16'
+
+    @pytest.mark.parametrize(("key", "diagnosis"), [
+        ("RELEASE_FIXTURE_FAIL", "fixed_gis exited 5"),
+        ("RELEASE_FIXTURE_MISSING", "Missing or duplicate fixed GIS node for T16"),
+    ])
+    def test_validation_preserves_failed_evidence_without_receipt(validation_checkout, monkeypatch, key, diagnosis):
+        _, root, output, options = validation_checkout
+        monkeypatch.setenv(key, "fixed_gis")
+        result = _invoke(root, VALIDATOR, *options)
+>       assert result.returncode == 1 and diagnosis in result.stderr
+E       AssertionError: assert (1 == 1 and 'Missing or duplicate fixed GIS node for T16' in 'Version probe failed for /dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail1/tools/fixture-python --version (exit 1)\n')
+E        +  where 1 = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-B', '/dev/shm/geop...ev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail1/tools/fixture-python --version (exit 1)\n').returncode
+E        +  and   'Version probe failed for /dev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail1/tools/fixture-python --version (exit 1)\n' = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-B', '/dev/shm/geop...ev/shm/geopilot-p16-06-runner.RoMVdm/pytest/test_validation_preserves_fail1/tools/fixture-python --version (exit 1)\n').stderr
+
+tests/quality/test_round2_release_manifest.py:298: AssertionError
+----- generated xml file: /dev/shm/geopilot-p16-06-runner.RoMVdm/junit.xml -----
+=========================== short test summary info ============================
+FAILED tests/quality/test_round2_release_manifest.py::test_validates_from_detached_commit_and_produces_usable_receipt
+FAILED tests/quality/test_round2_release_manifest.py::test_validation_preserves_failed_evidence_without_receipt[RELEASE_FIXTURE_FAIL-fixed_gis exited 5]
+FAILED tests/quality/test_round2_release_manifest.py::test_validation_preserves_failed_evidence_without_receipt[RELEASE_FIXTURE_MISSING-Missing or duplicate fixed GIS node for T16]
+3 failed, 42 passed in 5.91s
+exit 1
