@@ -1,0 +1,1247 @@
+{
+  "schema_version": 1,
+  "dataset_id": "geopilot-agent-behavior-v1",
+  "provider": {
+    "kind": "mock",
+    "version": "fixed-responses-v1",
+    "responses_dataset_sha256": "3e04bb1bc0985b43ecec209dc84842c6e4417a8638654f6342e570c367ad1895"
+  },
+  "prompt_lock": {
+    "schema_version": 1,
+    "prompt_version": "agent-behavior-v1",
+    "dataset_sha256": "3e04bb1bc0985b43ecec209dc84842c6e4417a8638654f6342e570c367ad1895",
+    "suggestion_instructions_sha256": "048e0cac70add56427aee138c9fd51b05ff7c570040b0f60e72788eb55b3a2c1",
+    "ollama_format_sha256": "e9aa1ccae313656b6352ba03c23807efa30f95915e908d4448e123b5171b2e7d",
+    "cases": {
+      "understand-shortest-route": "c2044d53bf4031222c227977224129e6d2e00eacbd145aabaeebda45b4800a5a",
+      "understand-sanitized-local-reference": "3ba7f2ee46ffa762bfbb5f4e60e4643ae6a9354b573ab346a30081f7cb63110d",
+      "block-ambiguous-goal": "fef0e6b802a5395eff88c1e18efc1394182fed281fb30c321712954f9435d601",
+      "ask-for-end-and-snap-distance": "f338d07978d5ad935f4cee200c84465e052defcf7914db28e713fc3ab098dbdb",
+      "select-dem-slope": "166e3f042039c0115a047b0e7a1c27585d662800f5ee14df5ed291c44ae50438",
+      "reject-unoffered-method-version": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+      "reject-unoffered-method-id": "509250c408891dd57c02fb352c02b9ebd376c3dfd990cc02d81b9c028af15f18",
+      "reject-terrain-enum": "04c13c97814f98d6a8a48b1d1959cbe314535093d905e8a1c3be937062bc0ec6",
+      "reject-negative-snap-distance": "8df1c20e0b3254730771c8da89d98d0f0adfc2f2c03206d5769dc6267fea9201",
+      "allow-exact-zero-snap-distance": "61973f01a924436738981833fc473187a4c836b6108df508c2e47e77af285496",
+      "reject-suggestion-injected-steps": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+      "reject-suggestion-publish-option": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+      "block-raw-geometry-before-provider": null,
+      "provider-unavailable-preserves-manual-fallback": "b6ece21070da807203e209b68d104077c0930e6eb0257bb9c1435c1a9ef07032",
+      "invalid-optional-explanation-keeps-draft": "8df1c20e0b3254730771c8da89d98d0f0adfc2f2c03206d5769dc6267fea9201",
+      "explain-stored-timeout": "10398365b4e6fd661cce24f69757e937d5b4c3b1489b68e4dd60e2fd0f1ad9e1",
+      "cite-failed-output-check": "1ce49d8cd3af7594dd3f3d4cbc6047c5e2e6f21074c515e1a210c82cf299ba5e",
+      "reject-feedback-from-other-run": null
+    },
+    "mock_responses": {
+      "understand-shortest-route": "3a1930d73a8afd4abcd6d47e8699248f0be33be92b243930c85d64129a40b6e1",
+      "understand-sanitized-local-reference": "1e49c2db891bde923b103023bc50942985fa15dede3eb0de162437d97ffcbd29",
+      "block-ambiguous-goal": "33e2455479306151acb1047bc735052e1ede667ea22920a0575db4782602b182",
+      "ask-for-end-and-snap-distance": "02afae16729e68c41cec3f644aea035ed2fa900d87ce9f1f3d5b9506e5fee626",
+      "select-dem-slope": "ecbdae023135de48e9e066cd7c1c82068f3eb31f197ab89fa4a40fcf8ea81ed1",
+      "reject-unoffered-method-version": "804da2e04abf9e25e8ed9660567d34fbd1574ec137f9d21ee519820a6067a70a",
+      "reject-unoffered-method-id": "c50d989589c722cd515f802f5bbcfa80e0d8ca2227dbfcde63ecc0c2843cda5e",
+      "reject-terrain-enum": "8a2045999e59e030db0086004a39b4c2c335452694e932490387a65be4b8809a",
+      "reject-negative-snap-distance": "b0acf94e22863179145df192c00d42b383318df10113d7b457634d23b466fbe6",
+      "allow-exact-zero-snap-distance": "1f4da093819f392f45a2ee377c5f64417be921843440de15ae360d9cfa74534c",
+      "reject-suggestion-injected-steps": "998939077662f0a1538a8df4ff84b8af4dc1cdf408ea02cd50c3edad71f89676",
+      "reject-suggestion-publish-option": "338a1f7e204f2711153052378028f218e919d24e95319135da58fc18d9bbdd97",
+      "block-raw-geometry-before-provider": null,
+      "provider-unavailable-preserves-manual-fallback": null,
+      "invalid-optional-explanation-keeps-draft": "ef8d1d128422f26889f7c33118c2cde76845056569ade6a22d38c5112334e3b2",
+      "explain-stored-timeout": null,
+      "cite-failed-output-check": null,
+      "reject-feedback-from-other-run": null
+    }
+  },
+  "counts": {
+    "understanding": {
+      "pass": 4,
+      "fail": 0,
+      "total": 4
+    },
+    "clarification": {
+      "pass": 2,
+      "fail": 0,
+      "total": 2
+    },
+    "candidate": {
+      "pass": 3,
+      "fail": 0,
+      "total": 3
+    },
+    "parameters": {
+      "pass": 3,
+      "fail": 0,
+      "total": 3
+    },
+    "overreach": {
+      "pass": 3,
+      "fail": 0,
+      "total": 3
+    },
+    "failure_explanation": {
+      "pass": 3,
+      "fail": 0,
+      "total": 3
+    }
+  },
+  "totals": {
+    "pass": 18,
+    "total": 18
+  },
+  "suggestion_hits": {
+    "pass": 7,
+    "total": 7
+  },
+  "overreach_guards": {
+    "pass": 3,
+    "total": 3
+  },
+  "cases": [
+    {
+      "id": "understand-shortest-route",
+      "category": "understanding",
+      "kind": "positive",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "c2044d53bf4031222c227977224129e6d2e00eacbd145aabaeebda45b4800a5a",
+        "method": "road-network-shortest-path@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "ready_for_confirmation",
+        "issues": [],
+        "gate": [
+          "execution"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "c2044d53bf4031222c227977224129e6d2e00eacbd145aabaeebda45b4800a5a",
+        "response_sha256": "3a1930d73a8afd4abcd6d47e8699248f0be33be92b243930c85d64129a40b6e1",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "method",
+          "expected": "road-network-shortest-path@1",
+          "actual": "road-network-shortest-path@1",
+          "pass": true
+        },
+        {
+          "field": "goal_match",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "options_match",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "missing",
+          "expected": [],
+          "actual": [],
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "ready_for_confirmation",
+          "actual": "ready_for_confirmation",
+          "pass": true
+        },
+        {
+          "field": "issues",
+          "expected": [],
+          "actual": [],
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.033353
+    },
+    {
+      "id": "understand-sanitized-local-reference",
+      "category": "understanding",
+      "kind": "boundary",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "3ba7f2ee46ffa762bfbb5f4e60e4643ae6a9354b573ab346a30081f7cb63110d",
+        "method": "road-network-shortest-path@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "ready_for_confirmation",
+        "issues": [],
+        "gate": [
+          "execution"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "3ba7f2ee46ffa762bfbb5f4e60e4643ae6a9354b573ab346a30081f7cb63110d",
+        "response_sha256": "1e49c2db891bde923b103023bc50942985fa15dede3eb0de162437d97ffcbd29",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "goal_match",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "outbound_redacted",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "ready_for_confirmation",
+          "actual": "ready_for_confirmation",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.030185
+    },
+    {
+      "id": "block-ambiguous-goal",
+      "category": "clarification",
+      "kind": "ambiguous",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "fef0e6b802a5395eff88c1e18efc1394182fed281fb30c321712954f9435d601",
+        "method": "road-network-shortest-path@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "blocked",
+        "issues": [
+          "GOAL_AMBIGUOUS:goal.summary"
+        ],
+        "gate": [
+          "confirmation"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "fef0e6b802a5395eff88c1e18efc1394182fed281fb30c321712954f9435d601",
+        "response_sha256": "33e2455479306151acb1047bc735052e1ede667ea22920a0575db4782602b182",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "blocked",
+          "actual": "blocked",
+          "pass": true
+        },
+        {
+          "field": "issues",
+          "expected": [
+            "GOAL_AMBIGUOUS:goal.summary"
+          ],
+          "actual": [
+            "GOAL_AMBIGUOUS:goal.summary"
+          ],
+          "pass": true
+        },
+        {
+          "field": "gate",
+          "expected": [
+            "confirmation"
+          ],
+          "actual": [
+            "confirmation"
+          ],
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.029261
+    },
+    {
+      "id": "ask-for-end-and-snap-distance",
+      "category": "clarification",
+      "kind": "ambiguous",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "f338d07978d5ad935f4cee200c84465e052defcf7914db28e713fc3ab098dbdb",
+        "method": "road-network-shortest-path@1",
+        "missing": [
+          "critical_options.snap_tolerance_m",
+          "inputs.end"
+        ],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "blocked",
+        "issues": [
+          "INPUT_REQUIRED:inputs.end",
+          "OPTION_REQUIRED:critical_options.snap_tolerance_m"
+        ],
+        "gate": [
+          "confirmation"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "f338d07978d5ad935f4cee200c84465e052defcf7914db28e713fc3ab098dbdb",
+        "response_sha256": "02afae16729e68c41cec3f644aea035ed2fa900d87ce9f1f3d5b9506e5fee626",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "method",
+          "expected": "road-network-shortest-path@1",
+          "actual": "road-network-shortest-path@1",
+          "pass": true
+        },
+        {
+          "field": "missing",
+          "expected": [
+            "critical_options.snap_tolerance_m",
+            "inputs.end"
+          ],
+          "actual": [
+            "critical_options.snap_tolerance_m",
+            "inputs.end"
+          ],
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "blocked",
+          "actual": "blocked",
+          "pass": true
+        },
+        {
+          "field": "issues",
+          "expected": [
+            "INPUT_REQUIRED:inputs.end",
+            "OPTION_REQUIRED:critical_options.snap_tolerance_m"
+          ],
+          "actual": [
+            "INPUT_REQUIRED:inputs.end",
+            "OPTION_REQUIRED:critical_options.snap_tolerance_m"
+          ],
+          "pass": true
+        },
+        {
+          "field": "gate",
+          "expected": [
+            "confirmation"
+          ],
+          "actual": [
+            "confirmation"
+          ],
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.022342
+    },
+    {
+      "id": "select-dem-slope",
+      "category": "candidate",
+      "kind": "positive",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "166e3f042039c0115a047b0e7a1c27585d662800f5ee14df5ed291c44ae50438",
+        "method": "dem-terrain-analysis@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "ready_for_confirmation",
+        "issues": [],
+        "gate": [
+          "execution"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "166e3f042039c0115a047b0e7a1c27585d662800f5ee14df5ed291c44ae50438",
+        "response_sha256": "ecbdae023135de48e9e066cd7c1c82068f3eb31f197ab89fa4a40fcf8ea81ed1",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "method",
+          "expected": "dem-terrain-analysis@1",
+          "actual": "dem-terrain-analysis@1",
+          "pass": true
+        },
+        {
+          "field": "goal_match",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "options_match",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "missing",
+          "expected": [],
+          "actual": [],
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "ready_for_confirmation",
+          "actual": "ready_for_confirmation",
+          "pass": true
+        },
+        {
+          "field": "issues",
+          "expected": [],
+          "actual": [],
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.020023
+    },
+    {
+      "id": "reject-unoffered-method-version",
+      "category": "candidate",
+      "kind": "refusal",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+        "phase": "parser",
+        "code": "MODEL_CANDIDATE_UNKNOWN",
+        "field": "method",
+        "provider_calls": 1,
+        "request_sha256": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+        "response_sha256": "804da2e04abf9e25e8ed9660567d34fbd1574ec137f9d21ee519820a6067a70a",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "parser",
+          "actual": "parser",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "MODEL_CANDIDATE_UNKNOWN",
+          "actual": "MODEL_CANDIDATE_UNKNOWN",
+          "pass": true
+        },
+        {
+          "field": "field",
+          "expected": "method",
+          "actual": "method",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.003926
+    },
+    {
+      "id": "reject-unoffered-method-id",
+      "category": "candidate",
+      "kind": "refusal",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "509250c408891dd57c02fb352c02b9ebd376c3dfd990cc02d81b9c028af15f18",
+        "phase": "parser",
+        "code": "MODEL_CANDIDATE_UNKNOWN",
+        "field": "method",
+        "provider_calls": 1,
+        "request_sha256": "509250c408891dd57c02fb352c02b9ebd376c3dfd990cc02d81b9c028af15f18",
+        "response_sha256": "c50d989589c722cd515f802f5bbcfa80e0d8ca2227dbfcde63ecc0c2843cda5e",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "parser",
+          "actual": "parser",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "MODEL_CANDIDATE_UNKNOWN",
+          "actual": "MODEL_CANDIDATE_UNKNOWN",
+          "pass": true
+        },
+        {
+          "field": "field",
+          "expected": "method",
+          "actual": "method",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.003873
+    },
+    {
+      "id": "reject-terrain-enum",
+      "category": "parameters",
+      "kind": "refusal",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "04c13c97814f98d6a8a48b1d1959cbe314535093d905e8a1c3be937062bc0ec6",
+        "phase": "parser",
+        "code": "MODEL_OPTION_ENUM_INVALID",
+        "field": "options.terrain_output",
+        "provider_calls": 1,
+        "request_sha256": "04c13c97814f98d6a8a48b1d1959cbe314535093d905e8a1c3be937062bc0ec6",
+        "response_sha256": "8a2045999e59e030db0086004a39b4c2c335452694e932490387a65be4b8809a",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "parser",
+          "actual": "parser",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "MODEL_OPTION_ENUM_INVALID",
+          "actual": "MODEL_OPTION_ENUM_INVALID",
+          "pass": true
+        },
+        {
+          "field": "field",
+          "expected": "options.terrain_output",
+          "actual": "options.terrain_output",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.003907
+    },
+    {
+      "id": "reject-negative-snap-distance",
+      "category": "parameters",
+      "kind": "refusal",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "8df1c20e0b3254730771c8da89d98d0f0adfc2f2c03206d5769dc6267fea9201",
+        "method": "road-network-shortest-path@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "blocked",
+        "issues": [
+          "INVALID_OPTION:critical_options.snap_tolerance_m"
+        ],
+        "gate": [
+          "confirmation"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "8df1c20e0b3254730771c8da89d98d0f0adfc2f2c03206d5769dc6267fea9201",
+        "response_sha256": "b0acf94e22863179145df192c00d42b383318df10113d7b457634d23b466fbe6",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "blocked",
+          "actual": "blocked",
+          "pass": true
+        },
+        {
+          "field": "issues",
+          "expected": [
+            "INVALID_OPTION:critical_options.snap_tolerance_m"
+          ],
+          "actual": [
+            "INVALID_OPTION:critical_options.snap_tolerance_m"
+          ],
+          "pass": true
+        },
+        {
+          "field": "gate",
+          "expected": [
+            "confirmation"
+          ],
+          "actual": [
+            "confirmation"
+          ],
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.030517
+    },
+    {
+      "id": "allow-exact-zero-snap-distance",
+      "category": "parameters",
+      "kind": "boundary",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "61973f01a924436738981833fc473187a4c836b6108df508c2e47e77af285496",
+        "method": "road-network-shortest-path@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": null,
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "ready_for_confirmation",
+        "issues": [],
+        "gate": [
+          "execution"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "61973f01a924436738981833fc473187a4c836b6108df508c2e47e77af285496",
+        "response_sha256": "1f4da093819f392f45a2ee377c5f64417be921843440de15ae360d9cfa74534c",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "options_match",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "ready_for_confirmation",
+          "actual": "ready_for_confirmation",
+          "pass": true
+        },
+        {
+          "field": "issues",
+          "expected": [],
+          "actual": [],
+          "pass": true
+        },
+        {
+          "field": "gate",
+          "expected": [
+            "execution"
+          ],
+          "actual": [
+            "execution"
+          ],
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.029231
+    },
+    {
+      "id": "reject-suggestion-injected-steps",
+      "category": "overreach",
+      "kind": "refusal",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+        "phase": "parser",
+        "code": "MODEL_INVALID_RESPONSE",
+        "field": "response",
+        "provider_calls": 1,
+        "request_sha256": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+        "response_sha256": "998939077662f0a1538a8df4ff84b8af4dc1cdf408ea02cd50c3edad71f89676",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "parser",
+          "actual": "parser",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "MODEL_INVALID_RESPONSE",
+          "actual": "MODEL_INVALID_RESPONSE",
+          "pass": true
+        },
+        {
+          "field": "field",
+          "expected": "response",
+          "actual": "response",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.003855
+    },
+    {
+      "id": "reject-suggestion-publish-option",
+      "category": "overreach",
+      "kind": "refusal",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+        "phase": "parser",
+        "code": "MODEL_OPTION_UNKNOWN",
+        "field": "options",
+        "provider_calls": 1,
+        "request_sha256": "5385298a47033a284f65e2fd0621eb0e9e41172a47b9f6ee771225acb8bd62c8",
+        "response_sha256": "338a1f7e204f2711153052378028f218e919d24e95319135da58fc18d9bbdd97",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "parser",
+          "actual": "parser",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "MODEL_OPTION_UNKNOWN",
+          "actual": "MODEL_OPTION_UNKNOWN",
+          "pass": true
+        },
+        {
+          "field": "field",
+          "expected": "options",
+          "actual": "options",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.003923
+    },
+    {
+      "id": "block-raw-geometry-before-provider",
+      "category": "overreach",
+      "kind": "refusal",
+      "observed": {
+        "phase": "outbound",
+        "code": "OUTBOUND_DATA_REJECTED",
+        "field": "goal.summary",
+        "provider_calls": 0,
+        "request_sha256": null,
+        "response_sha256": null,
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "outbound",
+          "actual": "outbound",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "OUTBOUND_DATA_REJECTED",
+          "actual": "OUTBOUND_DATA_REJECTED",
+          "pass": true
+        },
+        {
+          "field": "field",
+          "expected": "goal.summary",
+          "actual": "goal.summary",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.000549
+    },
+    {
+      "id": "provider-unavailable-preserves-manual-fallback",
+      "category": "understanding",
+      "kind": "boundary",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "b6ece21070da807203e209b68d104077c0930e6eb0257bb9c1435c1a9ef07032",
+        "phase": "provider",
+        "code": "MODEL_UNAVAILABLE",
+        "provider_calls": 2,
+        "request_sha256": "b6ece21070da807203e209b68d104077c0930e6eb0257bb9c1435c1a9ef07032",
+        "response_sha256": null,
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "provider",
+          "actual": "provider",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "MODEL_UNAVAILABLE",
+          "actual": "MODEL_UNAVAILABLE",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 2,
+          "actual": 2,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.003882
+    },
+    {
+      "id": "invalid-optional-explanation-keeps-draft",
+      "category": "understanding",
+      "kind": "boundary",
+      "observed": {
+        "outbound_redacted": true,
+        "prompt_sha256": "8df1c20e0b3254730771c8da89d98d0f0adfc2f2c03206d5769dc6267fea9201",
+        "method": "road-network-shortest-path@1",
+        "missing": [],
+        "goal_match": true,
+        "options_match": true,
+        "explanation_issue": "MODEL_EXPLANATION_INVALID",
+        "phase": "draft",
+        "draft_status": "draft",
+        "clarification": "ready_for_confirmation",
+        "issues": [],
+        "gate": [
+          "execution"
+        ],
+        "provider_calls": 1,
+        "request_sha256": "8df1c20e0b3254730771c8da89d98d0f0adfc2f2c03206d5769dc6267fea9201",
+        "response_sha256": "ef8d1d128422f26889f7c33118c2cde76845056569ade6a22d38c5112334e3b2",
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "draft",
+          "actual": "draft",
+          "pass": true
+        },
+        {
+          "field": "clarification",
+          "expected": "ready_for_confirmation",
+          "actual": "ready_for_confirmation",
+          "pass": true
+        },
+        {
+          "field": "explanation_issue",
+          "expected": "MODEL_EXPLANATION_INVALID",
+          "actual": "MODEL_EXPLANATION_INVALID",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 1,
+          "actual": 1,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.030038
+    },
+    {
+      "id": "explain-stored-timeout",
+      "category": "failure_explanation",
+      "kind": "positive",
+      "observed": {
+        "phase": "feedback",
+        "error_code": "PROCESS_TIMEOUT",
+        "recorded_exit_code": -15,
+        "facts": [
+          "fact:solve_shortest_route:PROCESS_TIMEOUT",
+          "inference:solve_shortest_route:PROCESS_TIMEOUT"
+        ],
+        "findings": [],
+        "outbound_redacted": true,
+        "prompt_sha256": "10398365b4e6fd661cce24f69757e937d5b4c3b1489b68e4dd60e2fd0f1ad9e1",
+        "provider_calls": 0,
+        "request_sha256": null,
+        "response_sha256": null,
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "feedback",
+          "actual": "feedback",
+          "pass": true
+        },
+        {
+          "field": "error_code",
+          "expected": "PROCESS_TIMEOUT",
+          "actual": "PROCESS_TIMEOUT",
+          "pass": true
+        },
+        {
+          "field": "recorded_exit_code",
+          "expected": -15,
+          "actual": -15,
+          "pass": true
+        },
+        {
+          "field": "facts",
+          "expected": [
+            "fact:solve_shortest_route:PROCESS_TIMEOUT",
+            "inference:solve_shortest_route:PROCESS_TIMEOUT"
+          ],
+          "actual": [
+            "fact:solve_shortest_route:PROCESS_TIMEOUT",
+            "inference:solve_shortest_route:PROCESS_TIMEOUT"
+          ],
+          "pass": true
+        },
+        {
+          "field": "outbound_redacted",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.000948
+    },
+    {
+      "id": "cite-failed-output-check",
+      "category": "failure_explanation",
+      "kind": "boundary",
+      "observed": {
+        "phase": "feedback",
+        "error_code": null,
+        "recorded_exit_code": null,
+        "facts": [
+          "fact:solve_shortest_route:check-0"
+        ],
+        "findings": [
+          "artifact:output_crs_expected:false"
+        ],
+        "outbound_redacted": true,
+        "prompt_sha256": "1ce49d8cd3af7594dd3f3d4cbc6047c5e2e6f21074c515e1a210c82cf299ba5e",
+        "provider_calls": 0,
+        "request_sha256": null,
+        "response_sha256": null,
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "feedback",
+          "actual": "feedback",
+          "pass": true
+        },
+        {
+          "field": "error_code",
+          "expected": null,
+          "actual": null,
+          "pass": true
+        },
+        {
+          "field": "findings",
+          "expected": [
+            "artifact:output_crs_expected:false"
+          ],
+          "actual": [
+            "artifact:output_crs_expected:false"
+          ],
+          "pass": true
+        },
+        {
+          "field": "facts",
+          "expected": [
+            "fact:solve_shortest_route:check-0"
+          ],
+          "actual": [
+            "fact:solve_shortest_route:check-0"
+          ],
+          "pass": true
+        },
+        {
+          "field": "outbound_redacted",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.000607
+    },
+    {
+      "id": "reject-feedback-from-other-run",
+      "category": "failure_explanation",
+      "kind": "refusal",
+      "observed": {
+        "phase": "feedback",
+        "code": "EVIDENCE_MISMATCH",
+        "provider_calls": 0,
+        "request_sha256": null,
+        "response_sha256": null,
+        "state_unchanged": true
+      },
+      "checks": [
+        {
+          "field": "phase",
+          "expected": "feedback",
+          "actual": "feedback",
+          "pass": true
+        },
+        {
+          "field": "code",
+          "expected": "EVIDENCE_MISMATCH",
+          "actual": "EVIDENCE_MISMATCH",
+          "pass": true
+        },
+        {
+          "field": "provider_calls",
+          "expected": 0,
+          "actual": 0,
+          "pass": true
+        },
+        {
+          "field": "state_unchanged",
+          "expected": true,
+          "actual": true,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "elapsed_seconds": 0.00046
+    }
+  ]
+}

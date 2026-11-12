@@ -1,0 +1,7 @@
+start_utc 2026-11-12T06:49:52Z
+some avg10=1.11 avg60=13.52 avg300=18.02 total=89715383776
+full avg10=1.05 avg60=12.98 avg300=17.35 total=83959039977
+end_utc 2026-11-12T06:51:14Z
+some avg10=20.19 avg60=15.48 avg300=17.02 total=89726890943
+full avg10=15.62 avg60=11.09 avg300=15.23 total=83966262847
+local replay exit 0

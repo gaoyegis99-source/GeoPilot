@@ -1,0 +1,10 @@
+baseline 51f175fcf03aaf02f8d8580109eb5d50700a74d6
+source /tmp/geopilot-p15-08-source.mBYGVb/system-prototype-v1
+mock evidence root /dev/shm/geopilot-p15-08-evals.FTQNcz
+start_utc 2026-11-12T06:49:50Z
+Python 3.13.13
+some avg10=1.36 avg60=13.97 avg300=18.14 total=89715383278
+full avg10=1.28 avg60=13.41 avg300=17.47 total=83959039560
+...................                                                      [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/reports/agent/p15-08-mock-junit.xml -
+19 passed in 1.59s

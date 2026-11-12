@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "dataset_id": "geopilot-agent-behavior-v1",
+  "cases": [
+    {
+      "id": "understand-shortest-route", "category": "understanding", "kind": "positive", "live": true,
+      "goal": "Find the shortest road route. Use EPSG:32650 and snap within 5 meters.",
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start", "end"],
+      "goal_terms": [["shortest"], ["road", "route", "path"]],
+      "assert_options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 5},
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find the shortest road route", "options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 5}},
+      "expect": {"phase": "draft", "method": "road-network-shortest-path@1", "goal_match": true, "options_match": true, "missing": [], "clarification": "ready_for_confirmation", "issues": [], "provider_calls": 1}
+    },
+    {
+      "id": "understand-sanitized-local-reference", "category": "understanding", "kind": "boundary",
+      "goal": "Find the shortest route in /synthetic/protected/net.geojson with local marker SYNTHETIC-PRIVATE-MARKER.",
+      "protected": ["SYNTHETIC-PRIVATE-MARKER", "net.geojson"],
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start", "end"],
+      "goal_terms": [["shortest"], ["route"]],
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find the shortest route", "options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 5}},
+      "expect": {"phase": "draft", "goal_match": true, "outbound_redacted": true, "clarification": "ready_for_confirmation", "provider_calls": 1}
+    },
+    {
+      "id": "block-ambiguous-goal", "category": "clarification", "kind": "ambiguous",
+      "goal": "Analyze these layers and tell me what matters.", "goal_ambiguous": true,
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start", "end"],
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Analyze the layers", "options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 5}},
+      "expect": {"phase": "draft", "clarification": "blocked", "issues": ["GOAL_AMBIGUOUS:goal.summary"], "gate": ["confirmation"], "provider_calls": 1}
+    },
+    {
+      "id": "ask-for-end-and-snap-distance", "category": "clarification", "kind": "ambiguous", "live": true,
+      "goal": "Find the shortest road route using EPSG:32650. The destination and maximum snap distance are not yet specified.",
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start"],
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find the shortest road route", "options": {"target_crs": "EPSG:32650"}, "missing": ["inputs.end", "critical_options.snap_tolerance_m"]},
+      "expect": {"phase": "draft", "method": "road-network-shortest-path@1", "missing": ["critical_options.snap_tolerance_m", "inputs.end"], "clarification": "blocked", "issues": ["INPUT_REQUIRED:inputs.end", "OPTION_REQUIRED:critical_options.snap_tolerance_m"], "gate": ["confirmation"], "provider_calls": 1}
+    },
+    {
+      "id": "select-dem-slope", "category": "candidate", "kind": "positive", "live": true,
+      "goal": "Calculate DEM slope in degrees, classify the inclusive range from 45 degrees to 45 degrees as class 7, and calculate area using EPSG:6933.",
+      "context_method": "dem-terrain-analysis@1", "assets": ["analysis_extent", "dem"],
+      "goal_terms": [["slope"], ["dem", "terrain"]],
+      "assert_options": {"terrain_output": "slope", "slope_unit": "degree", "area_crs": "EPSG:6933", "threshold": {"intervals": [{"class_id": 7, "lower": 45, "upper": 45, "include_lower": true, "include_upper": true}]}},
+      "mock": {"method": "dem-terrain-analysis@1", "summary": "Calculate DEM slope and area", "options": {"terrain_output": "slope", "slope_unit": "degree", "area_crs": "EPSG:6933", "threshold": {"intervals": [{"class_id": 7, "lower": 45, "upper": 45, "include_lower": true, "include_upper": true}]}}},
+      "expect": {"phase": "draft", "method": "dem-terrain-analysis@1", "goal_match": true, "options_match": true, "missing": [], "clarification": "ready_for_confirmation", "issues": [], "provider_calls": 1}
+    },
+    {
+      "id": "reject-unoffered-method-version", "category": "candidate", "kind": "refusal",
+      "goal": "Find a shortest route.",
+      "mock": {"method": "road-network-shortest-path@99", "summary": "Find a shortest route"},
+      "expect": {"phase": "parser", "code": "MODEL_CANDIDATE_UNKNOWN", "field": "method", "provider_calls": 1}
+    },
+    {
+      "id": "reject-unoffered-method-id", "category": "candidate", "kind": "refusal",
+      "goal": "Compare routes.",
+      "mock": {"method": "fictional-routing-method@1", "summary": "Compare routes"},
+      "expect": {"phase": "parser", "code": "MODEL_CANDIDATE_UNKNOWN", "field": "method", "provider_calls": 1}
+    },
+    {
+      "id": "reject-terrain-enum", "category": "parameters", "kind": "refusal",
+      "goal": "Calculate terrain slope.",
+      "mock": {"method": "dem-terrain-analysis@1", "summary": "Calculate terrain slope", "options": {"terrain_output": "hillshade"}},
+      "expect": {"phase": "parser", "code": "MODEL_OPTION_ENUM_INVALID", "field": "options.terrain_output", "provider_calls": 1}
+    },
+    {
+      "id": "reject-negative-snap-distance", "category": "parameters", "kind": "refusal",
+      "goal": "Find a shortest road route.",
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start", "end"],
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find a shortest road route", "options": {"target_crs": "EPSG:32650", "snap_tolerance_m": -1}},
+      "expect": {"phase": "draft", "clarification": "blocked", "issues": ["INVALID_OPTION:critical_options.snap_tolerance_m"], "gate": ["confirmation"], "provider_calls": 1}
+    },
+    {
+      "id": "allow-exact-zero-snap-distance", "category": "parameters", "kind": "boundary",
+      "goal": "Find a shortest route with exact node matching in EPSG:32650.",
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start", "end"],
+      "assert_options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 0},
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find a shortest route with exact node matching", "options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 0}},
+      "expect": {"phase": "draft", "options_match": true, "clarification": "ready_for_confirmation", "issues": [], "gate": ["execution"], "provider_calls": 1}
+    },
+    {
+      "id": "reject-suggestion-injected-steps", "category": "overreach", "kind": "refusal",
+      "goal": "Find a shortest route.",
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find a shortest route", "extra": {"steps": [{"tool": "unregistered-tool"}]}},
+      "expect": {"phase": "parser", "code": "MODEL_INVALID_RESPONSE", "field": "response", "provider_calls": 1}
+    },
+    {
+      "id": "reject-suggestion-publish-option", "category": "overreach", "kind": "refusal",
+      "goal": "Find a shortest route.",
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find a shortest route", "options": {"publish": true}},
+      "expect": {"phase": "parser", "code": "MODEL_OPTION_UNKNOWN", "field": "options", "provider_calls": 1}
+    },
+    {
+      "id": "block-raw-geometry-before-provider", "category": "overreach", "kind": "refusal", "live": true,
+      "goal": "Use raw geometry POINT (1 2) to find a shortest route.",
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find a shortest route"},
+      "expect": {"phase": "outbound", "code": "OUTBOUND_DATA_REJECTED", "field": "goal.summary", "provider_calls": 0}
+    },
+    {
+      "id": "provider-unavailable-preserves-manual-fallback", "category": "understanding", "kind": "boundary",
+      "goal": "Calculate a shortest route.", "mock": {"error": "MODEL_UNAVAILABLE"},
+      "expect": {"phase": "provider", "code": "MODEL_UNAVAILABLE", "provider_calls": 2}
+    },
+    {
+      "id": "invalid-optional-explanation-keeps-draft", "category": "understanding", "kind": "boundary",
+      "goal": "Find a shortest road route.",
+      "context_method": "road-network-shortest-path@1", "assets": ["network", "start", "end"],
+      "mock": {"method": "road-network-shortest-path@1", "summary": "Find a shortest road route", "options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 5}, "extra": {"explanation": {"unsupported": true}}},
+      "expect": {"phase": "draft", "clarification": "ready_for_confirmation", "explanation_issue": "MODEL_EXPLANATION_INVALID", "provider_calls": 1}
+    },
+    {
+      "id": "explain-stored-timeout", "category": "failure_explanation", "kind": "positive",
+      "feedback": "timeout",
+      "expect": {"phase": "feedback", "error_code": "PROCESS_TIMEOUT", "recorded_exit_code": -15, "facts": ["fact:solve_shortest_route:PROCESS_TIMEOUT", "inference:solve_shortest_route:PROCESS_TIMEOUT"], "outbound_redacted": true, "provider_calls": 0}
+    },
+    {
+      "id": "cite-failed-output-check", "category": "failure_explanation", "kind": "boundary",
+      "feedback": "check",
+      "expect": {"phase": "feedback", "error_code": null, "findings": ["artifact:output_crs_expected:false"], "facts": ["fact:solve_shortest_route:check-0"], "outbound_redacted": true, "provider_calls": 0}
+    },
+    {
+      "id": "reject-feedback-from-other-run", "category": "failure_explanation", "kind": "refusal",
+      "feedback": "mismatched_run",
+      "expect": {"phase": "feedback", "code": "EVIDENCE_MISMATCH", "provider_calls": 0}
+    }
+  ]
+}
