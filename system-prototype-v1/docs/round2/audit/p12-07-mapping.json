@@ -1,0 +1,446 @@
+{
+  "task_id": "P12-07",
+  "test_commit": "80d724f35fba31cacb9d3f740265b2713c6be6f4",
+  "pytest_exit_code": 0,
+  "evidence": {
+    "artifacts/test-results/round2/gis-regression.xml": "32215b946d047e8f01b86c84d16d994d27ed303fce62077ddffd1ab4e9032df5",
+    "artifacts/test-results/round2/gis-regression.log": "dd68fc22d9898debc143b9e17f39eac2e768a2a8ed9c53ed707a285e595f5c41",
+    "artifacts/test-results/round2/backend-collection.txt": "1b12cedc9cd92d1a677cb9dbd7ea976df3fcf7fbe6144ea3aeef0a384be288d2"
+  },
+  "testcases": {
+    "expected": 476,
+    "observed": 476,
+    "unique_observed": 476,
+    "passed": 476,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "missing": [],
+    "unexpected": [],
+    "duplicates": []
+  },
+  "mapped_unique_nodes": 82,
+  "fixed_case_totals": {
+    "PASS": 16,
+    "FAIL": 0,
+    "NOT_RUN": 0
+  },
+  "fixed_cases": {
+    "T01": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/runners/test_measurement_steps.py::test_fixed_distance_rejects_geographic_and_web_mercator_before_dispatch[T01-geographic]",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T02": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/runners/test_measurement_steps.py::test_fixed_distance_rejects_geographic_and_web_mercator_before_dispatch[T02-web-mercator]",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T03": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/runners/test_measurement_steps.py::test_fixed_T03_local_projected_buffer_matches_independent_reference",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T04": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_wgs84_capsules_match_independent_distance_probes[equatorial-straight]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_wgs84_capsules_match_independent_distance_probes[equatorial-bend]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_wgs84_capsules_match_independent_distance_probes[high-latitude-arc]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_equatorial_sides_and_endpoints_match_analytic_ellipsoid[500]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_equatorial_sides_and_endpoints_match_analytic_ellipsoid[2000]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_real_python_child_preserves_crs_and_matches_fixed_probes[False]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_real_python_child_preserves_crs_and_matches_fixed_probes[True]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_geodesic_buffer.py::test_unified_run_step_passes_wgs84_contract_through_input_checks_and_real_worker",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T05": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/runners/test_measurement_steps.py::test_fixed_T05_web_mercator_area_rejected_before_dispatch",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T06": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/runners/test_measurement_steps.py::test_fixed_T06_equal_area_polygons_match_manual_areas",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T07": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/application/test_plan_run.py::test_road_workflow_passes_fixed_road_cases_and_reproduces_in_an_independent_run",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T08": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/application/test_plan_run.py::test_road_workflow_passes_fixed_road_cases_and_reproduces_in_an_independent_run",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T09": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/gis/raster/test_clip_back.py::test_t09_runs_real_confirmed_five_step_plan_and_recovers_all_analysis_edges",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T10": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/methods/test_remote_sensing_change.py::test_t10_t11_mixed_native_products_execute_and_publish_original_pixels",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T11": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/methods/test_remote_sensing_change.py::test_t10_t11_mixed_native_products_execute_and_publish_original_pixels",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T12": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/methods/test_remote_sensing_change.py::test_t12_unconfigured_product_version_is_blocked_before_any_step[first_product-landsat-8-oli-tirs/L2SP/03]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/methods/test_remote_sensing_change.py::test_t12_unconfigured_product_version_is_blocked_before_any_step[second_product-sentinel-2-msi/L2A/05.12]",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T13": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/methods/test_full_geometry_before_clip.py::test_t13_runs_the_selected_relation_on_complete_objects_before_clipping[intersects-points]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/methods/test_full_geometry_before_clip.py::test_t13_runs_the_selected_relation_on_complete_objects_before_clipping[intersects-lines]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/methods/test_full_geometry_before_clip.py::test_t13_runs_the_selected_relation_on_complete_objects_before_clipping[intersects-polygons]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/methods/test_full_geometry_before_clip.py::test_t13_runs_the_selected_relation_on_complete_objects_before_clipping[within-points]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/methods/test_full_geometry_before_clip.py::test_t13_runs_the_selected_relation_on_complete_objects_before_clipping[within-lines]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/methods/test_full_geometry_before_clip.py::test_t13_runs_the_selected_relation_on_complete_objects_before_clipping[within-polygons]",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T14": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/gis/test_source_feature_identity.py::test_t14_three_real_subprocesses_match_manual_details_and_unique_totals[split_by_area]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_source_feature_identity.py::test_t14_three_real_subprocesses_match_manual_details_and_unique_totals[centroid]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/gis/test_source_feature_identity.py::test_t14_three_real_subprocesses_match_manual_details_and_unique_totals[largest_overlap]",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T15": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/llm/test_data_boundary.py::test_accepts_entire_real_summary_and_frozen_candidate_request_without_network",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_accepts_final_bytes_from_the_production_candidate_builder",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_known_sample_literals_are_rejected_at_any_allowlisted_string_location[location0-$.payload.context.goal]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_known_sample_literals_are_rejected_at_any_allowlisted_string_location[location1-$.payload.context.roles[0].asset.fields[0].name]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_known_sample_literals_are_rejected_at_any_allowlisted_string_location[location2-$.payload.candidate_methods[0].id]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_known_sample_literals_are_rejected_at_any_allowlisted_string_location[location3-$.payload.candidate_tools[0].id]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_malformed_utf8_json_and_duplicate_keys_fail_closed[\\xff]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_malformed_utf8_json_and_duplicate_keys_fail_closed[{\"payload\":]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_malformed_utf8_json_and_duplicate_keys_fail_closed[{\"payload\":{},\"payl\\\\u006fad\":{}}]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_malformed_utf8_json_and_duplicate_keys_fail_closed[{\"payload\":{},\"payload\":{\"private\":\"raw\"}}]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_nonfinite_json_numbers_are_rejected_before_structure_validation[-Infinity]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_nonfinite_json_numbers_are_rejected_before_structure_validation[1e999]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_nonfinite_json_numbers_are_rejected_before_structure_validation[Infinity]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_nonfinite_json_numbers_are_rejected_before_structure_validation[NaN]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_only_declared_option_types_and_string_enum_values_can_pass",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_only_typed_scalar_raster_statistics_can_pass[height-0-height]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_only_typed_scalar_raster_statistics_can_pass[resolution_x-value0-resolution_x]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_only_typed_scalar_raster_statistics_can_pass[resolution_y-10-resolution_y]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_only_typed_scalar_raster_statistics_can_pass[width-True-width]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_raw_spatial_and_source_fields_are_not_allowlisted[bounds-value1]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_raw_spatial_and_source_fields_are_not_allowlisted[geometry-value0]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_raw_spatial_and_source_fields_are_not_allowlisted[records-value3]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_raw_spatial_and_source_fields_are_not_allowlisted[source-value2]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_non_unicode_scalar_after_decoding_json_escapes",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Clip CIRCULARSTRING (0 0, 1 1, 2 0)]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Clip POINT Z (500750 4401500 1)]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Clip SRID=32650;POLYGON EMPTY]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Clip near (500750 4401500)]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Clip near 117.25 39.9]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Clip near 500750,4401500]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Connect postgres://analyst:example-secret@localhost/catalog]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Raw row\\tprivate value]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read \"C:\\\\Project Files\\\\private.gpkg\"]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read %252Fprivate%252Fcoordinates]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read /private/work/dem.tif]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read C:private_folder]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read \\\\\\\\local-server\\\\private\\\\point-data]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read \\\\u002fprivate\\\\u002fcoordinates]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read \\uff0fprivate\\uff0fcoordinates]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Read host=localhost dbname=survey password=example-secret]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Use [500750,4401500]]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Use row (1,\"local sample\")]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Use staged/data/private_source]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[Use survey.gpkg]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[\\u53c2\\u8003\\u7ecf\\u5ea6\\uff1a117.0087]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[{\"record_id\":\"row-001\",\"name\":\"local sample\"}]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_rejects_unsanitized_goal_in_the_serialized_request[{\"type\":\"Feature\",\"geometry\":{\"type\":\"Point\",\"coordinates\":[117.25,39.9]}}]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_safe_crs_text_and_declared_table_statistics_are_accepted",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_unicode_json_escapes_are_decoded_before_checking_nested_values",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_data_boundary.py::test_unknown_keys_are_rejected_at_a_known_parent_without_echoing_them",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_error_handling.py::test_actual_http_retry_posts_exact_scanned_prompt_with_fixed_envelope",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/llm/test_error_handling.py::test_rejected_request_opens_no_socket_even_when_adapter_called_directly",
+          "outcome": "PASS"
+        }
+      ]
+    },
+    "T16": {
+      "outcome": "PASS",
+      "nodes": [
+        {
+          "id": "tests/api/test_check_reports.py::test_real_qgis_execution_status_is_independent_of_check_report[blocking-FAILED]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/api/test_check_reports.py::test_real_qgis_execution_status_is_independent_of_check_report[warning-WARNING]",
+          "outcome": "PASS"
+        },
+        {
+          "id": "tests/api/test_check_reports.py::test_real_qgis_execution_status_is_independent_of_check_report[interrupted-NOT_CHECKED]",
+          "outcome": "PASS"
+        }
+      ]
+    }
+  }
+}
