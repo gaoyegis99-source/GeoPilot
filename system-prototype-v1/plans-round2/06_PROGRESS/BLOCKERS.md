@@ -18,7 +18,7 @@ P14-01 审查入口要求静止的回滚日志模式 SQLite 副本。检测到 W
 
 P13-01 已核对各档生成物和独立参考。AUD-05 仍需执行资源遥测与真实方法多档性能测量。 [生成证据](../../docs/round2/performance/p13-01.md)
 
-P14-02 模板生成与 P14-03 静态 lint 已通过。隔离试运行仍依赖独立参考样例包。 [模板验收](../../docs/round2/methods/p14-02.md) · [lint 验收](../../docs/round2/methods/p14-03.md)
+P14-02 至 P14-04 已通过，隔离试运行所需的模板、静态 lint 和独立参考接口就绪。 [模板验收](../../docs/round2/methods/p14-02.md) · [lint 验收](../../docs/round2/methods/p14-03.md) · [样例包验收](../../docs/round2/methods/p14-04.md)
 
 P16-03 已准备可复跑的主持流程和观察工具。真实会话为 0，P16-04 和 P16-05 仍依赖实际观察。 [准备证据](../../docs/round2/user-research/p16-03-preparation.md)
 

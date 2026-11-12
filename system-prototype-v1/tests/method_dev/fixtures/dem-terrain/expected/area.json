@@ -1,0 +1,17 @@
+{
+  "value": {
+    "source_crs": "EPSG:6933",
+    "area_crs": "EPSG:6933",
+    "area_method": "equal_area",
+    "area_unit": "square_meter",
+    "cell_area_method": "affine_determinant",
+    "resampling": "none",
+    "valid_pixel_count": 23,
+    "selected_pixel_count": 23,
+    "unselected_pixel_count": 0,
+    "nodata_pixel_count": 2,
+    "classes": [{"class_id": 7, "pixel_count": 23, "area_m2": 2300.0}],
+    "total_area_m2": 2300.0
+  },
+  "numeric_tolerances": {}
+}

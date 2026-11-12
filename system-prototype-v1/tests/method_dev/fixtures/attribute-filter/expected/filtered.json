@@ -1,0 +1,9 @@
+{
+  "crs": "EPSG:32650",
+  "id_field": "source_feature_id",
+  "attribute_fields": ["class_name", "rank"],
+  "features": {
+    "pt-a": {"wkt": "POINT (500010 4400005)", "properties": {"class_name": "keep", "rank": 1}},
+    "pt-b": {"wkt": "POINT (500130 4400020)", "properties": {"class_name": "keep", "rank": 2}}
+  }
+}

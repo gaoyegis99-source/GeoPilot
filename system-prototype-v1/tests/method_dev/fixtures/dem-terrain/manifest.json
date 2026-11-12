@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "case_id": "dem-planar-slope-with-masked-corners",
+  "method": {"id": "dem-terrain-analysis", "version": 1},
+  "environment": {
+    "python": "3.13.13",
+    "rasterio": "1.4.3",
+    "gdal_raster": "3.9.3",
+    "pyogrio": "0.12.1",
+    "gdal_vector": "3.11.4",
+    "shapely": "2.1.2",
+    "proj": "9.5.1"
+  },
+  "inputs": {
+    "analysis_extent": {"path": "inputs/extent.geojson", "sha256": "cacc04010f63906448708068b3e9d813b9aa1f4773ba189fe9bd09c9e2099c32"},
+    "dem": {"path": "inputs/dem.tif", "sha256": "e208d5868728a26255248340480fa325b053a079413bdf6c4cc5a0d73a6183e8"}
+  },
+  "critical_options": {
+    "terrain_output": "slope",
+    "slope_unit": "degree",
+    "area_crs": "EPSG:6933",
+    "threshold": {"intervals": [{"class_id": 7, "lower": 45, "upper": 45, "include_lower": true, "include_upper": true}]}
+  },
+  "outputs": {
+    "terrain_raster": {
+      "kind": "raster",
+      "reference": {"path": "expected/slope.json", "sha256": "14f54d0d5f5bb7c3da57c28fb8d58dc65ae59f56721bbb2ae3eb22a6d6343e4a"},
+      "basis": "Analytic grid slope atan(10/10) = 45 degrees. The crop retains 25 cells, with two masked because their 3 by 3 input neighbourhoods touch a NoData corner."
+    },
+    "threshold_regions": {
+      "kind": "raster",
+      "reference": {"path": "expected/classes.json", "sha256": "b9d3ff9e951f493560c7c7d477fd4c204184e6254c9b1e1a3ea012183494419c"},
+      "basis": "Hand-applied inclusive [45,45] interval maps each of the 23 unmasked 45 degree pixels to class 7. The other two remain masked."
+    },
+    "area_statistics": {
+      "kind": "json",
+      "reference": {"path": "expected/area.json", "sha256": "e57a8315aef081ca04abd46ff155ed15b1a89df6cfdc0dd7957afc93f82346bb"},
+      "basis": "The source is already equal-area EPSG:6933. Exactly 23 selected 10 m by 10 m cells give 2300 square metres without resampling."
+    }
+  },
+  "failure_cases": [
+    {
+      "id": "missing-vertical-unit",
+      "inputs": {
+        "dem": {"path": "inputs/unlabelled-dem.tif", "sha256": "ed77e11c27aee00e7dfe1468a62b52206556fe17fa0b551a074fdb404ec33b96"}
+      },
+      "critical_options": {},
+      "expected": {"phase": "draft", "code": "DEM_VERTICAL_UNIT_REQUIRED"}
+    }
+  ]
+}

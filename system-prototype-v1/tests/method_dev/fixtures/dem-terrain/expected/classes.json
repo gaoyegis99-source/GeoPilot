@@ -1,0 +1,12 @@
+{
+  "crs": "EPSG:6933",
+  "transform": [10, 0, 500010, 0, -10, 4400060],
+  "resolution": [10, 10],
+  "width": 5,
+  "height": 5,
+  "dtypes": ["uint8"],
+  "nodata": [255],
+  "pixels": [[[null, 7, 7, 7, 7], [7, 7, 7, 7, 7], [7, 7, 7, 7, 7], [7, 7, 7, 7, 7], [7, 7, 7, 7, null]]],
+  "absolute_tolerance": 0,
+  "tolerance_basis": "Class 7 is the exact integer result of the single closed interval [45, 45]."
+}

@@ -1,0 +1,34 @@
+{"checks": "PASSED", "declared_environment": {"gdal_vector": "3.11.4", "proj": "9.5.1", "pyogrio": "0.12.1", "python": "3.13.13", "qgis": "3.44.15", "shapely": "2.1.2"}, "execution": "SUCCEEDED", "method": {"id": "attribute-filter-export", "version": 1}, "observed_environment": {"gdal_vector": "3.11.4", "proj": "9.5.1", "pyogrio": "0.12.1", "python": "3.13.13", "qgis": "3.44.15", "shapely": "2.1.2"}, "reference_report": {"case_id": "attribute-filter-two-points", "issues": [], "outputs": {"filtered_features": {"checks": {"crs": "EPSG:32650", "feature_count": 2}, "kind": "vector", "sha256": "3741933fde0d6f8c43176969d1259183a366b770458932141692210e4aa23eaa", "status": "PASS"}}, "schema_version": 1, "status": "PASS"}, "run_id": "92a1e06119794c97bccc55aecc26f8c1"}
+.{"checks": "PASSED", "declared_environment": {"gdal_raster": "3.9.3", "gdal_vector": "3.11.4", "proj": "9.5.1", "pyogrio": "0.12.1", "python": "3.13.13", "rasterio": "1.4.3", "shapely": "2.1.2"}, "execution": "SUCCEEDED", "method": {"id": "dem-terrain-analysis", "version": 1}, "observed_environment": {"gdal_raster": "3.9.3", "gdal_vector": "3.11.4", "proj": "9.5.1", "pyogrio": "0.12.1", "python": "3.13.13", "rasterio": "1.4.3", "shapely": "2.1.2"}, "reference_report": {"case_id": "dem-planar-slope-with-masked-corners", "issues": [], "outputs": {"area_statistics": {"checks": {}, "kind": "json", "sha256": "d24e81b2c8e6375ef98792d2c2c68b2bf33dd29c74ad4bfd06011a531a68b7a5", "status": "PASS"}, "terrain_raster": {"checks": {"crs": "EPSG:6933", "masked_pixels": 2, "valid_pixels": 23}, "kind": "raster", "sha256": "e60a080e4c7050d2f39ff8025f66ebca845599d8374acf5609c2cdc45155c400", "status": "PASS"}, "threshold_regions": {"checks": {"crs": "EPSG:6933", "masked_pixels": 2, "valid_pixels": 23}, "kind": "raster", "sha256": "b3c3f2f13a68e74e2461b382a62bd5ecf256067a11252ffbb5b56dc576e31734", "status": "PASS"}}, "schema_version": 1, "status": "PASS"}, "run_id": "bd4b0babfe82456ebbd510bd046554a3"}
+.{"case": "missing-filter-field", "confirm_issues": [{"code": "METHOD_PRECONDITION_FAILED", "field": "critical_options.field_name", "message": "Field 'class_name' is absent from the selected asset"}], "confirmation_http": 422, "draft_issues": [], "expected": {"code": "METHOD_PRECONDITION_FAILED", "phase": "confirm"}, "method": {"id": "attribute-filter-export", "version": 1}, "runs": []}
+.{"case": "missing-vertical-unit", "confirm_issues": [{"code": "DEM_VERTICAL_UNIT_REQUIRED", "field": "inputs.dem", "message": "Specify the elevation unit for this DEM."}, {"code": "OPTION_REQUIRED", "field": "critical_options.z_factor", "message": "Provide a value for z_factor"}], "confirmation_http": 422, "draft_issues": [{"code": "DEM_VERTICAL_UNIT_REQUIRED", "field": "inputs.dem", "message": "Specify the elevation unit for this DEM."}, {"code": "OPTION_REQUIRED", "field": "critical_options.z_factor", "message": "Provide a value for z_factor"}], "expected": {"code": "DEM_VERTICAL_UNIT_REQUIRED", "phase": "draft"}, "method": {"id": "dem-terrain-analysis", "version": 1}, "runs": []}
+..................
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/method_dev/test_reference_package.py::test_real_v1_bad_inputs_fail_before_a_run[attribute-filter]
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread geopilot-scheduler
+
+  Traceback (most recent call last):
+    File "/home/mtd/miniconda3/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+      self.run()
+      ~~~~~~~~^^
+    File "/home/mtd/miniconda3/lib/python3.13/threading.py", line 995, in run
+      self._target(*self._args, **self._kwargs)
+      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 174, in run_loop
+      if run_once(database_path, execute, execute_recheck=execute_recheck) is None:
+         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 146, in run_once
+      job = _claim_next_work(database_path)
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 52, in _claim_next_work
+      connection.execute("BEGIN IMMEDIATE")
+      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  sqlite3.OperationalError: database is locked
+
+    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+21 passed, 2 warnings in 42.83s

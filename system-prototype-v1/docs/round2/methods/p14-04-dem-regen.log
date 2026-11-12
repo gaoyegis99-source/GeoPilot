@@ -1,0 +1,6 @@
+e107e63b8de034f98ce3c3ef580422dd05593b8d6b0aabd32003044fbb522139  tests/fixtures/raster/dem-plane.tif
+e208d5868728a26255248340480fa325b053a079413bdf6c4cc5a0d73a6183e8  tests/method_dev/fixtures/dem-terrain/inputs/dem.tif
+ed77e11c27aee00e7dfe1468a62b52206556fe17fa0b551a074fdb404ec33b96  tests/method_dev/fixtures/dem-terrain/inputs/unlabelled-dem.tif
+usage: generate_inputs.py [-h] --output OUTPUT
+generate_inputs.py: error: DEM fixture destinations must not already exist
+existing output exit=2

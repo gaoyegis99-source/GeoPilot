@@ -1,0 +1,9 @@
+{
+  "type": "FeatureCollection",
+  "crs": {"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32650"}},
+  "features": [
+    {"type": "Feature", "properties": {"source_feature_id": "pt-b", "class_name": "keep", "rank": 2}, "geometry": {"type": "Point", "coordinates": [500130, 4400020]}},
+    {"type": "Feature", "properties": {"source_feature_id": "pt-c", "class_name": "drop", "rank": 3}, "geometry": {"type": "Point", "coordinates": [500050, 4400040]}},
+    {"type": "Feature", "properties": {"source_feature_id": "pt-a", "class_name": "keep", "rank": 1}, "geometry": {"type": "Point", "coordinates": [500010, 4400005]}}
+  ]
+}

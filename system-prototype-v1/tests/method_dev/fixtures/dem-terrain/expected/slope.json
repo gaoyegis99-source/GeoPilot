@@ -1,0 +1,12 @@
+{
+  "crs": "EPSG:6933",
+  "transform": [10, 0, 500010, 0, -10, 4400060],
+  "resolution": [10, 10],
+  "width": 5,
+  "height": 5,
+  "dtypes": ["float32"],
+  "nodata": [-9999],
+  "pixels": [[[null, 45, 45, 45, 45], [45, 45, 45, 45, 45], [45, 45, 45, 45, 45], [45, 45, 45, 45, 45], [45, 45, 45, 45, null]]],
+  "absolute_tolerance": 0,
+  "tolerance_basis": "A 10 m horizontal run and 10 m vertical rise yield exactly 45 degrees, exactly representable as Float32."
+}
