@@ -1,0 +1,107 @@
+baseline 861a0767c62b5da02a38aeae8c1156c30ed81a0c
+source /tmp/geopilot-p14-07-source.eVq9ng/system-prototype-v1
+release test evidence root /tmp/geopilot-p14-07-tests.SM2vWi
+Python 3.13.13
+F..                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_release_lifecycle_preserves_confirmed_plan_and_real_outputs _______
+
+tmp_path = PosixPath('/tmp/geopilot-p14-07-tests.SM2vWi/test_release_lifecycle_preserv0')
+release_files = (PosixPath('/tmp/geopilot-p14-07-tests.SM2vWi/test_release_lifecycle_preserv0/installed-config/methods'), PosixPath('/...package/manifest.json'), PosixPath('/tmp/geopilot-p14-07-tests.SM2vWi/test_release_lifecycle_preserv0/candidate.yaml'))
+
+    def test_release_lifecycle_preserves_confirmed_plan_and_real_outputs(tmp_path, release_files):
+        catalog, manifest, candidate = release_files
+        source_before = file_state(CONFIG), file_state(FIXTURE)
+        target_before = file_state(catalog.parent)
+        review_dir = tmp_path / "review"
+        inputs = ["--method", candidate, "--package", manifest]
+
+        prepared = invoke("prepare-release", catalog, *inputs, "--work-dir", review_dir)
+        assert prepared["scope"] == "local_method_review"
+        assert file_state(catalog.parent) == target_before
+        review_path = Path(prepared["review_path"])
+        review = read_json(review_path)
+        assert review == prepared["review"]
+        assert prepared["approval_sha256"] == fingerprint(review)
+        assert review["summary"]["candidate_sha256"] == hashlib.sha256(candidate.read_bytes()).hexdigest()
+        assert review["summary"]["manifest_sha256"] == hashlib.sha256(manifest.read_bytes()).hexdigest()
+        assert review["summary"]["cases"][0]["verdict"] == "positive_match"
+        assert review["summary"]["cases"][1]["code"] == "METHOD_PRECONDITION_FAILED"
+        assert review["summary"]["cases"][1]["phase"] == "confirm"
+        for receipt in review["reports"]:
+            assert hashlib.sha256((review_dir / receipt["path"]).read_bytes()).hexdigest() == receipt["sha256"]
+
+        published_args = [
+            *inputs, "--review", review_path, "--approve", prepared["approval_sha256"],
+            "--approver", MAINTAINER, "--reason", "Independent DEM and missing unit cases checked",
+        ]
+        assert invoke("publish", catalog, *inputs, "--review", review_path, "--work-dir", tmp_path / "missing",
+                      code=2) == "CLI_USAGE"
+        assert invoke("publish", catalog, *published_args, "--approve", "0" * 64,
+                      "--work-dir", tmp_path / "wrong-approval", code=1) == "APPROVAL_MISMATCH"
+        assert not (tmp_path / "wrong-approval").exists() and not (catalog / LEDGER_NAME).exists()
+
+        raw_path = review_dir / review["reports"][0]["path"]
+        for label, path, payload, expected in (
+            ("candidate", candidate, candidate.read_bytes() + b"# changed candidate\n", "RELEASE_INPUT_CHANGED"),
+            ("manifest", manifest, manifest.read_bytes() + b"\n", "RELEASE_INPUT_CHANGED"),
+            ("config", catalog / f"{METHOD}.v1.yaml", (catalog / f"{METHOD}.v1.yaml").read_bytes() + b"# changed config\n",
+             "RELEASE_INPUT_CHANGED"),
+            ("report", raw_path, raw_path.read_bytes() + b"\n", "INVALID_RELEASE_EVIDENCE"),
+        ):
+            original = path.read_bytes()
+            path.write_bytes(payload)
+            try:
+                assert invoke("publish", catalog, *published_args, "--work-dir", tmp_path / label, code=1) == expected
+                assert not (tmp_path / label).exists() and not (catalog / LEDGER_NAME).exists()
+            finally:
+                path.write_bytes(original)
+
+        replay = tmp_path / "replay"
+        published = invoke("publish", catalog, *published_args, "--work-dir", replay)
+        ledger = read_ledger(catalog)
+        event = ledger.events[0]
+        assert published["event"]["approval"]["approver"] == MAINTAINER
+        assert event.candidate_yaml.encode("utf-8") == candidate.read_bytes()
+        assert event.review.summary == event.replay.summary
+        assert event.review.reports[0].sha256 != event.replay.reports[0].sha256
+        assert invoke("publish", catalog, *published_args, "--work-dir", tmp_path / "duplicate",
+                      code=1) == "METHOD_VERSION_EXISTS"
+        assert not (tmp_path / "duplicate").exists() and len(read_ledger(catalog).events) == 1
+
+        installed = load_method_catalog(catalog)
+        assert not installed.issues and installed.get_enabled(METHOD).version == 2
+        positive = replay / "cases" / review["summary"]["cases"][0]["case_id"]
+        report = read_json(positive / "report.json")
+        assert report["reference"]["status"] == "PASS"
+        database, workspace = positive / "project.sqlite", positive / "workspace"
+        historical = report["actual"]["plan"]
+        prior_run = report["actual"]["run"]["run_id"]
+        request = {
+            "method": {"id": METHOD, "version": 2},
+            "inputs": {role: item["asset"] for role, item in report["inputs"].items()},
+            "critical_options": report["critical_options"],
+        }
+
+        with TestClient(create_local_app(database, workspace, config=catalog.parent)) as client:
+            task = client.post("/api/tasks", json={"goal": {"summary": "Check a pending released draft"}}).json()["task_id"]
+            response = client.post(f"/api/tasks/{task}/plans", json=request)
+            assert response.status_code == 200 and not response.json()["issues"]
+            draft = response.json()
+>           assert draft["status"] == "DRAFT"
+E           AssertionError: assert 'draft' == 'DRAFT'
+E
+E             - DRAFT
+E             + draft
+
+tests/method_dev/test_publish_rollback.py:159: AssertionError
+=============================== warnings summary ===============================
+../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/methods/p14-07-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/method_dev/test_publish_rollback.py::test_release_lifecycle_preserves_confirmed_plan_and_real_outputs
+1 failed, 2 passed, 1 warning in 36.41s

@@ -184,7 +184,7 @@ def confirm_plan(
         return plan
     _require_no_issues(plan.issues)
     try:
-        method = catalog.get(plan.method.id, plan.method.version)
+        method = catalog.get_enabled(plan.method.id, plan.method.version)
     except KeyError as error:
         raise PlanConfirmationError((PlanIssue(
             code="METHOD_UNAVAILABLE", field="method", message="The exact method version is unavailable",

@@ -29,8 +29,7 @@ from geopilot.checks.raster_checks import DEM_ARTIFACT_RULES
 from geopilot.domain.tool_contract import ToolContract
 from geopilot.execution.process_manager import capture_process
 from geopilot.execution.worker_lease import managed_workers_stopped
-from geopilot.methods.loader import _UniqueKeySafeLoader, load_method_catalog
-from geopilot.methods.models import MethodDefinition
+from geopilot.methods.loader import load_method_catalog, parse_method_yaml
 from geopilot.persistence.schema import initialize_database, open_database
 from geopilot.remote_sensing.config_registry import load_sensor_registry
 from geopilot.runs.query_service import get_run_status
@@ -80,14 +79,14 @@ def _write_json(path, value):
         stream.write("\n")
 
 
-def _selected_method(package, candidate, fingerprints):
+def _selected_method(package, candidate, fingerprints, config):
     if candidate is None:
-        directory = CONFIG / "methods"
+        directory = config / "methods"
         for source in _yaml_files(directory):
             if source.is_symlink():
                 raise TrialError("UNSAFE_PATH", "config", f"Configuration symlink: {source.name}", exit_code=2)
             fingerprints[source] = _digest(source)
-        catalog = load_method_catalog(directory)
+        catalog = load_method_catalog(directory, include_releases=False)
         if catalog.issues:
             first = catalog.issues[0]
             raise TrialError("INVALID_METHOD_CONFIG", "method", f"{first.path}: {first.field}: {first.message}")
@@ -101,11 +100,11 @@ def _selected_method(package, candidate, fingerprints):
         if candidate.is_symlink() or candidate.suffix.lower() not in {".yaml", ".yml"} or not candidate.is_file():
             raise OSError("Expected an external regular YAML candidate file")
         candidate = candidate.resolve(strict=True)
-        if candidate.is_relative_to(CONFIG.resolve()):
+        if candidate.is_relative_to(config) or candidate.is_relative_to(CONFIG.resolve()):
             raise TrialError("UNSAFE_PATH", "method", "Use the built-in selector for a method inside config/",
                              exit_code=2)
         content = candidate.read_bytes()
-        method = MethodDefinition.model_validate(yaml.load(content.decode("utf-8"), Loader=_UniqueKeySafeLoader))
+        method = parse_method_yaml(content.decode("utf-8"))
     except OSError as error:
         raise TrialError("INPUT_READ_ERROR", "method", str(error), exit_code=2) from error
     except (ValidationError, UnicodeError, RecursionError, yaml.YAMLError) as error:
@@ -115,12 +114,12 @@ def _selected_method(package, candidate, fingerprints):
     return method, content, candidate
 
 
-def _reserve_directory(requested, package):
+def _reserve_directory(requested, package, config):
     try:
         if requested.exists() or requested.is_symlink():
             raise FileExistsError("Choose a new trial directory")
         root = requested.parent.resolve(strict=True) / requested.name
-        protected = [CONFIG.resolve(), (ROOT / "src").resolve(), (ROOT / "local-data").resolve(), package.root]
+        protected = [config, CONFIG.resolve(), (ROOT / "src").resolve(), (ROOT / "local-data").resolve(), package.root]
         if configured := os.environ.get("GEOPILOT_DATA_DIR"):
             protected.append(Path(configured).resolve())
         if any(root.is_relative_to(path) for path in protected):
@@ -132,12 +131,12 @@ def _reserve_directory(requested, package):
     return root
 
 
-def _stage_config(root, method_bytes, candidate, fingerprints):
+def _stage_config(root, method_bytes, candidate, fingerprints, config_root):
     config = root / "config"
     for family in ("tools", "runner_bindings", "sensors"):
         destination = config / family
         destination.mkdir(parents=True)
-        for source in _yaml_files(CONFIG / family):
+        for source in _yaml_files(config_root / family):
             if source.is_symlink():
                 raise TrialError("UNSAFE_PATH", "config", f"Configuration symlink: {source.name}")
             content = source.read_bytes()
@@ -361,9 +360,21 @@ def _assess(report):
     return "positive_match"
 
 
-def run_trial(package_path, work_dir, *, case, candidate, qgis_process, timeout):
+def resolve_qgis(qgis_process):
+    executable = qgis_process or os.environ.get("GEOPILOT_QGIS_PROCESS") or "qgis_process"
+    qgis = shutil.which(os.path.expanduser(executable))
+    return Path(qgis).absolute() if qgis is not None else None
+
+
+def run_trial(package_path, work_dir, *, case, candidate, qgis_process, timeout, config_root=CONFIG):
     if not math.isfinite(timeout) or timeout <= 0:
         raise TrialError("INVALID_TIMEOUT", "timeout", "Timeout must be positive and finite", exit_code=2)
+    try:
+        config = config_root.resolve(strict=True)
+        if not config.is_dir():
+            raise NotADirectoryError(config)
+    except OSError as error:
+        raise TrialError("INPUT_READ_ERROR", "config", str(error), exit_code=2) from error
     try:
         package = load_reference_package(package_path)
         failure = package._failure(case)
@@ -372,17 +383,15 @@ def run_trial(package_path, work_dir, *, case, candidate, qgis_process, timeout)
     case = case or package.case_id
     fingerprints = {}
     try:
-        method, method_bytes, candidate = _selected_method(package, candidate, fingerprints)
+        method, method_bytes, candidate = _selected_method(package, candidate, fingerprints, config)
     except OSError as error:
         raise TrialError("INPUT_READ_ERROR", "method", str(error), exit_code=2) from error
     if package.inputs.keys() != method.inputs.keys():
         raise TrialError("METHOD_INPUT_MISMATCH", "inputs", "Package input roles must match the method")
-    root = _reserve_directory(work_dir, package)
+    root = _reserve_directory(work_dir, package, config)
     started = time.monotonic()
     deadline = started + timeout
-    executable = qgis_process or os.environ.get("GEOPILOT_QGIS_PROCESS") or "qgis_process"
-    qgis = shutil.which(os.path.expanduser(executable))
-    qgis = Path(qgis).absolute() if qgis is not None else None
+    qgis = resolve_qgis(qgis_process)
     manifest = package.root / package_path.name
     replay = [
         sys.executable, str(Path(__file__).with_name("method_cli.py")), "trial", "--package", str(manifest),
@@ -392,6 +401,8 @@ def run_trial(package_path, work_dir, *, case, candidate, qgis_process, timeout)
         replay.extend(("--method", str(candidate)))
     if qgis is not None:
         replay.extend(("--qgis-process", str(qgis)))
+    if config != CONFIG.resolve():
+        replay.extend(("--config", str(config)))
     report = {
         "schema_version": 1, "status": "FAIL", "verdict": None, "case_id": case,
         "method": package.method.model_dump(mode="json"), "tools": [],
@@ -409,10 +420,10 @@ def run_trial(package_path, work_dir, *, case, candidate, qgis_process, timeout)
     os.environ["QGIS_CUSTOM_CONFIG_PATH"] = str(root / "qgis-profile")
     fault = None
     try:
-        selected = _stage_config(root, method_bytes, candidate, fingerprints)
+        selected = _stage_config(root, method_bytes, candidate, fingerprints, config)
         report["fingerprints"]["config"] = {
-            path.relative_to(CONFIG).as_posix(): digest for path, digest in fingerprints.items()
-            if path.is_relative_to(CONFIG)
+            path.relative_to(config).as_posix(): digest for path, digest in fingerprints.items()
+            if path.is_relative_to(config)
         }
         lint_methods(root / "config", selected)
         _before_deadline(deadline, "lint")

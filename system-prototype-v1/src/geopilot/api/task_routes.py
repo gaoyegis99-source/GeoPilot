@@ -112,10 +112,10 @@ def task_routes(
                 stored = _task_row(connection, task_id)
             goal = request.goal or TaskGoal.model_validate_json(stored["goal_json"])
         try:
-            method = catalog.get(request.method.id, request.method.version)
+            method = catalog.get_enabled(request.method.id, request.method.version)
         except KeyError as error:
             raise HTTPException(status_code=404, detail={
-                "code": "METHOD_NOT_FOUND", "field": "method", "message": "The exact method version does not exist.",
+                "code": "METHOD_NOT_FOUND", "field": "method", "message": "The exact method version is unavailable for selection.",
             }) from error
         try:
             context = build_task_context(

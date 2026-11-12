@@ -1,0 +1,13 @@
+baseline 861a0767c62b5da02a38aeae8c1156c30ed81a0c
+source /tmp/geopilot-p14-07-source.eVq9ng/system-prototype-v1
+release test evidence root /tmp/geopilot-p14-07-tests.guEjD3
+Python 3.13.13
+...                                                                      [100%]
+=============================== warnings summary ===============================
+../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/methods/p14-07-junit.xml -
+3 passed, 1 warning in 114.55s (0:01:54)

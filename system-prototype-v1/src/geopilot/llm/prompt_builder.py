@@ -84,7 +84,7 @@ def build_model_request(
     rules = tuple(registered_rules)
     methods = []
     tools: set[tuple[str, int]] = set()
-    for method in catalog.list():
+    for method in catalog.list_enabled():
         candidate = describe_method_candidate(method)
         if candidate is None or validate_method(method, registry=registry, registered_rules=rules):
             continue

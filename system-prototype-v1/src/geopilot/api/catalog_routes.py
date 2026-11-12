@@ -153,7 +153,7 @@ def catalog_routes(
                 "code": "METHOD_CATALOG_UNAVAILABLE", "message": "The local method catalogue is unavailable.",
             })
         methods = []
-        for definition in catalog.list():
+        for definition in catalog.list_enabled():
             issues = tuple(
                 PlanIssue(code=issue.code, field=issue.field, message=issue.message)
                 for issue in validate_method(definition, registry=registry, registered_rules=rule_names)

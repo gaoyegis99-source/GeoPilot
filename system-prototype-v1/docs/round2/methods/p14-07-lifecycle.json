@@ -1,0 +1,262 @@
+{
+  "pending_draft_status": 422,
+  "pending_draft_issue": {
+    "code": "METHOD_UNAVAILABLE",
+    "field": "method",
+    "message": "The exact method version is unavailable"
+  },
+  "model_preview_status": 404,
+  "model_preview_issue": "METHOD_NOT_FOUND",
+  "model_advertised_versions": [
+    1
+  ],
+  "historical_plan": {
+    "method": {
+      "id": "dem-terrain-analysis",
+      "version": 2
+    },
+    "status": "confirmed",
+    "id": "7ff65915bb874c579acd7fa738fb5b77"
+  },
+  "historical_artifacts": [
+    {
+      "id": "a1153703c33546a093694b4a95b8c74f",
+      "run_id": "4ec44deef31a4bb282b8610465db045e",
+      "role": "area_statistics",
+      "uri": "intermediate/calculate_area_with_equal_area_projection/area_statistics.json",
+      "layer": null,
+      "type": "json",
+      "kind": "json",
+      "format": "JSON",
+      "fingerprint": "2806accfe8fed42cfd57dc08f4e7ddc79ea8f6310fe4c8a8261ffd42ea533541",
+      "metadata": {
+        "kind": "json",
+        "format": "JSON",
+        "value_type": "object",
+        "item_count": 12
+      },
+      "source": {
+        "plan_id": "7ff65915bb874c579acd7fa738fb5b77",
+        "plan_version": 1,
+        "step_key": "calculate_area_with_equal_area_projection",
+        "output_name": "area_statistics",
+        "tool": {
+          "id": "python-dem-area-stats",
+          "version": 1
+        },
+        "inputs": {
+          "analysis_extent": {
+            "asset_id": "eba320b923424a01ac2a9adbe46d4893",
+            "asset_version": 1
+          },
+          "dem": {
+            "asset_id": "2218185adbe8471aa50fca0338b9feb4",
+            "asset_version": 1
+          }
+        }
+      },
+      "created_at": "2026-11-12T05:32:03.009021Z",
+      "readable": true
+    },
+    {
+      "id": "fd18a1f7f21949bf8842608ee85a656c",
+      "run_id": "4ec44deef31a4bb282b8610465db045e",
+      "role": "terrain_raster",
+      "uri": "intermediate/clip_back_to_analysis_extent/terrain_raster.tif",
+      "layer": null,
+      "type": "raster_terrain",
+      "kind": "raster",
+      "format": "GTiff",
+      "fingerprint": "0690636e52a0c70e61563e6f4ec29f21c67b29217577f3463d3f462d9bedf068",
+      "metadata": {
+        "format": "GTiff",
+        "crs": "EPSG:6933",
+        "bounds": [
+          500010.0,
+          4400010.0,
+          500060.0,
+          4400060.0
+        ],
+        "issues": [],
+        "kind": "raster",
+        "width": 5,
+        "height": 5,
+        "band_count": 1,
+        "transform": [
+          10.0,
+          0.0,
+          500010.0,
+          0.0,
+          -10.0,
+          4400060.0
+        ],
+        "resolution": [
+          10.0,
+          10.0
+        ],
+        "nodata": [
+          -9999.0
+        ],
+        "band_dtypes": [
+          "float32"
+        ],
+        "band_names": [
+          "terrain"
+        ],
+        "band_units": [
+          "degree"
+        ],
+        "band_statistics": [
+          {
+            "band": 1,
+            "mask_flags": [
+              "per_dataset"
+            ],
+            "scale": 1.0,
+            "offset": 0.0,
+            "valid_pixel_count": 23,
+            "masked_pixel_count": 2,
+            "nonfinite_pixel_count": 0,
+            "valid_bounds": [
+              500010.0,
+              4400010.0,
+              500060.0,
+              4400060.0
+            ],
+            "minimum": 45.0,
+            "maximum": 45.0,
+            "mean": 45.0
+          }
+        ],
+        "common_valid_pixel_count": 23
+      },
+      "source": {
+        "plan_id": "7ff65915bb874c579acd7fa738fb5b77",
+        "plan_version": 1,
+        "step_key": "clip_back_to_analysis_extent",
+        "output_name": "terrain_raster",
+        "tool": {
+          "id": "python-dem-clip-back",
+          "version": 1
+        },
+        "inputs": {
+          "analysis_extent": {
+            "asset_id": "eba320b923424a01ac2a9adbe46d4893",
+            "asset_version": 1
+          },
+          "dem": {
+            "asset_id": "2218185adbe8471aa50fca0338b9feb4",
+            "asset_version": 1
+          }
+        }
+      },
+      "created_at": "2026-11-12T05:32:03.001579Z",
+      "readable": true
+    },
+    {
+      "id": "3b8b33911e304cfa9ae68156eda1bf1f",
+      "run_id": "4ec44deef31a4bb282b8610465db045e",
+      "role": "threshold_regions",
+      "uri": "intermediate/extract_by_threshold/threshold_regions.tif",
+      "layer": null,
+      "type": "raster_classification",
+      "kind": "raster",
+      "format": "GTiff",
+      "fingerprint": "8173bee83fb006dab74c1c779eaba414fa10902faff8cbaa9550291a0f955565",
+      "metadata": {
+        "format": "GTiff",
+        "crs": "EPSG:6933",
+        "bounds": [
+          500010.0,
+          4400010.0,
+          500060.0,
+          4400060.0
+        ],
+        "issues": [],
+        "kind": "raster",
+        "width": 5,
+        "height": 5,
+        "band_count": 1,
+        "transform": [
+          10.0,
+          0.0,
+          500010.0,
+          0.0,
+          -10.0,
+          4400060.0
+        ],
+        "resolution": [
+          10.0,
+          10.0
+        ],
+        "nodata": [
+          255.0
+        ],
+        "band_dtypes": [
+          "uint8"
+        ],
+        "band_names": [
+          "threshold_class"
+        ],
+        "band_units": [
+          "class"
+        ],
+        "band_statistics": [
+          {
+            "band": 1,
+            "mask_flags": [
+              "nodata"
+            ],
+            "scale": 1.0,
+            "offset": 0.0,
+            "valid_pixel_count": 23,
+            "masked_pixel_count": 2,
+            "nonfinite_pixel_count": 0,
+            "valid_bounds": [
+              500010.0,
+              4400010.0,
+              500060.0,
+              4400060.0
+            ],
+            "minimum": 7,
+            "maximum": 7,
+            "mean": 7.0
+          }
+        ],
+        "common_valid_pixel_count": 23
+      },
+      "source": {
+        "plan_id": "7ff65915bb874c579acd7fa738fb5b77",
+        "plan_version": 1,
+        "step_key": "extract_by_threshold",
+        "output_name": "threshold_regions",
+        "tool": {
+          "id": "python-dem-threshold",
+          "version": 1
+        },
+        "inputs": {
+          "analysis_extent": {
+            "asset_id": "eba320b923424a01ac2a9adbe46d4893",
+            "asset_version": 1
+          },
+          "dem": {
+            "asset_id": "2218185adbe8471aa50fca0338b9feb4",
+            "asset_version": 1
+          }
+        }
+      },
+      "created_at": "2026-11-12T05:32:03.008403Z",
+      "readable": true
+    }
+  ],
+  "historical_replay": {
+    "run_id": "2d46f45cf09d49b7956a59117fe544de",
+    "execution_status": "SUCCEEDED",
+    "check_status": "PASSED",
+    "current_step": "calculate_area_with_equal_area_projection",
+    "cancel_requested": false,
+    "error": null,
+    "current_report_id": "968d516e8e744650abcbf1f56df1af50"
+  },
+  "source_config_and_fixtures_unchanged": true
+}

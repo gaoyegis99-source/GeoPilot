@@ -18,10 +18,12 @@ from geopilot.application.remote_sensing_checks import REMOTE_SENSING_CHECKS
 from geopilot.application.run_checks import RUN_CHECKS
 from geopilot.checks.raster_checks import DEM_ARTIFACT_RULES
 from geopilot.methods.loader import _UniqueKeySafeLoader
+from geopilot.methods.release_ledger import ReleaseError
 from geopilot.scripts.registration import RegistrationCandidate, RegistrationError, validate_manual_registration
 
 from lint import LintError, lint_methods
 from template import TemplateError, generate_template
+from scripts.methods.release import RELEASE_COMMANDS, add_release_commands, execute_release
 from scripts.methods.trial import TrialError, run_trial
 
 
@@ -124,18 +126,22 @@ def build_parser() -> argparse.ArgumentParser:
     trial.add_argument("--case", help="positive or expected-failure case ID")
     trial.add_argument("--method", type=Path, help="external candidate YAML matching the package ID and version")
     trial.add_argument("--qgis-process", type=Path, help="trusted local QGIS Processing executable")
+    trial.add_argument("--config", type=Path, default=DEFAULT_CONFIG, help="configuration root to stage")
     trial.add_argument("--timeout", type=float, default=120, help="trial deadline in seconds (default: 120)")
+    add_release_commands(commands)
     return parser
 
 
 def execute(args: argparse.Namespace) -> dict:
+    if args.command in RELEASE_COMMANDS:
+        return execute_release(args)
     if args.command == "template":
         return generate_template(args.config, args.tool, args.method)
     if args.command == "lint":
         return lint_methods(args.config, args.method)
     if args.command == "trial":
         return run_trial(args.package, args.work_dir, case=args.case, candidate=args.method,
-                         qgis_process=args.qgis_process, timeout=args.timeout)
+                         qgis_process=args.qgis_process, timeout=args.timeout, config_root=args.config)
     candidate = read_candidate(args.candidate)
     normalized = json.loads(candidate.model_dump_json())
     if args.command == "inspect":
@@ -163,7 +169,7 @@ def main() -> int:
     except LintError as error:
         emit(args.command, errors=error.errors)
         return error.exit_code
-    except (TemplateError, TrialError) as error:
+    except (ReleaseError, TemplateError, TrialError) as error:
         emit(args.command, errors=[issue(error.code, error.field, str(error))])
         return error.exit_code
     except InputPathError as error:

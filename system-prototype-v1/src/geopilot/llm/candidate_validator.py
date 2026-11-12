@@ -76,7 +76,7 @@ def validate_model_candidate(
     if len(advertised) != 1:
         return _rejected("MODEL_CANDIDATE_UNKNOWN", "method", "Select a method from the exact advertised versions.")
     try:
-        definition = catalog.get(method.id, method.version)
+        definition = catalog.get_enabled(method.id, method.version)
     except KeyError:
         return _rejected("MODEL_CANDIDATE_UNAVAILABLE", "method", "The candidate version is unavailable.")
     if validate_method(definition, registry=registry, registered_rules=registered_rules):

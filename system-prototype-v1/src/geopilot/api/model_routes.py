@@ -83,9 +83,9 @@ def model_routes(
             context = TaskContext(task_id=preview_id, goal=request.goal, method=MethodRef(id="task-context", version=1), roles={})
         else:
             try:
-                definition = catalog.get(request.method.id, request.method.version)
+                definition = catalog.get_enabled(request.method.id, request.method.version)
             except KeyError as error:
-                raise _problem(404, "METHOD_NOT_FOUND", "本机方法版本不存在。", "method") from error
+                raise _problem(404, "METHOD_NOT_FOUND", "该本机方法版本不可用于新的建议。", "method") from error
             try:
                 context = build_task_context(
                     database, task_id=preview_id, goal=request.goal, method=definition,
@@ -117,7 +117,7 @@ def model_routes(
             }.get(error.code, 503)
             raise _problem(status, error.code, "模型暂不可用，可继续手工填写。") from error
 
-        method = catalog.get(parsed.method.id, parsed.method.version)
+        method = catalog.get_enabled(parsed.method.id, parsed.method.version)
         applicable_inputs = {role: ref for role, ref in request.inputs.items() if role in method.inputs}
         validation = validate_model_candidate(
             database, task_id=preview_id, plan_id=preview_id, method=parsed.method,
