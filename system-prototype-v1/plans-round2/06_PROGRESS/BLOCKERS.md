@@ -54,7 +54,7 @@ P13-05 的原版 L 线相交 14 轮均在关系判定超时。局部裁剪候选
 
 P13-05 已分别验证逐步请求采集、原生环境指纹及计时外配置回执。正式复测需要使用同一包装方式采集，比较时强制回执。当前镜像只有本机 ID。 [请求采集](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log) · [环境复验](../../docs/round2/performance/p13-05-preflight.md#原生运行时身份与配置对照)
 
-P13-05 的原候选 M 矢量四个配对已完成。修正版已启动 M 档复测，复用原版分片并按同输入和环境核验。L 矢量与 DEM／遥感仍待正式采样。 [M 结果](../../docs/round2/performance/p13-05-vector-m.md) · [修正版证据](../../docs/round2/performance/p13-05-staging-resources.md)
+P13-05 修正版 M 矢量和 DEM S 配对已完成。遥感 S 原版在第 5 次冷态试次遇到状态读取错误并中止，持久库记录 `align_two_dates` 的 SQLite 锁冲突。原版没有完整配置回执，待在新目录重采两侧。L 矢量已启动，DEM M/L 和遥感 L 待测。 [修正版 M 复测](../../docs/round2/performance/p13-05-vector-m-revised.md) · [栅格 S 证据](../../docs/round2/performance/p13-05-raster-s.md)
 
 P16-06 的原生镜像及外部绑定已从归档在独立空镜像库恢复并断网验证。正式第二轮交付仍依赖阶段结果和最终同提交回执。 [恢复验证](../../docs/round2/deployment/p16-06-tooling.md#原生基准绑定文件恢复)
 

@@ -1,0 +1,66 @@
+Frozen runner evidence and allowlisted read-only SQLite terminal export.
+Original raster launcher exit=2. DEM base/candidate exit=0/0. Remote base/candidate exit=1/0.
+Strict comparator explicitly rejects incomplete remote pair, exit=1.
+Incompatible benchmark evidence: Runtime configuration evidence is required in artifacts/test-results/p13-05-raster-audit.Fqwwa9/portable/remote-s/base/attempt.28na5exq/evidence
+./dem-s/base/COMPLETED: 成功
+./dem-s/base/attempt.aflu9mp3/command.log: 成功
+./dem-s/base/attempt.aflu9mp3/container-name: 成功
+./dem-s/base/attempt.aflu9mp3/container.log: 成功
+./dem-s/base/attempt.aflu9mp3/evidence/report.json: 成功
+./dem-s/base/attempt.aflu9mp3/evidence/runtime-configuration.json: 成功
+./dem-s/base/attempt.aflu9mp3/evidence/trials.jsonl: 成功
+./dem-s/base/attempt.aflu9mp3/exit-code: 成功
+./dem-s/base/attempt.aflu9mp3/self-comparison.command: 成功
+./dem-s/base/attempt.aflu9mp3/self-comparison.exit-code: 成功
+./dem-s/base/attempt.aflu9mp3/self-comparison.json: 成功
+./dem-s/base/attempt.aflu9mp3/self-comparison.stderr: 成功
+./dem-s/candidate/COMPLETED: 成功
+./dem-s/candidate/attempt.7exbfjl6/command.log: 成功
+./dem-s/candidate/attempt.7exbfjl6/container-name: 成功
+./dem-s/candidate/attempt.7exbfjl6/container.log: 成功
+./dem-s/candidate/attempt.7exbfjl6/evidence/report.json: 成功
+./dem-s/candidate/attempt.7exbfjl6/evidence/runtime-configuration.json: 成功
+./dem-s/candidate/attempt.7exbfjl6/evidence/trials.jsonl: 成功
+./dem-s/candidate/attempt.7exbfjl6/exit-code: 成功
+./dem-s/candidate/attempt.7exbfjl6/self-comparison.command: 成功
+./dem-s/candidate/attempt.7exbfjl6/self-comparison.exit-code: 成功
+./dem-s/candidate/attempt.7exbfjl6/self-comparison.json: 成功
+./dem-s/candidate/attempt.7exbfjl6/self-comparison.stderr: 成功
+./dem-s/pair.1atfaa1w/before-after.command: 成功
+./dem-s/pair.1atfaa1w/before-after.exit-code: 成功
+./dem-s/pair.1atfaa1w/before-after.json: 成功
+./dem-s/pair.1atfaa1w/before-after.stderr: 成功
+./independent-review/SHA256SUMS: 成功
+./independent-review/audit.py: 成功
+./independent-review/independent.json: 成功
+./independent-review/independent.log: 成功
+./plan.json: 成功
+./remote-s/base/attempt.28na5exq/command.log: 成功
+./remote-s/base/attempt.28na5exq/container-name: 成功
+./remote-s/base/attempt.28na5exq/container.log: 成功
+./remote-s/base/attempt.28na5exq/evidence/persisted-terminal.json: 成功
+./remote-s/base/attempt.28na5exq/evidence/report.json: 成功
+./remote-s/base/attempt.28na5exq/evidence/trials.jsonl: 成功
+./remote-s/base/attempt.28na5exq/exit-code: 成功
+./remote-s/candidate/COMPLETED: 成功
+./remote-s/candidate/attempt.q97gl6sz/command.log: 成功
+./remote-s/candidate/attempt.q97gl6sz/container-name: 成功
+./remote-s/candidate/attempt.q97gl6sz/container.log: 成功
+./remote-s/candidate/attempt.q97gl6sz/evidence/report.json: 成功
+./remote-s/candidate/attempt.q97gl6sz/evidence/runtime-configuration.json: 成功
+./remote-s/candidate/attempt.q97gl6sz/evidence/trials.jsonl: 成功
+./remote-s/candidate/attempt.q97gl6sz/exit-code: 成功
+./remote-s/candidate/attempt.q97gl6sz/self-comparison.command: 成功
+./remote-s/candidate/attempt.q97gl6sz/self-comparison.exit-code: 成功
+./remote-s/candidate/attempt.q97gl6sz/self-comparison.json: 成功
+./remote-s/candidate/attempt.q97gl6sz/self-comparison.stderr: 成功
+./remote-s/incomplete-comparison.exit-code: 成功
+./remote-s/incomplete-comparison.stderr: 成功
+./remote-s/incomplete-comparison.stdout: 成功
+./run_memory_profile.py: 成功
+audit.py: 成功
+independent.json: 成功
+independent.log: 成功
+Standalone archive replay matched live evidence byte-for-byte, exit=0, 47 distinct runs.
+b8ab69983699966cedf5fb7e052ab97b2bd750fde967f3b7c214925aac663d82  docs/round2/performance/p13-05-raster-s-evidence.tar.gz
+d4d5898316efa2b4035c8056f5e98fa11cb64b0de84979ac8831c72de4ff136e  artifacts/test-results/p13-05-raster-audit.Fqwwa9/summary.json

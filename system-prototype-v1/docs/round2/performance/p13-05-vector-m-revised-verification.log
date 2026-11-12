@@ -1,0 +1,8 @@
+Session 43345 exited 0. Four revised candidate containers each completed 14 PASS.
+Reused 56 original baseline runs. All four baseline raw sample SHA-256 digests match the original M archive.
+Audit verified 112 raw trials, eight pairs of cache groups, receipts, correctness, and distributions.
+Extracted archive replay matches the independently generated summary byte-for-byte.
+Original candidate archive still replays identically with default arguments.
+Revised evidence with the original candidate argument was rejected, exit 1.
+Independent review cross-checked 168 unique runs across original, initial candidate, and revised candidate.
+ceeb6d47c53300b22eff8b24ee674dddd74e6aec4ed59381d19e1a0e22426751  artifacts/test-results/p13-05-vector-m-revised-audit.8hyh0P/vector-m-revised-evidence.tar.gz

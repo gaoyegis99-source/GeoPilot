@@ -55,13 +55,13 @@ def result_matches(actual, expected, workload, reference):
         assert actual == expected
 
 
-def side_results(directory, side, workload, expected, run_ids):
+def side_results(directory, side, workload, expected, run_ids, source_commit):
     marker = (directory / side / "COMPLETED").read_text().strip()
     assert re.fullmatch(r"attempt\.[A-Za-z0-9]+", marker)
     attempt = directory / side / marker
     evidence = attempt / "evidence"
     assert (attempt / "logging-exit").read_text().strip() == "0"
-    assert read(evidence / "environment.json")["source_commit"] == SOURCES[side]
+    assert read(evidence / "environment.json")["source_commit"] == source_commit
     report = read(evidence / "summary.json")
     receipt = read(evidence / "runtime-configuration.json")
     assert receipt["schema_version"] == 1 and receipt["before"] == receipt["after"]
@@ -151,9 +151,9 @@ def verify_deltas(group):
     assert expected == group["successful_sample_deltas"], f"Incorrect deltas for {group['group']}"
 
 
-def compare(directory, workload, expected, run_ids):
-    base = side_results(directory, "base", workload, expected, run_ids)
-    candidate = side_results(directory, "candidate", workload, expected, run_ids)
+def compare(directory, workload, expected, run_ids, sources):
+    base = side_results(directory, "base", workload, expected, run_ids, sources["base"])
+    candidate = side_results(directory, "candidate", workload, expected, run_ids, sources["candidate"])
     assert base[1:3] == candidate[1:3], "Runtime configuration or input bytes differ"
     paths = [base[0], candidate[0]]
     matches = [path / "result.json" for path in sorted(directory.glob("comparison.*"))
@@ -163,7 +163,7 @@ def compare(directory, workload, expected, run_ids):
     document = read(matches[0])
     assert all(read(path) == document for path in matches[1:])
     assert document["status"] == "MATCHED_EVIDENCE"
-    assert (document["before_source"], document["after_source"]) == tuple(SOURCES.values())
+    assert (document["before_source"], document["after_source"]) == (sources["base"], sources["candidate"])
     assert document["runtime_configuration"]["sha256"] == base[1]
     assert {tuple(group["group"]) for group in document["groups"]} == {
         ("M", workload, cache, "p13-01") for cache in CACHES
@@ -191,10 +191,14 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("root", type=Path)
 parser.add_argument("historical_evidence", type=Path)
 parser.add_argument("--workload", choices=WORKLOADS, action="append")
+parser.add_argument("--candidate-commit", default=SOURCES["candidate"])
 args = parser.parse_args()
+if not re.fullmatch(r"[0-9a-f]{40}", args.candidate_commit):
+    parser.error("--candidate-commit requires a full lowercase Git SHA-1")
 expected = historical_results(args.historical_evidence)
 run_ids = set()
 workloads = args.workload or WORKLOADS
 assert len(set(workloads)) == len(workloads)
-results = [compare(args.root.resolve() / name, name, expected[name], run_ids) for name in workloads]
+sources = {**SOURCES, "candidate": args.candidate_commit}
+results = [compare(args.root.resolve() / name, name, expected[name], run_ids, sources) for name in workloads]
 print(json.dumps({"status": "PASS_VECTOR_M_AUDIT", "records": len(run_ids), "workloads": results}, indent=2))

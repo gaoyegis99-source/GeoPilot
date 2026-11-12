@@ -264,6 +264,8 @@
 - 主控复核四个 M 档正式配对和 112 个实际运行，全部正确。实时、归档和解包复算结果一致。道路 v2 冷态中位数略增，所有 RSS 组有 partial，保持原始观测。A/B 的栅格与 L 矢量入口通过预演。P13-05 仍为 DOING。 [正式结果及复跑](../../docs/round2/performance/p13-05-vector-m.md)
 - A 的 45 次原生探针定位 Rasterio 间接导入。主控冻结最小修正版 `a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc`，20 项暂存与写入专项通过。主控在真实遥感写入后触发取消、超时，修正版均回收两份暂存 TIFF，保留终态和输入。 [探针及受控复验](../../docs/round2/performance/p13-05-staging-resources.md)
 - 修正版完整数据适配和 GIS 首次 360 通过、1 次 SQLite 锁失败。原版和修正版的同项复跑各通过，完整复跑 361 项全部通过，退出 0。修正版正式 M 复测已启动。 [完整复跑](../../docs/round2/performance/p13-05-domain-tests.log) · [JUnit](../../docs/round2/performance/p13-05-domain-tests-junit.xml)
+- 主控及 B 分别复算修正版 M 的四个对照。56 个新运行通过，复用的原版样本摘要一致，八个端到端 RSS 组有 partial。冷态面归属统计步骤五次完整采样的修正版 RSS 中位数接近原版。修正版 M 退出 0，随后启动 S 档栅格。 [正式复测](../../docs/round2/performance/p13-05-vector-m-revised.md)
+- 主控与 B 独立核对栅格 S 的 47 个实际运行。DEM S 两侧 28 次全部通过。遥感修正版 14 次通过，原版仅执行冷态 5 次。A 与主控从持久 SQLite 核对最后一轮以 `RUN_INTERRUPTED` 失败。完整 DEM 配对和遥感单侧证据离线复算通过，遥感原版缺回执，强制比较退出 1。L 矢量已启动，P13-05 为 DOING。 [证据、退出码及复算](../../docs/round2/performance/p13-05-raster-s.md)
 
 ## P13-06 复用证据准备
 

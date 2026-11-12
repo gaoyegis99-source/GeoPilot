@@ -29,3 +29,5 @@ M 档三个矢量负载的候选 RSS 观测中位数较高。原候选 `e874a0f`
 修正版 M 复测已从 `artifacts/test-results/p13-05-vector-m-revised-plan.qp9bS7/run-m-revised.py` 启动。四个原版分片已经用冻结比较器独立校验并保留，修正版另生成 56 个运行后按输入及环境回执逐组对照。输出根为 `/mnt/datab/geopilot-p13-05-vector-m-revised.a2d2e68`。L 矢量和栅格启动器也已固定同一修正版，分别位于 `artifacts/test-results/p13-05-vector-l-plan.a2d2e68.C905zE/` 与 `artifacts/test-results/p13-05-raster-plan-a2d2e68.TONYtP/`。三者共用正式测量锁。
 
 首个修正版点相交分片 14 次全部通过。与原版对照的冷态墙钟中位数为 8.08 → 2.89 秒，暖态为 8.11 → 3.08 秒。原版与修正版的观测 RSS 中位数约为 142 MiB，冷热组均有 partial，仍不计算 RSS 差值。独立重跑冻结比较器，输出与启动器保存的结果逐字节相同。原始证据在上述输出根，复跑结果在启动器目录的 `first-pair-recheck.json`。
+
+后续三个修正版分片均已完成，四组共 56 次新运行通过。 [修正版 M 完整结果](p13-05-vector-m-revised.md)
