@@ -38,10 +38,49 @@ def _declared_xy(reference: dict) -> bool:
     return rows == [(0, 0)]
 
 
-def _component_intersections(geometry, scope):
+def _integer_rectangles(geometry):
+    simple = shapely.get_num_coordinates(geometry) == 5
+    coordinates = shapely.get_coordinates(geometry[simple]).reshape(-1, 5, 2)
+    edges = np.diff(coordinates, axis=1)
+    rectangles = np.zeros(geometry.size, dtype=bool)
+    rectangles[simple] = (
+        (np.abs(coordinates) <= 2**52).all(axis=(1, 2))
+        & (coordinates == np.trunc(coordinates)).all(axis=(1, 2))
+        & ((edges == 0).sum(axis=2) == 1).all(axis=1)
+    )
+    return rectangles
+
+
+def _rectangular_pair_clips(batch, parts, bounds, positions, components, counts):
+    paired = counts[positions] == 2
+    positions, components = positions[paired], components[paired]
+    order = np.lexsort((components, positions))
+    rows = positions[order][::2]
+    pairs = components[order].reshape(-1, 2)
+    targets = batch[rows]
+    target_bounds = shapely.bounds(targets)[:, None, :]
+    part_bounds = bounds[pairs]
+    # Require two separated area intersections. Contact and mixed-dimension
+    # results keep the whole scope's GEOS representation.
+    lower = np.maximum(target_bounds[:, :, :2], part_bounds[:, :, :2])
+    upper = np.minimum(target_bounds[:, :, 2:], part_bounds[:, :, 2:])
+    separated = (part_bounds[:, 0, 2:] < part_bounds[:, 1, :2]) | (part_bounds[:, 1, 2:] < part_bounds[:, 0, :2])
+    eligible = _integer_rectangles(targets) & (lower < upper).all(axis=(1, 2)) & separated.any(axis=1)
+    # Use dissolved components in their original order, retaining the right
+    # operand's MultiPolygon type and the target's original ring order.
+    local_scope = shapely.multipolygons(parts[pairs[eligible]])
+    return rows[eligible], shapely.intersection(targets[eligible], local_scope)
+
+
+def _component_intersections(geometry, scope, polygon_targets=False):
     parts = shapely.get_parts(scope)
     tree = shapely.STRtree(parts)
     candidate = np.full(geometry.size, -1, dtype=np.intp)
+    intersections = np.empty_like(geometry)
+    fallback = np.ones(geometry.size, dtype=bool)
+    rectangular_scope = polygon_targets and _integer_rectangles(parts).all()
+    bounds = shapely.bounds(parts) if rectangular_scope else None
+    empty = shapely.Polygon() if rectangular_scope else None
     # A broad envelope can match every component. Bound the number of such
     # rows per query while allowing a single row to match the whole scope.
     batch_size = max(1, min(1024, _COMPONENT_QUERY_PAIR_BUDGET // len(parts)))
@@ -51,11 +90,19 @@ def _component_intersections(geometry, scope):
         counts = np.bincount(positions, minlength=batch.size)
         unique = counts[positions] == 1
         candidate[start + positions[unique]] = components[unique]
+        if rectangular_scope:
+            disjoint = start + np.flatnonzero(counts == 0)
+            intersections[disjoint] = empty
+            fallback[disjoint] = False
+            if (counts == 2).any():
+                rows, clipped = _rectangular_pair_clips(batch, parts, bounds, positions, components, counts)
+                intersections[start + rows] = clipped
+                fallback[start + rows] = False
 
     local = candidate >= 0
-    intersections = np.empty_like(geometry)
     intersections[local] = shapely.intersection(geometry[local], parts[candidate[local]])
-    intersections[~local] = shapely.intersection(geometry[~local], scope)
+    fallback &= ~local
+    intersections[fallback] = shapely.intersection(geometry[fallback], scope)
     return intersections
 
 
@@ -85,7 +132,11 @@ def _clip_geometries(geometry, scope, geometry_type, area_type, inputs):
         and _declared_xy(inputs["targets"]) and _declared_xy(inputs["area"])
     ):
         try:
-            intersections = _component_intersections(geometry, scope)
+            polygon_targets = (
+                geometry_type == "Polygon"
+                and (shapely.get_type_id(geometry) == shapely.GeometryType.POLYGON).all()
+            )
+            intersections = _component_intersections(geometry, scope, polygon_targets)
         except GEOSException:
             # Repeat the established whole-scope call to preserve its result or error.
             pass
