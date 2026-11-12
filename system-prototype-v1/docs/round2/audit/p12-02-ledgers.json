@@ -1,0 +1,25 @@
+{
+  "scope": "historical_ledger_consistency",
+  "baseline_commit": "80d724f35fba31cacb9d3f740265b2713c6be6f4",
+  "ledgers": {
+    "V2.0 通用需求": {
+      "PASS": 40,
+      "PARTIAL": 0,
+      "NOT_IMPLEMENTED": 0
+    },
+    "T01–T16 固定用例": {
+      "PASS": 16,
+      "FAIL": 0,
+      "NOT_RUN": 0
+    },
+    "P0–P11 原子任务": {
+      "ACCEPTED": 122
+    }
+  },
+  "follow_up_requirements": [
+    "CTX-001",
+    "CTX-003",
+    "TOOL-003",
+    "TOOL-004"
+  ]
+}

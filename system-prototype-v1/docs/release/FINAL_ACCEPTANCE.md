@@ -2,14 +2,36 @@
 
 验收日期为 2026-11-12。交付包含本机 Web GIS 工作台、版本化数据资产和方法目录、方案生成与独立确认、真实 QGIS/Python 执行、取消与重试、输入/过程/成果检查、成果下载与地图查询、模型辅助与手工入口，以及源码、样本、测试和使用文档。[启动说明](../../README.md) · [工作台操作](../user-guide/workbench.md) · [源码与证据指纹清单](../../artifacts/reports/final/delivery-manifest.json)
 
+## V1 验收台账对账
+
+V1 审计基线提交：`80d724f35fba31cacb9d3f740265b2713c6be6f4`。以下统计由 P12-02 从该基线的需求矩阵、固定用例台账及任务看板逐行核对，属于 V1 历史签收。 [P12 审计基线](../round2/audit/baseline.md) · [对账记录](../round2/audit/p12-02.md)
+
+| 台账 | 总数 | 历史状态 |
+|---|---|---|
+| V2.0 通用需求 | 40 | 40 PASS、0 PARTIAL、0 NOT_IMPLEMENTED |
+| T01–T16 固定用例 | 16 | 16 PASS、0 FAIL、0 NOT_RUN |
+| P0–P11 原子任务 | 122 | 122 ACCEPTED |
+
+P11 初次验收记录了 36 PASS、4 PARTIAL。后续补齐将 CTX-001、CTX-003、TOOL-003、TOOL-004 逐项签收为 PASS，矩阵更新到 40 PASS。固定用例和任务统计分别取自对应台账。 [需求矩阵](../traceability/requirements-matrix.md) · [四项补齐](../acceptance/traceability-follow-up.md) · [固定用例台账](../acceptance/FIXED_CASES.md) · [任务看板](../../plans/06_PROGRESS/TASK_BOARD.md)
+
+| V1 历史验证轮次 | 后端测试 | 前端测试 |
+|---|---|---|
+| P11 初次验收 | 1,595 项全量通过，另 1 项新增端到端通过 | 66 项通过 |
+| 四项需求补齐 | 1,646 项通过 | 67 项通过 |
+| 道路缓冲统计 v3 | 1,670 个唯一用例最终通过 | 68 项通过 |
+
+这些数字对应各轮的收集范围及复验时点。道路 v3 保留分组回归、失败记录及修后专项复跑。P12 的后端、前端、固定用例独立回归分别在 P12-05、P12-06、P12-07 记录实际命令和原始结果。 [四项补齐](../acceptance/traceability-follow-up.md) · [道路 v3 结果](../acceptance/road-geodesic-workflow.md) · [道路 v3 覆盖核对](../../artifacts/smoke/road-workflow/coverage.json) · [道路 v3 前端 JUnit](../../artifacts/test-results/road-workflow-frontend-junit.xml)
+
 ## 验收范围和结果
+
+下表保留 P11 初次验收统计及当时的证据引用。
 
 | 范围 | 实际结果 |
 |---|---|
 | P0–P11 开发计划 | 122 项原子任务全部签收，详见各阶段证据。 [任务看板](../../plans/06_PROGRESS/TASK_BOARD.md) · [P11 阶段记录](../acceptance/P11.md) |
 | V2.0 通用需求 | 40 条逐项映射，36 PASS、4 PARTIAL、0 NOT_IMPLEMENTED。 [需求矩阵](../traceability/requirements-matrix.md) |
-| T01–T16 | 16 PASS、0 FAIL、0 NOT_RUN。本轮固定用例组合共 122 项参数化和辅助断言通过。 [固定用例复跑](../acceptance/P11-02.md) |
-| 后端 | 全量套件 1,595 项通过。随后新增的端到端测试单独实跑 1 项通过，合计覆盖当前 1,596 个后端用例，0 失败、0 错误、0 跳过。 [全量 JUnit](../../artifacts/test-results/p11-complete-backend-junit.xml) · [新增端到端 JUnit](../../artifacts/test-results/p11-05-junit.xml) |
+| T01–T16 | 16 PASS、0 FAIL、0 NOT_RUN。P11 固定用例组合共 122 项参数化和辅助断言通过。 [固定用例复跑](../acceptance/P11-02.md) |
+| 后端 | 全量套件 1,595 项通过。随后新增的端到端测试单独实跑 1 项通过，合计覆盖 P11 的 1,596 个后端用例，0 失败、0 错误、0 跳过。 [全量 JUnit](../../artifacts/test-results/p11-complete-backend-junit.xml) · [新增端到端 JUnit](../../artifacts/test-results/p11-05-junit.xml) |
 | 前端 | 14 个测试文件、66 项通过，0 失败、0 跳过。TypeScript 校验及 Vite 生产构建通过。栅格点击修复前曾出现 1 项失败，已保留原始证据并用真实浏览器复验。 [接口审计](../acceptance/interface-audit.md) · [修后 JUnit](../../artifacts/test-results/p11-04-frontend-junit.xml) |
 | 净目录启动 | 新 Python venv、新 npm 依赖及空 SQLite 启动通过，专项后端 42 项和交付版本前端 66 项通过。空库实际执行七步道路样例，重开三个下载成果。 [净目录报告](../acceptance/P11-07.md) |
 
@@ -27,7 +49,7 @@
 
 ## 已知限制
 
-- 需求矩阵中的四项部分实现涉及任务语义和范围参与资产候选筛选、角色快照汇总缺字段与不交叠原因、通用工具的栅格 NoData 前置声明、工具级规则自动进入方案。 [需求矩阵](../traceability/requirements-matrix.md)
+- P11 初验的四项需求差距已在 V1 后续补齐中签收。 [四项补齐](../acceptance/traceability-follow-up.md)
 - 椭球缓冲独立工具通过 T04，初次验收时正式道路 v2 接入局部投影，v1 保留为目录结构示例。后续 v3 已完成双模式工作台验收。 [矢量阶段](../acceptance/P6.md) · [后续验收](../acceptance/road-geodesic-workflow.md)
 - 栅格地图预览以单张最长边 1024 像元的图像显示。跨反经线且无法单图表达的范围返回明确状态。遥感定标依赖五个配置中的精确版本，未知版本在确认前阻断。 [栅格预览](../acceptance/P7.md) · [遥感配置与操作](../user-guide/workbench.md)
 - 本机部署按单用户和回环地址验证，Ollama 与 PostGIS 需单独配置。PostGIS 运行读取已登记的本地版本，强制终止导出可能留下未登记文件。 [启动说明](../../README.md) · [可选数据源](../acceptance/P10.md)
@@ -41,9 +63,10 @@
 export GEOPILOT_QGIS_PROCESS="$PWD/.environments/qgis-deb/qgis_process"
 export PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1
 python -m pytest -q -p no:cacheprovider
+python scripts/quality/validate_acceptance_consistency.py
 python scripts/validate_traceability.py
 (cd frontend && npm test -- --run && npm run build)
 python artifacts/reports/final/delivery_manifest.py
 ```
 
-本项新增本报告、P11 阶段签收、可验证交付清单和标准库脚本，更新任务看板、验收日志与最终清单。源工作区缺少 Git 元数据，使用清单的确定性 SHA-256 记录该版代码、配置、测试和关键证据。清单文件路径均相对于原型目录。[交付清单](../../artifacts/reports/final/delivery-manifest.json)
+P11 交付时的源工作区缺少 Git 元数据，清单用确定性 SHA-256 记录该版代码、配置、测试和关键证据。清单文件路径均相对于原型目录。P12 在 Git 审计基线上保留原清单和历史链接，缺失证据及清单差异由 P12-03 和 P12-04 记录。 [交付清单](../../artifacts/reports/final/delivery-manifest.json)
