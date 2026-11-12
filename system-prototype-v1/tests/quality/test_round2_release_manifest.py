@@ -18,6 +18,11 @@ VERIFIER = "scripts/quality/verify_delivery_manifest.py"
 VALIDATOR = "scripts/quality/run_round2_validation.py"
 REPORT_DIR = f"{PROTOTYPE}/artifacts/reports/final/round2-validation"
 REPRODUCTION = f"{PROTOTYPE}/docs/release/reproduction.md"
+PERFORMANCE_REPORT = "docs/release/accepted-performance.md"
+PERFORMANCE_METHOD = "docs/release/area-method.MD"
+PERFORMANCE_RAW = "docs/release/accepted-performance-raw.json"
+HISTORICAL_RAW = "docs/release/old-output.json"
+LINK_AUDIT = "docs/round2/audit/evidence-link-audit.csv"
 FIXED_MAPPING = "docs/round2/audit/p12-07-mapping.json"
 FIXED_NODES = [
     f'<testcase classname="tests.test_fixed" name="test_case[T{index:02}]" />' for index in range(1, 17)
@@ -69,6 +74,9 @@ def delivery(tmp_path):
     for path, content in files.items():
         _write(root, path, content)
     _write(repo, ".gitignore", ".environments/\n")
+    _write(root, LINK_AUDIT, "commit,source,line,kind,target,status,resolved,note\n"
+           f"fixture,{PROTOTYPE}/{PERFORMANCE_METHOD},6,markdown,old-output.json,"
+           f"untracked_run_output,{PROTOTYPE}/{HISTORICAL_RAW},Historical test output\n")
     _write(root, FIXED_MAPPING, json.dumps({
         "fixed_cases": {
             case_id: {"nodes": [{"id": f"tests/test_fixed.py::test_case[{case_id}]"}]}
@@ -357,3 +365,61 @@ def test_validation_refuses_a_conflicting_managed_qgis(validation_checkout):
     result = _invoke(root, VALIDATOR, *options)
     assert result.returncode == 1 and "managed QGIS executable different" in result.stderr
     assert not output.exists()
+
+
+def _write_linked_evidence(root, receipt):
+    receipt["evidence"].append(f"{PROTOTYPE}/{PERFORMANCE_REPORT}")
+    _write(root, RECEIPT, json.dumps(receipt))
+    _write(root, PERFORMANCE_REPORT, "# Performance\n\n"
+           "[Method](area-method.MD#raw-evidence)\n[Configuration](../../config)\n")
+    _write(root, PERFORMANCE_METHOD, "# Method\n\n## Raw Evidence\n"
+           "[Raw data](accepted-performance-raw.json#L1)\n[This section](#raw-evidence)\n"
+           "[Historical](old-output.json)\n")
+    _write(root, PERFORMANCE_RAW, '{"observed":true}\n')
+
+
+def test_selected_evidence_links_are_closed_in_the_archive_and_offline(delivery, tmp_path):
+    repo, root, source, _, receipt = delivery
+    _write_linked_evidence(root, receipt)
+    archive_path = tmp_path / "linked-evidence.tar.gz"
+    generated = _generate(root, source, _commit(repo), "--archive", str(archive_path))
+    assert generated.returncode == 0, generated.stderr
+    extracted = tmp_path / "offline-linked-evidence"
+    with tarfile.open(archive_path) as archive:
+        paths = set(archive.getnames())
+        assert {f"{PROTOTYPE}/{path}" for path in (PERFORMANCE_REPORT, PERFORMANCE_METHOD, PERFORMANCE_RAW, LINK_AUDIT)} <= paths
+        assert f"{PROTOTYPE}/{HISTORICAL_RAW}" not in paths
+        archive.extractall(extracted, filter="data")
+    prototype = extracted / PROTOTYPE
+    checked = _invoke(prototype, VERIFIER, "--round2-manifest", MANIFEST, "--offline-root", str(extracted))
+    assert checked.returncode == 0, checked.stderr
+
+    manifest_path = prototype / MANIFEST
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["evidence"] = [
+        item for item in manifest["evidence"] if item["path"] != f"{PROTOTYPE}/{PERFORMANCE_RAW}"
+    ]
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    (prototype / PERFORMANCE_RAW).unlink()
+
+    rejected = _invoke(prototype, VERIFIER, "--round2-manifest", MANIFEST, "--offline-root", str(extracted))
+    assert rejected.returncode == 1
+    assert f"committed regular file: {PROTOTYPE}/{PERFORMANCE_RAW}" in rejected.stderr
+
+
+@pytest.mark.parametrize(("link", "diagnosis"), [
+    ("[Wrong heading](area-method.MD#missing)", "Missing reproduction anchor"),
+    ("[Wrong line](accepted-performance-raw.json#L2)", "Missing reproduction anchor"),
+    ("[Empty]()", "Empty reproduction link"),
+    ("[New missing](new-output.json)", "committed regular file"),
+    ("[Historical link from another source](old-output.json)", "committed regular file"),
+    ("[Outside](../../../../outside.json)", "Unsafe repository-relative file path"),
+])
+def test_selected_evidence_rejects_invalid_links(delivery, link, diagnosis):
+    repo, root, source, _, receipt = delivery
+    _write_linked_evidence(root, receipt)
+    report = root / PERFORMANCE_REPORT
+    report.write_text(report.read_text(encoding="utf-8") + link + "\n", encoding="utf-8")
+
+    rejected = _generate(root, source, _commit(repo))
+    assert rejected.returncode == 1 and diagnosis in rejected.stderr

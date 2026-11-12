@@ -1,0 +1,12 @@
+37cc741ed7446e617416156737b8212a48e5e7e9
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+Original Git fixture with two evidence links:
+{"generate_exit": 0, "offline_exit": 0, "offline_status": "matched", "archive_membership": {"system-prototype-v1/docs/release/round2-acceptance.md": true, "system-prototype-v1/docs/release/capacity-report.md": false, "system-prototype-v1/docs/release/raw-capacity.json": false}}
+Candidate Git fixture with the same two evidence links:
+{"generate_exit": 0, "offline_exit": 0, "offline_status": "matched", "archive_membership": {"system-prototype-v1/docs/release/round2-acceptance.md": true, "system-prototype-v1/docs/release/capacity-report.md": true, "system-prototype-v1/docs/release/raw-capacity.json": true}}
+nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider tests/quality/test_round2_release_manifest.py tests/quality/test_doc_evidence_links.py tests/quality/test_delivery_manifest.py tests/quality/test_ci_matrix.py --basetemp=<temp>/pytest --junitxml=docs/round2/deployment/p16-06-links-junit.xml
+............................................................             [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/deployment/p16-06-links-junit.xml -
+60 passed in 10.49s
+Candidate pytest exit: 0

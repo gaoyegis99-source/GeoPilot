@@ -30,7 +30,7 @@ git -C "$release_repo" worktree add --detach "$release_staging/source" "$release
 | `evidence` | 纳入候选包的正式验收、样本复核、性能及部署记录路径 |
 | `reproduction` | 候选包需要校验本地链接的 Markdown 复现材料路径 |
 
-回执路径相对 Git 根目录。生成器核对日志的源提交、实际命令和最终退出行，读取 JUnit 实际结果并与后端完整收集逐节点比对。固定 GIS 报告须为 T01–T16 映射逐个提供唯一节点。后端和前端报告中的跳过独立计数，发布评估根据原始 JUnit 核对原因。生成器检查列入复现清单的文档及其直接本地链接。回归测试使用的计划、历史审计材料、模板和合成记录随源码固定。离线验证重读日志、后端收集记录和固定 GIS 映射。
+回执路径相对 Git 根目录。生成器核对日志的源提交、实际命令和最终退出行，读取 JUnit 实际结果并与后端完整收集逐节点比对。固定 GIS 报告须为 T01–T16 映射逐个提供唯一节点。后端和前端报告中的跳过独立计数，发布评估根据原始 JUnit 核对原因。生成器递归核对复现文档和选定证据 Markdown 的本地链接，将链接到的已提交文件纳入归档。新缺链或无效锚点会使生成失败。P12-03 已登记的历史未入库输出和已移除文件按原文档及链接目标精确匹配，缺口可从包内审计清单追溯。回归测试使用的计划、历史审计材料、模板和合成记录随源码固定。 [历史链接审计](../round2/audit/p12-03-review.md)
 
 ## 生成与检验
 
@@ -45,7 +45,7 @@ git -C "$release_repo" worktree add --detach "$release_staging/source" "$release
 sha256sum /path/to/geopilot-round2.tar.gz artifacts/reports/final/round2-delivery-manifest.json
 ```
 
-离线主机先核对交付方公布的归档 SHA-256，在空目录解包。可用可信的校验脚本对解包根目录逐文件复核，无需 Git 历史。离线验证同时重读归档内的日志和 JUnit。
+离线主机先核对交付方公布的归档 SHA-256，在空目录解包。可用可信的校验脚本对解包根目录逐文件复核，无需 Git 历史。离线验证从已校验的回执重新追踪本地证据链接，并重读归档内的日志、JUnit、后端收集记录和固定 GIS 映射。
 
 ```bash
 mkdir /path/to/round2-extracted

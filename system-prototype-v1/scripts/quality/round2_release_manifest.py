@@ -1,5 +1,6 @@
 """Bind a second-round delivery to immutable source and validation evidence."""
 
+import csv
 import gzip
 import io
 import json
@@ -8,18 +9,20 @@ import re
 import shlex
 import tarfile
 from collections import Counter
+from collections.abc import Callable
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree
 
 from build_source_inventory import git
-from check_doc_evidence_links import heading_anchors, references
+from check_doc_evidence_links import LINE_ANCHOR, heading_anchors, references
 from verify_delivery_manifest import committed_file_states, committed_files, read_records, sha256, worktree_file_state
 
 
 MANIFEST = Path("artifacts/reports/final/round2-delivery-manifest.json")
 RECEIPT = "artifacts/reports/final/round2-validation.json"
 _FIXED_GIS_MAPPING = "docs/round2/audit/p12-07-mapping.json"
+_LINK_AUDIT = "docs/round2/audit/evidence-link-audit.csv"
 _SOURCE_DIRECTORIES = (
     "src", "config", "frontend", "scripts", "tests", "benchmarks", "artifacts/schemas",
     "plans", "plans-round2", "docs/round2/audit", "artifacts/test-results/round2",
@@ -250,28 +253,84 @@ def _paths(value: object, label: str) -> set[str]:
     return paths
 
 
-def _reproduction_links(repo: Path, tree: dict, documents: set[str]) -> set[str]:
+def _directories(files: set[str]) -> set[str]:
+    return {parent.as_posix() for path in files for parent in PurePosixPath(path).parents}
+
+
+def _historical_links(audit: bytes | None) -> set[tuple[str, str, str]]:
+    if audit is None:
+        return set()
+    rows = csv.DictReader(io.StringIO(audit.decode("utf-8"), newline=""))
+    return {
+        (row["source"], row["target"], row["resolved"])
+        for row in rows
+        if row["kind"] == "markdown" and row["status"] in {"untracked_run_output", "removed_from_tree"}
+    }
+
+
+def _reproduction_links(
+    documents: set[str], available: set[str], packaged: set[str], read: Callable[[str], bytes],
+    historical: set[tuple[str, str, str]],
+) -> set[str]:
+    """Follow the checked-in local links reachable from reproduction and evidence documents."""
     linked = set()
-    for source in sorted(documents):
-        if not source.endswith(".md"):
+    pending = sorted(documents)
+    visited = set()
+    available_directories = _directories(available)
+    linked_directories = {}
+    while pending:
+        source = pending.pop()
+        if source in visited:
+            continue
+        visited.add(source)
+        if not source.lower().endswith(".md"):
             raise ValueError(f"Expected a Markdown reproduction document: {source}")
-        content = _read_file(repo, tree, source).decode("utf-8")
+        content = read(source).decode("utf-8")
         for ref in references(source, content):
             if ref.kind != "markdown":
                 continue
+            if not ref.target:
+                raise ValueError(f"Empty reproduction link: {source}:{ref.line}")
             url = urlsplit(ref.target)
             if url.scheme in {"http", "https"}:
                 continue
             if url.scheme or url.netloc:
                 raise ValueError(f"Unsupported reproduction link: {source}:{ref.line}")
-            path = unquote(url.path)
-            target = posixpath.normpath(posixpath.join(posixpath.dirname(source), path)) if path else source
-            blob = _read_file(repo, tree, _file_path(target))
+            path = re.sub(r"\\([() ])", r"\1", unquote(url.path))
+            target = _file_path(posixpath.normpath(posixpath.join(posixpath.dirname(source), path)) if path else source)
             anchor = unquote(url.fragment)
-            if anchor and target.endswith(".md") and anchor not in heading_anchors(blob.decode("utf-8")):
-                raise ValueError(f"Missing reproduction anchor: {source}:{ref.line} {ref.target}")
+            if target not in available:
+                if target in available_directories and not anchor:
+                    linked_directories[target] = (source, ref.line)
+                    continue
+                if target not in available_directories and (source, ref.target, target) in historical:
+                    continue
+                raise ValueError(f"Delivery requires a committed regular file: {target} ({source}:{ref.line})")
+            if anchor:
+                if line_range := LINE_ANCHOR.fullmatch(anchor):
+                    first, last = int(line_range[1]), int(line_range[2] or line_range[1])
+                    if not first <= last <= len(read(target).splitlines()):
+                        raise ValueError(f"Missing reproduction anchor: {source}:{ref.line} {ref.target}")
+                elif target.lower().endswith(".md") and anchor not in heading_anchors(read(target).decode("utf-8")):
+                    raise ValueError(f"Missing reproduction anchor: {source}:{ref.line} {ref.target}")
             linked.add(target)
+            if target.lower().endswith(".md") and target not in visited:
+                pending.append(target)
+    for directory in sorted(linked_directories.keys() - _directories(packaged | linked)):
+        source, line = linked_directories[directory]
+        raise ValueError(f"Directory link has no packaged files: {directory} ({source}:{line})")
     return linked
+
+
+def _validation_receipt(data: bytes, source_commit: str) -> dict:
+    receipt = json.loads(data, object_pairs_hook=_json_object)
+    if (
+        not isinstance(receipt, dict) or set(receipt) != {"schema_version", "source_commit", "suites", "evidence", "reproduction"}
+        or type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1
+        or receipt["source_commit"] != source_commit
+    ):
+        raise ValueError("The validation receipt must bind to the exact source commit")
+    return receipt
 
 
 def build_round2_manifest(root: Path, source_ref: str, evidence_ref: str) -> dict:
@@ -289,13 +348,7 @@ def build_round2_manifest(root: Path, source_ref: str, evidence_ref: str) -> dic
     if any(not any(path.startswith(prefix + directory + "/") for path in source_paths) for directory in _SOURCE_DIRECTORIES):
         raise ValueError("A required release source directory is absent")
     receipt_path = prefix + RECEIPT
-    receipt = json.loads(_read_file(repo, evidence_tree, receipt_path), object_pairs_hook=_json_object)
-    if (
-        not isinstance(receipt, dict) or set(receipt) != {"schema_version", "source_commit", "suites", "evidence", "reproduction"}
-        or type(receipt["schema_version"]) is not int or receipt["schema_version"] != 1
-        or receipt["source_commit"] != source_commit
-    ):
-        raise ValueError("The validation receipt must bind to the exact source commit")
+    receipt = _validation_receipt(_read_file(repo, evidence_tree, receipt_path), source_commit)
     mapping_path = prefix + _FIXED_GIS_MAPPING
     suites, suite_evidence = _suites(repo, evidence_tree, receipt, source_commit, _read_file(repo, source_tree, mapping_path))
     reproduction = _paths(receipt["reproduction"], "reproduction")
@@ -303,7 +356,13 @@ def build_round2_manifest(root: Path, source_ref: str, evidence_ref: str) -> dic
     source = _records(repo, source_tree, source_paths)
     index = "".join(f"{entry['sha256']}  {entry['path']}\n" for entry in source)
     evidence_paths = {receipt_path} | suite_evidence | reproduction | selected
-    evidence_paths.update(_reproduction_links(repo, evidence_tree, reproduction) - source_paths)
+    audit_path = prefix + _LINK_AUDIT
+    audit = _read_file(repo, source_tree, audit_path) if audit_path in source_paths else None
+    documents = reproduction | {path for path in selected if path.lower().endswith(".md")}
+    evidence_paths.update(_reproduction_links(
+        documents, set(evidence_tree), source_paths | evidence_paths,
+        lambda path: _read_file(repo, evidence_tree, path), _historical_links(audit),
+    ) - source_paths)
     if prefix + MANIFEST.as_posix() in evidence_paths:
         raise ValueError("A delivery manifest cannot include itself as evidence")
     return {
@@ -387,6 +446,25 @@ def verify_round2_files(root: Path, manifest_path: Path) -> dict:
         state = worktree_file_state(root, path)
         if state is None or state.problem or state.sha256 != digest:
             raise ValueError(f"Extracted delivery bytes differ from manifest: {path}")
+    files = source.keys() | evidence.keys()
+    mapping = manifest["fixed_gis_mapping"]
+    prefix = mapping[:-len(_FIXED_GIS_MAPPING)]
+    receipt_path = prefix + RECEIPT
+    if receipt_path not in evidence:
+        raise ValueError("Validation receipt is missing from the extracted delivery")
+    receipt = _validation_receipt((root / receipt_path).read_bytes(), manifest["source_commit"])
+    reproduction = _paths(manifest.get("reproduction"), "reproduction")
+    if _paths(receipt["reproduction"], "reproduction") != reproduction:
+        raise ValueError("Extracted reproduction documents differ from the validation receipt")
+    selected = _paths(receipt.get("evidence"), "evidence")
+    if not (reproduction | selected) <= files:
+        raise ValueError("Selected evidence or reproduction documents are missing from the extracted delivery")
+    audit_path = prefix + _LINK_AUDIT
+    audit = (root / audit_path).read_bytes() if audit_path in source else None
+    _reproduction_links(
+        reproduction | {path for path in selected if path.lower().endswith(".md")},
+        files, files, lambda path: (root / path).read_bytes(), _historical_links(audit),
+    )
     suites = manifest.get("validation_suites")
     if not isinstance(suites, list):
         raise ValueError("A release manifest requires validation suites")
