@@ -1,0 +1,9 @@
+t13-points-intersects base valid
+t13-points-intersects candidate valid
+t13-lines-within candidate valid
+t13-lines-within base valid
+t14-split_by_area base valid
+t14-split_by_area candidate valid
+road candidate valid
+road base valid
+docker_calls=0 formal_output_created=false validated_commands=8

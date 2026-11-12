@@ -238,6 +238,7 @@
 - B 的原生批次使用冻结的生产提交 `37cb329be04eaddfeb23ac62789926d0fcdb63aa`。道路、T13 面相交和 T14 按面积分割分别完成冷热两类各 2 次预热和 5 次正式采样，批次退出 1，汇总为 42 FAIL、0 PASS、0 NOT_RUN。
 - 主控从 `/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/evidence/samples.jsonl` 核对 42 个唯一运行及各组采样键。道路 14 次在成果登记报 `OUTPUT_INVALID`。T13 和 T14 各 14 次在 `apply_spatial_relation` 报 `PROCESS_TIMEOUT`，退出 -15。T14 的后续两步保持 `NOT_STARTED`。P13-03 仍为 DOING，余下七项继续正式采样。
 - 主控冻结 L 后续批次首 74 条原始样本，独立复核输入、终态、逐步超时及资源覆盖。压缩副本重跑一致，重复 run、无进程超时和正式复核缺样均拒绝。正式汇总待该批 98 次采样完成。 [复算与复跑](../../docs/round2/performance/p13-03-SM-reproduction.md#l-后续批次独立复核)
+- 主控使用完整冻结快照和实际 L 驱动独立复跑矢量专项，18 项通过、0 跳过，退出 0。选择性导出的两次失败及实际命令保留。 [复跑日志](../../docs/round2/performance/p13-03-independent-native-pytest.log) · [JUnit](../../docs/round2/performance/p13-03-independent-native-junit.xml)
 - F 独立复算 S、M、M 续段和首批 L 共 325 个唯一运行，分布及资源计数与归档一致。主控复跑结果逐字节一致，归档 S/M 实际使用的旧驱动并验证解包摘要及 CLI 入口。 [复算与旧驱动归档](../../docs/round2/performance/p13-03-SM-reproduction.md)
 
 ## P13-05 隔离候选检查
@@ -258,6 +259,7 @@
 - 主控两次启动同镜像复核实际绑定、原生 QGIS/GDAL/PROJ 数据和三个算法参数定义，环境指纹逐字节一致。C 在隔离比较器上验证 26 项断言，包含报告字节绑定和两侧配置漂移拒绝。正式全规模复测仍待 P13-03。 [原生环境证据](../../docs/round2/performance/p13-05-preflight-native-identity.json) · [比较器复跑](../../docs/round2/performance/p13-05-preflight-runtime-comparator.log)
 - A 对真实遥感 S 分类做同输入三版面积函数对照，21 次预热和计量均返回相同报告。主控核对文件摘要和五次计量的中位数，布局 71 次检查均无命中。正式方法复测待 P13-03。 [遥感 S 原始记录](../../docs/round2/performance/p13-05-preflight-remote-s.log)
 - C 的采集包装器通过 24 项隔离进程断言，四个完整报告回执通过正式比较器。主控用实际前测与候选的只读源码容器分别采集配置，快照逐字节一致。基准完整接入仍待 P13-03。 [包装器复验](../../docs/round2/performance/p13-05-preflight-runtime-wrapper.log) · [原生采集](../../docs/round2/performance/p13-05-preflight-native-configuration.log)
+- A 固定 M 档八条正式配对命令并通过 dry-run。主控从持久归档重放，生成八条命令且未创建正式目录。 [预演结果](../../docs/round2/performance/p13-05-preflight-vector-m-launch.log)
 
 ## P13-06 复用证据准备
 

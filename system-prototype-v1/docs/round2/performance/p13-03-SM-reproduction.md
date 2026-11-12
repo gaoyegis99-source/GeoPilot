@@ -32,3 +32,5 @@ nice -n 19 taskset -c 31 .venv/bin/python \
 主控从正在写入的原始 JSONL 冻结前 74 条完整记录，与首批 L 的环境和输入清单对照。两批使用相同源提交、驱动、QGIS 和输入摘要。首批与后续记录共有 116 个唯一 run ID。后续的十组已完成全部冷热采样键，其余样本继续采集。点任务在裁剪超时，其余已观测任务在空间关系超时。逐条核对持久终态、计划步骤、进程退出码和资源观测覆盖。 [复核脚本](p13-03-L-continuation-audit.py) · [原始复算结果](p13-03-L-continuation-audit-preview.json)
 
 同一批原始字节压缩归档后重跑输出一致。注入重复 run ID、移除实际进程超时标记，以及用未采完的样本执行正式审计，均退出 1。正式审计还要读取全部 98 条和最终汇总。当前输出状态为 `PREVIEW`。原始压缩样本和命令保存在 `artifacts/test-results/p13-03-L-continuation-audit.wnPNCG/`。 [复跑及异常验证](p13-03-L-continuation-audit.log)
+
+主控把实际 L 驱动及其独立参考代码叠加到 `37cb329` 的完整冻结原型快照，并复跑矢量专项。两次选择性导出分别缺少配方引用的夹具和测试源，均有 16 项通过、2 项失败。改用完整导出后 18 项通过、0 跳过，退出 0。复跑使用原生 QGIS 3.44.15、Python 3.12.3、tmpfs、CPU 31、nice 19 与 idle I/O 优先级。三次实际命令及报告保存在 `artifacts/test-results/p13-03-independent-native.uoGlWa/`。 [复跑日志](p13-03-independent-native-pytest.log) · [JUnit](p13-03-independent-native-junit.xml)
