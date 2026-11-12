@@ -1,5 +1,6 @@
 """Record run cancellation and relay committed intent to local workers."""
 
+import sqlite3
 from pathlib import Path
 
 from geopilot.domain.errors import ErrorDetail
@@ -40,8 +41,17 @@ def request_cancellation(database_path: str | Path, run_id: str) -> tuple[Run, b
 
 def observe_cancellation(database_path: str | Path, run_id: str, workdir: Path, cancel_ref: str) -> bool:
     """Mirror committed cancellation to the cooperative marker used by scripts."""
-    with open_database(database_path, read_only=True) as connection:
-        run = get_run(connection, run_id)
+    try:
+        with open_database(database_path, read_only=True) as connection:
+            # The worker loop retries this observation between waits. A busy
+            # database must not consume the worker's timeout budget here.
+            connection.execute("PRAGMA busy_timeout = 0")
+            run = get_run(connection, run_id)
+    except sqlite3.OperationalError as error:
+        primary_code = getattr(error, "sqlite_errorcode", 0) & 0xFF
+        if primary_code not in (sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED):
+            raise
+        return False
     if run is None or not run.cancel_requested:
         return False
     marker = resolve_step_path(workdir, cancel_ref, field="cancel_path")
