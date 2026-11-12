@@ -86,3 +86,31 @@ B 在主机 Shapely 2.1.2、GEOS 3.13.1 上复跑 54 项裁回及方法回归，
 主控在 `b989cca` 的独立工作树依次重放 `e874a0f`、`a2d2e68`、分区重投影暂存修补 `b126785` 和局部裁回候选，得到组合预演 `d98d22b08cf275a2c52fb905c62fe2e16631a600`。裁回、方法、源身份、受管写入、暂存与取消共 87 项测试通过，0 失败、0 跳过，pytest 退出 0。解包 SHA-256、实际命令和两份 JUnit 均已独立核对。 [分区重投影和暂存复验](p13-05-staging-resources.md#分区重投影与终态回执)
 
 A 按候选精确提交和原五个运行器覆盖文件重建源码，树清单 SHA-256 为 `05258667966a75b5695ca10e9835daf9bb36d050fd8254fdfe95eabef18930e7`。旧版和新版预演均退出 0，Docker 调用为 0。正式候选沿用每个缓存组 2 次预热、5 次计量和 600 秒等待上限，使用新结果根。原版 14 条样本按封存校验和严格自比较只读复用。候选启动已排在遥感 S、DEM M、DEM L 和遥感 L 四组后，取得共用测量锁后开始。正式命令及预演原始输出在候选证据归档的 `launcher/`。 [启动器、源码清单及预演回执](p13-05-t14-local-clip-evidence.tar.gz)
+
+## T14 局部裁回候选冷态
+
+候选于 16:56:12 UTC 启动。原生 Python 3.12.3、QGIS 3.44.15 与 `/dev/sdb1` ext4 沿用冻结配对环境。正式源码清单与预演摘要一致，输入清单与原版及冻结修正版逐字节相同。两次冷预热和五次正式计量均为 `SUCCEEDED/PASSED`，三步退出码均为 0。每轮筛选 131,072 条、裁回 114,688 条，按 32,768 个区汇总 98,304 个对象，产生 147,456 条分配明细，总面积 36,044,800 m²。 [冷态原始记录、环境和独立复算](p13-05-t14-local-clip-cold-evidence.tar.gz)
+
+| 五次正式计量 | 中位数，秒 | P95，秒 |
+| --- | ---: | ---: |
+| 端到端 | 68.182 | 69.035 |
+| 空间关系筛选 | 7.277 | 7.533 |
+| 裁回 | 15.984 | 16.227 |
+| 按区汇总 | 31.786 | 32.389 |
+
+整轮 RSS 两次完整、三次部分采样，裁回 RSS 四次完整、一次部分采样。五次临时空间均有完整采样，峰值中位数／P95 为 309,053,477／319,399,909 字节。原版冷组五次在筛选步超时，冻结修正版冷组五次在裁回步超时，两侧成功分位及成功耗时差值留空。正式候选的暖组已接续。
+
+基准在冷态 worker 退出后清理临时工作区，保留逐轮检查、独立几何验算与四个登记指纹。主控从封存输入的逐块参考直接重建 7,094,321 字节的分配 CSV 和 8,602,009 字节的分区 JSON，计算出的内容文件组指纹与七轮登记一致。同一方法对 M 档封存配对的两侧 28 轮也全部匹配。篡改隔离副本中一个登记指纹后，复算拒绝该副本，退出 1。B 从原始记录独立核对几何验算、三步日志与资源采样，复算退出 0。完整单侧回执及前后配对待暖组终态。 [M 档正式复测](p13-05-vector-m-revised.md)
+
+```bash
+p13_t14_cold=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-t14-local-clip-cold-evidence.tar.gz -C "$p13_t14_cold"
+(cd "$p13_t14_cold" && sha256sum -c SHA256SUMS)
+PYTHONPATH="$p13_t14_cold/source" .venv/bin/python -B \
+  "$p13_t14_cold/verify_t14_cold.py" "$p13_t14_cold" > "$p13_t14_cold/replay.json"
+cmp "$p13_t14_cold/replay.json" "$p13_t14_cold/cold-replayed.json"
+PYTHONPATH="$p13_t14_cold/source" .venv/bin/python -B \
+  "$p13_t14_cold/check-m-reference.py" docs/round2/performance/p13-05-vector-m-revised-evidence.tar.gz \
+  > "$p13_t14_cold/m-replayed.json"
+cmp "$p13_t14_cold/m-replayed.json" "$p13_t14_cold/m-reference.json"
+```
