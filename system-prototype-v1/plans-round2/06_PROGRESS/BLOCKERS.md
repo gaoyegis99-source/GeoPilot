@@ -83,3 +83,5 @@ P13-05 在回执写入异常和清理同时失败、或启动子进程前强制�
 P13-05 已集成四项有实测支持的修复。主机回归有 13 项依赖 psycopg、9 项依赖原生 QGIS 而跳过，正式同提交验证仍待最终源码。冻结状态查询记录的相邻关系只可依据显式中止日志，现行采集器已补序号。 [集成回归](../../docs/round2/performance/p13-05-staging-resources.md#四项性能修复集成) · [冻结记录边界](../../docs/round2/performance/p13-05-runner-reproducibility.md#状态查询失败序号)
 
 宿主回归跳过的 22 项已在原生 QGIS 或真实 PostGIS 的独立环境中复跑通过。P16-06 当前集成提交前端通过、后端执行预演已启动，正式交付仍待最终同提交回执。 [原生复跑](../../docs/round2/performance/p13-05-staging-resources.md#宿主跳过节点的原生复跑) · [验证预演](../../docs/round2/deployment/p16-06-tooling.md#集成提交的前端与后端收集预验)
+
+P16-06 后端预演发现 P14 版本兼容三处固定断言落后于路网试点。专项修正已验证，完整后端与固定 GIS 仍需复跑。 [复现与修正](../../docs/round2/methods/p14-06.md#基线版本数量的回归修正)

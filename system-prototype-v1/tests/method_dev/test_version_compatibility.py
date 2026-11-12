@@ -25,6 +25,20 @@ def candidate(tmp_path):
     return tmp_path
 
 
+@pytest.fixture(scope="module")
+def baseline_version_count():
+    versions = set()
+    for family in ("methods", "tools", "sensors"):
+        for path in (ROOT / "config" / family).iterdir():
+            if not path.is_file() or path.suffix not in {".yaml", ".yml"}:
+                continue
+            document = yaml.safe_load(path.read_bytes())
+            version = (family, document["id"], document["version"])
+            assert version not in versions, version
+            versions.add(version)
+    return len(versions)
+
+
 def compare(candidate, *, baseline=ROOT):
     result = subprocess.run([
         sys.executable, str(CLI), "--baseline", str(baseline), "--candidate", str(candidate),
@@ -50,17 +64,17 @@ def subject(family, identifier, version):
     return {"family": family, "id": identifier, "version": version}
 
 
-def test_unchanged_registry_passes_without_qgis_probe(candidate):
+def test_unchanged_registry_passes_without_qgis_probe(candidate, baseline_version_count):
     before = {path: path.read_bytes() for path in candidate.rglob("*.yaml")}
     report = compare(candidate)
 
     assert report == {
-        "schema_version": 1, "status": "PASS", "preserved_versions": 54, "added": [], "issues": [],
+        "schema_version": 1, "status": "PASS", "preserved_versions": baseline_version_count, "added": [], "issues": [],
     }
     assert {path: path.read_bytes() for path in candidate.rglob("*.yaml")} == before
 
 
-def test_file_rename_and_yaml_formatting_keep_the_exact_version(candidate):
+def test_file_rename_and_yaml_formatting_keep_the_exact_version(candidate, baseline_version_count):
     method = load(candidate, METHOD)
     (candidate / "config" / METHOD).unlink()
     write(candidate, "methods/renamed.yml", method)
@@ -68,10 +82,10 @@ def test_file_rename_and_yaml_formatting_keep_the_exact_version(candidate):
     report = compare(candidate)
 
     assert report["status"] == "PASS"
-    assert report["preserved_versions"] == 54 and not report["added"]
+    assert report["preserved_versions"] == baseline_version_count and not report["added"]
 
 
-def test_additive_versions_preserve_historical_method_and_sensor_lookup(candidate):
+def test_additive_versions_preserve_historical_method_and_sensor_lookup(candidate, baseline_version_count):
     method = load(candidate, METHOD)
     method["version"] = 4
     write(candidate, "methods/road-buffer-statistics.v4.yaml", method)
@@ -84,7 +98,7 @@ def test_additive_versions_preserve_historical_method_and_sensor_lookup(candidat
 
     report = compare(candidate)
 
-    assert report["status"] == "PASS" and report["preserved_versions"] == 54
+    assert report["status"] == "PASS" and report["preserved_versions"] == baseline_version_count
     assert report["added"] == [
         subject("method", method["id"], 4), subject("sensor", sensor["id"], 2), subject("tool", tool["id"], 2),
     ]
