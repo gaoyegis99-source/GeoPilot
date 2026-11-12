@@ -7,11 +7,11 @@
 | P12-03 | P12 | 文档与证据链接完整性扫描 | F | P12-01 | ACCEPTED | [扫描与人工复核](../../docs/round2/audit/p12-03-review.md) |
 | P12-04 | P12 | 交付 Manifest 完整性校验 | A/F | P12-01、P12-03 | ACCEPTED | [严格校验与逐文件差异](../../docs/round2/audit/p12-04.md) |
 | P12-05 | P12 | 后端全量回归复跑 | F | P12-01、P12-02；QGIS CLI 可用 | REWORK | [首次全量失败与补跑](../../docs/round2/audit/p12-05.md) |
-| P12-06 | P12 | 前端测试与构建基线 | E/F | P12-01 | TODO | 待执行 |
+| P12-06 | P12 | 前端测试与构建基线 | E/F | P12-01 | DOING | Agent E/F（独立 V1 工作树） |
 | P12-07 | P12 | T01—T16 固定用例独立复跑 | B/F | P12-05；QGIS CLI 可用 | TODO | 待执行 |
 | P12-08 | P12 | GitHub Actions 分层 CI | F/主控 | P12-05、P12-06；依赖策略冻结 | TODO | 待执行 |
-| P12-09 | P12 | 配置与 Schema 漂移检查 | C/F | P12-01 | TODO | 待执行 |
-| P12-10 | P12 | 调度单活动约束与并发安全审计 | D/F | P12-01 | TODO | 待执行 |
+| P12-09 | P12 | 配置与 Schema 漂移检查 | C/F | P12-01 | DOING | Agent C/F（配置与模型校验） |
+| P12-10 | P12 | 调度单活动约束与并发安全审计 | D/F | P12-01 | DOING | Agent D/F（源码审计与专项回归） |
 | P12-11 | P12 | 数据规模与性能基准方案 | B/F/A | P12-01、P12-05 | TODO | 待执行 |
 | P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | TODO | 待执行 |
 | P13-01 | P13 | GIS 数据规模分级生成器 | B/F | P12-11 | TODO | 待执行 |
