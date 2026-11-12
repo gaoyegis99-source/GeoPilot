@@ -1,0 +1,34 @@
+python-road-network-shortest-path version 1 (python)
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.network.path","severity":"blocking","passed":true,"observed":{"path":"inputs/0001/source.gpkg","layer":"roads"},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.network","severity":"blocking","passed":true,"observed":"LineString","expected":"vector_line","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.network.bounds","severity":"blocking","passed":true,"observed":[500000.0,3500000.0,500075.0,3500000.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"crs_is_known","phase":"input","field":"inputs.network.crs","severity":"blocking","passed":true,"observed":"EPSG:32650","expected":"Known declared CRS","message":"Input CRS is known"}
+input_check: {"rule":"horizontal_unit_is_meter","phase":"input","field":"inputs.network.crs.unit","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","unit":"metre","metres_per_unit":1.0},"expected":"meter","message":"Horizontal axes use metres"}
+input_check: {"rule":"projected_crs_suitable_for_extent","phase":"input","field":"inputs.network.crs","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","bounds":[500000.0,3500000.0,500075.0,3500000.0],"unit":"meter"},"expected":{"method":"local_projected","unit":"meter"},"message":"Measurement policy is suitable for the input extent"}
+input_check: {"rule":"geometry_is_valid","phase":"input","field":"inputs.network.geometry","severity":"blocking","passed":true,"observed":{"feature_count":2,"invalid_count":0,"invalid_fids":[]},"expected":"Valid nonempty geometry in every feature","message":"Input feature geometries are valid"}
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.start.path","severity":"blocking","passed":true,"observed":{"path":"inputs/0002/source.geojson","layer":null},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.start","severity":"blocking","passed":true,"observed":"Point","expected":"vector_point","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.start.bounds","severity":"blocking","passed":true,"observed":[499997.0,3500004.0,499997.0,3500004.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"crs_is_known","phase":"input","field":"inputs.start.crs","severity":"blocking","passed":true,"observed":"EPSG:32650","expected":"Known declared CRS","message":"Input CRS is known"}
+input_check: {"rule":"horizontal_unit_is_meter","phase":"input","field":"inputs.start.crs.unit","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","unit":"metre","metres_per_unit":1.0},"expected":"meter","message":"Horizontal axes use metres"}
+input_check: {"rule":"projected_crs_suitable_for_extent","phase":"input","field":"inputs.start.crs","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","bounds":[499997.0,3500004.0,499997.0,3500004.0],"unit":"meter"},"expected":{"method":"local_projected","unit":"meter"},"message":"Measurement policy is suitable for the input extent"}
+input_check: {"rule":"geometry_is_valid","phase":"input","field":"inputs.start.geometry","severity":"blocking","passed":true,"observed":{"feature_count":1,"invalid_count":0,"invalid_fids":[]},"expected":"Valid nonempty geometry in every feature","message":"Input feature geometries are valid"}
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.end.path","severity":"blocking","passed":true,"observed":{"path":"inputs/0003/source.geojson","layer":null},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.end","severity":"blocking","passed":true,"observed":"Point","expected":"vector_point","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.end.bounds","severity":"blocking","passed":true,"observed":[500063.0,3500004.0,500063.0,3500004.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"crs_is_known","phase":"input","field":"inputs.end.crs","severity":"blocking","passed":true,"observed":"EPSG:32650","expected":"Known declared CRS","message":"Input CRS is known"}
+input_check: {"rule":"horizontal_unit_is_meter","phase":"input","field":"inputs.end.crs.unit","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","unit":"metre","metres_per_unit":1.0},"expected":"meter","message":"Horizontal axes use metres"}
+input_check: {"rule":"projected_crs_suitable_for_extent","phase":"input","field":"inputs.end.crs","severity":"blocking","passed":true,"observed":{"crs":"EPSG:32650","bounds":[500063.0,3500004.0,500063.0,3500004.0],"unit":"meter"},"expected":{"method":"local_projected","unit":"meter"},"message":"Measurement policy is suitable for the input extent"}
+input_check: {"rule":"geometry_is_valid","phase":"input","field":"inputs.end.geometry","severity":"blocking","passed":true,"observed":{"feature_count":1,"invalid_count":0,"invalid_fids":[]},"expected":"Valid nonempty geometry in every feature","message":"Input feature geometries are valid"}
+input_check: {"rule":"input_crs_match","phase":"input","field":"inputs.crs","severity":"blocking","passed":true,"observed":{"network":"EPSG:32650","start":"EPSG:32650","end":"EPSG:32650"},"expected":"Same known CRS across spatial inputs","message":"Spatial input CRS match"}
+measurement: {"role": "network", "method": "local_projected", "crs": "EPSG:32650", "unit": "meter"}
+measurement: {"role": "start", "method": "local_projected", "crs": "EPSG:32650", "unit": "meter"}
+measurement: {"role": "end", "method": "local_projected", "crs": "EPSG:32650", "unit": "meter"}
+$ /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python /tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/src/geopilot/gis/tools/road_network_shortest_path.py --request steps/solve_shortest_route/request.json --result steps/solve_shortest_route/python-result.json
+stdout:
+
+stderr:
+Tool failed: The snapped start and end nodes are disconnected
+
+exit_code: 1
+execute: PROCESS_FAILED: Process exited with code 1

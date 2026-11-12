@@ -1,0 +1,36 @@
+{
+  "run": {
+    "run_id": "5bfe1cadc7304bb89f93637617f49cf9",
+    "execution_status": "FAILED",
+    "check_status": "NOT_CHECKED",
+    "current_step": "solve_shortest_route",
+    "cancel_requested": false,
+    "error": {
+      "code": "PROCESS_FAILED",
+      "phase": "execute",
+      "step_key": "solve_shortest_route",
+      "field": null,
+      "message": "Process exited with code 1",
+      "suggestion": "Check the step inputs, local tool and process log.",
+      "log_path": "steps/solve_shortest_route/process.log",
+      "observed": null
+    },
+    "current_report_id": null
+  },
+  "artifacts": {
+    "run_id": "5bfe1cadc7304bb89f93637617f49cf9",
+    "check_status": "NOT_CHECKED",
+    "artifacts": [],
+    "diagnostics": [
+      {
+        "step_key": "solve_shortest_route",
+        "role": "process_log",
+        "type": "log",
+        "path": "steps/solve_shortest_route/process.log",
+        "layer": null,
+        "readable": true
+      }
+    ]
+  },
+  "process_log": "/dev/shm/geopilot-p14-08-tests.4eU1f5/test_workbench_preserves_disco0/workspace/tasks/4fdc8b4681bb450d98dd5199c6342f1d/runs/5bfe1cadc7304bb89f93637617f49cf9/steps/solve_shortest_route/process.log"
+}

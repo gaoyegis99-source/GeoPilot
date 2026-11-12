@@ -1,0 +1,40 @@
+{
+  "run": {
+    "run_id": "734559e9e3d3412882e8f507b664ae6e",
+    "execution_status": "SUCCEEDED",
+    "check_status": "PASSED",
+    "current_step": "solve_shortest_route",
+    "cancel_requested": false,
+    "error": null,
+    "current_report_id": "307e75b3159d4392a0e1c92367c8fb3f"
+  },
+  "artifact_endpoint": "/api/artifacts/456a9433e46f4098a354f5d216c6ef9c/file",
+  "http_status": 200,
+  "sha256": "70a1dc32bd3d890b9b45fed382acc302a85fee9d024f27cbdaa652214be947a2",
+  "summary": {
+    "schema_version": 1,
+    "crs": "EPSG:32650",
+    "distance_unit": "meter",
+    "snap_tolerance_m": 5.0,
+    "start": {
+      "node_xy": [
+        500000.0,
+        3500000.0
+      ],
+      "offset_m": 5.0
+    },
+    "end": {
+      "node_xy": [
+        500060.0,
+        3500000.0
+      ],
+      "offset_m": 5.0
+    },
+    "edge_ids": [
+      "west",
+      "east"
+    ],
+    "total_distance_m": 60.0
+  },
+  "project_tree_unchanged": true
+}

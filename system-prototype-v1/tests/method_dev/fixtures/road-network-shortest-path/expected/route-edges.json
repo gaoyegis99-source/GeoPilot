@@ -1,0 +1,15 @@
+{
+  "crs": "EPSG:32650",
+  "id_field": "source_feature_id",
+  "attribute_fields": ["sequence", "distance_m"],
+  "features": {
+    "west": {
+      "wkt": "LINESTRING (500000 3500000, 500030 3500000)",
+      "properties": {"sequence": 1, "distance_m": 30.0}
+    },
+    "east": {
+      "wkt": "LINESTRING (500030 3500000, 500060 3500000)",
+      "properties": {"sequence": 2, "distance_m": 30.0}
+    }
+  }
+}

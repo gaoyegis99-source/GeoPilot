@@ -1,0 +1,1398 @@
+{
+  "task_id": "c54b04639cb04c97b59a315f6698e144",
+  "plan": {
+    "id": "701e0fdede20437a95b5dfd33a3b2160",
+    "task_id": "c54b04639cb04c97b59a315f6698e144",
+    "version": 1,
+    "status": "confirmed",
+    "goal": {
+      "summary": "Find the shortest route on the fixture road network"
+    },
+    "inputs": {
+      "network": {
+        "asset_id": "dd32d84b6e7541b9a5767fbdbc6b4bd5",
+        "asset_version": 1
+      },
+      "start": {
+        "asset_id": "5e165a5657c145d5be850722a5d3409b",
+        "asset_version": 1
+      },
+      "end": {
+        "asset_id": "549c7bf5831a46218b5de3456778972d",
+        "asset_version": 1
+      }
+    },
+    "critical_options": {
+      "target_crs": "EPSG:32650",
+      "snap_tolerance_m": 5
+    },
+    "method": {
+      "id": "road-network-shortest-path",
+      "version": 1
+    },
+    "steps": [
+      {
+        "key": "solve_shortest_route",
+        "tool": {
+          "id": "python-road-network-shortest-path",
+          "version": 1
+        },
+        "inputs": {
+          "network": {
+            "asset": "network"
+          },
+          "start": {
+            "asset": "start"
+          },
+          "end": {
+            "asset": "end"
+          }
+        },
+        "parameters": {
+          "target_crs": "EPSG:32650",
+          "snap_tolerance_m": 5
+        },
+        "outputs": {
+          "route_edges": {
+            "type": "vector_line",
+            "target": "intermediate/solve_shortest_route/route_edges.gpkg",
+            "layer": "route_edges"
+          },
+          "route_summary": {
+            "type": "json",
+            "target": "intermediate/solve_shortest_route/route_summary.json",
+            "layer": null
+          }
+        },
+        "tool_check_rules": [
+          {
+            "name": "output_exists",
+            "version": 1
+          },
+          {
+            "name": "output_crs_expected",
+            "version": 1
+          }
+        ]
+      }
+    ],
+    "expected_artifacts": [
+      {
+        "role": "route_edges",
+        "step": "solve_shortest_route",
+        "output": "route_edges",
+        "type": "vector_line"
+      },
+      {
+        "role": "route_summary",
+        "step": "solve_shortest_route",
+        "output": "route_summary",
+        "type": "json"
+      }
+    ],
+    "check_rules": [
+      "output_exists"
+    ],
+    "issues": []
+  },
+  "run": {
+    "run_id": "f2172a5350b04e87aab816ea37595ed3",
+    "execution_status": "SUCCEEDED",
+    "check_status": "PASSED",
+    "current_step": "solve_shortest_route",
+    "cancel_requested": false,
+    "error": null,
+    "current_report_id": "83497ca1d317411d8e25f8cd7b0c11a1"
+  },
+  "checks": {
+    "id": "83497ca1d317411d8e25f8cd7b0c11a1",
+    "run_id": "f2172a5350b04e87aab816ea37595ed3",
+    "status": "PASSED",
+    "report": {
+      "report_id": "83497ca1d317411d8e25f8cd7b0c11a1",
+      "run_id": "f2172a5350b04e87aab816ea37595ed3",
+      "status": "PASSED",
+      "rules": {
+        "output_exists": {
+          "passed": true,
+          "message": "All expected artifacts reopened",
+          "observed": {
+            "opened": {
+              "route_edges": {
+                "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                "layer": "route_edges",
+                "type": "vector_line"
+              },
+              "route_summary": {
+                "path": "intermediate/solve_shortest_route/route_summary.json",
+                "layer": null,
+                "type": "json"
+              }
+            },
+            "problems": {}
+          },
+          "severity": "blocking"
+        }
+      },
+      "completed_rules": [
+        "output_exists"
+      ],
+      "pending_rules": [],
+      "interruption": null,
+      "phase_findings": {
+        "input": [
+          {
+            "rule": "source_is_readable",
+            "phase": "input",
+            "field": "inputs.network.path",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "path": "inputs/0001/source.geojson",
+              "layer": null
+            },
+            "expected": "Readable local spatial input",
+            "message": "Input reopened",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_type_matches",
+            "phase": "input",
+            "field": "inputs.network",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "LineString",
+            "expected": "vector_line",
+            "message": "Input type matches",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_extent_is_valid",
+            "phase": "input",
+            "field": "inputs.network.bounds",
+            "severity": "blocking",
+            "passed": true,
+            "observed": [
+              500000.0,
+              3500000.0,
+              500060.0,
+              3500040.0
+            ],
+            "expected": "Finite ordered extent, with a positive raster footprint",
+            "message": "Input extent is usable",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "crs_is_known",
+            "phase": "input",
+            "field": "inputs.network.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "EPSG:32650",
+            "expected": "Known declared CRS",
+            "message": "Input CRS is known",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "horizontal_unit_is_meter",
+            "phase": "input",
+            "field": "inputs.network.crs.unit",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "crs": "EPSG:32650",
+              "unit": "metre",
+              "metres_per_unit": 1.0
+            },
+            "expected": "meter",
+            "message": "Horizontal axes use metres",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "projected_crs_suitable_for_extent",
+            "phase": "input",
+            "field": "inputs.network.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "crs": "EPSG:32650",
+              "bounds": [
+                500000.0,
+                3500000.0,
+                500060.0,
+                3500040.0
+              ],
+              "unit": "meter"
+            },
+            "expected": {
+              "method": "local_projected",
+              "unit": "meter"
+            },
+            "message": "Measurement policy is suitable for the input extent",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "geometry_is_valid",
+            "phase": "input",
+            "field": "inputs.network.geometry",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "feature_count": 4,
+              "invalid_count": 0,
+              "invalid_fids": []
+            },
+            "expected": "Valid nonempty geometry in every feature",
+            "message": "Input feature geometries are valid",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "source_is_readable",
+            "phase": "input",
+            "field": "inputs.start.path",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "path": "inputs/0002/source.geojson",
+              "layer": null
+            },
+            "expected": "Readable local spatial input",
+            "message": "Input reopened",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_type_matches",
+            "phase": "input",
+            "field": "inputs.start",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "Point",
+            "expected": "vector_point",
+            "message": "Input type matches",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_extent_is_valid",
+            "phase": "input",
+            "field": "inputs.start.bounds",
+            "severity": "blocking",
+            "passed": true,
+            "observed": [
+              499997.0,
+              3500004.0,
+              499997.0,
+              3500004.0
+            ],
+            "expected": "Finite ordered extent, with a positive raster footprint",
+            "message": "Input extent is usable",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "crs_is_known",
+            "phase": "input",
+            "field": "inputs.start.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "EPSG:32650",
+            "expected": "Known declared CRS",
+            "message": "Input CRS is known",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "horizontal_unit_is_meter",
+            "phase": "input",
+            "field": "inputs.start.crs.unit",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "crs": "EPSG:32650",
+              "unit": "metre",
+              "metres_per_unit": 1.0
+            },
+            "expected": "meter",
+            "message": "Horizontal axes use metres",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "projected_crs_suitable_for_extent",
+            "phase": "input",
+            "field": "inputs.start.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "crs": "EPSG:32650",
+              "bounds": [
+                499997.0,
+                3500004.0,
+                499997.0,
+                3500004.0
+              ],
+              "unit": "meter"
+            },
+            "expected": {
+              "method": "local_projected",
+              "unit": "meter"
+            },
+            "message": "Measurement policy is suitable for the input extent",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "geometry_is_valid",
+            "phase": "input",
+            "field": "inputs.start.geometry",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "feature_count": 1,
+              "invalid_count": 0,
+              "invalid_fids": []
+            },
+            "expected": "Valid nonempty geometry in every feature",
+            "message": "Input feature geometries are valid",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "source_is_readable",
+            "phase": "input",
+            "field": "inputs.end.path",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "path": "inputs/0003/source.geojson",
+              "layer": null
+            },
+            "expected": "Readable local spatial input",
+            "message": "Input reopened",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_type_matches",
+            "phase": "input",
+            "field": "inputs.end",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "Point",
+            "expected": "vector_point",
+            "message": "Input type matches",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_extent_is_valid",
+            "phase": "input",
+            "field": "inputs.end.bounds",
+            "severity": "blocking",
+            "passed": true,
+            "observed": [
+              500063.0,
+              3500004.0,
+              500063.0,
+              3500004.0
+            ],
+            "expected": "Finite ordered extent, with a positive raster footprint",
+            "message": "Input extent is usable",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "crs_is_known",
+            "phase": "input",
+            "field": "inputs.end.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "EPSG:32650",
+            "expected": "Known declared CRS",
+            "message": "Input CRS is known",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "horizontal_unit_is_meter",
+            "phase": "input",
+            "field": "inputs.end.crs.unit",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "crs": "EPSG:32650",
+              "unit": "metre",
+              "metres_per_unit": 1.0
+            },
+            "expected": "meter",
+            "message": "Horizontal axes use metres",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "projected_crs_suitable_for_extent",
+            "phase": "input",
+            "field": "inputs.end.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "crs": "EPSG:32650",
+              "bounds": [
+                500063.0,
+                3500004.0,
+                500063.0,
+                3500004.0
+              ],
+              "unit": "meter"
+            },
+            "expected": {
+              "method": "local_projected",
+              "unit": "meter"
+            },
+            "message": "Measurement policy is suitable for the input extent",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "geometry_is_valid",
+            "phase": "input",
+            "field": "inputs.end.geometry",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "feature_count": 1,
+              "invalid_count": 0,
+              "invalid_fids": []
+            },
+            "expected": "Valid nonempty geometry in every feature",
+            "message": "Input feature geometries are valid",
+            "step_key": "solve_shortest_route"
+          },
+          {
+            "rule": "input_crs_match",
+            "phase": "input",
+            "field": "inputs.crs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "network": "EPSG:32650",
+              "start": "EPSG:32650",
+              "end": "EPSG:32650"
+            },
+            "expected": "Same known CRS across spatial inputs",
+            "message": "Spatial input CRS match",
+            "step_key": "solve_shortest_route"
+          }
+        ],
+        "process": [
+          {
+            "rule": "run_snapshot_matches",
+            "phase": "process",
+            "step_key": null,
+            "field": "plan.status",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "confirmed",
+            "expected": "confirmed",
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "run_snapshot_matches",
+            "phase": "process",
+            "step_key": null,
+            "field": "snapshot.run_id",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "f2172a5350b04e87aab816ea37595ed3",
+            "expected": "f2172a5350b04e87aab816ea37595ed3",
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "run_snapshot_matches",
+            "phase": "process",
+            "step_key": null,
+            "field": "snapshot.plan",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "id": "701e0fdede20437a95b5dfd33a3b2160",
+              "task_id": "c54b04639cb04c97b59a315f6698e144",
+              "version": 1,
+              "status": "confirmed",
+              "goal": {
+                "summary": "Find the shortest route on the fixture road network"
+              },
+              "inputs": {
+                "network": {
+                  "asset_id": "dd32d84b6e7541b9a5767fbdbc6b4bd5",
+                  "asset_version": 1
+                },
+                "start": {
+                  "asset_id": "5e165a5657c145d5be850722a5d3409b",
+                  "asset_version": 1
+                },
+                "end": {
+                  "asset_id": "549c7bf5831a46218b5de3456778972d",
+                  "asset_version": 1
+                }
+              },
+              "critical_options": {
+                "target_crs": "EPSG:32650",
+                "snap_tolerance_m": 5
+              },
+              "method": {
+                "id": "road-network-shortest-path",
+                "version": 1
+              },
+              "steps": [
+                {
+                  "key": "solve_shortest_route",
+                  "tool": {
+                    "id": "python-road-network-shortest-path",
+                    "version": 1
+                  },
+                  "inputs": {
+                    "network": {
+                      "asset": "network"
+                    },
+                    "start": {
+                      "asset": "start"
+                    },
+                    "end": {
+                      "asset": "end"
+                    }
+                  },
+                  "parameters": {
+                    "target_crs": "EPSG:32650",
+                    "snap_tolerance_m": 5
+                  },
+                  "outputs": {
+                    "route_edges": {
+                      "type": "vector_line",
+                      "target": "intermediate/solve_shortest_route/route_edges.gpkg",
+                      "layer": "route_edges"
+                    },
+                    "route_summary": {
+                      "type": "json",
+                      "target": "intermediate/solve_shortest_route/route_summary.json",
+                      "layer": null
+                    }
+                  },
+                  "tool_check_rules": [
+                    {
+                      "name": "output_exists",
+                      "version": 1
+                    },
+                    {
+                      "name": "output_crs_expected",
+                      "version": 1
+                    }
+                  ]
+                }
+              ],
+              "expected_artifacts": [
+                {
+                  "role": "route_edges",
+                  "step": "solve_shortest_route",
+                  "output": "route_edges",
+                  "type": "vector_line"
+                },
+                {
+                  "role": "route_summary",
+                  "step": "solve_shortest_route",
+                  "output": "route_summary",
+                  "type": "json"
+                }
+              ],
+              "check_rules": [
+                "output_exists"
+              ],
+              "issues": []
+            },
+            "expected": {
+              "id": "701e0fdede20437a95b5dfd33a3b2160",
+              "task_id": "c54b04639cb04c97b59a315f6698e144",
+              "version": 1,
+              "status": "confirmed",
+              "goal": {
+                "summary": "Find the shortest route on the fixture road network"
+              },
+              "inputs": {
+                "network": {
+                  "asset_id": "dd32d84b6e7541b9a5767fbdbc6b4bd5",
+                  "asset_version": 1
+                },
+                "start": {
+                  "asset_id": "5e165a5657c145d5be850722a5d3409b",
+                  "asset_version": 1
+                },
+                "end": {
+                  "asset_id": "549c7bf5831a46218b5de3456778972d",
+                  "asset_version": 1
+                }
+              },
+              "critical_options": {
+                "target_crs": "EPSG:32650",
+                "snap_tolerance_m": 5
+              },
+              "method": {
+                "id": "road-network-shortest-path",
+                "version": 1
+              },
+              "steps": [
+                {
+                  "key": "solve_shortest_route",
+                  "tool": {
+                    "id": "python-road-network-shortest-path",
+                    "version": 1
+                  },
+                  "inputs": {
+                    "network": {
+                      "asset": "network"
+                    },
+                    "start": {
+                      "asset": "start"
+                    },
+                    "end": {
+                      "asset": "end"
+                    }
+                  },
+                  "parameters": {
+                    "target_crs": "EPSG:32650",
+                    "snap_tolerance_m": 5
+                  },
+                  "outputs": {
+                    "route_edges": {
+                      "type": "vector_line",
+                      "target": "intermediate/solve_shortest_route/route_edges.gpkg",
+                      "layer": "route_edges"
+                    },
+                    "route_summary": {
+                      "type": "json",
+                      "target": "intermediate/solve_shortest_route/route_summary.json",
+                      "layer": null
+                    }
+                  },
+                  "tool_check_rules": [
+                    {
+                      "name": "output_exists",
+                      "version": 1
+                    },
+                    {
+                      "name": "output_crs_expected",
+                      "version": 1
+                    }
+                  ]
+                }
+              ],
+              "expected_artifacts": [
+                {
+                  "role": "route_edges",
+                  "step": "solve_shortest_route",
+                  "output": "route_edges",
+                  "type": "vector_line"
+                },
+                {
+                  "role": "route_summary",
+                  "step": "solve_shortest_route",
+                  "output": "route_summary",
+                  "type": "json"
+                }
+              ],
+              "check_rules": [
+                "output_exists"
+              ],
+              "issues": []
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "run_snapshot_matches",
+            "phase": "process",
+            "step_key": null,
+            "field": "snapshot.asset_roles",
+            "severity": "blocking",
+            "passed": true,
+            "observed": [
+              "end",
+              "network",
+              "start"
+            ],
+            "expected": [
+              "end",
+              "network",
+              "start"
+            ],
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_order_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "position",
+            "severity": "blocking",
+            "passed": true,
+            "observed": 0,
+            "expected": 0,
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_result_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "status",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "SUCCEEDED",
+            "expected": "SUCCEEDED",
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_request_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "request",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "run_id": "f2172a5350b04e87aab816ea37595ed3",
+              "step_key": "solve_shortest_route",
+              "tool": {
+                "id": "python-road-network-shortest-path",
+                "version": 1
+              },
+              "workdir_ref": "f2172a5350b04e87aab816ea37595ed3",
+              "inputs": {
+                "network": {
+                  "path": "inputs/0001/source.geojson",
+                  "layer": null
+                },
+                "start": {
+                  "path": "inputs/0002/source.geojson",
+                  "layer": null
+                },
+                "end": {
+                  "path": "inputs/0003/source.geojson",
+                  "layer": null
+                }
+              },
+              "parameters": {
+                "target_crs": "EPSG:32650",
+                "snap_tolerance_m": 5
+              },
+              "output_targets": {
+                "route_edges": {
+                  "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                  "layer": "route_edges"
+                },
+                "route_summary": {
+                  "path": "intermediate/solve_shortest_route/route_summary.json",
+                  "layer": null
+                }
+              },
+              "log_path": "steps/solve_shortest_route/process.log",
+              "cancel_path": "cancel.flag"
+            },
+            "expected": {
+              "run_id": "f2172a5350b04e87aab816ea37595ed3",
+              "step_key": "solve_shortest_route",
+              "tool": {
+                "id": "python-road-network-shortest-path",
+                "version": 1
+              },
+              "workdir_ref": "f2172a5350b04e87aab816ea37595ed3",
+              "inputs": {
+                "network": {
+                  "path": "inputs/0001/source.geojson",
+                  "layer": null
+                },
+                "start": {
+                  "path": "inputs/0002/source.geojson",
+                  "layer": null
+                },
+                "end": {
+                  "path": "inputs/0003/source.geojson",
+                  "layer": null
+                }
+              },
+              "parameters": {
+                "target_crs": "EPSG:32650",
+                "snap_tolerance_m": 5
+              },
+              "output_targets": {
+                "route_edges": {
+                  "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                  "layer": "route_edges"
+                },
+                "route_summary": {
+                  "path": "intermediate/solve_shortest_route/route_summary.json",
+                  "layer": null
+                }
+              },
+              "log_path": "steps/solve_shortest_route/process.log",
+              "cancel_path": "cancel.flag"
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_request_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "request_file",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "run_id": "f2172a5350b04e87aab816ea37595ed3",
+              "step_key": "solve_shortest_route",
+              "tool": {
+                "id": "python-road-network-shortest-path",
+                "version": 1
+              },
+              "workdir_ref": "f2172a5350b04e87aab816ea37595ed3",
+              "inputs": {
+                "network": {
+                  "path": "inputs/0001/source.geojson",
+                  "layer": null
+                },
+                "start": {
+                  "path": "inputs/0002/source.geojson",
+                  "layer": null
+                },
+                "end": {
+                  "path": "inputs/0003/source.geojson",
+                  "layer": null
+                }
+              },
+              "parameters": {
+                "target_crs": "EPSG:32650",
+                "snap_tolerance_m": 5
+              },
+              "output_targets": {
+                "route_edges": {
+                  "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                  "layer": "route_edges"
+                },
+                "route_summary": {
+                  "path": "intermediate/solve_shortest_route/route_summary.json",
+                  "layer": null
+                }
+              },
+              "log_path": "steps/solve_shortest_route/process.log",
+              "cancel_path": "cancel.flag"
+            },
+            "expected": {
+              "run_id": "f2172a5350b04e87aab816ea37595ed3",
+              "step_key": "solve_shortest_route",
+              "tool": {
+                "id": "python-road-network-shortest-path",
+                "version": 1
+              },
+              "workdir_ref": "f2172a5350b04e87aab816ea37595ed3",
+              "inputs": {
+                "network": {
+                  "path": "inputs/0001/source.geojson",
+                  "layer": null
+                },
+                "start": {
+                  "path": "inputs/0002/source.geojson",
+                  "layer": null
+                },
+                "end": {
+                  "path": "inputs/0003/source.geojson",
+                  "layer": null
+                }
+              },
+              "parameters": {
+                "target_crs": "EPSG:32650",
+                "snap_tolerance_m": 5
+              },
+              "output_targets": {
+                "route_edges": {
+                  "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                  "layer": "route_edges"
+                },
+                "route_summary": {
+                  "path": "intermediate/solve_shortest_route/route_summary.json",
+                  "layer": null
+                }
+              },
+              "log_path": "steps/solve_shortest_route/process.log",
+              "cancel_path": "cancel.flag"
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_result_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "result_file",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "run_id": "f2172a5350b04e87aab816ea37595ed3",
+              "step_key": "solve_shortest_route",
+              "status": "SUCCEEDED",
+              "exit_code": 0,
+              "outputs": {
+                "route_edges": {
+                  "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                  "layer": "route_edges",
+                  "type": "vector_line"
+                },
+                "route_summary": {
+                  "path": "intermediate/solve_shortest_route/route_summary.json",
+                  "layer": null,
+                  "type": "json"
+                }
+              },
+              "log_path": "steps/solve_shortest_route/process.log",
+              "warnings": [],
+              "error": null,
+              "started_at": "2026-11-12T06:08:53.693867Z",
+              "finished_at": "2026-11-12T06:08:54.581299Z",
+              "environment": {
+                "geopandas": "1.1.3",
+                "pyogrio": "0.12.1",
+                "pyproj": "3.7.2",
+                "shapely": "2.1.2",
+                "python": "3.13.13"
+              }
+            },
+            "expected": {
+              "run_id": "f2172a5350b04e87aab816ea37595ed3",
+              "step_key": "solve_shortest_route",
+              "status": "SUCCEEDED",
+              "exit_code": 0,
+              "outputs": {
+                "route_edges": {
+                  "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                  "layer": "route_edges",
+                  "type": "vector_line"
+                },
+                "route_summary": {
+                  "path": "intermediate/solve_shortest_route/route_summary.json",
+                  "layer": null,
+                  "type": "json"
+                }
+              },
+              "log_path": "steps/solve_shortest_route/process.log",
+              "warnings": [],
+              "error": null,
+              "started_at": "2026-11-12T06:08:53.693867Z",
+              "finished_at": "2026-11-12T06:08:54.581299Z",
+              "environment": {
+                "geopandas": "1.1.3",
+                "pyogrio": "0.12.1",
+                "pyproj": "3.7.2",
+                "shapely": "2.1.2",
+                "python": "3.13.13"
+              }
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_result_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "result.outputs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "route_edges": {
+                "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                "layer": "route_edges",
+                "type": "vector_line"
+              },
+              "route_summary": {
+                "path": "intermediate/solve_shortest_route/route_summary.json",
+                "layer": null,
+                "type": "json"
+              }
+            },
+            "expected": {
+              "route_edges": {
+                "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                "type": "vector_line",
+                "layer": "route_edges"
+              },
+              "route_summary": {
+                "path": "intermediate/solve_shortest_route/route_summary.json",
+                "type": "json",
+                "layer": null
+              }
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_result_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "log_path",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "steps/solve_shortest_route/process.log",
+            "expected": "steps/solve_shortest_route/process.log",
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_result_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "result.timestamps",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "started_at": "2026-11-12T06:08:53.693867Z",
+              "finished_at": "2026-11-12T06:08:54.581299Z"
+            },
+            "expected": {
+              "started_at": "2026-11-12T06:08:53.693867Z",
+              "finished_at": "2026-11-12T06:08:54.581299Z"
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_process_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "log.header",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "python-road-network-shortest-path version 1 (python)",
+            "expected": "python-road-network-shortest-path version 1 (python)",
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_process_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "log.exit_code",
+            "severity": "blocking",
+            "passed": true,
+            "observed": 0,
+            "expected": 0,
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_process_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "log.arguments",
+            "severity": "blocking",
+            "passed": true,
+            "observed": [
+              "--request",
+              "steps/solve_shortest_route/request.json",
+              "--result",
+              "steps/solve_shortest_route/python-result.json"
+            ],
+            "expected": [
+              "--request",
+              "steps/solve_shortest_route/request.json",
+              "--result",
+              "steps/solve_shortest_route/python-result.json"
+            ],
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_process_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "log.implementation",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/src/geopilot/gis/tools/road_network_shortest_path.py",
+            "expected": "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/src/geopilot/gis/tools/road_network_shortest_path.py",
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_process_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "python_manifest.outputs",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "route_edges": {
+                "layer": "route_edges",
+                "path": "intermediate/solve_shortest_route/route_edges.gpkg"
+              },
+              "route_summary": {
+                "layer": null,
+                "path": "intermediate/solve_shortest_route/route_summary.json"
+              }
+            },
+            "expected": {
+              "route_edges": {
+                "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+                "layer": "route_edges"
+              },
+              "route_summary": {
+                "path": "intermediate/solve_shortest_route/route_summary.json",
+                "layer": null
+              }
+            },
+            "message": "Recorded evidence matches"
+          },
+          {
+            "rule": "step_environment_matches",
+            "phase": "process",
+            "step_key": "solve_shortest_route",
+            "field": "environment",
+            "severity": "blocking",
+            "passed": true,
+            "observed": {
+              "geopandas": "1.1.3",
+              "pyogrio": "0.12.1",
+              "pyproj": "3.7.2",
+              "shapely": "2.1.2"
+            },
+            "expected": {
+              "geopandas": "1.1.3",
+              "pyogrio": "0.12.1",
+              "pyproj": "3.7.2",
+              "shapely": "2.1.2"
+            },
+            "message": "Recorded evidence matches"
+          }
+        ],
+        "artifact": [
+          {
+            "rule": "artifact_integrity",
+            "phase": "artifact",
+            "field": "artifacts",
+            "severity": "blocking",
+            "passed": true,
+            "observed": [
+              "route_edges",
+              "route_summary"
+            ],
+            "expected": [
+              "route_edges",
+              "route_summary"
+            ],
+            "message": "Compare registered artifact roles with the confirmed plan"
+          },
+          {
+            "rule": "artifact_integrity",
+            "phase": "artifact",
+            "field": "artifacts.route_edges.fingerprint",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "edcb62415685912632ab4fa3a48550a6f2cf1934df95d2c5b9a45e57d7a010bb",
+            "expected": "edcb62415685912632ab4fa3a48550a6f2cf1934df95d2c5b9a45e57d7a010bb",
+            "message": "Reopened the registered artifact and verified its content fingerprint"
+          },
+          {
+            "rule": "artifact_integrity",
+            "phase": "artifact",
+            "field": "artifacts.route_summary.fingerprint",
+            "severity": "blocking",
+            "passed": true,
+            "observed": "4f9a1e2b3637dba71daa32cf08290e2bbd2746b2a2838674fb22e4adefceccca",
+            "expected": "4f9a1e2b3637dba71daa32cf08290e2bbd2746b2a2838674fb22e4adefceccca",
+            "message": "Reopened the registered artifact and verified its content fingerprint"
+          },
+          {
+            "step_key": "solve_shortest_route",
+            "tool": {
+              "id": "python-road-network-shortest-path",
+              "version": 1
+            },
+            "rule": "output_exists",
+            "rule_version": 1,
+            "field": "steps.solve_shortest_route.outputs.route_edges",
+            "passed": true,
+            "observed": {
+              "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+              "layer": "route_edges",
+              "type": "vector_line"
+            },
+            "expected": {
+              "path": "intermediate/solve_shortest_route/route_edges.gpkg",
+              "type": "vector_line",
+              "layer": "route_edges"
+            },
+            "message": "Named output reopened",
+            "phase": "artifact",
+            "severity": "blocking"
+          },
+          {
+            "step_key": "solve_shortest_route",
+            "tool": {
+              "id": "python-road-network-shortest-path",
+              "version": 1
+            },
+            "rule": "output_exists",
+            "rule_version": 1,
+            "field": "steps.solve_shortest_route.outputs.route_summary",
+            "passed": true,
+            "observed": {
+              "path": "intermediate/solve_shortest_route/route_summary.json",
+              "layer": null,
+              "type": "json"
+            },
+            "expected": {
+              "path": "intermediate/solve_shortest_route/route_summary.json",
+              "type": "json",
+              "layer": null
+            },
+            "message": "Named output reopened",
+            "phase": "artifact",
+            "severity": "blocking"
+          },
+          {
+            "step_key": "solve_shortest_route",
+            "tool": {
+              "id": "python-road-network-shortest-path",
+              "version": 1
+            },
+            "rule": "output_crs_expected",
+            "rule_version": 1,
+            "field": "steps.solve_shortest_route.outputs.route_edges.crs",
+            "passed": true,
+            "observed": "EPSG:32650",
+            "expected": "EPSG:32650",
+            "message": "Output CRS matches",
+            "phase": "artifact",
+            "severity": "blocking"
+          }
+        ]
+      },
+      "tool_rules": {
+        "steps.solve_shortest_route.check_rules.output_exists": {
+          "step_key": "solve_shortest_route",
+          "tool": {
+            "id": "python-road-network-shortest-path",
+            "version": 1
+          },
+          "rule": "output_exists",
+          "rule_version": 1,
+          "passed": true,
+          "severity": "blocking"
+        },
+        "steps.solve_shortest_route.check_rules.output_crs_expected": {
+          "step_key": "solve_shortest_route",
+          "tool": {
+            "id": "python-road-network-shortest-path",
+            "version": 1
+          },
+          "rule": "output_crs_expected",
+          "rule_version": 1,
+          "passed": true,
+          "severity": "blocking"
+        }
+      },
+      "completed_tool_rules": [
+        "steps.solve_shortest_route.check_rules.output_exists",
+        "steps.solve_shortest_route.check_rules.output_crs_expected"
+      ],
+      "pending_tool_rules": []
+    },
+    "rule_versions": {
+      "output_exists": 1
+    },
+    "created_at": "2026-11-12T06:08:54.609150Z"
+  },
+  "artifacts": [
+    {
+      "id": "4dd771587976447ba0b3d50b5ae3b6ce",
+      "run_id": "f2172a5350b04e87aab816ea37595ed3",
+      "role": "route_edges",
+      "uri": "intermediate/solve_shortest_route/route_edges.gpkg",
+      "layer": "route_edges",
+      "type": "vector_line",
+      "kind": "vector",
+      "format": "GPKG",
+      "fingerprint": "edcb62415685912632ab4fa3a48550a6f2cf1934df95d2c5b9a45e57d7a010bb",
+      "metadata": {
+        "format": "GPKG",
+        "crs": "EPSG:32650",
+        "bounds": [
+          500000.0,
+          3500000.0,
+          500060.0,
+          3500000.0
+        ],
+        "issues": [],
+        "kind": "vector",
+        "geometry_type": "LineString",
+        "feature_count": 2,
+        "fields": [
+          {
+            "name": "source_feature_id",
+            "dtype": "object",
+            "missing_count": 0
+          },
+          {
+            "name": "sequence",
+            "dtype": "int64",
+            "missing_count": 0
+          },
+          {
+            "name": "distance_m",
+            "dtype": "float64",
+            "missing_count": 0
+          }
+        ]
+      },
+      "source": {
+        "plan_id": "701e0fdede20437a95b5dfd33a3b2160",
+        "plan_version": 1,
+        "step_key": "solve_shortest_route",
+        "output_name": "route_edges",
+        "tool": {
+          "id": "python-road-network-shortest-path",
+          "version": 1
+        },
+        "inputs": {
+          "network": {
+            "asset_id": "dd32d84b6e7541b9a5767fbdbc6b4bd5",
+            "asset_version": 1
+          },
+          "start": {
+            "asset_id": "5e165a5657c145d5be850722a5d3409b",
+            "asset_version": 1
+          },
+          "end": {
+            "asset_id": "549c7bf5831a46218b5de3456778972d",
+            "asset_version": 1
+          }
+        }
+      },
+      "created_at": "2026-11-12T06:08:54.605941Z",
+      "readable": true
+    },
+    {
+      "id": "670ac8a47cfd42369012fd89960ce060",
+      "run_id": "f2172a5350b04e87aab816ea37595ed3",
+      "role": "route_summary",
+      "uri": "intermediate/solve_shortest_route/route_summary.json",
+      "layer": null,
+      "type": "json",
+      "kind": "json",
+      "format": "JSON",
+      "fingerprint": "4f9a1e2b3637dba71daa32cf08290e2bbd2746b2a2838674fb22e4adefceccca",
+      "metadata": {
+        "kind": "json",
+        "format": "JSON",
+        "value_type": "object",
+        "item_count": 8
+      },
+      "source": {
+        "plan_id": "701e0fdede20437a95b5dfd33a3b2160",
+        "plan_version": 1,
+        "step_key": "solve_shortest_route",
+        "output_name": "route_summary",
+        "tool": {
+          "id": "python-road-network-shortest-path",
+          "version": 1
+        },
+        "inputs": {
+          "network": {
+            "asset_id": "dd32d84b6e7541b9a5767fbdbc6b4bd5",
+            "asset_version": 1
+          },
+          "start": {
+            "asset_id": "5e165a5657c145d5be850722a5d3409b",
+            "asset_version": 1
+          },
+          "end": {
+            "asset_id": "549c7bf5831a46218b5de3456778972d",
+            "asset_version": 1
+          }
+        }
+      },
+      "created_at": "2026-11-12T06:08:54.606587Z",
+      "readable": true
+    }
+  ]
+}

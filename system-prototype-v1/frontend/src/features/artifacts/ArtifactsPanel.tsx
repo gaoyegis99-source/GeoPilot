@@ -11,6 +11,7 @@ const roleLabels: Record<string, string> = {
   first_ndvi: '第一期 NDVI', second_ndvi: '第二期 NDVI', change_raster: 'NDVI 差值', change_classes: 'NDVI 变化类别',
   first_quality_mask: '第一期质量掩膜', second_quality_mask: '第二期质量掩膜',
   sensor_configuration: '传感器配置', calibration_report: '反射率定标', alignment_report: '两期对齐记录',
+  route_edges: '最短路径路段', route_summary: '最短路径摘要',
 }
 
 export const artifactTitle = (role: string) => roleLabels[role] ?? role

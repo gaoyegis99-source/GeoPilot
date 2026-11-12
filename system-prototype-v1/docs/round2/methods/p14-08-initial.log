@@ -1,0 +1,50 @@
+baseline 90c79597be956cc2e9fb52e78dc9ca70be67f4f7
+source /tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1
+route test evidence root /tmp/geopilot-p14-08-tests.ptMTGF
+start_utc 2026-11-12T05:45:58Z
+Python 3.13.13
+some avg10=3.25 avg60=17.89 avg300=18.56 total=89421018889
+full avg10=3.24 avg60=17.59 avg300=18.23 total=83672971356
+.F............                                                           [100%]
+=================================== FAILURES ===================================
+______________ test_workbench_confirms_runs_and_checks_the_route _______________
+
+tmp_path = PosixPath('/tmp/geopilot-p14-08-tests.ptMTGF/test_workbench_confirms_runs_a0')
+
+    def test_workbench_confirms_runs_and_checks_the_route(tmp_path):
+        app = create_local_app(tmp_path / "project.sqlite", tmp_path / "workspace", qgis_process=tmp_path / "unused-qgis")
+        sources = {role: FIXTURE / "inputs" / f"{role}.geojson" for role in ("network", "start", "end")}
+        with TestClient(app) as client:
+            endpoint, state, task_id, plan = _run_workbench(client, sources)
+            assert (state["execution_status"], state["check_status"]) == (
+                ExecutionStatus.SUCCEEDED.value, CheckStatus.PASSED.value,
+            )
+            checks = _response(client.get(endpoint + "/checks"))["current_report"]
+            findings = checks["report"]["phase_findings"]
+            assert any(item["rule"] == "projected_crs_suitable_for_extent" and item["passed"] for item in findings["input"])
+            assert any(item["rule"] == "output_crs_expected" and item["passed"] for item in findings["artifact"])
+            artifacts = _response(client.get(endpoint + "/artifacts"))["artifacts"]
+            assert {item["role"] for item in artifacts if item["readable"]} == {"route_edges", "route_summary"}
+            assert next(item for item in artifacts if item["role"] == "route_edges")["metadata"]["crs"] == CRS
+            summary = next(item for item in artifacts if item["role"] == "route_summary")
+>           assert client.get(f"/api/artifacts/{summary['id']}/download").json()["total_distance_m"] == 60
+E           KeyError: 'total_distance_m'
+
+tests/methods/test_selected_complex_method.py:149: KeyError
+------------------------------ Captured log call -------------------------------
+WARNING  geopilot.scheduler.loop:loop.py:207 Scheduler could not claim work because SQLite is busy; waiting to retry
+WARNING  geopilot.scheduler.loop:loop.py:207 Scheduler could not claim work because SQLite is busy; waiting to retry
+=============================== warnings summary ===============================
+../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/methods/p14-08-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/methods/test_selected_complex_method.py::test_workbench_confirms_runs_and_checks_the_route
+1 failed, 13 passed, 1 warning in 95.86s (0:01:35)
+end_utc 2026-11-12T05:47:35Z
+some avg10=39.46 avg60=41.60 avg300=26.72 total=89467152793
+full avg10=38.98 avg60=40.86 avg300=26.22 total=83718250345
+pytest exit 1

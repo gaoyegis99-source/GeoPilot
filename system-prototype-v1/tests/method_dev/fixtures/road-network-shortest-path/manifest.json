@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "case_id": "two-edge-minimum-with-boundary-snaps",
+  "method": {"id": "road-network-shortest-path", "version": 1},
+  "environment": {
+    "python": "3.13.13",
+    "pyogrio": "0.12.1",
+    "gdal_vector": "3.11.4",
+    "proj": "9.5.1",
+    "shapely": "2.1.2"
+  },
+  "inputs": {
+    "network": {"path": "inputs/network.geojson", "sha256": "1a1f15876b796305b59f68287ef86ddc51a3b420faf5d6746de0e85cc2daa462"},
+    "start": {"path": "inputs/start.geojson", "sha256": "7870f4495bd945721edd58298ede5105802d7296d7466e968ee0ce8a84a70edc"},
+    "end": {"path": "inputs/end.geojson", "sha256": "100e6330d05a331145aaa8871f8214ba040ad75adb9e3e4beca645f040601668"}
+  },
+  "critical_options": {"target_crs": "EPSG:32650", "snap_tolerance_m": 5},
+  "outputs": {
+    "route_edges": {
+      "kind": "vector",
+      "reference": {"path": "expected/route-edges.json", "sha256": "4b66e1a1b09bb74e5dfb0fe36cfc7f73fae0e9945dc54ca6910e6240499aa9b5"},
+      "basis": "Hand calculation in the declared UTM grid. The west and east edges each have delta X of 30 m and delta Y of 0 m. Each north alternative edge has delta magnitudes 30 m and 40 m and length 50 m. The 60 m route is west followed by east."
+    },
+    "route_summary": {
+      "kind": "json",
+      "reference": {"path": "expected/route-summary.json", "sha256": "a4a43902a981dbc44450b89df761ee694bdb36185006977ace025b2bbeb16d52"},
+      "basis": "The nearest endpoint nodes are (500000,3500000) and (500060,3500000). Both offsets have component magnitudes 3 m and 4 m, hence 5 m, exactly the permitted limit. Their network route length is 30 + 30 = 60 m, excluding the two offsets."
+    }
+  },
+  "failure_cases": [
+    {
+      "id": "web-mercator-start",
+      "inputs": {
+        "start": {"path": "inputs/start-web-mercator.geojson", "sha256": "38d4298fff8d34349d3cdd33968a88dc16d9f8a99fcc4912518e476a6b721208"}
+      },
+      "expected": {"phase": "draft", "code": "MEASUREMENT_POLICY_REJECTED"}
+    }
+  ]
+}

@@ -4,6 +4,7 @@ export const roleLabels: Record<string, string> = {
   analysis_extent: '分析范围', relation_area: '关系范围', roads: '道路', targets: '目标对象',
   zones: '统计分区', features: '筛选要素', first_classes: '第一期地类', second_classes: '第二期地类', dem: '高程栅格（DEM）',
   first_product: '第一期产品', second_product: '第二期产品',
+  network: '已节点化路网', start: '起点', end: '终点',
 }
 
 export const optionLabels: Record<string, string> = {
@@ -16,6 +17,7 @@ export const optionLabels: Record<string, string> = {
   terrain_output: '地形指标', slope_unit: '坡度单位', vertical_unit: '高程单位', band: '高程波段',
   threshold: '分类阈值', change_threshold: 'NDVI 变化阈值', resampling: '重采样方式',
   overlay_area_tolerance: '叠加面积容差', minimum_change_area: '最小变化面积', merge_adjacent_classes: '合并相邻同类图斑',
+  target_crs: '米制投影坐标参考系', snap_tolerance_m: '最大吸附距离',
 }
 
 export const enumLabels: Record<string, string> = {

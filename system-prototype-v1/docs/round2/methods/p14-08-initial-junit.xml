@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="14" time="95.866" timestamp="2026-11-12T13:45:59.141814+08:00" hostname="mtd-4028GR"><testcase classname="tests.methods.test_selected_complex_method" name="test_lint_and_isolated_reference_cases" time="39.511" /><testcase classname="tests.methods.test_selected_complex_method" name="test_workbench_confirms_runs_and_checks_the_route" time="53.625"><failure message="KeyError: 'total_distance_m'">tmp_path = PosixPath('/tmp/geopilot-p14-08-tests.ptMTGF/test_workbench_confirms_runs_a0')
+
+    def test_workbench_confirms_runs_and_checks_the_route(tmp_path):
+        app = create_local_app(tmp_path / "project.sqlite", tmp_path / "workspace", qgis_process=tmp_path / "unused-qgis")
+        sources = {role: FIXTURE / "inputs" / f"{role}.geojson" for role in ("network", "start", "end")}
+        with TestClient(app) as client:
+            endpoint, state, task_id, plan = _run_workbench(client, sources)
+            assert (state["execution_status"], state["check_status"]) == (
+                ExecutionStatus.SUCCEEDED.value, CheckStatus.PASSED.value,
+            )
+            checks = _response(client.get(endpoint + "/checks"))["current_report"]
+            findings = checks["report"]["phase_findings"]
+            assert any(item["rule"] == "projected_crs_suitable_for_extent" and item["passed"] for item in findings["input"])
+            assert any(item["rule"] == "output_crs_expected" and item["passed"] for item in findings["artifact"])
+            artifacts = _response(client.get(endpoint + "/artifacts"))["artifacts"]
+            assert {item["role"] for item in artifacts if item["readable"]} == {"route_edges", "route_summary"}
+            assert next(item for item in artifacts if item["role"] == "route_edges")["metadata"]["crs"] == CRS
+            summary = next(item for item in artifacts if item["role"] == "route_summary")
+&gt;           assert client.get(f"/api/artifacts/{summary['id']}/download").json()["total_distance_m"] == 60
+E           KeyError: 'total_distance_m'
+
+tests/methods/test_selected_complex_method.py:149: KeyError</failure></testcase><testcase classname="tests.methods.test_selected_complex_method" name="test_workbench_preserves_disconnected_failure_without_route_artifacts" time="1.393" /><testcase classname="tests.methods.test_selected_complex_method" name="test_same_cost_routes_use_fixed_tie_order_and_full_line_lengths" time="0.052" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_crossings_overlaps_and_unnoded_junctions[other0]" time="0.015" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_crossings_overlaps_and_unnoded_junctions[other1]" time="0.014" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_crossings_overlaps_and_unnoded_junctions[other2]" time="0.015" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_out_of_range_ambiguous_and_same_node_snaps[start0-end0-4.99-outside the snap tolerance]" time="0.015" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_out_of_range_ambiguous_and_same_node_snaps[start1-end1-30-multiple equally near network nodes]" time="0.014" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_out_of_range_ambiguous_and_same_node_snaps[start2-end2-5-same node]" time="0.014" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_angular_web_mercator_and_nonmetre_crs[EPSG:4326-Geographic CRS]" time="0.005" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_angular_web_mercator_and_nonmetre_crs[EPSG:3857-Web Mercator]" time="0.006" /><testcase classname="tests.methods.test_selected_complex_method" name="test_refuses_angular_web_mercator_and_nonmetre_crs[EPSG:2263-requires metre axes]" time="0.006" /><testcase classname="tests.methods.test_selected_complex_method" name="test_requires_one_point_an_explicit_common_crs_and_two_dimensional_lines" time="0.007" /></testsuite></testsuites>

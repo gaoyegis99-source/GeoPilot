@@ -1,0 +1,40 @@
+INFO:     Started server process [3153338]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:37239 (Press CTRL+C to quit)
+INFO:     127.0.0.1:45524 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45542 - "GET /api/model-assistance HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45580 - "GET /api/model-assistance HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45588 - "GET /api/methods HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45574 - "GET /api/assets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45604 - "POST /api/assets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45616 - "POST /api/assets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45624 - "POST /api/assets HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45634 - "POST /api/tasks HTTP/1.1" 201 Created
+INFO:     127.0.0.1:45650 - "POST /api/tasks/43513a20cbf24935bf12bc60c7a41292/plans HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45654 - "GET /api/tasks/43513a20cbf24935bf12bc60c7a41292 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45666 - "POST /api/tasks/context-preview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45670 - "POST /api/plans/114f5b2254f045a49e0676b5eae9ec2e/confirm HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45676 - "POST /api/plans/114f5b2254f045a49e0676b5eae9ec2e/runs HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:45680 - "GET /api/tasks/43513a20cbf24935bf12bc60c7a41292 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45714 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/checks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45706 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/artifacts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45694 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45718 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/steps HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45738 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/artifacts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45722 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/checks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45750 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45758 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/steps HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45760 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/checks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45772 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/artifacts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45788 - "GET /api/artifacts/54c804671c6f4450a69259c12ef879ed/preview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45794 - "GET /api/artifacts/54c804671c6f4450a69259c12ef879ed/preview HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45798 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45814 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/steps HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45816 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/checks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45832 - "GET /api/runs/e7fa1d7904254e35b71c9b6261fe6d78/artifacts HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45834 - "GET /api/artifacts/0b2f60c3b4a640b99f6f66255f415dac/file HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3153338]

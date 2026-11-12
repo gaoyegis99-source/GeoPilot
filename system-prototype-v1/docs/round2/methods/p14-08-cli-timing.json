@@ -1,0 +1,41 @@
+{
+  "lint": {
+    "argv": [
+      "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+      "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/scripts/methods/method_cli.py",
+      "lint",
+      "--method",
+      "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/config/methods/road-network-shortest-path.v1.yaml"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 1.292076
+  },
+  "positive": {
+    "argv": [
+      "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+      "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/scripts/methods/method_cli.py",
+      "trial",
+      "--package",
+      "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/tests/method_dev/fixtures/road-network-shortest-path/manifest.json",
+      "--work-dir",
+      "/dev/shm/geopilot-p14-08-tests.4eU1f5/test_lint_and_isolated_referen0/positive"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 2.630661
+  },
+  "negative": {
+    "argv": [
+      "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+      "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/scripts/methods/method_cli.py",
+      "trial",
+      "--package",
+      "/tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1/tests/method_dev/fixtures/road-network-shortest-path/manifest.json",
+      "--work-dir",
+      "/dev/shm/geopilot-p14-08-tests.4eU1f5/test_lint_and_isolated_referen0/negative",
+      "--case",
+      "web-mercator-start"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 1.826854
+  }
+}

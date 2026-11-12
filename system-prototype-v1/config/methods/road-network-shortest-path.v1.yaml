@@ -1,0 +1,33 @@
+id: road-network-shortest-path
+version: 1
+locked_order: true
+inputs:
+  network: vector_line
+  start: vector_point
+  end: vector_point
+input_context:
+  network:
+    required_fields: [source_feature_id]
+critical_options:
+  target_crs: {type: string}
+  snap_tolerance_m: {type: number, minimum: 0, unit: meter}
+preconditions:
+  - required_input_roles_available
+steps:
+  - key: solve_shortest_route
+    tool: {id: python-road-network-shortest-path, version: 1}
+    inputs:
+      network: {asset: network}
+      start: {asset: start}
+      end: {asset: end}
+    parameters:
+      target_crs: {option: target_crs}
+      snap_tolerance_m: {option: snap_tolerance_m}
+    outputs:
+      route_edges: vector_line
+      route_summary: json
+expected_artifacts:
+  - {role: route_edges, step: solve_shortest_route, output: route_edges, type: vector_line}
+  - {role: route_summary, step: solve_shortest_route, output: route_summary, type: json}
+check_rules:
+  - output_exists

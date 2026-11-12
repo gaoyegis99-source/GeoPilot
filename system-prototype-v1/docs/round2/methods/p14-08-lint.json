@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "command": "lint",
+  "status": "ok",
+  "data": {
+    "scope": "method_static_lint",
+    "selection": "single_method",
+    "tools_checked": 41,
+    "methods": [
+      {
+        "id": "road-network-shortest-path",
+        "version": 1,
+        "path": "config/methods/road-network-shortest-path.v1.yaml",
+        "locked_order": true
+      }
+    ],
+    "catalog_examples": []
+  },
+  "errors": []
+}

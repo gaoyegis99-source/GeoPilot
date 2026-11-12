@@ -1,0 +1,24 @@
+baseline 90c79597be956cc2e9fb52e78dc9ca70be67f4f7
+source /tmp/geopilot-p14-08-source.EA2tmK/system-prototype-v1
+route test evidence root /dev/shm/geopilot-p14-08-tests.4eU1f5
+start_utc 2026-11-12T06:08:46Z
+Python 3.13.13
+some avg10=0.00 avg60=0.00 avg300=0.96 total=89520136805
+full avg10=0.00 avg60=0.00 avg300=0.94 total=83769882375
+..............                                                           [100%]
+=============================== warnings summary ===============================
+../../../home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/methods/test_selected_complex_method.py::test_requires_one_point_an_explicit_common_crs_and_two_dimensional_lines
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/pandas/core/generic.py:6220: DeprecationWarning: Overriding the CRS of a GeoDataFrame that already has CRS. This unsafe behavior will be deprecated in future versions. Use GeoDataFrame.set_crs method instead
+    return object.__setattr__(self, name, value)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/methods/p14-08-junit.xml -
+14 passed, 2 warnings in 10.22s
+end_utc 2026-11-12T06:08:56Z
+some avg10=0.00 avg60=0.00 avg300=0.92 total=89520138282
+full avg10=0.00 avg60=0.00 avg300=0.90 total=83769883654
+pytest exit 0

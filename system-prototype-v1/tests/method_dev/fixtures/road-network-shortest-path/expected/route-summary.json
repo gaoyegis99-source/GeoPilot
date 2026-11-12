@@ -1,0 +1,13 @@
+{
+  "value": {
+    "schema_version": 1,
+    "crs": "EPSG:32650",
+    "distance_unit": "meter",
+    "snap_tolerance_m": 5.0,
+    "start": {"node_xy": [500000.0, 3500000.0], "offset_m": 5.0},
+    "end": {"node_xy": [500060.0, 3500000.0], "offset_m": 5.0},
+    "edge_ids": ["west", "east"],
+    "total_distance_m": 60.0
+  },
+  "numeric_tolerances": {}
+}

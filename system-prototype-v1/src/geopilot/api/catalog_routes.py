@@ -29,6 +29,7 @@ _LocalText = Annotated[str, StringConstraints(strict=True, min_length=1, pattern
 _METHOD_LABELS = {
     "attribute-filter-export": ("属性筛选与导出", "按指定字段和值筛选要素，并保存匹配结果。"),
     "road-buffer-statistics": ("道路缓冲统计", "计算道路影响范围，裁回分析区并按分区统计目标。"),
+    "road-network-shortest-path": ("路网最短路径", "将起终点吸附到二维米制路网节点，按长度计算最短路径。"),
     "spatial-select-and-clip": ("空间筛选与裁剪", "用完整对象判断空间关系，再裁回分析范围。"),
     "polygon-zone-statistics": ("跨区图斑统计", "在分析范围内按面积、质心或最大重叠分区统计。"),
     "remote-sensing-index-change": ("两期 NDVI 变化", "按产品元数据计算两期指数、共同有效差值和等积面积。"),

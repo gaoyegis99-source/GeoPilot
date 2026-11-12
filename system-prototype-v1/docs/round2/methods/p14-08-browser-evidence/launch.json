@@ -1,0 +1,73 @@
+{
+  "commit": "4a1b2c2c8a420698a39ab214f8347ad4d200e9ae",
+  "status": "PASS",
+  "steps": [
+    {
+      "name": "backend",
+      "argv": [
+        "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+        "-m",
+        "geopilot.api.server",
+        "--database",
+        "/dev/shm/geopilot-route-browser.9a82fw1v/project.sqlite",
+        "--workspace",
+        "/dev/shm/geopilot-route-browser.9a82fw1v/workspace",
+        "--config",
+        "/dev/shm/geopilot-route-browser.9a82fw1v/system-prototype-v1/config",
+        "--qgis-process",
+        "/dev/shm/geopilot-route-browser.9a82fw1v/absent-qgis",
+        "--port",
+        "37239"
+      ],
+      "cwd": "/dev/shm/geopilot-route-browser.9a82fw1v/system-prototype-v1",
+      "log": "backend.log",
+      "exit_code": -15
+    },
+    {
+      "name": "frontend",
+      "argv": [
+        "npm",
+        "run",
+        "dev",
+        "--",
+        "--port",
+        "57101",
+        "--strictPort"
+      ],
+      "cwd": "/dev/shm/geopilot-route-browser.9a82fw1v/system-prototype-v1/frontend",
+      "log": "frontend.log",
+      "exit_code": -15
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "node",
+        "/dev/shm/geopilot-route-browser.9a82fw1v/system-prototype-v1/docs/round2/methods/p14-08-browser.mjs",
+        "http://127.0.0.1:57101",
+        "/dev/shm/geopilot-route-browser.9a82fw1v/system-prototype-v1/tests/method_dev/fixtures/road-network-shortest-path"
+      ],
+      "cwd": "/dev/shm/geopilot-route-browser.9a82fw1v/system-prototype-v1",
+      "log": "browser.log",
+      "exit_code": 0,
+      "stderr_log": "browser.stderr.log"
+    }
+  ],
+  "overlays": {
+    "config/methods/road-network-shortest-path.v1.yaml": "4f24c6c7f202aa489d4d885815471066c6b182fff8d379586948d6909794944c",
+    "config/tools/python-road-network-shortest-path.yaml": "45894fbf557da9ffc3facda7417d3cc26c40276d4ce6b6138fb0638ae667d16d",
+    "src/geopilot/gis/tools/road_network_shortest_path.py": "6fa623a939b45080654368ba4178024090c9471100d3d0213e943dc7b44c740e",
+    "src/geopilot/api/catalog_routes.py": "e7c378a98d276c1ac23773257b28b3c707367692e52f034193ec94ebc2c1e2d9",
+    "frontend/src/features/method-form/method-form-fields.ts": "a813bc8cdca8e366c47fd302c544c75f370c3bf73d21ae97b19953dc4bfb6c83",
+    "frontend/src/features/artifacts/ArtifactsPanel.tsx": "679355e5bfdafdb0777ca706f32021491f37e6fcf949fff3ac8f0925d28581a4",
+    "docs/round2/methods/p14-08-browser.mjs": "7a02806e76287b66adb8e0e86614fa1c3a6880bba8b8cae768d9224c73f79574"
+  },
+  "fixtures": {
+    "expected/route-edges.json": "4b66e1a1b09bb74e5dfb0fe36cfc7f73fae0e9945dc54ca6910e6240499aa9b5",
+    "expected/route-summary.json": "a4a43902a981dbc44450b89df761ee694bdb36185006977ace025b2bbeb16d52",
+    "inputs/end.geojson": "100e6330d05a331145aaa8871f8214ba040ad75adb9e3e4beca645f040601668",
+    "inputs/network.geojson": "1a1f15876b796305b59f68287ef86ddc51a3b420faf5d6746de0e85cc2daa462",
+    "inputs/start-web-mercator.geojson": "38d4298fff8d34349d3cdd33968a88dc16d9f8a99fcc4912518e476a6b721208",
+    "inputs/start.geojson": "7870f4495bd945721edd58298ede5105802d7296d7466e968ee0ce8a84a70edc",
+    "manifest.json": "d24be32c94d0e0b2db5f31fb597421262f8f3fcc7e897aea0234852d21fac37d"
+  }
+}
