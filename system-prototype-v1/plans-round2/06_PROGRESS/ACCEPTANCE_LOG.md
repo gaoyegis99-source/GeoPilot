@@ -249,6 +249,7 @@
 - 主控使用三份 128 × 128 实际分类窗口做 18 次隔离测量，退出 0。新旧完整报告逐项一致，候选耗时中位数下降 22%–25%，峰值 RSS 中位数略高。完整规模仍待测。 [原始输出](../../docs/round2/performance/p13-05-preflight-area-profile.log)
 - A 的真实 Python 暂存集成 22 项和进程组回归 2 项通过。主控将四个候选应用于同一隔离副本，81 项通过，退出 0。实际重启恢复受旧工人租约约束，退出后回收且保留诊断。 [合并日志与证据](../../docs/round2/performance/p13-05-preflight.md)
 - A 用真实 Python worker 验证直接写入器扩展。旧补丁的 GeoPackage 与阈值 TIFF 残留均被回收，成功产物通过独立检查。主控合并五个隔离候选，88 项通过。前后比较工具读取六批真实归档并拒绝八种失配。 [原始结果](../../docs/round2/performance/p13-05-preflight.md)
+- 主控的面积布局复用增量通过 20 项专项。三个真实窗口的 18 次报告一致。DEM L 窗口的 NumPy 去重从 768 次降至 30 次，两个 DEM 窗口较首版候选快约三分之一，遥感窗口略慢。 [原始测量与 JUnit](../../docs/round2/performance/p13-05-preflight.md)
 
 ## P13-06 复用证据准备
 

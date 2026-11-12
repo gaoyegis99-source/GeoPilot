@@ -26,6 +26,12 @@ env PYTHONPATH="$profile_tmp/src" PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS
   nice -n 19 taskset -c 31 .venv/bin/python "$profile_tmp/profile-windows.py" "$PWD/benchmarks/raster/area-fixtures"
 ```
 
+在同一输入的 256 × 256 窗口剖析中，首版坐标复用候选在 DEM L 的 256 批中有 246 批与前一批布局相同，NumPy `unique` 执行 768 次。隔离增量只在同一瓦片内保留最近布局的 2、4、8 段索引，投影坐标仍逐批独立计算。DEM L 的 `unique` 调用降至 30 次，遥感窗口 129 批均为不同布局，调用次数保持 387。20 项面积测试通过，含粗剪切至 256 段和零面积错误路径。
+
+对首版候选及增量各启动三个独立进程，在三份同字节窗口上复验。18 次面积报告逐项一致，原分类输入及窗口摘要保持。两个 DEM 窗口的计算中位数由 852.3、859.9 ms 降至 568.3、568.7 ms。遥感窗口由 429.3 ms 增至 438.4 ms。进程峰值 RSS 中位数变化均小于 0.5 MiB。全图耗时、RSS 和方法验证待正式测量。
+
+增量补丁、脚本和完整原始证据位于 `artifacts/test-results/p13-05-area-layout.i0WWFE/SHA256SUMS`。在原型目录运行同目录的 `reproduce.sh` 可复跑隔离构建、剖析及专项。 [实际测量与剖析](p13-05-preflight-area-layout.log) · [JUnit](p13-05-preflight-area-layout-junit.xml)
+
 ## 暂存文件生命周期
 
 原生 P13-04 遥感 L 的 14 次超时均留下两份暂存栅格。主控用基线 `78b8174cb25a74ec74dc83db3ae3a5ccd09e15b4` 的 `capture_process` 启动真实 Python 子进程，调用实际 `_stage_outputs`，写入模拟差值和内层分类文件，再由父进程触发超时或取消。隔离候选由父进程在输出所在文件系统分配独占目录，等子进程退出后按目录身份回收。两次探针均退出 0。 [原始结果](p13-05-preflight-staging.log)

@@ -1,0 +1,20 @@
+feab265b22ad25ac6ae7e846a8eb88ee343afdc2
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+....................                                                     [100%]
+---- generated xml file: /dev/shm/geopilot-p13-area-layout.k8uhPH/junit.xml ----
+20 passed in 2.41s
+{"affinity": [31], "nice": 19, "numpy": "2.4.4", "proj": "9.5.1", "gdal": "3.9.3", "python": "3.13.13"}
+{"case": "dem-m", "summary": "paired exact window result", "sha256": "43154ed639a53a5d6f0d8c48fc81062cf2b3530f4bf07d3e0a692e10cecb8d18", "selected_pixels": 65500, "wall_ms_median": {"baseline": 852.30583, "candidate": 568.316502}, "peak_rss_mib_median": {"baseline": 163.94140625, "candidate": 163.84375}}
+{"case": "dem-l", "summary": "paired exact window result", "sha256": "164abb66bb461dd7bd39b5fcc6feb21009068201c1fd156e6b4461b58ad7d1f4", "selected_pixels": 65500, "wall_ms_median": {"baseline": 859.941243, "candidate": 568.718048}, "peak_rss_mib_median": {"baseline": 163.88671875, "candidate": 164.36328125}}
+{"case": "remote-l", "summary": "paired exact window result", "sha256": "22988547a98e446b974ba6ef596587a7eab1f2ba06205467b3e02c37d2245bee", "selected_pixels": 33024, "wall_ms_median": {"baseline": 429.315701, "candidate": 438.38856}, "peak_rss_mib_median": {"baseline": 163.67578125, "candidate": 163.578125}}
+First candidate
+{"case": "dem-l", "selected_cells": 65500, "batches": 256, "consecutive_matching_layouts": 246, "input_sha256": "164abb66bb461dd7bd39b5fcc6feb21009068201c1fd156e6b4461b58ad7d1f4"}
+      768    0.002    0.000    0.195    0.000 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:145(unique)
+{"case": "remote-l", "selected_cells": 33024, "batches": 129, "consecutive_matching_layouts": 0, "input_sha256": "22988547a98e446b974ba6ef596587a7eab1f2ba06205467b3e02c37d2245bee"}
+      387    0.001    0.000    0.099    0.000 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:145(unique)
+Candidate with batch index reuse
+{"case": "dem-l", "selected_cells": 65500, "batches": 256, "consecutive_matching_layouts": 246, "input_sha256": "164abb66bb461dd7bd39b5fcc6feb21009068201c1fd156e6b4461b58ad7d1f4"}
+       30    0.000    0.000    0.008    0.000 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:145(unique)
+{"case": "remote-l", "selected_cells": 33024, "batches": 129, "consecutive_matching_layouts": 0, "input_sha256": "22988547a98e446b974ba6ef596587a7eab1f2ba06205467b3e02c37d2245bee"}
+      387    0.001    0.000    0.099    0.000 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/numpy/lib/_arraysetops_impl.py:145(unique)
