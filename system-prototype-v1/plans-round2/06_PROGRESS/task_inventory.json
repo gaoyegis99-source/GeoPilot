@@ -1,0 +1,401 @@
+{
+  "repository": "gaoyegis99-source/GeoPilot",
+  "prototype_path": "system-prototype-v1",
+  "task_count": 43,
+  "phase_counts": {
+    "P12": 12,
+    "P13": 8,
+    "P14": 8,
+    "P15": 8,
+    "P16": 7
+  },
+  "tasks": [
+    {
+      "id": "P12-01",
+      "phase": "P12",
+      "title": "固定审计基线与仓库快照",
+      "agent": "主控/F",
+      "deps": "无",
+      "command": "git rev-parse HEAD && git status --short --branch；python scripts/quality/build_source_inventory.py（本任务创建）",
+      "acceptance": "记录完整 commit SHA；清单覆盖 src/config/frontend/tests/docs/artifacts；未提交改动单独列出；同一 commit 重跑稳定。"
+    },
+    {
+      "id": "P12-02",
+      "phase": "P12",
+      "title": "需求矩阵与最终报告统计对账",
+      "agent": "F",
+      "deps": "P12-01",
+      "command": "python scripts/quality/validate_acceptance_consistency.py（创建）；python -m pytest tests -q（环境可运行时）",
+      "acceptance": "机器解析得到 40/40 PASS、16/16 PASS、122/122 ACCEPTED；最终报告说明后续补齐及最新 commit；保留历史统计。"
+    },
+    {
+      "id": "P12-03",
+      "phase": "P12",
+      "title": "文档与证据链接完整性扫描",
+      "agent": "F",
+      "deps": "P12-01",
+      "command": "python scripts/quality/check_doc_evidence_links.py --root . --report docs/round2/audit/evidence-link-audit.csv（创建）",
+      "acceptance": "相对源文档解析；区分外链/锚点；所有断链分类；不自动删除引用。"
+    },
+    {
+      "id": "P12-04",
+      "phase": "P12",
+      "title": "交付 Manifest 完整性校验",
+      "agent": "F/A",
+      "deps": "P12-01、P12-03",
+      "command": "python artifacts/reports/final/delivery_manifest.py；python scripts/quality/verify_delivery_manifest.py（创建）",
+      "acceptance": "区分源码与证据；新增/缺失/变化文件有差异报告；不静默重写基线。"
+    },
+    {
+      "id": "P12-05",
+      "phase": "P12",
+      "title": "后端全量回归复跑",
+      "agent": "F",
+      "deps": "P12-01、P12-02；QGIS CLI 可用",
+      "command": "GEOPILOT_QGIS_PROCESS=\"$PWD/.environments/qgis-deb/qgis_process\" PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 python -m pytest -q -p no:cacheprovider --junitxml=artifacts/test-results/round2/backend.xml",
+      "acceptance": "记录实际收集数、通过/失败/跳过、时长、退出码、环境和 commit；失败保留 XML/log；不以旧报告替代本轮。"
+    },
+    {
+      "id": "P12-06",
+      "phase": "P12",
+      "title": "前端测试与构建基线",
+      "agent": "E/F",
+      "deps": "P12-01",
+      "command": "cd frontend && npm ci --include=dev --no-audit --no-fund && npm test -- --run && npm run build",
+      "acceptance": "记录测试文件/用例数量、构建退出码、包体警告和 Node/npm 版本。"
+    },
+    {
+      "id": "P12-07",
+      "phase": "P12",
+      "title": "T01—T16 固定用例独立复跑",
+      "agent": "B/F",
+      "deps": "P12-05；QGIS CLI 可用",
+      "command": "GEOPILOT_QGIS_PROCESS=\"$PWD/.environments/qgis-deb/qgis_process\" PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest tests/golden tests/gis tests/methods -q -p no:cacheprovider --junitxml=artifacts/test-results/round2/gis-regression.xml",
+      "acceptance": "每个 T01—T16 有明确测试映射；分别列 PASS/FAIL/NOT_RUN；不得将 tests/gis 全通过直接等同 16 项全通过。"
+    },
+    {
+      "id": "P12-08",
+      "phase": "P12",
+      "title": "GitHub Actions 分层 CI",
+      "agent": "F/主控",
+      "deps": "P12-05、P12-06；依赖策略冻结",
+      "command": "git diff --check；python scripts/quality/validate_ci_matrix.py（创建）；GitHub Actions 首次运行",
+      "acceptance": "CI 包含 Python compile/import、配置/schema、非 QGIS 单测、前端 test/build；GIS/大样本另设手动或 nightly job。"
+    },
+    {
+      "id": "P12-09",
+      "phase": "P12",
+      "title": "配置与 Schema 漂移检查",
+      "agent": "C/F",
+      "deps": "P12-01",
+      "command": "python scripts/quality/validate_config_schemas.py（创建）；python -m pytest tests/contracts tests/methods tests/remote_sensing -q",
+      "acceptance": "配置可解析；未知字段、重复 ID、无效引用被拒绝；Schema 与当前模型一致或记录有意差异。"
+    },
+    {
+      "id": "P12-10",
+      "phase": "P12",
+      "title": "调度单活动约束与并发安全审计",
+      "agent": "D/F",
+      "deps": "P12-01",
+      "command": "python -m pytest tests/scheduler tests/runs tests/checks -q",
+      "acceptance": "说明单活动/排队语义；核查写竞态、SQLite 锁等待、长事务和跨进程约束；不在本任务改调度。"
+    },
+    {
+      "id": "P12-11",
+      "phase": "P12",
+      "title": "数据规模与性能基准方案",
+      "agent": "B/F/A",
+      "deps": "P12-01、P12-05",
+      "command": "python scripts/bench/validate_benchmark_manifest.py（创建）",
+      "acceptance": "定义小/中/大样本、硬件软件、重复次数、预热、冷/热缓存、CPU/RAM/IO、正确性校验；样本可生成。"
+    },
+    {
+      "id": "P12-12",
+      "phase": "P12",
+      "title": "P12 审计签收与第二轮放行",
+      "agent": "主控",
+      "deps": "P12-01 至 P12-11",
+      "command": "python scripts/quality/validate_round2_status.py（创建）",
+      "acceptance": "每个 AUD 有证据、负责人、优先级、处置和关闭条件；主控签署后放行。"
+    },
+    {
+      "id": "P13-01",
+      "phase": "P13",
+      "title": "GIS 数据规模分级生成器",
+      "agent": "B/F",
+      "deps": "P12-11",
+      "command": "python -m pytest tests/benchmarks/test_dataset_generators.py -q",
+      "acceptance": "至少三档规模；矢量含几何/属性复杂度；栅格含多波段/NoData；有 checksum、CRS、transform 和参考摘要。"
+    },
+    {
+      "id": "P13-02",
+      "phase": "P13",
+      "title": "执行资源遥测",
+      "agent": "D/F",
+      "deps": "P12-10、P13-01",
+      "command": "python -m pytest tests/observability -q",
+      "acceptance": "采样器不阻塞 runner；缺失指标标 unavailable；run/step 关联稳定；T01—T16 不回退。"
+    },
+    {
+      "id": "P13-03",
+      "phase": "P13",
+      "title": "矢量处理性能基线",
+      "agent": "B/F",
+      "deps": "P13-01、P13-02",
+      "command": "python scripts/bench/run_vector.py --profile benchmarks/datasets/vector.yaml",
+      "acceptance": "每档至少 3 次；记录中位数/P95、内存峰值和结果摘要；硬件/软件/输入一致。"
+    },
+    {
+      "id": "P13-04",
+      "phase": "P13",
+      "title": "栅格与遥感性能基线",
+      "agent": "B/F",
+      "deps": "P13-01、P13-02",
+      "command": "python scripts/bench/run_raster.py --profile benchmarks/datasets/raster.yaml",
+      "acceptance": "记录栅格大小、波段、NoData、窗口、内存峰值、吞吐和数值一致性。"
+    },
+    {
+      "id": "P13-05",
+      "phase": "P13",
+      "title": "大数据内存与临时文件控制",
+      "agent": "A/B",
+      "deps": "P13-03、P13-04",
+      "command": "python -m pytest tests/data_adapters tests/gis -q；python scripts/bench/run_memory_profile.py",
+      "acceptance": "同输入同环境前后对照；正确性不退化；临时文件有生命周期策略。"
+    },
+    {
+      "id": "P13-06",
+      "phase": "P13",
+      "title": "中间成果缓存与失效策略",
+      "agent": "A/D",
+      "deps": "P13-02、P13-05",
+      "command": "python -m pytest tests/cache -q",
+      "acceptance": "输入/工具/配置/参数变化均失效；缓存成果重新验证；缓存失败可回退全量计算。"
+    },
+    {
+      "id": "P13-07",
+      "phase": "P13",
+      "title": "运行队列与取消压力测试",
+      "agent": "D/F",
+      "deps": "P12-10、P13-02",
+      "command": "python -m pytest tests/stress/scheduler -q",
+      "acceptance": "覆盖队列、状态转换、锁等待、取消延迟、无重复领取、无孤儿进程；明确容量上限。"
+    },
+    {
+      "id": "P13-08",
+      "phase": "P13",
+      "title": "并发执行可行性决策",
+      "agent": "主控/D/F",
+      "deps": "P13-02 至 P13-07",
+      "command": "python scripts/bench/summarize_scheduler.py（创建）",
+      "acceptance": "决策包含 CPU/RAM/IO/QGIS 实例、SQLite 写竞争、隔离、取消语义和回滚；无证据则维持串行。"
+    },
+    {
+      "id": "P14-01",
+      "phase": "P14",
+      "title": "方法开发者 CLI 需求与接口设计",
+      "agent": "C/F",
+      "deps": "P12-09",
+      "command": "python -m pytest tests/scripts/test_manual_registration.py -q",
+      "acceptance": "不绕过现有校验；支持 validate/inspect/report；结构化错误；不自动发布。"
+    },
+    {
+      "id": "P14-02",
+      "phase": "P14",
+      "title": "方法配置模板生成",
+      "agent": "C",
+      "deps": "P14-01",
+      "command": "python -m pytest tests/method_dev/test_template_generation.py -q",
+      "acceptance": "模板通过 Schema；不虚构工具；未知参数留空并标注；版本明确。"
+    },
+    {
+      "id": "P14-03",
+      "phase": "P14",
+      "title": "方法配置静态 lint",
+      "agent": "C/F",
+      "deps": "P14-01、P12-09",
+      "command": "python -m pytest tests/method_dev/test_lint.py -q",
+      "acceptance": "错误码和配置路径稳定；错误配置阻断登记；现有方法全部通过。"
+    },
+    {
+      "id": "P14-04",
+      "phase": "P14",
+      "title": "方法样例包与参考输出协议",
+      "agent": "B/C/F",
+      "deps": "P14-01",
+      "command": "python -m pytest tests/method_dev/test_reference_package.py -q",
+      "acceptance": "参考独立于被测实现；矢量按 ID/拓扑、栅格按网格/NoData/像元；容差有依据。"
+    },
+    {
+      "id": "P14-05",
+      "phase": "P14",
+      "title": "方法隔离试运行与验证报告",
+      "agent": "B/C",
+      "deps": "P14-02 至 P14-04",
+      "command": "python -m pytest tests/method_dev/test_trial_run.py -q",
+      "acceptance": "不写正式成果；超时/失败隔离；输入只读；报告可复现。"
+    },
+    {
+      "id": "P14-06",
+      "phase": "P14",
+      "title": "方法版本兼容与弃用策略",
+      "agent": "C/主控",
+      "deps": "P14-03、P14-04",
+      "command": "python -m pytest tests/method_dev/test_version_compatibility.py -q",
+      "acceptance": "历史方案按原版本可追溯；不兼容变更拒绝；迁移需批准。"
+    },
+    {
+      "id": "P14-07",
+      "phase": "P14",
+      "title": "方法审批发布与回滚",
+      "agent": "C/D/F",
+      "deps": "P14-05、P14-06",
+      "command": "python -m pytest tests/method_dev/test_publish_rollback.py -q",
+      "acceptance": "仅已通过样例且人工批准的方法可启用；回滚不破坏历史运行；事件可追踪。"
+    },
+    {
+      "id": "P14-08",
+      "phase": "P14",
+      "title": "第二种复杂方法扩展试点",
+      "agent": "B/C/F",
+      "deps": "P14-01 至 P14-07；产品决策选定场景",
+      "command": "python -m pytest tests/methods/test_selected_complex_method.py -q",
+      "acceptance": "通过 lint、隔离试跑、独立参考、工作台流程和成果检查；记录接入成本。"
+    },
+    {
+      "id": "P15-01",
+      "phase": "P15",
+      "title": "Agent 任务澄清状态模型",
+      "agent": "G/C",
+      "deps": "P12-10、P14-03",
+      "command": "python -m pytest tests/agent/test_clarification_model.py -q",
+      "acceptance": "澄清项有原因/选项/必要性/阻断级别；不虚构数据参数；未澄清进入 issues。"
+    },
+    {
+      "id": "P15-02",
+      "phase": "P15",
+      "title": "多轮任务上下文与草稿修订",
+      "agent": "G/C/E",
+      "deps": "P15-01",
+      "command": "python -m pytest tests/agent/test_multi_turn_revision.py -q",
+      "acceptance": "局部修改不覆盖已确认历史；资产版本变化触发重审；刷新恢复当前草稿。"
+    },
+    {
+      "id": "P15-03",
+      "phase": "P15",
+      "title": "执行反馈结构化解释",
+      "agent": "G/D",
+      "deps": "P13-02、P15-01",
+      "command": "python -m pytest tests/agent/test_execution_feedback.py -q",
+      "acceptance": "解释引用真实 step/error/check；推断需标注；敏感路径和原始数据不外发。"
+    },
+    {
+      "id": "P15-04",
+      "phase": "P15",
+      "title": "受约束的替代方案建议",
+      "agent": "G/C",
+      "deps": "P14-03、P15-03",
+      "command": "python -m pytest tests/agent/test_alternative_plan.py -q",
+      "acceptance": "只引用真实候选；比较输入/参数/约束；不自动确认或执行。"
+    },
+    {
+      "id": "P15-05",
+      "phase": "P15",
+      "title": "失败后的计划修订闭环",
+      "agent": "D/G/C",
+      "deps": "P15-02 至 P15-04",
+      "command": "python -m pytest tests/agent/test_failure_replanning.py -q",
+      "acceptance": "旧运行不覆盖；新版本差异明确；本地校验通过；执行前用户确认。"
+    },
+    {
+      "id": "P15-06",
+      "phase": "P15",
+      "title": "代码型 GIS 工具生成隔离试点",
+      "agent": "G/B/F",
+      "deps": "P14-04、P14-05、P15-03",
+      "command": "python -m pytest tests/agent/test_generated_tool_sandbox.py -q",
+      "acceptance": "限制路径/网络/密钥；超时和资源限制有效；人工审批前不得注册或正式执行。"
+    },
+    {
+      "id": "P15-07",
+      "phase": "P15",
+      "title": "第二模型供应商适配决策",
+      "agent": "G/主控",
+      "deps": "P12-07、P15-01",
+      "command": "python -m pytest tests/llm/test_provider_contract.py -q",
+      "acceptance": "复用 provider contract；出站扫描先于网络调用；密钥不进日志；手工回退可用。"
+    },
+    {
+      "id": "P15-08",
+      "phase": "P15",
+      "title": "Agent 行为评估集",
+      "agent": "F/G",
+      "deps": "P15-01 至 P15-07",
+      "command": "python -m pytest tests/agent/evals -q",
+      "acceptance": "含正例/歧义/拒绝/边界；按类别报告；固定模型和提示版本。"
+    },
+    {
+      "id": "P16-01",
+      "phase": "P16",
+      "title": "本机环境诊断命令",
+      "agent": "A/B",
+      "deps": "P12-05、P12-06",
+      "command": "python -m pytest tests/diagnostics -q；python -m geopilot.diagnostics --json",
+      "acceptance": "只读诊断不自动改系统；输出可操作原因；版本组合有记录。"
+    },
+    {
+      "id": "P16-02",
+      "phase": "P16",
+      "title": "干净环境安装矩阵",
+      "agent": "A/E/F",
+      "deps": "P16-01",
+      "command": "python scripts/install-check/run_matrix.py（按测试机执行）",
+      "acceptance": "记录系统/Python/Node/QGIS/GDAL/命令/结果；未测平台标 NOT_TESTED。"
+    },
+    {
+      "id": "P16-03",
+      "phase": "P16",
+      "title": "工作台用户任务可用性测试",
+      "agent": "E/F",
+      "deps": "P12-12、至少一个稳定方法",
+      "command": "python scripts/quality/summarize_user_trials.py（创建）",
+      "acceptance": "建议至少 5 名目标用户并说明样本限制；记录完成率、求助、错误、耗时；开发者自测不算用户研究。"
+    },
+    {
+      "id": "P16-04",
+      "phase": "P16",
+      "title": "错误信息与恢复路径优化",
+      "agent": "E/D",
+      "deps": "P16-03",
+      "command": "cd frontend && npm test -- --run && npm run build；后端相关 tests",
+      "acceptance": "能区分修草稿/重跑/重查/重登记；不隐藏日志；状态语义不变。"
+    },
+    {
+      "id": "P16-05",
+      "phase": "P16",
+      "title": "长任务用户体验",
+      "agent": "E/D",
+      "deps": "P13-02、P16-03",
+      "command": "前端 Vitest + 浏览器 E2E；后端 run status tests",
+      "acceptance": "只展示可观测状态，不造伪百分比；刷新状态一致。"
+    },
+    {
+      "id": "P16-06",
+      "phase": "P16",
+      "title": "交付包与复现材料整理",
+      "agent": "F/A",
+      "deps": "P12-04 至 P12-08、已选 P13/P14",
+      "command": "python artifacts/reports/final/delivery_manifest.py；python scripts/quality/verify_delivery_manifest.py",
+      "acceptance": "manifest 可校验；链接闭合；测试数字与同 commit 一致；环境说明清楚。"
+    },
+    {
+      "id": "P16-07",
+      "phase": "P16",
+      "title": "V2 产品范围与发布决策",
+      "agent": "主控",
+      "deps": "P13-08、P14-08、P15-08、P16-01 至 P16-06",
+      "command": "python scripts/quality/validate_release_readiness.py（创建）",
+      "acceptance": "逐项列出已验证/部分验证/未验证；性能阈值来自用户需求；发布阻断明确；主控签署。"
+    }
+  ]
+}

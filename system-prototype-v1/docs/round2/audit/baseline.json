@@ -1,0 +1,3713 @@
+{
+  "commit": "80d724f35fba31cacb9d3f740265b2713c6be6f4",
+  "files": [
+    {
+      "path": "artifacts/reports/final/delivery-manifest.json",
+      "git_mode": "100644",
+      "sha256": "f4a32a3ca58d5fe0171b2dfedf3501c73a7a81a89ac7c1d466be255bf85b750e"
+    },
+    {
+      "path": "artifacts/reports/final/delivery_manifest.py",
+      "git_mode": "100644",
+      "sha256": "40041354636be316719f9a811b3a752561d047664622508faf90397f04729ab8"
+    },
+    {
+      "path": "artifacts/reports/methods/regression.md",
+      "git_mode": "100644",
+      "sha256": "c8ab63d74f1ba1fe20041ebb216f01b1c67082bf44a85df3c573eb603636bca3"
+    },
+    {
+      "path": "artifacts/schemas/analysis-plan.schema.json",
+      "git_mode": "100644",
+      "sha256": "8a7fd8d02f2f1ed240b8375db70f2c1b2a562f8d7d221da26a8c80b26756cf8b"
+    },
+    {
+      "path": "artifacts/schemas/error-detail.schema.json",
+      "git_mode": "100644",
+      "sha256": "b958b1055703e15ba45969aaa8c3db0d6cd239caaa751280621fe47822b26084"
+    },
+    {
+      "path": "artifacts/schemas/execution-status.schema.json",
+      "git_mode": "100644",
+      "sha256": "4282dcea4408e72e85d15e92dfee2e2ffec141a35940692d73aa0c2ecf210ff5"
+    },
+    {
+      "path": "artifacts/schemas/method-definition.schema.json",
+      "git_mode": "100644",
+      "sha256": "56cad0f705235f6dea216db7fa5e7f8a9094c99e215ebc16affc49ec797b39a9"
+    },
+    {
+      "path": "artifacts/schemas/method-ref.schema.json",
+      "git_mode": "100644",
+      "sha256": "0b9f9762cf851ae34cb68e2ca0bd59b05c71db9850ef04548f1203751bf136b9"
+    },
+    {
+      "path": "artifacts/schemas/p9-model-response.schema.json",
+      "git_mode": "100644",
+      "sha256": "f6341d132a2f3809390126d5ff267f89a8969fa5120c5a3f4fdee82d8d5e7034"
+    },
+    {
+      "path": "artifacts/schemas/run-step.schema.json",
+      "git_mode": "100644",
+      "sha256": "2c3533ac4e9ca3b21f62cc55f55f71123c51d8192999822223c7d6837ad60518"
+    },
+    {
+      "path": "artifacts/schemas/run.schema.json",
+      "git_mode": "100644",
+      "sha256": "2775e42046be60851cb79ecd3109725b8fb446344f7e23fdf52078a35078dfb1"
+    },
+    {
+      "path": "artifacts/schemas/sensor-product-config.schema.json",
+      "git_mode": "100644",
+      "sha256": "645b6b1fe4d7b1c0d502ee19f479a58492ddeabd0837dedc51fee94289c6fa22"
+    },
+    {
+      "path": "artifacts/schemas/step-request.schema.json",
+      "git_mode": "100644",
+      "sha256": "0a2909688c8446782c1a291845963b6631cf341618a67ed5921b2fae36fcf895"
+    },
+    {
+      "path": "artifacts/schemas/step-result.schema.json",
+      "git_mode": "100644",
+      "sha256": "b2a7bffd5403aa04ae609179d4e4e247e9e6005819c0f2af1c69b9ae17bfee84"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/coverage.json",
+      "git_mode": "100644",
+      "sha256": "d51dc9e8d8a1fb0511e0ed5bf2a8e49a053635ea80ede8023c282c159dcf1acc"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/current-collection.txt",
+      "git_mode": "100644",
+      "sha256": "fbd82d8fcd7461201aaa40409803185602f02a0ef826565a18cd39d302d256a1"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/scope-high-latitude-reference.json",
+      "git_mode": "100644",
+      "sha256": "91a8c145483a820690aac8c43944972ae940f33334cf088427fd3434ee420263"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/verify-downloads.py",
+      "git_mode": "100644",
+      "sha256": "a8d6da60a4f65545d9d99877af0a5832ae2240c9b325fb324530bb7d57b9424e"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/verify-workbench.mjs",
+      "git_mode": "100644",
+      "sha256": "09c7faea8e590e9560e273a3b74b46d36a06a64549438d3e2afce5882f064ca3"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/browser.json",
+      "git_mode": "100644",
+      "sha256": "d917a06a39d8e6921fabfbacb5df9ece3cc7e2eb572001fce0405c34d2a94ec3"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/download-verification.json",
+      "git_mode": "100644",
+      "sha256": "9c5a1e1d3ea8ee2037f907c5b4793dcc7c46a23957222f96a3a0005cc3953b96"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/geodesic-v3.png",
+      "git_mode": "100644",
+      "sha256": "a5f82721fbbcae78b9017b87416405cf0ef52905079266a640a694902f4e9f2d"
+    },
+    {
+      "path": "artifacts/smoke/road-workflow/workbench.4t9svZFH/local-projected-v3.png",
+      "git_mode": "100644",
+      "sha256": "5ae73fbf7feb1182a45cd2a909ee021987cbe44ef23ad89d3df4dca4d0f915b3"
+    },
+    {
+      "path": "artifacts/test-results/geodesic-road-workflow-junit.xml",
+      "git_mode": "100644",
+      "sha256": "7ee56a980427f3222cd79513d359410671e5f3a1f89fa171dd788bf5cb68a400"
+    },
+    {
+      "path": "artifacts/test-results/p11-02-fixed-regression-junit.xml",
+      "git_mode": "100644",
+      "sha256": "6d1edd479cfa8290fd9f75b4869ccea987d95079d9272665014e454a579ffe08"
+    },
+    {
+      "path": "artifacts/test-results/road-workflow-frontend-junit.xml",
+      "git_mode": "100644",
+      "sha256": "5260f0b10c7c101ff48209faa29ca697476a381a2922a95b51bbb87826249d40"
+    },
+    {
+      "path": "artifacts/test-results/road-workflow-full-application-junit.xml",
+      "git_mode": "100644",
+      "sha256": "5c2ccc4690ce066696c29305f2e8d91ce167dd2075ff104583ad0c8c171c9980"
+    },
+    {
+      "path": "artifacts/test-results/road-workflow-full-execution-junit.xml",
+      "git_mode": "100644",
+      "sha256": "e16d174c7016dcee1af332b6b5c573e2d6216b9f6e68b75c45dfa3a8b314cdcb"
+    },
+    {
+      "path": "artifacts/test-results/road-workflow-full-methods-final-junit.xml",
+      "git_mode": "100644",
+      "sha256": "833e269deb3747ee75c7f356c5e88d5bdb9d2a0e7b55360d880482bb33fdf1e6"
+    },
+    {
+      "path": "artifacts/test-results/road-workflow-full-spatial-final-junit.xml",
+      "git_mode": "100644",
+      "sha256": "10c99ee0acdff95e192f222ef22176639ea534a7615302401f73056d7a4ec00d"
+    },
+    {
+      "path": "config/methods/attribute-filter-export.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "c96a5d7f256bd216c23b981b923546d77c92e6b8824f8268f4bf7342a093a28f"
+    },
+    {
+      "path": "config/methods/dem-terrain-analysis.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "ed2a696d6f6fe72f5a401c7e6a84a8491210978f48c991e511369fca12515973"
+    },
+    {
+      "path": "config/methods/land-use-change.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "e11f93a602c48d88cb82bf5f5f1b4abfb989b050c3548b934d087ed5150393f2"
+    },
+    {
+      "path": "config/methods/polygon-zone-statistics.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "26110b799517b62fce605d31d4054a19ff78ab77f47ce2f2a770898290d8e828"
+    },
+    {
+      "path": "config/methods/remote-sensing-index-change.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "e5331572ffe08c7f366ed5b510ea5ec76c509a1545800b835a616371f7a13355"
+    },
+    {
+      "path": "config/methods/road-buffer-statistics.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "758920c7c9082de25456c2a95452f6b7dfef4e199890be550b2b2f2be4be5c59"
+    },
+    {
+      "path": "config/methods/road-buffer-statistics.v2.yaml",
+      "git_mode": "100644",
+      "sha256": "87758b005dce881c5824b801e77ad109f56338b3a90b8609fe51b83f1822cd0e"
+    },
+    {
+      "path": "config/methods/road-buffer-statistics.v3.yaml",
+      "git_mode": "100644",
+      "sha256": "298e82e52dc653be8e6487bfd39afe1f5ec9a18a9a12d71036abecaf4674607a"
+    },
+    {
+      "path": "config/methods/spatial-select-and-clip.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "8a9622573e453e25d5600975d14bbbabfd568e99656b5d93ccbf7db97eb48031"
+    },
+    {
+      "path": "config/runner_bindings/qgis-buffer.yaml",
+      "git_mode": "100644",
+      "sha256": "4623a6c4b23e8c893c4398f67e3680aefbe6a809fd5cde050021100c7559754d"
+    },
+    {
+      "path": "config/runner_bindings/qgis-extract-by-attribute.yaml",
+      "git_mode": "100644",
+      "sha256": "f5e8e1016b71dd2f150b538b1682f2ae23a5f220a0a3a5c7f08a54761eff3b4a"
+    },
+    {
+      "path": "config/runner_bindings/qgis-road-workflow.yaml",
+      "git_mode": "100644",
+      "sha256": "616a3c930726a42afccddb9a64304562de97ce9212a8b57352940d53eebea521"
+    },
+    {
+      "path": "config/sensors/landsat-8-c2-l2sp.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "254b6d9687a4c833b93a3ea147843f0e8ffc0eaed25ffa748cb9bd3e8e0335d7"
+    },
+    {
+      "path": "config/sensors/landsat-8-c2-l2sr.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "499adde0b098281cf739ac969adda623df1d2ab3d65732223e8db3172b4ea686"
+    },
+    {
+      "path": "config/sensors/landsat-9-c2-l2sp.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "b04392de2500e356c3f4cccc4ef3790069033f29779f3e1e3b7e272ec769f4ca"
+    },
+    {
+      "path": "config/sensors/landsat-9-c2-l2sr.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "6a8cf7cc475b1d1ac4a984f8e0800236082b8cdab18b84bd7b0410183dca1606"
+    },
+    {
+      "path": "config/sensors/sentinel-2-l2a-pb05-11.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "61d979500f687f4e0e1b765177ecb1a03c10359193c19f6d986ac5e5f3b4e583"
+    },
+    {
+      "path": "config/tools/python-area.yaml",
+      "git_mode": "100644",
+      "sha256": "a4149e7c5492fc8613bc9a3894d49a5a5b63127fbf39eda76b5e50ac75e5ade8"
+    },
+    {
+      "path": "config/tools/python-clip-points-to-extent.yaml",
+      "git_mode": "100644",
+      "sha256": "ce1398ef6b5359ee5d184b79ca73e8d651ad93f314c99c9aaf965a7669d470d8"
+    },
+    {
+      "path": "config/tools/python-clip-vector-to-extent.yaml",
+      "git_mode": "100644",
+      "sha256": "cc83c2c2baa71e54254684bcf52f6137c1e04d67837cbcb9912cf09e42ebc53f"
+    },
+    {
+      "path": "config/tools/python-count-points-by-zone.yaml",
+      "git_mode": "100644",
+      "sha256": "409365e4742bf04f8c298f847443c7c1efb8f5fdf7bdee8a8364d9d56518c728"
+    },
+    {
+      "path": "config/tools/python-dem-area-stats.yaml",
+      "git_mode": "100644",
+      "sha256": "f9a249e32acfca085bb5d5a2d9110af8b0bc1b3764cd6c1dbad1c8d25d90e518"
+    },
+    {
+      "path": "config/tools/python-dem-aspect.yaml",
+      "git_mode": "100644",
+      "sha256": "71185e4d13dd5c020bfb152f188712c3dfefe00cfca3fe003cbf02fca5ea4620"
+    },
+    {
+      "path": "config/tools/python-dem-clip-back.yaml",
+      "git_mode": "100644",
+      "sha256": "edc5ef81351596634331bd72c9d0429665ec251a2a146b01491a74e52e17e1d1"
+    },
+    {
+      "path": "config/tools/python-dem-expand-extent.yaml",
+      "git_mode": "100644",
+      "sha256": "81ad16ff6ace3c0d9cb2abfd193e85fde51f4fe8fd179a2ab78fbec899f5003b"
+    },
+    {
+      "path": "config/tools/python-dem-prepare.yaml",
+      "git_mode": "100644",
+      "sha256": "ec6261d595304fa3634555e335dfda09b52b83e5302b45292a8863230cee264a"
+    },
+    {
+      "path": "config/tools/python-dem-slope.yaml",
+      "git_mode": "100644",
+      "sha256": "af89db35439899cba3f6136db170eceecbfeb97ce087482ba541aa9e0cd65f89"
+    },
+    {
+      "path": "config/tools/python-dem-terrain.yaml",
+      "git_mode": "100644",
+      "sha256": "1a7f66bdfa2e45a535d837291c776b7dedc995662cd190dfea9352a786363c86"
+    },
+    {
+      "path": "config/tools/python-dem-threshold.yaml",
+      "git_mode": "100644",
+      "sha256": "e5d80624b1c1e585d6a76cb2f04303927607935d7bc5ce9bb4aa4653ce603e14"
+    },
+    {
+      "path": "config/tools/python-dem-unit-check.yaml",
+      "git_mode": "100644",
+      "sha256": "035159cd173defdef9aca80eabee55d8d8bf5c73fa94ae03e62e4b90db7ee024"
+    },
+    {
+      "path": "config/tools/python-expand-wgs84-analysis-extent.yaml",
+      "git_mode": "100644",
+      "sha256": "43f5369c0c5d8fc6531e4ae14ff177fba4ebed0f1119a8854dbdfd15b001d888"
+    },
+    {
+      "path": "config/tools/python-land-use-assign.yaml",
+      "git_mode": "100644",
+      "sha256": "f0837178dadc23183afcac3556df2bbf2f48b478a180bb5b080ee20c0bbc9c8b"
+    },
+    {
+      "path": "config/tools/python-land-use-build-changes.yaml",
+      "git_mode": "100644",
+      "sha256": "c389e55577bb6754d16391871294bfeda61226cd8e7e71ebaf027132a3c44ae7"
+    },
+    {
+      "path": "config/tools/python-land-use-map.yaml",
+      "git_mode": "100644",
+      "sha256": "e27afdce1a22f00b776d2bd1435d51aca65cb7f22e4cf3796432f4f5dd004f13"
+    },
+    {
+      "path": "config/tools/python-land-use-overlay.yaml",
+      "git_mode": "100644",
+      "sha256": "1cd859b70a7a571f0ffdf6ed5bf6be1028f3d14e673c85ee39ed9b9bc10003b7"
+    },
+    {
+      "path": "config/tools/python-land-use-project.yaml",
+      "git_mode": "100644",
+      "sha256": "e71b4a2ff28f5099f92017cac22d2d9a8dcbbff2c36c36226792ccaa346d803b"
+    },
+    {
+      "path": "config/tools/python-land-use-read.yaml",
+      "git_mode": "100644",
+      "sha256": "827757c7b8bafbb8ec43a42990bfd875065f24deddd870994d85eb8cf9cf0ff6"
+    },
+    {
+      "path": "config/tools/python-land-use-transition-matrix.yaml",
+      "git_mode": "100644",
+      "sha256": "a36f4b67056bf29cda8a0e69daf7927ed2db71b720725aad6ebbedfcfbf1ec9e"
+    },
+    {
+      "path": "config/tools/python-polygon-zone-statistics.yaml",
+      "git_mode": "100644",
+      "sha256": "6d2f08d535278ecc65d556a4d939f21a9a8ef51e339e8d5c578448643e662b0f"
+    },
+    {
+      "path": "config/tools/python-prepare-measurement-lines.yaml",
+      "git_mode": "100644",
+      "sha256": "eaa1a1c1696839bb23c9c9e4e09caf7776e1c81d962c44498a2975f3c889d617"
+    },
+    {
+      "path": "config/tools/python-prepare-wgs84-measurement-lines.yaml",
+      "git_mode": "100644",
+      "sha256": "17f92fe29562ac91b5500c7f5e8a3dbd09b5bf60fa0ac3557bd83adb796e5801"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-align-dates.yaml",
+      "git_mode": "100644",
+      "sha256": "c16712908f78f31494efbccb64fa6928109b1e81622e5c18846d7838ab4c51e8"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-calculate-change.yaml",
+      "git_mode": "100644",
+      "sha256": "8261d056f6cf6cdd3cdd273908fc61d01ee4072081f59afd51e5eeb432e04f36"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-calculate-ndvi.yaml",
+      "git_mode": "100644",
+      "sha256": "8738c32fcb9b88ec8731d4afcc5d4b391282f057c9a66cb21497bb0cb3fb7f95"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-lookup-configuration.yaml",
+      "git_mode": "100644",
+      "sha256": "ee2ea7e0f42a309eac91b2054083b0a91012beb31b2da82960c4e99d38f5abc9"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-map-bands.yaml",
+      "git_mode": "100644",
+      "sha256": "aabc437c79afad9f9dc349693fce739562b060a2b36dd8e2306cf125092d3bf3"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-quality-mask.yaml",
+      "git_mode": "100644",
+      "sha256": "a20b5fca26f93885cb0f899dec88afcfdfdbfc79203f56acc5e8966b62fcbef6"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-read-metadata.yaml",
+      "git_mode": "100644",
+      "sha256": "2a52ad991c0ba80ce682d8c7c9f1de1c43142c7fd3b51dc2785a89d3bfef3341"
+    },
+    {
+      "path": "config/tools/python-remote-sensing-scale-reflectance.yaml",
+      "git_mode": "100644",
+      "sha256": "5bbea2cfd1e4b6645aba71187eb622b23d267727a49eb673d4da9416b2b3fa3b"
+    },
+    {
+      "path": "config/tools/python-select-spatial-relation.yaml",
+      "git_mode": "100644",
+      "sha256": "3b7a6239a35f63c4bf808fcf6175715b9e5ac9e2519ff13310567bf82bf3f59f"
+    },
+    {
+      "path": "config/tools/python-select-wgs84-roads.yaml",
+      "git_mode": "100644",
+      "sha256": "dd66309a5566504e87517a10e7633c265974c6c349f1da6c6cb0e206cc843ce7"
+    },
+    {
+      "path": "config/tools/python-wgs84-geodesic-buffer.yaml",
+      "git_mode": "100644",
+      "sha256": "2569f1eeca851dbebab5116bb156834da95f3027d733991c3a05be93bdd54229"
+    },
+    {
+      "path": "config/tools/qgis-buffer.yaml",
+      "git_mode": "100644",
+      "sha256": "2dc8ca1374519bcb2f919f635318101b68616353a002df628eb8de3c3f09c1eb"
+    },
+    {
+      "path": "config/tools/qgis-expand-analysis-extent.yaml",
+      "git_mode": "100644",
+      "sha256": "7f4f133ffa254b3ab78ed638663dacafa50e64584b011cdd61beb9af2d14c3c1"
+    },
+    {
+      "path": "config/tools/qgis-extract-by-attribute.yaml",
+      "git_mode": "100644",
+      "sha256": "335d6f9353532f6b539f6cb73fd45f940ec3fed8cfc66c06450de17ccc2f7ea2"
+    },
+    {
+      "path": "config/tools/qgis-select-points-by-location.yaml",
+      "git_mode": "100644",
+      "sha256": "32d53865cda7a8260a0fc05722087a0d9ff1cf5b5ac46633eda910a4addd9f3c"
+    },
+    {
+      "path": "config/tools/qgis-select-roads-by-location.yaml",
+      "git_mode": "100644",
+      "sha256": "734c0d0b18cc849ee023abfab34fd1f9af90660f161a15c7cc826ec953b78e38"
+    },
+    {
+      "path": "docs/acceptance/FIXED_CASES.md",
+      "git_mode": "100644",
+      "sha256": "72c85668f8bfaa60937b0f57e8c9a7939f0f49843b6a83dbad86b4c238115436"
+    },
+    {
+      "path": "docs/acceptance/P0-04.md",
+      "git_mode": "100644",
+      "sha256": "27007c29a89f981d12b244ac05d0f5e421baea3a2590e7374d909b3755ae639e"
+    },
+    {
+      "path": "docs/acceptance/P0.md",
+      "git_mode": "100644",
+      "sha256": "d2b4b747cce6f5a1e879d73309fbceb004412e1f8476c469e007dcb824e3e76c"
+    },
+    {
+      "path": "docs/acceptance/P1-01.md",
+      "git_mode": "100644",
+      "sha256": "f63411b3b67cb181069a6933333915c350a2d49f23804235813b079f49904db5"
+    },
+    {
+      "path": "docs/acceptance/P1-02.md",
+      "git_mode": "100644",
+      "sha256": "49f619c863bf87f24da5a27848400aa85f16fe84e4e58a2c6a692c722e928648"
+    },
+    {
+      "path": "docs/acceptance/P1-03.md",
+      "git_mode": "100644",
+      "sha256": "9563d29bdf6c3a51987c9160a6ae17b2526f4e369d7f71e3a7caec904b9475f4"
+    },
+    {
+      "path": "docs/acceptance/P1-04.md",
+      "git_mode": "100644",
+      "sha256": "3f00c8a9f2d4588c4facc81bbeca62893df38f093385b5a3f25b965a88b56603"
+    },
+    {
+      "path": "docs/acceptance/P1-05.md",
+      "git_mode": "100644",
+      "sha256": "df225996272a01ec6479d2a5ecf0fd98951183bf8ba5c1d9667f42a879504726"
+    },
+    {
+      "path": "docs/acceptance/P1-06.md",
+      "git_mode": "100644",
+      "sha256": "1e1be7cb59a452ee37be36ec3ba6cea589a8670d6366e990805058a48981db7b"
+    },
+    {
+      "path": "docs/acceptance/P1-07.md",
+      "git_mode": "100644",
+      "sha256": "caec525fabf44f0544ef4b2343081c59fb3adf31036f4c715fbf24d848158063"
+    },
+    {
+      "path": "docs/acceptance/P1-08.md",
+      "git_mode": "100644",
+      "sha256": "935e40f68ca374819fa53279d2a4e28b7dfb0a640a05e5cd6a32af582797d70a"
+    },
+    {
+      "path": "docs/acceptance/P1-09.md",
+      "git_mode": "100644",
+      "sha256": "abd649743272c2671fec4ceb579b5ecda16d28f9cd108d9bff73f827e4526664"
+    },
+    {
+      "path": "docs/acceptance/P1-10.md",
+      "git_mode": "100644",
+      "sha256": "867ca0ef81cd3bfc81222a66491e4ceba203c18ea51ae20169b87eced3f9d0d8"
+    },
+    {
+      "path": "docs/acceptance/P1.md",
+      "git_mode": "100644",
+      "sha256": "b34ae0c6ef9a0e66b63ade7eb905d50cf1a7c3724fa319c535998685934bde11"
+    },
+    {
+      "path": "docs/acceptance/P10-01.md",
+      "git_mode": "100644",
+      "sha256": "afc0caaf72689e401930f8ebb5461869388b2d55d21e9c9973396ea5ff8f29c3"
+    },
+    {
+      "path": "docs/acceptance/P10-02.md",
+      "git_mode": "100644",
+      "sha256": "43dd44c69abc9d96479c3c740a3820f22993b268726d9eda6ae1b6331f1877e2"
+    },
+    {
+      "path": "docs/acceptance/P10-03.md",
+      "git_mode": "100644",
+      "sha256": "c4f1efdec2330d0515b16a47deba89b064bba257a144eabe7b1807a06f3d5695"
+    },
+    {
+      "path": "docs/acceptance/P10-04.md",
+      "git_mode": "100644",
+      "sha256": "3d747d669d9047481c38097a116c24426396fb69e3169eb28b492338a039aa3a"
+    },
+    {
+      "path": "docs/acceptance/P10-05.md",
+      "git_mode": "100644",
+      "sha256": "7237091ca95355fb8fa2ada73917ec40b0c354435b348f5efe25edc7c9d52de5"
+    },
+    {
+      "path": "docs/acceptance/P10-06.md",
+      "git_mode": "100644",
+      "sha256": "df82158c809ba1a3e4bc037dff3c1b291c83d051aaf63810445069d4a7e0aea8"
+    },
+    {
+      "path": "docs/acceptance/P10-07.md",
+      "git_mode": "100644",
+      "sha256": "334138b695d22803afc66d8878ba3cd0ab6d8c19039357b6e0c6fa996a0d326d"
+    },
+    {
+      "path": "docs/acceptance/P10.md",
+      "git_mode": "100644",
+      "sha256": "c3986f0b240bfabda232ab641927b83027c7810007cc4b2fc25b29231d342a0b"
+    },
+    {
+      "path": "docs/acceptance/P11-01.md",
+      "git_mode": "100644",
+      "sha256": "dda50494cd3ebeccf0fac440fcb9cea6ef0ec1c5e85cfe72a8821f180eacf378"
+    },
+    {
+      "path": "docs/acceptance/P11-02.md",
+      "git_mode": "100644",
+      "sha256": "9ecc762adfcde165b57be74fceab917d3e2b83838a5b33a54fc3803107f745b0"
+    },
+    {
+      "path": "docs/acceptance/P11-03.md",
+      "git_mode": "100644",
+      "sha256": "8f4e992bf6011128e704a059d76ceb8a9e17cafa9548cce12f0e3574020dbb94"
+    },
+    {
+      "path": "docs/acceptance/P11-05.md",
+      "git_mode": "100644",
+      "sha256": "74c4b90d2ee957e2bf4e8e1f77fe7818efac7c5bf4d7fb5750264caf5fe44c88"
+    },
+    {
+      "path": "docs/acceptance/P11-07.md",
+      "git_mode": "100644",
+      "sha256": "30d660a6c806be1315f435a133bb1f8269c0a4392222f51f20ffaed96d8c3a73"
+    },
+    {
+      "path": "docs/acceptance/P11.md",
+      "git_mode": "100644",
+      "sha256": "957c98e889f10acc3b9b4a7ac2b8f7c353e84ec0425b8a2cece584cee82c71f6"
+    },
+    {
+      "path": "docs/acceptance/P2-01.md",
+      "git_mode": "100644",
+      "sha256": "a4a3d9fc4536d9eedefd346db279404d825d244bb74ae147d08785f5a2a2d0f7"
+    },
+    {
+      "path": "docs/acceptance/P2-02.md",
+      "git_mode": "100644",
+      "sha256": "039769fdc212efdc8e4c74ac4bb6522eb49af7015b3262540f3b91894fe35863"
+    },
+    {
+      "path": "docs/acceptance/P2-03.md",
+      "git_mode": "100644",
+      "sha256": "ec8743d8d6c574a41e54603c980d10ab4209dac0d75ca01dc566045795b4e0c2"
+    },
+    {
+      "path": "docs/acceptance/P2-04.md",
+      "git_mode": "100644",
+      "sha256": "3ed3609c13e0c23e3438f4f947bafdc79e3c17393543d13d92225cee622ec98c"
+    },
+    {
+      "path": "docs/acceptance/P2-05.md",
+      "git_mode": "100644",
+      "sha256": "2aeabdc3a1859fcb7fb2803a542872799f54120c4e33a70570ddfbf45e8837c1"
+    },
+    {
+      "path": "docs/acceptance/P2-06.md",
+      "git_mode": "100644",
+      "sha256": "1d8e9d9eb8714ed5f97f021c9557f5364a039a15126cefeaa86d480d2f91ea27"
+    },
+    {
+      "path": "docs/acceptance/P2-07.md",
+      "git_mode": "100644",
+      "sha256": "49cc27206d5b8ecafcac9eb529faaad045d463ff9402ceb36918bc6d98d8b33d"
+    },
+    {
+      "path": "docs/acceptance/P2-08.md",
+      "git_mode": "100644",
+      "sha256": "89fd47fe9353c44226b3fc8e04a91da05a94aa11880e3df0d7e54a78c2e170b8"
+    },
+    {
+      "path": "docs/acceptance/P2-09.md",
+      "git_mode": "100644",
+      "sha256": "a79fbd80badefd41fad3287fb5b94b71c34876dc8cc4541cfaffdf1709c79fb9"
+    },
+    {
+      "path": "docs/acceptance/P2-10.md",
+      "git_mode": "100644",
+      "sha256": "e59379b2ed33d3bc4c0038bb3b00e41742ecb19fa2a84ddba6d320d09965ef15"
+    },
+    {
+      "path": "docs/acceptance/P2.md",
+      "git_mode": "100644",
+      "sha256": "7b6e47195f988b8ebd8886c4673f540ddf1ac4c3c86cfe2b4b7a62e9149fe7b1"
+    },
+    {
+      "path": "docs/acceptance/P3-01.md",
+      "git_mode": "100644",
+      "sha256": "ec943ba7ff8bdca6593b84ef53cdc0fb3b873bf2addb3558627f6d10f17e1cc0"
+    },
+    {
+      "path": "docs/acceptance/P3-02.md",
+      "git_mode": "100644",
+      "sha256": "2af8ac97f3734d9ec029f0e4d68e254b2c76a7b8808222071d9a367d4a194f59"
+    },
+    {
+      "path": "docs/acceptance/P3-03.md",
+      "git_mode": "100644",
+      "sha256": "fb4ea1b663a6e70a3f46d40887734ac87b999581b46561d13e28cf224a0d0a6a"
+    },
+    {
+      "path": "docs/acceptance/P3-04.md",
+      "git_mode": "100644",
+      "sha256": "f32a465b912b54a0b1348e6a16fc8b10a57a3c028f211e33e18abeb1f3c61c19"
+    },
+    {
+      "path": "docs/acceptance/P3-05.md",
+      "git_mode": "100644",
+      "sha256": "dfa2fa990acfa7369cbae435112bc11151684acc854401372074eb2a73a3397b"
+    },
+    {
+      "path": "docs/acceptance/P3-06.md",
+      "git_mode": "100644",
+      "sha256": "e48d1282d4654adabb03b52153e3d317601e2e4db632732780c84ca151e8fe1e"
+    },
+    {
+      "path": "docs/acceptance/P3-07-context.md",
+      "git_mode": "100644",
+      "sha256": "8de507e5b902886ea52d0f58f866fb0dfab3d6a2d2419585e21a3176d7bfcdf8"
+    },
+    {
+      "path": "docs/acceptance/P3-07.md",
+      "git_mode": "100644",
+      "sha256": "28b7505478211cec34487a9d0bd8ed7998e8903865075e959da21fef4bb6d8a1"
+    },
+    {
+      "path": "docs/acceptance/P3-08.md",
+      "git_mode": "100644",
+      "sha256": "d6e7897afc44a66bc8d4eb2c46fc3441125ca00b80375a818c824e3fcd5e7373"
+    },
+    {
+      "path": "docs/acceptance/P3-09.md",
+      "git_mode": "100644",
+      "sha256": "74f469d9c1c1649359419e4a82832f60c7e2dcc6b589643af72045b891a45424"
+    },
+    {
+      "path": "docs/acceptance/P3-10.md",
+      "git_mode": "100644",
+      "sha256": "5ea750dd026ab09181aa74d79e074d015af60a008b2dd8f6772a8b62447f8b56"
+    },
+    {
+      "path": "docs/acceptance/P3-attribute-tool.md",
+      "git_mode": "100644",
+      "sha256": "f74b71ebd42db1c7525e50043d5de1be8b8b926c907c4d02dfdcf9f378398c4c"
+    },
+    {
+      "path": "docs/acceptance/P3-clip-tool.md",
+      "git_mode": "100644",
+      "sha256": "0225452a939baa92501d0f285b935969e325f8ad52cb106c40f68b64c81ad877"
+    },
+    {
+      "path": "docs/acceptance/P3-count-tool.md",
+      "git_mode": "100644",
+      "sha256": "f6e71f91f1c39db95e2cb7380e92e8d75a8984084b270839b325ad9b8e7ea265"
+    },
+    {
+      "path": "docs/acceptance/P3-road-tools.md",
+      "git_mode": "100644",
+      "sha256": "5eeb2f2c97d99654322533dfa057350793109e250bce1bed11ac0342d964702a"
+    },
+    {
+      "path": "docs/acceptance/P3-road-workflow.md",
+      "git_mode": "100644",
+      "sha256": "0e8e8813a65d49d93b25a352fb6665255c7831a4292e8c66ddcbbaea00975e85"
+    },
+    {
+      "path": "docs/acceptance/P3-run-checks.md",
+      "git_mode": "100644",
+      "sha256": "7b7ba7bc30cb3a006325a2d38accc3fd08ba6b6fb783c1021b2e139b9e335e7b"
+    },
+    {
+      "path": "docs/acceptance/P3.md",
+      "git_mode": "100644",
+      "sha256": "94044c3adf65722cf01b844e05590b5002378315fbbb1e4e9d80584bcadc7e2e"
+    },
+    {
+      "path": "docs/acceptance/P4-01.md",
+      "git_mode": "100644",
+      "sha256": "1759801ce6838af478d5eff20464aa2dda8ac395a8a3967830764460c08b8a43"
+    },
+    {
+      "path": "docs/acceptance/P4-02.md",
+      "git_mode": "100644",
+      "sha256": "4b8ee75c88cd49309ae0b82db3ee7f7e4dba476b5dbd001a9e7b8b03991e3d3d"
+    },
+    {
+      "path": "docs/acceptance/P4-03.md",
+      "git_mode": "100644",
+      "sha256": "1f92dd8c1afa2b9065dc9a50a6e2f6346fd1e1e905458292b3de7df2e7c141f6"
+    },
+    {
+      "path": "docs/acceptance/P4-04.md",
+      "git_mode": "100644",
+      "sha256": "5c3f7dd33e17bc2cd7255d314856155946c7007bf170a20fee208e8c5e5535cb"
+    },
+    {
+      "path": "docs/acceptance/P4-05.md",
+      "git_mode": "100644",
+      "sha256": "31473712f9cd607467552e36b90ca8dbc103be04023c2795c46f69391f69b10d"
+    },
+    {
+      "path": "docs/acceptance/P4-06.md",
+      "git_mode": "100644",
+      "sha256": "067f72fd3b4ea94fb93f6d17ab470a64c428c80e8cbe270422fc90024c58eb12"
+    },
+    {
+      "path": "docs/acceptance/P4-07.md",
+      "git_mode": "100644",
+      "sha256": "fd1733e059df2bf63761cc3d89c9a12ca56b16d358a0636e77e90881a23f1339"
+    },
+    {
+      "path": "docs/acceptance/P4-08.md",
+      "git_mode": "100644",
+      "sha256": "a641ccde31b17e28c3c8b03e906aa24ff902638d9dcb4bed6c34eab51a21948b"
+    },
+    {
+      "path": "docs/acceptance/P4-09.md",
+      "git_mode": "100644",
+      "sha256": "86de0c94bd6a35220b712ced15fc874d73ec98b56d7a81a5d6a6d8a974b536be"
+    },
+    {
+      "path": "docs/acceptance/P4-10.md",
+      "git_mode": "100644",
+      "sha256": "d366d0932e8d8b376e01757c068eca2b4e4451a51c4eccf1bab74fe2d63f9617"
+    },
+    {
+      "path": "docs/acceptance/P4-11.md",
+      "git_mode": "100644",
+      "sha256": "8ce5235020098aa4cd7cf598b12e4387e346a0431fc8686d95863e6fd76abb09"
+    },
+    {
+      "path": "docs/acceptance/P4-12.md",
+      "git_mode": "100644",
+      "sha256": "93e5c1e571bd5b6a89e760535f466b4beab3c91f8f34b4100480644abec747f0"
+    },
+    {
+      "path": "docs/acceptance/P4-13.md",
+      "git_mode": "100644",
+      "sha256": "19a249fec5363c8f8475569c152f85566908093de7462e3f5353eb5d9f19d9a7"
+    },
+    {
+      "path": "docs/acceptance/P4-14.md",
+      "git_mode": "100644",
+      "sha256": "fd8778150c8f7287ad6af4f35f0ef76756fdfc440845cdc23ae007e7d6febec9"
+    },
+    {
+      "path": "docs/acceptance/P4-15.md",
+      "git_mode": "100644",
+      "sha256": "0a39f8bf790e3842c24f426206b18709eb482ecd0a793298d74d1c2f84931081"
+    },
+    {
+      "path": "docs/acceptance/P4-16.md",
+      "git_mode": "100644",
+      "sha256": "d1a3439e0666f4d6883e70a7955a86b3d14aa8d7b9b334442ee747c934fe2e20"
+    },
+    {
+      "path": "docs/acceptance/P4.md",
+      "git_mode": "100644",
+      "sha256": "25621f3646a3cb9eee0b1673fff1684677d3260ac5b2cea8e4c36745318b6e9d"
+    },
+    {
+      "path": "docs/acceptance/P5-01.md",
+      "git_mode": "100644",
+      "sha256": "13cd3264baa720061fdee5201d2f90f621dabcbcf73c3fc4159d9156ed2ba6d6"
+    },
+    {
+      "path": "docs/acceptance/P5-02.md",
+      "git_mode": "100644",
+      "sha256": "4874c1075791fe1a4baf2155dee4ed1c3143958ffd5d50bff91b87b071b066bf"
+    },
+    {
+      "path": "docs/acceptance/P5-03.md",
+      "git_mode": "100644",
+      "sha256": "edb2536b9d7cb158c15a6982e0e0de8f33575fcb702d1d97a421954b29e8ecc3"
+    },
+    {
+      "path": "docs/acceptance/P5-04.md",
+      "git_mode": "100644",
+      "sha256": "f7f79ffe0256ec06fa58cbff86c8f1a963157b17f45970f19288b4a00025c2cf"
+    },
+    {
+      "path": "docs/acceptance/P5-05.md",
+      "git_mode": "100644",
+      "sha256": "f34b0238167c2baef5a6572ac5a0a065a08922f3b6beda1367cd3b8badf98434"
+    },
+    {
+      "path": "docs/acceptance/P5-06.md",
+      "git_mode": "100644",
+      "sha256": "389b27d5a837a7dd60c0221835596916f273163f98c51f7dd38687351f4b6a8b"
+    },
+    {
+      "path": "docs/acceptance/P5-07.md",
+      "git_mode": "100644",
+      "sha256": "54df0e8f51d2aeb7647fdfd515dbff9b81558c5325ea60cdf56b35f8b39379c3"
+    },
+    {
+      "path": "docs/acceptance/P5-08.md",
+      "git_mode": "100644",
+      "sha256": "cd30e5a55a98bcab68776c5d00060c1fe9019dc875c7d1b75fc130e62c0ef69c"
+    },
+    {
+      "path": "docs/acceptance/P5-09.md",
+      "git_mode": "100644",
+      "sha256": "d9c2440cf4ea1df256ed2166e235b822a1adfde7ff57d9c49b0d6a0e4a94c8b7"
+    },
+    {
+      "path": "docs/acceptance/P5-10.md",
+      "git_mode": "100644",
+      "sha256": "f0a6cb8a5bec11103f395f6dfcd5e6c9c335432b8bb35946a649c94fd04145a1"
+    },
+    {
+      "path": "docs/acceptance/P5-11.md",
+      "git_mode": "100644",
+      "sha256": "8e8ff398a04e07fe7292a2c03acaa724a4088e5bd25d7596ff08c85e3d17c410"
+    },
+    {
+      "path": "docs/acceptance/P5-12.md",
+      "git_mode": "100644",
+      "sha256": "6b0d0c7662f01f2e5cdd01ebeb8f2ec747798f367aba8909fa95eb5e8a2f1b93"
+    },
+    {
+      "path": "docs/acceptance/P5.md",
+      "git_mode": "100644",
+      "sha256": "b03da66f5f34479afe62ac7ebddc8f315a4258dbd3b945b62e9a0a129af3a877"
+    },
+    {
+      "path": "docs/acceptance/P6-01.md",
+      "git_mode": "100644",
+      "sha256": "d4c4111f974f8093abd51f6b9d5824d47198f6507ee0ce8a875dc4b9eb0d92b7"
+    },
+    {
+      "path": "docs/acceptance/P6-02.md",
+      "git_mode": "100644",
+      "sha256": "a09e7378c29275a2091d56c0101acd65807b6413f46ccd4f40a878b38c6c499d"
+    },
+    {
+      "path": "docs/acceptance/P6-03.md",
+      "git_mode": "100644",
+      "sha256": "10cacdd27e7af9789a2a3175cbf24bcec84413cbadb1d563128837eec6d45f94"
+    },
+    {
+      "path": "docs/acceptance/P6-04.md",
+      "git_mode": "100644",
+      "sha256": "e7b71095a176092d56db93ac3691050520064ca2a7f5da487a374b3c5e04ba5f"
+    },
+    {
+      "path": "docs/acceptance/P6-05.md",
+      "git_mode": "100644",
+      "sha256": "29162724f86699601c6c28cbcb072c0914e52cdf21e136b462e781f7d40ad4cb"
+    },
+    {
+      "path": "docs/acceptance/P6-06.md",
+      "git_mode": "100644",
+      "sha256": "f4516be164e341fdc019854eb2b48cabd04888475a6a20106d10d93208c97f26"
+    },
+    {
+      "path": "docs/acceptance/P6-07.md",
+      "git_mode": "100644",
+      "sha256": "80423dde51daaa084ae93f977cd775a8d69e85d1bbb15ecc3428143baa69149c"
+    },
+    {
+      "path": "docs/acceptance/P6-08.md",
+      "git_mode": "100644",
+      "sha256": "f81d1fa40ffa4e32a91ed10a45922936cde1312de52e99501edf9aa704a1178f"
+    },
+    {
+      "path": "docs/acceptance/P6-09.md",
+      "git_mode": "100644",
+      "sha256": "84c5d303a3457f82bf6b39055b64743b23301b6a20da07482fc42f1de99fa1c3"
+    },
+    {
+      "path": "docs/acceptance/P6-10.md",
+      "git_mode": "100644",
+      "sha256": "86c3d980f56f384cc014f3cf8d2b5b4eaed1164be317dd21cf0838b59b0f7625"
+    },
+    {
+      "path": "docs/acceptance/P6-11.md",
+      "git_mode": "100644",
+      "sha256": "3a5c2359923f99e99e78cd67906e67eef8a71d1505ee318622154edbc25ba69b"
+    },
+    {
+      "path": "docs/acceptance/P6.md",
+      "git_mode": "100644",
+      "sha256": "6b974b745ccdfaa25440e41796e1ab9334d1174d6e38b57738d74f10e252a9be"
+    },
+    {
+      "path": "docs/acceptance/P7-01.md",
+      "git_mode": "100644",
+      "sha256": "6b0692158df0c34f697833d6ac2bfcf11276407437f2cc71e1d68c2d71f10c97"
+    },
+    {
+      "path": "docs/acceptance/P7-02.md",
+      "git_mode": "100644",
+      "sha256": "4cdae9a1976abd9056d9a425ca1eca2fa42ff69c59432336437bb0d2e2ecc646"
+    },
+    {
+      "path": "docs/acceptance/P7-03.md",
+      "git_mode": "100644",
+      "sha256": "5cee24b2116e857bcf2ce37bc200b82b5028998d56c44f03735a7b633bdfdbb9"
+    },
+    {
+      "path": "docs/acceptance/P7-04.md",
+      "git_mode": "100644",
+      "sha256": "5237af8677223b74b12055fa83ff4603a004c0e051045effe9d9a62daece6f6b"
+    },
+    {
+      "path": "docs/acceptance/P7-05.md",
+      "git_mode": "100644",
+      "sha256": "be9c353276688c06cd86566e456c43998cbdc83233331a267d2e964449462fff"
+    },
+    {
+      "path": "docs/acceptance/P7-06.md",
+      "git_mode": "100644",
+      "sha256": "1670766cd18b20caa6e1c48f8d5fb722dbaee11d9591b9d09f4824be23ec7538"
+    },
+    {
+      "path": "docs/acceptance/P7-07.md",
+      "git_mode": "100644",
+      "sha256": "a96bc0bd8d9d49efcefdb072553246d222e860bec3044b64182a7b94c10bcf05"
+    },
+    {
+      "path": "docs/acceptance/P7-08.md",
+      "git_mode": "100644",
+      "sha256": "821038f066d97bb39e75f5b2a9232f5809debc2e4fc32da064d38a5b280580f5"
+    },
+    {
+      "path": "docs/acceptance/P7-09.md",
+      "git_mode": "100644",
+      "sha256": "ecdcde31d3b2260319ebcb2dc161fe416ccd2104c22a54815451d80e99ea918f"
+    },
+    {
+      "path": "docs/acceptance/P7-10.md",
+      "git_mode": "100644",
+      "sha256": "3da61b8dc4261df2f1ffaabe9710c2f11b61444f1a8ac9549d4454708835fc51"
+    },
+    {
+      "path": "docs/acceptance/P7-11.md",
+      "git_mode": "100644",
+      "sha256": "fb67584dbfc4b3b8f803e32ef30417bfe50d147930e47a1fc7dac7d41569fba9"
+    },
+    {
+      "path": "docs/acceptance/P7-12.md",
+      "git_mode": "100644",
+      "sha256": "05d9c3ffa18f8de51d9db8db151a8385bb31422b930ee762376cb90f8e03a5d3"
+    },
+    {
+      "path": "docs/acceptance/P7.md",
+      "git_mode": "100644",
+      "sha256": "cf058805111655cec2e9416f50b233194a34b3fa38c69f4c1e5dc617671b72fb"
+    },
+    {
+      "path": "docs/acceptance/P8-01.md",
+      "git_mode": "100644",
+      "sha256": "e890895eafbed4dfcda39846c2b39e3097bb9814bbf43190af29286b3242f2fc"
+    },
+    {
+      "path": "docs/acceptance/P8-02.md",
+      "git_mode": "100644",
+      "sha256": "cde61bab1d8e3a0245ac4c91f170ef1d764bd5b9cc74c2f3dbb11cf252cb243a"
+    },
+    {
+      "path": "docs/acceptance/P8-03.md",
+      "git_mode": "100644",
+      "sha256": "95edc3ef73bc64712be0d87c45f3b8cf272dc8653cd604031ad6b3134e2c978f"
+    },
+    {
+      "path": "docs/acceptance/P8-04.md",
+      "git_mode": "100644",
+      "sha256": "0b68c2d971ee18adf97d5c01ccf011401c30b0802399a7f57f3404811daa034d"
+    },
+    {
+      "path": "docs/acceptance/P8-05.md",
+      "git_mode": "100644",
+      "sha256": "6b71c7d550772ee04aa7c4f54698bd2695a539f9c8f8cf2216cc6a60750cd3e9"
+    },
+    {
+      "path": "docs/acceptance/P8-06.md",
+      "git_mode": "100644",
+      "sha256": "15ea84696d3ae12cfe059ba8f1b2b1df8b3c761c4fdb6fc37f51e8e29537a8b2"
+    },
+    {
+      "path": "docs/acceptance/P8-07.md",
+      "git_mode": "100644",
+      "sha256": "0e9acc432653c9fdaae6896459aeb83fd89fb407edef7a386b91f598df6e9367"
+    },
+    {
+      "path": "docs/acceptance/P8-08.md",
+      "git_mode": "100644",
+      "sha256": "2068c7202e439f531764bb9f2a7e6d9471352a8cc9cdd4aed3fc66807e717c4e"
+    },
+    {
+      "path": "docs/acceptance/P8-09.md",
+      "git_mode": "100644",
+      "sha256": "7b9c6dc80033f3b5ae70f62d493004bd4add999ffc4577514ffa90de85313bbd"
+    },
+    {
+      "path": "docs/acceptance/P8-10-product-pack.md",
+      "git_mode": "100644",
+      "sha256": "c7b7c8a96a2274c2a99ec0c18344a6389102608dc51e1df3b160c37875098f43"
+    },
+    {
+      "path": "docs/acceptance/P8-10.md",
+      "git_mode": "100644",
+      "sha256": "6704c5974487a501d9c14894fd7893c06982e8bad3775b4ab58f9d06122a82a5"
+    },
+    {
+      "path": "docs/acceptance/P8.md",
+      "git_mode": "100644",
+      "sha256": "d21a4416b7a975ebd54fa5095eee90e0c16bbe0252f10a98cbfee9b4a970b8b5"
+    },
+    {
+      "path": "docs/acceptance/P9-01.md",
+      "git_mode": "100644",
+      "sha256": "1368488e3edad69bdc5cd2c52dd243dad51210e8f68b19c311dae183e891a7bb"
+    },
+    {
+      "path": "docs/acceptance/P9-02.md",
+      "git_mode": "100644",
+      "sha256": "18fcb99fb6f4a8fe7abaaabeb4621368255d0c7d84ce97075c42340e2dab0fef"
+    },
+    {
+      "path": "docs/acceptance/P9-03.md",
+      "git_mode": "100644",
+      "sha256": "263f419f24c94e40a64e50646581463f4b3a5c5312efeba1cf736bea8a1a6a31"
+    },
+    {
+      "path": "docs/acceptance/P9-04.md",
+      "git_mode": "100644",
+      "sha256": "8c6ff6580131eab50d4466978b7664c9330c9bba958965dfb11798477c34d63b"
+    },
+    {
+      "path": "docs/acceptance/P9-05.md",
+      "git_mode": "100644",
+      "sha256": "8d209b6eadd8802196248655fa0b41d7689a4fbf76f91d924e9d5fe1b4fa065f"
+    },
+    {
+      "path": "docs/acceptance/P9-06.md",
+      "git_mode": "100644",
+      "sha256": "ac1aa90aed15a1f60a9802b294159d3b2152e4b2f949ce71b078b134f7ea0164"
+    },
+    {
+      "path": "docs/acceptance/P9-07.md",
+      "git_mode": "100644",
+      "sha256": "f1ffcf527f05e629d0551c26879ca4f0d25d83da7bf892d5352734ac7323d806"
+    },
+    {
+      "path": "docs/acceptance/P9-08.md",
+      "git_mode": "100644",
+      "sha256": "dfec570d72153bc9af1b1223a1df63e358ba36b5fc1c8856265576149f921104"
+    },
+    {
+      "path": "docs/acceptance/P9-09.md",
+      "git_mode": "100644",
+      "sha256": "a5ed57307ee94577a8ed31c2e09d0dcb01eb03d6713cb7b0b2c7cc6cc41553f2"
+    },
+    {
+      "path": "docs/acceptance/P9.md",
+      "git_mode": "100644",
+      "sha256": "9806434f9dac94a50727347aa8bcebf6b3064a37fd6d021007647464eb48afa8"
+    },
+    {
+      "path": "docs/acceptance/interface-audit.md",
+      "git_mode": "100644",
+      "sha256": "e2a54dbb28cec17d6f1630d3b5481f3d612bfd7a91c6c68ca1ec6aa154734b2e"
+    },
+    {
+      "path": "docs/acceptance/lifecycle.md",
+      "git_mode": "100644",
+      "sha256": "d8c8f0dbb5f9ae7afea494145081c4368c7c904e7117346ab708caebb5796495"
+    },
+    {
+      "path": "docs/acceptance/road-geodesic-workflow.md",
+      "git_mode": "100644",
+      "sha256": "78d9416cd5d1d294cef52378e0cde296d0f85ebc6400b92c2ff76a9d9978fa86"
+    },
+    {
+      "path": "docs/acceptance/traceability-follow-up.md",
+      "git_mode": "100644",
+      "sha256": "da324bb5dcef27c51efd4dfe5853e3a028d53a7f447df3fd946bbd91f72c4b9d"
+    },
+    {
+      "path": "docs/baseline/ENVIRONMENT.md",
+      "git_mode": "100644",
+      "sha256": "8ba2a181af5b627ed01d02009316e5ed68719d89cbd1f610e3d104efbc9a31cd"
+    },
+    {
+      "path": "docs/baseline/GEODESIC_BUFFER_RESEARCH.md",
+      "git_mode": "100644",
+      "sha256": "65b92eca646b2c3da180e974bc67f24e8a5d4c99c97dab873014099729fcf7e9"
+    },
+    {
+      "path": "docs/baseline/PROJECT_AUDIT.md",
+      "git_mode": "100644",
+      "sha256": "77ac8b8bcd17e2c894abc29e12384db1c03fcae1d1e9e382aa0be58090491a55"
+    },
+    {
+      "path": "docs/baseline/TEST_BASELINE.md",
+      "git_mode": "100644",
+      "sha256": "e1ac3eb8f9936d6238602bb3f7342c54e927c3ef305e4ac298bf0eb7c907af99"
+    },
+    {
+      "path": "docs/method-authoring/README.md",
+      "git_mode": "100644",
+      "sha256": "44b4bd2961081a8936eb80f9e3ede679c33d31a7d0303e02234262c3a863d8a2"
+    },
+    {
+      "path": "docs/method-authoring/manual-registration.yaml",
+      "git_mode": "100644",
+      "sha256": "f31237836bf176fd1feeb2d5b308cb84935084f0c1747b19fea0c5c41ad181a5"
+    },
+    {
+      "path": "docs/release/FINAL_ACCEPTANCE.md",
+      "git_mode": "100644",
+      "sha256": "848b13c36ed75867542df81c7af41b46593787f018a4c3fe3a93d0c720788440"
+    },
+    {
+      "path": "docs/traceability/requirements-matrix.md",
+      "git_mode": "100644",
+      "sha256": "0b0f5479cbdd5f32e28542d72ee44b351055acc6e54f6c3f6bb71b85ef8aa318"
+    },
+    {
+      "path": "docs/user-guide/workbench.md",
+      "git_mode": "100644",
+      "sha256": "2a28a7ec30050e70f4aec59a49d7cdc66d824946b6be823fa3a242b981b25078"
+    },
+    {
+      "path": "frontend/.gitignore",
+      "git_mode": "100644",
+      "sha256": "790e3169bc19b046fe55ba1da6d13b976c28363c8c00462a2195fe5faf260910"
+    },
+    {
+      "path": "frontend/index.html",
+      "git_mode": "100644",
+      "sha256": "52f44e219e4e68517aaae1ef041e853e63671c80652a25c2ce6739bafd229281"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "git_mode": "100644",
+      "sha256": "b8c1e13453fe3ddb46823cb169f2823a6776d5bb1dcc3dab3b48c2b3802bb45f"
+    },
+    {
+      "path": "frontend/package.json",
+      "git_mode": "100644",
+      "sha256": "9382bb1d14a92795f4a6a4a7e3d60acd9809144ce99892683e338ecf711db652"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "git_mode": "100644",
+      "sha256": "633740d3f1a85ddcabdc9a7ae39556b74551fc2054cba9d25562cbf8ce78d447"
+    },
+    {
+      "path": "frontend/src/api/workbench.ts",
+      "git_mode": "100644",
+      "sha256": "5d55c8e283e5e6875de3035148c7fbdbc7e2aa91cab7dc4943efbc054d9224f3"
+    },
+    {
+      "path": "frontend/src/components/errors/ProblemDetails.test.tsx",
+      "git_mode": "100644",
+      "sha256": "ab65d1b978df188b4a2db89c4c5b67df7402f45d9b48e5f7eb571d3114e90896"
+    },
+    {
+      "path": "frontend/src/components/errors/ProblemDetails.tsx",
+      "git_mode": "100644",
+      "sha256": "ce4c6ff388f8fc02c2a7621481f3d3a3c526b5c5e8b6bd2f361f2477ee798c03"
+    },
+    {
+      "path": "frontend/src/components/errors/problem.css",
+      "git_mode": "100644",
+      "sha256": "061bb46ec2d2bcfa9089feda99e42950b94e191cb2b6b7980bdb707fdff6f1be"
+    },
+    {
+      "path": "frontend/src/features/artifacts/ArtifactsPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "688a52b884b8a35291554d5abad82e17454e4f010a6cda446905c00ee28b6f47"
+    },
+    {
+      "path": "frontend/src/features/artifacts/ArtifactsPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "a84349f561eaaf415f378715c538d459b5d08e09d999e43d62c01088a9274bc6"
+    },
+    {
+      "path": "frontend/src/features/artifacts/artifacts.css",
+      "git_mode": "100644",
+      "sha256": "579b83e1ac4b9b3ee75e186f6f80e1ab442003a0c9aafaa23e9062134cce49c9"
+    },
+    {
+      "path": "frontend/src/features/assets/AssetPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "80f4752c728536fb5393a5313ecc4fafab4370523eb81e7bec7b8d266f67c85b"
+    },
+    {
+      "path": "frontend/src/features/assets/AssetPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "9df5724e449e3d8ad2dee1c749c78064e2252524cf4ac845eaf8e3586899349d"
+    },
+    {
+      "path": "frontend/src/features/assets/assets.css",
+      "git_mode": "100644",
+      "sha256": "e08656f965f1b2cbed4e6b6b2cc23c0f120672837e94b05f716160da94b51af0"
+    },
+    {
+      "path": "frontend/src/features/checks/ChecksPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "dc5838792bc70878e296e647136f5bca937a263476e85826b226b333eaa88d22"
+    },
+    {
+      "path": "frontend/src/features/checks/ChecksPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "23f34f52524ecc1b973c04737f99efbf5c6868d49d47c163df54cc8b63a61e36"
+    },
+    {
+      "path": "frontend/src/features/checks/checks-panel.css",
+      "git_mode": "100644",
+      "sha256": "dc615003d9845492f93d13eb58969ee1df7f52885ee2adc1fe8928897af3ff5a"
+    },
+    {
+      "path": "frontend/src/features/map/MapPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "679aad97fcf27352f7a9acc194513bd65cdaf994ccdb7587029cdba3f98fda5f"
+    },
+    {
+      "path": "frontend/src/features/map/MapPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "4633e22a13304a6ec31e38eb16ed53331e28402cf236dd8d662d07ea697749d3"
+    },
+    {
+      "path": "frontend/src/features/map/RasterPixelResult.tsx",
+      "git_mode": "100644",
+      "sha256": "1e669dd5e0fadf05cee2a24a80f2f011924c75e5c7cc845dad0bb3d51a596a2a"
+    },
+    {
+      "path": "frontend/src/features/map/RasterPreviewLayer.tsx",
+      "git_mode": "100644",
+      "sha256": "46a94a1b8e141e2a908cedb5e89220650d41b815e4b9bf71fb5079f83c2cf7b6"
+    },
+    {
+      "path": "frontend/src/features/map/map-panel.css",
+      "git_mode": "100644",
+      "sha256": "b571b8f10f763c91dac23e2b4a1ab2077cb42d671c3d20a0f10ff254898c4f0d"
+    },
+    {
+      "path": "frontend/src/features/map/preview.ts",
+      "git_mode": "100644",
+      "sha256": "b91371874f186ee225e061d9a042b6dac4c8d84df001927ad798ae7bdb38694b"
+    },
+    {
+      "path": "frontend/src/features/map/raster-preview.ts",
+      "git_mode": "100644",
+      "sha256": "67ae1f1acdeddf2c709e3fa312e31524069d522ce322d716bc5cf0059f7779d6"
+    },
+    {
+      "path": "frontend/src/features/method-form/MethodForm.test.tsx",
+      "git_mode": "100644",
+      "sha256": "37cb6f2f29e1306d8c5bb9213c0b3f2dbd90f8a4b26089077b2f80469751822f"
+    },
+    {
+      "path": "frontend/src/features/method-form/MethodForm.tsx",
+      "git_mode": "100644",
+      "sha256": "e74876ec2c481f50581b1697ea0d7b177b911f492d8dd8f6fbdada60468861d6"
+    },
+    {
+      "path": "frontend/src/features/method-form/method-form-fields.ts",
+      "git_mode": "100644",
+      "sha256": "2fb8179eb66d411504ff5a5ca5204b35d707b94bd10b5a14ed411c02c40853f6"
+    },
+    {
+      "path": "frontend/src/features/method-form/method-form.css",
+      "git_mode": "100644",
+      "sha256": "08e9a4b086294dbef4f5153fc92aa4d09696039f398f0f6adbc999a612dac808"
+    },
+    {
+      "path": "frontend/src/features/methods/MethodCatalogPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "00a7c59ce3353552f7cfeabe51c92e05887e9720e92ac53f9348dca7a5d50bf9"
+    },
+    {
+      "path": "frontend/src/features/methods/MethodCatalogPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "02391f1cb0c69f6e668957300df3550899797ef541c5cbb41dec6e9eca811956"
+    },
+    {
+      "path": "frontend/src/features/methods/method-catalog.css",
+      "git_mode": "100644",
+      "sha256": "644b08c4e3a348184eec361689232cc5adebe6cf18fa13c35b37698bc953e3da"
+    },
+    {
+      "path": "frontend/src/features/model-assistance/ModelAssistPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "b50c6f1bd90adaa348f8d2896344e0ba7729275e1f8d297e5de5fd74e6a825fc"
+    },
+    {
+      "path": "frontend/src/features/model-assistance/ModelAssistPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "674f21853a4e0402baea76ba49ed0e08c3fda5fed80e85c52f52b0e3589208a6"
+    },
+    {
+      "path": "frontend/src/features/model-assistance/model-assistance.css",
+      "git_mode": "100644",
+      "sha256": "a27d2370259ca0a04360d3af1f9383a769f705b42bcd959b4cdaacbfa52c43ca"
+    },
+    {
+      "path": "frontend/src/features/plans/PlanActions.test.tsx",
+      "git_mode": "100644",
+      "sha256": "16ce56c30d7cb75dcbf28ad6397ed5031f90d1d3511be344598a025e4795d1c0"
+    },
+    {
+      "path": "frontend/src/features/plans/PlanActions.tsx",
+      "git_mode": "100644",
+      "sha256": "35967c6ec42d64e44b71929e62ded2339ea5dd7050ada9d1d509bac594848e3c"
+    },
+    {
+      "path": "frontend/src/features/plans/preview/PlanPreview.test.tsx",
+      "git_mode": "100644",
+      "sha256": "0352f3174bf37690dc60c24daf6c48b8cac9e62de285111a8194a3244ddca154"
+    },
+    {
+      "path": "frontend/src/features/plans/preview/PlanPreview.tsx",
+      "git_mode": "100644",
+      "sha256": "bef2a9fff6c2d441baf04cd58f374e4091397dcac6c786697cbce6d33044da5b"
+    },
+    {
+      "path": "frontend/src/features/plans/preview/plan-preview.css",
+      "git_mode": "100644",
+      "sha256": "db3976477773ddd9e4fb7b9dec7324c9e6b8a7c645c9b742302b24e4e24190fa"
+    },
+    {
+      "path": "frontend/src/features/runs/RunPanel.test.tsx",
+      "git_mode": "100644",
+      "sha256": "cf4d915b83a95cfb0d524801d38ad6f13fe87215e63672ae5390851bd384c186"
+    },
+    {
+      "path": "frontend/src/features/runs/RunPanel.tsx",
+      "git_mode": "100644",
+      "sha256": "e81f5f47feb3acaa40b563955893dbde1cac7ddc6b354f3549e26cceddbdeedf"
+    },
+    {
+      "path": "frontend/src/features/runs/runs.css",
+      "git_mode": "100644",
+      "sha256": "62405a4be0567dff92faa42e1197d57082e2f64dc720df88dc4a08c7aec06e43"
+    },
+    {
+      "path": "frontend/src/features/scripts/ScriptRunsPage.test.tsx",
+      "git_mode": "100644",
+      "sha256": "e6447f439309326d768a64b4b9096904013afe34d5a96a143440fbcb36b35c89"
+    },
+    {
+      "path": "frontend/src/features/scripts/ScriptRunsPage.tsx",
+      "git_mode": "100644",
+      "sha256": "a782e923218f6038dc5836907c9e536d186a12a3d553477c26ebc8fe6ec936d9"
+    },
+    {
+      "path": "frontend/src/features/scripts/script-runs-api.ts",
+      "git_mode": "100644",
+      "sha256": "afc2c0b6694d698cc72c92a5a86ee1ac76e5483d5974e3d846f434dfe205e28f"
+    },
+    {
+      "path": "frontend/src/features/scripts/script-runs.css",
+      "git_mode": "100644",
+      "sha256": "4c1e449c14ff1a279032b18e5e619af30c64560b96fc1e7ec7f04ace94e7717e"
+    },
+    {
+      "path": "frontend/src/features/session/TaskHistory.tsx",
+      "git_mode": "100644",
+      "sha256": "d36b077fca1e1405787a6ffe6a6f83e40758d117abd6ada454c638400eb6ec94"
+    },
+    {
+      "path": "frontend/src/features/session/session.css",
+      "git_mode": "100644",
+      "sha256": "fe3d99b41c8f6b97c2330a128931e2b9234516eab2ddaeac1d7a0cda8e8753b2"
+    },
+    {
+      "path": "frontend/src/features/session/workbench-session.test.ts",
+      "git_mode": "100644",
+      "sha256": "409f509ceeb2190f8b7c3f09d210ebeaf79db7c07b2a0fadb2d97f4f6e2c093b"
+    },
+    {
+      "path": "frontend/src/features/session/workbench-session.ts",
+      "git_mode": "100644",
+      "sha256": "30b4e6b86070d60d8ca964928255fbf38c4d489531cbacf7c94442b95c01e525"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "git_mode": "100644",
+      "sha256": "9abbafa120f0cd4ed04b6d76ea696f353578e118b7bc975767ef41528dd5d5a0"
+    },
+    {
+      "path": "frontend/src/pages/WorkbenchPage.test.tsx",
+      "git_mode": "100644",
+      "sha256": "1a6ff33ca0725f2442eea6c4e61a77a36e1ec806e936fb33ba870759f6930292"
+    },
+    {
+      "path": "frontend/src/pages/WorkbenchPage.tsx",
+      "git_mode": "100644",
+      "sha256": "6a31e482ea229025e2119d1046c9aa346efec269c48cd8e5585f9a7a99b3473b"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "git_mode": "100644",
+      "sha256": "df51c3ca39a4b250d68ce2a605702e854396f44ce714f91f624ff52cac4187d1"
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "git_mode": "100644",
+      "sha256": "49820053f9f99ad3e9b5128a77a321b9993356d43991356facbbfe2812dd853f"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "git_mode": "100644",
+      "sha256": "f10089e54dcfe4da5e2fb06b010be5c509818815ff77f4eadfda4675bd1f1f21"
+    },
+    {
+      "path": "src/geopilot/api/app.py",
+      "git_mode": "100644",
+      "sha256": "5b610db5ba6d76ae23c5cae96e3cd9968a518eeac839af8d868f5c739c28b9f3"
+    },
+    {
+      "path": "src/geopilot/api/artifact_routes.py",
+      "git_mode": "100644",
+      "sha256": "6409618c449c9a39e9964458abdba0a32f2070c06bb518d6e9efae65f88c5f1a"
+    },
+    {
+      "path": "src/geopilot/api/catalog_routes.py",
+      "git_mode": "100644",
+      "sha256": "b2b0b8cbbb2c96ac84e472a415c75e3ce1fa9b0c0430898efe81565d21ddf1ad"
+    },
+    {
+      "path": "src/geopilot/api/check_routes.py",
+      "git_mode": "100644",
+      "sha256": "70a9a09dacfd8b24a598294ab1a9549d9705513782cb8accc2dd76cca578f021"
+    },
+    {
+      "path": "src/geopilot/api/model_routes.py",
+      "git_mode": "100644",
+      "sha256": "448f2896413a7398317ed23e12210c6b75a507a67f8196e10f82b04ad3687dbd"
+    },
+    {
+      "path": "src/geopilot/api/plan_routes.py",
+      "git_mode": "100644",
+      "sha256": "c3375956d0d696c5779e4d8652fa65ea49cc0f64ab35c4208e263691bbaf7972"
+    },
+    {
+      "path": "src/geopilot/api/run_step_routes.py",
+      "git_mode": "100644",
+      "sha256": "0ce7e0baae3777431ab5f32211d4620673ef2348f29a316dbecdeeb63ff377f8"
+    },
+    {
+      "path": "src/geopilot/api/script_routes.py",
+      "git_mode": "100644",
+      "sha256": "107654c2b7528b7232ff7cb6928ace76cb98eff930f8e328b73ec83fe6037bec"
+    },
+    {
+      "path": "src/geopilot/api/server.py",
+      "git_mode": "100644",
+      "sha256": "cd7ab1f2f549ef27137130647d9db3a891eb46a9928cae434736f7892bdfe2ee"
+    },
+    {
+      "path": "src/geopilot/api/spatial_preview.py",
+      "git_mode": "100644",
+      "sha256": "9a2c6b049cf4c7484b7a5b1eaa2a0db98ac8ca022d35e262965b58e0087f4132"
+    },
+    {
+      "path": "src/geopilot/api/task_routes.py",
+      "git_mode": "100644",
+      "sha256": "88abd6b55f6958973c0b1372ffb430f88adb743a071738589629325ded13558a"
+    },
+    {
+      "path": "src/geopilot/application/check_evidence.py",
+      "git_mode": "100644",
+      "sha256": "77fdc8fe3ee5cdded6fd81acb155ef8ea1447be756a858e76fe80c51d71e2ded"
+    },
+    {
+      "path": "src/geopilot/application/draft_options.py",
+      "git_mode": "100644",
+      "sha256": "0d48cf7948baf701cc9c353f1415a234f02f613ddf14296621a420b8092e0983"
+    },
+    {
+      "path": "src/geopilot/application/land_use_checks.py",
+      "git_mode": "100644",
+      "sha256": "0ba5e2c71a7df8a55c22d86dbfc2c174a1a937f53474c06b48eac77943b88f32"
+    },
+    {
+      "path": "src/geopilot/application/method_preconditions.py",
+      "git_mode": "100644",
+      "sha256": "60dd9e140d1ee017e7b64eb48c340b0e8db66b7323c93f881343f507284dfcd0"
+    },
+    {
+      "path": "src/geopilot/application/plan_runner.py",
+      "git_mode": "100644",
+      "sha256": "00f9ac118160d33709c34c6946d7bd6117e247b9410ac35859da97b4364da704"
+    },
+    {
+      "path": "src/geopilot/application/remote_sensing_checks.py",
+      "git_mode": "100644",
+      "sha256": "8e5f748da9c8cd13cf28593172b1a925b98772cd65254c635f18aca1152082f7"
+    },
+    {
+      "path": "src/geopilot/application/remote_sensing_plan.py",
+      "git_mode": "100644",
+      "sha256": "8e883cf0766a6346d538c550c1bc5eb828cbc8a303132191277a9d25f26e505d"
+    },
+    {
+      "path": "src/geopilot/application/run_checks.py",
+      "git_mode": "100644",
+      "sha256": "647af0ee55e7b38738e169923d39fa1e81c8d8e6167de6061cc99ee646ddd3c9"
+    },
+    {
+      "path": "src/geopilot/application/run_inputs.py",
+      "git_mode": "100644",
+      "sha256": "0918757f18e44e8bdecf20160bdec245f6228377072959b965ada7cc5bd51e9c"
+    },
+    {
+      "path": "src/geopilot/application/task_context.py",
+      "git_mode": "100644",
+      "sha256": "965bb9547a257a259c0a6bc62ffaff04df14d1267b0780b402f3282db8a1168d"
+    },
+    {
+      "path": "src/geopilot/application/terrain_plan.py",
+      "git_mode": "100644",
+      "sha256": "6d0144b6a0c3afff07447d8953e31ea3976cb8cbfe52525c5eb5489583284f3d"
+    },
+    {
+      "path": "src/geopilot/artifacts/models.py",
+      "git_mode": "100644",
+      "sha256": "9131fa190f1f2f0d4e62804ed02ababc6fd58b4c1b7b3a59f2851ed5d28451a8"
+    },
+    {
+      "path": "src/geopilot/artifacts/raster_metadata.py",
+      "git_mode": "100644",
+      "sha256": "0690d50b37fd32eaae72f57e3e09fa5f7472524616fddbbfdf1f5736f790f42b"
+    },
+    {
+      "path": "src/geopilot/artifacts/raster_source.py",
+      "git_mode": "100644",
+      "sha256": "ae8441e4c5e7ad1822274bf51f6704033ef925573ecf5692d56820a4af0a4825"
+    },
+    {
+      "path": "src/geopilot/artifacts/service.py",
+      "git_mode": "100644",
+      "sha256": "74a90e3437983844f43266853df608b3c18412f01fcbe5ee5f24d24c150a67bf"
+    },
+    {
+      "path": "src/geopilot/artifacts/value_query.py",
+      "git_mode": "100644",
+      "sha256": "cb03e722393acc77891df113c688bba93f652bd1d69feab6c580aa051733058f"
+    },
+    {
+      "path": "src/geopilot/checks/artifact_checks.py",
+      "git_mode": "100644",
+      "sha256": "fb732e1171da144c263ff4da7577e3a4a396d209ea79c3e6074e20369a387297"
+    },
+    {
+      "path": "src/geopilot/checks/attempt_reports.py",
+      "git_mode": "100644",
+      "sha256": "95676b2df639e64f71b8e923b2efc2892d26f347b78bc0c7cc610b19ddf07a64"
+    },
+    {
+      "path": "src/geopilot/checks/input_checks.py",
+      "git_mode": "100644",
+      "sha256": "fd9518a44310bbc9d9f4f9986d61bc88ba40737eb204f4bdc27a105f8303a92d"
+    },
+    {
+      "path": "src/geopilot/checks/process_checks.py",
+      "git_mode": "100644",
+      "sha256": "5491db34b454d4dae01a9ac1476d470e5f93aae559ac762d47ad6b30721a9a7a"
+    },
+    {
+      "path": "src/geopilot/checks/raster_checks.py",
+      "git_mode": "100644",
+      "sha256": "3ae9d11e7f3915bacf28e4f97e689a2a164afa5687700ff90cf729237ecc5ca0"
+    },
+    {
+      "path": "src/geopilot/checks/raster_nodata.py",
+      "git_mode": "100644",
+      "sha256": "6b3c06aff9045b53249ffa23640d5c591a01fb5c90bad5b85d1921380dcaa995"
+    },
+    {
+      "path": "src/geopilot/checks/recheck_service.py",
+      "git_mode": "100644",
+      "sha256": "86c273927a397cdc3db42760e90fe5caf346d6eeca7d37dfac851afd7e348450"
+    },
+    {
+      "path": "src/geopilot/checks/report_service.py",
+      "git_mode": "100644",
+      "sha256": "e4cdf0483a52ef0f3cc38009f09fb0d8f316471194120ba2eb47c819b15fd3d4"
+    },
+    {
+      "path": "src/geopilot/checks/tool_checks.py",
+      "git_mode": "100644",
+      "sha256": "11a05e4af2079823f8d14a165115ee8899872e67f8ea78e985b37d9893a7e963"
+    },
+    {
+      "path": "src/geopilot/data/assets.py",
+      "git_mode": "100644",
+      "sha256": "8c33369e5ec09b3988ae259876d7dd39629d09fcc11ad46e7b8c9560672aebd8"
+    },
+    {
+      "path": "src/geopilot/data/errors.py",
+      "git_mode": "100644",
+      "sha256": "8911e8e6aa3ec1803b4feab766e6c5d9eebe1e5a45913e219d59430931ec3ad6"
+    },
+    {
+      "path": "src/geopilot/data/fingerprint.py",
+      "git_mode": "100644",
+      "sha256": "89d0bbb5026f6e816ad262bc6bc00cdee339c33b637f4b23c6cb8255aae66aae"
+    },
+    {
+      "path": "src/geopilot/data/geopackage_reader.py",
+      "git_mode": "100644",
+      "sha256": "bbf250320c028948e69076261878b9b05787f816695d32835e352a8acaaceefc"
+    },
+    {
+      "path": "src/geopilot/data/postgis_import.py",
+      "git_mode": "100644",
+      "sha256": "41e70abcd374c74bcf505f9f148b6c59dd357581bdeb323bedabc156c4fe4671"
+    },
+    {
+      "path": "src/geopilot/data/raster_reader.py",
+      "git_mode": "100644",
+      "sha256": "5786157a772b0e055b876195e48158b0b9c13ad6921b7ee4d62cf0220b8232d0"
+    },
+    {
+      "path": "src/geopilot/data/resolver.py",
+      "git_mode": "100644",
+      "sha256": "c8ff3faace07a9cfb715e94b29be51fbdc92ab369ed19161033648196c9a3dc0"
+    },
+    {
+      "path": "src/geopilot/data/vector_reader.py",
+      "git_mode": "100644",
+      "sha256": "2f2c884eca7805bfd83c33e83dcf98235d7dc3007f7e128784e0838c473e8052"
+    },
+    {
+      "path": "src/geopilot/domain/data_asset.py",
+      "git_mode": "100644",
+      "sha256": "416731d3bed157e2962d9dd38cef0a2328be96031476895b23662a5c09efc2f9"
+    },
+    {
+      "path": "src/geopilot/domain/errors.py",
+      "git_mode": "100644",
+      "sha256": "63466538770dc61884c8b9af480be976e8ef4b593cd261a026a3d3f34c9eac55"
+    },
+    {
+      "path": "src/geopilot/domain/step_io.py",
+      "git_mode": "100644",
+      "sha256": "f1b0fad31b1831cfccb6aeab98257af22dfa37b5b901c2b693ead8362b068a67"
+    },
+    {
+      "path": "src/geopilot/domain/task.py",
+      "git_mode": "100644",
+      "sha256": "b8cb418dc0cfe42dfbfa725858417dbc05df0e066e74c01e3366740aecd36118"
+    },
+    {
+      "path": "src/geopilot/domain/tool_contract.py",
+      "git_mode": "100644",
+      "sha256": "4fb28487824de2373e398f1d03f812ee2f1f8247252836cf84dd600d61928ca9"
+    },
+    {
+      "path": "src/geopilot/execution/process_manager.py",
+      "git_mode": "100644",
+      "sha256": "f42911a3de4d287d35fe624fb935cda33fc76cdbeaf8a75c5fcc7de0a4788759"
+    },
+    {
+      "path": "src/geopilot/execution/python_runner.py",
+      "git_mode": "100644",
+      "sha256": "193603a816cfa2d0b031146b739284eab6cc59d6ac9fce9f26236407071b82ca"
+    },
+    {
+      "path": "src/geopilot/execution/qgis_runner.py",
+      "git_mode": "100644",
+      "sha256": "015db94b1a987bda2cf3fee90a3a21131b3f099359d64e17d75a6af0bb7c3f2c"
+    },
+    {
+      "path": "src/geopilot/execution/runner.py",
+      "git_mode": "100644",
+      "sha256": "1e57d936aee6fccc2cc3fdb9ac1a5544ae9a5c2f4b43e7ebd4438324160132de"
+    },
+    {
+      "path": "src/geopilot/execution/step_support.py",
+      "git_mode": "100644",
+      "sha256": "5eb293f679576ba4cea4697036b967a549884007773014cd83228f42937b3fb3"
+    },
+    {
+      "path": "src/geopilot/execution/worker_lease.py",
+      "git_mode": "100644",
+      "sha256": "096c120952854fe8b88953394bdfd09c641145ebb1867a8e97de502a225bce69"
+    },
+    {
+      "path": "src/geopilot/gis/measurement/area.py",
+      "git_mode": "100644",
+      "sha256": "cea0d66c2ce20c4ad9dea006ee229f7f2e1f55c5e2d654e65f8362d91e6ae7e0"
+    },
+    {
+      "path": "src/geopilot/gis/measurement/coverage.py",
+      "git_mode": "100644",
+      "sha256": "cd01e5027b4ce70aedb162ae4fecdb9c5c664c888e35d84f2f8fa7ff5e8a4f3f"
+    },
+    {
+      "path": "src/geopilot/gis/measurement/distance.py",
+      "git_mode": "100644",
+      "sha256": "316a75531942c6f754eaa7905193d04a53ecd88e3f7af5e6bda87b55a3a9f788"
+    },
+    {
+      "path": "src/geopilot/gis/measurement/geodesic_buffer.py",
+      "git_mode": "100644",
+      "sha256": "3d09f1c18f7350868446a3f3f771a3e47208fe9cdfdcaab396c117037cc15d9b"
+    },
+    {
+      "path": "src/geopilot/gis/measurement/geodesic_road_scope.py",
+      "git_mode": "100644",
+      "sha256": "be2bdbca5abe94bb3bcbe207847ba60ad0668ad89aa5aa0b6fbb663300154d60"
+    },
+    {
+      "path": "src/geopilot/gis/measurement/projection.py",
+      "git_mode": "100644",
+      "sha256": "34bd18026fdd532dc825cbf48edcaa3b12a4b17640fcee260fac7b270c5512f3"
+    },
+    {
+      "path": "src/geopilot/gis/raster/area_stats.py",
+      "git_mode": "100644",
+      "sha256": "f64f55ed7e601922d63fc0467084ea6fca9764c65e8d0c4b9310e264eeda4afb"
+    },
+    {
+      "path": "src/geopilot/gis/raster/aspect.py",
+      "git_mode": "100644",
+      "sha256": "b642901d7afc381db03285a672550e4f07f83a7488350db414d6e90cda4c4178"
+    },
+    {
+      "path": "src/geopilot/gis/raster/clip_back.py",
+      "git_mode": "100644",
+      "sha256": "dfa5caed4a6fa70325598f06cefe35ccf07f28254e3ebde8d625727a18778800"
+    },
+    {
+      "path": "src/geopilot/gis/raster/dem_prepare.py",
+      "git_mode": "100644",
+      "sha256": "4460c910583da0ebaac95925a2db76d75cfd281d779189d7100a263c01beb02a"
+    },
+    {
+      "path": "src/geopilot/gis/raster/extent_expansion.py",
+      "git_mode": "100644",
+      "sha256": "0cca74c8637874546674b054639c4ea0fff3599fdf5d0bbf4b3c6cbf6b37559f"
+    },
+    {
+      "path": "src/geopilot/gis/raster/terrain.py",
+      "git_mode": "100644",
+      "sha256": "f13e45a55200755a3f9b6299b6b23e2ba92628cdc41d6546f4957cffc530d463"
+    },
+    {
+      "path": "src/geopilot/gis/raster/threshold.py",
+      "git_mode": "100644",
+      "sha256": "04557b690945a6d395415880518fb3b9e69030b22ec4d4de15edc74919f11dfa"
+    },
+    {
+      "path": "src/geopilot/gis/raster/units.py",
+      "git_mode": "100644",
+      "sha256": "b5dacc370756e867ec5b1da8cb7888c573011dd696cf29021d6f11203b5898fe"
+    },
+    {
+      "path": "src/geopilot/gis/raster/window_io.py",
+      "git_mode": "100644",
+      "sha256": "20562d2c8d7afb68775cbc6dedac0a58c30522a89ae751ef090b0283979a67d0"
+    },
+    {
+      "path": "src/geopilot/gis/tools/calculate_dem_aspect.py",
+      "git_mode": "100644",
+      "sha256": "836f9c34f5a72b2966e7d433192a2913423919a2870888473677a5c93da05557"
+    },
+    {
+      "path": "src/geopilot/gis/tools/calculate_dem_slope.py",
+      "git_mode": "100644",
+      "sha256": "8d53c0554d8b46faca9af0ae64278eaf01ea18c4fa64cae4dffa13b08866c42f"
+    },
+    {
+      "path": "src/geopilot/gis/tools/calculate_dem_terrain.py",
+      "git_mode": "100644",
+      "sha256": "c57c9bb9f341ea1e992a92eda7ca1c40e80f49cb7ed134ee19e358a9039f7ecd"
+    },
+    {
+      "path": "src/geopilot/gis/tools/check_dem_units.py",
+      "git_mode": "100644",
+      "sha256": "35d109eb8afd0c36b0c5cc38475751ca749118323b27de6c8a302d4c12eb543e"
+    },
+    {
+      "path": "src/geopilot/gis/tools/classify_dem_threshold.py",
+      "git_mode": "100644",
+      "sha256": "e122971636404b7fe42d10735003a2b9299f34fd6cfed5c4d803ad34b8cfdac3"
+    },
+    {
+      "path": "src/geopilot/gis/tools/clip_dem_back.py",
+      "git_mode": "100644",
+      "sha256": "0d398a50d4a1820e49250824ef5d9f6140139d2144c60d0f7556cc66ae60df11"
+    },
+    {
+      "path": "src/geopilot/gis/tools/clip_points_to_extent.py",
+      "git_mode": "100644",
+      "sha256": "262155ed09775251caf877dfc4bb5e656018cab0b9ac83601530a000bc6cabfe"
+    },
+    {
+      "path": "src/geopilot/gis/tools/clip_vector_to_extent.py",
+      "git_mode": "100644",
+      "sha256": "f9cfcc6c02399af1a24ec221945ba99e445e720bf211b7817bf0ce760dba5630"
+    },
+    {
+      "path": "src/geopilot/gis/tools/count_points_by_zone.py",
+      "git_mode": "100644",
+      "sha256": "fbd2a3577281a1781435eb1cf28fdb2e71ff08dedfed29476839103fbada6193"
+    },
+    {
+      "path": "src/geopilot/gis/tools/expand_dem_extent.py",
+      "git_mode": "100644",
+      "sha256": "7f88c0f1e3f6fdf628434bf6093908345293b97a00b4f7befc05d8f0c918a233"
+    },
+    {
+      "path": "src/geopilot/gis/tools/expand_wgs84_analysis_extent.py",
+      "git_mode": "100644",
+      "sha256": "23dc67cf41c61983c881745b1f8c411c8d8c07a0aa7d74b055289f3303cba8a3"
+    },
+    {
+      "path": "src/geopilot/gis/tools/land_use_transition.py",
+      "git_mode": "100644",
+      "sha256": "a87ce114a59773dadb0f8ac002e168e03d58fb41b2749a51ab1ea2bfb2febb85"
+    },
+    {
+      "path": "src/geopilot/gis/tools/planar_area.py",
+      "git_mode": "100644",
+      "sha256": "7fe5eed291308adc0b1bfceff49a43be224b50ff95daecdca09d9331d86ed8d9"
+    },
+    {
+      "path": "src/geopilot/gis/tools/polygon_zone_statistics.py",
+      "git_mode": "100644",
+      "sha256": "7aefab6b0615bc55424f885d0ce164d5237b948ceb4dc35bce13e594c9fb865a"
+    },
+    {
+      "path": "src/geopilot/gis/tools/prepare_dem_window.py",
+      "git_mode": "100644",
+      "sha256": "727dd9ae7e51c662049cc8bafc0d9fe5c22d2e2bc5b11325cf6d8164a289eb21"
+    },
+    {
+      "path": "src/geopilot/gis/tools/prepare_measurement_lines.py",
+      "git_mode": "100644",
+      "sha256": "98364ca0a85c0faeb987692916b515f4071391f99515be3342ee184b9e137e23"
+    },
+    {
+      "path": "src/geopilot/gis/tools/prepare_wgs84_measurement_lines.py",
+      "git_mode": "100644",
+      "sha256": "e74bced8a7a53cc4f0cae2de590a14084cdcce1696d337de868f5a0ecbd0b16c"
+    },
+    {
+      "path": "src/geopilot/gis/tools/remote_sensing_workflow.py",
+      "git_mode": "100644",
+      "sha256": "4d0fe34039f1c5c0eb7228eafa877c0df789b33dec3299bf05b7f8ba15e97c3e"
+    },
+    {
+      "path": "src/geopilot/gis/tools/select_spatial_relation.py",
+      "git_mode": "100644",
+      "sha256": "68cf93f15ca8cee01a272c0bcad00efd321d2789c5c0475126e6106e591c34aa"
+    },
+    {
+      "path": "src/geopilot/gis/tools/select_wgs84_roads.py",
+      "git_mode": "100644",
+      "sha256": "828af91c0e7ed48e8e4a225c71de7a5146a4ac16b71b0da3c1bec8d6d6eb1ac4"
+    },
+    {
+      "path": "src/geopilot/gis/tools/summarize_dem_area.py",
+      "git_mode": "100644",
+      "sha256": "a7291320767f9cba8c67ebaa66fd70fe4b6ab2bf97f4e5512a6512e8e14176f1"
+    },
+    {
+      "path": "src/geopilot/gis/tools/tool_command.py",
+      "git_mode": "100644",
+      "sha256": "4281d9cb1e393571262ff6c1163533affd760777c6248323e982b5c4b628f5f2"
+    },
+    {
+      "path": "src/geopilot/gis/tools/vector_step_files.py",
+      "git_mode": "100644",
+      "sha256": "2e810b9dd28d4498f5b3d9a9060edcb6492204110ccc60de42ce619c9d6ea24a"
+    },
+    {
+      "path": "src/geopilot/gis/tools/wgs84_geodesic_buffer.py",
+      "git_mode": "100644",
+      "sha256": "cbdf4e3524f53a752209bb431cda8a8ac35eb2b021c510deb940bf91bc678d02"
+    },
+    {
+      "path": "src/geopilot/gis/tools/wgs84_road_io.py",
+      "git_mode": "100644",
+      "sha256": "8c60e9eaa56c6ac69c8f4ac7a715a0613b70396222208e6a5191c11487fa04e0"
+    },
+    {
+      "path": "src/geopilot/gis/validation/crs_validator.py",
+      "git_mode": "100644",
+      "sha256": "aabce2703615d6e5eebae1e4c9baedefa316a4fc1ea29812d289f7697cda0df5"
+    },
+    {
+      "path": "src/geopilot/gis/vector/boundary_assignment.py",
+      "git_mode": "100644",
+      "sha256": "9d3ef37401db7fe7bd7f90e643b380de523e86dd5f1f0c8688512de26b280dd8"
+    },
+    {
+      "path": "src/geopilot/gis/vector/polygon_statistics.py",
+      "git_mode": "100644",
+      "sha256": "2ae066912a5f6c14a06aea7f50e5e2b6d95adc00449d423cd6b541e6f4365a99"
+    },
+    {
+      "path": "src/geopilot/gis/vector/spatial_relations.py",
+      "git_mode": "100644",
+      "sha256": "ef4430bc0b6c1ec0e2bcb45a50fd7f88f000b4336279336fc3cb46ee92d7e46e"
+    },
+    {
+      "path": "src/geopilot/gis/vector/transition_matrix.py",
+      "git_mode": "100644",
+      "sha256": "f4a3af54b2ab46bf55f03ccdcea613841accfe3534ea77bc46fca327fba31e92"
+    },
+    {
+      "path": "src/geopilot/llm/base.py",
+      "git_mode": "100644",
+      "sha256": "99baef8771fea03ed4b217cc5e2205b75986f4210f449817bceb805443267411"
+    },
+    {
+      "path": "src/geopilot/llm/candidate_validator.py",
+      "git_mode": "100644",
+      "sha256": "935022c0504980a197f9d42a27fd90d9cc3336a9c8e575fc28ae7d52bc1de38f"
+    },
+    {
+      "path": "src/geopilot/llm/client.py",
+      "git_mode": "100644",
+      "sha256": "a7cc239fa996c95f5007f4b52c9f8828f28432ae0e518133e980a4f68171ae2f"
+    },
+    {
+      "path": "src/geopilot/llm/context_builder.py",
+      "git_mode": "100644",
+      "sha256": "02d6f2260922f0be3ca3864b424c0495c2a813e41332d166fe52211abcf67a92"
+    },
+    {
+      "path": "src/geopilot/llm/data_boundary.py",
+      "git_mode": "100644",
+      "sha256": "8915c0aca66e15b7c1ad4d8206897bc00b1d62a292cf4b7d2142e5112a1eeaf5"
+    },
+    {
+      "path": "src/geopilot/llm/prompt_builder.py",
+      "git_mode": "100644",
+      "sha256": "ae00f8f92c2e1144e7e356471d929a21f9ac3482ff524f58acbb4078c05afb29"
+    },
+    {
+      "path": "src/geopilot/llm/providers/mock.py",
+      "git_mode": "100644",
+      "sha256": "f0ebe73154165566d2fe00c7fb9ae8052838b4dbccb73d9b87c6b849f466b801"
+    },
+    {
+      "path": "src/geopilot/llm/providers/ollama.py",
+      "git_mode": "100644",
+      "sha256": "6dba86831ccdacab84c3ce255c6e53ddde4134636e5b0d9d81f2b744ae7566aa"
+    },
+    {
+      "path": "src/geopilot/llm/response_parser.py",
+      "git_mode": "100644",
+      "sha256": "3af8d0e898378f92911f75612a5fed89129625606c3a8f3f065f564a1fd2ebb7"
+    },
+    {
+      "path": "src/geopilot/methods/land_use_overlay.py",
+      "git_mode": "100644",
+      "sha256": "d439b92520cbddf6539817c3792f6da6be10a19bfc41826076264a569929e993"
+    },
+    {
+      "path": "src/geopilot/methods/loader.py",
+      "git_mode": "100644",
+      "sha256": "6adb3487f1a51f9aca8361c5e616623f15c76e887d415ec9cf9747cf44fb78c1"
+    },
+    {
+      "path": "src/geopilot/methods/models.py",
+      "git_mode": "100644",
+      "sha256": "2b2273a91f8043891d0dc8b069819b90175c55e92ed5a611ecf6d899207c193e"
+    },
+    {
+      "path": "src/geopilot/methods/validator.py",
+      "git_mode": "100644",
+      "sha256": "257ce4fbdf290aee345fa84bd2678882963fbd814b21a970eeb7d1c02d363ca1"
+    },
+    {
+      "path": "src/geopilot/persistence/asset_repository.py",
+      "git_mode": "100644",
+      "sha256": "ad05c6e25898e0ddbfa90d490530e81c8ad134bab26b4332ccb9db0e4ce38bbb"
+    },
+    {
+      "path": "src/geopilot/persistence/plan_repository.py",
+      "git_mode": "100644",
+      "sha256": "fc46d9b194ae5f5e5db9da725515fccb59f2d634846f3d10e5d06e7f6f8ba74d"
+    },
+    {
+      "path": "src/geopilot/persistence/run_repository.py",
+      "git_mode": "100644",
+      "sha256": "9f4e52e4f6c93c039db44b993906ae5488e27eed29b061c81144c89de3db408d"
+    },
+    {
+      "path": "src/geopilot/persistence/schema.py",
+      "git_mode": "100644",
+      "sha256": "390a32af88e67e0b88843cffe6678890f4c6e85082e287ac3cc31e624af259f1"
+    },
+    {
+      "path": "src/geopilot/persistence/workspace.py",
+      "git_mode": "100644",
+      "sha256": "92836b6370097fa0f25a2e8f4b289070b2709e3a0e9021a31d83a09f1f3584cb"
+    },
+    {
+      "path": "src/geopilot/plans/compiler.py",
+      "git_mode": "100644",
+      "sha256": "ccfdd0406cd71147550ca863f51e6a1c65a74351b5d174b8ebc84f4c3f94ecfc"
+    },
+    {
+      "path": "src/geopilot/plans/dependency_validator.py",
+      "git_mode": "100644",
+      "sha256": "af8eef19ad0cd3f38b2af4922bb3c0aeec59d29927bf569639902c7b41f88862"
+    },
+    {
+      "path": "src/geopilot/plans/draft_builder.py",
+      "git_mode": "100644",
+      "sha256": "9afb65262aa4b878a6547191ae1391737f0577ea3f2756ffdfe07c7f6327fdf0"
+    },
+    {
+      "path": "src/geopilot/plans/models.py",
+      "git_mode": "100644",
+      "sha256": "cd664123522a843e31527966165e4cad22a926a935d84d0f320804013c8060df"
+    },
+    {
+      "path": "src/geopilot/plans/service.py",
+      "git_mode": "100644",
+      "sha256": "3e2d51390546f3422e1c977a4c5340726404af925b678579c065a47c1033e0c6"
+    },
+    {
+      "path": "src/geopilot/plans/step_compiler.py",
+      "git_mode": "100644",
+      "sha256": "aa987df2400bc98ecbc6e229694cbb7171460b47cfef54a9b8edc04975de665b"
+    },
+    {
+      "path": "src/geopilot/plans/versioning.py",
+      "git_mode": "100644",
+      "sha256": "0f6273d63ac17f97d9fb5f5bf4eea2da4c9760864d71d78b4905e153f47afb1a"
+    },
+    {
+      "path": "src/geopilot/preview/raster_preview.py",
+      "git_mode": "100644",
+      "sha256": "8bd8dfd98c8455ffec7563026847e8ec9ad9adc1719a1adcc10a27602a4fec58"
+    },
+    {
+      "path": "src/geopilot/preview/store.py",
+      "git_mode": "100644",
+      "sha256": "c36bc1f0e024ae9ef1dbd0514100537205827f1ce965ee9aad3e78630f548281"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/alignment.py",
+      "git_mode": "100644",
+      "sha256": "bc5c7672fa34590c7e01b0d3f5b21754587c849f280235aaa572f02a0d6860a0"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/band_mapper.py",
+      "git_mode": "100644",
+      "sha256": "2575ff91c4f0ed8baa99816b99a71c177d7b3f14cae179af2f5ede0885789b12"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/change.py",
+      "git_mode": "100644",
+      "sha256": "1bd3eb01b026d17d6ff6c19a3f145b98c159ac566896450955daf701e9ca0c31"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/classification.py",
+      "git_mode": "100644",
+      "sha256": "9196c4ce6326f5d2f4f31b12c06a1a2a7cc1872a3d01405be71e6f51084777b6"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/config_models.py",
+      "git_mode": "100644",
+      "sha256": "f7a36453689205f35b6f7f6e79f715e187de3858921775f58157799ae450e40b"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/config_registry.py",
+      "git_mode": "100644",
+      "sha256": "dff62aaa2e2520e8718bf92af7273c31f76526b8aecbf589b42b1792eca6da70"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/indices.py",
+      "git_mode": "100644",
+      "sha256": "b432fd791d7e2f7f58932866321986210e3f9ec6eb2850fd7cfcbc933afc74dd"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/product_metadata.py",
+      "git_mode": "100644",
+      "sha256": "415c186b35c4e097c153e2a299f8448850b784abd9113db319adeea8832daacf"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/product_pack.py",
+      "git_mode": "100644",
+      "sha256": "159a9fdcf8f80e388254571903c08fccb5c3fe6d2b4061b909b0ebcac71c5117"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/quality_mask.py",
+      "git_mode": "100644",
+      "sha256": "6becce98e4736d1e9d1b8d0a09f5d83f6a570607b70b75f2c5d5cdbc3c66a76f"
+    },
+    {
+      "path": "src/geopilot/remote_sensing/scaling.py",
+      "git_mode": "100644",
+      "sha256": "980300a0988a5fa5a27d3361634600faf330cb85a8a2654cd85f05c36ed55138"
+    },
+    {
+      "path": "src/geopilot/runs/models.py",
+      "git_mode": "100644",
+      "sha256": "43d868727933ed1c55be6372118bb5011806dfa51a05e3f6803f595a33ed4926"
+    },
+    {
+      "path": "src/geopilot/runs/query_service.py",
+      "git_mode": "100644",
+      "sha256": "d25259e88c36a2f7579b7831c832239d4b44bbd9a37c38cf953870f07d4bb439"
+    },
+    {
+      "path": "src/geopilot/runs/retry_service.py",
+      "git_mode": "100644",
+      "sha256": "f1517e9e5aa625f07fff83adeb52cb0315cc2d82547b2d7f81a6e5e0c6218fe5"
+    },
+    {
+      "path": "src/geopilot/runs/service.py",
+      "git_mode": "100644",
+      "sha256": "6295ac6bd0d816512b00c6901930fb69d3aacbcfb5f8e936f56c610712bbdea0"
+    },
+    {
+      "path": "src/geopilot/scheduler/cancellation.py",
+      "git_mode": "100644",
+      "sha256": "eecfa0bca54b1cc89ba6d224ae173b727a89c4bcc66cea87f53d28f937cf9c8a"
+    },
+    {
+      "path": "src/geopilot/scheduler/failure_handler.py",
+      "git_mode": "100644",
+      "sha256": "1f50985cc985d7d51d10a3a3a2807ecc6c3719000a6ff90a894d2d3308b07445"
+    },
+    {
+      "path": "src/geopilot/scheduler/loop.py",
+      "git_mode": "100644",
+      "sha256": "790e817ad7a938e480be6aa2499e8678adb3d7669434eeab15eaf393a08d8eeb"
+    },
+    {
+      "path": "src/geopilot/scheduler/output_resolver.py",
+      "git_mode": "100644",
+      "sha256": "52f4f822f2769c328a3034378bdedaeb8f01b8ccb0070735611e050cc8525b1f"
+    },
+    {
+      "path": "src/geopilot/scheduler/step_executor.py",
+      "git_mode": "100644",
+      "sha256": "11c2e409a17e41fe3c1420f095ba4724c99cb20f85810769e60daedf3946294b"
+    },
+    {
+      "path": "src/geopilot/scripts/models.py",
+      "git_mode": "100644",
+      "sha256": "ab3dd6871cda79282bac08259ddfd659159d2451ef434c1736a72b472a393a36"
+    },
+    {
+      "path": "src/geopilot/scripts/registration/__init__.py",
+      "git_mode": "100644",
+      "sha256": "927b06a7e32880329e0502a7bf77cdf5b55d2214c77591b6c76b28760da2f5e1"
+    },
+    {
+      "path": "src/geopilot/scripts/registration/models.py",
+      "git_mode": "100644",
+      "sha256": "41a01e5d0ebc59f8fc25a6a67d00c90231cbe8e608d2f01b2aa49d1855b8ecf3"
+    },
+    {
+      "path": "src/geopilot/scripts/registration/validation.py",
+      "git_mode": "100644",
+      "sha256": "68ce47138f4a30f7cdeeb77e94c469217e58c53c4a64b8bc11171b4bd0fe97e7"
+    },
+    {
+      "path": "src/geopilot/scripts/runner.py",
+      "git_mode": "100644",
+      "sha256": "3bd341eb14c7cb6030101c6efd2ab0fe18fb46bae0619b3baa08bc8a1e7bdbb3"
+    },
+    {
+      "path": "src/geopilot/scripts/snapshot.py",
+      "git_mode": "100644",
+      "sha256": "63d73d20fad2f8dc0573f554afa44e1732fcc79a35ae19ca195e212fd62261a2"
+    },
+    {
+      "path": "src/geopilot/tools/parameter_normalizer.py",
+      "git_mode": "100644",
+      "sha256": "ada01a2d085dbf7628397a6d1dae343ecb24cd213a4d175cae45b6415da0109d"
+    },
+    {
+      "path": "src/geopilot/tools/registry.py",
+      "git_mode": "100644",
+      "sha256": "08269712159d294f05a30e17759735cb30c01dbe167c1b86714c60a12d2d6113"
+    },
+    {
+      "path": "tests/api/test_check_reports.py",
+      "git_mode": "100644",
+      "sha256": "07e4c1ba6cec7b0cab958a7887dacf152ac409c2956c13c79c58990f668277aa"
+    },
+    {
+      "path": "tests/api/test_run_origin.py",
+      "git_mode": "100644",
+      "sha256": "6babd9ec63278493b252308aadee7f61f805ba0452baaf47e8b117f51d4014c4"
+    },
+    {
+      "path": "tests/api/test_run_status.py",
+      "git_mode": "100644",
+      "sha256": "cfeff7a076a60dc0410b703d403b7f254630accb25c7cd42221f675922457d52"
+    },
+    {
+      "path": "tests/api/test_script_runs.py",
+      "git_mode": "100644",
+      "sha256": "6fc5fbcf528c437088f58b4b20358d019534b46fdde90b74369fa969aa2cf663"
+    },
+    {
+      "path": "tests/api/test_workbench_catalog.py",
+      "git_mode": "100644",
+      "sha256": "41509d300ede68e7167365cc79969982c9f3f652b4ba1593e006e7c0e20a0bcd"
+    },
+    {
+      "path": "tests/api/test_workbench_tasks.py",
+      "git_mode": "100644",
+      "sha256": "1ef6c41f39787d79c2253e7ac0aec59046bf05b2b09de620cf709123a9a30c8b"
+    },
+    {
+      "path": "tests/application/test_check_interruption.py",
+      "git_mode": "100644",
+      "sha256": "6108ca118e46ab724765dc0029de10ec267ece47b46c5dee6fdc9df806626523"
+    },
+    {
+      "path": "tests/application/test_context_candidates.py",
+      "git_mode": "100644",
+      "sha256": "6fb684f85dd99e0f99db376e081e299d0756de65b1199fc98491d2e09c722a36"
+    },
+    {
+      "path": "tests/application/test_method_preconditions.py",
+      "git_mode": "100644",
+      "sha256": "607916a1a8a8a95ff7cdf0eba1b6bc89565efd32c7498cb9e7fa377ce03588bf"
+    },
+    {
+      "path": "tests/application/test_plan_run.py",
+      "git_mode": "100644",
+      "sha256": "9faaf6756f4a88e3a4efa1541d02b78736fa699b7105f1d78745748a1dbb7c5e"
+    },
+    {
+      "path": "tests/application/test_run_checks.py",
+      "git_mode": "100644",
+      "sha256": "69c3c8791b8d4e572ca4cdefefc7182d4519438db87dd4c5778a286faaea996f"
+    },
+    {
+      "path": "tests/application/test_run_inputs.py",
+      "git_mode": "100644",
+      "sha256": "921a9364586cc53569e363d935b56ce485d47a967c1da2bd7d82b0feb3a43238"
+    },
+    {
+      "path": "tests/application/test_task_context.py",
+      "git_mode": "100644",
+      "sha256": "d9cafee5fe8a530acf0309fef45b8b9c3f8815323334f3b59609b13aeb987b6a"
+    },
+    {
+      "path": "tests/artifacts/test_registration.py",
+      "git_mode": "100644",
+      "sha256": "6ece268785fb275600226ea04f40c214d624d659efd2092a686e7e793647863c"
+    },
+    {
+      "path": "tests/artifacts/test_runner_registration.py",
+      "git_mode": "100644",
+      "sha256": "87646ec4c3db6dbc9495f8fa65c594f1ed6c59761d93817e04b2cbd72c68e1a9"
+    },
+    {
+      "path": "tests/artifacts/test_value_query.py",
+      "git_mode": "100644",
+      "sha256": "35a6d1ece779619cb5ebe2d763413bcfc003fbc18052a8f51ceeb573f00ac93b"
+    },
+    {
+      "path": "tests/assets/test_asset_registration.py",
+      "git_mode": "100644",
+      "sha256": "c5cbf08ed839bdf2caebb5f70bff8830a10ea102a2aabc33fa7313001b49321e"
+    },
+    {
+      "path": "tests/assets/test_asset_resolver.py",
+      "git_mode": "100644",
+      "sha256": "64f8811fd91baaa2ef25112abe03b99df60cd95cd2aeef227568501f61d6b6bd"
+    },
+    {
+      "path": "tests/assets/test_asset_versioning.py",
+      "git_mode": "100644",
+      "sha256": "1d9dd06d4daeabb114b5d506f46f4c734ba1abc9518a0cc02846d74a709f93d0"
+    },
+    {
+      "path": "tests/assets/test_fingerprint.py",
+      "git_mode": "100644",
+      "sha256": "26769e3b3c6f25f775a1a5dcd16cf873c69f4981ce4f99980fbd6e3c48886e9d"
+    },
+    {
+      "path": "tests/checks/test_artifact_checks.py",
+      "git_mode": "100644",
+      "sha256": "a9a1d06b6611d0f94da7e1690b60ef8a4f9c28321c0063ebfdbf91a06eabc931"
+    },
+    {
+      "path": "tests/checks/test_input_checks.py",
+      "git_mode": "100644",
+      "sha256": "5fc2da03df59fbb9ad5e4fbb86d0808f58c815d6313f8ca0a84ce3a2bd12ab05"
+    },
+    {
+      "path": "tests/checks/test_process_checks.py",
+      "git_mode": "100644",
+      "sha256": "f54d8cfefe787021a669a41cef19bd0828f6135ea34c034ef60fb82054622874"
+    },
+    {
+      "path": "tests/checks/test_raster_checks.py",
+      "git_mode": "100644",
+      "sha256": "6ff45b96cd7f11521e221a2bf4cf82555c885d98b311b3d34615bd8097f4de25"
+    },
+    {
+      "path": "tests/checks/test_raster_nodata_preflight.py",
+      "git_mode": "100644",
+      "sha256": "866fb590aa9de7b8f6dec4498d4054e1fd4d6a89aefa55209618f4cf5fca3b32"
+    },
+    {
+      "path": "tests/checks/test_recheck.py",
+      "git_mode": "100644",
+      "sha256": "729634eabb25905429df7c2553a597058b5360312cf7d18c57be92f1dca92dd5"
+    },
+    {
+      "path": "tests/checks/test_recheck_service.py",
+      "git_mode": "100644",
+      "sha256": "dd1837aadbc57c4645e714a4d530a71a35dfb70f08b3c07606b22d06728d1b17"
+    },
+    {
+      "path": "tests/checks/test_report_service.py",
+      "git_mode": "100644",
+      "sha256": "78385146a3b9316ac79cc823ad9464c776093d3ae24e18497b6c9b405af3d140"
+    },
+    {
+      "path": "tests/checks/test_tool_checks.py",
+      "git_mode": "100644",
+      "sha256": "42e8beddead24f4f108e70499eb667bf9aea4adafd900307cd484f5efad8042b"
+    },
+    {
+      "path": "tests/conftest.py",
+      "git_mode": "100644",
+      "sha256": "111bab7b57a5e642a8738d1ab5471d50887c6e17e8ad6d29cb10bb847b999553"
+    },
+    {
+      "path": "tests/contracts/test_tool_contract.py",
+      "git_mode": "100644",
+      "sha256": "008298714781704112869f12791d04ca1f618491744113384e0e7719c4be3910"
+    },
+    {
+      "path": "tests/data_adapters/test_geopackage_reader.py",
+      "git_mode": "100644",
+      "sha256": "5e5d93ba9e2eb450f46497d4a4363a0a71dfe686d883fe7063d7829c35d84d56"
+    },
+    {
+      "path": "tests/data_adapters/test_postgis_snapshot.py",
+      "git_mode": "100644",
+      "sha256": "95d4e585a2f9933ba0ff858088519485296ad29ede4e10871c72e95aa656eade"
+    },
+    {
+      "path": "tests/data_adapters/test_postgis_versioning.py",
+      "git_mode": "100644",
+      "sha256": "3698595c69bc64f18c67fa6ff87f67d94ce9f0f069a079fd1a646495843717e6"
+    },
+    {
+      "path": "tests/data_adapters/test_raster_reader.py",
+      "git_mode": "100644",
+      "sha256": "8196a72b2b4dbc53d51f8895215d45fcdf03a7267ac860da47f11dd249a696a8"
+    },
+    {
+      "path": "tests/data_adapters/test_vector_reader.py",
+      "git_mode": "100644",
+      "sha256": "5fe02afd2f3e723714377cdb3b26e2a6d5b81be0715cb0ed10dec762f7a8ead5"
+    },
+    {
+      "path": "tests/e2e/test_geodesic_road_workflow.py",
+      "git_mode": "100644",
+      "sha256": "4b23b38797511154d205a12369971de00661af3bf774f526790e46781eb79b88"
+    },
+    {
+      "path": "tests/e2e/test_workbench_reproduction.py",
+      "git_mode": "100644",
+      "sha256": "58832cc07d1eef8abe93f180cc1606ee38d9388b5a6f8113004171e6feb077ca"
+    },
+    {
+      "path": "tests/fixtures/geodesic/generate_reference.py",
+      "git_mode": "100644",
+      "sha256": "a8da45a896404dc0632d87b1c697fec0b4dbf2d00ce0c41817c1f017cfa0278e"
+    },
+    {
+      "path": "tests/fixtures/geodesic/reference.json",
+      "git_mode": "100644",
+      "sha256": "251b1a822896884a7f6359f5cd69cfd5ba53776954fb332e6d0bedeb25600e84"
+    },
+    {
+      "path": "tests/fixtures/geodesic/road_workflow.py",
+      "git_mode": "100644",
+      "sha256": "6bbc6e163703712549cab950502b8607b973ce4d793432bf96d716c44467331b"
+    },
+    {
+      "path": "tests/fixtures/land-use/land-use-overlay.v1.yaml",
+      "git_mode": "100644",
+      "sha256": "bd1db41def0b5e010fdf7d0577538f1c8f2230101d333190d75b438f7c07531e"
+    },
+    {
+      "path": "tests/fixtures/raster/README.md",
+      "git_mode": "100644",
+      "sha256": "931233fb2b44ec7e085cc714ce4a902e4eab9451497f7f5940316e44a37e5cad"
+    },
+    {
+      "path": "tests/fixtures/raster/dem-plane.tif",
+      "git_mode": "100644",
+      "sha256": "e107e63b8de034f98ce3c3ef580422dd05593b8d6b0aabd32003044fbb522139"
+    },
+    {
+      "path": "tests/fixtures/raster/expected.json",
+      "git_mode": "100644",
+      "sha256": "32804b0d8ec513a125e0c73691d77210a014d4cf0ded6fb1e5164793f1fcc25d"
+    },
+    {
+      "path": "tests/fixtures/raster/generate.py",
+      "git_mode": "100644",
+      "sha256": "c299d0a432b6728ca9201cf951af5acd3db9a8acb938ab582928696f954a000d"
+    },
+    {
+      "path": "tests/fixtures/raster/two-band.tif",
+      "git_mode": "100644",
+      "sha256": "2dbad472ae74ad0d1804cb498eedee6d71ca122acaf380d15fc9144cb0dc3ade"
+    },
+    {
+      "path": "tests/fixtures/vector/README.md",
+      "git_mode": "100644",
+      "sha256": "19232d77ecabf98e3419c3b2e9a39d24e0d25ef5c0223cfa4718c367631012a6"
+    },
+    {
+      "path": "tests/fixtures/vector/build_fixtures.py",
+      "git_mode": "100644",
+      "sha256": "39430e31a276de0b84aadfba61fcef7316eeabff8eef4030b00b39b465436fc3"
+    },
+    {
+      "path": "tests/fixtures/vector/expected.json",
+      "git_mode": "100644",
+      "sha256": "df2638c5ed1fb8cf75a95bb50525c115d446a16718e8923619d48e48ed1ff9a8"
+    },
+    {
+      "path": "tests/fixtures/vector/road-buffer.gpkg",
+      "git_mode": "100644",
+      "sha256": "52bf921e66f43866e5dade81ae5b489a79dbbc7671f82c10cc50ec537c8ba39c"
+    },
+    {
+      "path": "tests/fixtures/vector/source.json",
+      "git_mode": "100644",
+      "sha256": "fa045a6671c1eed83679c80034df8efb16beae0c8f095f1dec2bf515c94a494a"
+    },
+    {
+      "path": "tests/fixtures/vector/t13/README.md",
+      "git_mode": "100644",
+      "sha256": "f1aa4b28bda275e8e3e2dbdfa53a98c0ba0d6436a7d29b6f15d45f657ccb05e4"
+    },
+    {
+      "path": "tests/fixtures/vector/t13/build_fixture.py",
+      "git_mode": "100644",
+      "sha256": "5ce1cc1576b542b3ca4879e9f092f35ebc0ff41facaa5d896832824b0db06454"
+    },
+    {
+      "path": "tests/fixtures/vector/t13/expected.json",
+      "git_mode": "100644",
+      "sha256": "3f839f7a57865ddb177e58467bcf7b50a36c185573395d610839c9a6e3041e54"
+    },
+    {
+      "path": "tests/fixtures/vector/t13/source.json",
+      "git_mode": "100644",
+      "sha256": "365888bd0343e1751e4ac9bc8d530b75c6ca09f7751375787377c9a49d002422"
+    },
+    {
+      "path": "tests/fixtures/vector/t13/spatial-relations.gpkg",
+      "git_mode": "100644",
+      "sha256": "be729517ae3e2db3e967f8f63e7cedca4ffb7f9d4291f40c43c9c5d6ce6bcefe"
+    },
+    {
+      "path": "tests/gis/raster/test_area_preflight.py",
+      "git_mode": "100644",
+      "sha256": "2f9743086bcb84f5544883d45e06c4560103178e0be694da7af4cfadcd4ba914"
+    },
+    {
+      "path": "tests/gis/raster/test_area_stats.py",
+      "git_mode": "100644",
+      "sha256": "84b86b9f65145f56495d007faaa718081d3f3267e13733d77d464027ffa66272"
+    },
+    {
+      "path": "tests/gis/raster/test_aspect.py",
+      "git_mode": "100644",
+      "sha256": "6b6de642fc2763b0e2e6eac654c49055c4207c200dbcf1fbeff0cbf20ab85038"
+    },
+    {
+      "path": "tests/gis/raster/test_clip_back.py",
+      "git_mode": "100644",
+      "sha256": "6e85f036c3ba05de8396b262f4c64c9339842c8f4465da14b9bdf3866c6e03ef"
+    },
+    {
+      "path": "tests/gis/raster/test_dem_prepare.py",
+      "git_mode": "100644",
+      "sha256": "a291658cf119ee57060a827754e454683485b794bf00e213feaac2ae3f9e9c6c"
+    },
+    {
+      "path": "tests/gis/raster/test_extent_expansion.py",
+      "git_mode": "100644",
+      "sha256": "cad0447023efdbc9b4e0ea6ae39048f27874a9407b76a736d99a6edf37ea07c8"
+    },
+    {
+      "path": "tests/gis/raster/test_slope.py",
+      "git_mode": "100644",
+      "sha256": "13e020bef8fbc3585ad245b5fb61f23f18e4c0acf9980cedb462e2de5480ac79"
+    },
+    {
+      "path": "tests/gis/raster/test_threshold.py",
+      "git_mode": "100644",
+      "sha256": "6cc4f18b218c102e02f9888082d49fc92a03cf031b6d7f1e1a8d077885328080"
+    },
+    {
+      "path": "tests/gis/raster/test_units.py",
+      "git_mode": "100644",
+      "sha256": "c69c9e9a9d0b187998f95fe767f3a665c6623e5beeaa7e7560e65c7c4181bd85"
+    },
+    {
+      "path": "tests/gis/raster/test_window_io.py",
+      "git_mode": "100644",
+      "sha256": "59c0577f206cb8cc863bfd80fdadc2c1d75e03ee321e20f2ff42b9e0ae9e595d"
+    },
+    {
+      "path": "tests/gis/test_area_policy.py",
+      "git_mode": "100644",
+      "sha256": "790d515019b71081437e5dc16430ee3e0d65663b57b442ba342b5ec24ae358e5"
+    },
+    {
+      "path": "tests/gis/test_boundary_split.py",
+      "git_mode": "100644",
+      "sha256": "10cf50b413aa51e64604f19db1dbb68149a37bef7d2731a683fe44d8a56cfac3"
+    },
+    {
+      "path": "tests/gis/test_centroid_assignment.py",
+      "git_mode": "100644",
+      "sha256": "4d516d10a5617c42489908b94bed3f2b46b276dca4431562f300b043ce270c86"
+    },
+    {
+      "path": "tests/gis/test_crs_validator.py",
+      "git_mode": "100644",
+      "sha256": "3a9be0ce9465d61e1d97b650bd662c3049fcf08a2c0668bf673ad1a26be81fa8"
+    },
+    {
+      "path": "tests/gis/test_distance_policy.py",
+      "git_mode": "100644",
+      "sha256": "9f7574b5ba171abee54bb09f687bcec81f9dbb70a572fb5755661bdb51214854"
+    },
+    {
+      "path": "tests/gis/test_geodesic_buffer.py",
+      "git_mode": "100644",
+      "sha256": "391a6f6b4e8794dd232c1b013dcfd2c25f08455ca22057847d893415f1ff9345"
+    },
+    {
+      "path": "tests/gis/test_geodesic_road_scope.py",
+      "git_mode": "100644",
+      "sha256": "6facd93ca3c3941764f9cbf638dd68f229b8bd3ddcab40eb5358d8b0396a7129"
+    },
+    {
+      "path": "tests/gis/test_intersects.py",
+      "git_mode": "100644",
+      "sha256": "74883db1a40bcfa902a5d51dc86feb476383a153e6eb357609531f0d8783404f"
+    },
+    {
+      "path": "tests/gis/test_largest_overlap.py",
+      "git_mode": "100644",
+      "sha256": "c6867ea2a68dee306ef56b864d6209404c2b78a62c75fc3ef76c34c5d00be043"
+    },
+    {
+      "path": "tests/gis/test_projection.py",
+      "git_mode": "100644",
+      "sha256": "98ba43718dc4e60a07a66dbab5cd758a1f03c90d5fbf2a1a86160e3f8709c100"
+    },
+    {
+      "path": "tests/gis/test_projection_coverage.py",
+      "git_mode": "100644",
+      "sha256": "3513ac43bbd93e35bc8baf09f02204bd6f20a70108f8359418d6078decc75a1d"
+    },
+    {
+      "path": "tests/gis/test_source_feature_identity.py",
+      "git_mode": "100644",
+      "sha256": "2cce49d9601c12506b5c58548b5db1644bc5c263f3aad46253ad233aa5ce1ac8"
+    },
+    {
+      "path": "tests/gis/test_transition_matrix.py",
+      "git_mode": "100644",
+      "sha256": "8cde7dcc290601a7d35f2da4986f97d67409d93e776ac89d1355b4e9596296a8"
+    },
+    {
+      "path": "tests/gis/test_within.py",
+      "git_mode": "100644",
+      "sha256": "91a5aa9af598946b7f1d83153f779c1f245797d1282bf3fa58bfd177cfa719ef"
+    },
+    {
+      "path": "tests/golden/T13/test_spatial_relations_fixture.py",
+      "git_mode": "100644",
+      "sha256": "dc65521ec13c819db4b7ab1574e5fac7004234876c34b02f2331233502835596"
+    },
+    {
+      "path": "tests/golden/test_raster_fixtures.py",
+      "git_mode": "100644",
+      "sha256": "2578cb269658cd8447deebb6107dea3a4f78a215d38834f4c92f944c61242840"
+    },
+    {
+      "path": "tests/golden/test_vector_fixtures.py",
+      "git_mode": "100644",
+      "sha256": "f6b0f44ac43ea59e024bbe936d075d0e4336dcc181dbac38dacbd805c55129bb"
+    },
+    {
+      "path": "tests/integration/extensions/test_extension_acceptance.py",
+      "git_mode": "100644",
+      "sha256": "d57dbe2d3f5b41ef228574794cd50e49429b04259127292845ff6841d393265c"
+    },
+    {
+      "path": "tests/llm/e2e/test_model_manual_equivalence.py",
+      "git_mode": "100644",
+      "sha256": "08bb2ca5187696df51fc943eed051db7926e2198f7f350282f22f13789212616"
+    },
+    {
+      "path": "tests/llm/test_candidate_validator.py",
+      "git_mode": "100644",
+      "sha256": "cc4b5708d7cd3e3093ab8de1cecd17ab65e107f55876bacc4f09e1bc63bb26ab"
+    },
+    {
+      "path": "tests/llm/test_context_builder.py",
+      "git_mode": "100644",
+      "sha256": "89ea9575fe4aa3fdbb1f072bb7a69021b8f72cff3ff5b105e0481bc8908cc05e"
+    },
+    {
+      "path": "tests/llm/test_data_boundary.py",
+      "git_mode": "100644",
+      "sha256": "23ef6e9e6340bf9566e73e78de6c3efb941cce1b2ff497832bfd666b0dbe18ce"
+    },
+    {
+      "path": "tests/llm/test_error_handling.py",
+      "git_mode": "100644",
+      "sha256": "7a552c23577444cb2740c1a040516cac8e4e00b8fedf3e2b4cc386941a6f0049"
+    },
+    {
+      "path": "tests/llm/test_prompt_builder.py",
+      "git_mode": "100644",
+      "sha256": "0c2c5a72eaf3f6cbaeebc9cea13f60e8944ce084f725f160b01b1f9056247586"
+    },
+    {
+      "path": "tests/llm/test_provider_contract.py",
+      "git_mode": "100644",
+      "sha256": "1df570f29fd72dc55bbd97793b561ae8e7653e46e5a750c3420650491202b116"
+    },
+    {
+      "path": "tests/llm/test_response_parser.py",
+      "git_mode": "100644",
+      "sha256": "82f8f956d824913c400d9b53009201ce1be81039867eb5d375f2d1c24afa4acd"
+    },
+    {
+      "path": "tests/methods/remote_sensing_fixtures.py",
+      "git_mode": "100644",
+      "sha256": "4fa203a3d35c2ec1fe4ce2cdee0d9675332d7f570291aedd969b026bd0f2419a"
+    },
+    {
+      "path": "tests/methods/test_dem_terrain_method.py",
+      "git_mode": "100644",
+      "sha256": "8245025ca2ab216395e21926918b7a6f20ec3cdf8e82e913ceda7c50bbf28411"
+    },
+    {
+      "path": "tests/methods/test_full_geometry_before_clip.py",
+      "git_mode": "100644",
+      "sha256": "66bf124705d0167d15d54d7e500c1dde1647ea2910dbc5b8c281a828344d207d"
+    },
+    {
+      "path": "tests/methods/test_land_use_overlay.py",
+      "git_mode": "100644",
+      "sha256": "7c7f638a1c09f7f1ecf22d2394e6c270e956a4efcadf1273d6161a61dcc76267"
+    },
+    {
+      "path": "tests/methods/test_loader.py",
+      "git_mode": "100644",
+      "sha256": "23d053a5d28ba68e140747747a7acd392bffbdca1cbf87602e7f18f3010d2265"
+    },
+    {
+      "path": "tests/methods/test_method_models.py",
+      "git_mode": "100644",
+      "sha256": "5177b28ca82b5c4030531e91e8283eca6cfbfc0e3c2ffc01ef13396caf768299"
+    },
+    {
+      "path": "tests/methods/test_remote_sensing_change.py",
+      "git_mode": "100644",
+      "sha256": "bbf592941736e3340367ea0cf006235c18bf7ae24b0c036f506d342763842797"
+    },
+    {
+      "path": "tests/methods/test_road_distance_modes.py",
+      "git_mode": "100644",
+      "sha256": "32ce96206ebb884043f54b75f1b07760d1ada05b283ebef9912fbfa446f4e906"
+    },
+    {
+      "path": "tests/methods/test_validator.py",
+      "git_mode": "100644",
+      "sha256": "2636edb21980353a65a124e9d301dd05628e029fe0e2598ce251c142f3e9d143"
+    },
+    {
+      "path": "tests/models/test_data_asset.py",
+      "git_mode": "100644",
+      "sha256": "6870770900b7a2c4a10dcb0b9426a4b5c994871333706a3951d15eb450466639"
+    },
+    {
+      "path": "tests/models/test_errors.py",
+      "git_mode": "100644",
+      "sha256": "866423d5c4bfaed2fcbd7a74700d03f656566f6fd515279c7dbe0f56b445c7a9"
+    },
+    {
+      "path": "tests/models/test_step_io.py",
+      "git_mode": "100644",
+      "sha256": "e41a6f9da3e21bdcd864870798a6fec053888bf50bee180fa3ec8b7fcc95878e"
+    },
+    {
+      "path": "tests/plans/test_analysis_plan.py",
+      "git_mode": "100644",
+      "sha256": "f1e297d675c881bd09f8334364523885bcc1265930fbdf63b1504a87b18f33c3"
+    },
+    {
+      "path": "tests/plans/test_compiler.py",
+      "git_mode": "100644",
+      "sha256": "3c3506034f9b85a538554fa84c03bd3cd8f94a4552fcbd298cd2f6865a90afa0"
+    },
+    {
+      "path": "tests/plans/test_confirmation.py",
+      "git_mode": "100644",
+      "sha256": "adac103d31b73d115ad24ea76777f426ce84404ef2e35ce4839f8ab338ad3cdf"
+    },
+    {
+      "path": "tests/plans/test_dependency_validator.py",
+      "git_mode": "100644",
+      "sha256": "a6708b795b8ffe14b52bcfdb657ae6846be5d2be4f65f6de90426b96dc5f9925"
+    },
+    {
+      "path": "tests/plans/test_draft_builder.py",
+      "git_mode": "100644",
+      "sha256": "fcd68d4a3144ee6822e28e5f7ed4e8dcd33de72c8cb7d56826b17b1d1c1deda5"
+    },
+    {
+      "path": "tests/plans/test_locked_order.py",
+      "git_mode": "100644",
+      "sha256": "789aff52c4edeb06a6d7ee4e7a4f741228112839c3c1f863b5dc4f7742f25f7c"
+    },
+    {
+      "path": "tests/plans/test_manual_fallback.py",
+      "git_mode": "100644",
+      "sha256": "87237eda5e7cfd4781e70d2216a98d5c5ad05a794955db2f78ea7383e213100d"
+    },
+    {
+      "path": "tests/plans/test_plan_versioning.py",
+      "git_mode": "100644",
+      "sha256": "7c471095cfedc38e00e32fe6c82ea78176e9a3a5d7bd5f999717396817cf44ed"
+    },
+    {
+      "path": "tests/preview/test_preview_store.py",
+      "git_mode": "100644",
+      "sha256": "f8a40806af725b8188e1e86f3596842d0c075b6df880e844f5e68870cda31cce"
+    },
+    {
+      "path": "tests/preview/test_raster_preview.py",
+      "git_mode": "100644",
+      "sha256": "aa0fa34b8840086832b066f2764025b17de2a11792b6780f0f868bdaede7e7f7"
+    },
+    {
+      "path": "tests/remote_sensing/conftest.py",
+      "git_mode": "100644",
+      "sha256": "b68ecc4ed1b58ac6ce242ff429e17c32fd6d75dea1a7b7039f0ebbe895f5978e"
+    },
+    {
+      "path": "tests/remote_sensing/product_fixtures.py",
+      "git_mode": "100644",
+      "sha256": "095a09eabc277c9092b5763edaba05466603319fd737e5e27312d350bd6aadf9"
+    },
+    {
+      "path": "tests/remote_sensing/test_alignment.py",
+      "git_mode": "100644",
+      "sha256": "a0630f2d78a36c7908bebd4acf7b5810a6a222d1cda5a435e47c9bf2b4dfb8ac"
+    },
+    {
+      "path": "tests/remote_sensing/test_band_mapper.py",
+      "git_mode": "100644",
+      "sha256": "99bcb51aa97e58c48c4fa15571528d0f5888908223e53e07da25cc4708181f30"
+    },
+    {
+      "path": "tests/remote_sensing/test_change.py",
+      "git_mode": "100644",
+      "sha256": "64085c1aea4a9295417209fb397f143ac604bcce1315a556d2b020489b1a80b2"
+    },
+    {
+      "path": "tests/remote_sensing/test_change_classification.py",
+      "git_mode": "100644",
+      "sha256": "7ea294dabf30854983f1f05084da77fbf9c65f4a8f4acd6078ca5e26020846b1"
+    },
+    {
+      "path": "tests/remote_sensing/test_config_models.py",
+      "git_mode": "100644",
+      "sha256": "ea62da2375712f480e9018a6a00a6eb32b5cd72f6810476288c385147d3e18e8"
+    },
+    {
+      "path": "tests/remote_sensing/test_config_registry.py",
+      "git_mode": "100644",
+      "sha256": "7a5ead4803002bed7864b762ccbd0939eddd9e2cb52b6e8ffdeb6d69cd85d9b5"
+    },
+    {
+      "path": "tests/remote_sensing/test_ndvi.py",
+      "git_mode": "100644",
+      "sha256": "81b984f0f5ac6b6e01d35d56845688498afb2bd3d1236e2fbf43d0f558464f0e"
+    },
+    {
+      "path": "tests/remote_sensing/test_product_pack.py",
+      "git_mode": "100644",
+      "sha256": "4212fe237833974ed23d16272e1150069081161a3ce8ddcc78201e0db78a398f"
+    },
+    {
+      "path": "tests/remote_sensing/test_quality_mask.py",
+      "git_mode": "100644",
+      "sha256": "d2afe0e591aebd437312f6db50805197022241c4c5ec9c3be9ad7cf32a62780c"
+    },
+    {
+      "path": "tests/remote_sensing/test_scaling.py",
+      "git_mode": "100644",
+      "sha256": "0cbd33dbb51f73ac1c58b8d7ba7f40dbf80cc0b2dfe9ec71ecc3e7b91ae282d7"
+    },
+    {
+      "path": "tests/remote_sensing/test_workflow.py",
+      "git_mode": "100644",
+      "sha256": "2848784a5070c808024defe5614c434742b8db345e837dc41eb3481884ed07dd"
+    },
+    {
+      "path": "tests/runners/test_attribute_filter.py",
+      "git_mode": "100644",
+      "sha256": "91ba4b1fac4788abd3841ee704429cd7aded57ad9ec4e39682569966383c2884"
+    },
+    {
+      "path": "tests/runners/test_clip_points_to_extent.py",
+      "git_mode": "100644",
+      "sha256": "dde0d5b5cfdfb010918777e4f47bde9eb6a74f24993b65c5296c1ddda8a39024"
+    },
+    {
+      "path": "tests/runners/test_count_points_by_zone.py",
+      "git_mode": "100644",
+      "sha256": "7fcd39c0b0fa051947bec864bd6bc06cd3651282d56c67668b1a11005c7cf200"
+    },
+    {
+      "path": "tests/runners/test_measurement_steps.py",
+      "git_mode": "100644",
+      "sha256": "bf56652ded6f28cb6707969d011d5ef4b49d982e255a6c2399a02d18c3ca578d"
+    },
+    {
+      "path": "tests/runners/test_prepare_measurement_lines.py",
+      "git_mode": "100644",
+      "sha256": "02cfbd80e280030bbbb5c202047a96fc2f5e85bcc85e1f92e3f2d7b83454d264"
+    },
+    {
+      "path": "tests/runners/test_process_timeout.py",
+      "git_mode": "100644",
+      "sha256": "05b1e802fed7f417a04ef7b555816c36484cf94cd4b50967b9596f9fa8dece17"
+    },
+    {
+      "path": "tests/runners/test_python_runner.py",
+      "git_mode": "100644",
+      "sha256": "f3425477a88880e273de96793864c26e0ad787beb46820f8a6c191e07d93fde5"
+    },
+    {
+      "path": "tests/runners/test_qgis_runner.py",
+      "git_mode": "100644",
+      "sha256": "05178a956b7b913dfab4be3736814b9fb1ecad8bf12335d963105ed69b2e6d63"
+    },
+    {
+      "path": "tests/runners/test_road_selection.py",
+      "git_mode": "100644",
+      "sha256": "6fa7cf83f995fcb786822e3d2f6d94baf9063d1e50acbc027f16a6e9abab2762"
+    },
+    {
+      "path": "tests/runners/test_step_support.py",
+      "git_mode": "100644",
+      "sha256": "fdb244316089b18fb6247fc6c001cb1026caf16f4aa29e10215a22b66ea3790a"
+    },
+    {
+      "path": "tests/runs/conftest.py",
+      "git_mode": "100644",
+      "sha256": "6607cce54ba04e3bebc58c32d3832f4558f7d7d860a560b8cbb492bc40accd6f"
+    },
+    {
+      "path": "tests/runs/test_retry.py",
+      "git_mode": "100644",
+      "sha256": "5d77ccc4716e5bd43c58f8d8062d93dab7ae434d0a813b9e01059013468ac928"
+    },
+    {
+      "path": "tests/runs/test_run_api.py",
+      "git_mode": "100644",
+      "sha256": "2aab62896b74759407edcaeeab636afdd524c4a5fa757f8033e56c183ef88745"
+    },
+    {
+      "path": "tests/runs/test_run_creation.py",
+      "git_mode": "100644",
+      "sha256": "7e06ddda4882251bc0d9aaa1408987367f34509f74472e7fa6941d302ae1d169"
+    },
+    {
+      "path": "tests/runs/test_run_models.py",
+      "git_mode": "100644",
+      "sha256": "21dde1bb62f1dc0e3870b318446d141526d730a22222a55ae22fa06708088194"
+    },
+    {
+      "path": "tests/scheduler/conftest.py",
+      "git_mode": "100644",
+      "sha256": "a3b47eaf8126cc43a0ad0651134d5a0cf9a9abb84d44c0ef4fa23fa4bc0f0a04"
+    },
+    {
+      "path": "tests/scheduler/test_cancellation.py",
+      "git_mode": "100644",
+      "sha256": "1ebe0b8e7a66f36512b148d10b7ace64a7ad270d5c34101c249c73ec05e3ee11"
+    },
+    {
+      "path": "tests/scheduler/test_failure_handling.py",
+      "git_mode": "100644",
+      "sha256": "980d40e564ab8844ec4cdc0df14836dbfef838fb27be8d71e16b40cb237230dd"
+    },
+    {
+      "path": "tests/scheduler/test_output_handoff.py",
+      "git_mode": "100644",
+      "sha256": "278e8dd9fa563c6167478e0f6dde0878ac73acbe2b957235c0945eb82c720a82"
+    },
+    {
+      "path": "tests/scheduler/test_restart_recovery.py",
+      "git_mode": "100644",
+      "sha256": "9149a25a7786bd884342192fabcfa9d2918b0ccac373a74c3fb16caf7021e2a1"
+    },
+    {
+      "path": "tests/scheduler/test_scheduler.py",
+      "git_mode": "100644",
+      "sha256": "3b29be9abb7e2493d1c2ef4b890d92b4b20f80ecf8318607af941cd8c29ee574"
+    },
+    {
+      "path": "tests/scheduler/test_step_execution.py",
+      "git_mode": "100644",
+      "sha256": "8040561f30420970ea4c78f2d056253689202f44ddce32849cb4c5849137f407"
+    },
+    {
+      "path": "tests/scripts/test_manual_registration.py",
+      "git_mode": "100644",
+      "sha256": "c2c1c154f9fd24832538cc0cd0d951ef21169cee0e2b8f5ce3e3e9df994a9451"
+    },
+    {
+      "path": "tests/scripts/test_script_runner.py",
+      "git_mode": "100644",
+      "sha256": "b7b26a975aa0098e7cc4cb7bd23ee56776e642ff8777914f9687d9df9172b029"
+    },
+    {
+      "path": "tests/scripts/test_script_snapshot.py",
+      "git_mode": "100644",
+      "sha256": "7d1ed6454da83140f8c16d4ef7682ad5eee8ecdcbb28fc935765da5b20a51164"
+    },
+    {
+      "path": "tests/smoke/test_python_gis_smoke.py",
+      "git_mode": "100644",
+      "sha256": "99bbaa286d11c6df024adba26e92d406995c7b4599fb243cac71239d2135686e"
+    },
+    {
+      "path": "tests/smoke/test_qgis_smoke.py",
+      "git_mode": "100644",
+      "sha256": "267d7c104140bb4c43af3f9b974dfaef05e422477dee6590b8f484d22b54cfa5"
+    },
+    {
+      "path": "tests/storage/test_schema.py",
+      "git_mode": "100644",
+      "sha256": "8dca29447305a1cc287b75455641d3e02c968bb98b84a3098d007b84ed3a5fc3"
+    },
+    {
+      "path": "tests/test_baseline.py",
+      "git_mode": "100644",
+      "sha256": "79f8b84b8fc5b4deaee3e5168d5aa0dd9aafa38a9667c83a4d486aebc8d00874"
+    },
+    {
+      "path": "tests/tools/test_parameter_normalizer.py",
+      "git_mode": "100644",
+      "sha256": "e642fb2a2a502b6273ef08faea2bb44de6036dee9d56b5a9baa4b767448d4a1f"
+    },
+    {
+      "path": "tests/tools/test_registry.py",
+      "git_mode": "100644",
+      "sha256": "7bca5dfa537ba40aac9c618121e3ec8c579b306024822c01083e3eafa49a834d"
+    },
+    {
+      "path": "tests/workspace/test_workspace.py",
+      "git_mode": "100644",
+      "sha256": "60958077b19265a572c7ec058c570abc0373677c22f07389dec0ccace2533142"
+    }
+  ],
+  "counts": {
+    "src": 155,
+    "config": 57,
+    "frontend": 57,
+    "tests": 160,
+    "docs": 147,
+    "artifacts": 30
+  },
+  "worktree": {
+    "head": "80d724f35fba31cacb9d3f740265b2713c6be6f4",
+    "branch": "main",
+    "changes": [
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/00_GOVERNANCE/00_MASTER_PLAN.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/00_GOVERNANCE/01_HOW_TO_RUN.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/00_GOVERNANCE/02_CHANGE_CONTROL.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/01_MODULE_BOUNDARIES.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/02_PUBLIC_CONTRACTS.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/03_GIS_CORRECTNESS_RULES.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/04_DEPENDENCY_GRAPH.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/05_REPOSITORY_PATH_MAP.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/05_REPOSITORY_PATH_MAP_TEMPLATE.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/06_FILE_OWNERSHIP.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/01_ARCHITECTURE/07_STEP_PROTOCOL.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/A_DATA.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/B_GIS.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/C_METHODS.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/D_SCHEDULER.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/E_FRONTEND.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/F_QA.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/02_AGENT_PLAYBOOKS/G_LLM.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P0_\u73af\u5883\u4e0e\u53c2\u8003\u6837\u672c.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P10_\u811a\u672c\u4e0e\u53ef\u9009\u6570\u636e\u6e90.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P11_\u539f\u578b\u4e0e\u65b9\u6cd5\u9a8c\u6536.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P1_\u6570\u636e\u4e0e\u72b6\u6001\u5b58\u50a8.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P2_\u5951\u7ea6\u4e0e\u57fa\u7840\u6d4b\u91cf.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P3_\u901a\u7528\u65b9\u6cd5\u6267\u884c\u94fe.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P4_\u8fd0\u884c\u7ba1\u7406\u4e0e\u63a5\u53e3.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P5_\u901a\u7528_Web_\u5de5\u4f5c\u53f0.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P6_\u77e2\u91cf\u80fd\u529b\u8865\u9f50.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P7_DEM_\u4e0e\u6805\u683c\u9884\u89c8.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P8_\u9065\u611f\u53d8\u5316.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/03_STAGES/P9_\u6a21\u578b\u5165\u53e3.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/INDEX.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P0/P0-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P1/P1-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P10/P10-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P11/P11-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P2/P2-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P3/P3-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-11.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-12.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-13.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-14.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-15.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P4/P4-16.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-11.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P5/P5-12.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P6/P6-11.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-11.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P7/P7-12.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P8/P8-10.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-01.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-02.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-03.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-04.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-05.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-06.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-07.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-08.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/04_TASKS/P9/P9-09.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/05_ACCEPTANCE/01_ATOMIC_TASK_TEMPLATE.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/05_ACCEPTANCE/02_ACCEPTANCE_GATES.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/05_ACCEPTANCE/03_GIS_GOLDEN_TEST_POLICY.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/05_ACCEPTANCE/04_STAGE_EXIT_TEMPLATE.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/05_ACCEPTANCE/05_FINAL_ACCEPTANCE_CHECKLIST.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/06_PROGRESS/ACCEPTANCE_LOG.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/06_PROGRESS/BLOCKERS.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/06_PROGRESS/CHANGELOG.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/06_PROGRESS/DEPENDENCY_STATUS.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/06_PROGRESS/TASK_BOARD.md"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/06_PROGRESS/task_inventory.json"
+      },
+      {
+        "status": " D",
+        "path": "system-prototype-v1/plans/README.md"
+      },
+      {
+        "status": "??",
+        "path": "system-prototype-v1/plans/GeoPilot_P12_Audit_Round2_Plan/"
+      }
+    ]
+  }
+}
