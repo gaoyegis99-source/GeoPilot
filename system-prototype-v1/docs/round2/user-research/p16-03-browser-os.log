@@ -1,0 +1,11 @@
+9fb885d76566cca3f1d2cbc4dfa03f82d5c9b3a9
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+Invalid observation file: $.sessions[0].environment.os: expected a short version label
+Baseline null OS exit: 1
+nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider tests/quality/test_summarize_user_trials.py --basetemp=<temp>/pytest --junitxml=docs/round2/user-research/p16-03-browser-os-junit.xml
+......................                                                   [100%]
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/user-research/p16-03-browser-os-junit.xml -
+22 passed in 0.93s
+Candidate pytest exit: 0
+Candidate null OS summary equals the known OS summary, exit 0

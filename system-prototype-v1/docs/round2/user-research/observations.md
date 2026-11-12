@@ -2,14 +2,14 @@
 
 复制 [空白记录](observations.blank.json) 到本机研究目录。真实观察使用 `record_kind: observed`，测试记录使用 `synthetic` 并另存。每个会话对应一个参与者，使用 U001 到 U999 的匿名编号。一次研究中不得重用编号。参与者重试某一步记作同一任务的耗时和事件。
 
-以下对象示例使用占位值，复制到 `sessions` 后填写真实日期、版本和观察结果。 `gis_use` 可取 `occasional`（偶尔使用 GIS）或 `regular`（经常使用）。`environment.commit` 填完整的 40 位提交哈希。 `os` 和 `browser` 为浏览器端的版本，`qgis` 为后端实际执行器版本。省略主机名、账户和文件路径。
+以下对象示例使用占位值，复制到 `sessions` 后填写真实日期、版本和观察结果。 `gis_use` 可取 `occasional`（偶尔使用 GIS）或 `regular`（经常使用）。`environment.commit` 填完整的 40 位提交哈希，`browser` 填浏览器版本，`qgis` 填后端实际执行器版本。遇到浏览器兼容问题时将浏览器端操作系统版本填入 `os`，其余会话填 `null`。省略主机名、账户和文件路径。
 
 ```json
 {
   "participant_id": "U001",
   "trial_date": "YYYY-MM-DD",
   "gis_use": "regular",
-  "environment": {"commit": "完整 Git SHA", "os": "系统版本", "browser": "浏览器版本", "qgis": "QGIS 版本"},
+  "environment": {"commit": "完整 Git SHA", "os": null, "browser": "浏览器版本", "qgis": "QGIS 版本"},
   "tasks": {
     "register_assets": {"outcome": "incomplete", "elapsed_seconds": 0, "help_requests": 0, "assisted": false, "errors": []},
     "select_method": {"outcome": "not_attempted", "elapsed_seconds": null, "help_requests": 0, "assisted": false, "errors": []},

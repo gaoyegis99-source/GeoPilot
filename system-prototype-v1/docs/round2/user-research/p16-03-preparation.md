@@ -40,3 +40,5 @@ PY
 新增 [汇总工具](../../../scripts/quality/summarize_user_trials.py)、[专项测试](../../../tests/quality/test_summarize_user_trials.py)、[记录格式](observations.md)、[空白模板](observations.blank.json)、主持与受试材料及本目录原始证据。新增独立 JSON 输入输出 CLI。工作台、后端 API、数据库、生产配置和正式成果保持原样。回滚可撤销本批新增文件。
 
 用户已确认可以安排参与者。建议邀请至少 5 名平时使用 GIS、此前未使用 GeoPilot 的人员，每人独立完成约 30 分钟的浏览器任务。主持人准备运行 QGIS 的后端和样本，参与者从工作台登记、运行、检查并下载 CSV。实际会话结束后，提交匿名观察记录及对应的下载 CSV。当前为 0 个真实会话，任务待实测。 [任务单](participant-task.md) · [匿名记录模板](observations.blank.json)
+
+主持手册将浏览器端操作系统用于排查兼容问题。复验把 `observations.synthetic.json` 首个会话的 `environment.os` 改为 `null`，原 CLI 退出 1。修改后退出 0，汇总与原合成输入逐字节一致。22 项专项通过，浏览器版本与后端 QGIS 版本继续必填。测试使用 `9fb885d76566cca3f1d2cbc4dfa03f82d5c9b3a9` 加本次修改，Python 3.13.13。回滚可撤销此项提交。 [命令及原始日志](p16-03-browser-os.log) · [JUnit](p16-03-browser-os-junit.xml)

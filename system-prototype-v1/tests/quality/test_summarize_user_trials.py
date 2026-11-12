@@ -66,6 +66,16 @@ def test_blank_real_observations_are_not_run_without_implied_completion():
     assert all(row["median_elapsed_seconds_attempted"] is None for row in report["tasks"].values())
 
 
+def test_unrecorded_browser_os_does_not_change_summary(tmp_path):
+    data = read_synthetic()
+    data["sessions"][0]["environment"]["os"] = None
+
+    result = run_cli(write_observations(tmp_path / "observations.json", data))
+
+    assert result.returncode == 0 and result.stderr == ""
+    assert json.loads(result.stdout) == json.loads(run_cli(SYNTHETIC).stdout)
+
+
 def test_invalid_path_exits_without_a_report(tmp_path):
     result = run_cli(tmp_path / "missing.json")
     assert result.returncode == 1 and result.stdout == ""
@@ -81,6 +91,9 @@ def test_invalid_path_exits_without_a_report(tmp_path):
         (lambda data: data.update({"schema_version": True}), "expected integer 1"),
         (lambda data: data["sessions"][0].update(trial_date="2026-02-30"), "invalid calendar date"),
         (lambda data: data["sessions"][0]["environment"].update(commit="1111"), "full Git SHA-1"),
+        (lambda data: data["sessions"][0]["environment"].update(os=17), ".environment.os"),
+        (lambda data: data["sessions"][0]["environment"].update(browser=None), ".environment.browser"),
+        (lambda data: data["sessions"][0]["environment"].update(qgis=None), ".environment.qgis"),
         (lambda data: data["sessions"][0]["tasks"]["select_method"].update(outcome=[]), ".outcome"),
         (lambda data: data["sessions"][0]["tasks"]["select_method"].update(elapsed_seconds=-1), ".elapsed_seconds"),
         (lambda data: data["sessions"][0]["tasks"]["select_method"].update(elapsed_seconds=float("inf")), "numeric constant"),

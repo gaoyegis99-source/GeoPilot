@@ -90,6 +90,8 @@ def validate_session(session, path):
         raise ValueError(f"{path}.environment.commit: expected a full Git SHA-1")
     for key in ("os", "browser", "qgis"):
         value = environment[key]
+        if key == "os" and value is None:
+            continue
         if not isinstance(value, str) or not 1 <= len(value.strip()) <= 120 or not value.isprintable():
             raise ValueError(f"{path}.environment.{key}: expected a short version label")
 
