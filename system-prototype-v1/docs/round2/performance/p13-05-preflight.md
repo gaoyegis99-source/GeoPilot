@@ -67,6 +67,10 @@ L 档点相交的七次冷进程采样均在 29.496–30.517 秒完成 `apply_sp
 
 A 的隔离候选对确认是 XY 的 GeoPackage 点和面复用已准备的 `covers`。以真实 L 的三面、十八点窗口复跑原版与候选 CLI，先传入关系筛选后的 12 点，再直接传入 18 点。四次执行均退出 0，两套输出图层各保留相同的 12 个 ID、顺序、属性、CRS 和 WKB。首轮探针传绝对路径被现有协议拒绝，使用运行目录相对路径后完成对照。另对 1,224 个边界和邻近点比较掩膜及结果 WKB，完全一致。多点跨界和贴 Z 面边界的反例继续走现有相交运算，候选保留声明含 Z/M 的图层和空结果的原路径。16 项专项通过。源码补丁、原始日志和 JUnit 保存在 `artifacts/test-results/p13-05-point-candidate.pmbuVp/SHA256SUMS`。全量时间与峰值内存仍待测。
 
+原版 L 线相交的两类缓存共 14 次均在空间关系步骤达到 60 秒时限，裁剪步骤未启动。A 将线面裁剪候选限定为声明与实际几何均为纯 XY、默认精度且只命中一个已溶解部件的目标。零或多个候选、GEOS 异常及 Z/M 输入继续使用完整并集。合成反例中，远侧不相交的 M 面使 ZM 目标裁剪后的顶点 Z 从局部求交的 2 变为全并集的 2.3333333333333335。
+
+真实 L 三瓦片窗口的新旧裁剪四次退出 0，24 条线和 30 个面的两层输出在 WKB、CRS、属性、ID 和顺序上完全一致，独立参考的几何类型、长度和面积也相符。1,209 个纯 XY 合成目标的对照一致。A 的 35 项专项通过，主控在 `feab265` 的同一隔离副本应用七个补丁后 102 项通过，0 失败、0 错误、0 跳过。完整 L 性能和峰值内存仍待测。补丁、原始日志、完整 JUnit 和重放脚本保存在 `artifacts/test-results/p13-05-line-polygon-candidate.bNe9j1/SHA256SUMS`。 [局部裁剪证据](p13-05-preflight-line-polygon.log) · [联合日志](p13-05-preflight-layout-and-clip.log) · [JUnit](p13-05-preflight-layout-and-clip-junit.xml)
+
 ## 可复跑用例
 
 新增五个回归用例，覆盖粗剪切多类等积面积、非零行列式但投影退化和三个投影切缝。与现有矢量接缝用例合跑 6 项通过、13 项未选、退出 0。原始样本未改动。 [面积回归](../../../tests/gis/raster/test_area_stats.py) · [日志](p13-05-preflight-pytest.log) · [JUnit](p13-05-preflight-junit.xml)
@@ -93,3 +97,5 @@ nice -n 19 taskset -c 31 .venv/bin/python -m pytest -q -p no:cacheprovider \
 ```
 
 矢量目录使用 `summary.json`、`environment.json`、`command.log`、`inputs.json` 和 `samples.jsonl` 或其 gzip 归档。栅格和遥感使用 `--kind raster`，读取 `report.json` 和 `trials.jsonl` 或其 gzip 归档。比较仅涵盖原报告实际记录的环境身份，正式复测继续使用固定镜像及同一物理盘。工具退出 0 表示证据可对照，候选的成功次数单独记录。
+
+F 从真实归档构造变体，复现首版工具放行实际步骤参数漂移、报告计数矛盾和缺失持久终态。标为 unavailable 且带数值的 RSS 也被误算为差值。隔离修正核对原始计数、持久终态、共同已执行的步骤配置及 RSS 覆盖，拒绝这些变体。原运行超时而候选执行更多步骤时仍保留失败与成功各自统计，未以失败用时计算成功性能差值。主控从首版脚本重新应用补丁，两组验证输出均与 F 逐字节一致。旧栅格归档仅能对照已确认选项和实际工具版本。正式逐步比较还需留存实际请求与固定执行绑定。补丁及完整命令位于 `artifacts/test-results/p13-05-memory-comparator-reviewed.MnDC2U/SHA256SUMS`。 [复核原始结果](p13-05-preflight-comparator-review.log)

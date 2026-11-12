@@ -1,0 +1,17 @@
+{"case": "vector-control", "exit": 0, "error": "", "candidate_all_measurements_pass": true}
+{"case": "raster-control", "exit": 0, "error": "", "candidate_all_measurements_pass": true}
+{"case": "vector-step-parameter-drift", "exit": 1, "error": "Incompatible benchmark evidence: Inconsistent executed step configuration for expand_analysis_extent", "candidate_all_measurements_pass": null}
+{"case": "vector-aggregate-count-drift", "exit": 1, "error": "Incompatible benchmark evidence: Vector report sample counts differ from raw samples", "candidate_all_measurements_pass": null}
+{"case": "vector-group-count-drift", "exit": 1, "error": "Incompatible benchmark evidence: Vector report group counts differ from raw samples for ('S', 't13-points-intersects', 'process_cold', 'p13-01')", "candidate_all_measurements_pass": null}
+{"case": "raster-confirmed-parameters-drift", "exit": 1, "error": "Incompatible benchmark evidence: Raster confirmed parameters differ from their recorded digest", "candidate_all_measurements_pass": null}
+{"case": "raster-operation-count-drift", "exit": 1, "error": "Incompatible benchmark evidence: Raster report operation counts differ from raw samples for ('S', 'method', 'process_cold', 'p13-01', 'method')", "candidate_all_measurements_pass": null}
+{"case": "raster-group-count-drift", "exit": 1, "error": "Incompatible benchmark evidence: Raster report group counts differ from raw trials for ('S', 'method', 'process_cold')", "candidate_all_measurements_pass": null}
+{"case": "vector-pass-without-run-state", "exit": 1, "error": "Incompatible benchmark evidence: A successful sample lacks a successful persisted run outcome", "candidate_all_measurements_pass": null}
+{"case": "vector-rss-partial", "exit": 0, "error": "", "candidate_all_measurements_pass": true}
+{"case": "vector-rss-partial-delta", "group": ["t13-points-intersects", "process_cold"], "delta": null}
+{"case": "vector-rss-unavailable", "exit": 1, "error": "Incompatible benchmark evidence: Invalid peak_rss_bytes observation", "candidate_all_measurements_pass": null}
+{"case": "vector-consistent-parameter-drift-across-versions", "exit": 1, "error": "Incompatible benchmark evidence: Different executed step configuration for ('S', 'road', 'process_cold', 'p13-01')", "candidate_all_measurements_pass": null}
+{"case": "vector-rss-unavailable-without-value", "exit": 0, "error": "", "candidate_all_measurements_pass": true}
+{"case": "vector-rss-incomplete-coverage", "samples": [5, 4], "delta": null}
+{"case": "vector-failed-prefix-to-successful-full-step-sequence", "exit": 0, "error": "", "candidate_all_measurements_pass": true}
+{"case": "complete", "mode": "patched"}
