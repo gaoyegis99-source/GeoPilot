@@ -232,6 +232,11 @@
 - `743252b` 的 19 项专项通过。冻结输入、旧生产源码和镜像只增加六个修复文件，实际完成 L 道路 `SUCCEEDED / PASSED`，独立核对 98,304 个目标和 16,384 个未归属 ID。
 - 表格预览与原始下载均返回 200，原件字节摘要一致。首次复验脚本混用文件 SHA-256 和成果复合指纹，修正后实际命令退出 0。P13-03 正式基准仍为 DOING。 [命令、原始 CSV、验算及回滚](../../docs/round2/performance/p13-03-large-csv.md)
 
+## P13-03 原版 L 首批检查
+
+- B 的原生批次使用冻结的生产提交 `37cb329be04eaddfeb23ac62789926d0fcdb63aa`。道路、T13 面相交和 T14 按面积分割分别完成冷热两类各 2 次预热和 5 次正式采样，批次退出 1，汇总为 42 FAIL、0 PASS、0 NOT_RUN。
+- 主控从 `/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/evidence/samples.jsonl` 核对 42 个唯一运行及各组采样键。道路 14 次在成果登记报 `OUTPUT_INVALID`。T13 和 T14 各 14 次在 `apply_spatial_relation` 报 `PROCESS_TIMEOUT`，退出 -15。T14 的后续两步保持 `NOT_STARTED`。P13-03 仍为 DOING，余下七项继续正式采样。
+
 ## P13-05 隔离候选检查
 
 - A 的栅格候选通过 18 项专项，8 个微型 GeoTIFF 的报告或错误及输入指纹与原版一致。主控复跑三份原生分类窗口，逐格面积、收敛分段与原版一致，样本 SHA-256 匹配清单。完整规模的耗时与峰值内存待实测。
