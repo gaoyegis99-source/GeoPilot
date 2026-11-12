@@ -100,7 +100,7 @@ A 按候选精确提交和原五个运行器覆盖文件重建源码，树清单
 
 整轮 RSS 两次完整、三次部分采样，裁回 RSS 四次完整、一次部分采样。五次临时空间均有完整采样，峰值中位数／P95 为 309,053,477／319,399,909 字节。原版冷组五次在筛选步超时，冻结修正版冷组五次在裁回步超时，两侧成功分位及成功耗时差值留空。正式候选的暖组已接续。
 
-基准在冷态 worker 退出后清理临时工作区，保留逐轮检查、独立几何验算与四个登记指纹。主控从封存输入的逐块参考直接重建 7,094,321 字节的分配 CSV 和 8,602,009 字节的分区 JSON，计算出的内容文件组指纹与七轮登记一致。同一方法对 M 档封存配对的两侧 28 轮也全部匹配。篡改隔离副本中一个登记指纹后，复算拒绝该副本，退出 1。B 从原始记录独立核对几何验算、三步日志与资源采样，复算退出 0。完整单侧回执及前后配对待暖组终态。 [M 档正式复测](p13-05-vector-m-revised.md)
+基准在冷态 worker 退出后清理临时工作区，保留逐轮检查、独立几何验算与四个登记指纹。主控从封存输入的逐块参考直接重建 7,094,321 字节的分配 CSV 和 8,602,009 字节的分区 JSON，计算出的内容文件组指纹与七轮登记一致。同一方法对 M 档封存配对的两侧 28 轮也全部匹配。篡改隔离副本中一个登记指纹后，复算拒绝该副本，退出 1。B 从原始记录独立核对几何验算、三步日志与资源采样，复算退出 0。完整单侧回执及前后配对见下节。 [M 档正式复测](p13-05-vector-m-revised.md)
 
 ```bash
 p13_t14_cold=$(mktemp -d)
@@ -114,3 +114,34 @@ PYTHONPATH="$p13_t14_cold/source" .venv/bin/python -B \
   > "$p13_t14_cold/m-replayed.json"
 cmp "$p13_t14_cold/m-replayed.json" "$p13_t14_cold/m-reference.json"
 ```
+
+## T14 局部裁回候选完整配对
+
+候选于 17:18:04 UTC 结束。暖态 2 次预热和 5 次正式计量全部通过，冷暖共 14 轮为 `SUCCEEDED/PASSED`，三步均退出 0。候选容器和日志写入退出码均为 0。配置回执一致，严格比较器返回 `MATCHED_EVIDENCE`。两侧 28 个运行 ID 互异，14 个新 ID 与此前 224 个 L 档运行互异，冷态前缀与已封存证据逐字节一致。 [完整配对、原始逐轮记录和两份复算](p13-05-t14-local-clip-pair-evidence.tar.gz)
+
+| 暖态五次正式计量 | 中位数，秒 | P95，秒 |
+| --- | ---: | ---: |
+| 端到端 | 67.738 | 69.365 |
+| 空间关系筛选 | 7.166 | 7.347 |
+| 裁回 | 15.822 | 18.090 |
+| 按区汇总 | 31.659 | 33.387 |
+
+暖态整轮 RSS 一次完整、四次部分采样，临时空间四次完整、一次部分采样。整轮 RSS 中位数／P95 为 517,513,216／520,974,336 字节，临时空间为 304,252,965／319,543,269 字节。正式原版冷暖 14 轮均在首步超时，冻结修正版冷暖 14 轮均在裁回步超时。正式原版和局部裁回候选的成功样本差值留空。
+
+主控从独立参考重建的两类文本成果与冷暖 14 轮登记指纹均一致，篡改暖态登记指纹的副本被拒绝，退出 1。B 独立核对全部几何验算、四个成果角色登记和逐步日志。原版自比较、候选自比较和两侧配对离线重放逐字节一致，退出 0。DEM M 原版重试于 17:18:08 UTC 接续，DEM L 容量探针仍排在重试之后。
+
+```bash
+p13_t14_pair=$(mktemp -d)
+mkdir "$p13_t14_pair"/{previous,cold,pair}
+tar -xzf docs/round2/performance/p13-05-vector-l-area-evidence.tar.gz -C "$p13_t14_pair/previous"
+tar -xzf docs/round2/performance/p13-05-t14-local-clip-cold-evidence.tar.gz -C "$p13_t14_pair/cold"
+tar -xzf docs/round2/performance/p13-05-t14-local-clip-pair-evidence.tar.gz -C "$p13_t14_pair/pair"
+for group in previous cold pair; do
+  (cd "$p13_t14_pair/$group" && sha256sum -c SHA256SUMS) || exit 1
+done
+.venv/bin/python -B "$p13_t14_pair/pair/verify-complete.py" \
+  "$p13_t14_pair/pair" "$p13_t14_pair/previous" "$p13_t14_pair/cold" > "$p13_t14_pair/replay.json"
+cmp "$p13_t14_pair/replay.json" "$p13_t14_pair/pair/replayed.json"
+```
+
+复算另需此前归档的原版和冻结修正版，以及参考重建脚本。 [原版和冻结修正版归档](p13-05-vector-l-area-evidence.tar.gz) · [冷态与参考重建归档](p13-05-t14-local-clip-cold-evidence.tar.gz)
