@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "FAIL",
+  "preserved_versions": 53,
+  "added": [],
+  "issues": [
+    {
+      "tree": "candidate",
+      "path": "config/methods",
+      "code": "VERSION_REMOVED",
+      "field": "version",
+      "subject": {
+        "family": "method",
+        "id": "road-buffer-statistics",
+        "version": 2
+      }
+    }
+  ]
+}
