@@ -33,3 +33,7 @@ p13_point="$p13_unpack/t13-points-intersects"
   --before "$p13_point/base/$(cat "$p13_point/base/COMPLETED")/evidence" \
   --after "$p13_point/candidate/$(cat "$p13_point/candidate/COMPLETED")/evidence"
 ```
+
+## 线相交修正版冷态
+
+修正版冷态 2 次预热及 5 次正式计量均通过。每次筛选及裁回各保留 131,072 条线要素，总长度 4,030,464 米，符合独立参考。5 次正式计量的端到端中位数为 50.966 秒、P95 为 53.578 秒，筛选及裁回步骤中位数分别为 17.080、19.199 秒。端到端 RSS 有 2 个 partial 样本。7 个运行 ID 与点相交的 28 个运行和 P13-03 的 140 个历史样本无交集。暖态及本轮原版待完成后生成严格配对。 [冷态单侧原始样本复算](p13-05-vector-l-line-cold.json)
