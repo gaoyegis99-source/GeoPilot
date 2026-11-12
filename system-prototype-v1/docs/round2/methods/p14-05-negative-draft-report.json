@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "verdict": "expected_failure_matched",
+  "case_id": "missing-vertical-unit",
+  "method": {
+    "id": "dem-terrain-analysis",
+    "version": 1
+  },
+  "tools": [
+    {
+      "id": "python-dem-area-stats",
+      "version": 1
+    },
+    {
+      "id": "python-dem-clip-back",
+      "version": 1
+    },
+    {
+      "id": "python-dem-expand-extent",
+      "version": 1
+    },
+    {
+      "id": "python-dem-prepare",
+      "version": 1
+    },
+    {
+      "id": "python-dem-terrain",
+      "version": 1
+    },
+    {
+      "id": "python-dem-threshold",
+      "version": 1
+    },
+    {
+      "id": "python-dem-unit-check",
+      "version": 1
+    }
+  ],
+  "expected_failure": {
+    "phase": "draft",
+    "code": "DEM_VERTICAL_UNIT_REQUIRED"
+  },
+  "fingerprints": {
+    "manifest": "e788319f86cae92a4f9a1e215e0cf6a8476593ca7b2f85174bd38500ebc98a93",
+    "method": "0bc1b56786f4954834a6fea9bd6747b9bb9bb255b37b28a1e0606a6ccd564288",
+    "config": {
+      "methods/attribute-filter-export.v1.yaml": "c96a5d7f256bd216c23b981b923546d77c92e6b8824f8268f4bf7342a093a28f",
+      "methods/dem-terrain-analysis.v1.yaml": "ed2a696d6f6fe72f5a401c7e6a84a8491210978f48c991e511369fca12515973",
+      "methods/land-use-change.v1.yaml": "e11f93a602c48d88cb82bf5f5f1b4abfb989b050c3548b934d087ed5150393f2",
+      "methods/polygon-zone-statistics.v1.yaml": "26110b799517b62fce605d31d4054a19ff78ab77f47ce2f2a770898290d8e828",
+      "methods/remote-sensing-index-change.v1.yaml": "e5331572ffe08c7f366ed5b510ea5ec76c509a1545800b835a616371f7a13355",
+      "methods/road-buffer-statistics.v1.yaml": "758920c7c9082de25456c2a95452f6b7dfef4e199890be550b2b2f2be4be5c59",
+      "methods/road-buffer-statistics.v2.yaml": "87758b005dce881c5824b801e77ad109f56338b3a90b8609fe51b83f1822cd0e",
+      "methods/road-buffer-statistics.v3.yaml": "298e82e52dc653be8e6487bfd39afe1f5ec9a18a9a12d71036abecaf4674607a",
+      "methods/spatial-select-and-clip.v1.yaml": "8a9622573e453e25d5600975d14bbbabfd568e99656b5d93ccbf7db97eb48031",
+      "tools/python-area.yaml": "a4149e7c5492fc8613bc9a3894d49a5a5b63127fbf39eda76b5e50ac75e5ade8",
+      "tools/python-clip-points-to-extent.yaml": "ce1398ef6b5359ee5d184b79ca73e8d651ad93f314c99c9aaf965a7669d470d8",
+      "tools/python-clip-vector-to-extent.yaml": "cc83c2c2baa71e54254684bcf52f6137c1e04d67837cbcb9912cf09e42ebc53f",
+      "tools/python-count-points-by-zone.yaml": "409365e4742bf04f8c298f847443c7c1efb8f5fdf7bdee8a8364d9d56518c728",
+      "tools/python-dem-area-stats.yaml": "f9a249e32acfca085bb5d5a2d9110af8b0bc1b3764cd6c1dbad1c8d25d90e518",
+      "tools/python-dem-aspect.yaml": "71185e4d13dd5c020bfb152f188712c3dfefe00cfca3fe003cbf02fca5ea4620",
+      "tools/python-dem-clip-back.yaml": "edc5ef81351596634331bd72c9d0429665ec251a2a146b01491a74e52e17e1d1",
+      "tools/python-dem-expand-extent.yaml": "81ad16ff6ace3c0d9cb2abfd193e85fde51f4fe8fd179a2ab78fbec899f5003b",
+      "tools/python-dem-prepare.yaml": "ec6261d595304fa3634555e335dfda09b52b83e5302b45292a8863230cee264a",
+      "tools/python-dem-slope.yaml": "af89db35439899cba3f6136db170eceecbfeb97ce087482ba541aa9e0cd65f89",
+      "tools/python-dem-terrain.yaml": "1a7f66bdfa2e45a535d837291c776b7dedc995662cd190dfea9352a786363c86",
+      "tools/python-dem-threshold.yaml": "e5d80624b1c1e585d6a76cb2f04303927607935d7bc5ce9bb4aa4653ce603e14",
+      "tools/python-dem-unit-check.yaml": "035159cd173defdef9aca80eabee55d8d8bf5c73fa94ae03e62e4b90db7ee024",
+      "tools/python-expand-wgs84-analysis-extent.yaml": "43f5369c0c5d8fc6531e4ae14ff177fba4ebed0f1119a8854dbdfd15b001d888",
+      "tools/python-land-use-assign.yaml": "f0837178dadc23183afcac3556df2bbf2f48b478a180bb5b080ee20c0bbc9c8b",
+      "tools/python-land-use-build-changes.yaml": "c389e55577bb6754d16391871294bfeda61226cd8e7e71ebaf027132a3c44ae7",
+      "tools/python-land-use-map.yaml": "e27afdce1a22f00b776d2bd1435d51aca65cb7f22e4cf3796432f4f5dd004f13",
+      "tools/python-land-use-overlay.yaml": "1cd859b70a7a571f0ffdf6ed5bf6be1028f3d14e673c85ee39ed9b9bc10003b7",
+      "tools/python-land-use-project.yaml": "e71b4a2ff28f5099f92017cac22d2d9a8dcbbff2c36c36226792ccaa346d803b",
+      "tools/python-land-use-read.yaml": "827757c7b8bafbb8ec43a42990bfd875065f24deddd870994d85eb8cf9cf0ff6",
+      "tools/python-land-use-transition-matrix.yaml": "a36f4b67056bf29cda8a0e69daf7927ed2db71b720725aad6ebbedfcfbf1ec9e",
+      "tools/python-polygon-zone-statistics.yaml": "6d2f08d535278ecc65d556a4d939f21a9a8ef51e339e8d5c578448643e662b0f",
+      "tools/python-prepare-measurement-lines.yaml": "eaa1a1c1696839bb23c9c9e4e09caf7776e1c81d962c44498a2975f3c889d617",
+      "tools/python-prepare-wgs84-measurement-lines.yaml": "17f92fe29562ac91b5500c7f5e8a3dbd09b5bf60fa0ac3557bd83adb796e5801",
+      "tools/python-remote-sensing-align-dates.yaml": "c16712908f78f31494efbccb64fa6928109b1e81622e5c18846d7838ab4c51e8",
+      "tools/python-remote-sensing-calculate-change.yaml": "8261d056f6cf6cdd3cdd273908fc61d01ee4072081f59afd51e5eeb432e04f36",
+      "tools/python-remote-sensing-calculate-ndvi.yaml": "8738c32fcb9b88ec8731d4afcc5d4b391282f057c9a66cb21497bb0cb3fb7f95",
+      "tools/python-remote-sensing-lookup-configuration.yaml": "ee2ea7e0f42a309eac91b2054083b0a91012beb31b2da82960c4e99d38f5abc9",
+      "tools/python-remote-sensing-map-bands.yaml": "aabc437c79afad9f9dc349693fce739562b060a2b36dd8e2306cf125092d3bf3",
+      "tools/python-remote-sensing-quality-mask.yaml": "a20b5fca26f93885cb0f899dec88afcfdfdbfc79203f56acc5e8966b62fcbef6",
+      "tools/python-remote-sensing-read-metadata.yaml": "2a52ad991c0ba80ce682d8c7c9f1de1c43142c7fd3b51dc2785a89d3bfef3341",
+      "tools/python-remote-sensing-scale-reflectance.yaml": "5bbea2cfd1e4b6645aba71187eb622b23d267727a49eb673d4da9416b2b3fa3b",
+      "tools/python-select-spatial-relation.yaml": "3b7a6239a35f63c4bf808fcf6175715b9e5ac9e2519ff13310567bf82bf3f59f",
+      "tools/python-select-wgs84-roads.yaml": "dd66309a5566504e87517a10e7633c265974c6c349f1da6c6cb0e206cc843ce7",
+      "tools/python-wgs84-geodesic-buffer.yaml": "2569f1eeca851dbebab5116bb156834da95f3027d733991c3a05be93bdd54229",
+      "tools/qgis-buffer.yaml": "2dc8ca1374519bcb2f919f635318101b68616353a002df628eb8de3c3f09c1eb",
+      "tools/qgis-expand-analysis-extent.yaml": "7f4f133ffa254b3ab78ed638663dacafa50e64584b011cdd61beb9af2d14c3c1",
+      "tools/qgis-extract-by-attribute.yaml": "335d6f9353532f6b539f6cb73fd45f940ec3fed8cfc66c06450de17ccc2f7ea2",
+      "tools/qgis-select-points-by-location.yaml": "32d53865cda7a8260a0fc05722087a0d9ff1cf5b5ac46633eda910a4addd9f3c",
+      "tools/qgis-select-roads-by-location.yaml": "734c0d0b18cc849ee023abfab34fd1f9af90660f161a15c7cc826ec953b78e38",
+      "runner_bindings/qgis-buffer.yaml": "4623a6c4b23e8c893c4398f67e3680aefbe6a809fd5cde050021100c7559754d",
+      "runner_bindings/qgis-extract-by-attribute.yaml": "f5e8e1016b71dd2f150b538b1682f2ae23a5f220a0a3a5c7f08a54761eff3b4a",
+      "runner_bindings/qgis-road-workflow.yaml": "616a3c930726a42afccddb9a64304562de97ce9212a8b57352940d53eebea521",
+      "sensors/landsat-8-c2-l2sp.v1.yaml": "254b6d9687a4c833b93a3ea147843f0e8ffc0eaed25ffa748cb9bd3e8e0335d7",
+      "sensors/landsat-8-c2-l2sr.v1.yaml": "499adde0b098281cf739ac969adda623df1d2ab3d65732223e8db3172b4ea686",
+      "sensors/landsat-9-c2-l2sp.v1.yaml": "b04392de2500e356c3f4cccc4ef3790069033f29779f3e1e3b7e272ec769f4ca",
+      "sensors/landsat-9-c2-l2sr.v1.yaml": "6a8cf7cc475b1d1ac4a984f8e0800236082b8cdab18b84bd7b0410183dca1606",
+      "sensors/sentinel-2-l2a-pb05-11.v1.yaml": "61d979500f687f4e0e1b765177ecb1a03c10359193c19f6d986ac5e5f3b4e583"
+    }
+  },
+  "inputs": {
+    "analysis_extent": {
+      "path": "inputs/analysis_extent.geojson",
+      "sha256": "cacc04010f63906448708068b3e9d813b9aa1f4773ba189fe9bd09c9e2099c32",
+      "layer": null,
+      "asset": {
+        "asset_id": "d910037fcb474125b77ceae0ece141a0",
+        "asset_version": 1
+      }
+    },
+    "dem": {
+      "path": "inputs/dem.tif",
+      "sha256": "ed77e11c27aee00e7dfe1468a62b52206556fe17fa0b551a074fdb404ec33b96",
+      "layer": null,
+      "asset": {
+        "asset_id": "e613c2a0b03b4b6b97d0ee1ba162ff79",
+        "asset_version": 1
+      }
+    }
+  },
+  "critical_options": {
+    "terrain_output": "slope",
+    "slope_unit": "degree",
+    "area_crs": "EPSG:6933",
+    "threshold": {
+      "intervals": [
+        {
+          "class_id": 7,
+          "lower": 45,
+          "upper": 45,
+          "include_lower": true,
+          "include_upper": true
+        }
+      ]
+    }
+  },
+  "environment": {
+    "declared": {
+      "python": "3.13.13",
+      "rasterio": "1.4.3",
+      "gdal_raster": "3.9.3",
+      "pyogrio": "0.12.1",
+      "gdal_vector": "3.11.4",
+      "shapely": "2.1.2",
+      "proj": "9.5.1"
+    },
+    "observed": {
+      "python": "3.13.13",
+      "pyogrio": "0.12.1",
+      "gdal_vector": "3.11.4",
+      "rasterio": "1.4.3",
+      "gdal_raster": "3.9.3",
+      "proj": "9.5.1",
+      "shapely": "2.1.2"
+    },
+    "matches_declared": true
+  },
+  "actual": {
+    "phase": "draft",
+    "issues": [
+      {
+        "code": "DEM_VERTICAL_UNIT_REQUIRED",
+        "field": "inputs.dem",
+        "message": "Specify the elevation unit for this DEM."
+      },
+      {
+        "code": "OPTION_REQUIRED",
+        "field": "critical_options.z_factor",
+        "message": "Provide a value for z_factor"
+      }
+    ],
+    "plan": {
+      "id": "a53ab02c5a8d43a9996919635a57c1c9",
+      "version": 1,
+      "task_id": "519e644699344aeab9418ed88c13f2f3"
+    },
+    "run": null,
+    "run_dir": null,
+    "artifacts": {},
+    "run_count": 0,
+    "cancellation_accepted": null,
+    "cancellation_error": null,
+    "workers_stopped": null,
+    "discovery_workers_stopped": null
+  },
+  "reference": null,
+  "source_integrity": {
+    "status": "PASS",
+    "error": null
+  },
+  "replay_argv": [
+    "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python",
+    "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/scripts/methods/method_cli.py",
+    "trial",
+    "--package",
+    "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/tests/method_dev/fixtures/dem-terrain/manifest.json",
+    "--work-dir",
+    "<new-trial-directory>",
+    "--case",
+    "missing-vertical-unit",
+    "--timeout",
+    "120",
+    "--qgis-process",
+    "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process"
+  ],
+  "error": null,
+  "timing": {
+    "timeout_seconds": 120,
+    "elapsed_seconds": 3.947404,
+    "deadline_expired": false
+  }
+}

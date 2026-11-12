@@ -22,6 +22,7 @@ from geopilot.scripts.registration import RegistrationCandidate, RegistrationErr
 
 from lint import LintError, lint_methods
 from template import TemplateError, generate_template
+from scripts.methods.trial import TrialError, run_trial
 
 
 SCHEMA_VERSION = 1
@@ -115,6 +116,15 @@ def build_parser() -> argparse.ArgumentParser:
     )
     lint.add_argument("--config", type=Path, default=DEFAULT_CONFIG, help="configuration root")
     lint.add_argument("--method", type=Path, help="single method definition to check strictly")
+    trial = commands.add_parser(
+        "trial", help="Run a reference case in a new isolated project", allow_abbrev=False,
+    )
+    trial.add_argument("--package", type=Path, required=True, help="reference package manifest.json")
+    trial.add_argument("--work-dir", type=Path, required=True, help="new trial directory in an existing parent")
+    trial.add_argument("--case", help="positive or expected-failure case ID")
+    trial.add_argument("--method", type=Path, help="external candidate YAML matching the package ID and version")
+    trial.add_argument("--qgis-process", type=Path, help="trusted local QGIS Processing executable")
+    trial.add_argument("--timeout", type=float, default=120, help="trial deadline in seconds (default: 120)")
     return parser
 
 
@@ -123,6 +133,9 @@ def execute(args: argparse.Namespace) -> dict:
         return generate_template(args.config, args.tool, args.method)
     if args.command == "lint":
         return lint_methods(args.config, args.method)
+    if args.command == "trial":
+        return run_trial(args.package, args.work_dir, case=args.case, candidate=args.method,
+                         qgis_process=args.qgis_process, timeout=args.timeout)
     candidate = read_candidate(args.candidate)
     normalized = json.loads(candidate.model_dump_json())
     if args.command == "inspect":
@@ -150,7 +163,7 @@ def main() -> int:
     except LintError as error:
         emit(args.command, errors=error.errors)
         return error.exit_code
-    except TemplateError as error:
+    except (TemplateError, TrialError) as error:
         emit(args.command, errors=[issue(error.code, error.field, str(error))])
         return error.exit_code
     except InputPathError as error:

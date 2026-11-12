@@ -1,0 +1,27 @@
+stdout:
+
+stderr:
+Traceback (most recent call last):
+  File "/tmp/geopilot-p14-05-tests.9kh8QL/test_timeout_reaps_real_worker1/qgis-foreground-fixture", line 31, in <module>
+    child.wait()
+    ~~~~~~~~~~^^
+  File "/home/mtd/miniconda3/lib/python3.13/subprocess.py", line 1280, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mtd/miniconda3/lib/python3.13/subprocess.py", line 2085, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ~~~~~~~~~~~~~~^^^
+  File "/home/mtd/miniconda3/lib/python3.13/subprocess.py", line 2043, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/geopilot-p14-05-tests.9kh8QL/test_timeout_reaps_real_worker1/qgis-foreground-fixture", line 26, in finish
+    child.wait(timeout=1)
+    ~~~~~~~~~~^^^^^^^^^^^
+  File "/home/mtd/miniconda3/lib/python3.13/subprocess.py", line 1280, in wait
+    return self._wait(timeout=timeout)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/mtd/miniconda3/lib/python3.13/subprocess.py", line 2077, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-c', 'import time; time.sleep(60)']' timed out after 1 seconds
+
+exit_code: 1

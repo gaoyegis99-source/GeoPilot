@@ -1,0 +1,137 @@
+F...FF....                                                               [100%]
+=================================== FAILURES ===================================
+_______________ test_real_vector_external_candidate_is_isolated ________________
+
+tmp_path = PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_real_vector_external_cand0')
+formal = PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_real_vector_external_cand0/formal')
+qgis_process = '/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process'
+
+    def test_real_vector_external_candidate_is_isolated(tmp_path, formal, qgis_process):
+        config = ROOT / "config/methods/attribute-filter-export.v1.yaml"
+        candidate = tmp_path / "external.yaml"
+        shutil.copyfile(config, candidate)
+        before = tree_state(VECTOR.parent), tree_state(ROOT / "config"), tree_state(formal), candidate.read_bytes()
+        work = tmp_path / "vector-trial"
+
+>       invoke(work, VECTOR, "--method", candidate, "--qgis-process", qgis_process, "--timeout", 60,
+               env={"GEOPILOT_DATA_DIR": str(formal)})
+
+tests/method_dev/test_trial_run.py:77:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+work_dir = PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_real_vector_external_cand0/vector-trial')
+package = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/tests/method_dev/fixtures/attribute-filter/manifest.json')
+env = {'GEOPILOT_DATA_DIR': '/tmp/geopilot-p14-05-tests.kMDkYI/test_real_vector_external_cand0/formal'}
+code = 0
+args = ('--method', PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_real_vector_external_cand0/external.yaml'), '--qgis-process', '/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process', '--timeout', 60)
+result = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '/home/mtd/liweigis/...                                      ^^^^^^^^^^^^^^^^^^^^\nNameError: name \'_UniqueKeySafeLoader\' is not defined\n')
+
+    def invoke(work_dir, package, *args, env=None, code=0):
+        result = subprocess.run(
+            [sys.executable, str(CLI), "trial", "--package", str(package), "--work-dir", str(work_dir), *map(str, args)],
+            cwd=ROOT, env={**os.environ, **(env or {})}, capture_output=True, text=True, timeout=90, check=False,
+        )
+>       assert result.returncode == code, (result.stdout, result.stderr)
+E       AssertionError: ('', 'Traceback (most recent call last):
+E           File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/scripts/metho...                                      ^^^^^^^^^^^^^^^^^^^^
+E         NameError: name \'_UniqueKeySafeLoader\' is not defined
+E         ')
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '/home/mtd/liweigis/...                                      ^^^^^^^^^^^^^^^^^^^^\nNameError: name \'_UniqueKeySafeLoader\' is not defined\n').returncode
+
+tests/method_dev/test_trial_run.py:38: AssertionError
+_____ test_rejects_work_dir_reuse_protected_paths_and_mismatched_candidate _____
+
+tmp_path = PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_rejects_work_dir_reuse_pr0')
+formal = PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_rejects_work_dir_reuse_pr0/formal')
+
+    def test_rejects_work_dir_reuse_protected_paths_and_mismatched_candidate(tmp_path, formal):
+        before = tree_state(formal)
+        reused = invoke(formal, RASTER, code=2)
+        assert reused["errors"][0]["field"] == "work_dir"
+        rejected = invoke(formal / "nested-trial", RASTER, env={"GEOPILOT_DATA_DIR": str(formal)}, code=2)
+        assert rejected["errors"][0]["code"] == "UNSAFE_PATH"
+        assert tree_state(formal) == before and not (formal / "nested-trial").exists()
+
+        candidate = tmp_path / "candidate.yaml"
+        document = yaml.safe_load((ROOT / "config/methods/dem-terrain-analysis.v1.yaml").read_text())
+        document["version"] = 99
+        candidate.write_text(yaml.safe_dump(document), encoding="utf-8")
+        work = tmp_path / "wrong-version"
+>       wrong = invoke(work, RASTER, "--method", candidate, code=1)
+
+tests/method_dev/test_trial_run.py:148:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/method_dev/test_trial_run.py:39: in invoke
+    envelope = json.loads(result.stdout)
+../../../miniconda3/lib/python3.13/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+../../../miniconda3/lib/python3.13/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.decoder.JSONDecoder object at 0x7f42cb3d82f0>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+../../../miniconda3/lib/python3.13/json/decoder.py:363: JSONDecodeError
+________ test_lint_failure_keeps_report_without_executing_unknown_tool _________
+
+tmp_path = PosixPath('/tmp/geopilot-p14-05-tests.kMDkYI/test_lint_failure_keeps_report0')
+
+    def test_lint_failure_keeps_report_without_executing_unknown_tool(tmp_path):
+        candidate = tmp_path / "candidate.yaml"
+        document = yaml.safe_load((ROOT / "config/methods/dem-terrain-analysis.v1.yaml").read_text())
+        document["steps"][0]["tool"]["id"] = "unregistered-worker"
+        candidate.write_text(yaml.safe_dump(document), encoding="utf-8")
+        work = tmp_path / "lint-failure"
+
+>       invoke(work, RASTER, "--method", candidate, code=1)
+
+tests/method_dev/test_trial_run.py:160:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests/method_dev/test_trial_run.py:39: in invoke
+    envelope = json.loads(result.stdout)
+../../../miniconda3/lib/python3.13/json/__init__.py:352: in loads
+    return _default_decoder.decode(s)
+../../../miniconda3/lib/python3.13/json/decoder.py:345: in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <json.decoder.JSONDecoder object at 0x7f42cb3d82f0>, s = '', idx = 0
+
+    def raw_decode(self, s, idx=0):
+        """Decode a JSON document from ``s`` (a ``str`` beginning with
+        a JSON document) and return a 2-tuple of the Python
+        representation and the index in ``s`` where the document ended.
+
+        This can be used to decode a JSON document from a string that may
+        have extraneous data at the end.
+
+        """
+        try:
+            obj, end = self.scan_once(s, idx)
+        except StopIteration as err:
+>           raise JSONDecodeError("Expecting value", s, err.value) from None
+E           json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+../../../miniconda3/lib/python3.13/json/decoder.py:363: JSONDecodeError
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/methods/p14-05-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/method_dev/test_trial_run.py::test_real_vector_external_candidate_is_isolated
+FAILED tests/method_dev/test_trial_run.py::test_rejects_work_dir_reuse_protected_paths_and_mismatched_candidate
+FAILED tests/method_dev/test_trial_run.py::test_lint_failure_keeps_report_without_executing_unknown_tool
+3 failed, 7 passed in 33.44s

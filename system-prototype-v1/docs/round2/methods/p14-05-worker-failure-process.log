@@ -1,0 +1,20 @@
+qgis-extract-by-attribute version 1 (qgis)
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.source.path","severity":"blocking","passed":true,"observed":{"path":"inputs/0001/source.geojson","layer":null},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.source","severity":"blocking","passed":true,"observed":"Point","expected":"vector_point","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.source.bounds","severity":"blocking","passed":true,"observed":[500010.0,4400005.0,500130.0,4400040.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"selected_field_exists","phase":"input","field":"inputs.source.fields","severity":"blocking","passed":true,"observed":["source_feature_id","class_name","rank"],"expected":"class_name","message":"Selected field exists"}
+$ /tmp/geopilot-p14-05-tests.9kh8QL/test_failed_worker_retains_run0/qgis-foreground-fixture --json help native:extractbyattribute
+stdout:
+{"algorithm_details": {"id": "native:extractbyattribute"}, "parameters": {"INPUT": {"is_destination": false, "optional": false}, "FIELD": {"is_destination": false, "optional": false}, "OPERATOR": {"is_destination": false, "optional": false, "available_options": {"0": "equals"}}, "VALUE": {"is_destination": false, "optional": false}, "OUTPUT": {"is_destination": true, "optional": false}}, "outputs": {"OUTPUT": {}}}
+
+stderr:
+
+exit_code: 0
+$ /tmp/geopilot-p14-05-tests.9kh8QL/test_failed_worker_retains_run0/qgis-foreground-fixture --json run native:extractbyattribute -
+stdout:
+
+stderr:
+fixture exits 7
+
+exit_code: 7
+execute: PROCESS_FAILED: Process exited with code 7
