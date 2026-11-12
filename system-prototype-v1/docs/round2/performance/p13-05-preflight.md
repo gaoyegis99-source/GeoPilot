@@ -27,6 +27,10 @@ P13-05 等待矢量基准验收。本轮增加面积回归用例和小样本对�
 
 正式 L 原版样本的 `apply_spatial_relation` 触发生产步骤时限。主控对真实 L GeoPackage 的 64 格窗口使用原并集、准备后的并集、索引筛选后局部并集三种口径。384 点、640 线、768 面的 `intersects` 和 `within` 选中 ID 均符合独立参考。该窗口每个相交目标只有一个候选，另用相邻覆盖面反例验证跨面目标需要局部并集。现有自动化已覆盖接缝和间隙。完整规模仍须按正常工具链复跑选择、裁剪、登记和独立结果核对。 [原始窗口输出](p13-05-preflight-t13.log) · [已有接缝测试](../../../tests/gis/test_within.py)
 
+L 档点相交的七次冷进程采样均在 29.496–30.517 秒完成 `apply_spatial_relation`。下一步将 65,536 个已筛选点裁回 16,384 个面覆盖范围，`clip_vector_to_extent.py` 均达到生产 60 秒时限，退出 -15。原始记录保存在 `/mnt/datab/geopilot-p13-03.KXUnnZ/L-remaining/evidence/samples.jsonl`。 [七次遥测和输入检查摘录](p13-05-preflight-t13-clip.log)
+
+A 的隔离候选对确认是 XY 的 GeoPackage 点和面复用已准备的 `covers`。以真实 L 的三面、十八点窗口复跑原版与候选 CLI，先传入关系筛选后的 12 点，再直接传入 18 点。四次执行均退出 0，两套输出图层各保留相同的 12 个 ID、顺序、属性、CRS 和 WKB。首轮探针传绝对路径被现有协议拒绝，使用运行目录相对路径后完成对照。另对 1,224 个边界和邻近点比较掩膜及结果 WKB，完全一致。多点跨界和贴 Z 面边界的反例继续走现有相交运算，候选保留声明含 Z/M 的图层和空结果的原路径。16 项专项通过。源码补丁、原始日志和 JUnit 保存在 `artifacts/test-results/p13-05-point-candidate.pmbuVp/SHA256SUMS`。全量时间与峰值内存仍待测。
+
 ## 可复跑用例
 
 新增五个回归用例，覆盖粗剪切多类等积面积、非零行列式但投影退化和三个投影切缝。与现有矢量接缝用例合跑 6 项通过、13 项未选、退出 0。原始样本未改动。 [面积回归](../../../tests/gis/raster/test_area_stats.py) · [日志](p13-05-preflight-pytest.log) · [JUnit](p13-05-preflight-junit.xml)
