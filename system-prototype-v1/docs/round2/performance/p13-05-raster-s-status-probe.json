@@ -1,0 +1,16 @@
+{
+  "source_sha256": "b15ed3816cb7c496b6e1d39cbc14ac737f3593fea0d0228768b28c71a8740a72",
+  "begin_immediate_status": 200,
+  "begin_exclusive_status": 500,
+  "detail": {
+    "code": "STORAGE_FAILED",
+    "message": "Could not read the run record."
+  },
+  "cause": {
+    "exception": "OperationalError",
+    "sqlite_code": 5,
+    "sqlite_name": "SQLITE_BUSY"
+  },
+  "wait_seconds": 5.008,
+  "after_release_status": 200
+}

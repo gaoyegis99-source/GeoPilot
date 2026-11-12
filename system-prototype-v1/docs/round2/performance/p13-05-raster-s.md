@@ -21,6 +21,8 @@ RSS 只保留各侧观测值。临时文件峰值采样完整，冷态中位数�
 
 主控用原版代码、数据库副本和独立的 `BEGIN EXCLUSIVE` 连接做了受控验证。子进程写出结果后，父进程的取消轮询在 5.008 秒后抛出 `SQLITE_BUSY`。无锁对照正常返回，释放锁后已提交的取消请求能生成标记。该实验定位了一个可复现的失败路径，正式样本中的锁持有者仍未确认。 [调用栈和结果](p13-05-raster-s-verification.log)
 
+主控另用原版状态路由和同一数据库副本验证 HTTP 行为。另一连接执行 `BEGIN IMMEDIATE` 时 GET 返回 200，持有 `BEGIN EXCLUSIVE` 时在约 5 秒后返回 500 `STORAGE_FAILED`，捕获到的原始异常为 `SQLITE_BUSY`。释放锁后 GET 恢复为 200。探针保留原版响应，并核对原始数据库摘要。 [探针](p13-05-raster-s-status-probe.py) · [原始输出](p13-05-raster-s-status-probe.json)
+
 原版退出 1，正式冷态为 1 通过、2 失败、2 缺失，正式暖态 5 次均未运行。包装器未生成完整配置回执，批次启动器退出 2。离线强制比较也因缺少回执退出 1。保留单侧分布和原始失败样本，遥感 S 前后差值待两侧用新目录重采样。
 
 ## 命令与复算
@@ -37,4 +39,14 @@ tar -xzf docs/round2/performance/p13-05-raster-s-evidence.tar.gz -C "$p13_replay
   "$p13_replay" "$p13_replay/run_memory_profile.py"
 ```
 
-L 档矢量于 12:25 UTC 启动，依次采样点相交、线相交和按面积分配。运行入口为 `bash artifacts/test-results/p13-05-vector-l-plan.a2d2e68.C905zE/run-l.sh --run`，输出在 `/mnt/datab/geopilot-p13-05-vector-l.a2d2e68.C905zE/`。P13-05 仍在执行，剩余范围包括遥感 S 新配对、DEM M/L 和遥感 L。本批提交涉及证据、复算脚本及进度记录，回滚可撤销该证据提交。 [修正版矢量 M](p13-05-vector-m-revised.md)
+L 档矢量于 12:25 UTC 启动，依次采样点相交、线相交和按面积分配。运行入口为 `bash artifacts/test-results/p13-05-vector-l-plan.a2d2e68.C905zE/run-l.sh --run`，输出在 `/mnt/datab/geopilot-p13-05-vector-l.a2d2e68.C905zE/`。12:36 UTC，遥感 S、DEM M、DEM L、遥感 L 排队等候同一测量锁。四组预演通过，核对了八条容器命令、四条强制回执比较命令和四个输入指纹。队列每组单独调用栅格启动器，首组和后续组使用新输出根 `artifacts/test-results/p13-05-raster-pairs.a2d2e68.after-vector-l/`，旧样本继续保留。P13-05 仍在执行。 [修正版矢量 M](p13-05-vector-m-revised.md)
+
+状态路由探针使用原版源码运行，退出 0。以首轮原始遥感证据中的数据库为输入，测量副本由临时目录在退出时清理。
+
+```bash
+p13_db=artifacts/test-results/p13-05-raster-pairs.a2d2e68.TONYtP/remote-s/base/attempt.28na5exq/evidence/samples/S/method/process_cold/05-measurement/service/project.sqlite
+PYTHONPATH=artifacts/test-results/p13-05-revised-pair-source.a2d2e68/base/src \
+  .venv/bin/python -B docs/round2/performance/p13-05-raster-s-status-probe.py "$p13_db"
+```
+
+本批提交涉及证据、复算脚本及进度记录，回滚可撤销相应证据提交。

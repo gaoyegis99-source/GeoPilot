@@ -266,6 +266,7 @@
 - 修正版完整数据适配和 GIS 首次 360 通过、1 次 SQLite 锁失败。原版和修正版的同项复跑各通过，完整复跑 361 项全部通过，退出 0。修正版正式 M 复测已启动。 [完整复跑](../../docs/round2/performance/p13-05-domain-tests.log) · [JUnit](../../docs/round2/performance/p13-05-domain-tests-junit.xml)
 - 主控及 B 分别复算修正版 M 的四个对照。56 个新运行通过，复用的原版样本摘要一致，八个端到端 RSS 组有 partial。冷态面归属统计步骤五次完整采样的修正版 RSS 中位数接近原版。修正版 M 退出 0，随后启动 S 档栅格。 [正式复测](../../docs/round2/performance/p13-05-vector-m-revised.md)
 - 主控与 B 独立核对栅格 S 的 47 个实际运行。DEM S 两侧 28 次全部通过。遥感修正版 14 次通过，原版仅执行冷态 5 次。A 与主控从持久 SQLite 核对最后一轮以 `RUN_INTERRUPTED` 失败。完整 DEM 配对和遥感单侧证据离线复算通过，遥感原版缺回执，强制比较退出 1。L 矢量已启动，P13-05 为 DOING。 [证据、退出码及复算](../../docs/round2/performance/p13-05-raster-s.md)
+- 原版状态路由探针在 `BEGIN EXCLUSIVE` 下捕获 `SQLITE_BUSY`，返回 500，释放锁后恢复 200，探针退出 0。正式遥感 S 新配对与 DEM M/L、遥感 L 的八条容器命令预演通过，四组已排队。 [受控验证和队列记录](../../docs/round2/performance/p13-05-raster-s.md)
 
 ## P13-06 复用证据准备
 
