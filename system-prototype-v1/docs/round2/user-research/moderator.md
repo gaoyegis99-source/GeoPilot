@@ -22,7 +22,7 @@ PYTHONPATH="$PWD/src" .venv/bin/python -m geopilot.api.server \
   --config "$PWD/config" --qgis-process "$GEOPILOT_QGIS_PROCESS" --port 8000
 ```
 
-将前端回环地址和样例的后端绝对路径填入受试任务单。使用独立浏览器会话并把下载位置设为本次会话的 `downloads` 目录。留存实际下载的 CSV 和匿名观察表，按会话编号关联。 [工作台启动说明](../../../README.md#启动工作台) · [匿名记录填写规则](observations.md) · [两套后端和浏览器验证](../deployment/p16-02.md)
+将前端回环地址和样例的后端绝对路径填入受试任务单。使用独立浏览器会话并把下载位置设为本次会话的 `downloads` 目录。留存实际下载的 CSV 和匿名观察表，按会话编号关联。可将原 CSV 命名为匿名编号后批量复核分区计数。 [工作台启动说明](../../../README.md#启动工作台) · [匿名记录填写规则](observations.md) · [两套后端和浏览器验证](../deployment/p16-02.md)
 
 ## 任务边界与答案
 
