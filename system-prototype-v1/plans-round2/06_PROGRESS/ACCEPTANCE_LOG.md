@@ -333,6 +333,8 @@
 
 - A 复现两项 GDAL 实际配置在同内容指纹下改变面积，D 复现第二个文件组失败时首组残留阻断正常回退，主控核对 GeoPackage 差异来自写入时间戳并复算文件组复制。三类探针退出 0，正式缓存仍待前置。 [复用证据](../../docs/round2/performance/p13-06-preflight.md#geopackage-写入时间与物理文件身份)
 
+- P13-06 主控 ACCEPTED。源码 `55e34e0` 专项和关联回归 96 项通过，实际 DEM 提交 8 次，复用命中 3 次，检查中断复检通过。独立工作进程导入覆盖触发失效。解包逐项复算退出 0。 [命令、范围与原始证据](../../docs/round2/performance/p13-06.md)
+
 ## P13-08 外部容器生命周期准备
 
 - F 的隔离探针退出 0，主控核对四组逐事件原始结果。三种 Docker 客户端退出均释放本地租约，daemon 容器仍在运行，按已核对的自有 ID 回收后均确认移除。P13-08 仍等待性能和缓存证据。 [命令与原始记录](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md)
