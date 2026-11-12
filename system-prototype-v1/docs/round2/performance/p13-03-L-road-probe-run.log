@@ -1,0 +1,6 @@
+Evidence directory: /scratch/evidence
+L generated 16384 tiles in 29.241s
+L generated corrected road package in 8.477s
+L road warm probe 1 FAIL ValueError: Run state is FAILED/NOT_CHECKED
+{"status": "INCOMPLETE", "probe": true, "sample_counts": {"PASS": 0, "FAIL": 1, "NOT_RUN": 0}}
+P13-03 exit 1

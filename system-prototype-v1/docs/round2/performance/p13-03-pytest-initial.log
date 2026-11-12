@@ -1,0 +1,36 @@
+............F                                                            [100%]
+=================================== FAILURES ===================================
+_______ test_native_probe_runs_confirmed_plan_and_excludes_measurements ________
+
+tmp_path = PosixPath('/scratch/pytest-tmp/test_native_probe_runs_confirm0')
+
+    @pytest.mark.skipif(not os.environ.get("GEOPILOT_BENCH_QGIS"), reason="native QGIS benchmark executable is unavailable")
+    def test_native_probe_runs_confirmed_plan_and_excludes_measurements(tmp_path):
+        output = tmp_path / "probe"
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--output", str(output), "--qgis-process", os.environ["GEOPILOT_BENCH_QGIS"],
+             "--tier", "S", "--workload", "t13-lines-intersects", "--probe"],
+            cwd=ROOT, text=True, capture_output=True,
+        )
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Evidence directory: /scratch/pytest-tmp/test_native_probe_runs_confirm0/probe
+E         S generated 16 tiles in 3.067s
+E         S t13-lines-intersects warm probe 1 FAIL HTTPStatusError: Server error '500 Internal Server Error' for url 'http://testserver/api/runs/2f0bd38779e94f7788f1eddc13e4ec2e'
+E         For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500
+E         {"status": "INCOMPLETE", "probe": true, "sample_counts": {"PASS": 0, "FAIL": 1, "NOT_RUN": 0}}
+E
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/runtime/venv/bin/python', '/project/scripts/bench/run_vector.py', '--output', '/scratch/pytes...atus/500\n{"status": "INCOMPLETE", "probe": true, "sample_counts": {"PASS": 0, "FAIL": 1, "NOT_RUN": 0}}\n', stderr='').returncode
+
+tests/benchmarks/test_run_vector.py:121: AssertionError
+=============================== warnings summary ===============================
+tests/benchmarks/test_run_vector.py::test_translates_two_and_three_digit_grid_coordinates
+  /runtime/venv/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+---------------- generated xml file: /scratch/pytest-junit.xml -----------------
+=========================== short test summary info ============================
+FAILED tests/benchmarks/test_run_vector.py::test_native_probe_runs_confirmed_plan_and_excludes_measurements
+1 failed, 12 passed, 1 warning in 71.47s (0:01:11)
+P13-03 pytest exit 1

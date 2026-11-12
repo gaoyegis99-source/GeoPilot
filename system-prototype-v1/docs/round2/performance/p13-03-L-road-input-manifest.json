@@ -1,0 +1,314 @@
+{
+  "base_input_manifest_sha256": "ada61ccadb58accc19039b9f30c24db3d25ac0dc11d09987148105e10dac9c24",
+  "base_road_file": {
+    "bytes": 149028864,
+    "path": "road.gpkg",
+    "sha256": "01036320a6bb7184619ae31ac085b4470e7de8c2bb4547918e8fabd6578af5db"
+  },
+  "family": "vector",
+  "files": [
+    {
+      "bytes": 149028864,
+      "path": "road.gpkg",
+      "sha256": "7211b7e75c9560acdab8198c555d62af732f1de3e9fe15317f9ab55706d21775"
+    }
+  ],
+  "input_profile": "road-l-utm50n-south@1",
+  "position_profile": {
+    "base_profile": "benchmarks/datasets/vector.yaml",
+    "id": "road-l-utm50n-south",
+    "origin_north_m": 3880000,
+    "package": "road.gpkg",
+    "tier": "L",
+    "version": 1
+  },
+  "position_profile_sha256": "d39dfd31459e80623ec16649980d43756c6ee251e7e4009f63f2e9e952e94e22",
+  "reference": {
+    "attribute_bytes": 256,
+    "crs": {
+      "road.gpkg": "EPSG:32650"
+    },
+    "layer_counts": {
+      "road.gpkg": {
+        "analysis_extent": 16384,
+        "roads": 49152,
+        "targets": 147456,
+        "zones": 32768
+      }
+    },
+    "layers": {
+      "road.gpkg": {
+        "analysis_extent": {
+          "bounds_xy_m": [
+            244000.0,
+            3880000.0,
+            754000.0,
+            4390000.0
+          ],
+          "features": 16384,
+          "geometry_type": "Polygon",
+          "logical_sha256": "34cda4e5ef62b0ba74a030a964707a8c8f0d99fcde3cd133664695971116687a",
+          "per_tile_input_id_counts": {
+            "analysis-extent": 1
+          },
+          "unique_source_ids": 16384
+        },
+        "roads": {
+          "bounds_xy_m": [
+            244150.0,
+            3881500.0,
+            753850.0,
+            4390650.0
+          ],
+          "features": 49152,
+          "geometry_type": "LineString",
+          "logical_sha256": "801ff8c1cbfebef0a46a67d7c119a03966d0ca5b1b5a7c4f8389cc5141aeddf8",
+          "per_tile_input_id_counts": {
+            "road-edge": 1,
+            "road-far": 1,
+            "road-main": 1
+          },
+          "unique_source_ids": 49152
+        },
+        "targets": {
+          "bounds_xy_m": [
+            244200.0,
+            3880300.0,
+            753400.0,
+            4391075.0
+          ],
+          "features": 147456,
+          "geometry_type": "Point",
+          "logical_sha256": "f51189901a9742a94d849d33432637d81b0292e818759a5f9ceff8f6f2d006b8",
+          "per_tile_input_id_counts": {
+            "building-buffer-boundary": 1,
+            "building-east": 1,
+            "building-edge-road": 1,
+            "building-far-road": 1,
+            "building-outside-extent": 1,
+            "building-overlap": 1,
+            "building-unaffected": 1,
+            "building-west": 1,
+            "building-zone-boundary": 1
+          },
+          "unique_source_ids": 147456
+        },
+        "zones": {
+          "bounds_xy_m": [
+            244000.0,
+            3880000.0,
+            754000.0,
+            4390000.0
+          ],
+          "features": 32768,
+          "geometry_type": "Polygon",
+          "logical_sha256": "6b6f327f88ba966066a23c7195296845daa000e8b58c55bc529b6068a1f9620a",
+          "per_tile_input_id_counts": {
+            "zone-east": 1,
+            "zone-west": 1
+          },
+          "unique_source_ids": 32768
+        }
+      }
+    },
+    "logical_encoding": "ascending source_feature_id; UTF-8 compact JSON lines [source_feature_id,tile_id,template_id,bench_payload,little-endian WKB hex]",
+    "road": {
+      "boundary_tie": "unassigned",
+      "buffer_options": {
+        "dissolve": true,
+        "end_cap_style": "round",
+        "join_style": "round",
+        "segments_per_quarter": 16
+      },
+      "candidate_road_ids": [
+        "road-edge",
+        "road-main"
+      ],
+      "case_id": "road-buffer-point-statistics-v1",
+      "crs": "EPSG:32650",
+      "distance_m": 500,
+      "distance_method": "local_projected",
+      "input_feature_ids": {
+        "analysis_extent": [
+          "analysis-extent"
+        ],
+        "roads": [
+          "road-edge",
+          "road-far",
+          "road-main"
+        ],
+        "targets": [
+          "building-buffer-boundary",
+          "building-east",
+          "building-edge-road",
+          "building-far-road",
+          "building-outside-extent",
+          "building-overlap",
+          "building-unaffected",
+          "building-west",
+          "building-zone-boundary"
+        ],
+        "zones": [
+          "zone-east",
+          "zone-west"
+        ]
+      },
+      "linear_unit": "metre",
+      "main_road_buffer": {
+        "absolute_tolerances": {
+          "area_m2": 0.01,
+          "boundary_hausdorff_m": 1e-06,
+          "bounds_m": 1e-06
+        },
+        "bounds_xy_m": [
+          500000,
+          4401000,
+          502000,
+          4402000
+        ],
+        "discrete_area_m2": 1784137.122636485,
+        "endpoints_xy_m": [
+          [
+            500500,
+            4401500
+          ],
+          [
+            501500,
+            4401500
+          ]
+        ],
+        "ideal_area_m2": 1785398.1633974481,
+        "length_m": 1000,
+        "max_sagitta_m": 0.6022718974137975,
+        "reference_wkt": "POLYGON ((501500 4401000, 501549.0085701648 4401002.407636664, 501597.5451610081 4401009.607359799, 501645.14233862725 4401021.529832134, 501691.34171618253 4401038.060233745, 501735.698368413 4401059.039367826, 501777.7851165098 4401084.265193849, 501817.19664208184 4401113.494773319, 501853.55339059327 4401146.446609407, 501886.50522668136 4401182.803357918, 501915.73480615125 4401222.21488349, 501940.96063217416 4401264.301631587, 501961.9397662556 4401308.658283818, 501978.4701678661 4401354.857661373, 501990.3926402016 4401402.454838992, 501997.5923633361 4401450.991429836, 502000 4401500, 501997.5923633361 4401549.008570164, 501990.3926402016 4401597.545161008, 501978.4701678661 4401645.142338627, 501961.9397662556 4401691.341716182, 501940.96063217416 4401735.698368413, 501915.73480615125 4401777.78511651, 501886.50522668136 4401817.196642082, 501853.55339059327 4401853.553390593, 501817.19664208184 4401886.505226681, 501777.7851165098 4401915.734806151, 501735.698368413 4401940.960632174, 501691.34171618253 4401961.939766255, 501645.14233862725 4401978.470167866, 501597.5451610081 4401990.392640201, 501549.0085701648 4401997.592363336, 501500 4402000, 500500 4402000, 500450.9914298352 4401997.592363336, 500402.4548389919 4401990.392640201, 500354.85766137275 4401978.470167866, 500308.65828381747 4401961.939766255, 500264.301631587 4401940.960632174, 500222.2148834902 4401915.734806151, 500182.80335791816 4401886.505226681, 500146.44660940673 4401853.553390593, 500113.49477331864 4401817.196642082, 500084.26519384875 4401777.78511651, 500059.03936782584 4401735.698368413, 500038.0602337444 4401691.341716182, 500021.5298321339 4401645.142338627, 500009.6073597984 4401597.545161008, 500002.4076366639 4401549.008570164, 500000 4401500, 500002.4076366639 4401450.991429836, 500009.6073597984 4401402.454838992, 500021.5298321339 4401354.857661373, 500038.0602337444 4401308.658283818, 500059.03936782584 4401264.301631587, 500084.26519384875 4401222.21488349, 500113.49477331864 4401182.803357918, 500146.44660940673 4401146.446609407, 500182.80335791816 4401113.494773319, 500222.2148834902 4401084.265193849, 500264.301631587 4401059.039367826, 500308.65828381747 4401038.060233745, 500354.85766137275 4401021.529832134, 500402.4548389919 4401009.607359799, 500450.9914298352 4401002.407636664, 500500 4401000, 501500 4401000))",
+        "road_id": "road-main"
+      },
+      "output_scope": "clipped_to_analysis_extent",
+      "relations": {
+        "intersects": {
+          "before_clip_target_ids": [
+            "building-buffer-boundary",
+            "building-east",
+            "building-edge-road",
+            "building-outside-extent",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "clipped_target_ids": [
+            "building-buffer-boundary",
+            "building-east",
+            "building-edge-road",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "counts": {
+            "total": 6,
+            "unassigned": 1,
+            "zone-east": 2,
+            "zone-west": 3
+          },
+          "total_counts": {
+            "total": 98304,
+            "unassigned": 16384,
+            "zone-east": 32768,
+            "zone-west": 49152
+          },
+          "unassigned_target_ids": [
+            "building-zone-boundary"
+          ],
+          "zone_target_ids": {
+            "zone-east": [
+              "building-east",
+              "building-overlap"
+            ],
+            "zone-west": [
+              "building-buffer-boundary",
+              "building-edge-road",
+              "building-west"
+            ]
+          }
+        },
+        "within": {
+          "before_clip_target_ids": [
+            "building-east",
+            "building-edge-road",
+            "building-outside-extent",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "clipped_target_ids": [
+            "building-east",
+            "building-edge-road",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "counts": {
+            "total": 5,
+            "unassigned": 1,
+            "zone-east": 2,
+            "zone-west": 2
+          },
+          "total_counts": {
+            "total": 81920,
+            "unassigned": 16384,
+            "zone-east": 32768,
+            "zone-west": 32768
+          },
+          "unassigned_target_ids": [
+            "building-zone-boundary"
+          ],
+          "zone_target_ids": {
+            "zone-east": [
+              "building-east",
+              "building-overlap"
+            ],
+            "zone-west": [
+              "building-edge-road",
+              "building-west"
+            ]
+          }
+        }
+      },
+      "road_distance_to_extent_m": {
+        "road-edge": 300,
+        "road-far": 650,
+        "road-main": 0
+      },
+      "statistic": "count"
+    },
+    "road_vertices": 33,
+    "side_tiles": 128,
+    "source_feature_id_format": "{tile_id}/{template_id}",
+    "template_origin_xy_m": {
+      "road.gpkg": [
+        500000,
+        4400000
+      ]
+    },
+    "tile_id_format": "r{row:03d}c{col:03d}",
+    "tile_origin_xy_m": {
+      "road.gpkg": [
+        244000,
+        3880000
+      ]
+    },
+    "tile_pitch_m": 4000,
+    "tiles": 16384
+  },
+  "source_sha256": {
+    "benchmarks/datasets/vector.yaml": "b162af1c69c4a4b3adba67f1fbed1b47e6d75367915fd700226736f7973b6a5b",
+    "benchmarks/vector/road-l-utm50n-south.v1.yaml": "d39dfd31459e80623ec16649980d43756c6ee251e7e4009f63f2e9e952e94e22",
+    "tests/fixtures/vector/expected.json": "df2638c5ed1fb8cf75a95bb50525c115d446a16718e8923619d48e48ed1ff9a8",
+    "tests/fixtures/vector/source.json": "fa045a6671c1eed83679c80034df8efb16beae0c8f095f1dec2bf515c94a494a"
+  },
+  "tier": "L",
+  "translation_xy_m": [
+    0,
+    -264000
+  ],
+  "version": 1
+}

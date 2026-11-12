@@ -1,0 +1,22 @@
+Evidence directory: /scratch/evidence
+L generated 16384 tiles in 29.407s
+L t13-polygons-intersects warm probe 1 FAIL ValueError: Run state is FAILED/NOT_CHECKED
+L t14-split_by_area warm probe 1 FAIL ValueError: Run state is FAILED/NOT_CHECKED
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/project/scripts/bench/run_vector.py", line 395, in run_batch
+    plan, setup = prepare_plan(client, database, inputs, workload)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/scripts/bench/run_vector.py", line 174, in prepare_plan
+    plan = post(client, f"/api/plans/{draft['id']}/confirm", {"plan_version": draft["version"]})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/scripts/bench/run_vector.py", line 159, in post
+    raise ValueError(f"POST {path}: HTTP {response.status_code}: {response.text}")
+ValueError: POST /api/plans/fe3ee173a0744ad09d708c6553622979/confirm: HTTP 422: {"detail":{"code":"PLAN_CONFIRMATION_FAILED","message":"Input bounds fall outside the area of use for EPSG:32650","issues":[{"code":"MEASUREMENT_POLICY_REJECTED","field":"inputs.analysis_extent","message":"Input bounds fall outside the area of use for EPSG:32650"}]}}
+L road warm worker_exit_1
+{"status": "INCOMPLETE", "probe": true, "sample_counts": {"PASS": 0, "FAIL": 3, "NOT_RUN": 0}}
+P13-03 exit 1

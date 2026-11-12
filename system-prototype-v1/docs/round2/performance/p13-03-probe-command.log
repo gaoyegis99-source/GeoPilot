@@ -1,0 +1,12 @@
+docker run --rm --network none --user 1000:1000 --entrypoint /runtime/venv/bin/python --workdir /project -e HOME=/tmp -e QT_QPA_PLATFORM=offscreen -e QGIS_CUSTOM_CONFIG_PATH=/tmp/geopilot-qgis -e PYTHONDONTWRITEBYTECODE=1 -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 -e GDAL_NUM_THREADS=1 -e MKL_NUM_THREADS=1 --mount type=bind\,src=/tmp/geopilot-p13-03.6YqXHW/probe-corrected/source/system-prototype-v1\,dst=/project\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/p13-native\,dst=/runtime\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/usr/bin/qgis_process\,dst=/usr/bin/qgis_process\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/usr/bin/qgis_process.bin\,dst=/usr/bin/qgis_process.bin\,readonly --mount type=bind\,src=/tmp/geopilot-p13-03.6YqXHW/probe-corrected\,dst=/scratch sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87 scripts/bench/run_vector.py --tier S --probe --profile benchmarks/datasets/vector.yaml --output /scratch/evidence --qgis-process /usr/bin/qgis_process --source-commit 297daddeb56f8690ee6e8f6089db394faa7877f4
+d76d82e4d9dc25e0e1949e752c25756ae188f58f6a740d38ba14bc2f606b6f4a  /tmp/geopilot-p13-03.6YqXHW/probe-corrected/source/system-prototype-v1/scripts/bench/run_vector.py
+1d57da70fe20882f1392c047c39b32be433aa75ee7e17efaa12576fda9768f64  /tmp/geopilot-p13-03.6YqXHW/probe-corrected/source/system-prototype-v1/scripts/bench/_vector_reference.py
+/dev/sda2 ext4
+NAME   TYPE ROTA FSTYPE
+sda    disk    1
+├─sda1 part    1 vfat
+└─sda2 part    1 ext4
+sdb    disk    1
+└─sdb1 part    1 ext4
+sdc    disk    1
+└─sdc1 part    1 ext4

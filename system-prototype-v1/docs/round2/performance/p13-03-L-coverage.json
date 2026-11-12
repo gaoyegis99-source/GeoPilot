@@ -1,0 +1,388 @@
+{
+  "crs": "EPSG:32650",
+  "area_of_use_wgs84": [
+    114.0,
+    0.0,
+    120.0,
+    84.0
+  ],
+  "pyproj": "3.7.2",
+  "proj": "9.5.1",
+  "maximum_sampled_relative_linear_distortion": 0.001,
+  "actual_tiers": {
+    "S": {
+      "manifest_sha256": "2f3f54dd48ffe353a5c0b9f4ef2e5d62f2fe4aa8429d133b88bdb8d26efd05ea",
+      "tile_count": 16,
+      "side_tiles": 4,
+      "tile_pitch_m": 4000,
+      "tile_origin_m": [
+        244000,
+        4144000
+      ],
+      "road_vertices": 2,
+      "attribute_bytes": 16,
+      "road_layer_counts": {
+        "analysis_extent": 16,
+        "roads": 48,
+        "targets": 144,
+        "zones": 32
+      },
+      "calculated_aoi_bounds_m": [
+        244000,
+        4144000,
+        258000,
+        4158000
+      ],
+      "layers": {
+        "analysis_extent": {
+          "projected_bounds_m": [
+            244000.0,
+            4144000.0,
+            258000.0,
+            4158000.0
+          ],
+          "wgs84_bounds": [
+            114.10277438987934,
+            37.407442177435904,
+            114.26564521914706,
+            37.537252600404095
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.0004100770323249847
+        },
+        "roads": {
+          "projected_bounds_m": [
+            244150.0,
+            4145500.0,
+            257850.0,
+            4158650.0
+          ],
+          "wgs84_bounds": [
+            114.10424354985257,
+            37.420987054492336,
+            114.2634604103096,
+            37.54306534765789
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.000408950633824956
+        },
+        "targets": {
+          "projected_bounds_m": [
+            244200.0,
+            4144300.0,
+            257400.0,
+            4159075.0
+          ],
+          "wgs84_bounds": [
+            114.10466072884427,
+            37.410198109676344,
+            114.2587744122773,
+            37.54677341604551
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.0004089517766483475
+        },
+        "zones": {
+          "projected_bounds_m": [
+            244000.0,
+            4144000.0,
+            258000.0,
+            4158000.0
+          ],
+          "wgs84_bounds": [
+            114.10277438987934,
+            37.407442177435904,
+            114.26564521914706,
+            37.537252600404095
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.0004100770323249847
+        }
+      }
+    },
+    "M": {
+      "manifest_sha256": "4a2f4568b7b40227b028fb2d3505fdb9508144a446eb84c6f0e1bb9e5ff81cb2",
+      "tile_count": 1024,
+      "side_tiles": 32,
+      "tile_pitch_m": 4000,
+      "tile_origin_m": [
+        244000,
+        4144000
+      ],
+      "road_vertices": 9,
+      "attribute_bytes": 64,
+      "road_layer_counts": {
+        "analysis_extent": 1024,
+        "roads": 3072,
+        "targets": 9216,
+        "zones": 2048
+      },
+      "calculated_aoi_bounds_m": [
+        244000,
+        4144000,
+        370000,
+        4270000
+      ],
+      "layers": {
+        "analysis_extent": {
+          "projected_bounds_m": [
+            244000.0,
+            4144000.0,
+            370000.0,
+            4270000.0
+          ],
+          "wgs84_bounds": [
+            114.06274871304493,
+            37.407442177435904,
+            115.53058721742785,
+            38.56895131010057
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.0004326117344994884
+        },
+        "roads": {
+          "projected_bounds_m": [
+            244150.0,
+            4145500.0,
+            369850.0,
+            4270650.0
+          ],
+          "wgs84_bounds": [
+            114.06422962789809,
+            37.420987054492336,
+            115.52862757583345,
+            38.574785165924474
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.00043146963439011365
+        },
+        "targets": {
+          "projected_bounds_m": [
+            244200.0,
+            4144300.0,
+            369400.0,
+            4271075.0
+          ],
+          "wgs84_bounds": [
+            114.06464701266904,
+            37.410198109676344,
+            115.5237542627541,
+            38.57854790985618
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.0004314739653161759
+        },
+        "zones": {
+          "projected_bounds_m": [
+            244000.0,
+            4144000.0,
+            370000.0,
+            4270000.0
+          ],
+          "wgs84_bounds": [
+            114.06274871304493,
+            37.407442177435904,
+            115.53058721742785,
+            38.56895131010057
+          ],
+          "status": "PASS",
+          "sampled_max_relative_linear_distortion": 0.0004326117344994884
+        }
+      }
+    },
+    "L": {
+      "manifest_sha256": "ada61ccadb58accc19039b9f30c24db3d25ac0dc11d09987148105e10dac9c24",
+      "tile_count": 16384,
+      "side_tiles": 128,
+      "tile_pitch_m": 4000,
+      "tile_origin_m": [
+        244000,
+        4144000
+      ],
+      "road_vertices": 33,
+      "attribute_bytes": 256,
+      "road_layer_counts": {
+        "analysis_extent": 16384,
+        "roads": 49152,
+        "targets": 147456,
+        "zones": 32768
+      },
+      "calculated_aoi_bounds_m": [
+        244000,
+        4144000,
+        754000,
+        4654000
+      ],
+      "layers": {
+        "analysis_extent": {
+          "projected_bounds_m": [
+            244000.0,
+            4144000.0,
+            754000.0,
+            4654000.0
+          ],
+          "wgs84_bounds": [
+            113.90920348104187,
+            37.407442177435904,
+            120.06668322933616,
+            42.03804137727326
+          ],
+          "status": "MEASUREMENT_POLICY_REJECTED",
+          "message": "Input bounds fall outside the area of use for EPSG:32650"
+        },
+        "roads": {
+          "projected_bounds_m": [
+            244150.0,
+            4145500.0,
+            753850.0,
+            4654650.0
+          ],
+          "wgs84_bounds": [
+            113.91072894375144,
+            37.420987054492336,
+            120.0651555065508,
+            42.04389566924062
+          ],
+          "status": "MEASUREMENT_POLICY_REJECTED",
+          "message": "Input bounds fall outside the area of use for EPSG:32650"
+        },
+        "targets": {
+          "projected_bounds_m": [
+            244200.0,
+            4144300.0,
+            753400.0,
+            4655075.0
+          ],
+          "wgs84_bounds": [
+            113.91114677073264,
+            37.410198109676344,
+            120.05991272396786,
+            42.0477231924049
+          ],
+          "status": "MEASUREMENT_POLICY_REJECTED",
+          "message": "Input bounds fall outside the area of use for EPSG:32650"
+        },
+        "zones": {
+          "projected_bounds_m": [
+            244000.0,
+            4144000.0,
+            754000.0,
+            4654000.0
+          ],
+          "wgs84_bounds": [
+            113.90920348104187,
+            37.407442177435904,
+            120.06668322933616,
+            42.03804137727326
+          ],
+          "status": "MEASUREMENT_POLICY_REJECTED",
+          "message": "Input bounds fall outside the area of use for EPSG:32650"
+        }
+      }
+    }
+  },
+  "candidate_geometry_only": {
+    "status": "CALCULATED_NOT_GENERATED_OR_RUN",
+    "proposed_L_northing_m": 3880000,
+    "translation_y_m": -264000,
+    "layers": {
+      "analysis_extent": {
+        "projected_bounds_m": [
+          244000.0,
+          3880000.0,
+          754000.0,
+          4390000.0
+        ],
+        "wgs84_bounds": [
+          114.01758349658101,
+          35.03027027298392,
+          119.95914567955212,
+          39.659804306474456
+        ],
+        "status": "PASS",
+        "sampled_max_relative_linear_distortion": 0.0005125398205692022
+      },
+      "roads": {
+        "projected_bounds_m": [
+          244150.0,
+          3881500.0,
+          753850.0,
+          4390650.0
+        ],
+        "wgs84_bounds": [
+          114.01907761598015,
+          35.04381810028764,
+          119.95764955439451,
+          39.66566101976113
+        ],
+        "status": "PASS",
+        "sampled_max_relative_linear_distortion": 0.000511321295876277
+      },
+      "targets": {
+        "projected_bounds_m": [
+          244200.0,
+          3880300.0,
+          753400.0,
+          4391075.0
+        ],
+        "wgs84_bounds": [
+          114.01949519513583,
+          35.033022902860345,
+          119.9525757723577,
+          39.6694901485192
+        ],
+        "status": "PASS",
+        "sampled_max_relative_linear_distortion": 0.0005113080555270155
+      },
+      "zones": {
+        "projected_bounds_m": [
+          244000.0,
+          3880000.0,
+          754000.0,
+          4390000.0
+        ],
+        "wgs84_bounds": [
+          114.01758349658101,
+          35.03027027298392,
+          119.95914567955212,
+          39.659804306474456
+        ],
+        "status": "PASS",
+        "sampled_max_relative_linear_distortion": 0.0005125398205692022
+      },
+      "500m_expanded_analysis_extent": {
+        "projected_bounds_m": [
+          243500.0,
+          3879500.0,
+          754500.0,
+          4390500.0
+        ],
+        "wgs84_bounds": [
+          114.01157221043279,
+          35.02564019352945,
+          119.96515563573192,
+          39.6643094710669
+        ],
+        "status": "PASS",
+        "sampled_max_relative_linear_distortion": 0.0005163282155487003
+      }
+    }
+  },
+  "actual_road_confirmation": {
+    "http_status": 422,
+    "response": {
+      "detail": {
+        "code": "PLAN_CONFIRMATION_FAILED",
+        "message": "Input bounds fall outside the area of use for EPSG:32650",
+        "issues": [
+          {
+            "code": "MEASUREMENT_POLICY_REJECTED",
+            "field": "inputs.analysis_extent",
+            "message": "Input bounds fall outside the area of use for EPSG:32650"
+          }
+        ]
+      }
+    },
+    "run_created": false
+  }
+}

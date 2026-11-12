@@ -1,0 +1,6 @@
+id: road-l-utm50n-south
+version: 1
+base_profile: benchmarks/datasets/vector.yaml
+tier: L
+package: road.gpkg
+origin_north_m: 3880000

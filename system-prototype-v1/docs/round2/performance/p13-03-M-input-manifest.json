@@ -1,0 +1,1023 @@
+{
+  "family": "vector",
+  "files": [
+    {
+      "bytes": 9469952,
+      "path": "relations.gpkg",
+      "sha256": "c37a6af7665faf53281f35aff79aef9733264b8354768a30157ef5b915ad5975"
+    },
+    {
+      "bytes": 4493312,
+      "path": "road.gpkg",
+      "sha256": "9fd25ed1b20a1c6b8d1227661f5dc518d5f6f61da90cbbbe8c402f9c671c4df1"
+    },
+    {
+      "bytes": 4730880,
+      "path": "t14.gpkg",
+      "sha256": "cecddb1517de04c567488d2bbd0901afba4c3ee55d687ee08c054f089d4e0638"
+    }
+  ],
+  "reference": {
+    "attribute_bytes": 64,
+    "crs": {
+      "relations.gpkg": "EPSG:32650",
+      "road.gpkg": "EPSG:32650",
+      "t14.gpkg": "EPSG:6933"
+    },
+    "layer_counts": {
+      "relations.gpkg": {
+        "area": 1024,
+        "lines": 10240,
+        "points": 6144,
+        "polygons": 12288
+      },
+      "road.gpkg": {
+        "analysis_extent": 1024,
+        "roads": 3072,
+        "targets": 9216,
+        "zones": 2048
+      },
+      "t14.gpkg": {
+        "analysis_extent": 3072,
+        "relation_area": 1024,
+        "targets": 8192,
+        "zones": 2048
+      }
+    },
+    "layers": {
+      "relations.gpkg": {
+        "area": {
+          "bounds_xy_m": [
+            244000.0,
+            4144000.0,
+            368100.0,
+            4268100.0
+          ],
+          "features": 1024,
+          "geometry_type": "Polygon",
+          "logical_sha256": "ef2ea667e183d60395913f6bffa1db5714bf96c9a93a1f90a968d9f70170bb61",
+          "per_tile_input_id_counts": {
+            "area-with-hole": 1
+          },
+          "unique_source_ids": 1024
+        },
+        "lines": {
+          "bounds_xy_m": [
+            243990.0,
+            4144000.0,
+            368110.0,
+            4268080.0
+          ],
+          "features": 10240,
+          "geometry_type": "LineString",
+          "logical_sha256": "1168b087b99222acddc582ae05e0641f28c9184407dfd5280a4578aa8faff979",
+          "per_tile_input_id_counts": {
+            "line-crosses-hole": 1,
+            "line-crosses-shell": 1,
+            "line-disjoint": 1,
+            "line-hole-edge": 1,
+            "line-hole-endpoint-inside": 1,
+            "line-in-hole": 1,
+            "line-inside": 1,
+            "line-shell-edge": 1,
+            "line-shell-endpoint-inside": 1,
+            "line-touch-corner": 1
+          },
+          "unique_source_ids": 10240
+        },
+        "points": {
+          "bounds_xy_m": [
+            244000.0,
+            4144020.0,
+            368101.0,
+            4268100.0
+          ],
+          "features": 6144,
+          "geometry_type": "Point",
+          "logical_sha256": "16fab1e253635319358a9ce19d63f564a82369d88088c6f3623dcd1046c85fbc",
+          "per_tile_input_id_counts": {
+            "point-hole-edge": 1,
+            "point-in-hole": 1,
+            "point-inside": 1,
+            "point-outside": 1,
+            "point-shell-corner": 1,
+            "point-shell-edge": 1
+          },
+          "unique_source_ids": 6144
+        },
+        "polygons": {
+          "bounds_xy_m": [
+            243990.0,
+            4144010.0,
+            368110.0,
+            4268110.0
+          ],
+          "features": 12288,
+          "geometry_type": "Polygon",
+          "logical_sha256": "3e2b87e8041aab673ca1a956efc8ea2901fe75eb07a02e6e0970848a71f22ada",
+          "per_tile_input_id_counts": {
+            "polygon-crosses-hole": 1,
+            "polygon-crosses-shell": 1,
+            "polygon-disjoint": 1,
+            "polygon-encloses-hole": 1,
+            "polygon-hole-edge-inside": 1,
+            "polygon-hole-edge-outside": 1,
+            "polygon-in-hole": 1,
+            "polygon-inside": 1,
+            "polygon-shell-edge-inside": 1,
+            "polygon-shell-edge-outside": 1,
+            "polygon-shell-vertex-outside": 1,
+            "polygon-with-matching-hole": 1
+          },
+          "unique_source_ids": 12288
+        }
+      },
+      "road.gpkg": {
+        "analysis_extent": {
+          "bounds_xy_m": [
+            244000.0,
+            4144000.0,
+            370000.0,
+            4270000.0
+          ],
+          "features": 1024,
+          "geometry_type": "Polygon",
+          "logical_sha256": "755319f221ddbe45b0a6f7b23de5d8ad5db7b4922c45ec11071e5dd8ed025a5f",
+          "per_tile_input_id_counts": {
+            "analysis-extent": 1
+          },
+          "unique_source_ids": 1024
+        },
+        "roads": {
+          "bounds_xy_m": [
+            244150.0,
+            4145500.0,
+            369850.0,
+            4270650.0
+          ],
+          "features": 3072,
+          "geometry_type": "LineString",
+          "logical_sha256": "0a92e3bfe1c2673861020bbccbf77b525d83f35dbae8cdec9fe6b34a5e19a851",
+          "per_tile_input_id_counts": {
+            "road-edge": 1,
+            "road-far": 1,
+            "road-main": 1
+          },
+          "unique_source_ids": 3072
+        },
+        "targets": {
+          "bounds_xy_m": [
+            244200.0,
+            4144300.0,
+            369400.0,
+            4271075.0
+          ],
+          "features": 9216,
+          "geometry_type": "Point",
+          "logical_sha256": "9eb13a906262dc27145d8b8cd77d1c5b860f6d8a981ee865a2765fe63328a316",
+          "per_tile_input_id_counts": {
+            "building-buffer-boundary": 1,
+            "building-east": 1,
+            "building-edge-road": 1,
+            "building-far-road": 1,
+            "building-outside-extent": 1,
+            "building-overlap": 1,
+            "building-unaffected": 1,
+            "building-west": 1,
+            "building-zone-boundary": 1
+          },
+          "unique_source_ids": 9216
+        },
+        "zones": {
+          "bounds_xy_m": [
+            244000.0,
+            4144000.0,
+            370000.0,
+            4270000.0
+          ],
+          "features": 2048,
+          "geometry_type": "Polygon",
+          "logical_sha256": "b51a3954f69481b6bd1107f8cbf524ab7e68428c08f42ffada44e5c990462537",
+          "per_tile_input_id_counts": {
+            "zone-east": 1,
+            "zone-west": 1
+          },
+          "unique_source_ids": 2048
+        }
+      },
+      "t14.gpkg": {
+        "analysis_extent": {
+          "bounds_xy_m": [
+            1000000.0,
+            2000000.0,
+            1124240.0,
+            2124100.0
+          ],
+          "features": 3072,
+          "geometry_type": "Polygon",
+          "logical_sha256": "73be638bf7e02e4c2f5c075d9e8d097bd21d9758381a686e987cbfbeb8a94841",
+          "per_tile_input_id_counts": {
+            "first-band": 1,
+            "outer-band": 1,
+            "second-band": 1
+          },
+          "unique_source_ids": 3072
+        },
+        "relation_area": {
+          "bounds_xy_m": [
+            1000000.0,
+            2000000.0,
+            1124240.0,
+            2124100.0
+          ],
+          "features": 1024,
+          "geometry_type": "Polygon",
+          "logical_sha256": "fdeee4787eb33b58442048e608992caa38d179ff8b4bcdf5c926de97e1563241",
+          "per_tile_input_id_counts": {
+            "relation": 1
+          },
+          "unique_source_ids": 1024
+        },
+        "targets": {
+          "bounds_xy_m": [
+            1000010.0,
+            2000005.0,
+            1124230.0,
+            2124090.0
+          ],
+          "features": 8192,
+          "geometry_type": "Polygon",
+          "logical_sha256": "30bada9d3fe496a6428bd4d41e3d83a1e5550c791f218ad166da1026f7443a18",
+          "per_tile_input_id_counts": {
+            "boundary-contact": 1,
+            "centroid-tie": 1,
+            "crossing": 2,
+            "drop-outside": 1,
+            "outside-zones": 1,
+            "partly-uncovered": 1,
+            "west-only": 1
+          },
+          "unique_source_ids": 7168
+        },
+        "zones": {
+          "bounds_xy_m": [
+            1000000.0,
+            2000000.0,
+            1124200.0,
+            2124100.0
+          ],
+          "features": 2048,
+          "geometry_type": "Polygon",
+          "logical_sha256": "1fae14af32035df324bf00a05707511946437e78b9bd559544300edee32d6a6f",
+          "per_tile_input_id_counts": {
+            "east": 1,
+            "west": 1
+          },
+          "unique_source_ids": 2048
+        }
+      }
+    },
+    "logical_encoding": "ascending source_feature_id; UTF-8 compact JSON lines [source_feature_id,tile_id,template_id,bench_payload,little-endian WKB hex]",
+    "road": {
+      "boundary_tie": "unassigned",
+      "buffer_options": {
+        "dissolve": true,
+        "end_cap_style": "round",
+        "join_style": "round",
+        "segments_per_quarter": 16
+      },
+      "candidate_road_ids": [
+        "road-edge",
+        "road-main"
+      ],
+      "case_id": "road-buffer-point-statistics-v1",
+      "crs": "EPSG:32650",
+      "distance_m": 500,
+      "distance_method": "local_projected",
+      "input_feature_ids": {
+        "analysis_extent": [
+          "analysis-extent"
+        ],
+        "roads": [
+          "road-edge",
+          "road-far",
+          "road-main"
+        ],
+        "targets": [
+          "building-buffer-boundary",
+          "building-east",
+          "building-edge-road",
+          "building-far-road",
+          "building-outside-extent",
+          "building-overlap",
+          "building-unaffected",
+          "building-west",
+          "building-zone-boundary"
+        ],
+        "zones": [
+          "zone-east",
+          "zone-west"
+        ]
+      },
+      "linear_unit": "metre",
+      "main_road_buffer": {
+        "absolute_tolerances": {
+          "area_m2": 0.01,
+          "boundary_hausdorff_m": 1e-06,
+          "bounds_m": 1e-06
+        },
+        "bounds_xy_m": [
+          500000,
+          4401000,
+          502000,
+          4402000
+        ],
+        "discrete_area_m2": 1784137.122636485,
+        "endpoints_xy_m": [
+          [
+            500500,
+            4401500
+          ],
+          [
+            501500,
+            4401500
+          ]
+        ],
+        "ideal_area_m2": 1785398.1633974481,
+        "length_m": 1000,
+        "max_sagitta_m": 0.6022718974137975,
+        "reference_wkt": "POLYGON ((501500 4401000, 501549.0085701648 4401002.407636664, 501597.5451610081 4401009.607359799, 501645.14233862725 4401021.529832134, 501691.34171618253 4401038.060233745, 501735.698368413 4401059.039367826, 501777.7851165098 4401084.265193849, 501817.19664208184 4401113.494773319, 501853.55339059327 4401146.446609407, 501886.50522668136 4401182.803357918, 501915.73480615125 4401222.21488349, 501940.96063217416 4401264.301631587, 501961.9397662556 4401308.658283818, 501978.4701678661 4401354.857661373, 501990.3926402016 4401402.454838992, 501997.5923633361 4401450.991429836, 502000 4401500, 501997.5923633361 4401549.008570164, 501990.3926402016 4401597.545161008, 501978.4701678661 4401645.142338627, 501961.9397662556 4401691.341716182, 501940.96063217416 4401735.698368413, 501915.73480615125 4401777.78511651, 501886.50522668136 4401817.196642082, 501853.55339059327 4401853.553390593, 501817.19664208184 4401886.505226681, 501777.7851165098 4401915.734806151, 501735.698368413 4401940.960632174, 501691.34171618253 4401961.939766255, 501645.14233862725 4401978.470167866, 501597.5451610081 4401990.392640201, 501549.0085701648 4401997.592363336, 501500 4402000, 500500 4402000, 500450.9914298352 4401997.592363336, 500402.4548389919 4401990.392640201, 500354.85766137275 4401978.470167866, 500308.65828381747 4401961.939766255, 500264.301631587 4401940.960632174, 500222.2148834902 4401915.734806151, 500182.80335791816 4401886.505226681, 500146.44660940673 4401853.553390593, 500113.49477331864 4401817.196642082, 500084.26519384875 4401777.78511651, 500059.03936782584 4401735.698368413, 500038.0602337444 4401691.341716182, 500021.5298321339 4401645.142338627, 500009.6073597984 4401597.545161008, 500002.4076366639 4401549.008570164, 500000 4401500, 500002.4076366639 4401450.991429836, 500009.6073597984 4401402.454838992, 500021.5298321339 4401354.857661373, 500038.0602337444 4401308.658283818, 500059.03936782584 4401264.301631587, 500084.26519384875 4401222.21488349, 500113.49477331864 4401182.803357918, 500146.44660940673 4401146.446609407, 500182.80335791816 4401113.494773319, 500222.2148834902 4401084.265193849, 500264.301631587 4401059.039367826, 500308.65828381747 4401038.060233745, 500354.85766137275 4401021.529832134, 500402.4548389919 4401009.607359799, 500450.9914298352 4401002.407636664, 500500 4401000, 501500 4401000))",
+        "road_id": "road-main"
+      },
+      "output_scope": "clipped_to_analysis_extent",
+      "relations": {
+        "intersects": {
+          "before_clip_target_ids": [
+            "building-buffer-boundary",
+            "building-east",
+            "building-edge-road",
+            "building-outside-extent",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "clipped_target_ids": [
+            "building-buffer-boundary",
+            "building-east",
+            "building-edge-road",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "counts": {
+            "total": 6,
+            "unassigned": 1,
+            "zone-east": 2,
+            "zone-west": 3
+          },
+          "total_counts": {
+            "total": 6144,
+            "unassigned": 1024,
+            "zone-east": 2048,
+            "zone-west": 3072
+          },
+          "unassigned_target_ids": [
+            "building-zone-boundary"
+          ],
+          "zone_target_ids": {
+            "zone-east": [
+              "building-east",
+              "building-overlap"
+            ],
+            "zone-west": [
+              "building-buffer-boundary",
+              "building-edge-road",
+              "building-west"
+            ]
+          }
+        },
+        "within": {
+          "before_clip_target_ids": [
+            "building-east",
+            "building-edge-road",
+            "building-outside-extent",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "clipped_target_ids": [
+            "building-east",
+            "building-edge-road",
+            "building-overlap",
+            "building-west",
+            "building-zone-boundary"
+          ],
+          "counts": {
+            "total": 5,
+            "unassigned": 1,
+            "zone-east": 2,
+            "zone-west": 2
+          },
+          "total_counts": {
+            "total": 5120,
+            "unassigned": 1024,
+            "zone-east": 2048,
+            "zone-west": 2048
+          },
+          "unassigned_target_ids": [
+            "building-zone-boundary"
+          ],
+          "zone_target_ids": {
+            "zone-east": [
+              "building-east",
+              "building-overlap"
+            ],
+            "zone-west": [
+              "building-edge-road",
+              "building-west"
+            ]
+          }
+        }
+      },
+      "road_distance_to_extent_m": {
+        "road-edge": 300,
+        "road-far": 650,
+        "road-main": 0
+      },
+      "statistic": "count"
+    },
+    "road_vertices": 9,
+    "side_tiles": 32,
+    "source_feature_id_format": "{tile_id}/{template_id}",
+    "t13": {
+      "area": {
+        "hole_bounds_xy": [
+          500040,
+          4400040,
+          500060,
+          4400060
+        ],
+        "layer": "area",
+        "shell_bounds_xy": [
+          500000,
+          4400000,
+          500100,
+          4400100
+        ],
+        "source_feature_id": "area-with-hole"
+      },
+      "boundary_only_ids": {
+        "lines": [
+          "line-hole-edge",
+          "line-shell-edge",
+          "line-touch-corner"
+        ],
+        "points": [
+          "point-hole-edge",
+          "point-shell-corner",
+          "point-shell-edge"
+        ],
+        "polygons": [
+          "polygon-hole-edge-outside",
+          "polygon-shell-edge-outside",
+          "polygon-shell-vertex-outside"
+        ]
+      },
+      "relations": {
+        "intersects": {
+          "lines": {
+            "count": 8192,
+            "per_tile_clipped": {
+              "line-crosses-hole": {
+                "area_m2": 0.0,
+                "geometry_type": "MultiLineString",
+                "length_m": 20.0,
+                "wkt": "MULTILINESTRING ((500030 4400050, 500040 4400050), (500060 4400050, 500070 4400050))"
+              },
+              "line-crosses-shell": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 100.0,
+                "wkt": "LINESTRING (500000 4400030, 500100 4400030)"
+              },
+              "line-hole-edge": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 16.0,
+                "wkt": "LINESTRING (500040 4400042, 500040 4400058)"
+              },
+              "line-hole-endpoint-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 10.0,
+                "wkt": "LINESTRING (500030 4400050, 500040 4400050)"
+              },
+              "line-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 20.0,
+                "wkt": "LINESTRING (500010 4400020, 500030 4400020)"
+              },
+              "line-shell-edge": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 60.0,
+                "wkt": "LINESTRING (500000 4400020, 500000 4400080)"
+              },
+              "line-shell-endpoint-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 20.0,
+                "wkt": "LINESTRING (500000 4400025, 500020 4400025)"
+              },
+              "line-touch-corner": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500000 4400000)"
+              }
+            },
+            "per_tile_ids": [
+              "line-crosses-hole",
+              "line-crosses-shell",
+              "line-hole-edge",
+              "line-hole-endpoint-inside",
+              "line-inside",
+              "line-shell-edge",
+              "line-shell-endpoint-inside",
+              "line-touch-corner"
+            ],
+            "retained_area_m2": 0.0,
+            "retained_line_length_m": 251904.0
+          },
+          "points": {
+            "count": 4096,
+            "per_tile_clipped": {
+              "point-hole-edge": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500040 4400050)"
+              },
+              "point-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500020 4400020)"
+              },
+              "point-shell-corner": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500100 4400100)"
+              },
+              "point-shell-edge": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500000 4400025)"
+              }
+            },
+            "per_tile_ids": [
+              "point-hole-edge",
+              "point-inside",
+              "point-shell-corner",
+              "point-shell-edge"
+            ],
+            "retained_area_m2": 0.0,
+            "retained_line_length_m": 0.0
+          },
+          "polygons": {
+            "count": 10240,
+            "per_tile_clipped": {
+              "polygon-crosses-hole": {
+                "area_m2": 50.0,
+                "geometry_type": "Polygon",
+                "length_m": 30.0,
+                "wkt": "POLYGON ((500035 4400045, 500040 4400045, 500040 4400055, 500035 4400055, 500035 4400045))"
+              },
+              "polygon-crosses-shell": {
+                "area_m2": 300.0,
+                "geometry_type": "Polygon",
+                "length_m": 70.0,
+                "wkt": "POLYGON ((500000 4400030, 500015 4400030, 500015 4400050, 500000 4400050, 500000 4400030))"
+              },
+              "polygon-encloses-hole": {
+                "area_m2": 1200.0,
+                "geometry_type": "Polygon",
+                "length_m": 240.0,
+                "wkt": "POLYGON ((500030 4400030, 500070 4400030, 500070 4400070, 500030 4400070, 500030 4400030), (500040 4400040, 500040 4400060, 500060 4400060, 500060 4400040, 500040 4400040))"
+              },
+              "polygon-hole-edge-inside": {
+                "area_m2": 100.0,
+                "geometry_type": "Polygon",
+                "length_m": 40.0,
+                "wkt": "POLYGON ((500030 4400045, 500040 4400045, 500040 4400055, 500030 4400055, 500030 4400045))"
+              },
+              "polygon-hole-edge-outside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 10.0,
+                "wkt": "LINESTRING (500040 4400045, 500040 4400055)"
+              },
+              "polygon-inside": {
+                "area_m2": 100.0,
+                "geometry_type": "Polygon",
+                "length_m": 40.0,
+                "wkt": "POLYGON ((500010 4400010, 500020 4400010, 500020 4400020, 500010 4400020, 500010 4400010))"
+              },
+              "polygon-shell-edge-inside": {
+                "area_m2": 100.0,
+                "geometry_type": "Polygon",
+                "length_m": 40.0,
+                "wkt": "POLYGON ((500000 4400070, 500010 4400070, 500010 4400080, 500000 4400080, 500000 4400070))"
+              },
+              "polygon-shell-edge-outside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 10.0,
+                "wkt": "LINESTRING (500000 4400070, 500000 4400080)"
+              },
+              "polygon-shell-vertex-outside": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500100 4400100)"
+              },
+              "polygon-with-matching-hole": {
+                "area_m2": 1200.0,
+                "geometry_type": "Polygon",
+                "length_m": 240.0,
+                "wkt": "POLYGON ((500030 4400030, 500070 4400030, 500070 4400070, 500030 4400070, 500030 4400030), (500040 4400040, 500040 4400060, 500060 4400060, 500060 4400040, 500040 4400040))"
+              }
+            },
+            "per_tile_ids": [
+              "polygon-crosses-hole",
+              "polygon-crosses-shell",
+              "polygon-encloses-hole",
+              "polygon-hole-edge-inside",
+              "polygon-hole-edge-outside",
+              "polygon-inside",
+              "polygon-shell-edge-inside",
+              "polygon-shell-edge-outside",
+              "polygon-shell-vertex-outside",
+              "polygon-with-matching-hole"
+            ],
+            "retained_area_m2": 3123200.0,
+            "retained_line_length_m": 20480.0
+          }
+        },
+        "within": {
+          "lines": {
+            "count": 3072,
+            "per_tile_clipped": {
+              "line-hole-endpoint-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 10.0,
+                "wkt": "LINESTRING (500030 4400050, 500040 4400050)"
+              },
+              "line-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 20.0,
+                "wkt": "LINESTRING (500010 4400020, 500030 4400020)"
+              },
+              "line-shell-endpoint-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "LineString",
+                "length_m": 20.0,
+                "wkt": "LINESTRING (500000 4400025, 500020 4400025)"
+              }
+            },
+            "per_tile_ids": [
+              "line-hole-endpoint-inside",
+              "line-inside",
+              "line-shell-endpoint-inside"
+            ],
+            "retained_area_m2": 0.0,
+            "retained_line_length_m": 51200.0
+          },
+          "points": {
+            "count": 1024,
+            "per_tile_clipped": {
+              "point-inside": {
+                "area_m2": 0.0,
+                "geometry_type": "Point",
+                "length_m": 0.0,
+                "wkt": "POINT (500020 4400020)"
+              }
+            },
+            "per_tile_ids": [
+              "point-inside"
+            ],
+            "retained_area_m2": 0.0,
+            "retained_line_length_m": 0.0
+          },
+          "polygons": {
+            "count": 4096,
+            "per_tile_clipped": {
+              "polygon-hole-edge-inside": {
+                "area_m2": 100.0,
+                "geometry_type": "Polygon",
+                "length_m": 40.0,
+                "wkt": "POLYGON ((500030 4400045, 500040 4400045, 500040 4400055, 500030 4400055, 500030 4400045))"
+              },
+              "polygon-inside": {
+                "area_m2": 100.0,
+                "geometry_type": "Polygon",
+                "length_m": 40.0,
+                "wkt": "POLYGON ((500010 4400010, 500020 4400010, 500020 4400020, 500010 4400020, 500010 4400010))"
+              },
+              "polygon-shell-edge-inside": {
+                "area_m2": 100.0,
+                "geometry_type": "Polygon",
+                "length_m": 40.0,
+                "wkt": "POLYGON ((500000 4400070, 500010 4400070, 500010 4400080, 500000 4400080, 500000 4400070))"
+              },
+              "polygon-with-matching-hole": {
+                "area_m2": 1200.0,
+                "geometry_type": "Polygon",
+                "length_m": 240.0,
+                "wkt": "POLYGON ((500030 4400030, 500070 4400030, 500070 4400070, 500030 4400070, 500030 4400030), (500040 4400040, 500040 4400060, 500060 4400060, 500060 4400040, 500040 4400040))"
+              }
+            },
+            "per_tile_ids": [
+              "polygon-hole-edge-inside",
+              "polygon-inside",
+              "polygon-shell-edge-inside",
+              "polygon-with-matching-hole"
+            ],
+            "retained_area_m2": 1536000.0,
+            "retained_line_length_m": 0.0
+          }
+        }
+      }
+    },
+    "t14": {
+      "clipped_geometry_per_tile": {
+        "boundary-contact": {
+          "area_m2": 0.0,
+          "geometry_type": "LineString",
+          "length_m": 10.0,
+          "wkt": "LINESTRING (1000120 2000005, 1000120 2000015)"
+        },
+        "centroid-tie": {
+          "area_m2": 400.0,
+          "geometry_type": "Polygon",
+          "length_m": 100.0,
+          "wkt": "POLYGON ((1000120 2000010, 1000120 2000020, 1000080 2000020, 1000080 2000010, 1000120 2000010))"
+        },
+        "crossing": {
+          "area_m2": 1200.0,
+          "geometry_type": "MultiPolygon",
+          "length_m": 280.0,
+          "wkt": "MULTIPOLYGON (((1000120 2000010, 1000120 2000020, 1000060 2000020, 1000060 2000010, 1000120 2000010)), ((1000120 2000030, 1000120 2000040, 1000060 2000040, 1000060 2000030, 1000120 2000030)))"
+        },
+        "outside-zones": {
+          "area_m2": 100.0,
+          "geometry_type": "Polygon",
+          "length_m": 40.0,
+          "wkt": "POLYGON ((1000230 2000080, 1000230 2000090, 1000220 2000090, 1000220 2000080, 1000230 2000080))"
+        },
+        "partly-uncovered": {
+          "area_m2": 300.0,
+          "geometry_type": "Polygon",
+          "length_m": 80.0,
+          "wkt": "POLYGON ((1000220 2000070, 1000220 2000080, 1000190 2000080, 1000190 2000070, 1000220 2000070))"
+        },
+        "west-only": {
+          "area_m2": 200.0,
+          "geometry_type": "Polygon",
+          "length_m": 60.0,
+          "wkt": "POLYGON ((1000030 2000032, 1000030 2000042, 1000010 2000042, 1000010 2000032, 1000030 2000032))"
+        }
+      },
+      "clipped_rows": 7168,
+      "clipped_rows_per_id_per_tile": {
+        "boundary-contact": 1,
+        "centroid-tie": 1,
+        "crossing": 2,
+        "outside-zones": 1,
+        "partly-uncovered": 1,
+        "west-only": 1
+      },
+      "methods": {
+        "centroid": {
+          "areas_m2": {
+            "assigned": 1433600,
+            "total": 2252800,
+            "unassigned": 819200,
+            "uncovered": 307200
+          },
+          "counts": {
+            "assigned": 2048,
+            "total": 6144,
+            "unassigned": 4096
+          },
+          "details_per_tile": [
+            {
+              "area_m2": 0,
+              "object_status": "unassigned",
+              "source_feature_id": "boundary-contact",
+              "zone_id": null
+            },
+            {
+              "area_m2": 400,
+              "object_status": "unassigned",
+              "source_feature_id": "centroid-tie",
+              "zone_id": null
+            },
+            {
+              "area_m2": 1200,
+              "object_status": "assigned",
+              "source_feature_id": "crossing",
+              "zone_id": "east"
+            },
+            {
+              "area_m2": 100,
+              "object_status": "unassigned",
+              "source_feature_id": "outside-zones",
+              "zone_id": null
+            },
+            {
+              "area_m2": 300,
+              "object_status": "unassigned",
+              "source_feature_id": "partly-uncovered",
+              "zone_id": null
+            },
+            {
+              "area_m2": 200,
+              "object_status": "assigned",
+              "source_feature_id": "west-only",
+              "zone_id": "west"
+            }
+          ]
+        },
+        "largest_overlap": {
+          "areas_m2": {
+            "assigned": 1740800,
+            "total": 2252800,
+            "unassigned": 512000,
+            "uncovered": 307200
+          },
+          "counts": {
+            "assigned": 3072,
+            "total": 6144,
+            "unassigned": 3072
+          },
+          "details_per_tile": [
+            {
+              "area_m2": 0,
+              "object_status": "unassigned",
+              "source_feature_id": "boundary-contact",
+              "zone_id": null
+            },
+            {
+              "area_m2": 400,
+              "object_status": "unassigned",
+              "source_feature_id": "centroid-tie",
+              "zone_id": null
+            },
+            {
+              "area_m2": 1200,
+              "object_status": "assigned",
+              "source_feature_id": "crossing",
+              "zone_id": "east"
+            },
+            {
+              "area_m2": 100,
+              "object_status": "unassigned",
+              "source_feature_id": "outside-zones",
+              "zone_id": null
+            },
+            {
+              "area_m2": 300,
+              "object_status": "assigned",
+              "source_feature_id": "partly-uncovered",
+              "zone_id": "east"
+            },
+            {
+              "area_m2": 200,
+              "object_status": "assigned",
+              "source_feature_id": "west-only",
+              "zone_id": "west"
+            }
+          ]
+        },
+        "split_by_area": {
+          "areas_m2": {
+            "assigned": 1945600,
+            "total": 2252800,
+            "unassigned": 307200,
+            "uncovered": 307200
+          },
+          "counts": {
+            "assigned": 4096,
+            "total": 6144,
+            "unassigned": 2048
+          },
+          "details_per_tile": [
+            {
+              "area_m2": 0,
+              "object_status": "unassigned",
+              "source_feature_id": "boundary-contact",
+              "zone_id": null
+            },
+            {
+              "area_m2": 200,
+              "object_status": "assigned",
+              "source_feature_id": "centroid-tie",
+              "zone_id": "east"
+            },
+            {
+              "area_m2": 200,
+              "object_status": "assigned",
+              "source_feature_id": "centroid-tie",
+              "zone_id": "west"
+            },
+            {
+              "area_m2": 400,
+              "object_status": "assigned",
+              "source_feature_id": "crossing",
+              "zone_id": "east"
+            },
+            {
+              "area_m2": 800,
+              "object_status": "assigned",
+              "source_feature_id": "crossing",
+              "zone_id": "west"
+            },
+            {
+              "area_m2": 100,
+              "object_status": "unassigned",
+              "source_feature_id": "outside-zones",
+              "zone_id": null
+            },
+            {
+              "area_m2": 100,
+              "object_status": "assigned",
+              "source_feature_id": "partly-uncovered",
+              "zone_id": "east"
+            },
+            {
+              "area_m2": 200,
+              "object_status": "assigned",
+              "source_feature_id": "partly-uncovered",
+              "zone_id": null
+            },
+            {
+              "area_m2": 200,
+              "object_status": "assigned",
+              "source_feature_id": "west-only",
+              "zone_id": "west"
+            }
+          ]
+        }
+      },
+      "selected_rows": 8192
+    },
+    "template_origin_xy_m": {
+      "relations.gpkg": [
+        500000,
+        4400000
+      ],
+      "road.gpkg": [
+        500000,
+        4400000
+      ],
+      "t14.gpkg": [
+        1000000,
+        2000000
+      ]
+    },
+    "tile_id_format": "r{row:03d}c{col:03d}",
+    "tile_origin_xy_m": {
+      "relations.gpkg": [
+        244000,
+        4144000
+      ],
+      "road.gpkg": [
+        244000,
+        4144000
+      ],
+      "t14.gpkg": [
+        1000000,
+        2000000
+      ]
+    },
+    "tile_pitch_m": 4000,
+    "tiles": 1024
+  },
+  "source_sha256": {
+    "benchmarks/datasets/vector.yaml": "b162af1c69c4a4b3adba67f1fbed1b47e6d75367915fd700226736f7973b6a5b",
+    "tests/fixtures/vector/expected.json": "df2638c5ed1fb8cf75a95bb50525c115d446a16718e8923619d48e48ed1ff9a8",
+    "tests/fixtures/vector/source.json": "fa045a6671c1eed83679c80034df8efb16beae0c8f095f1dec2bf515c94a494a",
+    "tests/fixtures/vector/t13/expected.json": "3f839f7a57865ddb177e58467bcf7b50a36c185573395d610839c9a6e3041e54",
+    "tests/fixtures/vector/t13/source.json": "365888bd0343e1751e4ac9bc8d530b75c6ca09f7751375787377c9a49d002422",
+    "tests/gis/test_source_feature_identity.py": "2cce49d9601c12506b5c58548b5db1644bc5c263f3aad46253ad233aa5ce1ac8",
+    "tests/methods/test_full_geometry_before_clip.py": "66bf124705d0167d15d54d7e500c1dde1647ea2910dbc5b8c281a828344d207d"
+  },
+  "tier": "M",
+  "version": 1
+}

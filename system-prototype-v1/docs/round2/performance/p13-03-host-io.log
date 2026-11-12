@@ -1,0 +1,6 @@
+2026-11-12T13:13:07+08:00
+some avg10=51.31 avg60=62.29 avg300=58.04 total=89031004927
+full avg10=49.99 avg60=60.98 avg300=56.89 total=83293589375
+STAT WCHAN                          ELAPSED COMMAND
+S    do_wait                          01:42 python
+/      /dev/sda2 ext4

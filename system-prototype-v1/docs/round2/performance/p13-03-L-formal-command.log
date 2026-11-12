@@ -1,0 +1,14 @@
+docker run --rm --network none --user 1000:1000 --entrypoint /runtime/venv/bin/python --workdir /project -e HOME=/tmp -e QT_QPA_PLATFORM=offscreen -e QGIS_CUSTOM_CONFIG_PATH=/tmp/geopilot-qgis -e PYTHONDONTWRITEBYTECODE=1 -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 -e GDAL_NUM_THREADS=1 -e MKL_NUM_THREADS=1 --mount type=bind\,src=/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/source/system-prototype-v1\,dst=/project\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/p13-native\,dst=/runtime\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/usr/bin/qgis_process\,dst=/usr/bin/qgis_process\,readonly --mount type=bind\,src=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/usr/bin/qgis_process.bin\,dst=/usr/bin/qgis_process.bin\,readonly --mount type=bind\,src=/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal\,dst=/scratch sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87 scripts/bench/run_vector.py --tier L --workload road --workload t13-polygons-intersects --workload t14-split_by_area --road-profile benchmarks/vector/road-l-utm50n-south.v1.yaml --wait-seconds 600 --profile benchmarks/datasets/vector.yaml --output /scratch/evidence --qgis-process /usr/bin/qgis_process --source-commit 37cb329be04eaddfeb23ac62789926d0fcdb63aa
+52b254fcd93b08521ae7347c44e27f9dda3979bcda7fd8b97f1d72a5cd232063  /mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/source/system-prototype-v1/scripts/bench/run_vector.py
+2aad7d57adba3a9a98cf93e68c40e60d717268b6fd5f229ad54e59bfd46d41f1  /mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/source/system-prototype-v1/scripts/bench/_vector_reference.py
+31aefb282de59a63882e7b1bcca436fe1f10204bf60e6c07f0f8c6d0d5117232  /mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/source/system-prototype-v1/scripts/bench/_vector_road_profile.py
+d39dfd31459e80623ec16649980d43756c6ee251e7e4009f63f2e9e952e94e22  /mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/source/system-prototype-v1/benchmarks/vector/road-l-utm50n-south.v1.yaml
+/dev/sdb1 ext4
+NAME   TYPE ROTA FSTYPE
+sda    disk    1
+├─sda1 part    1 vfat
+└─sda2 part    1 ext4
+sdb    disk    1
+└─sdb1 part    1 ext4
+sdc    disk    1
+└─sdc1 part    1 ext4

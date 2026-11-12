@@ -1,0 +1,40 @@
+{
+  "S": {
+    "generation_ns": 212572545,
+    "files_before": [
+      {
+        "path": "relations.gpkg",
+        "bytes": 274432,
+        "sha256": "ec61bf63b999c2fb2ec6e2e21d1a41485769e0cc1d1db9b64fbf6782bdea179b"
+      },
+      {
+        "path": "road.gpkg",
+        "bytes": 204800,
+        "sha256": "2dc8036995e1385f710d429567bb59593ea23dab007671c94593213d1a1d1939"
+      },
+      {
+        "path": "t14.gpkg",
+        "bytes": 217088,
+        "sha256": "b661950112a53c1f2ccccccb6ac9d72adc18ef238849247416f74c80bc977b4e"
+      }
+    ],
+    "input_manifest_sha256": "2f3f54dd48ffe353a5c0b9f4ef2e5d62f2fe4aa8429d133b88bdb8d26efd05ea",
+    "files_after": [
+      {
+        "path": "relations.gpkg",
+        "bytes": 274432,
+        "sha256": "ec61bf63b999c2fb2ec6e2e21d1a41485769e0cc1d1db9b64fbf6782bdea179b"
+      },
+      {
+        "path": "road.gpkg",
+        "bytes": 204800,
+        "sha256": "2dc8036995e1385f710d429567bb59593ea23dab007671c94593213d1a1d1939"
+      },
+      {
+        "path": "t14.gpkg",
+        "bytes": 217088,
+        "sha256": "b661950112a53c1f2ccccccb6ac9d72adc18ef238849247416f74c80bc977b4e"
+      }
+    ]
+  }
+}
