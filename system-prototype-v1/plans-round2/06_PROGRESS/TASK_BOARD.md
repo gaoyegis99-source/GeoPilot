@@ -18,7 +18,7 @@
 | P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | ACCEPTED | [旁路采样、真实运行及 T01–T16 复验](../../docs/round2/performance/p13-02.md) |
 | P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | DOING | S、M 各完成 20 组。L 道路 CSV 修复通过原输入复验，原版本 L 正式批次已启动。 [修复与复验](../../docs/round2/performance/p13-03-large-csv.md) |
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
-| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | BLOCKED | 待 P13-03 矢量基准验收。 [复验准备](../../docs/round2/performance/p13-05-preflight.md) |
+| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | BLOCKED | 隔离候选已验证逐格面积一致和中断暂存回收，待 P13-03 验收后复跑完整方法。 [复验准备](../../docs/round2/performance/p13-05-preflight.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 待 P13-05 验收。 |
 | P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | [SQLite 锁恢复、队列取消与重启](../../docs/round2/performance/p13-07.md) |
 | P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 待多档基准、内存与缓存验收。 |

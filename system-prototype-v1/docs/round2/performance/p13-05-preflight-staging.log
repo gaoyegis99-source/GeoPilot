@@ -1,0 +1,11 @@
+Baseline capture_process + child-managed _stage_outputs (probe exit 0)
+{"mode": "success", "exit": 0, "timeout": false, "cancelled": false, "residuals": [], "published": true}
+{"mode": "timeout", "exit": -15, "timeout": true, "cancelled": false, "residuals": [".land-use-o_ye_8mw/.ndvi-classification-ghjt9n3k/classes.tif", ".land-use-o_ye_8mw/result.csv"], "published": false}
+{"mode": "kill", "exit": -9, "timeout": true, "cancelled": false, "residuals": [".land-use-roifw6zj/.ndvi-classification-5cqfo5lv/classes.tif", ".land-use-roifw6zj/result.csv"], "published": false}
+{"mode": "cancel", "exit": -15, "timeout": false, "cancelled": true, "residuals": [".land-use-ic9ou0cu/.ndvi-classification-v_e2k3tw/classes.tif", ".land-use-ic9ou0cu/result.csv"], "published": false}
+
+Isolated parent-owned staging + capture_process + _stage_outputs (probe exit 0)
+{"mode": "success", "exit": 0, "timeout": false, "cancelled": false, "residuals": [], "published": true}
+{"mode": "timeout", "exit": -15, "timeout": true, "cancelled": false, "residuals": [], "published": false}
+{"mode": "kill", "exit": -9, "timeout": true, "cancelled": false, "residuals": [], "published": false}
+{"mode": "cancel", "exit": -15, "timeout": false, "cancelled": true, "residuals": [], "published": false}
