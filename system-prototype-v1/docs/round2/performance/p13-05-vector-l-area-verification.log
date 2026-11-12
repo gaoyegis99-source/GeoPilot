@@ -1,0 +1,8 @@
+Offline archive checksum verification exit=0.
+Base and candidate side independent replays byte-identical, exit=0. Both container=1, logging=0.
+Both strict self-comparisons and the cross-version comparison replay byte-identically, exit=0.
+audit.py: 成功
+independent.json: 成功
+independent.log: 成功
+28 T14 runs are distinct from 56 point and line runs and 140 historical L runs.
+d3467fae29dd132aef297253bdb0df348d1264f139ed12330a45a5198354ed11  docs/round2/performance/p13-05-vector-l-area-evidence.tar.gz

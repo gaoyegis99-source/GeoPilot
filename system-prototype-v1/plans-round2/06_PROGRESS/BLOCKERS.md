@@ -54,9 +54,9 @@ P13-05 的原版 L 线相交 14 轮均在关系判定超时。局部裁剪候选
 
 P13-05 已分别验证逐步请求采集、原生环境指纹及计时外配置回执。正式复测需要使用同一包装方式采集，比较时强制回执。当前镜像只有本机 ID。 [请求采集](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log) · [环境复验](../../docs/round2/performance/p13-05-preflight.md#原生运行时身份与配置对照)
 
-P13-05 修正版 M 矢量和 DEM S 配对已完成。遥感 S 原版在第 5 次冷态试次中止，持久库记录 `align_two_dates` 的 SQLite 锁冲突。受控 `BEGIN EXCLUSIVE` 复现状态 GET 的 `SQLITE_BUSY` 与 500。遥感 S 新配对、DEM M/L 和遥感 L 已排队，等待 L 矢量释放测量锁。 [修正版 M 复测](../../docs/round2/performance/p13-05-vector-m-revised.md) · [栅格 S 证据](../../docs/round2/performance/p13-05-raster-s.md)
+P13-05 修正版 M 矢量和 DEM S 配对已完成。遥感 S 原版在第 5 次冷态试次中止，持久库记录 `align_two_dates` 的 SQLite 锁冲突。受控 `BEGIN EXCLUSIVE` 复现状态 GET 的 `SQLITE_BUSY` 与 500。遥感 S 新配对已开始，DEM M/L 和遥感 L 依次排队。 [修正版 M 复测](../../docs/round2/performance/p13-05-vector-m-revised.md) · [栅格 S 证据](../../docs/round2/performance/p13-05-raster-s.md)
 
-L 点、线相交配对已完成，两组修正版各 14 次通过。L 按面积分配原版 14 次空间关系判定超时，修正版已观测到裁回超时。冻结批次继续采集，局部裁回另行验证。四组栅格继续等待测量锁。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
+L 点、线相交配对已完成，两组修正版各 14 次通过。L 按面积分配原版 14 次空间关系判定超时，冻结修正版 14 次裁回超时。局部裁回候选通过隔离与组合回归，等待栅格释放测量窗口后正式复测。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
 
 暂存与取消的组合回归 23 项通过。土地利用分区重投影的暂存修补已在隔离分支验证。终态删除失败的回执保留和显式恢复已独立复现。 [组合回归](../../docs/round2/performance/p13-05-staging-resources.md#暂存与取消的组合回归)
 
