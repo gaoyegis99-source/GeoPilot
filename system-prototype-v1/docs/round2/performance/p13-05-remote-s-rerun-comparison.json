@@ -1,0 +1,240 @@
+{
+  "status": "MATCHED_EVIDENCE",
+  "before_source": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+  "after_source": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+  "same_source": false,
+  "runtime_configuration": {
+    "level": "application_config_and_python_proj",
+    "schema_version": 1,
+    "sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3"
+  },
+  "candidate_all_measurements_pass": true,
+  "groups": [
+    {
+      "group": [
+        "S",
+        "method",
+        "process_cold",
+        "p13-01",
+        "method"
+      ],
+      "before": {
+        "counts": {
+          "FAIL": 2,
+          "NOT_RUN": 0,
+          "PASS": 3
+        },
+        "failure_codes": {
+          "unspecified": 2
+        },
+        "wall_ns": {
+          "PASS": {
+            "samples": 3,
+            "partial": 0,
+            "median": 8472571369,
+            "p95_nearest_rank": 8476724118
+          },
+          "FAIL": {
+            "samples": 2,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 3,
+            "partial": 3,
+            "median": 195203072,
+            "p95_nearest_rank": 195567616
+          },
+          "FAIL": {
+            "samples": 2,
+            "partial": 2,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 3,
+            "partial": 0,
+            "median": 25658,
+            "p95_nearest_rank": 248208
+          },
+          "FAIL": {
+            "samples": 2,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        }
+      },
+      "after": {
+        "counts": {
+          "FAIL": 0,
+          "NOT_RUN": 0,
+          "PASS": 5
+        },
+        "failure_codes": {},
+        "wall_ns": {
+          "PASS": {
+            "samples": 5,
+            "partial": 0,
+            "median": 8276759994,
+            "p95_nearest_rank": 8294727579
+          },
+          "FAIL": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 5,
+            "partial": 5,
+            "median": 194822144,
+            "p95_nearest_rank": 195887104
+          },
+          "FAIL": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 5,
+            "partial": 0,
+            "median": 13439,
+            "p95_nearest_rank": 123004
+          },
+          "FAIL": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        }
+      },
+      "successful_sample_deltas": {},
+      "step_parameter_evidence": "normalized_step_requests"
+    },
+    {
+      "group": [
+        "S",
+        "method",
+        "warm",
+        "p13-01",
+        "method"
+      ],
+      "before": {
+        "counts": {
+          "FAIL": 1,
+          "NOT_RUN": 0,
+          "PASS": 4
+        },
+        "failure_codes": {
+          "unspecified": 1
+        },
+        "wall_ns": {
+          "PASS": {
+            "samples": 4,
+            "partial": 0,
+            "median": 14227500785.0,
+            "p95_nearest_rank": 21501139010
+          },
+          "FAIL": {
+            "samples": 1,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 4,
+            "partial": 3,
+            "median": 194971648.0,
+            "p95_nearest_rank": 195833856
+          },
+          "FAIL": {
+            "samples": 1,
+            "partial": 1,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 4,
+            "partial": 0,
+            "median": 25826.5,
+            "p95_nearest_rank": 26050
+          },
+          "FAIL": {
+            "samples": 1,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        }
+      },
+      "after": {
+        "counts": {
+          "FAIL": 0,
+          "NOT_RUN": 0,
+          "PASS": 5
+        },
+        "failure_codes": {},
+        "wall_ns": {
+          "PASS": {
+            "samples": 5,
+            "partial": 0,
+            "median": 8772178575,
+            "p95_nearest_rank": 24816581144
+          },
+          "FAIL": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 5,
+            "partial": 5,
+            "median": 190763008,
+            "p95_nearest_rank": 195788800
+          },
+          "FAIL": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 5,
+            "partial": 0,
+            "median": 13439,
+            "p95_nearest_rank": 18737
+          },
+          "FAIL": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          }
+        }
+      },
+      "successful_sample_deltas": {},
+      "step_parameter_evidence": "normalized_step_requests"
+    }
+  ]
+}

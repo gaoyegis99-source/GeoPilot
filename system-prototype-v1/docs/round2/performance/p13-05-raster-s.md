@@ -25,6 +25,21 @@ RSS 只保留各侧观测值。临时文件峰值采样完整，冷态中位数�
 
 原版退出 1，正式冷态为 1 通过、2 失败、2 缺失，正式暖态 5 次均未运行。包装器未生成完整配置回执，批次启动器退出 2。离线强制比较也因缺少回执退出 1。保留单侧分布和原始失败样本，遥感 S 前后差值待两侧用新目录重采样。
 
+## 遥感 S 重测
+
+重测于 14:16:19–14:23:57 UTC 执行。两侧各完成 14 轮，原版容器退出 1，修正版退出 0，配对启动器退出 0。严格比较确认两侧输入指纹、原生运行环境、八步执行参数和绑定报告的配置回执一致。主控与 B 核对了 28 个不同运行 ID，与首轮 47 个运行 ID 无交集。配对及两侧自比较均从原始证据离线重放，结果逐字节相同。 [严格配对](p13-05-remote-s-rerun-comparison.json) · [原始报告和独立复算](p13-05-remote-s-rerun-evidence.tar.gz) · [复算日志](p13-05-remote-s-rerun-verification.log)
+
+| 版本和正式计量组 | 通过 | 失败 | 成功中位数（秒） | 成功 P95（秒） | 成功 RSS partial |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 原版冷态 | 3 | 2 | 8.473 | 8.477 | 3 / 3 |
+| 原版暖态 | 4 | 1 | 14.228 | 21.501 | 3 / 4 |
+| 修正版冷态 | 5 | 0 | 8.277 | 8.295 | 5 / 5 |
+| 修正版暖态 | 5 | 0 | 8.772 | 24.817 | 5 / 5 |
+
+原版三次失败均为 `StatusObservationFailure`，冷态第 2、5 次正式计量及暖态第 5 次正式计量分别遇到 4、1、1 次 HTTP 500 `STORAGE_FAILED`。三次都到达 `SUCCEEDED/PASSED`，八步退出码均为 0。失败样本耗时原值为冷态 40.668、29.311 秒和暖态 34.321 秒。每组不足三条失败记录，比较器保留失败次数、原始耗时和 RSS 覆盖，失败分位留空。两侧正式成功样本数不同，成功耗时和资源差值也留空。
+
+独立正确性覆盖 28 轮。每轮分类 1、2、3 各 6,144 像元，NoData 为 18,432 像元，栅格最大像元误差为 0。等积面积合计 16,602,074.596798936 m²，与独立参考相差约 0.000088 m²。D 从 8 个终态 SQLite 副本核对原版 14 个运行、112 个步骤和正式成果登记，全部与原始结果一致，114 个源文件前后摘要相同。状态 GET 与取消轮询是两个调用入口，已合并的 P13-07 修复覆盖取消轮询。此批 HTTP 记录未保存具体异常和锁持有者。DEM M 于 14:23:57 UTC 接续开始，随后为 DEM L、遥感 L 和按面积分配候选复测。
+
 ## 命令与复算
 
 在原型根目录执行。首次栅格批次原始根为 `artifacts/test-results/p13-05-raster-pairs.a2d2e68.TONYtP/`。归档带有冻结比较器，独立解包复算退出 0，并与实时证据复算逐字节相同。
@@ -37,6 +52,15 @@ tar -xzf docs/round2/performance/p13-05-raster-s-evidence.tar.gz -C "$p13_replay
 (cd "$p13_replay" && sha256sum -c SHA256SUMS)
 .venv/bin/python -B docs/round2/performance/p13-05-raster-s-audit.py \
   "$p13_replay" "$p13_replay/run_memory_profile.py"
+```
+
+遥感 S 重测归档独立解包。输入清单指纹、14 次计划、报告回执和两侧及配对比较均在解包目录重放。
+
+```bash
+p13_remote_replay=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-remote-s-rerun-evidence.tar.gz -C "$p13_remote_replay"
+(cd "$p13_remote_replay" && sha256sum -c SHA256SUMS)
+.venv/bin/python -B "$p13_remote_replay/proof/replay.py" "$p13_remote_replay" remote-s
 ```
 
 L 档矢量于 12:25 UTC 启动，依次采样点相交、线相交和按面积分配。运行入口为 `bash artifacts/test-results/p13-05-vector-l-plan.a2d2e68.C905zE/run-l.sh --run`，输出在 `/mnt/datab/geopilot-p13-05-vector-l.a2d2e68.C905zE/`。12:36 UTC，遥感 S、DEM M、DEM L、遥感 L 排队等候同一测量锁。四组预演通过，核对了八条容器命令、四条强制回执比较命令和四个输入指纹。队列每组单独调用栅格启动器，首组和后续组使用新输出根 `artifacts/test-results/p13-05-raster-pairs.a2d2e68.after-vector-l/`，旧样本继续保留。P13-05 仍在执行。 [修正版矢量 M](p13-05-vector-m-revised.md)

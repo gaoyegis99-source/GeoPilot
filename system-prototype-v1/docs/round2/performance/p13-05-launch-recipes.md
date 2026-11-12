@@ -22,3 +22,15 @@ git fetch --no-tags "$p13_launch/frozen-source-revisions.bundle" \
   refs/heads/codex/p13-05-preflight-base:refs/heads/codex/p13-05-preflight-base \
   refs/heads/codex/p13-05-candidate-lazy-staging:refs/heads/codex/p13-05-candidate-lazy-staging
 ```
+
+局部裁回与分区重投影暂存修补另有增量 Git bundle，前置提交为 `a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc`。在只从审计分支和上一份 bundle 初始化的仓库导入两项修补后，按原五个文件覆盖重建 T14 候选树，1,473 个文件的摘要清单与正式预演逐字节相同。归档的 `source-revisions/` 包含 bundle 及实际复验日志。 [后续候选归档](p13-05-t14-local-clip-evidence.tar.gz)
+
+```bash
+p13_followup=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-t14-local-clip-evidence.tar.gz -C "$p13_followup"
+(cd "$p13_followup" && sha256sum -c SHA256SUMS)
+git bundle verify "$p13_followup/source-revisions/followup-source-revisions.bundle"
+git fetch --no-tags "$p13_followup/source-revisions/followup-source-revisions.bundle" \
+  refs/heads/codex/p13-05-t14-local-clip:refs/heads/codex/p13-05-t14-local-clip \
+  refs/heads/codex/p13-05-managed-land-use-zones:refs/heads/codex/p13-05-managed-land-use-zones
+```

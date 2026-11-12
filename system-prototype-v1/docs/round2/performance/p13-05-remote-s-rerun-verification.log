@@ -1,0 +1,16 @@
+Offline archive checksum verification exit=0.
+base attempt.86mfi320 trials 14 container 1
+candidate attempt._d7itl7q trials 14 container 0
+Pair and both self comparisons reproduce byte-for-byte. 28 unique run IDs.
+audit.py: 成功
+independent.json: 成功
+independent.log: 成功
+base attempt.86mfi320 trials 14 container 1
+candidate attempt._d7itl7q trials 14 container 0
+Pair and both self comparisons reproduce byte-for-byte. 28 unique run IDs.
+unchanged copied evidence exit=0
+modified report with unchanged runtime receipt rejected, exit=1
+missing completion pointer rejected, exit=1
+restored copy replays byte-for-byte, exit=0
+Terminal SQLite review reproduced by D. Source signatures preserved for 114 files.
+f9a25f00189ad145b63c5b096b321c2dfb2a2c0713708434ab7f702e92127841  docs/round2/performance/p13-05-remote-s-rerun-evidence.tar.gz
