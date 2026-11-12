@@ -3,7 +3,6 @@
 import os
 from contextlib import ExitStack
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import pyogrio
 from geopandas import GeoDataFrame
@@ -14,6 +13,7 @@ from geopilot.data.errors import SourceReadError
 from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.vector_reader import local_ogr_path, read_layer_metadata
 from geopilot.domain.data_asset import VectorMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 
 
 def read_vector(reference: dict, *, role: str, require_source_id: bool = False) -> tuple[GeoDataFrame, str]:
@@ -66,7 +66,7 @@ def write_vector_outputs(outputs: dict, layers: dict[str, tuple[GeoDataFrame, st
             target = Path(reference["path"])
             if target.suffix.lower() != ".gpkg":
                 raise ValueError(f"{role} output requires a .gpkg path")
-            directory = staging.enter_context(TemporaryDirectory(prefix=".vector-step-", dir=target.parent))
+            directory = staging.enter_context(temporary_output_directory(target, prefix=".vector-step-"))
             temporary = Path(directory) / "layer.gpkg"
             pyogrio.write_dataframe(
                 frame, temporary, layer=reference.get("layer") or role, driver="GPKG", geometry_type=geometry_type,

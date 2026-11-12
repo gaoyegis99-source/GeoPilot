@@ -4,7 +4,6 @@ import errno
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import geopandas as gpd
 import numpy as np
@@ -23,6 +22,7 @@ from geopilot.data.fingerprint import capture_file_state, fingerprint_file
 from geopilot.data.vector_reader import local_ogr_path
 from geopilot.domain.data_asset import AssetMetadata, VectorMetadata
 from geopilot.domain.tool_contract import ToolContract
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.measurement.area import validate_area, validate_tool_area
 from geopilot.gis.measurement.coverage import (
     Bounds,
@@ -271,7 +271,7 @@ def reproject_vector(
     output_bounds = _geometry_bounds(projected, field=_TARGET_FIELD)
     _METHODS[method](metadata.model_copy(update={"crs": decision.crs, "bounds": output_bounds}), field=_TARGET_FIELD)
 
-    with TemporaryDirectory(prefix=".geopilot-projection-", dir=destination.parent) as directory:
+    with temporary_output_directory(destination, prefix=".geopilot-projection-") as directory:
         stage = Path(directory) / "projection.gpkg"
         _write_verified_layer(projected, stage, layer, target)
         try:

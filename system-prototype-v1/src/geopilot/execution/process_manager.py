@@ -5,6 +5,7 @@ import signal
 import subprocess
 import time
 from collections.abc import Callable, Mapping, Sequence
+from contextlib import AbstractContextManager, nullcontext
 from dataclasses import dataclass
 from pathlib import Path
 from tempfile import TemporaryFile
@@ -60,15 +61,20 @@ def _stop_process(process: subprocess.Popen) -> None:
 def capture_process(
     argv: Sequence[str], *, cwd: Path, timeout: float,
     stdin: str | None = None, env: Mapping[str, str] | None = None,
+    env_context: AbstractContextManager[Mapping[str, str]] | None = None,
     cancel_requested: Callable[[], bool] | None = None,
     probe: ProcessProbe | None = None,
 ) -> ProcessOutcome:
-    with worker_lease(cwd) as lease, TemporaryFile() as input_file, TemporaryFile() as stdout, TemporaryFile() as stderr:
+    with (
+        worker_lease(cwd) as lease,
+        (env_context if env_context is not None else nullcontext(env)) as process_env,
+        TemporaryFile() as input_file, TemporaryFile() as stdout, TemporaryFile() as stderr,
+    ):
         if stdin is not None:
             input_file.write(stdin.encode("utf-8"))
             input_file.seek(0)
         with subprocess.Popen(
-            argv, cwd=cwd, env=env, stdin=subprocess.DEVNULL if stdin is None else input_file,
+            argv, cwd=cwd, env=process_env, stdin=subprocess.DEVNULL if stdin is None else input_file,
             stdout=stdout, stderr=stderr, start_new_session=os.name == "posix", pass_fds=(lease,),
         ) as process:
             timed_out = cancelled = False

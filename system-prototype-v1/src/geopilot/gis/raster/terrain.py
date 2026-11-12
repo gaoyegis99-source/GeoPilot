@@ -8,7 +8,6 @@ from dataclasses import asdict
 from functools import partial
 from numbers import Real
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import rasterio
@@ -18,6 +17,7 @@ from rasterio.windows import Window
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.units import resolve_dem_units
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 from geopilot.gis.validation.crs_validator import inspect_crs
@@ -151,7 +151,7 @@ def write_terrain_raster(
         east_scale, north_scale = terrain_gradient_scales(dataset, band, z_factor)
         scale, offset = dataset.scales[band - 1], dataset.offsets[band - 1]
 
-        with TemporaryDirectory(prefix=".terrain-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+        with temporary_output_directory(target, prefix=".terrain-", ignore_cleanup_errors=True) as directory:
             staged = Path(directory) / "terrain.tif"
             with rasterio.open(
                 staged, "w", driver="GTiff", width=dataset.width, height=dataset.height, count=1, dtype="float32",

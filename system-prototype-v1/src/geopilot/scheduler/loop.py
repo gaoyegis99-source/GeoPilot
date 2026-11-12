@@ -6,6 +6,7 @@ import sqlite3
 from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
+from stat import S_ISDIR
 from threading import Event
 from geopilot.artifacts.service import ARTIFACT_MANIFEST_PATH
 from geopilot.checks.attempt_reports import CHECK_REPORT_PATH, publish_unfinished_attempt
@@ -13,7 +14,9 @@ from geopilot.checks.recheck_service import claim_recheck
 from geopilot.checks.report_service import CheckAttempt, get_active_check_attempt
 from geopilot.domain.errors import ErrorDetail
 from geopilot.domain.step_io import ExecutionStatus, StepResult
+from geopilot.execution.output_staging import recover_output_staging
 from geopilot.execution.step_support import resolve_step_path
+from geopilot.execution.worker_lease import worker_lease
 from geopilot.persistence.run_repository import get_run, list_run_steps, save_run_step, update_run
 from geopilot.persistence.schema import open_database
 from geopilot.runs.models import CheckStatus, Run, RunStep
@@ -229,5 +232,28 @@ def recover_interrupted_runs(
             run = get_run(connection, run_id)
             if processes_stopped(run) is not True:
                 raise RuntimeError(f"Cannot recover run {run_id!r} until its managed processes have stopped")
+            if run.execution_status is ExecutionStatus.RUNNING:
+                _recover_output_staging(connection, run)
             _mark_interrupted(connection, run, "The previous service stopped before this run completed")
     return ids
+
+
+def _recover_output_staging(connection: sqlite3.Connection, run: Run) -> None:
+    workdir = Path(run.workdir)
+    try:
+        if not S_ISDIR(workdir.lstat().st_mode):
+            return
+    except FileNotFoundError:
+        return
+    try:
+        with worker_lease(workdir):
+            for step in list_run_steps(connection, run.id):
+                request = step.request
+                if step.status is not ExecutionStatus.RUNNING or request is None or not request.output_targets:
+                    continue
+                try:
+                    recover_output_staging(workdir, request.model_dump(mode="json"))
+                except (OSError, ValueError):
+                    _LOGGER.exception("Could not recover output staging for %s/%s", run.id, step.step_key)
+    except BlockingIOError as error:
+        raise RuntimeError(f"Cannot recover run {run.id!r} until its managed processes have stopped") from error

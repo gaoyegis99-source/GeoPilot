@@ -2,6 +2,7 @@
 
 import math
 from collections.abc import Iterator
+from dataclasses import dataclass
 from os import PathLike
 
 import numpy as np
@@ -31,21 +32,25 @@ def _tiles(width: int, height: int) -> Iterator[Window]:
             yield Window(col, row, min(_TILE_SIZE, width - col), min(_TILE_SIZE, height - row))
 
 
-def _projected_areas(
-    rows: np.ndarray, cols: np.ndarray, affine: Affine, transformer: Transformer, segments: int,
-) -> np.ndarray:
-    along = np.arange(segments, dtype=np.float64) / segments
-    zero = np.zeros(segments, dtype=np.float64)
-    one = np.ones(segments, dtype=np.float64)
+def _ring_offsets(along: np.ndarray, end: int) -> tuple[np.ndarray, np.ndarray]:
+    zero = np.zeros_like(along)
+    span = np.full_like(along, end)
     # Walk the four true affine pixel edges without repeating any corner.
-    row = rows[:, None] + np.concatenate((zero, along, one, 1 - along))
-    col = cols[:, None] + np.concatenate((along, one, 1 - along, zero))
+    return np.concatenate((zero, along, span, end - along)), np.concatenate((along, span, end - along, zero))
+
+
+def _project_points(
+    row: np.ndarray, col: np.ndarray, affine: Affine, transformer: Transformer,
+) -> tuple[np.ndarray, np.ndarray]:
     x = affine.a * col + affine.b * row + affine.c
     y = affine.d * col + affine.e * row + affine.f
     try:
-        x, y = transformer.transform(x, y, errcheck=True)
+        return transformer.transform(x, y, errcheck=True)
     except ProjError as error:
         raise ValueError("Could not project the classification cell boundaries into the area CRS") from error
+
+
+def _cell_areas(x: np.ndarray, y: np.ndarray) -> np.ndarray:
     # Translate each ring to its first vertex before summing cross products.
     x = x - x[:, :1]
     y = y - y[:, :1]
@@ -55,13 +60,96 @@ def _projected_areas(
     return areas
 
 
+def _projected_areas(
+    rows: np.ndarray, cols: np.ndarray, affine: Affine, transformer: Transformer, segments: int,
+) -> np.ndarray:
+    row, col = _ring_offsets(np.arange(segments, dtype=np.float64) / segments, 1)
+    return _cell_areas(*_project_points(rows[:, None] + row, cols[:, None] + col, affine, transformer))
+
+
+@dataclass(frozen=True)
+class _ProjectionLevel:
+    keys: np.ndarray
+    inverse: np.ndarray
+    reused: np.ndarray
+    missing: np.ndarray
+    new_rows: np.ndarray
+    new_cols: np.ndarray
+
+
+class _BatchLayout:
+    """Keep the small refinement indices for the most recent shape in a tile."""
+
+    def __init__(self, row_offsets: np.ndarray, col_offsets: np.ndarray) -> None:
+        self.row_offsets, self.col_offsets = row_offsets, col_offsets
+        scale = _SEGMENTS_PER_EDGE[-1]
+        # The largest sampled column is the right edge of the last cell.
+        self._stride = (int(col_offsets.max()) + 1) * scale + 1
+        self._cell_keys = (row_offsets * self._stride + col_offsets) * scale
+        self._levels: dict[int, _ProjectionLevel] = {}
+
+    def matches(self, row_offsets: np.ndarray, col_offsets: np.ndarray) -> bool:
+        return np.array_equal(self.row_offsets, row_offsets) and np.array_equal(self.col_offsets, col_offsets)
+
+    def level(self, segments: int, previous_keys: np.ndarray) -> _ProjectionLevel:
+        if segments in self._levels:
+            return self._levels[segments]
+        scale = _SEGMENTS_PER_EDGE[-1]
+        along = np.arange(segments, dtype=np.int64) * (scale // segments)
+        row, col = _ring_offsets(along, scale)
+        ring_keys = self._cell_keys[:, None] + row * self._stride + col
+        keys, inverse = np.unique(ring_keys, return_inverse=True)
+        # Each finer dyadic ring contains the vertices sampled at the previous level.
+        reused = np.searchsorted(keys, previous_keys)
+        missing = np.ones(keys.size, dtype=bool)
+        missing[reused] = False
+        new_rows, new_cols = np.divmod(keys[missing], self._stride)
+        level = _ProjectionLevel(
+            keys, inverse.reshape(ring_keys.shape), reused, missing, new_rows / scale, new_cols / scale,
+        )
+        # Every successful batch needs at least these levels. Dense refinements
+        # can be much larger, so retain their indices only during the current batch.
+        if segments <= _SEGMENTS_PER_EDGE[2]:
+            self._levels[segments] = level
+        return level
+
+
+class _BatchProjection:
+    """Reuse dyadic boundary vertices within one tile-local convergence batch."""
+
+    def __init__(
+        self, rows: np.ndarray, cols: np.ndarray, affine: Affine, transformer: Transformer,
+        layout: _BatchLayout | None,
+    ) -> None:
+        self._row_origin, self._col_origin = int(rows.min()), int(cols.min())
+        self._layout = layout or _BatchLayout(rows - self._row_origin, cols - self._col_origin)
+        self._affine, self._transformer = affine, transformer
+        self._keys = np.empty(0, dtype=np.int64)
+        self._x, self._y = np.empty(0), np.empty(0)
+
+    def areas(self, segments: int) -> np.ndarray:
+        level = self._layout.level(segments, self._keys)
+        new_x, new_y = _project_points(
+            self._row_origin + level.new_rows,
+            self._col_origin + level.new_cols,
+            self._affine, self._transformer,
+        )
+        x, y = np.empty(level.keys.size), np.empty(level.keys.size)
+        x[level.reused], y[level.reused] = self._x, self._y
+        x[level.missing], y[level.missing] = new_x, new_y
+        self._keys, self._x, self._y = level.keys, x, y
+        return _cell_areas(x[level.inverse], y[level.inverse])
+
+
 def _converged_areas(
     rows: np.ndarray, cols: np.ndarray, affine: Affine, transformer: Transformer,
+    *, layout: _BatchLayout | None = None,
 ) -> tuple[np.ndarray, int]:
-    previous = _projected_areas(rows, cols, affine, transformer, _SEGMENTS_PER_EDGE[0])
+    projection = _BatchProjection(rows, cols, affine, transformer, layout)
+    previous = projection.areas(_SEGMENTS_PER_EDGE[0])
     previous_converged = False
     for segments in _SEGMENTS_PER_EDGE[1:]:
-        areas = _projected_areas(rows, cols, affine, transformer, segments)
+        areas = projection.areas(segments)
         tolerance = np.maximum(_ABSOLUTE_TOLERANCE_M2, areas * _RELATIVE_TOLERANCE)
         converged = bool(np.all(np.abs(areas - previous) <= tolerance))
         if converged and previous_converged:
@@ -79,9 +167,14 @@ def _sum_projected_tile(
     rows += int(tile.row_off)
     cols += int(tile.col_off)
     max_segments = 0
+    layout = None
     for start in range(0, class_ids.size, _CELL_BATCH_SIZE):
         batch = slice(start, start + _CELL_BATCH_SIZE)
-        areas, segments = _converged_areas(rows[batch], cols[batch], affine, transformer)
+        batch_rows, batch_cols = rows[batch], cols[batch]
+        row_offsets, col_offsets = batch_rows - batch_rows.min(), batch_cols - batch_cols.min()
+        if layout is None or not layout.matches(row_offsets, col_offsets):
+            layout = _BatchLayout(row_offsets, col_offsets)
+        areas, segments = _converged_areas(batch_rows, batch_cols, affine, transformer, layout=layout)
         sums += np.bincount(class_ids[batch], weights=areas, minlength=NODATA_CLASS + 1)
         max_segments = max(max_segments, segments)
     return max_segments

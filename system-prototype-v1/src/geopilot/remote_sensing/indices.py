@@ -5,7 +5,6 @@ import math
 import os
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import rasterio
@@ -15,6 +14,7 @@ from rasterio.windows import Window
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 from geopilot.remote_sensing.scaling import REFLECTANCE_UNIT
 
@@ -198,7 +198,7 @@ def write_ndvi(reflectance: _Path, quality_mask: _Path, destination: _Path) -> N
     with rasterio.open(reflectance_path, driver="GTiff") as spectral, rasterio.open(quality_path, driver="GTiff") as quality:
         _validate_inputs(spectral, quality)
         source_metadata = read_raster_metadata(reflectance_path)
-        with TemporaryDirectory(prefix=".ndvi-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+        with temporary_output_directory(target, prefix=".ndvi-", ignore_cleanup_errors=True) as directory:
             staged = Path(directory) / "ndvi.tif"
             with rasterio.open(
                 staged, "w", driver="GTiff", width=spectral.width, height=spectral.height, count=1,

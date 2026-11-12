@@ -5,7 +5,6 @@ import math
 import os
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 from typing import Literal
 
 import numpy as np
@@ -16,6 +15,7 @@ from rasterio.windows import Window
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 from geopilot.remote_sensing.alignment import ALIGNED_NDVI_BANDS, AlignmentInputError, _open_referenced_tiff
 from geopilot.remote_sensing.indices import NDVI_MAXIMUM, NDVI_MINIMUM
@@ -139,7 +139,7 @@ def write_ndvi_change(aligned: _Path, destination: _Path) -> NdviChangeResult:
             "band_count": 1, "band_names": (NDVI_CHANGE_BAND,), "band_units": (NDVI_CHANGE_UNIT,),
             "band_dtypes": ("float64",), "nodata": ("nan",),
         })
-        with TemporaryDirectory(prefix=".ndvi-change-", dir=target.parent) as directory:
+        with temporary_output_directory(target, prefix=".ndvi-change-") as directory:
             staged = Path(directory) / "change.tif"
             with rasterio.open(
                 staged, "w", driver="GTiff", width=dataset.width, height=dataset.height, count=1,

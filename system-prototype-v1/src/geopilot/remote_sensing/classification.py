@@ -4,12 +4,12 @@ import math
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 from pydantic import JsonValue
 
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.area_stats import summarize_threshold_area
 from geopilot.gis.raster.threshold import ThresholdInterval, ThresholdSpec, classify_raster
 from geopilot.gis.raster.window_io import _check_destination, _local_source
@@ -77,7 +77,7 @@ def classify_ndvi_change(
     path = _local_source(source)
     before = capture_file_state(path)
     _validate_delta(path)
-    with TemporaryDirectory(prefix=".ndvi-classification-", dir=target.parent) as directory:
+    with temporary_output_directory(target, prefix=".ndvi-classification-") as directory:
         staged = Path(directory) / "classes.tif"
         metadata = classify_raster(path, staged, threshold=spec.model_dump(mode="json"))
         statistics = summarize_threshold_area(staged, area_crs=area_crs)

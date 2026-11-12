@@ -7,7 +7,6 @@ from dataclasses import dataclass
 from errno import EEXIST
 from numbers import Integral, Real
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import rasterio
@@ -19,6 +18,7 @@ from rasterio.windows import Window
 
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 
 
 _Path = str | os.PathLike[str]
@@ -128,7 +128,7 @@ def copy_raster_window(source: _Path, destination: _Path, window: Window) -> Ras
         if len(dtypes) != 1 or len(nodata_values) != 1:
             raise ValueError("GeoTIFF window copies require a shared storage dtype and NoData value")
         shared_mask = _shared_mask(dataset)
-        with TemporaryDirectory(prefix=".raster-window-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+        with temporary_output_directory(target, prefix=".raster-window-", ignore_cleanup_errors=True) as directory:
             staged = Path(directory) / "window.tif"
             with rasterio.Env(GDAL_TIFF_INTERNAL_MASK=True), rasterio.open(
                 staged, "w", driver="GTiff", width=window.width, height=window.height, count=dataset.count,

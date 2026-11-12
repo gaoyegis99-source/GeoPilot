@@ -7,7 +7,6 @@ import warnings
 from contextlib import ExitStack
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 from typing import Literal
 
 import numpy as np
@@ -26,6 +25,7 @@ from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.data.vector_reader import local_ogr_path
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.clip_back import analysis_scope
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 from geopilot.gis.tools.vector_step_files import read_vector
@@ -243,7 +243,7 @@ def align_ndvi(
             "band_count": 2, "band_dtypes": ("float64", "float64"), "band_names": ALIGNED_NDVI_BANDS,
             "band_units": ("1", "1"), "nodata": ("nan", "nan"),
         })
-        directory = Path(stack.enter_context(TemporaryDirectory(prefix=".ndvi-alignment-", dir=target.parent)))
+        directory = Path(stack.enter_context(temporary_output_directory(target, prefix=".ndvi-alignment-")))
         staged = directory / "output" / "aligned.tif"
         staged.parent.mkdir()
         warped = (first_data.crs, first_data.transform, first_data.shape) != (

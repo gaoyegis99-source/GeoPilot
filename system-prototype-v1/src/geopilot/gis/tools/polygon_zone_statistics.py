@@ -6,8 +6,8 @@ import os
 from contextlib import ExitStack
 from dataclasses import asdict, fields
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.tools.tool_command import run_tool_command
 from geopilot.gis.tools.vector_step_files import read_vector
 from geopilot.gis.vector.polygon_statistics import PolygonAllocation, PolygonStatistics, aggregate_polygon_statistics
@@ -21,7 +21,7 @@ def _write_statistics(outputs: dict, statistics: PolygonStatistics) -> None:
             target = Path(reference["path"])
             if target.suffix.lower() != suffix or reference.get("layer") is not None:
                 raise ValueError(f"{role} requires a {suffix} path without a layer")
-            directory = staging.enter_context(TemporaryDirectory(prefix=".polygon-statistics-", dir=target.parent))
+            directory = staging.enter_context(temporary_output_directory(target, prefix=".polygon-statistics-"))
             files[role] = (Path(directory) / target.name, target)
 
         with files["allocation_details"][0].open("x", encoding="utf-8", newline="") as stream:

@@ -7,7 +7,6 @@ from collections.abc import Iterator
 from contextlib import ExitStack, contextmanager
 from numbers import Integral
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import shapely
@@ -19,6 +18,7 @@ from shapely.geometry.base import BaseGeometry
 
 from geopilot.checks.input_checks import InputCheckResult, require_input_checks
 from geopilot.domain.data_asset import VectorMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.execution.step_support import PreparedStep, resolve_step_path
 from geopilot.gis.measurement.area import validate_area
 from geopilot.gis.measurement.projection import reproject_vector
@@ -183,7 +183,7 @@ def _stage_outputs(outputs: dict) -> Iterator[dict]:
         temporary = {}
         for role, reference in outputs.items():
             target = Path(reference["path"])
-            directory = staging.enter_context(TemporaryDirectory(prefix=".land-use-", dir=target.parent))
+            directory = staging.enter_context(temporary_output_directory(target, prefix=".land-use-"))
             temporary[role] = {**reference, "path": str(Path(directory) / target.name)}
         yield temporary
         with ExitStack() as rollback:

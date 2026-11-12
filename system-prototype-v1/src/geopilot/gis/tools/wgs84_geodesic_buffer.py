@@ -2,7 +2,6 @@
 
 import json
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import geopandas as gpd
 import pyogrio
@@ -10,6 +9,7 @@ from pyproj import CRS
 
 from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.vector_reader import local_ogr_path, read_layer_metadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.measurement.geodesic_buffer import (
     MAX_CAP_ANGLE_DEG,
     MAX_DISTANCE_M,
@@ -67,7 +67,7 @@ def buffer_roads(request: dict) -> dict:
     destination = Path(target["path"])
     if destination.suffix.lower() != ".gpkg":
         raise ValueError("The geodesic buffer output requires a .gpkg path")
-    with TemporaryDirectory(prefix=".geodesic-buffer-", dir=destination.parent) as directory:
+    with temporary_output_directory(destination, prefix=".geodesic-buffer-") as directory:
         staged = Path(directory) / "buffer.gpkg"
         pyogrio.write_dataframe(
             output, staged, driver="GPKG", layer=target.get("layer") or "buffer", layer_options=_layer_options(output),

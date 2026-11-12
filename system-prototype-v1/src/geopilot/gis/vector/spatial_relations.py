@@ -65,13 +65,32 @@ def _prepare_selection(targets: GeoDataFrame, area: GeoDataFrame) -> tuple[np.nd
     return target_geometry.to_numpy(), scope
 
 
+def points_covered_by_scope(points: np.ndarray, scope: BaseGeometry) -> np.ndarray:
+    """Test point coverage, including contact with the shell and hole boundaries."""
+    shapely.prepare(scope)
+    return shapely.covers(scope, points)
+
+
 def select_intersecting(targets: GeoDataFrame, area: GeoDataFrame) -> GeoDataFrame:
     """Return original target rows that intersect the area, including boundary contact."""
     target_geometry, scope = _prepare_selection(targets, area)
-    return targets.iloc[shapely.intersects(target_geometry, scope)].copy()
+    retained = _evaluate_prepared(scope, target_geometry, shapely.intersects, shapely.intersects)
+    return targets.iloc[retained].copy()
 
 
 def select_within(targets: GeoDataFrame, area: GeoDataFrame) -> GeoDataFrame:
     """Return original target rows contained in the area with intersecting interiors."""
     target_geometry, scope = _prepare_selection(targets, area)
-    return targets.iloc[shapely.within(target_geometry, scope)].copy()
+    retained = _evaluate_prepared(scope, target_geometry, shapely.contains, shapely.within)
+    return targets.iloc[retained].copy()
+
+
+def _evaluate_prepared(scope: BaseGeometry, targets: np.ndarray, predicate, original_predicate) -> np.ndarray:
+    if targets.size:
+        try:
+            shapely.prepare(scope)
+            return predicate(scope, targets)
+        except GEOSException:
+            # Preserve the original predicate result or error if preparation cannot be used.
+            pass
+    return original_predicate(targets, scope)

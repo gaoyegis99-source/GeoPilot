@@ -4,7 +4,6 @@ import json
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import rasterio
@@ -13,6 +12,7 @@ from rasterio.io import DatasetReader, DatasetWriter
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 from geopilot.remote_sensing.band_mapper import ProductBandMapping, map_product_bands
 from geopilot.remote_sensing.config_models import BitmaskQualityRule, SensorConfigRef
@@ -122,7 +122,7 @@ def write_quality_mask(source: _Path, destination: _Path, *, registry: SensorCon
         "band_count": 1, "nodata": (None,), "band_dtypes": ("uint8",), "band_names": (_BAND_NAME,), "band_units": (None,),
     })
 
-    with TemporaryDirectory(prefix=".quality-mask-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+    with temporary_output_directory(target, prefix=".quality-mask-", ignore_cleanup_errors=True) as directory:
         staged = Path(directory) / "quality.tif"
         with rasterio.open(path, driver="GTiff") as dataset, rasterio.open(
             staged, "w", driver="GTiff", width=dataset.width, height=dataset.height, count=1, dtype="uint8",

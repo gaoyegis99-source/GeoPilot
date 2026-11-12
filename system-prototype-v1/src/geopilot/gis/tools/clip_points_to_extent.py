@@ -3,17 +3,18 @@
 import os
 from contextlib import ExitStack
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import geopandas as gpd
 import pyogrio
 import shapely
 from pyproj import CRS
 
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.data.geopackage_reader import read_geopackage_metadata
 from geopilot.data.vector_reader import local_ogr_path, read_layer_metadata
 from geopilot.domain.data_asset import VectorMetadata
 from geopilot.gis.tools.tool_command import run_tool_command
+from geopilot.gis.vector.spatial_relations import points_covered_by_scope
 
 
 def _read_vector(reference: dict, *, role: str, kinds: set[str]) -> tuple[gpd.GeoDataFrame, str]:
@@ -57,7 +58,7 @@ def _write_outputs(points: gpd.GeoDataFrame, outputs: dict, geometry_type: str) 
             target = Path(reference["path"])
             if target.suffix.lower() != ".gpkg":
                 raise ValueError(f"{role} output requires a .gpkg path")
-            directory = staging.enter_context(TemporaryDirectory(prefix=".geopilot-clip-", dir=target.parent))
+            directory = staging.enter_context(temporary_output_directory(target, prefix=".geopilot-clip-"))
             temporary = Path(directory) / "points.gpkg"
             pyogrio.write_dataframe(
                 points, temporary, driver="GPKG", layer=reference.get("layer") or role,
@@ -88,8 +89,7 @@ def clip_points(request: dict) -> dict:
         raise ValueError("source_feature_id values must be nonempty")
 
     coverage = shapely.union_all(extent.geometry.to_numpy())
-    shapely.prepare(coverage)
-    selected = points.loc[shapely.covers(coverage, points.geometry.to_numpy())]
+    selected = points.loc[points_covered_by_scope(points.geometry.to_numpy(), coverage)]
     outputs = request["output_targets"]
     _write_outputs(selected, outputs, geometry_type)
     print(f"Selected {len(selected)} of {len(points)} point(s) covered by the analysis extent")

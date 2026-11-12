@@ -4,6 +4,7 @@ import json
 import math
 import shlex
 from collections.abc import Callable, Mapping, Sequence
+from contextlib import AbstractContextManager
 from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
@@ -24,6 +25,7 @@ _REQUEST_KEYS = {
     "run_id", "step_key", "tool", "workdir_ref", "inputs", "parameters",
     "output_targets", "log_path", "cancel_path",
 }
+OUTPUT_STAGING_RECEIPT = ".python-output-staging.json"
 
 
 class AdapterError(ValueError):
@@ -71,6 +73,20 @@ def resolve_step_path(workdir: Path, relative: str, *, field: str) -> Path:
         if path.is_symlink():
             raise _invalid("Symbolic links are not allowed inside the run directory", field)
     return path
+
+
+def output_staging_receipt_path(workdir: Path, request: Mapping) -> Path:
+    """Derive the private receipt path from the validated, persisted step request."""
+    log = workdir / request["log_path"]
+    occupied = {log, workdir / request["cancel_path"]}
+    for key in ("inputs", "output_targets"):
+        occupied.update(workdir / ref["path"] for ref in request[key].values())
+    receipt = log.with_name(OUTPUT_STAGING_RECEIPT)
+    suffix = 1
+    while receipt in occupied:
+        receipt = log.with_name(f".python-output-staging-{suffix}.json")
+        suffix += 1
+    return receipt
 
 
 def _new_file(path: Path, field: str) -> None:
@@ -137,6 +153,10 @@ def prepare_step(
     records = {log, request_file, result_file, cancel, log.with_name("python-result.json")}
     if len(records) != 5 or records & (input_paths | output_paths):
         raise _invalid("Step record paths overlap with each other or a data file", "log_path")
+    if contract.runner == "python" and outputs:
+        receipt = output_staging_receipt_path(root, request)
+        if receipt.exists() or receipt.is_symlink():
+            raise _invalid("The Python staging receipt location is already in use", "log_path")
     for path in (log, request_file, result_file):
         _new_file(path, "log_path")
 
@@ -152,6 +172,7 @@ def prepare_step(
 def run_process(
     step: PreparedStep, argv: Sequence[str], *, timeout: float,
     stdin: str | None = None, env: Mapping[str, str] | None = None,
+    env_context: AbstractContextManager[Mapping[str, str]] | None = None,
     phase: str = "execute",
 ) -> str:
     """Capture a real child process and keep stdout/stderr in the step log."""
@@ -165,7 +186,7 @@ def run_process(
         probe = None if step.telemetry is None else step.telemetry.start_process(phase)
         try:
             outcome = capture_process(
-                argv, cwd=step.workdir, env=env, stdin=stdin, timeout=timeout,
+                argv, cwd=step.workdir, env=env, env_context=env_context, stdin=stdin, timeout=timeout,
                 cancel_requested=step.cancel_requested, probe=probe,
             )
         except OSError as error:

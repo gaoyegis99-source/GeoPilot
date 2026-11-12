@@ -6,7 +6,6 @@ import os
 from collections.abc import Callable
 from itertools import pairwise
 from pathlib import Path
-from tempfile import TemporaryDirectory
 from typing import Annotated, Self
 
 import numpy as np
@@ -17,6 +16,7 @@ from rasterio.io import DatasetReader, DatasetWriter
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 
 
@@ -146,7 +146,7 @@ def classify_raster(source: _Path, destination: _Path, *, threshold: dict) -> Ra
         if not all(map(math.isfinite, (dataset.scales[0], dataset.offsets[0]))):
             raise ValueError("Raster scale and offset must be finite")
 
-        with TemporaryDirectory(prefix=".raster-threshold-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+        with temporary_output_directory(target, prefix=".raster-threshold-", ignore_cleanup_errors=True) as directory:
             staged = Path(directory) / "classes.tif"
             with rasterio.open(
                 staged, "w", driver="GTiff", width=dataset.width, height=dataset.height, count=1, dtype="uint8",

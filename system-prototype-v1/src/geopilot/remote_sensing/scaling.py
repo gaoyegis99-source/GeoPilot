@@ -6,7 +6,6 @@ import os
 import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import rasterio
@@ -16,6 +15,7 @@ from rasterio.io import DatasetReader, DatasetWriter
 from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.window_io import _check_destination, _local_source
 from geopilot.remote_sensing.band_mapper import ProductBandMapping, map_product_bands
 from geopilot.remote_sensing.config_models import BandMetadataFieldRef, MetadataFieldRef, MultiplyAddScale
@@ -160,7 +160,7 @@ def scale_product_reflectance(source: _Path, destination: _Path, *, registry: Se
     coefficients = resolve_reflectance_coefficients(mapping)
     evidence = _calibration_evidence(mapping, coefficients)
     source_metadata = read_raster_metadata(path)
-    with TemporaryDirectory(prefix=".reflectance-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+    with temporary_output_directory(target, prefix=".reflectance-", ignore_cleanup_errors=True) as directory:
         staged = Path(directory) / "reflectance.tif"
         with rasterio.open(path, driver="GTiff") as dataset, rasterio.open(
             staged, "w", driver="GTiff", width=dataset.width, height=dataset.height, count=len(_ROLES),

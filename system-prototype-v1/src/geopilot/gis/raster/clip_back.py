@@ -3,7 +3,6 @@
 import json
 import os
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 import numpy as np
 import rasterio
@@ -18,6 +17,7 @@ from geopilot.data.fingerprint import capture_file_state
 from geopilot.data.raster_reader import read_raster_metadata
 from geopilot.domain.data_asset import RasterMetadata
 from geopilot.domain.step_io import StepFileRef
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.raster.dem_prepare import _windows_record
 from geopilot.gis.raster.extent_expansion import ExpandedWindow, expand_analysis_window
 from geopilot.gis.raster.window_io import _check_destination, _local_source
@@ -126,7 +126,7 @@ def clip_terrain_to_analysis_extent(
 
     with rasterio.open(path, driver="GTiff") as dataset:
         _check_terrain_grid(dataset, grid, expanded)
-        with TemporaryDirectory(prefix=".terrain-clip-", dir=target.parent, ignore_cleanup_errors=True) as directory:
+        with temporary_output_directory(target, prefix=".terrain-clip-", ignore_cleanup_errors=True) as directory:
             staged = Path(directory) / "terrain.tif"
             with rasterio.Env(GDAL_TIFF_INTERNAL_MASK=True), rasterio.open(
                 staged, "w", driver="GTiff", width=crop.width, height=crop.height, count=1, dtype=dataset.dtypes[0],

@@ -7,6 +7,10 @@ import sys
 from collections.abc import Mapping
 from pathlib import Path
 
+from geopilot.execution.output_staging import (
+    OUTPUT_STAGING_ENV,
+    owned_output_staging,
+)
 from geopilot.execution.step_support import AdapterError, PreparedStep, execute_adapter, run_process
 from geopilot.tools.registry import ToolRegistry
 
@@ -100,9 +104,13 @@ def invoke_python(
     script = _script_for(step, implementations)
     manifest = _new_manifest_path(step)
     env = os.environ.copy()
+    env.pop(OUTPUT_STAGING_ENV, None)
     source_root = str(Path(__file__).resolve().parents[2])
     inherited_path = env.get("PYTHONPATH")
     env["PYTHONPATH"] = os.pathsep.join((source_root, inherited_path)) if inherited_path else source_root
+    env_context = None
+    if step.request["output_targets"]:
+        env_context = owned_output_staging(step.workdir, step.request, env)
     run_process(
         step,
         [
@@ -112,6 +120,7 @@ def invoke_python(
         ],
         timeout=timeout,
         env=env,
+        env_context=env_context,
     )
     return _read_manifest(step, manifest)
 
