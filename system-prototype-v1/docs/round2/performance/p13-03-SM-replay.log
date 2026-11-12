@@ -1,0 +1,31 @@
+9f3f02138d93ec52ca0a9a0409d097c10eb1cb84
+Python 3.13.13
+Linux 5.15.0-139-generic x86_64 GNU/Linux
+28419e97039836130f5f87eab1488183fd222a863440010ffeced02f9bec1413  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-03-SM-runner-snapshot.tar.gz
+scripts/bench/_vector_reference.py: 成功
+scripts/bench/run_vector.py: 成功
+env PYTHONDONTWRITEBYTECODE=1 OPENBLAS_NUM_THREADS=1 nice -n 19 taskset -c 31 <host-python> scripts/bench/run_vector.py --help
+usage: run_vector.py [-h] [--profile PROFILE] [--output OUTPUT]
+                     [--qgis-process QGIS_PROCESS]
+                     [--source-commit SOURCE_COMMIT] [--tier {S,M,L}]
+                     [--workload {t13-points-intersects,t13-points-within,t13-lines-intersects,t13-lines-within,t13-polygons-intersects,t13-polygons-within,t14-split_by_area,t14-centroid,t14-largest_overlap,road}]
+                     [--cache-state {process_cold,warm}] [--probe]
+                     [--wait-seconds WAIT_SECONDS]
+                     [--budget-seconds BUDGET_SECONDS]
+
+Measure the exact V1 vector methods in isolated, serial benchmark runs.
+
+options:
+  -h, --help            show this help message and exit
+  --profile PROFILE
+  --output OUTPUT       New evidence and input directory
+  --qgis-process QGIS_PROCESS
+  --source-commit SOURCE_COMMIT
+  --tier {S,M,L}
+  --workload {t13-points-intersects,t13-points-within,t13-lines-intersects,t13-lines-within,t13-polygons-intersects,t13-polygons-within,t14-split_by_area,t14-centroid,t14-largest_overlap,road}
+  --cache-state {process_cold,warm}
+  --probe               One run per selected group; excludes all measurements
+  --wait-seconds WAIT_SECONDS
+  --budget-seconds BUDGET_SECONDS
+                        Stop starting samples at the elapsed limit
+Historical driver CLI probe exit: 0

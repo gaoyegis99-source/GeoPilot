@@ -237,6 +237,7 @@
 
 - B 的原生批次使用冻结的生产提交 `37cb329be04eaddfeb23ac62789926d0fcdb63aa`。道路、T13 面相交和 T14 按面积分割分别完成冷热两类各 2 次预热和 5 次正式采样，批次退出 1，汇总为 42 FAIL、0 PASS、0 NOT_RUN。
 - 主控从 `/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/evidence/samples.jsonl` 核对 42 个唯一运行及各组采样键。道路 14 次在成果登记报 `OUTPUT_INVALID`。T13 和 T14 各 14 次在 `apply_spatial_relation` 报 `PROCESS_TIMEOUT`，退出 -15。T14 的后续两步保持 `NOT_STARTED`。P13-03 仍为 DOING，余下七项继续正式采样。
+- F 独立复算 S、M、M 续段和首批 L 共 325 个唯一运行，分布及资源计数与归档一致。主控复跑结果逐字节一致，归档 S/M 实际使用的旧驱动并验证解包摘要及 CLI 入口。 [复算与旧驱动归档](../../docs/round2/performance/p13-03-SM-reproduction.md)
 
 ## P13-05 隔离候选检查
 

@@ -1,0 +1,233 @@
+{
+  "status": "PASS_ARCHIVED_RECORD_AUDIT",
+  "batches": {
+    "S": {
+      "records": 140,
+      "counts": {
+        "PASS": 140,
+        "FAIL": 0,
+        "NOT_RUN": 0
+      },
+      "groups": 20,
+      "step_groups": 56,
+      "phases": {
+        "warmup": {
+          "PASS": 40
+        },
+        "measurement": {
+          "PASS": 100
+        }
+      },
+      "output_checks_passed": 140,
+      "independent_geometry_checks_passed": 140,
+      "largest_successful_step_medians": [
+        {
+          "workload": "road",
+          "cache": "process_cold",
+          "step": "expand_analysis_extent",
+          "seconds": 2.77297596
+        },
+        {
+          "workload": "road",
+          "cache": "process_cold",
+          "step": "apply_spatial_relation",
+          "seconds": 2.767809693
+        },
+        {
+          "workload": "road",
+          "cache": "process_cold",
+          "step": "select_roads_from_expanded_extent",
+          "seconds": 2.73030157
+        }
+      ],
+      "failure_hotspots": {}
+    },
+    "M": {
+      "records": 140,
+      "counts": {
+        "PASS": 115,
+        "FAIL": 0,
+        "NOT_RUN": 25
+      },
+      "groups": 20,
+      "step_groups": 39,
+      "phases": {
+        "warmup": {
+          "PASS": 34,
+          "NOT_RUN": 6
+        },
+        "measurement": {
+          "PASS": 81,
+          "NOT_RUN": 19
+        }
+      },
+      "output_checks_passed": 115,
+      "independent_geometry_checks_passed": 115,
+      "largest_successful_step_medians": [
+        {
+          "workload": "t13-points-intersects",
+          "cache": "process_cold",
+          "step": "clip_back_to_analysis_extent",
+          "seconds": 6.159928139
+        },
+        {
+          "workload": "t13-points-intersects",
+          "cache": "warm",
+          "step": "clip_back_to_analysis_extent",
+          "seconds": 6.074388453
+        },
+        {
+          "workload": "t14-split_by_area",
+          "cache": "process_cold",
+          "step": "clip_back_to_analysis_extent",
+          "seconds": 5.836832642
+        }
+      ],
+      "failure_hotspots": {}
+    },
+    "M-cont": {
+      "records": 28,
+      "counts": {
+        "PASS": 28,
+        "FAIL": 0,
+        "NOT_RUN": 0
+      },
+      "groups": 4,
+      "step_groups": 20,
+      "phases": {
+        "warmup": {
+          "PASS": 8
+        },
+        "measurement": {
+          "PASS": 20
+        }
+      },
+      "output_checks_passed": 28,
+      "independent_geometry_checks_passed": 28,
+      "largest_successful_step_medians": [
+        {
+          "workload": "t14-largest_overlap",
+          "cache": "process_cold",
+          "step": "clip_back_to_analysis_extent",
+          "seconds": 5.863371247
+        },
+        {
+          "workload": "t14-largest_overlap",
+          "cache": "warm",
+          "step": "clip_back_to_analysis_extent",
+          "seconds": 5.852776179
+        },
+        {
+          "workload": "t14-largest_overlap",
+          "cache": "warm",
+          "step": "aggregate_by_zone",
+          "seconds": 4.007207793
+        }
+      ],
+      "failure_hotspots": {}
+    },
+    "L-formal": {
+      "records": 42,
+      "counts": {
+        "PASS": 0,
+        "FAIL": 42,
+        "NOT_RUN": 0
+      },
+      "groups": 6,
+      "step_groups": 0,
+      "phases": {
+        "warmup": {
+          "FAIL": 12
+        },
+        "measurement": {
+          "FAIL": 30
+        }
+      },
+      "output_checks_passed": 0,
+      "independent_geometry_checks_passed": 0,
+      "largest_successful_step_medians": [],
+      "failure_hotspots": {
+        "L/road/process_cold/road-l-utm50n-south@1": {
+          "state": "OUTPUT_INVALID",
+          "wall_seconds_range": [
+            55.666114407,
+            57.826014337
+          ],
+          "observed_rss_mib_range": [
+            708.8046875,
+            738.43359375
+          ]
+        },
+        "L/road/warm/road-l-utm50n-south@1": {
+          "state": "OUTPUT_INVALID",
+          "wall_seconds_range": [
+            54.962475043,
+            56.21094646
+          ],
+          "observed_rss_mib_range": [
+            710.828125,
+            737.91796875
+          ]
+        },
+        "L/t13-polygons-intersects/process_cold/p13-01": {
+          "state": "PROCESS_TIMEOUT",
+          "wall_seconds_range": [
+            67.416709873,
+            67.507857775
+          ],
+          "observed_rss_mib_range": [
+            451.14453125,
+            452.66015625
+          ]
+        },
+        "L/t13-polygons-intersects/warm/p13-01": {
+          "state": "PROCESS_TIMEOUT",
+          "wall_seconds_range": [
+            67.340044339,
+            67.531723354
+          ],
+          "observed_rss_mib_range": [
+            451.23828125,
+            452.24609375
+          ]
+        },
+        "L/t14-split_by_area/process_cold/p13-01": {
+          "state": "PROCESS_TIMEOUT",
+          "wall_seconds_range": [
+            65.135427389,
+            65.265445986
+          ],
+          "observed_rss_mib_range": [
+            312.98046875,
+            318.00390625
+          ]
+        },
+        "L/t14-split_by_area/warm/p13-01": {
+          "state": "PROCESS_TIMEOUT",
+          "wall_seconds_range": [
+            65.074534075,
+            65.271688863
+          ],
+          "observed_rss_mib_range": [
+            313.03515625,
+            318.43359375
+          ]
+        }
+      }
+    }
+  },
+  "unique_actual_run_ids": 325,
+  "M_complete_groups": 20,
+  "L_pending_workloads": [
+    "t13-lines-intersects",
+    "t13-lines-within",
+    "t13-points-intersects",
+    "t13-points-within",
+    "t13-polygons-within",
+    "t14-centroid",
+    "t14-largest_overlap"
+  ],
+  "L_pending_trials": 98,
+  "method_source_commit": "37cb329be04eaddfeb23ac62789926d0fcdb63aa",
+  "image": "sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87"
+}
