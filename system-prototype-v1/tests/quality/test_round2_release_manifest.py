@@ -16,6 +16,10 @@ RECEIPT = "artifacts/reports/final/round2-validation.json"
 VERIFIER = "scripts/quality/verify_delivery_manifest.py"
 REPORT_DIR = f"{PROTOTYPE}/artifacts/reports/final/round2-validation"
 REPRODUCTION = f"{PROTOTYPE}/docs/release/reproduction.md"
+FIXED_MAPPING = "docs/round2/audit/p12-07-mapping.json"
+FIXED_NODES = [
+    f'<testcase classname="tests.test_fixed" name="test_case[T{index:02}]" />' for index in range(1, 17)
+]
 
 
 def _git(repo, *args):
@@ -57,6 +61,12 @@ def delivery(tmp_path):
     }
     for path, content in files.items():
         _write(root, path, content)
+    _write(root, FIXED_MAPPING, json.dumps({
+        "fixed_cases": {
+            case_id: {"nodes": [{"id": f"tests/test_fixed.py::test_case[{case_id}]"}]}
+            for case_id in (f"T{index:02}" for index in range(1, 17))
+        }
+    }))
     _write(repo, ".github/workflows/ci.yml", "name: fixture\n")
     for tool in (GENERATOR, VERIFIER, "scripts/quality/round2_release_manifest.py",
                  "scripts/quality/build_source_inventory.py", "scripts/quality/check_doc_evidence_links.py"):
@@ -69,8 +79,8 @@ def delivery(tmp_path):
         junit, log = f"{REPORT_DIR}/{name}.xml", f"{REPORT_DIR}/{name}.log"
         _write(repo, log, f"commit {source}\nfixture validation\nexit 0\n")
         skip = '<testcase name="optional"><skipped /></testcase>' if name == "backend" else ""
-        count = 2 if skip else 1
-        _write(repo, junit, f'<testsuites><testsuite tests="{count}"><testcase name="observed"/>{skip}</testsuite></testsuites>')
+        cases = "".join(FIXED_NODES) if name == "fixed_gis" else '<testcase name="observed"/>' + skip
+        _write(repo, junit, f"<testsuites><testsuite>{cases}</testsuite></testsuites>")
         suites.append({
             "name": name, "command": ["fixture", name], "environment": {"runtime": "fixture-1"},
             "exit_code": 0, "junit": junit, "log": log,
@@ -99,7 +109,9 @@ def test_generate_and_verify_exact_source_and_evidence(delivery):
     }
     assert {item["path"] for item in manifest["source_files"]} >= {
         f"{PROTOTYPE}/frontend/package-lock.json", f"{PROTOTYPE}/tests/fixture.json", ".github/workflows/ci.yml",
+        f"{PROTOTYPE}/{FIXED_MAPPING}",
     }
+    assert manifest["fixed_gis_mapping"] == f"{PROTOTYPE}/{FIXED_MAPPING}"
     assert f"{PROTOTYPE}/docs/release/capacity.json" in {item["path"] for item in manifest["evidence"]}
     (root / "src/engine.py").write_text("dirty local file\n", encoding="utf-8")
     checked = _invoke(root, VERIFIER, "--round2-manifest", MANIFEST)
@@ -159,6 +171,16 @@ def test_requires_checked_log_report_and_reproduction_links(delivery, relative, 
     result = _generate(root, source, _commit(repo))
     assert result.returncode == 1
     assert diagnosis in result.stderr
+
+
+@pytest.mark.parametrize("last_node", ['', FIXED_NODES[-1] * 2])
+def test_fixed_gis_junit_requires_each_mapped_node_once(delivery, last_node):
+    repo, root, source, _, _ = delivery
+    cases = "".join(FIXED_NODES[:-1]) + last_node
+    _write(repo, f"{REPORT_DIR}/fixed_gis.xml", f"<testsuites><testsuite>{cases}</testsuite></testsuites>")
+    result = _generate(root, source, _commit(repo))
+    assert result.returncode == 1
+    assert "Missing or duplicate fixed GIS node for T16" in result.stderr
 
 
 def test_refuses_unsafe_receipt_and_tampered_manifest(delivery):

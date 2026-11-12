@@ -8,6 +8,8 @@
 
 本轮 39 项通过、0 失败、0 跳过，退出 0。真实 Git 夹具覆盖两个提交、源码漂移、错误日志、错误 JUnit 计数、缺失链接、归档重复生成、不覆盖现有归档、解包后无 Git 校验以及篡改检测。第二轮实际候选包尚未生成。 [日志](p16-06-tooling-pytest.log) · [JUnit](p16-06-tooling-junit.xml) · [CI 静态核对](p16-06-tooling-ci.json)
 
+补充复验基于 `ddf4e6074b265626690aef3986d013776acb5bec` 和本项变更。生成及离线核验逐一检查固定 GIS JUnit 中的 T01–T16 映射节点。缺失或重复节点时拒绝归档。按同一测试文件复跑 41 项通过、0 失败、0 跳过，退出 0。历史 JUnit 中的 476 个节点包含映射要求的 82 个唯一节点，逐项匹配。正式候选仍待同源提交复验。 [日志](p16-06-coverage-pytest.log) · [JUnit](p16-06-coverage-junit.xml)
+
 ```bash
 p16_manifest_tmp=$(mktemp -d /dev/shm/geopilot-p16-06.XXXXXX)
 export PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1

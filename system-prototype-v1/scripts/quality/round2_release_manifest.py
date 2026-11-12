@@ -6,6 +6,7 @@ import json
 import posixpath
 import re
 import tarfile
+from collections import Counter
 from pathlib import Path, PurePosixPath, PureWindowsPath
 from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree
@@ -18,10 +19,12 @@ from verify_delivery_manifest import committed_file_states, committed_files, rea
 MANIFEST = Path("artifacts/reports/final/round2-delivery-manifest.json")
 RECEIPT = "artifacts/reports/final/round2-validation.json"
 _SOURCE_DIRECTORIES = ("src", "config", "frontend", "scripts", "tests", "benchmarks", "artifacts/schemas")
+_FIXED_GIS_MAPPING = "docs/round2/audit/p12-07-mapping.json"
 _SOURCE_FILES = ("README.md", "pyproject.toml", "requirements.txt", "requirements-test.txt",
-                 "artifacts/reports/final/delivery_manifest.py")
+                 "artifacts/reports/final/delivery_manifest.py", _FIXED_GIS_MAPPING)
 _WORKFLOW = ".github/workflows/ci.yml"
 _REQUIRED_SUITES = {"backend", "frontend", "fixed_gis"}
+_FIXED_CASES = {f"T{number:02}" for number in range(1, 17)}
 _HASH = re.compile(r"[0-9a-f]{40}|[0-9a-f]{64}")
 
 
@@ -87,7 +90,7 @@ def _count_cases(document: ElementTree.Element) -> dict[str, int]:
     return {"passed": counts["tests"] - counts["failures"] - counts["errors"] - counts["skipped"], **counts}
 
 
-def _junit_counts(data: bytes) -> dict[str, int]:
+def _junit_report(data: bytes) -> tuple[ElementTree.Element, dict[str, int]]:
     try:
         document = ElementTree.fromstring(data)
     except ElementTree.ParseError as error:
@@ -100,20 +103,48 @@ def _junit_counts(data: bytes) -> dict[str, int]:
     for suite in document.iter("testsuite"):
         if suite is not document:
             _count_cases(suite)
-    return counts
+    return document, counts
 
 
-def _observed_suite(name: str, junit: bytes, log: bytes, source_commit: str) -> dict:
+def _check_fixed_gis(document: ElementTree.Element, mapping: bytes) -> None:
+    content = json.loads(mapping, object_pairs_hook=_json_object)
+    cases = content.get("fixed_cases") if isinstance(content, dict) else None
+    if not isinstance(cases, dict) or cases.keys() != _FIXED_CASES:
+        raise ValueError("Fixed GIS mapping must cover T01 through T16")
+    observed = Counter((node.get("classname"), node.get("name")) for node in document.iter("testcase"))
+    for case_id, case in sorted(cases.items()):
+        nodes = case.get("nodes") if isinstance(case, dict) else None
+        if not isinstance(nodes, list) or not nodes:
+            raise ValueError(f"Fixed GIS mapping has no nodes for {case_id}")
+        for node in nodes:
+            node_id = node.get("id") if isinstance(node, dict) else None
+            if not isinstance(node_id, str):
+                raise ValueError(f"Invalid fixed GIS node for {case_id}")
+            file, separator, test = node_id.partition("::")
+            if not separator or not file.startswith("tests/") or not file.endswith(".py") or not test:
+                raise ValueError(f"Invalid fixed GIS node for {case_id}: {node_id}")
+            module = file.removesuffix(".py").replace("/", ".")
+            test_function, bracket, parameters = test.partition("[")
+            test_class, _, function_name = test_function.rpartition("::")
+            classname = f"{module}.{test_class.replace('::', '.')}" if test_class else module
+            name = function_name + bracket + parameters
+            if observed[classname, name] != 1:
+                raise ValueError(f"Missing or duplicate fixed GIS node for {case_id}: {node_id}")
+
+
+def _observed_suite(name: str, junit: bytes, log: bytes, source_commit: str, fixed_mapping: bytes) -> dict:
     log_lines = log.decode("utf-8").splitlines()
     if f"commit {source_commit}" not in log_lines or "exit 0" not in log_lines:
         raise ValueError(f"Test log does not bind the successful suite to the source commit: {name}")
-    counts = _junit_counts(junit)
+    document, counts = _junit_report(junit)
     if counts["failures"] or counts["errors"] or not counts["passed"] or (name == "fixed_gis" and counts["skipped"]):
         raise ValueError(f"Release suite has failures, errors or incomplete fixed GIS coverage: {name}")
+    if name == "fixed_gis":
+        _check_fixed_gis(document, fixed_mapping)
     return counts
 
 
-def _suites(repo: Path, tree: dict, receipt: dict, source_commit: str) -> tuple[list[dict], set[str]]:
+def _suites(repo: Path, tree: dict, receipt: dict, source_commit: str, fixed_mapping: bytes) -> tuple[list[dict], set[str]]:
     entries = receipt.get("suites")
     if not isinstance(entries, list):
         raise ValueError("Validation requires a suites array")
@@ -134,7 +165,7 @@ def _suites(repo: Path, tree: dict, receipt: dict, source_commit: str) -> tuple[
         junit, log = _file_path(suite["junit"]), _file_path(suite["log"])
         if junit == log or {junit, log} & evidence:
             raise ValueError(f"Release suites must use distinct reports and logs: {name}")
-        counts = _observed_suite(name, _read_file(repo, tree, junit), _read_file(repo, tree, log), source_commit)
+        counts = _observed_suite(name, _read_file(repo, tree, junit), _read_file(repo, tree, log), source_commit, fixed_mapping)
         results[name] = {**suite, "counts": counts}
         evidence.update((junit, log))
     if not _REQUIRED_SUITES <= results.keys():
@@ -197,7 +228,8 @@ def build_round2_manifest(root: Path, source_ref: str, evidence_ref: str) -> dic
         or receipt["source_commit"] != source_commit
     ):
         raise ValueError("The validation receipt must bind to the exact source commit")
-    suites, suite_evidence = _suites(repo, evidence_tree, receipt, source_commit)
+    mapping_path = prefix + _FIXED_GIS_MAPPING
+    suites, suite_evidence = _suites(repo, evidence_tree, receipt, source_commit, _read_file(repo, source_tree, mapping_path))
     reproduction = _paths(receipt["reproduction"], "reproduction")
     selected = _paths(receipt["evidence"], "evidence")
     source = _records(repo, source_tree, source_paths)
@@ -210,7 +242,7 @@ def build_round2_manifest(root: Path, source_ref: str, evidence_ref: str) -> dic
         "schema_version": 1, "release": "GeoPilot round2 candidate",
         "source_commit": source_commit, "evidence_commit": evidence_commit,
         "source_sha256": sha256(index.encode("utf-8")), "source_files": source,
-        "validation_suites": suites, "reproduction": sorted(reproduction),
+        "validation_suites": suites, "fixed_gis_mapping": mapping_path, "reproduction": sorted(reproduction),
         "evidence": _records(repo, evidence_tree, evidence_paths),
     }
 
@@ -236,6 +268,9 @@ def _manifest_records(manifest: object) -> tuple[dict[str, str], dict[str, str]]
         raise ValueError("A release manifest requires exact source and evidence commits")
     source = read_records(manifest.get("source_files"), "source_files")
     evidence = read_records(manifest.get("evidence"), "evidence")
+    mapping_path = _file_path(manifest.get("fixed_gis_mapping"))
+    if mapping_path not in source or not (mapping_path == _FIXED_GIS_MAPPING or mapping_path.endswith("/" + _FIXED_GIS_MAPPING)):
+        raise ValueError("Release manifest requires the fixed GIS mapping as a source file")
     index = "".join(f"{source[path]}  {path}\n" for path in sorted(source))
     if not source or not evidence or sha256(index.encode("utf-8")) != manifest.get("source_sha256"):
         raise ValueError("Release source index does not match its manifest")
@@ -287,6 +322,7 @@ def verify_round2_files(root: Path, manifest_path: Path) -> dict:
     suites = manifest.get("validation_suites")
     if not isinstance(suites, list):
         raise ValueError("A release manifest requires validation suites")
+    fixed_mapping = (root / manifest["fixed_gis_mapping"]).read_bytes()
     observed = {}
     for suite in suites:
         if not isinstance(suite, dict) or not isinstance(name := suite.get("name"), str) or name in observed:
@@ -294,7 +330,8 @@ def verify_round2_files(root: Path, manifest_path: Path) -> dict:
         junit, log = _file_path(suite.get("junit")), _file_path(suite.get("log"))
         if junit not in evidence or log not in evidence or type(suite.get("exit_code")) is not int or suite["exit_code"] != 0:
             raise ValueError(f"Release suite evidence is incomplete: {name}")
-        counts = _observed_suite(name, (root / junit).read_bytes(), (root / log).read_bytes(), manifest["source_commit"])
+        counts = _observed_suite(name, (root / junit).read_bytes(), (root / log).read_bytes(),
+                                 manifest["source_commit"], fixed_mapping)
         if json.dumps(counts, sort_keys=True) != json.dumps(suite.get("counts"), sort_keys=True):
             raise ValueError(f"Extracted suite counts differ from manifest: {name}")
         observed[name] = counts
