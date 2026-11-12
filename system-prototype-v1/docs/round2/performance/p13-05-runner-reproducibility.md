@@ -41,3 +41,9 @@ for p13_role in base candidate; do
     | diff -u "$p13_point/$p13_role/$p13_attempt/source-tree.sha256" -
 done
 ```
+
+## 基准状态观察失败分类
+
+遥感 S 重测原版有三次状态观察失败。三次均取得同一运行的 `SUCCEEDED/PASSED`，也通过独立成果验算。冻结比较器将其故障类型记为 `unspecified`。现行比较器在原始状态查询错误、`StatusObservationFailure`、运行身份、终态和成果验算均有证据时，输出 `STATUS_OBSERVATION_FAILED`。计量仍归入失败组，持久 GIS 错误码优先，成功样本比较条件沿用原规则。正式旧批次使用各自归档中的冻结工具复现。 [遥感 S 原始记录](p13-05-raster-s.md#遥感-s-重测)
+
+主控在 `6411db937e51e24782529ae690d7bacd03f49dcb` 上加入两处文件变更。Linux 5.15、Python 3.13.13、pytest 8.3.4。专项修正前 1 失败、5 通过，退出 1。修正后联合验证 8 通过、12 未选，退出 0。用现行工具重放遥感 S 和 DEM L 的严格配对均退出 0。遥感 S 冷组和暖组分别有 2、1 条分类更新，其余 JSON 字段一致。DEM L 的超时结果逐字节一致。回滚可撤销本项提交。 [命令、红绿日志、JUnit 和两份实际比较](p13-05-status-observation-classification-evidence.tar.gz)

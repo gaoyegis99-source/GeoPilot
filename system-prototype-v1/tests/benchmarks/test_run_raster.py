@@ -173,6 +173,37 @@ def test_statistics_preserve_failed_missing_and_warmup_samples(bench_modules):
     assert short == {"passed": 2, "failed": 1, "missing": 2}
 
 
+@pytest.mark.parametrize(
+    ("state_update", "sample_update", "failure_code"),
+    [
+        ({}, {}, "STATUS_OBSERVATION_FAILED"),
+        ({"run_id": "other"}, {}, None),
+        ({}, {"correctness": {}}, None),
+        ({}, {"status_poll_errors": []}, None),
+        ({"execution_status": "RUNNING", "check_status": "NOT_CHECKED"}, {}, None),
+        ({"execution_status": "FAILED", "error": {"code": "PROCESS_TIMEOUT"}}, {}, "PROCESS_TIMEOUT"),
+    ],
+)
+def test_comparison_preserves_status_observation_failure_after_verified_execution(
+    bench_modules, state_update, sample_update, failure_code,
+):
+    comparator = importlib.import_module("run_memory_profile")
+    sample = {
+        "status": "FAIL",
+        "run_id": "run",
+        "run_state": {"run_id": "run", "execution_status": "SUCCEEDED", "check_status": "PASSED", **state_update},
+        "error": {"type": "StatusObservationFailure"},
+        "status_poll_errors": [{"http_status": 500, "body": {"detail": {"code": "STORAGE_FAILED"}}}],
+        "correctness": {"classes": {"maximum_absolute_error": 0}},
+        "wall_ns": 100,
+        **sample_update,
+    }
+    observed = comparator.observation(sample, {}, {}, {}, require_run=True)
+    summary = comparator.summarize({("measurement", 1): observed})
+    assert summary["counts"] == {"FAIL": 1, "NOT_RUN": 0, "PASS": 0}
+    assert summary["failure_codes"] == {failure_code or "unspecified": 1}
+
+
 def test_status_observation_preserves_storage_error_body_and_limits_reads(bench_modules, monkeypatch):
     runner, _ = bench_modules
     workload = importlib.import_module("_raster_workloads")

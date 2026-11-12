@@ -199,6 +199,14 @@ def observation(row, resources, temp, options, *, require_run=False, executed=No
             raise ValueError("A successful sample has a different persisted run identity")
     failure = (run or {}).get("error") or row.get("error")
     error_code = failure.get("code") if isinstance(failure, dict) else row.get("reason")
+    if (
+        state == "FAIL" and require_run and run and error_code is None and run.get("error") is None
+        and isinstance(failure, dict) and failure.get("type") == "StatusObservationFailure"
+        and (run.get("execution_status"), run.get("check_status")) == ("SUCCEEDED", "PASSED")
+        and row.get("run_id") and run.get("run_id") == row["run_id"]
+        and row.get("correctness") and row.get("status_poll_errors")
+    ):
+        error_code = "STATUS_OBSERVATION_FAILED"
     wall = row.get("wall_ns")
     return {
         "status": state,

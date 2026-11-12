@@ -75,3 +75,5 @@ P13-05 在回执写入异常和清理同时失败、或启动子进程前强制�
 遥感 L 原版 14 轮均在变化计算步超时，两类暂存 TIFF 和配置回执已核对。冻结修正版运行中，取得完整回执后配对。隔离布局候选已复验遥感小窗耗时与正确性，整幅容量尚待测。 [原版完整记录](../../docs/round2/performance/p13-05-raster-m-l.md#遥感-l-原版完成) · [隔离布局候选](../../docs/round2/performance/p13-05-raster-m-l.md#有界栅格布局索引预研)
 
 已封存 20 个冷热配对组的整轮 RSS 尚无可用成功样本差值。正式 CPU 与磁盘读写只有部分采样，容量判断须采用观测范围及其他实测证据。 [配对资源覆盖](../../docs/round2/performance/p13-05-resource-coverage.md)
+
+状态查询的同一 HTTP 500 在隔离探针中对应不同 SQLite 底层错误。冻结遥感批的状态查询根因仍缺底层证据。现行比较器单列经终态和独立验算证实的观察失败，保留基准计量原有结果。 [SQLite 诊断](../../docs/round2/performance/p13-07.md#热回滚日志下的只读状态查询) · [基准分类](../../docs/round2/performance/p13-05-runner-reproducibility.md#基准状态观察失败分类)
