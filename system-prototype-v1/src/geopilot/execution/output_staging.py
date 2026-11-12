@@ -1,4 +1,7 @@
-"""Own and recover the temporary outputs of a Python invocation."""
+"""Own and recover the temporary outputs of a Python invocation.
+
+Tool subprocesses use the staging path helpers without loading the parent adapter.
+"""
 
 import json
 import logging
@@ -12,10 +15,6 @@ from shutil import rmtree
 from stat import S_ISDIR, S_ISREG
 from tempfile import TemporaryDirectory
 
-from geopilot.execution.step_support import output_staging_receipt_path, resolve_step_path
-from geopilot.persistence.workspace import _open_path
-
-
 OUTPUT_STAGING_ENV = "GEOPILOT_INTERNAL_OUTPUT_STAGING"
 _STAGE_NAME = re.compile(r"\.python-output-[0-9a-f]{32}")
 _MAX_RECEIPT_BYTES = 64 * 1024
@@ -27,6 +26,8 @@ def _identity(metadata: os.stat_result) -> tuple[int, int]:
 
 
 def _output_targets(workdir: Path, request: Mapping) -> set[Path]:
+    from geopilot.execution.step_support import resolve_step_path
+
     return {
         resolve_step_path(workdir, ref["path"], field="output_targets")
         for ref in request["output_targets"].values()
@@ -70,6 +71,9 @@ def owned_output_staging(
     workdir: Path, request: Mapping, env: Mapping[str, str],
 ) -> Iterator[Mapping[str, str]]:
     """Allocate and record the staging directories before launching the leased child."""
+    from geopilot.execution.step_support import output_staging_receipt_path
+    from geopilot.persistence.workspace import _open_path
+
     targets = _output_targets(workdir, request)
     parents = {target.parent for target in targets}
     receipt_path = output_staging_receipt_path(workdir, request)
@@ -129,6 +133,9 @@ def temporary_output_directory(
 
 def recover_output_staging(workdir: Path, request: Mapping) -> None:
     """Reclaim a recorded invocation while the caller holds the run's worker lease."""
+    from geopilot.execution.step_support import output_staging_receipt_path, resolve_step_path
+    from geopilot.persistence.workspace import _open_path
+
     receipt_path = output_staging_receipt_path(workdir, request)
     with _open_path(workdir, receipt_path.parent.relative_to(workdir).parts) as receipt_parent:
         try:
