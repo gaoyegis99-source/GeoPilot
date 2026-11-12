@@ -1,0 +1,35 @@
+Five benchmark tool/test blobs match frozen SHA-256 in Git b35660e3c1f932673020aada29454a98b68103e2.
+Detached preview candidate files all match the frozen candidate, with existing cancellation fix present.
+fa6bc12a43c93487c8159feb7fdf3529ac21b0bc0acaf436fe7a73591b54dd8d  scripts/bench/_raster_workloads.py
+70df5d4dd1eca53f43b229851b24a3d83f098dd07c6a54c49566529350d7e00d  scripts/bench/_runtime_config.py
+efb1bb22c92ffd42eab53292dc41868b30f61cf4b9f7473fba82efaa25e2804c  scripts/bench/run_memory_profile.py
+5a9a838b955f88aeddc5ec44e8627247bf5e0eb1289f55bd1a525012cee35d98  scripts/bench/run_with_runtime_configuration.py
+02db0b3600bd203911bc8bbb1fda6a4c16efcd6550261f29ec2be2b487833f6b  tests/benchmarks/test_run_raster.py
+
+Focused capture tests, Python 3.13.13, exit=0 in the isolated preview and audit branch:
+.venv/bin/python -B -m pytest -q -p no:cacheprovider tests/benchmarks/test_run_raster.py -k "collects_actual_normalized_requests or status_observation or statistics_preserve"
+....                                                                     [100%]
+=============================== warnings summary ===============================
+tests/benchmarks/test_run_raster.py::test_statistics_preserve_failed_missing_and_warmup_samples
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/p13-05-integration-preview.vpITur/audit-branch-capture-junit.xml -
+4 passed, 10 deselected, 1 warning in 1.18s
+
+Archive replay using the tracked comparator and strict configuration evidence:
+vector road result.json: byte-identical, exit=0
+vector t13-lines-within result.json: byte-identical, exit=0
+vector t13-points-intersects result.json: byte-identical, exit=0
+vector t14-split_by_area result.json: byte-identical, exit=0
+raster dem-s before-after.json: byte-identical, exit=0
+vector base self-comparison.json: byte-identical, exit=0
+Missing runtime receipt: rejected, exit=1
+Report bytes changed after receipt: rejected, exit=1
+
+Native read-only wrapper entrypoints, Python 3.12.3, image sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87, exit=0:
+runtime configuration: benchmark exited 0; no receipt: [Errno 2] No such file or directory: '/tmp/preview-vector/inputs.json'
+Verified vector native wrapper entrypoint and absent report
+runtime configuration: benchmark exited 0; no receipt: [Errno 2] No such file or directory: '/tmp/preview-raster/trials.jsonl'
+Verified raster native wrapper entrypoint and absent report

@@ -11,8 +11,25 @@
 | 冷态 | 5 | 96.612 | 97.374 | 60.667 | 3 / 5 |
 | 暖态 | 5 | 96.772 | 97.139 | 60.689 | 3 / 5 |
 
-墙钟分位按失败样本计算。原版严格自比较保留失败分布，成功分位留空。离线解包后复算结果与实时复算逐字节一致，冻结比较器回放也匹配原输出，均退出 0。原始分片位于 `/mnt/datab/geopilot-p13-05-vector-l.a2d2e68.C905zE/t13-points-intersects/base/attempt.zz4iJj/`。包含原始 JSONL、输入清单、回执、审计脚本与 SHA-256 清单的便携证据位于 `artifacts/test-results/p13-05-vector-l-portable-audit.jDmYpU/point-base-evidence.tar.gz`，摘要为 `234b5ecb2682e1af308110c84668d608406b2dead8d83d66b09c4280fcd5181d`。
+墙钟分位按失败样本计算。原版严格自比较保留失败分布，成功分位留空。原始分片位于 `/mnt/datab/geopilot-p13-05-vector-l.a2d2e68.C905zE/t13-points-intersects/base/attempt.zz4iJj/`，原始 JSONL、输入清单、配置回执和自比较结果均已收入完整配对归档。
 
 ## 点相交修正版
 
-修正版于 12:51:10 UTC 启动。已核验的两次冷态预热和前两次正式计量均 `SUCCEEDED/PASSED`。每次筛选及裁回各保留 65,536 个点，两项成果和检查报告与独立参考一致。前两次正式计量分别为 38.090、38.552 秒，完整冷热分布仍在采集。B 的独立审计和已核对的原始候选样本保存在 `artifacts/test-results/p13-05-vector-l-portable-audit.jDmYpU/`。后续栅格四组继续等待 L 矢量释放测量锁。 [栅格队列](p13-05-raster-s.md)
+修正版在 12:51:10–13:03:42 UTC 完成 14 次运行，均 `SUCCEEDED/PASSED`，容器和日志写入均退出 0。每次筛选及裁回各保留 65,536 个点，两步均退出 0，两项成果和检查报告与独立参考一致。主控和 B 核对了 28 个不同运行 ID，两侧回执一致，原始归档重放与实时配对逐字节相同。 [严格配对](p13-05-vector-l-point-comparison.json) · [完整原始证据和独立复算](p13-05-vector-l-point-evidence.tar.gz) · [复算日志](p13-05-vector-l-point-verification.log)
+
+| 修正版正式组 | 通过数 | 端到端中位数（秒） | 端到端 P95（秒） | 裁回中位数（秒） | RSS partial |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 冷态 | 5 | 38.719 | 39.384 | 14.640 | 2 / 5 |
+| 暖态 | 5 | 38.017 | 40.887 | 14.435 | 3 / 5 |
+
+两侧均成功完成筛选步骤，冷态中位数由 30.313 秒降至 14.686 秒，暖态由 30.242 秒降至 14.223 秒。原版裁回及端到端无成功样本，成功差值留空。修正版原始峰值 RSS 和临时文件观测随归档保留。完整 L 点相交配对已核验，线相交随后启动。 [栅格队列](p13-05-raster-s.md) · [已入库的复算工具](p13-05-runner-reproducibility.md)
+
+```bash
+p13_unpack=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-vector-l-point-evidence.tar.gz -C "$p13_unpack"
+(cd "$p13_unpack" && sha256sum -c SHA256SUMS)
+p13_point="$p13_unpack/t13-points-intersects"
+.venv/bin/python -B scripts/bench/run_memory_profile.py --kind vector --require-runtime-configuration \
+  --before "$p13_point/base/$(cat "$p13_point/base/COMPLETED")/evidence" \
+  --after "$p13_point/candidate/$(cat "$p13_point/candidate/COMPLETED")/evidence"
+```

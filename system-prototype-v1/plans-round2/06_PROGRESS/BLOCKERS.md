@@ -56,7 +56,7 @@ P13-05 已分别验证逐步请求采集、原生环境指纹及计时外配置�
 
 P13-05 修正版 M 矢量和 DEM S 配对已完成。遥感 S 原版在第 5 次冷态试次中止，持久库记录 `align_two_dates` 的 SQLite 锁冲突。受控 `BEGIN EXCLUSIVE` 复现状态 GET 的 `SQLITE_BUSY` 与 500。遥感 S 新配对、DEM M/L 和遥感 L 已排队，等待 L 矢量释放测量锁。 [修正版 M 复测](../../docs/round2/performance/p13-05-vector-m-revised.md) · [栅格 S 证据](../../docs/round2/performance/p13-05-raster-s.md)
 
-L 点相交原版的 14 次裁回超时已保留并核验，修正版正式冷热组仍在采集。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
+L 点相交配对完成，原版 14 次裁回超时，修正版 14 次通过。L 线相交正在采集，按面积分配和四组栅格随后执行。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
 
 P13-07 补充修复已集成。子进程取消轮询在 SQLite 忙锁时仍能按时完成超时处理，主机与原生专项通过。状态读取的 500 及其正式配对继续由 P13-05 独立复验。 [锁修复证据](../../docs/round2/performance/p13-07.md#子进程取消轮询锁冲突补充修复)
 

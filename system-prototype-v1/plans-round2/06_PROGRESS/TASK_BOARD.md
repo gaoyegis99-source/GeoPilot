@@ -18,7 +18,7 @@
 | P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | ACCEPTED | [旁路采样、真实运行及 T01–T16 复验](../../docs/round2/performance/p13-02.md) |
 | P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | ACCEPTED | S/M/L 各完成 20 个冷热组。S/M 正式样本各 100 通过，L 140 次实际失败，保留失败分位及资源观测。 [基准报告](../../docs/round2/performance/p13-03.md) · [独立复算](../../docs/round2/performance/p13-03-L-final-audit.log) |
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
-| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | DOING | 修正版 M 的 56 次新运行通过，DEM S 的 28 次前后测通过。L 点相交原版 14 次裁回超时，修正版已开始采样，四组栅格已排队。 [矢量 M](../../docs/round2/performance/p13-05-vector-m-revised.md) · [矢量 L](../../docs/round2/performance/p13-05-vector-l.md) · [栅格 S](../../docs/round2/performance/p13-05-raster-s.md) |
+| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | DOING | 修正版 M 的 56 次新运行通过，DEM S 的 28 次前后测通过。L 点相交原版 14 次裁回超时、修正版 14 次通过，线相交已启动。四组栅格已排队。 [矢量 M](../../docs/round2/performance/p13-05-vector-m-revised.md) · [矢量 L](../../docs/round2/performance/p13-05-vector-l.md) · [栅格 S](../../docs/round2/performance/p13-05-raster-s.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已实测同请求绑定变化、文件组及图层身份边界，等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
 | P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | SQLite 锁恢复、队列取消与重启已验证。补充修复取消轮询遇锁，集成主机 57 项及原生 10 项通过。 [验收](../../docs/round2/performance/p13-07.md) |
 | P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待多档基准、内存与缓存验收。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |

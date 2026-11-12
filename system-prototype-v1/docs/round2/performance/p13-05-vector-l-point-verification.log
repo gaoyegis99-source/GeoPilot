@@ -1,0 +1,9 @@
+Offline archive checksum verification exit=0.
+base side independent replay byte-identical, exit=0. Container=1 logging=0.
+candidate side independent replay byte-identical, exit=0. Container=0 logging=0.
+Tracked strict comparator reproduced the live result byte-for-byte, exit=0.
+audit.py: 成功
+independent.json: 成功
+independent.log: 成功
+28 unique runs verified. Baseline 14 timeout, candidate 14 passed.
+787a307337d3eb7de92c99e15ba22a7d700e82eff7fc5b244156f914837f493d  docs/round2/performance/p13-05-vector-l-point-evidence.tar.gz
