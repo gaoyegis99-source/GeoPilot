@@ -1,0 +1,21 @@
+id: python-land-use-transition-matrix
+version: 1
+runner: python
+implementation: geopilot.land_use_transition
+inputs:
+  overlay_polygons: vector_polygon
+  change_polygons: vector_polygon
+  allocations: json
+  change_report: json
+outputs:
+  transition_matrix: json
+  zone_statistics: json
+parameters:
+  area_crs: {type: string}
+  area_unit: {type: enum, values: [square_meter]}
+  area_tolerance: {type: number, minimum: 0, unit: square_meter}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known, input_crs_match, geometry_is_valid, source_feature_id_is_unique]
+check_rules: [output_exists]

@@ -1,0 +1,35 @@
+"qgis-expand-analysis-extent@1":
+  inputs:
+    source: INPUT
+  parameters:
+    distance: DISTANCE
+    segments: SEGMENTS
+    dissolve: DISSOLVE
+    end_cap_style: END_CAP_STYLE
+    join_style: JOIN_STYLE
+    miter_limit: MITER_LIMIT
+  outputs:
+    expanded_extent: OUTPUT
+  enum_values:
+    end_cap_style: {round: 0, flat: 1, square: 2}
+    join_style: {round: 0, miter: 1, bevel: 2}
+"qgis-select-roads-by-location@1":
+  inputs:
+    source: INPUT
+    area: INTERSECT
+  parameters:
+    predicate: PREDICATE
+  outputs:
+    roads: OUTPUT
+  enum_values:
+    predicate: {intersects: 0}
+"qgis-select-points-by-location@1":
+  inputs:
+    source: INPUT
+    area: INTERSECT
+  parameters:
+    predicate: PREDICATE
+  outputs:
+    targets: OUTPUT
+  enum_values:
+    predicate: {intersects: 0, within: 6}

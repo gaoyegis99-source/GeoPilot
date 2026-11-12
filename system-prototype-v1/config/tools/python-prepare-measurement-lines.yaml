@@ -1,0 +1,20 @@
+id: python-prepare-measurement-lines
+version: 1
+runner: python
+implementation: geopilot.prepare_measurement_lines
+inputs:
+  source: vector_line
+outputs:
+  roads: vector_line
+parameters:
+  method: {type: enum, values: [local_projected]}
+  target_crs: {type: string}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - geometry_is_valid
+check_rules:
+  - output_exists
+  - output_crs_expected

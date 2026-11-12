@@ -1,0 +1,46 @@
+id: sentinel-2-l2a-pb05-11
+version: 1
+sensor: sentinel-2-msi
+product_level: L2A
+processing_version: '05.11'
+band_roles:
+  red: {code: B04, resolution_m: 10, nodata_dn: 0}
+  nir: {code: B08, resolution_m: 10, nodata_dn: 0}
+  quality: {code: SCL, resolution_m: 20, nodata_dn: null}
+scale_offset:
+  red:
+    kind: quantification
+    quantification_field:
+      path: [General_Info, Product_Image_Characteristics, QUANTIFICATION_VALUES_LIST, BOA_QUANTIFICATION_VALUE]
+    dn_offset_field:
+      path: [General_Info, Product_Image_Characteristics, BOA_ADD_OFFSET_VALUES_LIST, BOA_ADD_OFFSET]
+      band_id: 3
+  nir:
+    kind: quantification
+    quantification_field:
+      path: [General_Info, Product_Image_Characteristics, QUANTIFICATION_VALUES_LIST, BOA_QUANTIFICATION_VALUE]
+    dn_offset_field:
+      path: [General_Info, Product_Image_Characteristics, BOA_ADD_OFFSET_VALUES_LIST, BOA_ADD_OFFSET]
+      band_id: 7
+quality_rules:
+  quality:
+    kind: classification
+    classes:
+      nodata: 0
+      saturated_or_defective: 1
+      cast_shadow: 2
+      cloud_shadow: 3
+      vegetation: 4
+      non_vegetated: 5
+      water: 6
+      unclassified: 7
+      cloud_medium_probability: 8
+      cloud_high_probability: 9
+      thin_cirrus: 10
+      snow_ice: 11
+    # The prototype keeps only the three identified clear surface classes.
+    valid_values: [4, 5, 6]
+source_reference:
+  title: Copernicus Sentinel-2 Products Specification Document v15.0
+  url: 'https://sentiwiki.copernicus.eu/__attachments/1692737/S2-PDGS-CS-DI-PSD%20-%20S2%20Product%20Specification%20Document%202024%20-%2015.0.pdf?inst-v=0f5b269b-1e8e-45fa-879c-4de81a2a8e80'
+  updated_at: '2024-04-30'

@@ -1,0 +1,24 @@
+{
+  "reference_case": "high-latitude-arc",
+  "distance_m": 1000,
+  "arc_distance_bracket_m": [
+    999.7300240618277,
+    999.7500001140885
+  ],
+  "raw_chord_distance_m": 1370.8192688708198,
+  "aoi_bounds": [
+    13.074029959235485,
+    65.01229414782054,
+    13.074031959235484,
+    65.01229614782054
+  ],
+  "candidate_extent_bounds": [
+    13.052760719113502,
+    65.00330175766736,
+    13.095301199357467,
+    65.02128853797372
+  ],
+  "curved_road_selected": true,
+  "raw_chord_intersects": false,
+  "distant_road_selected": false
+}

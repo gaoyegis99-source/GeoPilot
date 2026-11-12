@@ -1,0 +1,345 @@
+{
+  "$defs": {
+    "BandMetadataFieldRef": {
+      "additionalProperties": false,
+      "description": "A repeated metadata field selected by its zero-based product band ID.",
+      "properties": {
+        "path": {
+          "items": {
+            "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minLength": 1,
+          "title": "Path",
+          "type": "array"
+        },
+        "band_id": {
+          "minimum": 0,
+          "title": "Band Id",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "path",
+        "band_id"
+      ],
+      "title": "BandMetadataFieldRef",
+      "type": "object"
+    },
+    "BitmaskQualityRule": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "bitmask",
+          "title": "Kind",
+          "type": "string"
+        },
+        "bit_width": {
+          "maximum": 64,
+          "minimum": 1,
+          "title": "Bit Width",
+          "type": "integer"
+        },
+        "invalid_bits": {
+          "additionalProperties": false,
+          "minProperties": 1,
+          "patternProperties": {
+            "^[a-z][a-z0-9_]*$": {
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "title": "Invalid Bits",
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "bit_width",
+        "invalid_bits"
+      ],
+      "title": "BitmaskQualityRule",
+      "type": "object"
+    },
+    "ClassificationQualityRule": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "classification",
+          "title": "Kind",
+          "type": "string"
+        },
+        "classes": {
+          "additionalProperties": false,
+          "minProperties": 1,
+          "patternProperties": {
+            "^[a-z][a-z0-9_]*$": {
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "title": "Classes",
+          "type": "object"
+        },
+        "valid_values": {
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "minLength": 1,
+          "title": "Valid Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "classes",
+        "valid_values"
+      ],
+      "title": "ClassificationQualityRule",
+      "type": "object"
+    },
+    "MetadataFieldRef": {
+      "additionalProperties": false,
+      "description": "A field path relative to the product metadata root.",
+      "properties": {
+        "path": {
+          "items": {
+            "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$",
+            "type": "string"
+          },
+          "minLength": 1,
+          "title": "Path",
+          "type": "array"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "MetadataFieldRef",
+      "type": "object"
+    },
+    "MultiplyAddScale": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "multiply_add",
+          "title": "Kind",
+          "type": "string"
+        },
+        "scale_field": {
+          "$ref": "#/$defs/MetadataFieldRef"
+        },
+        "offset_field": {
+          "$ref": "#/$defs/MetadataFieldRef"
+        }
+      },
+      "required": [
+        "kind",
+        "scale_field",
+        "offset_field"
+      ],
+      "title": "MultiplyAddScale",
+      "type": "object"
+    },
+    "QuantificationScale": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "quantification",
+          "title": "Kind",
+          "type": "string"
+        },
+        "quantification_field": {
+          "$ref": "#/$defs/MetadataFieldRef"
+        },
+        "dn_offset_field": {
+          "$ref": "#/$defs/BandMetadataFieldRef"
+        }
+      },
+      "required": [
+        "kind",
+        "quantification_field",
+        "dn_offset_field"
+      ],
+      "title": "QuantificationScale",
+      "type": "object"
+    },
+    "SensorBand": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+          "title": "Code",
+          "type": "string"
+        },
+        "resolution_m": {
+          "exclusiveMinimum": 0,
+          "title": "Resolution M",
+          "type": "number"
+        },
+        "nodata_dn": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Nodata Dn"
+        }
+      },
+      "required": [
+        "code",
+        "resolution_m",
+        "nodata_dn"
+      ],
+      "title": "SensorBand",
+      "type": "object"
+    },
+    "SensorSourceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "url",
+        "updated_at"
+      ],
+      "title": "SensorSourceReference",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Bind named bands and metadata fields to a versioned product definition.",
+  "properties": {
+    "sensor": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+      "title": "Sensor",
+      "type": "string"
+    },
+    "product_level": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+      "title": "Product Level",
+      "type": "string"
+    },
+    "processing_version": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+      "title": "Processing Version",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "version": {
+      "exclusiveMinimum": 0,
+      "title": "Version",
+      "type": "integer"
+    },
+    "band_roles": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "$ref": "#/$defs/SensorBand"
+        }
+      },
+      "required": [
+        "red",
+        "nir"
+      ],
+      "title": "Band Roles",
+      "type": "object"
+    },
+    "scale_offset": {
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "discriminator": {
+            "mapping": {
+              "multiply_add": "#/$defs/MultiplyAddScale",
+              "quantification": "#/$defs/QuantificationScale"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MultiplyAddScale"
+            },
+            {
+              "$ref": "#/$defs/QuantificationScale"
+            }
+          ]
+        }
+      },
+      "required": [
+        "red",
+        "nir"
+      ],
+      "title": "Scale Offset",
+      "type": "object"
+    },
+    "quality_rules": {
+      "additionalProperties": false,
+      "minProperties": 1,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "discriminator": {
+            "mapping": {
+              "bitmask": "#/$defs/BitmaskQualityRule",
+              "classification": "#/$defs/ClassificationQualityRule"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/BitmaskQualityRule"
+            },
+            {
+              "$ref": "#/$defs/ClassificationQualityRule"
+            }
+          ]
+        }
+      },
+      "title": "Quality Rules",
+      "type": "object"
+    },
+    "source_reference": {
+      "$ref": "#/$defs/SensorSourceReference"
+    }
+  },
+  "required": [
+    "sensor",
+    "product_level",
+    "processing_version",
+    "id",
+    "version",
+    "band_roles",
+    "scale_offset",
+    "quality_rules",
+    "source_reference"
+  ],
+  "title": "SensorProductConfig",
+  "type": "object"
+}

@@ -1,0 +1,22 @@
+id: python-clip-points-to-extent
+version: 1
+runner: python
+implementation: geopilot.clip_points_to_extent
+inputs:
+  source: vector_point
+  extent: vector_polygon
+outputs:
+  targets: vector_point
+  original_targets: vector_point
+parameters:
+  output_scope: {type: enum, values: [clipped_to_analysis_extent]}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - input_crs_match
+  - geometry_is_valid
+check_rules:
+  - output_exists
+  - output_crs_expected

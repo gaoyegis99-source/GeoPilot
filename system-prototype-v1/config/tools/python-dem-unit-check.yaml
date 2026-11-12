@@ -1,0 +1,20 @@
+id: python-dem-unit-check
+version: 1
+runner: python
+implementation: geopilot.check_dem_units
+inputs:
+  dem: raster_elevation
+outputs:
+  unit_report: json
+parameters:
+  band: {type: integer, minimum: 1, default: 1}
+  vertical_unit:
+    type: enum
+    values: [metadata, meter, kilometer, centimeter, millimeter, foot, us_survey_foot]
+    default: metadata
+  z_factor: {type: number, minimum_exclusive: 0}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+check_rules: [output_exists]

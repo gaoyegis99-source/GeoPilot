@@ -1,0 +1,19 @@
+id: qgis-select-points-by-location
+version: 1
+runner: qgis
+implementation: native:extractbylocation
+inputs:
+  source: vector_point
+  area: vector_polygon
+outputs:
+  targets: vector_point
+parameters:
+  predicate: {type: enum, values: [intersects, within]}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - geometry_is_valid
+check_rules:
+  - output_exists

@@ -1,0 +1,69 @@
+id: land-use-overlay
+version: 1
+locked_order: true
+inputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+  analysis_extent: vector_polygon
+critical_options:
+  first_class_field: {type: string}
+  second_class_field: {type: string}
+  first_class_mapping: {type: json}
+  second_class_mapping: {type: json}
+  first_period: {type: string}
+  second_period: {type: string}
+  area_crs: {type: reference}
+  overlay_area_tolerance: {type: number, minimum: 0, unit: square_meter}
+steps:
+  - key: read_two_periods
+    tool: {id: python-land-use-read, version: 1}
+    inputs:
+      first_classes: {asset: first_classes}
+      second_classes: {asset: second_classes}
+    outputs:
+      first_classes: vector_polygon
+      second_classes: vector_polygon
+  - key: map_classification_systems
+    tool: {id: python-land-use-map, version: 1}
+    inputs:
+      first_classes: {step: read_two_periods, output: first_classes}
+      second_classes: {step: read_two_periods, output: second_classes}
+    parameters:
+      first_class_field: {option: first_class_field}
+      second_class_field: {option: second_class_field}
+      first_class_mapping: {option: first_class_mapping}
+      second_class_mapping: {option: second_class_mapping}
+      first_period: {option: first_period}
+      second_period: {option: second_period}
+    outputs:
+      first_classes: vector_polygon
+      second_classes: vector_polygon
+  - key: choose_equal_area_projection
+    tool: {id: python-land-use-project, version: 1}
+    inputs:
+      first_classes: {step: map_classification_systems, output: first_classes}
+      second_classes: {step: map_classification_systems, output: second_classes}
+      analysis_extent: {asset: analysis_extent}
+    parameters:
+      target_crs: {option: area_crs}
+    outputs:
+      first_classes: vector_polygon
+      second_classes: vector_polygon
+      analysis_extent: vector_polygon
+  - key: overlay
+    tool: {id: python-land-use-overlay, version: 1}
+    inputs:
+      first_classes: {step: choose_equal_area_projection, output: first_classes}
+      second_classes: {step: choose_equal_area_projection, output: second_classes}
+      analysis_extent: {step: choose_equal_area_projection, output: analysis_extent}
+    parameters:
+      area_crs: {option: area_crs}
+      area_unit: {literal: square_meter}
+      area_tolerance: {option: overlay_area_tolerance}
+    outputs:
+      overlay_polygons: vector_polygon
+      overlay_report: json
+expected_artifacts:
+  - {role: overlay_polygons, step: overlay, output: overlay_polygons, type: vector_polygon}
+  - {role: overlay_report, step: overlay, output: overlay_report, type: json}
+check_rules: [output_exists]

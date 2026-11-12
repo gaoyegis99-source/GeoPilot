@@ -1,0 +1,41 @@
+id: landsat-8-c2-l2sp
+version: 1
+sensor: landsat-8-oli-tirs
+product_level: L2SP
+processing_version: '02'
+band_roles:
+  red: {code: SR_B4, resolution_m: 30, nodata_dn: 0}
+  nir: {code: SR_B5, resolution_m: 30, nodata_dn: 0}
+  quality: {code: QA_PIXEL, resolution_m: 30, nodata_dn: null}
+  saturation: {code: QA_RADSAT, resolution_m: 30, nodata_dn: null}
+scale_offset:
+  red:
+    kind: multiply_add
+    scale_field: {path: [LEVEL2_SURFACE_REFLECTANCE_PARAMETERS, REFLECTANCE_MULT_BAND_4]}
+    offset_field: {path: [LEVEL2_SURFACE_REFLECTANCE_PARAMETERS, REFLECTANCE_ADD_BAND_4]}
+  nir:
+    kind: multiply_add
+    scale_field: {path: [LEVEL2_SURFACE_REFLECTANCE_PARAMETERS, REFLECTANCE_MULT_BAND_5]}
+    offset_field: {path: [LEVEL2_SURFACE_REFLECTANCE_PARAMETERS, REFLECTANCE_ADD_BAND_5]}
+quality_rules:
+  quality:
+    kind: bitmask
+    bit_width: 16
+    invalid_bits:
+      fill: 0
+      dilated_cloud: 1
+      cirrus: 2
+      cloud: 3
+      cloud_shadow: 4
+      snow: 5
+  saturation:
+    kind: bitmask
+    bit_width: 16
+    invalid_bits:
+      red_saturated: 3
+      nir_saturated: 4
+      terrain_occlusion: 11
+source_reference:
+  title: USGS Landsat 8-9 Collection 2 Level 2 Science Product Guide v6.0
+  url: https://www.usgs.gov/media/files/landsat-8-9-collection-2-level-2-science-product-guide
+  updated_at: '2024-05-23'

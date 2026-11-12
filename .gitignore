@@ -1,0 +1,27 @@
+# Python and Node.js local dependencies and build output
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+
+# Local configuration and runtime state
+.env
+.env.*
+!.env.example
+/system-prototype-v1/.environments/
+/system-prototype-v1/local-data/
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+*.scheduler.lock
+*.gpkg-wal
+*.gpkg-shm
+
+# Local acceptance output. Selected evidence is tracked explicitly.
+/system-prototype-v1/artifacts/smoke/
+/system-prototype-v1/artifacts/reproduction/
+/system-prototype-v1/artifacts/test-results/

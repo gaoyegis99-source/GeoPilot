@@ -1,0 +1,37 @@
+id: spatial-select-and-clip
+version: 1
+locked_order: true
+inputs:
+  targets: vector
+  relation_area: vector_polygon
+  analysis_extent: vector_polygon
+input_context:
+  targets:
+    scopes: [{reference_role: relation_area, allow_empty: true}, {reference_role: analysis_extent, allow_empty: true}]
+critical_options:
+  spatial_relation: [intersects, within]
+preconditions:
+  - required_input_roles_available
+steps:
+  - key: apply_spatial_relation
+    tool: {id: python-select-spatial-relation, version: 1}
+    inputs:
+      targets: {asset: targets}
+      area: {asset: relation_area}
+    parameters:
+      spatial_relation: {option: spatial_relation}
+    outputs:
+      targets: vector
+  - key: clip_back_to_analysis_extent
+    tool: {id: python-clip-vector-to-extent, version: 1}
+    inputs:
+      targets: {step: apply_spatial_relation, output: targets}
+      area: {asset: analysis_extent}
+    outputs:
+      targets: vector
+      original_targets: vector
+expected_artifacts:
+  - {role: clipped_targets, step: clip_back_to_analysis_extent, output: targets, type: vector}
+  - {role: original_targets, step: clip_back_to_analysis_extent, output: original_targets, type: vector}
+check_rules:
+  - output_exists

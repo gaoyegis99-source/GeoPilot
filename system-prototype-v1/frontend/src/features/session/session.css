@@ -1,0 +1,33 @@
+.task-history {
+  margin-block-end: 0.65rem;
+  font-size: 0.82rem;
+}
+
+.task-history summary {
+  cursor: pointer;
+}
+
+.task-history ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+.task-history li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.task-history a, .task-reset {
+  color: var(--color-focus);
+}
+
+.task-history a[aria-current="true"] {
+  font-weight: 700;
+}
+
+.task-reset {
+  display: inline-block;
+  margin-block-end: 0.65rem;
+  font-size: 0.82rem;
+}

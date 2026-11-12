@@ -1,0 +1,1301 @@
+{
+  "project": "GeoPilot",
+  "basis": "GeoPilot 产品需求规格与系统详细设计报告 V2.0",
+  "task_count": 122,
+  "stages": [
+    {
+      "id": "P0",
+      "name": "环境与参考样本",
+      "task_count": 7,
+      "exit_criteria": "QGIS/Python 均能独立读写样本"
+    },
+    {
+      "id": "P1",
+      "name": "数据与状态存储",
+      "task_count": 10,
+      "exit_criteria": "关闭读取会话后能按引用重开数据"
+    },
+    {
+      "id": "P2",
+      "name": "契约与基础测量",
+      "task_count": 10,
+      "exit_criteria": "T01/T02/T03/T05/T06 全部符合预期"
+    },
+    {
+      "id": "P3",
+      "name": "通用方法执行链",
+      "task_count": 10,
+      "exit_criteria": "道路样例可复算，另一方法可沿同一流程接入"
+    },
+    {
+      "id": "P4",
+      "name": "运行管理与接口",
+      "task_count": 16,
+      "exit_criteria": "T16 与失败、取消、中断联调符合状态表"
+    },
+    {
+      "id": "P5",
+      "name": "通用 Web 工作台",
+      "task_count": 12,
+      "exit_criteria": "不同方法共用页面，刷新可恢复运行记录"
+    },
+    {
+      "id": "P6",
+      "name": "矢量能力补齐",
+      "task_count": 11,
+      "exit_criteria": "T04/T13/T14 及土地利用样例符合预期"
+    },
+    {
+      "id": "P7",
+      "name": "DEM 与栅格预览",
+      "task_count": 12,
+      "exit_criteria": "T09、单位与预览取值检查符合预期"
+    },
+    {
+      "id": "P8",
+      "name": "遥感变化",
+      "task_count": 10,
+      "exit_criteria": "T10—T12 与两期 NDVI 样例符合预期"
+    },
+    {
+      "id": "P9",
+      "name": "模型入口",
+      "task_count": 9,
+      "exit_criteria": "T15 通过，候选随方法目录变化"
+    },
+    {
+      "id": "P10",
+      "name": "脚本与可选数据源",
+      "task_count": 7,
+      "exit_criteria": "脚本独立运行；所选数据源完成快照检查"
+    },
+    {
+      "id": "P11",
+      "name": "原型与方法验收",
+      "task_count": 8,
+      "exit_criteria": "核心可复用；已选方法符合预期；16 项清单完整记录"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "P0-01",
+      "stage": "P0",
+      "name": "现有项目结构审计",
+      "agent": "主控",
+      "deps": "无；先读取产品设计 PDF 与仓库现状。",
+      "tests": "`git status --short`；按仓库实际测试入口执行一次基线测试；无测试时记录 NOT_AVAILABLE。",
+      "acceptance": "项目目录、入口、依赖、已有测试、未完成项均有证据；未修改业务代码。",
+      "scope": "只读整个仓库；新增 docs/baseline/PROJECT_AUDIT.md。"
+    },
+    {
+      "id": "P0-02",
+      "stage": "P0",
+      "name": "开发环境盘点",
+      "agent": "Agent-A/B",
+      "deps": "P0-01。",
+      "tests": "`python --version`；`python -m pip freeze`；`qgis_process --version`；`gdalinfo --version`；`sqlite3 --version`；缺失命令需记录。",
+      "acceptance": "每项依赖记录版本、可用性、检查命令；不以安装成功替代运行验证。",
+      "scope": "新增 docs/baseline/ENVIRONMENT.md；不得修改系统级环境。"
+    },
+    {
+      "id": "P0-03",
+      "stage": "P0",
+      "name": "QGIS Processing 独立验证",
+      "agent": "Agent-B",
+      "deps": "P0-02。",
+      "tests": "`qgis_process --version`；`qgis_process list`；`qgis_process help native:buffer`；运行脚本及其输出检查。",
+      "acceptance": "有版本、算法帮助、输入、真实输出、退出码和日志；失败能定位到 provider/环境。",
+      "scope": "新增 scripts/smoke/qgis_smoke.*、tests/smoke/；仅限 smoke 验证。"
+    },
+    {
+      "id": "P0-04",
+      "stage": "P0",
+      "name": "Python GIS 读写验证",
+      "agent": "Agent-B",
+      "deps": "P0-02。",
+      "tests": "`python scripts/smoke/python_gis_smoke.py`；`python -m pytest tests/smoke -q`。",
+      "acceptance": "矢量与栅格均真实读写；重开后 CRS、图层/波段、尺寸和数值可核对。",
+      "scope": "新增 scripts/smoke/python_gis_smoke.py、tests/smoke/。"
+    },
+    {
+      "id": "P0-05",
+      "stage": "P0",
+      "name": "矢量黄金样本与参考答案",
+      "agent": "Agent-F",
+      "deps": "P0-01。",
+      "tests": "`python -m pytest tests/golden -q`（初始可先验证 fixture 构造器）。",
+      "acceptance": "参考答案独立于被测算法；包含输入说明、CRS、对象 ID、预期结果及来源/手算依据。",
+      "scope": "tests/fixtures/vector/；tests/golden/；不改生产代码。"
+    },
+    {
+      "id": "P0-06",
+      "stage": "P0",
+      "name": "栅格黄金样本与参考答案",
+      "agent": "Agent-F",
+      "deps": "P0-01。",
+      "tests": "`python -m pytest tests/golden -q`。",
+      "acceptance": "参考值可手算；覆盖内部像元、边缘像元、NoData 和单位信息。",
+      "scope": "tests/fixtures/raster/；tests/golden/。"
+    },
+    {
+      "id": "P0-07",
+      "stage": "P0",
+      "name": "自动化测试与报告基线",
+      "agent": "Agent-F",
+      "deps": "P0-01。",
+      "tests": "`python -m pytest -q`；`python -m pytest --junitxml=artifacts/test-results/junit.xml`。",
+      "acceptance": "命令可在干净工作目录运行；测试报告可保存；不得伪造未运行结果。",
+      "scope": "pyproject.toml 或 pytest.ini（按现状选一）；tests/conftest.py；scripts/test.*。"
+    },
+    {
+      "id": "P1-01",
+      "stage": "P1",
+      "name": "SQLite 初始化与迁移基线",
+      "agent": "Agent-A",
+      "deps": "P0-07；P0-01。",
+      "tests": "`python -m pytest tests/storage/test_schema.py -q`。",
+      "acceptance": "重复初始化不丢数据；schema 版本可读；失败事务回滚；不把大栅格写入 SQLite。",
+      "scope": "src/.../storage/；migrations/ 或项目既有迁移目录；tests/storage/。"
+    },
+    {
+      "id": "P1-02",
+      "stage": "P1",
+      "name": "DataAsset 公共模型",
+      "agent": "Agent-A",
+      "deps": "P0-01；P1-01。",
+      "tests": "`python -m pytest tests/models/test_data_asset.py -q`。",
+      "acceptance": "必需字段、枚举、版本约束校验；路径/连接信息仅本机持有；序列化结构稳定。",
+      "scope": "src/.../models/data_asset.py（或既有 models 目录）；tests/models/。"
+    },
+    {
+      "id": "P1-03",
+      "stage": "P1",
+      "name": "本地矢量读取器",
+      "agent": "Agent-A",
+      "deps": "P0-04；P0-05；P1-02。",
+      "tests": "`python -m pytest tests/data_adapters/test_vector_reader.py -q`。",
+      "acceptance": "支持样本格式；正确提取摘要；未知 CRS 显式标记；异常结构化返回。",
+      "scope": "src/.../data_adapters/vector_reader.py；tests/data_adapters/。"
+    },
+    {
+      "id": "P1-04",
+      "stage": "P1",
+      "name": "GeoPackage 读取器",
+      "agent": "Agent-A",
+      "deps": "P0-04；P1-02。",
+      "tests": "`python -m pytest tests/data_adapters/test_geopackage_reader.py -q`。",
+      "acceptance": "多图层可枚举；不存在图层报错；字段、CRS、几何类型与参考一致。",
+      "scope": "src/.../data_adapters/geopackage_reader.py；tests/data_adapters/。"
+    },
+    {
+      "id": "P1-05",
+      "stage": "P1",
+      "name": "GeoTIFF/COG 元数据读取",
+      "agent": "Agent-A",
+      "deps": "P0-04；P0-06；P1-02。",
+      "tests": "`python -m pytest tests/data_adapters/test_raster_reader.py -q`。",
+      "acceptance": "不加载完整像元数组；NoData/CRS 缺失有明确表示；元数据与样本一致。",
+      "scope": "src/.../data_adapters/raster_reader.py；tests/data_adapters/。"
+    },
+    {
+      "id": "P1-06",
+      "stage": "P1",
+      "name": "数据指纹计算",
+      "agent": "Agent-A",
+      "deps": "P1-02。",
+      "tests": "`python -m pytest tests/assets/test_fingerprint.py -q`。",
+      "acceptance": "相同输入稳定；修改内容能识别；指纹算法与局限写入文档。",
+      "scope": "src/.../assets/fingerprint.py；tests/assets/。"
+    },
+    {
+      "id": "P1-07",
+      "stage": "P1",
+      "name": "资产登记服务",
+      "agent": "Agent-A",
+      "deps": "P1-01 至 P1-06。",
+      "tests": "`python -m pytest tests/assets/test_asset_registration.py -q`。",
+      "acceptance": "成功返回稳定 asset_id/version；读取失败不创建可用资产；CRS 缺失可登记但标注缺项。",
+      "scope": "src/.../assets/；src/.../storage/repositories/；tests/assets/。"
+    },
+    {
+      "id": "P1-08",
+      "stage": "P1",
+      "name": "资产版本管理",
+      "agent": "Agent-A",
+      "deps": "P1-01、P1-06、P1-07。",
+      "tests": "`python -m pytest tests/assets/test_asset_versioning.py -q`。",
+      "acceptance": "版本不可覆盖；旧方案引用保持稳定；文件变化触发 INPUT_CHANGED 或新版本。",
+      "scope": "src/.../assets/versioning.py；相关 repository；tests/assets/。"
+    },
+    {
+      "id": "P1-09",
+      "stage": "P1",
+      "name": "资产按引用重新打开",
+      "agent": "Agent-A",
+      "deps": "P1-03 至 P1-08。",
+      "tests": "`python -m pytest tests/assets/test_asset_resolver.py -q`。",
+      "acceptance": "关闭句柄、重启服务后可按引用重开；丢失文件/图层返回结构化错误。",
+      "scope": "src/.../assets/resolver.py；tests/assets/。"
+    },
+    {
+      "id": "P1-10",
+      "stage": "P1",
+      "name": "运行工作目录管理",
+      "agent": "Agent-A",
+      "deps": "P1-01；P0-01。",
+      "tests": "`python -m pytest tests/workspace -q`。",
+      "acceptance": "每次运行目录唯一；路径限制在工作区；目录创建失败有错误；不覆盖原始输入。",
+      "scope": "src/.../workspace/；tests/workspace/。"
+    },
+    {
+      "id": "P2-01",
+      "stage": "P2",
+      "name": "ToolContract 模型",
+      "agent": "Agent-C",
+      "deps": "P1-02；P1-01。",
+      "tests": "`python -m pytest tests/contracts/test_tool_contract.py -q`。",
+      "acceptance": "合法契约可解析；缺字段、非法类型、未知 runner 被拒绝。",
+      "scope": "src/.../contracts/tool_contract.py；tests/contracts/。"
+    },
+    {
+      "id": "P2-02",
+      "stage": "P2",
+      "name": "工具注册表",
+      "agent": "Agent-B",
+      "deps": "P2-01；P0-03。",
+      "tests": "`python -m pytest tests/tools/test_registry.py -q`。",
+      "acceptance": "只返回已登记工具；缺依赖标记 unavailable；重复 ID/version 处理确定。",
+      "scope": "src/.../tools/registry.py；tests/tools/。"
+    },
+    {
+      "id": "P2-03",
+      "stage": "P2",
+      "name": "参数与枚举规范化",
+      "agent": "Agent-B",
+      "deps": "P2-01。",
+      "tests": "`python -m pytest tests/tools/test_parameter_normalizer.py -q`。",
+      "acceptance": "类型、范围、枚举、单位转换有断言；错误定位到参数字段。",
+      "scope": "src/.../tools/parameter_normalizer.py；tests/tools/。"
+    },
+    {
+      "id": "P2-04",
+      "stage": "P2",
+      "name": "CRS 与单位检查器",
+      "agent": "Agent-B",
+      "deps": "P1-03、P1-05；P2-01。",
+      "tests": "`python -m pytest tests/gis/test_crs_validator.py -q`。",
+      "acceptance": "未知 CRS 不猜测；区分设置 CRS 与重投影；错误含观察值与原因。",
+      "scope": "src/.../gis/validation/crs_validator.py；tests/gis/。"
+    },
+    {
+      "id": "P2-05",
+      "stage": "P2",
+      "name": "距离测量策略",
+      "agent": "Agent-B",
+      "deps": "P2-04。",
+      "tests": "`python -m pytest tests/gis/test_distance_policy.py -q`。",
+      "acceptance": "T01、T02 拒绝；T03 允许并记录 CRS；未实现测地线时明确 unavailable。",
+      "scope": "src/.../gis/measurement/distance.py；tests/gis/。"
+    },
+    {
+      "id": "P2-06",
+      "stage": "P2",
+      "name": "面积测量策略",
+      "agent": "Agent-B",
+      "deps": "P2-04。",
+      "tests": "`python -m pytest tests/gis/test_area_policy.py -q`。",
+      "acceptance": "T05 拒绝；T06 允许；面积单位和 CRS 写入实际请求。",
+      "scope": "src/.../gis/measurement/area.py；tests/gis/。"
+    },
+    {
+      "id": "P2-07",
+      "stage": "P2",
+      "name": "局部投影选择与转换",
+      "agent": "Agent-B",
+      "deps": "P2-04、P2-05、P2-06。",
+      "tests": "`python -m pytest tests/gis/test_projection.py -q`。",
+      "acceptance": "转换前后 CRS 正确；适用范围不足时阻断；不以 EPSG:3857 充当测量 CRS。",
+      "scope": "src/.../gis/measurement/projection.py；tests/gis/。"
+    },
+    {
+      "id": "P2-08",
+      "stage": "P2",
+      "name": "QGIS 最小执行适配器",
+      "agent": "Agent-B",
+      "deps": "P0-03；P2-01 至 P2-03。",
+      "tests": "`python -m pytest tests/runners/test_qgis_runner.py -q`；另执行真实 QGIS smoke。",
+      "acceptance": "真实算法可运行；启动失败、非零退出、超时和缺失输出均可区分。",
+      "scope": "src/.../runners/qgis_runner.py；scripts/；tests/runners/。"
+    },
+    {
+      "id": "P2-09",
+      "stage": "P2",
+      "name": "Python 最小执行适配器",
+      "agent": "Agent-B",
+      "deps": "P0-04；P2-01 至 P2-03。",
+      "tests": "`python -m pytest tests/runners/test_python_runner.py -q`；真实样本 smoke。",
+      "acceptance": "独立进程执行；请求/结果 JSON 可复现；异常退出可定位。",
+      "scope": "src/.../runners/python_runner.py；tests/runners/。"
+    },
+    {
+      "id": "P2-10",
+      "stage": "P2",
+      "name": "统一 StepRequest/StepResult 与错误模型",
+      "agent": "主控+Agent-B",
+      "deps": "P2-01、P2-08、P2-09。",
+      "tests": "`python -m pytest tests/models/test_step_io.py tests/models/test_errors.py -q`。",
+      "acceptance": "QGIS/Python 返回结构一致；错误 code/phase/step/field/message 可机器读取。",
+      "scope": "src/.../models/step_io.py；src/.../models/errors.py；tests/models/。"
+    },
+    {
+      "id": "P3-01",
+      "stage": "P3",
+      "name": "MethodDefinition 模型",
+      "agent": "Agent-C",
+      "deps": "P2-01；P1-02。",
+      "tests": "`python -m pytest tests/methods/test_method_models.py -q`。",
+      "acceptance": "方法配置可解析；必填字段和版本校验严格；业务字段不污染通用模型。",
+      "scope": "src/.../methods/models.py；tests/methods/。"
+    },
+    {
+      "id": "P3-02",
+      "stage": "P3",
+      "name": "方法目录加载器",
+      "agent": "Agent-C",
+      "deps": "P3-01。",
+      "tests": "`python -m pytest tests/methods/test_loader.py -q`。",
+      "acceptance": "支持多方法、多版本；单个坏配置报告定位；其他有效方法可用。",
+      "scope": "src/.../methods/loader.py；config/methods/；tests/methods/。"
+    },
+    {
+      "id": "P3-03",
+      "stage": "P3",
+      "name": "方法配置静态检查",
+      "agent": "Agent-C",
+      "deps": "P3-01、P3-02；P2-02。",
+      "tests": "`python -m pytest tests/methods/test_validator.py -q`。",
+      "acceptance": "缺字段、重复步骤、未知工具/规则均阻断；错误可定位到配置路径。",
+      "scope": "src/.../methods/validator.py；tests/methods/。"
+    },
+    {
+      "id": "P3-04",
+      "stage": "P3",
+      "name": "步骤依赖拓扑校验",
+      "agent": "Agent-C",
+      "deps": "P3-01、P3-02。",
+      "tests": "`python -m pytest tests/plans/test_dependency_validator.py -q`。",
+      "acceptance": "合法 DAG 可通过；循环、未知输出、未来引用启动前拒绝。",
+      "scope": "src/.../plans/dependency_validator.py；tests/plans/。"
+    },
+    {
+      "id": "P3-05",
+      "stage": "P3",
+      "name": "固定顺序与不可重排校验",
+      "agent": "Agent-C",
+      "deps": "P3-01、P3-04。",
+      "tests": "`python -m pytest tests/plans/test_locked_order.py -q`。",
+      "acceptance": "编译序列与方法配置逐项一致；不允许模型重排固定步骤。",
+      "scope": "src/.../plans/step_compiler.py；tests/plans/。"
+    },
+    {
+      "id": "P3-06",
+      "stage": "P3",
+      "name": "AnalysisPlan 公共模型",
+      "agent": "Agent-C",
+      "deps": "P1-02、P2-01、P3-01。",
+      "tests": "`python -m pytest tests/plans/test_analysis_plan.py -q`。",
+      "acceptance": "草稿/已确认状态合法；输入均带资产版本；快照可序列化。",
+      "scope": "src/.../plans/models.py；tests/plans/。"
+    },
+    {
+      "id": "P3-07",
+      "stage": "P3",
+      "name": "方案草稿生成器",
+      "agent": "Agent-C",
+      "deps": "P3-02、P3-06；任务上下文接口可用。",
+      "tests": "`python -m pytest tests/plans/test_draft_builder.py -q`。",
+      "acceptance": "生成结构完整；缺角色/参数写入 issues；不自动填入未授权业务口径。",
+      "scope": "src/.../plans/draft_builder.py；tests/plans/。"
+    },
+    {
+      "id": "P3-08",
+      "stage": "P3",
+      "name": "参数绑定与工具请求编译",
+      "agent": "Agent-C",
+      "deps": "P2-03、P3-04 至 P3-07。",
+      "tests": "`python -m pytest tests/plans/test_compiler.py -q`。",
+      "acceptance": "方案选项与实际请求逐值一致；命名输出引用正确；未绑定参数阻断。",
+      "scope": "src/.../plans/compiler.py；tests/plans/。"
+    },
+    {
+      "id": "P3-09",
+      "stage": "P3",
+      "name": "方案确认与快照",
+      "agent": "Agent-C",
+      "deps": "P3-06 至 P3-08；P1-07。",
+      "tests": "`python -m pytest tests/plans/test_confirmation.py -q`。",
+      "acceptance": "未解决 issues 不可确认；确认不启动计算；快照保留方法/契约版本。",
+      "scope": "src/.../plans/service.py；repository；tests/plans/。"
+    },
+    {
+      "id": "P3-10",
+      "stage": "P3",
+      "name": "方案版本与编辑失效",
+      "agent": "Agent-C",
+      "deps": "P3-06、P3-09；P1-08。",
+      "tests": "`python -m pytest tests/plans/test_plan_versioning.py -q`。",
+      "acceptance": "修改后状态回 draft；旧 run 仍指向原快照；版本不覆盖。",
+      "scope": "src/.../plans/versioning.py；tests/plans/。"
+    },
+    {
+      "id": "P4-01",
+      "stage": "P4",
+      "name": "Run 与 RunStep 持久化模型",
+      "agent": "Agent-D",
+      "deps": "P1-01；P2-10。",
+      "tests": "`python -m pytest tests/runs/test_run_models.py -q`。",
+      "acceptance": "execution_status 与 check_status 独立；枚举与设计报告一致。",
+      "scope": "src/.../runs/models.py；repositories；tests/runs/。"
+    },
+    {
+      "id": "P4-02",
+      "stage": "P4",
+      "name": "运行创建服务",
+      "agent": "Agent-D",
+      "deps": "P3-09、P3-10；P1-08、P1-10。",
+      "tests": "`python -m pytest tests/runs/test_run_creation.py -q`。",
+      "acceptance": "草稿拒绝；输入变化拒绝；返回 run_id；创建快照和独立目录。",
+      "scope": "src/.../runs/service.py；tests/runs/。"
+    },
+    {
+      "id": "P4-03",
+      "stage": "P4",
+      "name": "单运行调度循环",
+      "agent": "Agent-D",
+      "deps": "P4-01、P4-02；P3-08。",
+      "tests": "`python -m pytest tests/scheduler/test_scheduler.py -q`。",
+      "acceptance": "同一时刻不重复派发；服务查询可见状态；队列异常可恢复说明。",
+      "scope": "src/.../scheduler/；tests/scheduler/。"
+    },
+    {
+      "id": "P4-04",
+      "stage": "P4",
+      "name": "按步骤顺序执行",
+      "agent": "Agent-D",
+      "deps": "P4-03；P2-08 至 P2-10；P3-08。",
+      "tests": "`python -m pytest tests/scheduler/test_step_execution.py -q`。",
+      "acceptance": "顺序与确认方案一致；失败后后续步骤保持 NOT_STARTED。",
+      "scope": "src/.../scheduler/step_executor.py；tests/scheduler/。"
+    },
+    {
+      "id": "P4-05",
+      "stage": "P4",
+      "name": "命名输出解析与交接",
+      "agent": "Agent-D",
+      "deps": "P4-04；P2-10。",
+      "tests": "`python -m pytest tests/scheduler/test_output_handoff.py -q`。",
+      "acceptance": "引用存在且类型匹配；缺失/不可读输出阻断后续步骤。",
+      "scope": "src/.../scheduler/output_resolver.py；tests/scheduler/。"
+    },
+    {
+      "id": "P4-06",
+      "stage": "P4",
+      "name": "运行进度查询服务",
+      "agent": "Agent-D",
+      "deps": "P4-01 至 P4-05。",
+      "tests": "`python -m pytest tests/api/test_run_status.py -q`。",
+      "acceptance": "查询反映数据库真实状态；不把查询成功等同于计算成功。",
+      "scope": "src/.../runs/query_service.py；API route 按现状归属；tests/api/。"
+    },
+    {
+      "id": "P4-07",
+      "stage": "P4",
+      "name": "取消请求与进程终止",
+      "agent": "Agent-D",
+      "deps": "P4-03、P4-04；P2-08、P2-09。",
+      "tests": "`python -m pytest tests/scheduler/test_cancellation.py -q`。",
+      "acceptance": "取消后无新步骤；活动子进程已停止；状态不靠退出码猜测。",
+      "scope": "src/.../scheduler/cancellation.py；runner process handle；tests/scheduler/。"
+    },
+    {
+      "id": "P4-08",
+      "stage": "P4",
+      "name": "超时与进程清理",
+      "agent": "Agent-D",
+      "deps": "P2-08、P2-09；P4-04。",
+      "tests": "`python -m pytest tests/runners/test_process_timeout.py -q`。",
+      "acceptance": "超时后进程确实退出；日志完整；超时与用户取消区分。",
+      "scope": "src/.../runners/process_manager.py；tests/runners/。"
+    },
+    {
+      "id": "P4-09",
+      "stage": "P4",
+      "name": "失败停止与部分成果保留",
+      "agent": "Agent-D",
+      "deps": "P4-04、P4-05、P4-08。",
+      "tests": "`python -m pytest tests/scheduler/test_failure_handling.py -q`。",
+      "acceptance": "失败步骤定位明确；后续不执行；部分文件保留为排错文件而非正式成果。",
+      "scope": "src/.../scheduler/failure_handler.py；tests/scheduler/。"
+    },
+    {
+      "id": "P4-10",
+      "stage": "P4",
+      "name": "手动重试",
+      "agent": "Agent-D",
+      "deps": "P4-02、P4-09；P3-10。",
+      "tests": "`python -m pytest tests/runs/test_retry.py -q`。",
+      "acceptance": "新旧 run 互不覆盖；方案版本可追溯；从第一步重跑。",
+      "scope": "src/.../runs/retry_service.py；tests/runs/。"
+    },
+    {
+      "id": "P4-11",
+      "stage": "P4",
+      "name": "成果登记服务",
+      "agent": "Agent-A/D",
+      "deps": "P4-04、P4-05；P1-10。",
+      "tests": "`python -m pytest tests/artifacts -q`。",
+      "acceptance": "所有必需成果可读且类型匹配；关联 plan/run/input；缺失成果阻断成功状态。",
+      "scope": "src/.../artifacts/；tests/artifacts/。"
+    },
+    {
+      "id": "P4-12",
+      "stage": "P4",
+      "name": "输入规则检查器",
+      "agent": "Agent-F",
+      "deps": "P2-04 至 P2-07；P3-03。",
+      "tests": "`python -m pytest tests/checks/test_input_checks.py -q`。",
+      "acceptance": "观察值、期望条件、严重程度和阶段均记录；阻断项阻止执行或确认。",
+      "scope": "src/.../checks/input_checks.py；tests/checks/。"
+    },
+    {
+      "id": "P4-13",
+      "stage": "P4",
+      "name": "过程规则检查器",
+      "agent": "Agent-F",
+      "deps": "P4-04；P2-10；P3-09。",
+      "tests": "`python -m pytest tests/checks/test_process_checks.py -q`。",
+      "acceptance": "实际请求与确认方案可逐项比较；偏差定位到 step/field。",
+      "scope": "src/.../checks/process_checks.py；tests/checks/。"
+    },
+    {
+      "id": "P4-14",
+      "stage": "P4",
+      "name": "成果规则检查器",
+      "agent": "Agent-F",
+      "deps": "P4-11；P0-05、P0-06。",
+      "tests": "`python -m pytest tests/checks/test_artifact_checks.py -q`。",
+      "acceptance": "按方法规则检查；容差来源明确；不能以文件存在代替正确性。",
+      "scope": "src/.../checks/artifact_checks.py；tests/checks/。"
+    },
+    {
+      "id": "P4-15",
+      "stage": "P4",
+      "name": "检查报告与双状态汇总",
+      "agent": "Agent-F",
+      "deps": "P4-12 至 P4-14；P4-01。",
+      "tests": "`python -m pytest tests/checks/test_report_service.py -q`。",
+      "acceptance": "执行 SUCCEEDED 可同时检查 FAILED；规则中断回 NOT_CHECKED；报告可查询。",
+      "scope": "src/.../checks/report_service.py；repositories；tests/checks/。"
+    },
+    {
+      "id": "P4-16",
+      "stage": "P4",
+      "name": "检查中断与单独重查",
+      "agent": "Agent-D/F",
+      "deps": "P4-11、P4-15；P4-08。",
+      "tests": "`python -m pytest tests/checks/test_recheck.py -q`。",
+      "acceptance": "成果指纹变化时拒绝沿用；重查不重新执行 GIS 计算；历史报告保留。",
+      "scope": "src/.../checks/recheck_service.py；tests/checks/。"
+    },
+    {
+      "id": "P5-01",
+      "stage": "P5",
+      "name": "工作台路由与基础布局",
+      "agent": "Agent-E",
+      "deps": "P4 API 契约稳定；P0-01。",
+      "tests": "`cd frontend && npm test -- --run`（按实际包管理器调整）；`npm run build`。",
+      "acceptance": "页面可启动；模块区域清晰；不重复引入第二地图引擎。",
+      "scope": "frontend/src/pages/ 或现有页面目录；frontend tests。"
+    },
+    {
+      "id": "P5-02",
+      "stage": "P5",
+      "name": "资产登记与选择面板",
+      "agent": "Agent-E",
+      "deps": "P1-07、P4 API；P5-01。",
+      "tests": "`cd frontend && npm test -- --run`；相关组件测试。",
+      "acceptance": "资产 ID/version 可见；错误可定位；选择与任务上下文一致。",
+      "scope": "frontend/src/features/assets/；仅消费冻结 API。"
+    },
+    {
+      "id": "P5-03",
+      "stage": "P5",
+      "name": "方法目录浏览界面",
+      "agent": "Agent-E",
+      "deps": "P3-02；P5-01。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "只展示后端实际登记的方法；不可用方法显示原因。",
+      "scope": "frontend/src/features/methods/。"
+    },
+    {
+      "id": "P5-04",
+      "stage": "P5",
+      "name": "方法驱动动态表单",
+      "agent": "Agent-E",
+      "deps": "P3-01、P3-06；P5-03。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "不同方法显示各自选项；不出现无关字段；值与提交 payload 一致。",
+      "scope": "frontend/src/features/plans/dynamic-form/。"
+    },
+    {
+      "id": "P5-05",
+      "stage": "P5",
+      "name": "方案预览与 issues 展示",
+      "agent": "Agent-E",
+      "deps": "P3-07、P3-08；P5-04。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "步骤顺序与服务端快照一致；issues 定位字段；不隐藏关键口径。",
+      "scope": "frontend/src/features/plans/preview/。"
+    },
+    {
+      "id": "P5-06",
+      "stage": "P5",
+      "name": "方案确认与运行分离交互",
+      "agent": "Agent-E",
+      "deps": "P3-09；P4-02；P5-05。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "确认不触发计算；未确认不能运行；提交的 plan_version 与后端一致。",
+      "scope": "frontend/src/features/plans/；frontend/src/features/runs/。"
+    },
+    {
+      "id": "P5-07",
+      "stage": "P5",
+      "name": "运行进度与日志面板",
+      "agent": "Agent-E",
+      "deps": "P4-06、P4-07；P5-01。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "显示实际状态；停止态停止轮询；取消状态来自服务端。",
+      "scope": "frontend/src/features/runs/。"
+    },
+    {
+      "id": "P5-08",
+      "stage": "P5",
+      "name": "MapLibre 矢量结果显示",
+      "agent": "Agent-E",
+      "deps": "P4-11；P5-01。",
+      "tests": "`cd frontend && npm test -- --run`；浏览器人工 smoke。",
+      "acceptance": "图层来源对应 artifact ID；加载失败不影响成果下载/日志。",
+      "scope": "frontend/src/features/map/；不改后端 GIS 算法。"
+    },
+    {
+      "id": "P5-09",
+      "stage": "P5",
+      "name": "成果列表与下载",
+      "agent": "Agent-E",
+      "deps": "P4-11；P5-01。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "正式成果与 run_id 对应；排错文件不混入正式成果；下载链接有效。",
+      "scope": "frontend/src/features/artifacts/。"
+    },
+    {
+      "id": "P5-10",
+      "stage": "P5",
+      "name": "规则检查明细界面",
+      "agent": "Agent-E",
+      "deps": "P4-15；P5-01。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "PASSED/WARNING/FAILED 明确；执行状态独立显示；可定位规则对象。",
+      "scope": "frontend/src/features/checks/。"
+    },
+    {
+      "id": "P5-11",
+      "stage": "P5",
+      "name": "页面刷新与任务恢复",
+      "agent": "Agent-E",
+      "deps": "P4-06；P5-02 至 P5-10。",
+      "tests": "`cd frontend && npm test -- --run`；手动刷新 smoke。",
+      "acceptance": "刷新后恢复同一记录；不生成重复运行；当前任务上下文不串线。",
+      "scope": "frontend/src/features/session/；必要 API 由主控协调。"
+    },
+    {
+      "id": "P5-12",
+      "stage": "P5",
+      "name": "错误与渐进式详情体验",
+      "agent": "Agent-E",
+      "deps": "P4-06、P4-09、P4-15。",
+      "tests": "`cd frontend && npm test -- --run`。",
+      "acceptance": "用户可判断回草稿、重跑、重查或重建预览；日志仍可访问。",
+      "scope": "frontend/src/components/errors/；相关页面。"
+    },
+    {
+      "id": "P6-01",
+      "stage": "P6",
+      "name": "空间关系边界黄金用例",
+      "agent": "Agent-F",
+      "deps": "P0-05；P3 方法测试基础。",
+      "tests": "`python -m pytest tests/golden/T13 -q`。",
+      "acceptance": "边界点、边界线、部分相交、完全包含均有独立预期。",
+      "scope": "tests/fixtures/vector/；tests/golden/T13/。"
+    },
+    {
+      "id": "P6-02",
+      "stage": "P6",
+      "name": "intersects 实现与验证",
+      "agent": "Agent-B",
+      "deps": "P6-01；P2-04。",
+      "tests": "`python -m pytest tests/gis/test_intersects.py -q`。",
+      "acceptance": "对象 ID 集合与参考完全一致；无效几何有明确策略。",
+      "scope": "src/.../gis/vector/spatial_relations.py；tests/gis/。"
+    },
+    {
+      "id": "P6-03",
+      "stage": "P6",
+      "name": "within 实现与验证",
+      "agent": "Agent-B",
+      "deps": "P6-01；P6-02。",
+      "tests": "`python -m pytest tests/gis/test_within.py -q`。",
+      "acceptance": "与 intersects 结果区别符合定义；边界样本断言通过。",
+      "scope": "src/.../gis/vector/spatial_relations.py；tests/gis/。"
+    },
+    {
+      "id": "P6-04",
+      "stage": "P6",
+      "name": "完整对象关系判断与裁回分离",
+      "agent": "Agent-C",
+      "deps": "P3-05、P3-08；P6-02、P6-03。",
+      "tests": "`python -m pytest tests/methods/test_full_geometry_before_clip.py -q`。",
+      "acceptance": "裁剪不改变关系判定输入；输出保留 source_feature_id。",
+      "scope": "src/.../methods/；道路/矢量步骤配置；tests/methods/。"
+    },
+    {
+      "id": "P6-05",
+      "stage": "P6",
+      "name": "跨界面积拆分归属",
+      "agent": "Agent-B",
+      "deps": "P2-06、P6-01。",
+      "tests": "`python -m pytest tests/gis/test_boundary_split.py -q`。",
+      "acceptance": "分区面积和与约定范围总面积在容差内一致；点对象不提供面积拆分。",
+      "scope": "src/.../gis/vector/boundary_assignment.py；tests/gis/。"
+    },
+    {
+      "id": "P6-06",
+      "stage": "P6",
+      "name": "质心归属",
+      "agent": "Agent-B",
+      "deps": "P6-01。",
+      "tests": "`python -m pytest tests/gis/test_centroid_assignment.py -q`。",
+      "acceptance": "归属与独立参考一致；边界 tie 按配置处理。",
+      "scope": "src/.../gis/vector/boundary_assignment.py；tests/gis/。"
+    },
+    {
+      "id": "P6-07",
+      "stage": "P6",
+      "name": "最大重叠归属",
+      "agent": "Agent-B",
+      "deps": "P2-06、P6-01。",
+      "tests": "`python -m pytest tests/gis/test_largest_overlap.py -q`。",
+      "acceptance": "并列/无重叠/无效几何行为确定且有测试；面积使用适用口径。",
+      "scope": "src/.../gis/vector/boundary_assignment.py；tests/gis/。"
+    },
+    {
+      "id": "P6-08",
+      "stage": "P6",
+      "name": "原始对象标识与去重统计",
+      "agent": "Agent-B",
+      "deps": "P6-04 至 P6-07。",
+      "tests": "`python -m pytest tests/gis/test_source_feature_identity.py -q`。",
+      "acceptance": "已归属+未归属数量等于去重对象总数；拆分片段不重复计数。",
+      "scope": "src/.../gis/vector/；method output schema；tests/gis/。"
+    },
+    {
+      "id": "P6-09",
+      "stage": "P6",
+      "name": "测地线道路缓冲专项验证",
+      "agent": "Agent-B",
+      "deps": "P0-03 的专项调研记录；P2-05；P2-08。",
+      "tests": "`python -m pytest tests/gis/test_geodesic_buffer.py -q`。",
+      "acceptance": "线段、端点、转角均有验证；记录椭球、离散方式、容差；未达到时标记 unavailable，不假通过。",
+      "scope": "src/.../gis/measurement/geodesic_buffer.py；tool contract；tests/gis/。"
+    },
+    {
+      "id": "P6-10",
+      "stage": "P6",
+      "name": "土地利用分类映射与叠加",
+      "agent": "Agent-C/B",
+      "deps": "P2-06；P3-02 至 P3-08；P6-05。",
+      "tests": "`python -m pytest tests/methods/test_land_use_overlay.py -q`。",
+      "acceptance": "未映射编码阻断；叠加面积平衡符合预设容差；来源时相可追溯。",
+      "scope": "config/methods/land-use-change.*；src/.../methods/；tests/methods/。"
+    },
+    {
+      "id": "P6-11",
+      "stage": "P6",
+      "name": "转移矩阵与分区统计",
+      "agent": "Agent-B",
+      "deps": "P6-10。",
+      "tests": "`python -m pytest tests/gis/test_transition_matrix.py -q`。",
+      "acceptance": "矩阵总量与变化图斑/分区表一致；类别顺序稳定。",
+      "scope": "src/.../gis/vector/transition_matrix.py；tests/gis/。"
+    },
+    {
+      "id": "P7-01",
+      "stage": "P7",
+      "name": "栅格窗口读取器",
+      "agent": "Agent-B",
+      "deps": "P0-06；P1-05。",
+      "tests": "`python -m pytest tests/gis/raster/test_window_io.py -q`。",
+      "acceptance": "窗口边界、仿射变换、NoData 保持正确；峰值内存策略有说明。",
+      "scope": "src/.../gis/raster/window_io.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-02",
+      "stage": "P7",
+      "name": "分析区邻域外扩计算",
+      "agent": "Agent-B",
+      "deps": "P7-01；P1-05。",
+      "tests": "`python -m pytest tests/gis/raster/test_extent_expansion.py -q`。",
+      "acceptance": "外扩尺度由算法参数推导；不使用无依据固定值；覆盖所需邻域。",
+      "scope": "src/.../gis/raster/extent_expansion.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-03",
+      "stage": "P7",
+      "name": "DEM 水平/垂直单位检查",
+      "agent": "Agent-B",
+      "deps": "P2-04；P7-01。",
+      "tests": "`python -m pytest tests/gis/raster/test_units.py -q`。",
+      "acceptance": "未知单位不猜测；单位换算进入请求与运行记录。",
+      "scope": "src/.../gis/raster/units.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-04",
+      "stage": "P7",
+      "name": "DEM 外扩裁取与输入准备",
+      "agent": "Agent-B",
+      "deps": "P7-01 至 P7-03。",
+      "tests": "`python -m pytest tests/gis/raster/test_dem_prepare.py -q`。",
+      "acceptance": "输入覆盖计算邻域；CRS/transform/NoData 不丢失。",
+      "scope": "src/.../gis/raster/dem_prepare.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-05",
+      "stage": "P7",
+      "name": "坡度计算",
+      "agent": "Agent-B",
+      "deps": "P7-03、P7-04。",
+      "tests": "`python -m pytest tests/gis/raster/test_slope.py -q`。",
+      "acceptance": "内部与边缘像元分别与参考比较；算法版本、z-factor 和单位记录。",
+      "scope": "src/.../gis/raster/terrain.py；tool contract；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-06",
+      "stage": "P7",
+      "name": "坡向计算",
+      "agent": "Agent-B",
+      "deps": "P7-03、P7-04。",
+      "tests": "`python -m pytest tests/gis/raster/test_aspect.py -q`。",
+      "acceptance": "方向角范围、平坦区域和 NoData 符合选定算法定义。",
+      "scope": "src/.../gis/raster/terrain.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-07",
+      "stage": "P7",
+      "name": "裁回原分析区",
+      "agent": "Agent-B",
+      "deps": "P7-05、P7-06。",
+      "tests": "`python -m pytest tests/gis/raster/test_clip_back.py -q`。",
+      "acceptance": "输出范围符合分析区；网格变换正确；边界像元可解释。",
+      "scope": "src/.../gis/raster/clip_back.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-08",
+      "stage": "P7",
+      "name": "栅格阈值提取",
+      "agent": "Agent-B",
+      "deps": "P7-05 至 P7-07。",
+      "tests": "`python -m pytest tests/gis/raster/test_threshold.py -q`。",
+      "acceptance": "阈值边界包含规则明确；类别像元与手算结果一致。",
+      "scope": "src/.../gis/raster/threshold.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-09",
+      "stage": "P7",
+      "name": "栅格面积统计",
+      "agent": "Agent-B",
+      "deps": "P2-06；P7-08。",
+      "tests": "`python -m pytest tests/gis/raster/test_area_stats.py -q`。",
+      "acceptance": "面积单位、投影与有效像元口径明确；与参考值在容差内一致。",
+      "scope": "src/.../gis/raster/area_stats.py；tests/gis/raster/。"
+    },
+    {
+      "id": "P7-10",
+      "stage": "P7",
+      "name": "栅格成果元数据与检查规则",
+      "agent": "Agent-F",
+      "deps": "P4-11、P4-14；P7-01 至 P7-09。",
+      "tests": "`python -m pytest tests/checks/test_raster_checks.py -q`。",
+      "acceptance": "CRS、transform、尺寸、分辨率、NoData 掩膜和有效范围均可检查。",
+      "scope": "src/.../artifacts/raster_metadata.py；src/.../checks/；tests/。"
+    },
+    {
+      "id": "P7-11",
+      "stage": "P7",
+      "name": "栅格预览生成与 MapLibre 接入",
+      "agent": "Agent-E/B",
+      "deps": "P5-08；P7-10。",
+      "tests": "`python -m pytest tests/preview -q`；`cd frontend && npm test -- --run`。",
+      "acceptance": "调整配色不改变原始文件指纹；预览分辨率与样式有记录。",
+      "scope": "src/.../preview/；frontend map raster layer；tests/。"
+    },
+    {
+      "id": "P7-12",
+      "stage": "P7",
+      "name": "原始像元取值接口",
+      "agent": "Agent-A/E",
+      "deps": "P7-11；P4-11。",
+      "tests": "`python -m pytest tests/artifacts/test_value_query.py -q`；前端 smoke。",
+      "acceptance": "返回原始值、NoData 标记和坐标查询结果；不从彩色预览反推数值。",
+      "scope": "src/.../artifacts/value_query.py；API；frontend identify interaction；tests/。"
+    },
+    {
+      "id": "P8-01",
+      "stage": "P8",
+      "name": "传感器产品配置模型",
+      "agent": "Agent-C",
+      "deps": "P7-01；P2-01。",
+      "tests": "`python -m pytest tests/remote_sensing/test_config_models.py -q`。",
+      "acceptance": "配置版本化；来源可追溯；字段完整性严格校验。",
+      "scope": "src/.../remote_sensing/config_models.py；config/sensors/；tests/。"
+    },
+    {
+      "id": "P8-02",
+      "stage": "P8",
+      "name": "唯一配置查找服务",
+      "agent": "Agent-C",
+      "deps": "P8-01。",
+      "tests": "`python -m pytest tests/remote_sensing/test_config_registry.py -q`。",
+      "acceptance": "零匹配与多匹配分别报 SENSOR_CONFIG_NOT_FOUND/AMBIGUOUS；不猜测。",
+      "scope": "src/.../remote_sensing/config_registry.py；tests/。"
+    },
+    {
+      "id": "P8-03",
+      "stage": "P8",
+      "name": "波段角色映射",
+      "agent": "Agent-B",
+      "deps": "P8-02；P7-01。",
+      "tests": "`python -m pytest tests/remote_sensing/test_band_mapper.py -q`。",
+      "acceptance": "映射与产品配置一致；缺波段在计算前阻断。",
+      "scope": "src/.../remote_sensing/band_mapper.py；tests/。"
+    },
+    {
+      "id": "P8-04",
+      "stage": "P8",
+      "name": "缩放与偏移处理",
+      "agent": "Agent-B",
+      "deps": "P8-02、P8-03。",
+      "tests": "`python -m pytest tests/remote_sensing/test_scaling.py -q`。",
+      "acceptance": "使用 scale 与 offset；手算像元吻合；禁止误把原始 DN 当反射率。",
+      "scope": "src/.../remote_sensing/scaling.py；tests/。"
+    },
+    {
+      "id": "P8-05",
+      "stage": "P8",
+      "name": "质量掩膜生成",
+      "agent": "Agent-B",
+      "deps": "P8-02、P8-03。",
+      "tests": "`python -m pytest tests/remote_sensing/test_quality_mask.py -q`。",
+      "acceptance": "位解析和掩膜结果与配置样本一致；未定义质量位不臆测。",
+      "scope": "src/.../remote_sensing/quality_mask.py；tests/。"
+    },
+    {
+      "id": "P8-06",
+      "stage": "P8",
+      "name": "NDVI 计算",
+      "agent": "Agent-B",
+      "deps": "P8-04、P8-05。",
+      "tests": "`python -m pytest tests/remote_sensing/test_ndvi.py -q`。",
+      "acceptance": "固定像元与手算参考一致；有效掩膜传播正确；数值范围检查。",
+      "scope": "src/.../remote_sensing/indices.py；tests/。"
+    },
+    {
+      "id": "P8-07",
+      "stage": "P8",
+      "name": "双时相网格对齐",
+      "agent": "Agent-B",
+      "deps": "P7-01、P8-06。",
+      "tests": "`python -m pytest tests/remote_sensing/test_alignment.py -q`。",
+      "acceptance": "不能只比较数组形状；网格地理位置、重采样方式和 NoData 一致记录。",
+      "scope": "src/.../remote_sensing/alignment.py；tests/。"
+    },
+    {
+      "id": "P8-08",
+      "stage": "P8",
+      "name": "变化栅格计算",
+      "agent": "Agent-B",
+      "deps": "P8-06、P8-07。",
+      "tests": "`python -m pytest tests/remote_sensing/test_change.py -q`。",
+      "acceptance": "变化方向固定为 second-first；掩膜和数值与参考一致。",
+      "scope": "src/.../remote_sensing/change.py；tests/。"
+    },
+    {
+      "id": "P8-09",
+      "stage": "P8",
+      "name": "变化分类与统计",
+      "agent": "Agent-B",
+      "deps": "P8-08；P2-06。",
+      "tests": "`python -m pytest tests/remote_sensing/test_classification.py -q`。",
+      "acceptance": "阈值边界规则明确；分类总量与有效像元数一致；面积口径合规。",
+      "scope": "src/.../remote_sensing/classification.py；tests/。"
+    },
+    {
+      "id": "P8-10",
+      "stage": "P8",
+      "name": "遥感方法端到端接入",
+      "agent": "Agent-C",
+      "deps": "P3 全部；P8-01 至 P8-09；P7-11。",
+      "tests": "`python -m pytest tests/methods/test_remote_sensing_change.py -q`。",
+      "acceptance": "T10/T11 通过；T12 未知配置在算法启动前阻断；成果来源包含配置版本。",
+      "scope": "config/methods/remote-sensing-index-change.*；tests/methods/。"
+    },
+    {
+      "id": "P9-01",
+      "stage": "P9",
+      "name": "模型供应商适配接口",
+      "agent": "Agent-G",
+      "deps": "P5 方案流程可手工完成；P3 公共模型稳定。",
+      "tests": "`python -m pytest tests/llm/test_provider_contract.py -q`。",
+      "acceptance": "业务层不依赖单一供应商 SDK；超时/错误结构统一；密钥不写日志。",
+      "scope": "src/.../llm/base.py；src/.../llm/providers/；tests/llm/。"
+    },
+    {
+      "id": "P9-02",
+      "stage": "P9",
+      "name": "允许外发摘要构建器",
+      "agent": "Agent-G",
+      "deps": "P1 元数据；P3 任务上下文可用。",
+      "tests": "`python -m pytest tests/llm/test_context_builder.py -q`。",
+      "acceptance": "仅包含任务目标、角色、字段结构、统计摘要等允许字段；路径/坐标/样本不外发。",
+      "scope": "src/.../llm/context_builder.py；tests/llm/。"
+    },
+    {
+      "id": "P9-03",
+      "stage": "P9",
+      "name": "外发数据边界扫描器",
+      "agent": "Agent-F/G",
+      "deps": "P9-02；P0-07。",
+      "tests": "`python -m pytest tests/llm/test_data_boundary.py -q`。",
+      "acceptance": "T15 全部断言通过；扫描完整最终 payload，而非仅扫描输入对象。",
+      "scope": "src/.../llm/data_boundary.py；tests/llm/。"
+    },
+    {
+      "id": "P9-04",
+      "stage": "P9",
+      "name": "候选方法提示构建",
+      "agent": "Agent-G",
+      "deps": "P3-02、P2-02；P9-02。",
+      "tests": "`python -m pytest tests/llm/test_prompt_builder.py -q`。",
+      "acceptance": "候选只来自注册表；提示不泄漏本机路径和坐标；版本可追溯。",
+      "scope": "src/.../llm/prompt_builder.py；tests/llm/。"
+    },
+    {
+      "id": "P9-05",
+      "stage": "P9",
+      "name": "结构化模型输出解析",
+      "agent": "Agent-G",
+      "deps": "P3-06；P9-01。",
+      "tests": "`python -m pytest tests/llm/test_response_parser.py -q`。",
+      "acceptance": "模式错误、未知 ID、非法枚举均拒绝；文字说明失败不破坏结构化草稿。",
+      "scope": "src/.../llm/response_parser.py；tests/llm/。"
+    },
+    {
+      "id": "P9-06",
+      "stage": "P9",
+      "name": "候选合法性与参数范围检查",
+      "agent": "Agent-C/G",
+      "deps": "P9-04；P2-01 至 P2-03。",
+      "tests": "`python -m pytest tests/llm/test_candidate_validator.py -q`。",
+      "acceptance": "模型不能创建新工具或重排固定步骤；不合法参数生成 issues。",
+      "scope": "src/.../llm/candidate_validator.py；tests/llm/。"
+    },
+    {
+      "id": "P9-07",
+      "stage": "P9",
+      "name": "模型错误、超时与重试策略",
+      "agent": "Agent-G",
+      "deps": "P9-01、P9-05。",
+      "tests": "`python -m pytest tests/llm/test_error_handling.py -q`。",
+      "acceptance": "错误有类别；重试次数受限；不重复执行 GIS 计算；草稿不丢失。",
+      "scope": "src/.../llm/client.py；tests/llm/。"
+    },
+    {
+      "id": "P9-08",
+      "stage": "P9",
+      "name": "手工回退入口",
+      "agent": "Agent-C/E",
+      "deps": "P3-07 至 P3-09；P5-04 至 P5-06。",
+      "tests": "`python -m pytest tests/plans/test_manual_fallback.py -q`；前端相关测试。",
+      "acceptance": "手工与模型入口进入同一 AnalysisPlan 确认/执行链。",
+      "scope": "backend plan service；frontend plan entry；tests。"
+    },
+    {
+      "id": "P9-09",
+      "stage": "P9",
+      "name": "模型方案与手工方案一致性测试",
+      "agent": "Agent-F/G",
+      "deps": "P9-01 至 P9-08；至少一个已验收方法。",
+      "tests": "`python -m pytest tests/llm/e2e -q`。",
+      "acceptance": "模型结果不作为 GIS 正确性证明；差异可解释；用户修改项有记录。",
+      "scope": "tests/llm/e2e/；docs/acceptance/。"
+    },
+    {
+      "id": "P10-01",
+      "stage": "P10",
+      "name": "本地脚本草稿与快照",
+      "agent": "Agent-A",
+      "deps": "P4-08；P1-10。",
+      "tests": "`python -m pytest tests/scripts/test_script_snapshot.py -q`。",
+      "acceptance": "每次运行脚本快照不可变；输入引用可追溯；不覆盖正式成果。",
+      "scope": "src/.../scripts/；workspace/scripts/；tests/scripts/。"
+    },
+    {
+      "id": "P10-02",
+      "stage": "P10",
+      "name": "本地脚本进程执行",
+      "agent": "Agent-B",
+      "deps": "P2-09；P10-01。",
+      "tests": "`python -m pytest tests/scripts/test_script_runner.py -q`。",
+      "acceptance": "失败可定位；超时可终止；输出清单可读；与正式调度记录区分。",
+      "scope": "src/.../scripts/runner.py；tests/scripts/。"
+    },
+    {
+      "id": "P10-03",
+      "stage": "P10",
+      "name": "脚本结果浏览",
+      "agent": "Agent-E",
+      "deps": "P10-01、P10-02；P5 基础 UI。",
+      "tests": "`cd frontend && npm test -- --run`；后端脚本 API 测试。",
+      "acceptance": "脚本运行和正式分析任务区分；输出可下载/预览。",
+      "scope": "frontend/src/features/scripts/；对应 API。"
+    },
+    {
+      "id": "P10-04",
+      "stage": "P10",
+      "name": "脚本手动收录向导",
+      "agent": "Agent-C",
+      "deps": "P10-02；P2/P3 已验收。",
+      "tests": "`python -m pytest tests/scripts/test_manual_registration.py -q`。",
+      "acceptance": "收录不自动信任脚本；必须补齐前提、输入输出、规则和参考样本。",
+      "scope": "src/.../scripts/registration/；docs/method-authoring/；tests/。"
+    },
+    {
+      "id": "P10-05",
+      "stage": "P10",
+      "name": "PostGIS 导入适配器",
+      "agent": "Agent-A",
+      "deps": "P1 资产登记；P0 环境。",
+      "tests": "`python -m pytest tests/data_adapters/test_postgis_snapshot.py -q`（无连接环境标记 skip 并说明）。",
+      "acceptance": "连接别名/表名/筛选/导出时间可追溯；分析只读本地快照。",
+      "scope": "src/.../data_adapters/postgis/；tests/data_adapters/。"
+    },
+    {
+      "id": "P10-06",
+      "stage": "P10",
+      "name": "PostGIS 快照版本管理",
+      "agent": "Agent-A",
+      "deps": "P10-05；P1-08。",
+      "tests": "`python -m pytest tests/data_adapters/test_postgis_versioning.py -q`。",
+      "acceptance": "断开数据库后快照仍可计算；源变化重新导入产生新版本。",
+      "scope": "src/.../data_adapters/postgis/；asset version service；tests。"
+    },
+    {
+      "id": "P10-07",
+      "stage": "P10",
+      "name": "脚本/PostGIS 扩展验收",
+      "agent": "Agent-F",
+      "deps": "P10-01 至 P10-06。",
+      "tests": "`python -m pytest tests/integration/extensions -q`。",
+      "acceptance": "脚本目录与正式 run 分离；PostGIS 未接入时明确记录 NOT_IMPLEMENTED，不虚报通过。",
+      "scope": "tests/integration/extensions/；docs/acceptance/。"
+    },
+    {
+      "id": "P11-01",
+      "stage": "P11",
+      "name": "40 条通用需求追踪矩阵",
+      "agent": "Agent-F",
+      "deps": "P0—P10 已有实现记录。",
+      "tests": "`python scripts/validate_traceability.py`（若不存在先创建轻量校验脚本）。",
+      "acceptance": "40 条需求每条有状态、代码位置、测试证据；未完成项不标通过。",
+      "scope": "docs/traceability/requirements-matrix.md；不改生产代码。"
+    },
+    {
+      "id": "P11-02",
+      "stage": "P11",
+      "name": "T01—T16 固定用例全量回归",
+      "agent": "Agent-F",
+      "deps": "对应 P2—P9 用例已实现。",
+      "tests": "`python -m pytest tests/golden -q`；`python -m pytest --junitxml=artifacts/reports/golden.xml tests/golden`。",
+      "acceptance": "三类数量合计 16；每个未执行项有原因；不得删减分母。",
+      "scope": "tests/golden/；artifacts/reports/。"
+    },
+    {
+      "id": "P11-03",
+      "stage": "P11",
+      "name": "已接入方法独立回归",
+      "agent": "Agent-F",
+      "deps": "相应方法阶段完成。",
+      "tests": "`python -m pytest tests/methods -q`。",
+      "acceptance": "每个方法有输入前提、参考结果、容差、失败输入和端到端记录。",
+      "scope": "tests/methods/；artifacts/reports/methods/。"
+    },
+    {
+      "id": "P11-04",
+      "stage": "P11",
+      "name": "跨层接口一致性审计",
+      "agent": "主控+Agent-F",
+      "deps": "P1—P5；P7—P9 已接入部分。",
+      "tests": "`python -m pytest tests/integration -q`；前端测试与 build。",
+      "acceptance": "plan_version/run_id/artifact_id 一致；无字段漂移；数据库状态与页面状态一致。",
+      "scope": "docs/acceptance/interface-audit.md；必要时仅修复经主控批准的接口问题。"
+    },
+    {
+      "id": "P11-05",
+      "stage": "P11",
+      "name": "全流程真实数据复算",
+      "agent": "主控+Agent-F",
+      "deps": "P5；至少一个完整方法通过 P3/P4。",
+      "tests": "`python -m pytest tests/e2e -q`；按 README 手动运行真实 GIS smoke。",
+      "acceptance": "真实进程证据、请求快照、日志、输出文件和检查报告齐全；新 run 目录独立。",
+      "scope": "tests/e2e/；artifacts/reproduction/。"
+    },
+    {
+      "id": "P11-06",
+      "stage": "P11",
+      "name": "运行生命周期与故障演练",
+      "agent": "Agent-D/F",
+      "deps": "P4-07 至 P4-16。",
+      "tests": "`python -m pytest tests/integration/lifecycle -q`。",
+      "acceptance": "状态符合第 8.7 节；子进程停止；检查中断不误报计算失败。",
+      "scope": "tests/integration/lifecycle/；artifacts/reports/lifecycle/。"
+    },
+    {
+      "id": "P11-07",
+      "stage": "P11",
+      "name": "干净目录启动与使用文档",
+      "agent": "主控+Agent-E",
+      "deps": "P0—P5 已验收；最终选定方法可运行。",
+      "tests": "按 README 逐步执行；`python -m pytest -q`；前端 `npm run build`。",
+      "acceptance": "不依赖开发者隐含状态；版本、环境、数据位置、限制明确。",
+      "scope": "README.md；docs/user-guide/；scripts/start.*。"
+    },
+    {
+      "id": "P11-08",
+      "stage": "P11",
+      "name": "最终交付与已知限制报告",
+      "agent": "主控+Agent-F",
+      "deps": "P11-01 至 P11-07。",
+      "tests": "`python -m pytest -q`；`cd frontend && npm run build`；交付清单脚本。",
+      "acceptance": "不把可选 PostGIS/未完成测地线/未执行用例写成已完成；报告与实际证据一致。",
+      "scope": "docs/release/；artifacts/reports/final/。"
+    }
+  ]
+}

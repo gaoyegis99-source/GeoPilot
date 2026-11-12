@@ -1,0 +1,19 @@
+id: qgis-select-roads-by-location
+version: 1
+runner: qgis
+implementation: native:extractbylocation
+inputs:
+  source: vector_line
+  area: vector_polygon
+outputs:
+  roads: vector_line
+parameters:
+  predicate: {type: enum, values: [intersects]}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - geometry_is_valid
+check_rules:
+  - output_exists

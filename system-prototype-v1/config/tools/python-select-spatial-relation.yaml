@@ -1,0 +1,20 @@
+id: python-select-spatial-relation
+version: 1
+runner: python
+implementation: geopilot.select_spatial_relation
+inputs:
+  targets: vector
+  area: vector_polygon
+outputs:
+  targets: vector
+parameters:
+  spatial_relation: {type: enum, values: [intersects, within]}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - input_crs_match
+  - geometry_is_valid
+check_rules:
+  - output_exists

@@ -1,0 +1,25 @@
+.artifacts-panel { display: grid; gap: 0.65rem; min-width: 0; font-size: 0.82rem; overflow-wrap: anywhere; }
+.artifacts-panel p { margin: 0.2rem 0; }
+.artifacts-panel__list { list-style: none; margin: 0; padding: 0; }
+.artifacts-panel__item { border-block-end: 1px solid var(--color-border); padding-block: 0.55rem; }
+.artifacts-panel__title, .artifacts-panel__actions { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.45rem; }
+.artifacts-panel__title { justify-content: space-between; }
+.artifacts-panel__title span { color: var(--color-muted); }
+.artifacts-panel__actions { margin: 0.35rem 0; }
+.artifacts-panel a { color: var(--color-focus); }
+.artifacts-panel button { background: var(--color-panel); color: var(--color-focus); border: 1px solid var(--color-border); border-radius: 0.35rem; cursor: pointer; }
+.artifacts-panel details { color: var(--color-muted); }
+.artifacts-panel summary { cursor: pointer; }
+.artifacts-panel dt { font-weight: 650; }
+.artifacts-panel dd { margin: 0 0 0.25rem; }
+.artifacts-panel__error { color: var(--color-error); }
+.artifacts-panel__table, .artifacts-panel__json { overflow: auto; max-block-size: 14rem; }
+.artifacts-panel__table table { border-collapse: collapse; width: 100%; }
+.artifacts-panel__table th, .artifacts-panel__table td { text-align: start; padding: 0.25rem; border-block-end: 1px solid var(--color-border); }
+.artifacts-panel__json { white-space: pre-wrap; }
+.artifacts-panel__diagnostics ul { padding-inline-start: 1rem; }
+.artifacts-panel__item[data-selected="true"] {
+  border-color: var(--color-focus);
+  box-shadow: inset 0.15rem 0 var(--color-focus);
+  padding-inline-start: 0.45rem;
+}

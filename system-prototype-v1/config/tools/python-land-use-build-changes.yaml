@@ -1,0 +1,20 @@
+id: python-land-use-build-changes
+version: 1
+runner: python
+implementation: geopilot.land_use_transition
+inputs:
+  overlay_polygons: vector_polygon
+outputs:
+  change_polygons: vector_polygon
+  change_report: json
+parameters:
+  area_crs: {type: string}
+  area_unit: {type: enum, values: [square_meter]}
+  area_tolerance: {type: number, minimum: 0, unit: square_meter}
+  minimum_change_area: {type: number, minimum: 0, unit: square_meter}
+  merge_adjacent_classes: {type: boolean}
+measurement_policy:
+  distance: not_applicable
+  area: equal_area
+preconditions: [crs_is_known, geometry_is_valid, source_feature_id_is_unique]
+check_rules: [output_exists]

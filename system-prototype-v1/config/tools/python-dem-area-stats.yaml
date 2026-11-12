@@ -1,0 +1,15 @@
+id: python-dem-area-stats
+version: 1
+runner: python
+implementation: geopilot.summarize_dem_area
+inputs:
+  threshold_regions: raster_classification
+outputs:
+  area_statistics: json
+parameters:
+  area_crs: {type: string}
+measurement_policy:
+  distance: not_applicable
+  area: equal_area
+preconditions: [crs_is_known]
+check_rules: [output_exists]

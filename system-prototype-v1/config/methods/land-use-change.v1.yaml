@@ -1,0 +1,129 @@
+id: land-use-change
+version: 1
+locked_order: true
+inputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+  zones: vector_polygon
+  analysis_extent: vector_polygon
+input_context:
+  first_classes:
+    field_options: [first_class_field]
+    scopes: [{reference_role: analysis_extent}]
+  second_classes:
+    field_options: [second_class_field]
+    scopes: [{reference_role: analysis_extent}]
+  zones:
+    scopes: [{reference_role: analysis_extent, allow_empty: true}]
+critical_options:
+  first_class_field: {type: string}
+  second_class_field: {type: string}
+  first_class_mapping: {type: json}
+  second_class_mapping: {type: json}
+  first_period: {type: string}
+  second_period: {type: string}
+  area_crs: {type: reference}
+  overlay_area_tolerance: {type: number, minimum: 0, unit: square_meter}
+  boundary_assignment: [split_by_area, centroid, largest_overlap]
+  minimum_change_area: {type: number, minimum: 0, unit: square_meter}
+  merge_adjacent_classes: {type: boolean, required: false, default: false}
+preconditions: [required_input_roles_available]
+steps:
+  - key: read_two_periods
+    tool: {id: python-land-use-read, version: 1}
+    inputs:
+      first_classes: {asset: first_classes}
+      second_classes: {asset: second_classes}
+    outputs:
+      first_classes: vector_polygon
+      second_classes: vector_polygon
+  - key: map_classification_systems
+    tool: {id: python-land-use-map, version: 1}
+    inputs:
+      first_classes: {step: read_two_periods, output: first_classes}
+      second_classes: {step: read_two_periods, output: second_classes}
+    parameters:
+      first_class_field: {option: first_class_field}
+      second_class_field: {option: second_class_field}
+      first_class_mapping: {option: first_class_mapping}
+      second_class_mapping: {option: second_class_mapping}
+      first_period: {option: first_period}
+      second_period: {option: second_period}
+    outputs:
+      first_classes: vector_polygon
+      second_classes: vector_polygon
+  - key: choose_equal_area_projection
+    tool: {id: python-land-use-project, version: 1}
+    inputs:
+      first_classes: {step: map_classification_systems, output: first_classes}
+      second_classes: {step: map_classification_systems, output: second_classes}
+      analysis_extent: {asset: analysis_extent}
+    parameters:
+      target_crs: {option: area_crs}
+    outputs:
+      first_classes: vector_polygon
+      second_classes: vector_polygon
+      analysis_extent: vector_polygon
+  - key: overlay
+    tool: {id: python-land-use-overlay, version: 1}
+    inputs:
+      first_classes: {step: choose_equal_area_projection, output: first_classes}
+      second_classes: {step: choose_equal_area_projection, output: second_classes}
+      analysis_extent: {step: choose_equal_area_projection, output: analysis_extent}
+    parameters:
+      area_crs: {option: area_crs}
+      area_unit: {literal: square_meter}
+      area_tolerance: {option: overlay_area_tolerance}
+    outputs:
+      overlay_polygons: vector_polygon
+      overlay_report: json
+  - key: apply_boundary_assignment
+    tool: {id: python-land-use-assign, version: 1}
+    inputs:
+      overlay_polygons: {step: overlay, output: overlay_polygons}
+      first_classes: {step: choose_equal_area_projection, output: first_classes}
+      second_classes: {step: choose_equal_area_projection, output: second_classes}
+      zones: {asset: zones}
+    parameters:
+      area_crs: {option: area_crs}
+      area_unit: {literal: square_meter}
+      area_tolerance: {option: overlay_area_tolerance}
+      boundary_assignment: {option: boundary_assignment}
+      boundary_tie: {literal: unassigned}
+    outputs:
+      allocations: json
+  - key: build_change_polygons
+    tool: {id: python-land-use-build-changes, version: 1}
+    inputs:
+      overlay_polygons: {step: overlay, output: overlay_polygons}
+    parameters:
+      area_crs: {option: area_crs}
+      area_unit: {literal: square_meter}
+      area_tolerance: {option: overlay_area_tolerance}
+      minimum_change_area: {option: minimum_change_area}
+      merge_adjacent_classes: {option: merge_adjacent_classes}
+    outputs:
+      change_polygons: vector_polygon
+      change_report: json
+  - key: build_transition_matrix
+    tool: {id: python-land-use-transition-matrix, version: 1}
+    inputs:
+      overlay_polygons: {step: overlay, output: overlay_polygons}
+      change_polygons: {step: build_change_polygons, output: change_polygons}
+      allocations: {step: apply_boundary_assignment, output: allocations}
+      change_report: {step: build_change_polygons, output: change_report}
+    parameters:
+      area_crs: {option: area_crs}
+      area_unit: {literal: square_meter}
+      area_tolerance: {option: overlay_area_tolerance}
+    outputs:
+      transition_matrix: json
+      zone_statistics: json
+expected_artifacts:
+  - {role: change_polygons, step: build_change_polygons, output: change_polygons, type: vector_polygon}
+  - {role: transition_matrix, step: build_transition_matrix, output: transition_matrix, type: json}
+  - {role: zone_statistics, step: build_transition_matrix, output: zone_statistics, type: json}
+check_rules:
+  - classification_mapping_complete
+  - overlay_area_balanced
+  - transition_totals_match

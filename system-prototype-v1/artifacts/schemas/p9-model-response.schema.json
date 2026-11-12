@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "MethodRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "MethodRef",
+      "type": "object"
+    },
+    "TaskGoal": {
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "summary"
+      ],
+      "title": "TaskGoal",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "The public JSON reply shape, before local interpretation.",
+  "properties": {
+    "method": {
+      "$ref": "#/$defs/MethodRef"
+    },
+    "goal": {
+      "$ref": "#/$defs/TaskGoal"
+    },
+    "options": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Options",
+      "type": "object"
+    },
+    "missing": {
+      "items": {
+        "pattern": "^[A-Za-z_][A-Za-z0-9_-]*(\\.[A-Za-z0-9_-]+)*$",
+        "type": "string"
+      },
+      "title": "Missing",
+      "type": "array"
+    },
+    "explanation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Explanation"
+    }
+  },
+  "required": [
+    "method",
+    "goal",
+    "options",
+    "missing"
+  ],
+  "title": "ModelSuggestion",
+  "type": "object"
+}

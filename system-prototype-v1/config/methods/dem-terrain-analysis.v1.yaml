@@ -1,0 +1,89 @@
+id: dem-terrain-analysis
+version: 1
+locked_order: true
+inputs:
+  analysis_extent: vector_polygon
+  dem: raster_elevation
+input_context:
+  dem:
+    scopes: [{reference_role: analysis_extent}]
+critical_options:
+  terrain_output: [slope, aspect]
+  slope_unit: {type: enum, values: [degree, percent], default: degree}
+  band: {type: integer, minimum: 1, default: 1}
+  vertical_unit:
+    type: enum
+    values: [metadata, meter, kilometer, centimeter, millimeter, foot, us_survey_foot]
+    default: metadata
+  z_factor: {type: number, minimum_exclusive: 0}
+  threshold: {type: json}
+  area_crs: {type: reference}
+preconditions: [required_input_roles_available, terrain_inputs_are_consistent]
+steps:
+  - key: expand_extent_by_algorithm_neighborhood
+    tool: {id: python-dem-expand-extent, version: 1}
+    inputs:
+      dem: {asset: dem}
+      analysis_extent: {asset: analysis_extent}
+    parameters:
+      radius_pixels: {literal: 1}
+    outputs:
+      windows: json
+  - key: read_dem_for_expanded_extent
+    tool: {id: python-dem-prepare, version: 1}
+    inputs:
+      dem: {asset: dem}
+      windows: {step: expand_extent_by_algorithm_neighborhood, output: windows}
+    outputs:
+      prepared_dem: raster_elevation
+  - key: check_horizontal_vertical_units
+    tool: {id: python-dem-unit-check, version: 1}
+    inputs:
+      dem: {step: read_dem_for_expanded_extent, output: prepared_dem}
+    parameters:
+      band: {option: band}
+      vertical_unit: {option: vertical_unit}
+      z_factor: {option: z_factor}
+    outputs:
+      unit_report: json
+  - key: calculate_slope_or_aspect
+    tool: {id: python-dem-terrain, version: 1}
+    inputs:
+      dem: {step: read_dem_for_expanded_extent, output: prepared_dem}
+      unit_report: {step: check_horizontal_vertical_units, output: unit_report}
+    parameters:
+      terrain_output: {option: terrain_output}
+      slope_unit: {option: slope_unit}
+      band: {option: band}
+      z_factor: {option: z_factor}
+    outputs:
+      terrain_raster: raster_terrain
+  - key: clip_back_to_analysis_extent
+    tool: {id: python-dem-clip-back, version: 1}
+    inputs:
+      terrain_raster: {step: calculate_slope_or_aspect, output: terrain_raster}
+      windows: {step: expand_extent_by_algorithm_neighborhood, output: windows}
+      analysis_extent: {asset: analysis_extent}
+    outputs:
+      terrain_raster: raster_terrain
+  - key: extract_by_threshold
+    tool: {id: python-dem-threshold, version: 1}
+    inputs:
+      terrain_raster: {step: clip_back_to_analysis_extent, output: terrain_raster}
+    parameters:
+      threshold: {option: threshold}
+    outputs:
+      threshold_regions: raster_classification
+  - key: calculate_area_with_equal_area_projection
+    tool: {id: python-dem-area-stats, version: 1}
+    inputs:
+      threshold_regions: {step: extract_by_threshold, output: threshold_regions}
+    parameters:
+      area_crs: {option: area_crs}
+    outputs:
+      area_statistics: json
+expected_artifacts:
+  - {role: terrain_raster, step: clip_back_to_analysis_extent, output: terrain_raster, type: raster_terrain}
+  - {role: threshold_regions, step: extract_by_threshold, output: threshold_regions, type: raster_classification}
+  - {role: area_statistics, step: calculate_area_with_equal_area_projection, output: area_statistics, type: json}
+check_rules: [dem_covers_expanded_extent, units_resolved, border_pixels_match_reference]

@@ -1,0 +1,16 @@
+id: python-land-use-read
+version: 1
+runner: python
+implementation: geopilot.land_use_overlay
+inputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+outputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+parameters: {}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known, geometry_is_valid, source_feature_id_is_unique]
+check_rules: [output_exists]

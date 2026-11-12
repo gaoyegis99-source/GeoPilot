@@ -1,0 +1,450 @@
+{
+  "$defs": {
+    "AssetRoleBinding": {
+      "additionalProperties": false,
+      "description": "Bind an input port to a declared method input role.",
+      "properties": {
+        "asset": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Asset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset"
+      ],
+      "title": "AssetRoleBinding",
+      "type": "object"
+    },
+    "DataAssetRef": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "asset_version": {
+          "exclusiveMinimum": 0,
+          "title": "Asset Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "asset_id",
+        "asset_version"
+      ],
+      "title": "DataAssetRef",
+      "type": "object"
+    },
+    "ExpectedArtifactBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "output": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Output",
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Role",
+          "type": "string"
+        },
+        "step": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Step",
+          "type": "string"
+        },
+        "type": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "step",
+        "output",
+        "type"
+      ],
+      "title": "ExpectedArtifactBinding",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "MethodRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "MethodRef",
+      "type": "object"
+    },
+    "PlanIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Code",
+          "type": "string"
+        },
+        "field": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Field",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "field",
+        "message"
+      ],
+      "title": "PlanIssue",
+      "type": "object"
+    },
+    "PlanOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "layer": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Layer"
+        },
+        "target": {
+          "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Target",
+          "type": "string"
+        },
+        "type": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "target"
+      ],
+      "title": "PlanOutput",
+      "type": "object"
+    },
+    "PlanStatus": {
+      "enum": [
+        "draft",
+        "confirmed"
+      ],
+      "title": "PlanStatus",
+      "type": "string"
+    },
+    "PlanStep": {
+      "additionalProperties": false,
+      "properties": {
+        "inputs": {
+          "patternProperties": {
+            "\\S": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/AssetRoleBinding"
+                },
+                {
+                  "$ref": "#/$defs/StepOutputBinding"
+                }
+              ]
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "key": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Key",
+          "type": "string"
+        },
+        "outputs": {
+          "patternProperties": {
+            "\\S": {
+              "$ref": "#/$defs/PlanOutput"
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Outputs",
+          "type": "object"
+        },
+        "parameters": {
+          "patternProperties": {
+            "\\S": {
+              "$ref": "#/$defs/JsonValue"
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "tool": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolRef"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "tool_check_rules": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/ToolCheckRef"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tool Check Rules"
+        }
+      },
+      "required": [
+        "key",
+        "tool",
+        "inputs",
+        "parameters",
+        "outputs"
+      ],
+      "title": "PlanStep",
+      "type": "object"
+    },
+    "StepOutputBinding": {
+      "additionalProperties": false,
+      "description": "Bind an input port to a step's named output.",
+      "properties": {
+        "output": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Output",
+          "type": "string"
+        },
+        "step": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Step",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step",
+        "output"
+      ],
+      "title": "StepOutputBinding",
+      "type": "object"
+    },
+    "TaskGoal": {
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "summary"
+      ],
+      "title": "TaskGoal",
+      "type": "object"
+    },
+    "ToolCheckRef": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "ToolCheckRef",
+      "type": "object"
+    },
+    "ToolRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "ToolRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "check_rules": {
+      "items": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "title": "Check Rules",
+      "type": "array"
+    },
+    "critical_options": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Critical Options",
+      "type": "object"
+    },
+    "expected_artifacts": {
+      "items": {
+        "$ref": "#/$defs/ExpectedArtifactBinding"
+      },
+      "title": "Expected Artifacts",
+      "type": "array"
+    },
+    "goal": {
+      "$ref": "#/$defs/TaskGoal"
+    },
+    "id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Id",
+      "type": "string"
+    },
+    "inputs": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/DataAssetRef"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Inputs",
+      "type": "object"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/PlanIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "method": {
+      "$ref": "#/$defs/MethodRef"
+    },
+    "status": {
+      "$ref": "#/$defs/PlanStatus"
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/PlanStep"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "task_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Task Id",
+      "type": "string"
+    },
+    "version": {
+      "exclusiveMinimum": 0,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "task_id",
+    "version",
+    "status",
+    "goal",
+    "inputs",
+    "critical_options",
+    "method",
+    "steps",
+    "expected_artifacts",
+    "check_rules",
+    "issues"
+  ],
+  "title": "AnalysisPlan",
+  "type": "object"
+}

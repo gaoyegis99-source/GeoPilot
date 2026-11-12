@@ -1,0 +1,261 @@
+{
+  "reference": "GeographicLib 2.1 WGS84",
+  "distance_bracket_tolerance_m": 0.02,
+  "probe_radial_offset_m": 0.25,
+  "analytic_boundary_tolerance_m": 0.05,
+  "production_sampling": {
+    "max_segment_step_m": 25,
+    "max_cap_angle_deg": 1
+  },
+  "cases": [
+    {
+      "id": "equatorial-straight",
+      "distance_m": 500,
+      "line": [
+        [
+          117.0,
+          0.0
+        ],
+        [
+          117.02,
+          0.0
+        ]
+      ],
+      "probes": [
+        {
+          "label": "north side",
+          "point": [
+            117.00874,
+            0.004519586461465154
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.73005940900094,
+            499.7500001621496
+          ]
+        },
+        {
+          "label": "north side",
+          "point": [
+            117.00874,
+            0.004524108308850123
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.2300453848846,
+            500.2500001620873
+          ]
+        },
+        {
+          "label": "south side",
+          "point": [
+            117.01326,
+            -0.004519586461465154
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.7301614165723,
+            499.75000025637115
+          ]
+        },
+        {
+          "label": "south side",
+          "point": [
+            117.01326,
+            -0.004524108308850123
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.23014729050516,
+            500.2500002562146
+          ]
+        },
+        {
+          "label": "start round cap",
+          "point": [
+            116.99658628620261,
+            -0.0029352366049451056
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.73372481262516,
+            499.7500001003036
+          ]
+        },
+        {
+          "label": "start round cap",
+          "point": [
+            116.9965828707811,
+            -0.0029381733098989738
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.23372480899366,
+            500.2500001005647
+          ]
+        },
+        {
+          "label": "end round cap",
+          "point": [
+            117.02401765624516,
+            0.002016629593636323
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.7357300886866,
+            499.75000010051787
+          ]
+        },
+        {
+          "label": "end round cap",
+          "point": [
+            117.02402167591124,
+            0.002018647232045814
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.2357300811016,
+            500.25000010027856
+          ]
+        }
+      ]
+    },
+    {
+      "id": "equatorial-bend",
+      "distance_m": 500,
+      "line": [
+        [
+          117.0,
+          0.0
+        ],
+        [
+          117.02,
+          0.0
+        ],
+        [
+          117.02,
+          0.02
+        ]
+      ],
+      "probes": [
+        {
+          "label": "outer round corner",
+          "point": [
+            117.02314661343404,
+            -0.003223597072032809
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.73065188403694,
+            499.7500001000019
+          ]
+        },
+        {
+          "label": "outer round corner",
+          "point": [
+            117.02314976162157,
+            -0.003226822281706342
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.23065187930587,
+            500.2500000997445
+          ]
+        },
+        {
+          "label": "inner corner",
+          "point": [
+            117.01551001158222,
+            0.004520248666025219
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.80327351435625,
+            499.82322289192103
+          ]
+        },
+        {
+          "label": "inner corner",
+          "point": [
+            117.01550683555806,
+            0.004523446094964729
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.1568157945456,
+            500.17677632590227
+          ]
+        },
+        {
+          "label": "second segment side",
+          "point": [
+            117.02448933073347,
+            0.012199999965422214
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            499.7300313659454,
+            499.7500001018299
+          ]
+        },
+        {
+          "label": "second segment side",
+          "point": [
+            117.02449382230999,
+            0.012199999965346733
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            500.23001759681887,
+            500.25000010149546
+          ]
+        }
+      ]
+    },
+    {
+      "id": "high-latitude-arc",
+      "distance_m": 1000,
+      "line": [
+        [
+          12.0,
+          65.0
+        ],
+        [
+          14.0,
+          65.0
+        ]
+      ],
+      "probes": [
+        {
+          "label": "north of curved geodesic",
+          "point": [
+            13.074030959235484,
+            65.01229514782054
+          ],
+          "covered": true,
+          "distance_bracket_m": [
+            999.7300240618277,
+            999.7500001140885
+          ]
+        },
+        {
+          "label": "north of curved geodesic",
+          "point": [
+            13.074030971652897,
+            65.01229963241215
+          ],
+          "covered": false,
+          "distance_bracket_m": [
+            1000.2300228035728,
+            1000.2500001142839
+          ]
+        }
+      ],
+      "centerline_point": [
+        13.074006138947267,
+        65.00332820146517
+      ],
+      "inside_probe_raw_chord_distance_m": 1370.8192688708198
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "pattern": "^[A-Z][A-Z0-9_]*$",
+          "title": "Code",
+          "type": "string"
+        },
+        "phase": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Phase",
+          "type": "string"
+        },
+        "step_key": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Step Key",
+          "type": "string"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Field"
+        },
+        "message": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Message",
+          "type": "string"
+        },
+        "suggestion": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Suggestion",
+          "type": "string"
+        },
+        "log_path": {
+          "anyOf": [
+            {
+              "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Log Path"
+        },
+        "observed": {
+          "$ref": "#/$defs/JsonValue",
+          "default": null
+        }
+      },
+      "required": [
+        "code",
+        "phase",
+        "step_key",
+        "field",
+        "message",
+        "suggestion",
+        "log_path"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "StepOutput": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Path",
+          "type": "string"
+        },
+        "layer": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Layer"
+        },
+        "type": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "layer",
+        "type"
+      ],
+      "title": "StepOutput",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "step_key": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Step Key",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Exit Code"
+    },
+    "outputs": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/StepOutput"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Outputs",
+      "type": "object"
+    },
+    "log_path": {
+      "anyOf": [
+        {
+          "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+          "minLength": 1,
+          "pattern": "\\S",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Log Path"
+    },
+    "warnings": {
+      "items": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "title": "Warnings",
+      "type": "array"
+    },
+    "error": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ErrorDetail"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "finished_at": {
+      "format": "date-time",
+      "title": "Finished At",
+      "type": "string"
+    },
+    "environment": {
+      "patternProperties": {
+        "\\S": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "type": "string"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Environment",
+      "type": "object"
+    }
+  },
+  "required": [
+    "run_id",
+    "step_key",
+    "status",
+    "exit_code",
+    "outputs",
+    "log_path",
+    "warnings",
+    "error",
+    "started_at",
+    "finished_at",
+    "environment"
+  ],
+  "title": "StepResult",
+  "type": "object"
+}

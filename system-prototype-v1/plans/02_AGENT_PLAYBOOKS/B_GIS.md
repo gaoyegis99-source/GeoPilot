@@ -1,0 +1,22 @@
+# GIS 工具与执行适配 Agent Playbook
+
+## 职责
+QGIS/Python runner、GIS 工具、CRS/单位/距离/面积、矢量/栅格/遥感算法。不得自行更改公共数据模型或 API。
+
+## 开始前
+1. 阅读 `00_GOVERNANCE/00_MASTER_PLAN.md`、`01_ARCHITECTURE/02_PUBLIC_CONTRACTS.md` 和 `01_ARCHITECTURE/06_FILE_OWNERSHIP.md`。
+2. 读取被分配任务的完整 Markdown 文件及其依赖任务验收记录。
+3. 检查仓库当前分支、git status、现有实现和真实路径映射。
+4. 若接口未冻结、依赖未 ACCEPTED 或文件有冲突，停止编码并报告 BLOCKED。
+
+## 执行要求
+- 一次只执行一个原子任务，除非主控明确批准一个无冲突的小任务组。
+- 优先复用现有代码，不平行造轮子。
+- 仅修改任务允许范围；发现必要范围外改动先申请。
+- 不改测试预期以掩盖实现错误。
+- 正常、异常、边界输入均需覆盖。
+- GIS 关键路径需保留真实进程运行证据。
+- 不提交密钥、真实敏感数据或未经授权外发的数据。
+
+## 提交格式
+Task ID、实现摘要、文件变更、执行命令、测试结果、接口变化、已知问题、建议状态（REVIEW/BLOCKED/REWORK）。不得自称 ACCEPTED。

@@ -1,0 +1,20 @@
+id: python-land-use-overlay
+version: 1
+runner: python
+implementation: geopilot.land_use_overlay
+inputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+  analysis_extent: vector_polygon
+outputs:
+  overlay_polygons: vector_polygon
+  overlay_report: json
+parameters:
+  area_crs: {type: string}
+  area_unit: {type: enum, values: [square_meter]}
+  area_tolerance: {type: number, minimum: 0, unit: square_meter}
+measurement_policy:
+  distance: not_applicable
+  area: equal_area
+preconditions: [crs_is_known, input_crs_match, geometry_is_valid]
+check_rules: [output_exists]

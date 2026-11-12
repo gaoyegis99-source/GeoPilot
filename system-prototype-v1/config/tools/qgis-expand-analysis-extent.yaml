@@ -1,0 +1,26 @@
+id: qgis-expand-analysis-extent
+version: 1
+runner: qgis
+implementation: native:buffer
+inputs:
+  source: vector_polygon
+outputs:
+  expanded_extent: vector_polygon
+parameters:
+  distance: {type: number, unit: meter, minimum_exclusive: 0}
+  segments: {type: integer, minimum: 1}
+  dissolve: {type: boolean}
+  end_cap_style: {type: enum, values: [round, flat, square]}
+  join_style: {type: enum, values: [round, miter, bevel]}
+  miter_limit: {type: number, minimum: 1}
+measurement_policy:
+  distance: local_projected
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - projected_crs_suitable_for_extent
+  - horizontal_unit_is_meter
+  - geometry_is_valid
+check_rules:
+  - output_exists
+  - output_crs_expected

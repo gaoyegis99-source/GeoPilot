@@ -1,0 +1,756 @@
+{
+  "$defs": {
+    "AssetRoleBinding": {
+      "additionalProperties": false,
+      "description": "Bind an input port to a declared method input role.",
+      "properties": {
+        "asset": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Asset",
+          "type": "string"
+        }
+      },
+      "required": [
+        "asset"
+      ],
+      "title": "AssetRoleBinding",
+      "type": "object"
+    },
+    "ExpectedArtifactBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "output": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Output",
+          "type": "string"
+        },
+        "role": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Role",
+          "type": "string"
+        },
+        "step": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Step",
+          "type": "string"
+        },
+        "type": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "step",
+        "output",
+        "type"
+      ],
+      "title": "ExpectedArtifactBinding",
+      "type": "object"
+    },
+    "InputContextRule": {
+      "additionalProperties": false,
+      "properties": {
+        "field_options": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Field Options",
+          "type": "array"
+        },
+        "required_fields": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Required Fields",
+          "type": "array"
+        },
+        "scopes": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/InputScopeRule"
+          },
+          "title": "Scopes",
+          "type": "array"
+        }
+      },
+      "title": "InputContextRule",
+      "type": "object"
+    },
+    "InputScopeRule": {
+      "additionalProperties": false,
+      "description": "Compare a role with another selected role or the optional task scope.",
+      "properties": {
+        "allow_empty": {
+          "default": false,
+          "title": "Allow Empty",
+          "type": "boolean"
+        },
+        "distance_crs_option": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Distance Crs Option"
+        },
+        "distance_method_option": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Distance Method Option"
+        },
+        "distance_option": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Distance Option"
+        },
+        "reference_role": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reference Role"
+        }
+      },
+      "title": "InputScopeRule",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "LiteralBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "literal": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "literal"
+      ],
+      "title": "LiteralBinding",
+      "type": "object"
+    },
+    "MethodStep": {
+      "additionalProperties": false,
+      "properties": {
+        "inputs": {
+          "patternProperties": {
+            "\\S": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/AssetRoleBinding"
+                },
+                {
+                  "$ref": "#/$defs/StepOutputBinding"
+                }
+              ]
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Inputs",
+          "type": "object"
+        },
+        "key": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Key",
+          "type": "string"
+        },
+        "outputs": {
+          "patternProperties": {
+            "\\S": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Outputs",
+          "type": "object"
+        },
+        "parameters": {
+          "patternProperties": {
+            "\\S": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/OptionBinding"
+                },
+                {
+                  "$ref": "#/$defs/LiteralBinding"
+                }
+              ]
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Parameters",
+          "type": "object"
+        },
+        "tool": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ToolRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "MethodStep",
+      "type": "object"
+    },
+    "OptionBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "option": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Option",
+          "type": "string"
+        }
+      },
+      "required": [
+        "option"
+      ],
+      "title": "OptionBinding",
+      "type": "object"
+    },
+    "ParameterSpec": {
+      "additionalProperties": false,
+      "properties": {
+        "default": {
+          "$ref": "#/$defs/JsonValue",
+          "default": null
+        },
+        "maximum": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum"
+        },
+        "maximum_exclusive": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Maximum Exclusive"
+        },
+        "minimum": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum"
+        },
+        "minimum_exclusive": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Minimum Exclusive"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "type": {
+          "enum": [
+            "number",
+            "integer",
+            "boolean",
+            "enum",
+            "string",
+            "json"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        },
+        "values": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Values"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ParameterSpec",
+      "type": "object"
+    },
+    "ReferenceOption": {
+      "additionalProperties": false,
+      "properties": {
+        "required_for": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required For"
+        },
+        "type": {
+          "const": "reference",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ReferenceOption",
+      "type": "object"
+    },
+    "StepOutputBinding": {
+      "additionalProperties": false,
+      "description": "Bind an input port to a step's named output.",
+      "properties": {
+        "output": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Output",
+          "type": "string"
+        },
+        "step": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Step",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step",
+        "output"
+      ],
+      "title": "StepOutputBinding",
+      "type": "object"
+    },
+    "StepVariant": {
+      "additionalProperties": false,
+      "description": "Bind an exact tool and any branch-specific ports or parameters for a step.",
+      "properties": {
+        "inputs": {
+          "anyOf": [
+            {
+              "patternProperties": {
+                "\\S": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/AssetRoleBinding"
+                    },
+                    {
+                      "$ref": "#/$defs/StepOutputBinding"
+                    }
+                  ]
+                }
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inputs"
+        },
+        "outputs": {
+          "anyOf": [
+            {
+              "patternProperties": {
+                "\\S": {
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                }
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Outputs"
+        },
+        "parameters": {
+          "anyOf": [
+            {
+              "patternProperties": {
+                "\\S": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/OptionBinding"
+                    },
+                    {
+                      "$ref": "#/$defs/LiteralBinding"
+                    }
+                  ]
+                }
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Parameters"
+        },
+        "tool": {
+          "$ref": "#/$defs/ToolRef"
+        }
+      },
+      "required": [
+        "tool"
+      ],
+      "title": "StepVariant",
+      "type": "object"
+    },
+    "StepVariants": {
+      "additionalProperties": false,
+      "properties": {
+        "choices": {
+          "patternProperties": {
+            "\\S": {
+              "patternProperties": {
+                "\\S": {
+                  "$ref": "#/$defs/StepVariant"
+                }
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "type": "object"
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Choices",
+          "type": "object"
+        },
+        "option": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Option",
+          "type": "string"
+        }
+      },
+      "required": [
+        "option",
+        "choices"
+      ],
+      "title": "StepVariants",
+      "type": "object"
+    },
+    "ToolRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "ToolRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "check_rules": {
+      "items": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "title": "Check Rules",
+      "type": "array"
+    },
+    "critical_options": {
+      "patternProperties": {
+        "\\S": {
+          "anyOf": [
+            {
+              "discriminator": {
+                "mapping": {
+                  "boolean": "#/$defs/ParameterSpec",
+                  "enum": "#/$defs/ParameterSpec",
+                  "integer": "#/$defs/ParameterSpec",
+                  "json": "#/$defs/ParameterSpec",
+                  "number": "#/$defs/ParameterSpec",
+                  "reference": "#/$defs/ReferenceOption",
+                  "string": "#/$defs/ParameterSpec"
+                },
+                "propertyName": "type"
+              },
+              "oneOf": [
+                {
+                  "$ref": "#/$defs/ParameterSpec"
+                },
+                {
+                  "$ref": "#/$defs/ReferenceOption"
+                }
+              ]
+            },
+            {
+              "enum": [
+                "user_defined",
+                "user_selected"
+              ],
+              "type": "string"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "\\S",
+                "type": "string"
+              },
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            }
+          ]
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Critical Options",
+      "type": "object"
+    },
+    "expected_artifacts": {
+      "items": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          {
+            "$ref": "#/$defs/ExpectedArtifactBinding"
+          }
+        ]
+      },
+      "title": "Expected Artifacts",
+      "type": "array"
+    },
+    "id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Id",
+      "type": "string"
+    },
+    "input_context": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/InputContextRule"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Input Context",
+      "type": "object"
+    },
+    "inputs": {
+      "patternProperties": {
+        "\\S": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "type": "string"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Inputs",
+      "type": "object"
+    },
+    "locked_order": {
+      "title": "Locked Order",
+      "type": "boolean"
+    },
+    "preconditions": {
+      "default": [],
+      "items": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "title": "Preconditions",
+      "type": "array"
+    },
+    "step_variants": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/StepVariants"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/MethodStep"
+      },
+      "title": "Steps",
+      "type": "array"
+    },
+    "version": {
+      "exclusiveMinimum": 0,
+      "title": "Version",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "version",
+    "locked_order",
+    "inputs",
+    "critical_options",
+    "steps",
+    "expected_artifacts",
+    "check_rules"
+  ],
+  "title": "MethodDefinition",
+  "type": "object"
+}

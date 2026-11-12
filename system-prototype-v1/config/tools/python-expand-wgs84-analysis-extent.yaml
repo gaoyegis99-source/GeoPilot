@@ -1,0 +1,21 @@
+id: python-expand-wgs84-analysis-extent
+version: 1
+runner: python
+implementation: geopilot.expand_wgs84_analysis_extent
+inputs:
+  source: vector_polygon
+  targets: vector_point
+  zones: vector_polygon
+outputs:
+  expanded_extent: vector_polygon
+  analysis_extent: vector_polygon
+  targets: vector_point
+  zones: vector_polygon
+parameters:
+  distance: {type: number, unit: meter, minimum: 1, maximum: 2000}
+  target_crs: {type: enum, values: ['EPSG:4326'], default: 'EPSG:4326'}
+measurement_policy:
+  distance: geodesic
+  area: not_applicable
+preconditions: [crs_is_known, geometry_is_valid]
+check_rules: [output_exists, output_crs_expected]

@@ -1,0 +1,52 @@
+{
+  "case_id": "t13-spatial-relations-boundary-v1",
+  "input_file": "spatial-relations.gpkg",
+  "crs": "EPSG:32650",
+  "reference": {
+    "layer": "area",
+    "source_feature_id": "area-with-hole",
+    "shell_bounds_xy": [500000, 4400000, 500100, 4400100],
+    "hole_bounds_xy": [500040, 4400040, 500060, 4400060]
+  },
+  "geometry_types": {"area": "Polygon", "points": "Point", "lines": "LineString", "polygons": "Polygon"},
+  "input_feature_ids": {
+    "area": ["area-with-hole"],
+    "points": [
+      "point-hole-edge", "point-in-hole", "point-inside", "point-outside", "point-shell-corner", "point-shell-edge"
+    ],
+    "lines": [
+      "line-crosses-hole", "line-crosses-shell", "line-disjoint", "line-hole-edge", "line-hole-endpoint-inside",
+      "line-in-hole", "line-inside", "line-shell-edge", "line-shell-endpoint-inside", "line-touch-corner"
+    ],
+    "polygons": [
+      "polygon-crosses-hole", "polygon-crosses-shell", "polygon-disjoint", "polygon-encloses-hole",
+      "polygon-hole-edge-inside", "polygon-hole-edge-outside", "polygon-in-hole", "polygon-inside",
+      "polygon-shell-edge-inside", "polygon-shell-edge-outside", "polygon-shell-vertex-outside",
+      "polygon-with-matching-hole"
+    ]
+  },
+  "relations": {
+    "intersects": {
+      "points": ["point-hole-edge", "point-inside", "point-shell-corner", "point-shell-edge"],
+      "lines": [
+        "line-crosses-hole", "line-crosses-shell", "line-hole-edge", "line-hole-endpoint-inside", "line-inside",
+        "line-shell-edge", "line-shell-endpoint-inside", "line-touch-corner"
+      ],
+      "polygons": [
+        "polygon-crosses-hole", "polygon-crosses-shell", "polygon-encloses-hole", "polygon-hole-edge-inside",
+        "polygon-hole-edge-outside", "polygon-inside", "polygon-shell-edge-inside", "polygon-shell-edge-outside",
+        "polygon-shell-vertex-outside", "polygon-with-matching-hole"
+      ]
+    },
+    "within": {
+      "points": ["point-inside"],
+      "lines": ["line-hole-endpoint-inside", "line-inside", "line-shell-endpoint-inside"],
+      "polygons": ["polygon-hole-edge-inside", "polygon-inside", "polygon-shell-edge-inside", "polygon-with-matching-hole"]
+    }
+  },
+  "boundary_only_ids": {
+    "points": ["point-hole-edge", "point-shell-corner", "point-shell-edge"],
+    "lines": ["line-hole-edge", "line-shell-edge", "line-touch-corner"],
+    "polygons": ["polygon-hole-edge-outside", "polygon-shell-edge-outside", "polygon-shell-vertex-outside"]
+  }
+}

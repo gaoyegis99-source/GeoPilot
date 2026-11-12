@@ -1,0 +1,11 @@
+"native:extractbyattribute":
+  inputs:
+    source: INPUT
+  parameters:
+    field: FIELD
+    operator: OPERATOR
+    value: VALUE
+  outputs:
+    filtered: OUTPUT
+  enum_values:
+    operator: {equals: 0}

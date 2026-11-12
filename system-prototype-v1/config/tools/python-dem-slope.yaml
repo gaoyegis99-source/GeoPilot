@@ -1,0 +1,18 @@
+id: python-dem-slope
+version: 1
+runner: python
+implementation: geopilot.calculate_dem_slope
+inputs:
+  dem: raster_elevation
+  unit_report: json
+outputs:
+  terrain_raster: raster_terrain
+parameters:
+  band: {type: integer, minimum: 1, default: 1}
+  z_factor: {type: number, minimum_exclusive: 0}
+  slope_unit: {type: enum, values: [degree, percent]}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+check_rules: [output_exists]

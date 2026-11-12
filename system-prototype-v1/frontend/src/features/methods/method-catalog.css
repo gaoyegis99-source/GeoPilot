@@ -1,0 +1,143 @@
+.method-catalog {
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.method-catalog h3,
+.method-catalog h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.method-catalog p {
+  margin: 0 0 0.65rem;
+  color: var(--color-muted);
+}
+
+.method-catalog [role="alert"] {
+  color: var(--color-error);
+}
+
+.method-catalog__entries {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.method-catalog__entry {
+  border: 1px solid var(--color-border);
+  border-radius: 0.4rem;
+}
+
+.method-catalog__entry summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  column-gap: 0.65rem;
+  align-items: center;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.method-catalog__entry summary::-webkit-details-marker {
+  display: none;
+}
+
+.method-catalog__entry summary::after {
+  content: "";
+  grid-area: 1 / 3;
+  inline-size: 0.42rem;
+  block-size: 0.42rem;
+  margin-inline-end: 0.15rem;
+  border-inline-end: 1.5px solid var(--color-muted);
+  border-block-end: 1.5px solid var(--color-muted);
+  transform: translateY(-0.1rem) rotate(45deg);
+}
+
+.method-catalog__entry[open] summary::after {
+  transform: translateY(0.1rem) rotate(225deg);
+}
+
+.method-catalog__entry summary[aria-current="true"] {
+  background: var(--color-map);
+}
+
+.method-catalog__name {
+  font-weight: 650;
+}
+
+.method-catalog__status {
+  color: var(--color-success);
+  font-size: 0.75rem;
+}
+
+.method-catalog__status[data-available="false"] {
+  color: var(--color-warning);
+}
+
+.method-catalog__identity {
+  grid-column: 1 / -1;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.method-catalog__identity span {
+  white-space: nowrap;
+}
+
+.method-catalog__details {
+  padding: 0.65rem;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.method-catalog__roles {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0 0 0.65rem;
+}
+
+.method-catalog__roles div {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 0.5rem;
+}
+
+.method-catalog__roles dd {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.method-catalog__issues {
+  margin: 0 0 0.65rem;
+  padding-inline-start: 1.1rem;
+  color: var(--color-warning);
+}
+
+.method-catalog__issues li + li {
+  margin-block-start: 0.55rem;
+}
+
+.method-catalog__issues p {
+  margin: 0;
+}
+
+.method-catalog__details button {
+  min-block-size: 2.15rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--color-focus);
+  border-radius: 0.35rem;
+  background: var(--color-panel);
+  color: var(--color-focus);
+  cursor: pointer;
+}
+
+.method-catalog__details button:disabled {
+  border-color: var(--color-border);
+  background: var(--color-background);
+  color: var(--color-muted);
+  cursor: default;
+}

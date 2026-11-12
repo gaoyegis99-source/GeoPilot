@@ -1,0 +1,95 @@
+{
+  "case_id": "road-buffer-point-statistics-v1",
+  "input_file": "road-buffer.gpkg",
+  "crs": "EPSG:32650",
+  "linear_unit": "metre",
+  "input_feature_ids": {
+    "analysis_extent": ["analysis-extent"],
+    "roads": ["road-edge", "road-far", "road-main"],
+    "targets": [
+      "building-buffer-boundary",
+      "building-east",
+      "building-edge-road",
+      "building-far-road",
+      "building-outside-extent",
+      "building-overlap",
+      "building-unaffected",
+      "building-west",
+      "building-zone-boundary"
+    ],
+    "zones": ["zone-east", "zone-west"]
+  },
+  "distance_m": 500,
+  "distance_method": "local_projected",
+  "buffer_options": {
+    "segments_per_quarter": 16,
+    "end_cap_style": "round",
+    "join_style": "round",
+    "dissolve": true
+  },
+  "road_distance_to_extent_m": {"road-edge": 300, "road-far": 650, "road-main": 0},
+  "candidate_road_ids": ["road-edge", "road-main"],
+  "main_road_buffer": {
+    "road_id": "road-main",
+    "endpoints_xy_m": [[500500, 4401500], [501500, 4401500]],
+    "length_m": 1000,
+    "bounds_xy_m": [500000, 4401000, 502000, 4402000],
+    "ideal_area_m2": 1785398.1633974481,
+    "discrete_area_m2": 1784137.122636485,
+    "max_sagitta_m": 0.6022718974137975,
+    "absolute_tolerances": {"area_m2": 0.01, "bounds_m": 0.000001, "boundary_hausdorff_m": 0.000001}
+  },
+  "statistic": "count",
+  "boundary_tie": "unassigned",
+  "output_scope": "clipped_to_analysis_extent",
+  "relations": {
+    "intersects": {
+      "before_clip_target_ids": [
+        "building-buffer-boundary",
+        "building-east",
+        "building-edge-road",
+        "building-outside-extent",
+        "building-overlap",
+        "building-west",
+        "building-zone-boundary"
+      ],
+      "clipped_target_ids": [
+        "building-buffer-boundary",
+        "building-east",
+        "building-edge-road",
+        "building-overlap",
+        "building-west",
+        "building-zone-boundary"
+      ],
+      "zone_target_ids": {
+        "zone-west": ["building-buffer-boundary", "building-edge-road", "building-west"],
+        "zone-east": ["building-east", "building-overlap"]
+      },
+      "unassigned_target_ids": ["building-zone-boundary"],
+      "counts": {"zone-west": 3, "zone-east": 2, "unassigned": 1, "total": 6}
+    },
+    "within": {
+      "before_clip_target_ids": [
+        "building-east",
+        "building-edge-road",
+        "building-outside-extent",
+        "building-overlap",
+        "building-west",
+        "building-zone-boundary"
+      ],
+      "clipped_target_ids": [
+        "building-east",
+        "building-edge-road",
+        "building-overlap",
+        "building-west",
+        "building-zone-boundary"
+      ],
+      "zone_target_ids": {
+        "zone-west": ["building-edge-road", "building-west"],
+        "zone-east": ["building-east", "building-overlap"]
+      },
+      "unassigned_target_ids": ["building-zone-boundary"],
+      "counts": {"zone-west": 2, "zone-east": 2, "unassigned": 1, "total": 5}
+    }
+  }
+}

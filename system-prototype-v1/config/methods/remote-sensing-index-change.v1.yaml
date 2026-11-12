@@ -1,0 +1,109 @@
+id: remote-sensing-index-change
+version: 1
+locked_order: true
+inputs:
+  first_product: raster_product
+  second_product: raster_product
+  analysis_extent: vector_polygon
+input_context:
+  first_product:
+    scopes: [{reference_role: analysis_extent}]
+  second_product:
+    scopes: [{reference_role: analysis_extent}]
+critical_options:
+  resampling: [nearest, bilinear]
+  change_threshold: {type: number, minimum: 0, maximum: 2}
+  area_crs: {type: reference}
+  first_configuration: {type: json}
+  second_configuration: {type: json}
+preconditions: [required_input_roles_available, remote_sensing_inputs_are_consistent]
+steps:
+  - key: read_product_metadata
+    tool: {id: python-remote-sensing-read-metadata, version: 1}
+    inputs:
+      first_product: {asset: first_product}
+      second_product: {asset: second_product}
+    outputs:
+      product_metadata: json
+  - key: lookup_sensor_configuration
+    tool: {id: python-remote-sensing-lookup-configuration, version: 1}
+    inputs:
+      product_metadata: {step: read_product_metadata, output: product_metadata}
+    parameters:
+      first_configuration: {option: first_configuration}
+      second_configuration: {option: second_configuration}
+    outputs:
+      sensor_configuration: json
+  - key: map_band_roles
+    tool: {id: python-remote-sensing-map-bands, version: 1}
+    inputs:
+      first_product: {asset: first_product}
+      second_product: {asset: second_product}
+      sensor_configuration: {step: lookup_sensor_configuration, output: sensor_configuration}
+    outputs:
+      band_mapping: json
+  - key: apply_scale_and_offset
+    tool: {id: python-remote-sensing-scale-reflectance, version: 1}
+    inputs:
+      first_product: {asset: first_product}
+      second_product: {asset: second_product}
+      sensor_configuration: {step: lookup_sensor_configuration, output: sensor_configuration}
+      band_mapping: {step: map_band_roles, output: band_mapping}
+    outputs:
+      first_reflectance: raster_reflectance
+      second_reflectance: raster_reflectance
+      calibration_report: json
+  - key: build_quality_mask
+    tool: {id: python-remote-sensing-quality-mask, version: 1}
+    inputs:
+      first_product: {asset: first_product}
+      second_product: {asset: second_product}
+      sensor_configuration: {step: lookup_sensor_configuration, output: sensor_configuration}
+      band_mapping: {step: map_band_roles, output: band_mapping}
+    outputs:
+      first_quality_mask: raster_quality_mask
+      second_quality_mask: raster_quality_mask
+  - key: calculate_ndvi
+    tool: {id: python-remote-sensing-calculate-ndvi, version: 1}
+    inputs:
+      first_reflectance: {step: apply_scale_and_offset, output: first_reflectance}
+      second_reflectance: {step: apply_scale_and_offset, output: second_reflectance}
+      first_quality_mask: {step: build_quality_mask, output: first_quality_mask}
+      second_quality_mask: {step: build_quality_mask, output: second_quality_mask}
+    outputs:
+      first_ndvi: raster_ndvi
+      second_ndvi: raster_ndvi
+  - key: align_two_dates
+    tool: {id: python-remote-sensing-align-dates, version: 1}
+    inputs:
+      first_ndvi: {step: calculate_ndvi, output: first_ndvi}
+      second_ndvi: {step: calculate_ndvi, output: second_ndvi}
+      analysis_extent: {asset: analysis_extent}
+    parameters:
+      resampling: {option: resampling}
+    outputs:
+      aligned_ndvi: raster_ndvi_pair
+      alignment_report: json
+  - key: calculate_change
+    tool: {id: python-remote-sensing-calculate-change, version: 1}
+    inputs:
+      aligned_ndvi: {step: align_two_dates, output: aligned_ndvi}
+    parameters:
+      change_threshold: {option: change_threshold}
+      area_crs: {option: area_crs}
+    outputs:
+      change_raster: raster_ndvi_change
+      change_classes: raster_classification
+      area_statistics: json
+expected_artifacts:
+  - {role: sensor_configuration, step: lookup_sensor_configuration, output: sensor_configuration, type: json}
+  - {role: calibration_report, step: apply_scale_and_offset, output: calibration_report, type: json}
+  - {role: first_quality_mask, step: build_quality_mask, output: first_quality_mask, type: raster_quality_mask}
+  - {role: second_quality_mask, step: build_quality_mask, output: second_quality_mask, type: raster_quality_mask}
+  - {role: first_ndvi, step: calculate_ndvi, output: first_ndvi, type: raster_ndvi}
+  - {role: second_ndvi, step: calculate_ndvi, output: second_ndvi, type: raster_ndvi}
+  - {role: alignment_report, step: align_two_dates, output: alignment_report, type: json}
+  - {role: change_raster, step: calculate_change, output: change_raster, type: raster_ndvi_change}
+  - {role: change_classes, step: calculate_change, output: change_classes, type: raster_classification}
+  - {role: area_statistics, step: calculate_change, output: area_statistics, type: json}
+check_rules: [product_configuration_matches, common_valid_pixels_aligned, change_direction_is_second_minus_first, ndvi_values_in_range]

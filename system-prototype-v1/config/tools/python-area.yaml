@@ -1,0 +1,24 @@
+id: python-area
+version: 1
+runner: python
+implementation: geopilot.planar_area
+inputs:
+  source: vector_polygon
+outputs:
+  statistics: table_csv
+parameters:
+  area_crs: {type: string}
+  area_unit: {type: enum, values: [square_meter]}
+measurement_policy:
+  distance: not_applicable
+  area: equal_area
+preconditions:
+  - crs_is_known
+  - equal_area_crs_suitable_for_extent
+  - horizontal_unit_is_meter
+  - geometry_is_valid
+  - source_feature_id_is_unique
+check_rules:
+  - output_exists
+  - output_area_crs_expected
+  - output_area_unit_expected

@@ -1,0 +1,38 @@
+id: road-buffer-statistics
+version: 1
+locked_order: true
+inputs:
+  analysis_extent: vector_polygon
+  roads: vector_line
+  targets: vector_point_or_polygon
+  zones: vector_polygon
+critical_options:
+  distance_m: {type: number, minimum_exclusive: 0}
+  distance_method: [local_projected, geodesic]
+  distance_crs_ref: {type: reference, required_for: local_projected}
+  area_crs_ref: {type: reference, required_for: area_statistics}
+  spatial_relation: [intersects, within]
+  boundary_assignment: [split_by_area, centroid, largest_overlap]
+  boundary_tie: [unassigned]
+  statistic: [count, area]
+  output_scope: [clipped_to_analysis_extent]
+preconditions:
+  - required_input_roles_available
+  - selected_options_match_geometry_type
+steps:
+  - {key: expand_analysis_extent}
+  - {key: select_roads_from_expanded_extent}
+  - {key: choose_measurement_method}
+  - {key: create_buffer}
+  - {key: apply_spatial_relation}
+  - {key: clip_back_to_analysis_extent}
+  - {key: aggregate_by_zone}
+expected_artifacts:
+  - buffer_extent
+  - selected_targets
+  - zone_statistics
+check_rules:
+  - measurement_policy_satisfied
+  - outside_roads_within_influence_included
+  - output_clipped_to_analysis_extent
+  - detail_count_matches_summary

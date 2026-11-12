@@ -1,0 +1,23 @@
+id: python-count-points-by-zone
+version: 1
+runner: python
+implementation: geopilot.count_points_by_zone
+inputs:
+  targets: vector_point
+  original_targets: vector_point
+  zones: vector_polygon
+outputs:
+  statistics: table_csv
+parameters:
+  boundary_assignment: {type: enum, values: [centroid]}
+  boundary_tie: {type: enum, values: [unassigned]}
+  statistic: {type: enum, values: [count]}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - geometry_is_valid
+check_rules:
+  - output_exists
+  - detail_count_matches_summary

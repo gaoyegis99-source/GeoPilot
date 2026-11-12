@@ -1,0 +1,30 @@
+id: attribute-filter-export
+version: 1
+locked_order: true
+inputs:
+  features: vector_point
+input_context:
+  features:
+    field_options: [field_name]
+    scopes: [{}]
+critical_options:
+  field_name: {type: string}
+  match_value: {type: string}
+preconditions:
+  - required_input_roles_available
+  - selected_field_exists
+steps:
+  - key: filter_features
+    tool: {id: qgis-extract-by-attribute, version: 1}
+    inputs:
+      source: {asset: features}
+    parameters:
+      field: {option: field_name}
+      operator: {literal: equals}
+      value: {option: match_value}
+    outputs:
+      filtered: vector_point
+expected_artifacts:
+  - {role: filtered_features, step: filter_features, output: filtered, type: vector_point}
+check_rules:
+  - output_exists

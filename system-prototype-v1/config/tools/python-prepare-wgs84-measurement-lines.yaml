@@ -1,0 +1,16 @@
+id: python-prepare-wgs84-measurement-lines
+version: 1
+runner: python
+implementation: geopilot.prepare_wgs84_measurement_lines
+inputs:
+  source: vector_line
+outputs:
+  roads: vector_line
+parameters:
+  method: {type: enum, values: [geodesic]}
+  target_crs: {type: enum, values: ['EPSG:4326'], default: 'EPSG:4326'}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known, geometry_is_valid]
+check_rules: [output_exists, output_crs_expected]

@@ -1,0 +1,25 @@
+id: python-polygon-zone-statistics
+version: 1
+runner: python
+implementation: geopilot.polygon_zone_statistics
+inputs:
+  targets: vector
+  original_targets: vector_polygon
+  zones: vector_polygon
+outputs:
+  allocation_details: table_csv
+  zone_statistics: json
+parameters:
+  boundary_assignment: {type: enum, values: [split_by_area, centroid, largest_overlap]}
+  boundary_tie: {type: enum, values: [unassigned]}
+  area_crs: {type: string}
+  area_unit: {type: enum, values: [square_meter]}
+measurement_policy:
+  distance: not_applicable
+  area: equal_area
+preconditions:
+  - crs_is_known
+  - input_crs_match
+  - geometry_is_valid
+check_rules:
+  - output_exists

@@ -1,0 +1,18 @@
+id: python-remote-sensing-quality-mask
+version: 1
+runner: python
+implementation: geopilot.remote_sensing_workflow
+inputs:
+  first_product: raster_product
+  second_product: raster_product
+  sensor_configuration: json
+  band_mapping: json
+outputs:
+  first_quality_mask: raster_quality_mask
+  second_quality_mask: raster_quality_mask
+parameters: {}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+check_rules: [output_exists]

@@ -1,0 +1,22 @@
+{
+  "backend_collected": 1670,
+  "backend_passed": 1670,
+  "frontend_passed": 68,
+  "final_failures": 0,
+  "final_errors": 0,
+  "final_skipped": 0,
+  "groups": {
+    "road-workflow-full-spatial-final-junit.xml": 415,
+    "road-workflow-full-methods-final-junit.xml": 381,
+    "road-workflow-full-execution-junit.xml": 244,
+    "road-workflow-full-application-junit.xml": 630
+  },
+  "final_road_e2e_rerun_cases": 5,
+  "replaced_initial_failures": [
+    [
+      "tests.e2e.test_geodesic_road_workflow",
+      "test_confirmed_seven_step_road_workflow[local-projected-intersects]"
+    ]
+  ],
+  "collection_matches_junit_identifiers": true
+}

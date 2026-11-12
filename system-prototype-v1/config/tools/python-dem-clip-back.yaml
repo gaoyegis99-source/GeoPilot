@@ -1,0 +1,16 @@
+id: python-dem-clip-back
+version: 1
+runner: python
+implementation: geopilot.clip_dem_back
+inputs:
+  terrain_raster: raster_terrain
+  windows: json
+  analysis_extent: vector_polygon
+outputs:
+  terrain_raster: raster_terrain
+parameters: {}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known, geometry_is_valid]
+check_rules: [output_exists]

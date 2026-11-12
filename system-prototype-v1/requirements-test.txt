@@ -1,0 +1,9 @@
+-r requirements.txt
+
+# The pinned Starlette TestClient uses httpx2 in the verified environment.
+httpcore2==2.13.0
+httpx2==2.13.0
+iniconfig==2.3.0
+pluggy==1.6.0
+pytest==8.3.4
+truststore==0.10.1

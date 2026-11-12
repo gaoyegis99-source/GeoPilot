@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "JsonValue": {},
+    "StepFileRef": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Path",
+          "type": "string"
+        },
+        "layer": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Layer"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "StepFileRef",
+      "type": "object"
+    },
+    "ToolRef": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "exclusiveMinimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "title": "ToolRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "run_id": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "step_key": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Step Key",
+      "type": "string"
+    },
+    "tool": {
+      "$ref": "#/$defs/ToolRef"
+    },
+    "workdir_ref": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Workdir Ref",
+      "type": "string"
+    },
+    "inputs": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/StepFileRef"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Inputs",
+      "type": "object"
+    },
+    "parameters": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Parameters",
+      "type": "object"
+    },
+    "output_targets": {
+      "patternProperties": {
+        "\\S": {
+          "$ref": "#/$defs/StepFileRef"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Output Targets",
+      "type": "object"
+    },
+    "log_path": {
+      "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Log Path",
+      "type": "string"
+    },
+    "cancel_path": {
+      "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Cancel Path",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "step_key",
+    "tool",
+    "workdir_ref",
+    "inputs",
+    "parameters",
+    "output_targets",
+    "log_path",
+    "cancel_path"
+  ],
+  "title": "StepRequest",
+  "type": "object"
+}

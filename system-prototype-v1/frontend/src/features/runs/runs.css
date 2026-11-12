@@ -1,0 +1,29 @@
+.run-panel { display: grid; gap: 0.55rem; font-size: 0.82rem; }
+.run-panel p { margin: 0; overflow-wrap: anywhere; }
+.run-panel code { overflow-wrap: anywhere; }
+.run-panel__error { color: var(--color-error); }
+.run-panel__steps { display: grid; gap: 0.35rem; list-style: none; margin: 0; padding: 0; }
+.run-panel__steps li { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.run-panel__steps button { flex: none; }
+.run-panel button,
+.workbench-problem button {
+  width: fit-content;
+  background: var(--color-panel);
+  color: var(--color-focus);
+  border: 1px solid var(--color-border);
+  border-radius: 0.35rem;
+  padding: 0.28rem 0.55rem;
+  cursor: pointer;
+}
+.run-panel button:disabled { color: var(--color-muted); cursor: default; }
+.run-panel a { color: var(--color-focus); }
+.run-panel__log { min-width: 0; }
+.run-panel__log pre {
+  background: var(--color-background);
+  border-radius: 0.35rem;
+  padding: 0.55rem;
+  max-block-size: 12rem;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

@@ -1,0 +1,37 @@
+{
+  "crs": "EPSG:32650",
+  "layers": {
+    "analysis_extent": [
+      {
+        "source_feature_id": "analysis-extent",
+        "wkt": "POLYGON ((500000 4400000, 502000 4400000, 502000 4402000, 500000 4402000, 500000 4400000))"
+      }
+    ],
+    "roads": [
+      {"source_feature_id": "road-main", "wkt": "LINESTRING (500500 4401500, 501500 4401500)"},
+      {"source_feature_id": "road-edge", "wkt": "LINESTRING (500150 4402300, 501850 4402300)"},
+      {"source_feature_id": "road-far", "wkt": "LINESTRING (500150 4402650, 501850 4402650)"}
+    ],
+    "targets": [
+      {"source_feature_id": "building-west", "wkt": "POINT (500750 4401500)"},
+      {"source_feature_id": "building-east", "wkt": "POINT (501250 4401500)"},
+      {"source_feature_id": "building-overlap", "wkt": "POINT (501400 4401900)"},
+      {"source_feature_id": "building-edge-road", "wkt": "POINT (500200 4401950)"},
+      {"source_feature_id": "building-zone-boundary", "wkt": "POINT (501000 4401600)"},
+      {"source_feature_id": "building-buffer-boundary", "wkt": "POINT (500750 4401000)"},
+      {"source_feature_id": "building-outside-extent", "wkt": "POINT (500900 4402350)"},
+      {"source_feature_id": "building-far-road", "wkt": "POINT (500900 4403075)"},
+      {"source_feature_id": "building-unaffected", "wkt": "POINT (500500 4400300)"}
+    ],
+    "zones": [
+      {
+        "source_feature_id": "zone-west",
+        "wkt": "POLYGON ((500000 4400000, 501000 4400000, 501000 4402000, 500000 4402000, 500000 4400000))"
+      },
+      {
+        "source_feature_id": "zone-east",
+        "wkt": "POLYGON ((501000 4400000, 502000 4400000, 502000 4402000, 501000 4402000, 501000 4400000))"
+      }
+    ]
+  }
+}

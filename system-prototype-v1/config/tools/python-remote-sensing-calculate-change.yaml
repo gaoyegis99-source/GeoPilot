@@ -1,0 +1,18 @@
+id: python-remote-sensing-calculate-change
+version: 1
+runner: python
+implementation: geopilot.remote_sensing_workflow
+inputs:
+  aligned_ndvi: raster_ndvi_pair
+outputs:
+  change_raster: raster_ndvi_change
+  change_classes: raster_classification
+  area_statistics: json
+parameters:
+  change_threshold: {type: number, minimum: 0, maximum: 2}
+  area_crs: {type: string}
+measurement_policy:
+  distance: not_applicable
+  area: equal_area
+preconditions: [crs_is_known, area_projected_from_raster_cells]
+check_rules: [output_exists]

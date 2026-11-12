@@ -1,0 +1,23 @@
+id: python-remote-sensing-calculate-ndvi
+version: 1
+runner: python
+implementation: geopilot.remote_sensing_workflow
+inputs:
+  first_reflectance: raster_reflectance
+  second_reflectance: raster_reflectance
+  first_quality_mask: raster_quality_mask
+  second_quality_mask: raster_quality_mask
+outputs:
+  first_ndvi: raster_ndvi
+  second_ndvi: raster_ndvi
+parameters: {}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+raster_nodata:
+  first_reflectance: {mode: allow, bands: all, nodata_declaration: nan}
+  second_reflectance: {mode: allow, bands: all, nodata_declaration: nan}
+  first_quality_mask: {mode: allow, bands: [1], nodata_declaration: none}
+  second_quality_mask: {mode: allow, bands: [1], nodata_declaration: none}
+check_rules: [output_exists]

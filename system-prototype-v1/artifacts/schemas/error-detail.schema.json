@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "JsonValue": {}
+  },
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "pattern": "^[A-Z][A-Z0-9_]*$",
+      "title": "Code",
+      "type": "string"
+    },
+    "phase": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Phase",
+      "type": "string"
+    },
+    "step_key": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Step Key",
+      "type": "string"
+    },
+    "field": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "pattern": "\\S",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Field"
+    },
+    "message": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Message",
+      "type": "string"
+    },
+    "suggestion": {
+      "minLength": 1,
+      "pattern": "\\S",
+      "title": "Suggestion",
+      "type": "string"
+    },
+    "log_path": {
+      "anyOf": [
+        {
+          "description": "Slash-separated local path relative to the run root, without traversal or URI delimiters.",
+          "minLength": 1,
+          "pattern": "\\S",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Log Path"
+    },
+    "observed": {
+      "$ref": "#/$defs/JsonValue",
+      "default": null
+    }
+  },
+  "required": [
+    "code",
+    "phase",
+    "step_key",
+    "field",
+    "message",
+    "suggestion",
+    "log_path"
+  ],
+  "title": "ErrorDetail",
+  "type": "object"
+}

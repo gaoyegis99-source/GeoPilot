@@ -1,0 +1,15 @@
+id: python-dem-threshold
+version: 1
+runner: python
+implementation: geopilot.classify_dem_threshold
+inputs:
+  terrain_raster: raster_terrain
+outputs:
+  threshold_regions: raster_classification
+parameters:
+  threshold: {type: json}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+check_rules: [output_exists]

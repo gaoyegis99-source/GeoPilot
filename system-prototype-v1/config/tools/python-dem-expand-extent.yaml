@@ -1,0 +1,16 @@
+id: python-dem-expand-extent
+version: 1
+runner: python
+implementation: geopilot.expand_dem_extent
+inputs:
+  analysis_extent: vector_polygon
+  dem: raster_elevation
+outputs:
+  windows: json
+parameters:
+  radius_pixels: {type: integer, minimum: 0}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known, geometry_is_valid]
+check_rules: [output_exists]

@@ -1,0 +1,46 @@
+# Copy this template into a local review folder and fill in the actual trial evidence.
+tool:
+  id: python-manual-filter-points
+  version: 1
+  runner: python
+  implementation: geopilot.manual_filter_points
+  inputs: {source: vector_point}
+  outputs: {selected: vector_point}
+  parameters:
+    feature_id: {type: string}
+  measurement_policy: {distance: not_applicable, area: not_applicable}
+  preconditions: [crs_is_known, geometry_is_valid, source_feature_id_is_unique]
+  check_rules: [output_exists]
+
+method:
+  id: manual-point-filter
+  version: 1
+  locked_order: true
+  inputs: {points: vector_point}
+  critical_options:
+    feature_id: {type: string}
+  preconditions: [required_input_roles_available]
+  steps:
+    - key: filter
+      tool: {id: python-manual-filter-points, version: 1}
+      inputs: {source: {asset: points}}
+      parameters: {feature_id: {option: feature_id}}
+      outputs: {selected: vector_point}
+  expected_artifacts:
+    - {role: filtered_points, step: filter, output: selected, type: vector_point}
+  check_rules: [output_exists]
+
+reference:
+  script_run_id: replace-with-trial-run-id
+  script_sha256: '0000000000000000000000000000000000000000000000000000000000000000'
+  inputs:
+    source: {asset_id: replace-with-exact-asset-id, asset_version: 1}
+  parameters: {feature_id: building-west}
+  basis: P0-05 source.json 中 EPSG:32650 的建筑点 building-west 手工坐标
+  outputs:
+    selected:
+      path: outputs/selected.gpkg
+      layer: selected
+      crs: 'EPSG:32650'
+      features:
+        building-west: 'POINT (500750 4401500)'

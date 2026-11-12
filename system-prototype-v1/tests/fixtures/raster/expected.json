@@ -1,0 +1,40 @@
+{
+  "dem-plane.tif": {
+    "epsg": 32650,
+    "transform": [10, 0, 500000, 0, -10, 4400070],
+    "resolution_m": [10, 10],
+    "size": [7, 7],
+    "dtype": "float32",
+    "nodata": -9999,
+    "band_names": ["elevation"],
+    "band_units": ["m"],
+    "pixels": [[
+      [-9999, 110, 120, 130, 140, 150, 160],
+      [100, 110, 120, 130, 140, 150, 160],
+      [100, 110, 120, 130, 140, 150, 160],
+      [100, 110, 120, 130, 140, 150, 160],
+      [100, 110, 120, 130, 140, 150, 160],
+      [100, 110, 120, 130, 140, 150, 160],
+      [100, 110, 120, 130, 140, 150, -9999]
+    ]],
+    "common_valid_pixels": 47,
+    "analysis_window": {"col_offset": 2, "row_offset": 2, "width": 3, "height": 3},
+    "neighborhood_radius_pixels": 1,
+    "terrain_reference": {"slope_degrees": 45, "slope_percent": 100, "aspect_degrees": 270}
+  },
+  "two-band.tif": {
+    "epsg": 32650,
+    "transform": [10, 0, 500000, 0, -10, 4400070],
+    "resolution_m": [10, 10],
+    "size": [4, 3],
+    "dtype": "uint16",
+    "nodata": 65535,
+    "band_names": ["red", "nir"],
+    "band_units": ["DN", "DN"],
+    "pixels": [
+      [[101, 102, 103, 104], [111, 112, 65535, 114], [121, 122, 123, 124]],
+      [[201, 202, 203, 204], [211, 212, 213, 214], [65535, 222, 223, 224]]
+    ],
+    "common_valid_pixels": 10
+  }
+}

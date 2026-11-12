@@ -1,0 +1,113 @@
+id: road-buffer-statistics
+version: 2
+locked_order: true
+inputs:
+  analysis_extent: vector_polygon
+  roads: vector_line
+  targets: vector_point
+  zones: vector_polygon
+input_context:
+  roads:
+    scopes: [{reference_role: analysis_extent, distance_option: distance_m, distance_crs_option: distance_crs_ref, allow_empty: true}]
+  targets:
+    scopes: [{reference_role: analysis_extent, allow_empty: true}]
+  zones:
+    scopes: [{reference_role: analysis_extent, allow_empty: true}]
+critical_options:
+  distance_m: {type: number, unit: meter, minimum_exclusive: 0}
+  distance_method: [local_projected]
+  distance_crs_ref: {type: reference, required_for: local_projected}
+  spatial_relation: [intersects, within]
+  boundary_assignment: [centroid]
+  boundary_tie: [unassigned]
+  statistic: [count]
+  output_scope: [clipped_to_analysis_extent]
+preconditions:
+  - required_input_roles_available
+  - selected_options_match_geometry_type
+  - point_count_inputs_match_distance_crs
+steps:
+  - key: expand_analysis_extent
+    tool: {id: qgis-expand-analysis-extent, version: 1}
+    inputs:
+      source: {asset: analysis_extent}
+    parameters:
+      distance: {option: distance_m}
+      segments: {literal: 16}
+      dissolve: {literal: true}
+      end_cap_style: {literal: round}
+      join_style: {literal: round}
+      miter_limit: {literal: 2}
+    outputs:
+      expanded_extent: vector_polygon
+  - key: select_roads_from_expanded_extent
+    tool: {id: qgis-select-roads-by-location, version: 1}
+    inputs:
+      source: {asset: roads}
+      area: {step: expand_analysis_extent, output: expanded_extent}
+    parameters:
+      predicate: {literal: intersects}
+    outputs:
+      roads: vector_line
+  - key: choose_measurement_method
+    tool: {id: python-prepare-measurement-lines, version: 1}
+    inputs:
+      source: {step: select_roads_from_expanded_extent, output: roads}
+    parameters:
+      method: {option: distance_method}
+      target_crs: {option: distance_crs_ref}
+    outputs:
+      roads: vector_line
+  - key: create_buffer
+    tool: {id: qgis-buffer, version: 1}
+    inputs:
+      source: {step: choose_measurement_method, output: roads}
+    parameters:
+      distance: {option: distance_m}
+      segments: {literal: 16}
+      dissolve: {literal: true}
+      end_cap_style: {literal: round}
+      join_style: {literal: round}
+      miter_limit: {literal: 2}
+    outputs:
+      buffer: vector_polygon
+  - key: apply_spatial_relation
+    tool: {id: qgis-select-points-by-location, version: 1}
+    inputs:
+      source: {asset: targets}
+      area: {step: create_buffer, output: buffer}
+    parameters:
+      predicate: {option: spatial_relation}
+    outputs:
+      targets: vector_point
+  - key: clip_back_to_analysis_extent
+    tool: {id: python-clip-points-to-extent, version: 1}
+    inputs:
+      source: {step: apply_spatial_relation, output: targets}
+      extent: {asset: analysis_extent}
+    parameters:
+      output_scope: {option: output_scope}
+    outputs:
+      targets: vector_point
+      original_targets: vector_point
+  - key: aggregate_by_zone
+    tool: {id: python-count-points-by-zone, version: 1}
+    inputs:
+      targets: {step: clip_back_to_analysis_extent, output: targets}
+      original_targets: {step: clip_back_to_analysis_extent, output: original_targets}
+      zones: {asset: zones}
+    parameters:
+      boundary_assignment: {option: boundary_assignment}
+      boundary_tie: {option: boundary_tie}
+      statistic: {option: statistic}
+    outputs:
+      statistics: table_csv
+expected_artifacts:
+  - {role: buffer_extent, step: create_buffer, output: buffer, type: vector_polygon}
+  - {role: selected_targets, step: clip_back_to_analysis_extent, output: targets, type: vector_point}
+  - {role: zone_statistics, step: aggregate_by_zone, output: statistics, type: table_csv}
+check_rules:
+  - measurement_policy_satisfied
+  - outside_roads_within_influence_included
+  - output_clipped_to_analysis_extent
+  - detail_count_matches_summary

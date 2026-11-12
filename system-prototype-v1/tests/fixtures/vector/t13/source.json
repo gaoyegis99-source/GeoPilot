@@ -1,0 +1,81 @@
+{
+  "crs": "EPSG:32650",
+  "layers": {
+    "area": [
+      {
+        "source_feature_id": "area-with-hole",
+        "wkt": "POLYGON ((500000 4400000, 500100 4400000, 500100 4400100, 500000 4400100, 500000 4400000), (500040 4400040, 500040 4400060, 500060 4400060, 500060 4400040, 500040 4400040))"
+      }
+    ],
+    "points": [
+      {"source_feature_id": "point-hole-edge", "wkt": "POINT (500040 4400050)"},
+      {"source_feature_id": "point-in-hole", "wkt": "POINT (500050 4400050)"},
+      {"source_feature_id": "point-inside", "wkt": "POINT (500020 4400020)"},
+      {"source_feature_id": "point-outside", "wkt": "POINT (500101 4400020)"},
+      {"source_feature_id": "point-shell-corner", "wkt": "POINT (500100 4400100)"},
+      {"source_feature_id": "point-shell-edge", "wkt": "POINT (500000 4400025)"}
+    ],
+    "lines": [
+      {"source_feature_id": "line-crosses-hole", "wkt": "LINESTRING (500030 4400050, 500070 4400050)"},
+      {"source_feature_id": "line-crosses-shell", "wkt": "LINESTRING (499990 4400030, 500110 4400030)"},
+      {"source_feature_id": "line-disjoint", "wkt": "LINESTRING (499990 4400015, 499995 4400015)"},
+      {"source_feature_id": "line-hole-edge", "wkt": "LINESTRING (500040 4400042, 500040 4400058)"},
+      {"source_feature_id": "line-hole-endpoint-inside", "wkt": "LINESTRING (500030 4400050, 500040 4400050)"},
+      {"source_feature_id": "line-in-hole", "wkt": "LINESTRING (500045 4400050, 500055 4400050)"},
+      {"source_feature_id": "line-inside", "wkt": "LINESTRING (500010 4400020, 500030 4400020)"},
+      {"source_feature_id": "line-shell-edge", "wkt": "LINESTRING (500000 4400020, 500000 4400080)"},
+      {"source_feature_id": "line-shell-endpoint-inside", "wkt": "LINESTRING (500000 4400025, 500020 4400025)"},
+      {"source_feature_id": "line-touch-corner", "wkt": "LINESTRING (499990 4400000, 500000 4400000)"}
+    ],
+    "polygons": [
+      {
+        "source_feature_id": "polygon-crosses-hole",
+        "wkt": "POLYGON ((500035 4400045, 500045 4400045, 500045 4400055, 500035 4400055, 500035 4400045))"
+      },
+      {
+        "source_feature_id": "polygon-crosses-shell",
+        "wkt": "POLYGON ((499995 4400030, 500015 4400030, 500015 4400050, 499995 4400050, 499995 4400030))"
+      },
+      {
+        "source_feature_id": "polygon-disjoint",
+        "wkt": "POLYGON ((500101 4400010, 500110 4400010, 500110 4400020, 500101 4400020, 500101 4400010))"
+      },
+      {
+        "source_feature_id": "polygon-encloses-hole",
+        "wkt": "POLYGON ((500030 4400030, 500070 4400030, 500070 4400070, 500030 4400070, 500030 4400030))"
+      },
+      {
+        "source_feature_id": "polygon-hole-edge-inside",
+        "wkt": "POLYGON ((500030 4400045, 500040 4400045, 500040 4400055, 500030 4400055, 500030 4400045))"
+      },
+      {
+        "source_feature_id": "polygon-hole-edge-outside",
+        "wkt": "POLYGON ((500040 4400045, 500045 4400045, 500045 4400055, 500040 4400055, 500040 4400045))"
+      },
+      {
+        "source_feature_id": "polygon-in-hole",
+        "wkt": "POLYGON ((500045 4400045, 500055 4400045, 500055 4400055, 500045 4400055, 500045 4400045))"
+      },
+      {
+        "source_feature_id": "polygon-inside",
+        "wkt": "POLYGON ((500010 4400010, 500020 4400010, 500020 4400020, 500010 4400020, 500010 4400010))"
+      },
+      {
+        "source_feature_id": "polygon-shell-edge-inside",
+        "wkt": "POLYGON ((500000 4400070, 500010 4400070, 500010 4400080, 500000 4400080, 500000 4400070))"
+      },
+      {
+        "source_feature_id": "polygon-shell-edge-outside",
+        "wkt": "POLYGON ((499990 4400070, 500000 4400070, 500000 4400080, 499990 4400080, 499990 4400070))"
+      },
+      {
+        "source_feature_id": "polygon-shell-vertex-outside",
+        "wkt": "POLYGON ((500100 4400100, 500110 4400100, 500110 4400110, 500100 4400110, 500100 4400100))"
+      },
+      {
+        "source_feature_id": "polygon-with-matching-hole",
+        "wkt": "POLYGON ((500030 4400030, 500070 4400030, 500070 4400070, 500030 4400070, 500030 4400030), (500040 4400040, 500040 4400060, 500060 4400060, 500060 4400040, 500040 4400040))"
+      }
+    ]
+  }
+}

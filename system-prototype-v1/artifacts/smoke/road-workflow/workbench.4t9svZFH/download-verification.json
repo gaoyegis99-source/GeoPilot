@@ -1,0 +1,143 @@
+{
+  "cases": {
+    "local-projected-v2": {
+      "run_id": "38800a00456b44f7b94ef1989e12f035",
+      "crs": "EPSG:32650",
+      "selected_ids": [
+        "building-buffer-boundary",
+        "building-east",
+        "building-edge-road",
+        "building-overlap",
+        "building-west",
+        "building-zone-boundary"
+      ],
+      "candidate_ids": [
+        "road-edge",
+        "road-main"
+      ],
+      "buffer_tool": {
+        "id": "qgis-buffer",
+        "version": 1
+      },
+      "distance_m": 500,
+      "counts": {
+        "zone-east": 2,
+        "zone-west": 3,
+        "unassigned": 1,
+        "total": 6
+      }
+    },
+    "local-projected-v3": {
+      "run_id": "4a135d2dce0e4f2d9624f89389007173",
+      "crs": "EPSG:32650",
+      "selected_ids": [
+        "building-buffer-boundary",
+        "building-east",
+        "building-edge-road",
+        "building-overlap",
+        "building-west",
+        "building-zone-boundary"
+      ],
+      "candidate_ids": [
+        "road-edge",
+        "road-main"
+      ],
+      "buffer_tool": {
+        "id": "qgis-buffer",
+        "version": 1
+      },
+      "distance_m": 500,
+      "counts": {
+        "zone-east": 2,
+        "zone-west": 3,
+        "unassigned": 1,
+        "total": 6
+      }
+    },
+    "geodesic-v3": {
+      "run_id": "f2c7afedb31c481e9847099e5e0f4c51",
+      "crs": "EPSG:4326",
+      "selected_ids": [
+        "point-cap",
+        "point-cap-inside",
+        "point-east",
+        "point-near-road",
+        "point-shared-zone",
+        "point-west"
+      ],
+      "candidate_ids": [
+        "road-main",
+        "road-near"
+      ],
+      "buffer_tool": {
+        "id": "python-wgs84-geodesic-buffer",
+        "version": 1
+      },
+      "distance_m": 500,
+      "independent_equatorial_cap_m": 500.0000000000126,
+      "counts": {
+        "zone-east": 2,
+        "zone-west": 3,
+        "unassigned": 1,
+        "total": 6
+      }
+    },
+    "geodesic-v3-within": {
+      "run_id": "0326add3a9754651958afa60d20ecff2",
+      "crs": "EPSG:4326",
+      "selected_ids": [
+        "point-cap-inside",
+        "point-east",
+        "point-near-road",
+        "point-shared-zone",
+        "point-west"
+      ],
+      "candidate_ids": [
+        "road-main",
+        "road-near"
+      ],
+      "buffer_tool": {
+        "id": "python-wgs84-geodesic-buffer",
+        "version": 1
+      },
+      "distance_m": 500,
+      "independent_equatorial_cap_m": 500.0000000000126,
+      "counts": {
+        "zone-east": 2,
+        "zone-west": 2,
+        "unassigned": 1,
+        "total": 5
+      }
+    }
+  },
+  "projected_v2_v3_hausdorff_m": 0.0,
+  "projected_v2_v3_same_csv_bytes": true,
+  "confirmed_v2_replay": {
+    "run_id": "78d200d0dc66469db23e0f1f35aaacfe",
+    "crs": "EPSG:32650",
+    "selected_ids": [
+      "building-buffer-boundary",
+      "building-east",
+      "building-edge-road",
+      "building-overlap",
+      "building-west",
+      "building-zone-boundary"
+    ],
+    "candidate_ids": [
+      "road-edge",
+      "road-main"
+    ],
+    "buffer_tool": {
+      "id": "qgis-buffer",
+      "version": 1
+    },
+    "distance_m": 500,
+    "counts": {
+      "zone-east": 2,
+      "zone-west": 3,
+      "unassigned": 1,
+      "total": 6
+    },
+    "original_run_id": "e78864a5e1dc4ad68c42a134dda96a47"
+  }
+}

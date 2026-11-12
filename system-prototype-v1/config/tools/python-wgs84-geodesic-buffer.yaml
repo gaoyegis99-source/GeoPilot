@@ -1,0 +1,21 @@
+id: python-wgs84-geodesic-buffer
+version: 1
+runner: python
+implementation: geopilot.wgs84_geodesic_buffer
+inputs:
+  source: vector_line
+outputs:
+  buffer: vector_polygon
+parameters:
+  distance: {type: number, unit: meter, minimum: 1, maximum: 2000}
+  dissolve: {type: boolean}
+measurement_policy:
+  distance: geodesic
+  area: not_applicable
+preconditions:
+  - crs_is_known
+  - geometry_is_valid
+  - wgs84_geodesic_buffer_input
+check_rules:
+  - output_exists
+  - output_crs_expected

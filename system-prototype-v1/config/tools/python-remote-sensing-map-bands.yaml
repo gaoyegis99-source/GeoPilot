@@ -1,0 +1,16 @@
+id: python-remote-sensing-map-bands
+version: 1
+runner: python
+implementation: geopilot.remote_sensing_workflow
+inputs:
+  first_product: raster_product
+  second_product: raster_product
+  sensor_configuration: json
+outputs:
+  band_mapping: json
+parameters: {}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+check_rules: [output_exists]

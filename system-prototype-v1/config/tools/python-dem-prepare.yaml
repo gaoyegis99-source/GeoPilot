@@ -1,0 +1,15 @@
+id: python-dem-prepare
+version: 1
+runner: python
+implementation: geopilot.prepare_dem_window
+inputs:
+  dem: raster_elevation
+  windows: json
+outputs:
+  prepared_dem: raster_elevation
+parameters: {}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known]
+check_rules: [output_exists]

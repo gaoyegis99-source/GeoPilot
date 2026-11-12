@@ -1,0 +1,19 @@
+id: python-land-use-project
+version: 1
+runner: python
+implementation: geopilot.land_use_overlay
+inputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+  analysis_extent: vector_polygon
+outputs:
+  first_classes: vector_polygon
+  second_classes: vector_polygon
+  analysis_extent: vector_polygon
+parameters:
+  target_crs: {type: string}
+measurement_policy:
+  distance: not_applicable
+  area: not_applicable
+preconditions: [crs_is_known, geometry_is_valid]
+check_rules: [output_exists]

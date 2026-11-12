@@ -1,0 +1,119 @@
+.model-assist {
+  display: grid;
+  gap: 0.65rem;
+  min-inline-size: 0;
+  margin-block-end: 0.85rem;
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+}
+
+.model-assist h3,
+.model-assist h4,
+.model-assist h5 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.model-assist p {
+  margin: 0;
+}
+
+.model-assist__goal {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.model-assist__goal label {
+  font-weight: 600;
+}
+
+.model-assist__goal textarea {
+  inline-size: 100%;
+  min-inline-size: 0;
+  resize: vertical;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.35rem;
+  color: var(--color-text);
+  background: var(--color-panel);
+  font: inherit;
+}
+
+.model-assist__actions,
+.model-assist__method {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  align-items: baseline;
+}
+
+.model-assist__actions button,
+.model-assist__preview button {
+  min-block-size: 2.15rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--color-focus);
+  border-radius: 0.35rem;
+  color: var(--color-focus);
+  background: var(--color-panel);
+  cursor: pointer;
+}
+
+.model-assist button.model-assist__primary {
+  color: var(--color-panel);
+  background: var(--color-focus);
+}
+
+.model-assist button.model-assist__primary:disabled {
+  color: var(--color-muted);
+  border-color: var(--color-border);
+  background: var(--color-background);
+  cursor: default;
+}
+
+.model-assist__muted,
+.model-assist__method span,
+.model-assist__options dt,
+.model-assist__issues code {
+  color: var(--color-muted);
+}
+
+.model-assist__preview {
+  display: grid;
+  gap: 0.6rem;
+  padding: 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.4rem;
+}
+
+.model-assist__options {
+  display: grid;
+  gap: 0.3rem;
+  margin: 0;
+}
+
+.model-assist__options > div {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 0.5rem;
+}
+
+.model-assist__options dd,
+.model-assist__options pre {
+  min-inline-size: 0;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.model-assist__preview ul {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+}
+
+.model-assist__issues li + li {
+  margin-block-start: 0.35rem;
+}
+
+.model-assist__explanation {
+  white-space: pre-wrap;
+}
