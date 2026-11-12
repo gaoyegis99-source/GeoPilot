@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="8.362" timestamp="2026-11-12T12:43:19.094225+08:00" hostname="mtd-4028GR"><testcase classname="tests.runs.test_run_api" name="test_local_app_confirms_builtin_qgis_method_with_its_registered_precondition" time="7.889" /></testsuite></testsuites>

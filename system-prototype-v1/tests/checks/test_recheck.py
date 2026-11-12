@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from threading import Event
 
@@ -211,8 +212,10 @@ def test_recheck_of_interrupted_real_run_preserves_execution_and_publishes_new_r
             in_progress = _get(client, checks_endpoint)
             assert in_progress["check_status"] == "CHECKING"
             assert in_progress["current_report"] == initial and in_progress["report_ids"] == [initial["id"]]
-            repeat = client.post(checks_endpoint)
-            assert repeat.status_code == 202 and repeat.json()["report_id"] == new_id, repeat.text
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                repeats = list(pool.map(lambda _: client.post(checks_endpoint), range(16)))
+            for repeat in repeats:
+                assert repeat.status_code == 202 and repeat.json()["report_id"] == new_id, repeat.text
         finally:
             finish_recheck.set()
         assert recheck_done.wait(15), _get(client, endpoint)

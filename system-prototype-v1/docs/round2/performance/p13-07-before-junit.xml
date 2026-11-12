@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="3" time="28.452" timestamp="2026-11-12T12:37:53.149522+08:00" hostname="mtd-4028GR"><testcase classname="tests.stress.scheduler.test_queue_contention" name="test_scheduler_resumes_after_real_claim_busy_timeout" time="13.393"><failure message="AssertionError: Scheduler did not reach the expected state&#10;assert 9370550.462620128 &lt; 9370550.43622248&#10; +  where 9370550.462620128 = monotonic()">database = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-9/test_scheduler_resumes_after_r0/project.sqlite')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x7f9cdaf85ba0&gt;
+
+    def test_scheduler_resumes_after_real_claim_busy_timeout(database, monkeypatch):
+        real_claim = loop.claim_next_run
+        contended = Event()
+        dispatched = []
+    
+        def observe_claim(path):
+            try:
+                return real_claim(path)
+            except sqlite3.OperationalError as error:
+                if error.sqlite_errorcode == sqlite3.SQLITE_BUSY:
+                    contended.set()
+                raise
+    
+        def execute(run):
+            dispatched.append(run.id)
+            finish(database, run)
+    
+        monkeypatch.setattr(loop, "claim_next_run", observe_claim)
+        with TestClient(create_app(database, execute_run=execute)) as client:
+            with open_database(database) as holder, holder:
+                holder.execute("BEGIN IMMEDIATE")
+                enqueue(holder, database, "first", "second")
+                assert contended.wait(8), "Expected the real SQLite lock timeout while claiming"
+                assert dispatched == []
+&gt;           wait_for(lambda: status(client, "second")["execution_status"] == "SUCCEEDED")
+
+tests/stress/scheduler/test_queue_contention.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+predicate = &lt;function test_scheduler_resumes_after_real_claim_busy_timeout.&lt;locals&gt;.&lt;lambda&gt; at 0x7f9c78d76e80&gt;
+seconds = 8
+
+    def wait_for(predicate, seconds=8):
+        deadline = monotonic() + seconds
+        while not predicate():
+&gt;           assert monotonic() &lt; deadline, "Scheduler did not reach the expected state"
+E           AssertionError: Scheduler did not reach the expected state
+E           assert 9370550.462620128 &lt; 9370550.43622248
+E            +  where 9370550.462620128 = monotonic()
+
+tests/stress/scheduler/test_queue_contention.py:52: AssertionError</failure></testcase><testcase classname="tests.stress.scheduler.test_queue_contention" name="test_scheduler_settles_a_claim_after_timeout_without_reexecution" time="13.449"><failure message="AssertionError: Scheduler did not reach the expected state&#10;assert 9370563.976559628 &lt; 9370563.97572372&#10; +  where 9370563.976559628 = monotonic()">database = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-9/test_scheduler_settles_a_claim0/project.sqlite')
+
+    def test_scheduler_settles_a_claim_after_timeout_without_reexecution(database):
+        release = Event()
+        dispatched = []
+    
+        def execute(run):
+            dispatched.append(run.id)
+            if run.id == "first":
+                assert release.wait(8)
+                raise RuntimeError("The worker stopped before publishing a result")
+            finish(database, run)
+    
+        with open_database(database) as connection, connection:
+            enqueue(connection, database, "first", "second")
+    
+        with TestClient(create_app(database, execute_run=execute)) as client:
+            try:
+                wait_for(lambda: status(client, "first")["execution_status"] == "RUNNING")
+                with open_database(database) as holder, holder:
+                    holder.execute("BEGIN IMMEDIATE")
+                    assert holder.execute("PRAGMA busy_timeout").fetchone()[0] == 5000
+                    release.set()
+                    # Hold across a complete attempt to settle the claimed run.
+                    sleep(5.35)
+                    assert status(client, "first")["execution_status"] == "RUNNING"
+                    assert status(client, "second")["execution_status"] == "NOT_STARTED"
+                    assert dispatched == ["first"]
+&gt;               wait_for(lambda: status(client, "second")["execution_status"] == "SUCCEEDED")
+
+tests/stress/scheduler/test_queue_contention.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+predicate = &lt;function test_scheduler_settles_a_claim_after_timeout_without_reexecution.&lt;locals&gt;.&lt;lambda&gt; at 0x7f9c7979b7e0&gt;
+seconds = 8
+
+    def wait_for(predicate, seconds=8):
+        deadline = monotonic() + seconds
+        while not predicate():
+&gt;           assert monotonic() &lt; deadline, "Scheduler did not reach the expected state"
+E           AssertionError: Scheduler did not reach the expected state
+E           assert 9370563.976559628 &lt; 9370563.97572372
+E            +  where 9370563.976559628 = monotonic()
+
+tests/stress/scheduler/test_queue_contention.py:52: AssertionError</failure></testcase><testcase classname="tests.stress.scheduler.test_queue_contention" name="test_cancellation_burst_and_restart_drain_the_queue_once" time="0.585" /></testsuite></testsuites>

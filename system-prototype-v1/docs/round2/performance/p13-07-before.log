@@ -1,0 +1,151 @@
+FF48 queued cancellation requests in 0.281s
+.
+=================================== FAILURES ===================================
+_____________ test_scheduler_resumes_after_real_claim_busy_timeout _____________
+
+database = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-9/test_scheduler_resumes_after_r0/project.sqlite')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f9cdaf85ba0>
+
+    def test_scheduler_resumes_after_real_claim_busy_timeout(database, monkeypatch):
+        real_claim = loop.claim_next_run
+        contended = Event()
+        dispatched = []
+    
+        def observe_claim(path):
+            try:
+                return real_claim(path)
+            except sqlite3.OperationalError as error:
+                if error.sqlite_errorcode == sqlite3.SQLITE_BUSY:
+                    contended.set()
+                raise
+    
+        def execute(run):
+            dispatched.append(run.id)
+            finish(database, run)
+    
+        monkeypatch.setattr(loop, "claim_next_run", observe_claim)
+        with TestClient(create_app(database, execute_run=execute)) as client:
+            with open_database(database) as holder, holder:
+                holder.execute("BEGIN IMMEDIATE")
+                enqueue(holder, database, "first", "second")
+                assert contended.wait(8), "Expected the real SQLite lock timeout while claiming"
+                assert dispatched == []
+>           wait_for(lambda: status(client, "second")["execution_status"] == "SUCCEEDED")
+
+tests/stress/scheduler/test_queue_contention.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+predicate = <function test_scheduler_resumes_after_real_claim_busy_timeout.<locals>.<lambda> at 0x7f9c78d76e80>
+seconds = 8
+
+    def wait_for(predicate, seconds=8):
+        deadline = monotonic() + seconds
+        while not predicate():
+>           assert monotonic() < deadline, "Scheduler did not reach the expected state"
+E           AssertionError: Scheduler did not reach the expected state
+E           assert 9370550.462620128 < 9370550.43622248
+E            +  where 9370550.462620128 = monotonic()
+
+tests/stress/scheduler/test_queue_contention.py:52: AssertionError
+_______ test_scheduler_settles_a_claim_after_timeout_without_reexecution _______
+
+database = PosixPath('/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/tmp/pytest-of-mtd/pytest-9/test_scheduler_settles_a_claim0/project.sqlite')
+
+    def test_scheduler_settles_a_claim_after_timeout_without_reexecution(database):
+        release = Event()
+        dispatched = []
+    
+        def execute(run):
+            dispatched.append(run.id)
+            if run.id == "first":
+                assert release.wait(8)
+                raise RuntimeError("The worker stopped before publishing a result")
+            finish(database, run)
+    
+        with open_database(database) as connection, connection:
+            enqueue(connection, database, "first", "second")
+    
+        with TestClient(create_app(database, execute_run=execute)) as client:
+            try:
+                wait_for(lambda: status(client, "first")["execution_status"] == "RUNNING")
+                with open_database(database) as holder, holder:
+                    holder.execute("BEGIN IMMEDIATE")
+                    assert holder.execute("PRAGMA busy_timeout").fetchone()[0] == 5000
+                    release.set()
+                    # Hold across a complete attempt to settle the claimed run.
+                    sleep(5.35)
+                    assert status(client, "first")["execution_status"] == "RUNNING"
+                    assert status(client, "second")["execution_status"] == "NOT_STARTED"
+                    assert dispatched == ["first"]
+>               wait_for(lambda: status(client, "second")["execution_status"] == "SUCCEEDED")
+
+tests/stress/scheduler/test_queue_contention.py:111: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+predicate = <function test_scheduler_settles_a_claim_after_timeout_without_reexecution.<locals>.<lambda> at 0x7f9c7979b7e0>
+seconds = 8
+
+    def wait_for(predicate, seconds=8):
+        deadline = monotonic() + seconds
+        while not predicate():
+>           assert monotonic() < deadline, "Scheduler did not reach the expected state"
+E           AssertionError: Scheduler did not reach the expected state
+E           assert 9370563.976559628 < 9370563.97572372
+E            +  where 9370563.976559628 = monotonic()
+
+tests/stress/scheduler/test_queue_contention.py:52: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/stress/scheduler/test_queue_contention.py::test_scheduler_resumes_after_real_claim_busy_timeout
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread geopilot-scheduler
+  
+  Traceback (most recent call last):
+    File "/home/mtd/miniconda3/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+      self.run()
+      ~~~~~~~~^^
+    File "/home/mtd/miniconda3/lib/python3.13/threading.py", line 995, in run
+      self._target(*self._args, **self._kwargs)
+      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 174, in run_loop
+      if run_once(database_path, execute, execute_recheck=execute_recheck) is None:
+         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 143, in run_once
+      claimed = claim_next_run(database_path)
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/tests/stress/scheduler/test_queue_contention.py", line 63, in observe_claim
+      return real_claim(path)
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 33, in claim_next_run
+      connection.execute("BEGIN IMMEDIATE")
+      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  sqlite3.OperationalError: database is locked
+  
+    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+
+tests/stress/scheduler/test_queue_contention.py::test_scheduler_settles_a_claim_after_timeout_without_reexecution
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/_pytest/threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread geopilot-scheduler
+  
+  Traceback (most recent call last):
+    File "/home/mtd/miniconda3/lib/python3.13/threading.py", line 1044, in _bootstrap_inner
+      self.run()
+      ~~~~~~~~^^
+    File "/home/mtd/miniconda3/lib/python3.13/threading.py", line 995, in run
+      self._target(*self._args, **self._kwargs)
+      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 174, in run_loop
+      if run_once(database_path, execute, execute_recheck=execute_recheck) is None:
+         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/scheduler/loop.py", line 159, in run_once
+      connection.execute("BEGIN IMMEDIATE")
+      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  sqlite3.OperationalError: database is locked
+  
+    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-07-before-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/stress/scheduler/test_queue_contention.py::test_scheduler_resumes_after_real_claim_busy_timeout
+FAILED tests/stress/scheduler/test_queue_contention.py::test_scheduler_settles_a_claim_after_timeout_without_reexecution
+2 failed, 1 passed, 3 warnings in 28.45s

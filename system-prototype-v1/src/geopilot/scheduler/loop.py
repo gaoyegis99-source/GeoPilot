@@ -1,5 +1,6 @@
 """Claim and dispatch one local run at a time."""
 
+import logging
 import math
 import sqlite3
 from collections.abc import Callable
@@ -16,6 +17,9 @@ from geopilot.execution.step_support import resolve_step_path
 from geopilot.persistence.run_repository import get_run, list_run_steps, save_run_step, update_run
 from geopilot.persistence.schema import open_database
 from geopilot.runs.models import CheckStatus, Run, RunStep
+
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def _executing_ids(connection: sqlite3.Connection) -> tuple[str, ...]:
@@ -134,32 +138,46 @@ def _mark_interrupted(connection: sqlite3.Connection, run: Run, message: str) ->
     }))
 
 
-def run_once(
-    database_path: str | Path, execute: Callable[[Run], None], *,
-    execute_recheck: Callable[[Run, CheckAttempt], None] | None = None,
-) -> str | None:
-    """Claim a run, dispatch it outside the transaction, and retain failures."""
-    if execute_recheck is None:
-        claimed = claim_next_run(database_path)
-        attempt = None
-    else:
-        job = _claim_next_work(database_path)
-        claimed, attempt = job if job is not None else (None, None)
-    if claimed is None:
-        return None
-    message = "The worker returned before finishing the active run"
+def _claim_work(database_path: str | Path, *, include_rechecks: bool) -> tuple[Run, CheckAttempt | None] | None:
+    if include_rechecks:
+        return _claim_next_work(database_path)
+    run = claim_next_run(database_path)
+    return None if run is None else (run, None)
+
+
+def _dispatch_work(
+    claimed: Run, attempt: CheckAttempt | None, execute: Callable[[Run], None],
+    execute_recheck: Callable[[Run, CheckAttempt], None] | None,
+) -> str:
     try:
         if attempt is not None and execute_recheck is not None:
             execute_recheck(claimed, attempt)
         else:
             execute(claimed)
     except Exception as error:
-        message = f"The worker was interrupted: {error}"
+        return f"The worker was interrupted: {error}"
+    return "The worker returned before finishing the active run"
+
+
+def _settle_work(database_path: str | Path, run_id: str, message: str) -> None:
     with open_database(database_path) as connection, connection:
         connection.execute("BEGIN IMMEDIATE")
-        run = get_run(connection, claimed.id)
+        run = get_run(connection, run_id)
         if run is not None:
             _mark_interrupted(connection, run, message)
+
+
+def run_once(
+    database_path: str | Path, execute: Callable[[Run], None], *,
+    execute_recheck: Callable[[Run, CheckAttempt], None] | None = None,
+) -> str | None:
+    """Claim a run, dispatch it outside the transaction, and retain failures."""
+    job = _claim_work(database_path, include_rechecks=execute_recheck is not None)
+    if job is None:
+        return None
+    claimed, attempt = job
+    message = _dispatch_work(claimed, attempt, execute, execute_recheck)
+    _settle_work(database_path, claimed.id, message)
     return claimed.id
 
 
@@ -170,9 +188,34 @@ def run_loop(
     """Dispatch available work until the owning service requests shutdown."""
     if not math.isfinite(poll_seconds) or poll_seconds <= 0:
         raise ValueError("poll_seconds must be positive and finite")
-    while not stop.is_set():
-        if run_once(database_path, execute, execute_recheck=execute_recheck) is None:
+    pending: tuple[str, str] | None = None
+    contended = False
+    while pending is not None or not stop.is_set():
+        try:
+            if pending is not None:
+                _settle_work(database_path, *pending)
+                pending = None
+                contended = False
+                continue
+            job = _claim_work(database_path, include_rechecks=execute_recheck is not None)
+        except sqlite3.OperationalError as error:
+            primary_code = getattr(error, "sqlite_errorcode", 0) & 0xFF
+            if primary_code not in (sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED):
+                raise
+            if not contended:
+                phase = "settle" if pending is not None else "claim"
+                _LOGGER.warning("Scheduler could not %s work because SQLite is busy; waiting to retry", phase)
+                contended = True
+            if stop.wait(poll_seconds):
+                # Startup recovery can settle any active row once its workers have stopped.
+                return
+            continue
+        contended = False
+        if job is None:
             stop.wait(poll_seconds)
+        else:
+            claimed, attempt = job
+            pending = (claimed.id, _dispatch_work(claimed, attempt, execute, execute_recheck))
 
 
 def recover_interrupted_runs(

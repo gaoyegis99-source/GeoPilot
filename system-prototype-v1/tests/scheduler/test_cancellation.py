@@ -60,12 +60,14 @@ def test_active_cancel_waits_for_real_gis_worker_exit_and_stops_dispatch(queued_
         pid = int(pid_file.read_text(encoding="utf-8"))
         process_stat = Path(f"/proc/{pid}/stat")
         assert process_stat.exists()
+        cancelled_at = monotonic()
         response = client.post(f"/api/runs/{run_id}/cancel")
         assert response.status_code == 202
         assert response.json()["cancel_requested"] is True
         assert response.json()["execution_status"] == "RUNNING"
         assert call.result(timeout=8) == run_id
         assert not process_stat.exists()
+        print(f"Native GIS cancellation to worker exit: {monotonic() - cancelled_at:.3f}s")
         state = client.get(f"/api/runs/{run_id}").json()
     assert (state["execution_status"], state["check_status"]) == ("CANCELLED", "NOT_CHECKED")
     assert state["current_step"] == "prepare" and state["error"]["code"] == "PROCESS_CANCELLED"
