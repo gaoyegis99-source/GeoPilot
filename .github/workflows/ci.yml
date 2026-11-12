@@ -46,7 +46,7 @@ jobs:
         run: |
           python -m pytest -q -p no:cacheprovider \
             tests/assets tests/contracts tests/scheduler tests/llm/test_data_boundary.py \
-            tests/agent/test_clarification_model.py tests/agent/test_multi_turn_revision.py \
+            tests/agent/test_clarification_model.py tests/agent/test_multi_turn_revision.py tests/agent/test_alternative_plan.py \
             tests/quality/test_ci_matrix.py tests/quality/test_config_schemas.py \
             --junitxml="$RUNNER_TEMP/python-junit.xml"
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7

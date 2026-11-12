@@ -142,3 +142,37 @@
 .plan-preview__disclosure-body h5:not(:first-child) {
   margin-block-start: 0.7rem;
 }
+
+.plan-preview__alternatives > summary {
+  cursor: pointer;
+}
+
+.plan-preview__alternatives > :not(summary) {
+  margin-block-start: 0.6rem;
+}
+
+.plan-preview__comparison {
+  table-layout: fixed;
+  inline-size: 100%;
+  border-collapse: collapse;
+  text-align: start;
+}
+
+.plan-preview__comparison caption {
+  margin-block-end: 0.25rem;
+  font-weight: 650;
+  text-align: start;
+}
+
+.plan-preview__comparison th,
+.plan-preview__comparison td {
+  padding: 0.25rem 0.35rem;
+  border-block-end: 1px solid var(--color-border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.plan-preview__comparison ul {
+  margin: 0;
+  padding-inline-start: 1rem;
+}

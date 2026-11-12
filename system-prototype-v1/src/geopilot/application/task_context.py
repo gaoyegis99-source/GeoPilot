@@ -82,6 +82,21 @@ class TaskContext(BaseModel):
     candidates: dict[_Text, tuple[InputAssessment, ...]] | None = Field(default=None, exclude_if=lambda value: value is None)
 
 
+def current_task_criteria(
+    database_path: str | Path, *, task_id: str, method: MethodRef, goal: TaskGoal,
+    selected: Mapping[str, DataAssetRef],
+) -> ContextCriteria:
+    """Reuse saved shortlist criteria when the current context matches the snapshot."""
+    with open_database(database_path, read_only=True) as connection:
+        row = connection.execute("SELECT context_json FROM task WHERE id = ?", (task_id,)).fetchone()
+    if row is not None and row["context_json"] is not None:
+        context = TaskContext.model_validate_json(row["context_json"])
+        refs = {role: item.asset for role, item in context.roles.items() if item.asset is not None}
+        if (context.task_id, context.method, context.goal, refs) == (task_id, method, goal, selected):
+            return context.criteria or ContextCriteria()
+    return ContextCriteria()
+
+
 def _measurement_requirements(
     method: MethodDefinition, registry: ToolRegistry | None, options: Mapping[str, JsonValue],
 ) -> dict[str, list[tuple[str, ToolContract]]]:

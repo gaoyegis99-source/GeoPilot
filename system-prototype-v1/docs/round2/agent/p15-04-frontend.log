@@ -1,0 +1,26 @@
+v22.23.1
+10.9.8
+
+> geopilot-workbench@1.0.0 test
+> vitest --run src/features/plans/AlternativePlansPanel.test.tsx src/App.clarification.test.tsx src/features/method-form/MethodForm.test.tsx src/features/plans/preview/PlanPreview.test.tsx src/features/artifacts/ArtifactsPanel.test.tsx --reporter=default --reporter=junit --outputFile.junit=../docs/round2/agent/p15-04-frontend-junit.xml
+
+
+ RUN  v5.0.5 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/frontend
+
+ ✓ src/features/artifacts/ArtifactsPanel.test.tsx (3 tests) 486ms
+   ✓ keeps formal downloads, source versions, map selection and diagnostics tied to the same run 361ms
+ ✓ src/features/plans/preview/PlanPreview.test.tsx (3 tests) 531ms
+   ✓ shows the exact plan and asset versions with all declared option values 407ms
+ ✓ src/features/plans/AlternativePlansPanel.test.tsx (2 tests) 618ms
+   ✓ compares inputs, parameters and tools, then waits for explicit draft selection 362ms
+ ✓ src/App.clarification.test.tsx (1 test) 697ms
+   ✓ answers one field per version, restores the current draft, and keeps explicit confirmation 696ms
+ ✓ src/features/method-form/MethodForm.test.tsx (7 tests) 948ms
+   ✓ limits roles to compatible available versions and submits numeric values in the declared unit 437ms
+
+ Test Files  5 passed (5)
+      Tests  16 passed (16)
+   Start at  14:08:52
+   Duration  1.88s (tests 45%, environment 37%, import 11%, transform 7%)
+
+JUNIT report written to /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-04-frontend-junit.xml

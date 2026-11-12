@@ -1,3 +1,5 @@
+import type { PlanAlternatives } from './plan-alternatives'
+
 export type Json = null | boolean | number | string | Json[] | { [key: string]: Json }
 export type ExecutionStatus = 'NOT_STARTED' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'CANCELLED'
 export type CheckStatus = 'NOT_CHECKED' | 'CHECKING' | 'PASSED' | 'WARNING' | 'FAILED'
@@ -376,6 +378,8 @@ export const workbenchApi = {
   }) => sendJson<AnalysisPlan>(`${taskUrl(id)}/plans`, request),
   plan: (id: string, version: number, signal?: AbortSignal) =>
     readJson<AnalysisPlan>(`${planUrl(id)}?version=${version}`, signal),
+  alternatives: (id: string, version: number, signal?: AbortSignal) =>
+    readJson<PlanAlternatives>(`${planUrl(id)}/alternatives?version=${version}`, signal),
   clarification: (id: string, version: number, signal?: AbortSignal) =>
     readJson<ClarificationReport>(`${planUrl(id)}/clarification?version=${version}`, signal),
   answerClarification: (id: string, version: number, field: string, value: Json) =>

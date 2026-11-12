@@ -5,28 +5,16 @@ from pathlib import Path
 from pydantic import JsonValue, ValidationError
 
 from geopilot.application.draft_options import derived_method_options, resolve_draft_options
-from geopilot.application.task_context import ContextCriteria, InputReadiness, TaskContext, build_task_context
+from geopilot.application.task_context import InputReadiness, build_task_context, current_task_criteria
 from geopilot.domain.data_asset import DataAssetRef
 from geopilot.domain.task import TaskGoal
 from geopilot.llm.clarification import ClarificationReport, build_clarification_report
 from geopilot.methods.loader import MethodCatalog
-from geopilot.persistence.schema import open_database
 from geopilot.plans.models import AnalysisPlan, PlanStatus
 from geopilot.plans.service import load_plan
 from geopilot.plans.versioning import PlanAnswerError, PlanDraftRequiredError, revise_plan
 from geopilot.remote_sensing.config_registry import SensorConfigRegistry
 from geopilot.tools.registry import ToolRegistry
-
-
-def _criteria(database_path: str | Path, plan: AnalysisPlan) -> ContextCriteria:
-    with open_database(database_path, read_only=True) as connection:
-        row = connection.execute("SELECT context_json FROM task WHERE id = ?", (plan.task_id,)).fetchone()
-    if row is not None and row["context_json"] is not None:
-        context = TaskContext.model_validate_json(row["context_json"])
-        selected = {role: item.asset for role, item in context.roles.items() if item.asset is not None}
-        if (context.task_id, context.method, context.goal, selected) == (plan.task_id, plan.method, plan.goal, plan.inputs):
-            return context.criteria or ContextCriteria()
-    return ContextCriteria()
 
 
 def read_clarification(
@@ -37,9 +25,12 @@ def read_clarification(
     context = None
     input_fields = {f"inputs.{role}" for role in method.inputs}
     if any(issue.field in input_fields for issue in plan.issues):
+        criteria = current_task_criteria(
+            database_path, task_id=plan.task_id, method=plan.method, goal=plan.goal, selected=plan.inputs,
+        )
         context = build_task_context(
             database_path, task_id=plan.task_id, goal=plan.goal, method=method, selected=plan.inputs,
-            criteria=_criteria(database_path, plan), registry=registry, options=plan.critical_options,
+            criteria=criteria, registry=registry, options=plan.critical_options,
         )
     return build_clarification_report(plan, method, context=context)
 
@@ -73,9 +64,12 @@ def answer_clarification(
     except ValidationError as error:
         raise PlanAnswerError("Provide a nonempty goal or an exact asset ID and version.") from error
 
+    criteria = current_task_criteria(
+        database_path, task_id=plan.task_id, method=plan.method, goal=plan.goal, selected=plan.inputs,
+    )
     context = build_task_context(
         database_path, task_id=plan.task_id, goal=goal, method=method, selected=inputs,
-        criteria=_criteria(database_path, plan), registry=registry, options=options,
+        criteria=criteria, registry=registry, options=options,
     )
     context, options = resolve_draft_options(database_path, context, options, sensor_registry=sensor_registry)
     if item.kind == "input" and context.roles[name].status is InputReadiness.BLOCKED:

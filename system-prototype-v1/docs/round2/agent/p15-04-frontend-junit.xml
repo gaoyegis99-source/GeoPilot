@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="16" failures="0" errors="0" time="3.280205399">
+    <testsuite name="src/App.clarification.test.tsx" timestamp="2026-11-12T06:08:54.549Z" hostname="mtd-4028GR" tests="1" failures="0" errors="0" skipped="0" time="0.697391612">
+        <testcase classname="src/App.clarification.test.tsx" name="answers one field per version, restores the current draft, and keeps explicit confirmation" time="0.695799054">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/artifacts/ArtifactsPanel.test.tsx" timestamp="2026-11-12T06:08:54.550Z" hostname="mtd-4028GR" tests="3" failures="0" errors="0" skipped="0" time="0.485620549">
+        <testcase classname="src/features/artifacts/ArtifactsPanel.test.tsx" name="keeps formal downloads, source versions, map selection and diagnostics tied to the same run" time="0.36057515">
+        </testcase>
+        <testcase classname="src/features/artifacts/ArtifactsPanel.test.tsx" name="reads the actual formal CSV values on demand" time="0.08505801">
+        </testcase>
+        <testcase classname="src/features/artifacts/ArtifactsPanel.test.tsx" name="locates a readable formal raster by artifact ID and retains the original download link" time="0.037726444">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/method-form/MethodForm.test.tsx" timestamp="2026-11-12T06:08:54.552Z" hostname="mtd-4028GR" tests="7" failures="0" errors="0" skipped="0" time="0.948311648">
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="limits roles to compatible available versions and submits numeric values in the declared unit" time="0.437494626">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="derives required parameters from the selected tool variant" time="0.116840189">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="uses a new method definition and omits stale option keys on switch" time="0.049709431">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="keeps boolean, integer and JSON types and prevents invalid inputs from submitting" time="0.047166827">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="keeps a restored explicit quantity and shows only matching server role evidence" time="0.042442901">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="allows a partial draft only after the goal is supplied" time="0.028843846">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="refreshes the scoped shortlist and preserves a selected asset with its concrete diagnosis" time="0.221549824">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/plans/AlternativePlansPanel.test.tsx" timestamp="2026-11-12T06:08:54.554Z" hostname="mtd-4028GR" tests="2" failures="0" errors="0" skipped="0" time="0.617747872">
+        <testcase classname="src/features/plans/AlternativePlansPanel.test.tsx" name="compares inputs, parameters and tools, then waits for explicit draft selection" time="0.36225988">
+        </testcase>
+        <testcase classname="src/features/plans/AlternativePlansPanel.test.tsx" name="saves the selected alternative as a new draft of the original plan" time="0.253672439">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/plans/preview/PlanPreview.test.tsx" timestamp="2026-11-12T06:08:54.555Z" hostname="mtd-4028GR" tests="3" failures="0" errors="0" skipped="0" time="0.531133718">
+        <testcase classname="src/features/plans/preview/PlanPreview.test.tsx" name="shows the exact plan and asset versions with all declared option values" time="0.406741349">
+        </testcase>
+        <testcase classname="src/features/plans/preview/PlanPreview.test.tsx" name="preserves server step order and expands precise tools, parameters and output bindings" time="0.059685315">
+        </testcase>
+        <testcase classname="src/features/plans/preview/PlanPreview.test.tsx" name="shows issues with or without field paths and emits only an exact field on navigation" time="0.06219604">
+        </testcase>
+    </testsuite>
+</testsuites>

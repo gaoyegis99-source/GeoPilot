@@ -1,0 +1,19 @@
+4a1b2c2c8a420698a39ab214f8347ad4d200e9ae
+Python 3.13.13
+...............                                                          [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+tests/application/test_context_candidates.py::test_actual_candidates_use_task_geometry_field_and_scope_and_keep_selected_diagnosis
+tests/application/test_context_candidates.py::test_saved_explicit_scope_uses_the_exact_asset_version
+tests/application/test_context_candidates.py::test_selected_reference_role_reports_its_own_missing_crs
+tests/application/test_context_candidates.py::test_context_preview_and_saved_context_use_normal_http_with_legacy_shape
+tests/application/test_context_candidates.py::test_revising_only_candidate_scope_updates_the_task_context
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/pyogrio/geopandas.py:917: UserWarning: 'crs' was not provided.  The output dataset will not have projection information defined and may not be usable in other systems.
+    write(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-04-junit.xml -
+15 passed, 6 warnings in 5.39s

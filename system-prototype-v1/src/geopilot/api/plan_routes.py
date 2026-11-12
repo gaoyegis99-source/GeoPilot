@@ -14,6 +14,7 @@ from geopilot.application.method_preconditions import METHOD_PRECONDITIONS
 from geopilot.application.remote_sensing_plan import remote_sensing_inputs_are_consistent
 from geopilot.data.assets import InputChangedError
 from geopilot.data.errors import SourceReadError
+from geopilot.llm.alternative_plan import PlanAlternatives, compare_plan_alternatives
 from geopilot.llm.clarification import ClarificationReport
 from geopilot.methods.loader import MethodCatalog
 from geopilot.plans.compiler import PlanCompilationError
@@ -65,6 +66,23 @@ def plan_routes(
             raise _problem(404, "PLAN_NOT_FOUND", str(error)) from error
         except (sqlite3.Error, ValidationError) as error:
             raise _problem(500, "STORAGE_FAILED", "Could not read the plan.") from error
+
+    @router.get("/{plan_id}/alternatives")
+    def alternatives(plan_id: str, version: Annotated[int, Query(gt=0)]) -> PlanAlternatives:
+        if catalog is None or registry is None:
+            raise _problem(503, "METHOD_CATALOG_UNAVAILABLE", "Configure the local method and tool catalogues.")
+        try:
+            plan = load_plan(database_path, plan_id, version)
+            return compare_plan_alternatives(
+                database_path, plan, catalog=catalog, registry=registry, registered_rules=rule_names,
+                sensor_registry=sensor_registry,
+            )
+        except KeyError as error:
+            raise _problem(404, "METHOD_NOT_FOUND", "The exact method version is unavailable.") from error
+        except LookupError as error:
+            raise _problem(404, "PLAN_NOT_FOUND", str(error)) from error
+        except (sqlite3.Error, ValueError) as error:
+            raise _problem(500, "STORAGE_FAILED", "Could not compare registered plan alternatives.") from error
 
     @router.get("/{plan_id}/clarification")
     def clarification(plan_id: str, version: Annotated[int, Query(gt=0)]) -> ClarificationReport:
