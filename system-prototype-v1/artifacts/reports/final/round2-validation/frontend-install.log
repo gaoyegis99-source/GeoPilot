@@ -1,0 +1,8 @@
+commit 44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0
+cwd /dev/shm/geopilot-p16-candidate.IqabDKTG/tree/system-prototype-v1/frontend
+command npm ci --include=dev --no-audit --no-fund --offline --cache /home/mtd/.npm
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+
+added 128 packages in 2s
+
+exit 0
