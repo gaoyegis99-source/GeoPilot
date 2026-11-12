@@ -153,6 +153,22 @@ export interface AnalysisPlan extends PlanLink {
   issues: Issue[]
 }
 
+export interface ClarificationReport {
+  schema_version: 1
+  task_id: string
+  plan_id: string
+  plan_version: number
+  method: MethodRef
+  status: 'blocked' | 'ready_for_confirmation' | 'confirmed'
+  items: Array<{
+    kind: 'goal' | 'input' | 'option' | 'validation' | 'confirmation'
+    field: string
+    code: string
+    reason: string
+    options: Array<AssetRef | string | boolean>
+  }>
+}
+
 export interface TaskRecord {
   task_id: string
   goal: TaskGoal
@@ -360,6 +376,10 @@ export const workbenchApi = {
   }) => sendJson<AnalysisPlan>(`${taskUrl(id)}/plans`, request),
   plan: (id: string, version: number, signal?: AbortSignal) =>
     readJson<AnalysisPlan>(`${planUrl(id)}?version=${version}`, signal),
+  clarification: (id: string, version: number, signal?: AbortSignal) =>
+    readJson<ClarificationReport>(`${planUrl(id)}/clarification?version=${version}`, signal),
+  answerClarification: (id: string, version: number, field: string, value: Json) =>
+    sendJson<AnalysisPlan>(`${planUrl(id)}/clarification`, { plan_version: version, field, value }),
   confirm: (id: string, version: number) => sendJson<AnalysisPlan>(`${planUrl(id)}/confirm`, { plan_version: version }),
   start: (id: string, version: number) => sendJson<{ run_id: string }>(`${planUrl(id)}/runs`, { plan_version: version }),
   run: (id: string, signal?: AbortSignal) => readJson<RunStatus>(runUrl(id), signal),

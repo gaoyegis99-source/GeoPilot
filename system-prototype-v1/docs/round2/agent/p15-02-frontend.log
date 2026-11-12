@@ -1,0 +1,21 @@
+v22.23.1
+10.9.8
+
+> geopilot-workbench@1.0.0 test
+> vitest --run src/App.clarification.test.tsx src/features/session/workbench-session.test.ts src/features/method-form/MethodForm.test.tsx src/features/plans/PlanActions.test.tsx --reporter=default --reporter=junit --outputFile.junit=../docs/round2/agent/p15-02-frontend-junit.xml
+
+
+ RUN  v5.0.5 /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/frontend
+
+ ✓ src/features/session/workbench-session.test.ts (5 tests) 19ms
+ ✓ src/features/plans/PlanActions.test.tsx (2 tests) 298ms
+ ✓ src/features/method-form/MethodForm.test.tsx (7 tests) 763ms
+ ✓ src/App.clarification.test.tsx (1 test) 695ms
+   ✓ answers one field per version, restores the current draft, and keeps explicit confirmation 693ms
+
+ Test Files  4 passed (4)
+      Tests  15 passed (15)
+   Start at  13:45:50
+   Duration  1.88s (environment 42%, tests 35%, import 12%, transform 11%)
+
+JUNIT report written to /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/agent/p15-02-frontend-junit.xml

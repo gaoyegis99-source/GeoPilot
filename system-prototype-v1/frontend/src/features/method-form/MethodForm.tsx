@@ -172,7 +172,7 @@ function OptionControl({ field, id, unit, edit, problem, onChange, onJson, onNum
   />
 }
 
-function OptionInput({ field, problem, edit, onOption, onJson, onNumberInput }: {
+export function OptionInput({ field, problem, edit, onOption, onJson, onNumberInput }: {
   field: OptionField; problem?: string; edit?: OptionEdit; onOption: MethodFormProps['onOption']
   onJson: (text: string) => void; onNumberInput: (invalid: boolean) => void
 }) {

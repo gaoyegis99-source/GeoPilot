@@ -9,15 +9,11 @@ from geopilot.domain.data_asset import DataAssetRef
 from geopilot.domain.errors import _Text
 from geopilot.domain.tool_contract import ParameterSpec
 from geopilot.methods.models import MethodDefinition, MethodRef
-from geopilot.plans.models import AnalysisPlan, PlanIssue, PlanStatus
+from geopilot.plans.models import GOAL_CLARIFICATION_ISSUE, AnalysisPlan, PlanIssue, PlanStatus
 
 
 _Kind = Literal["goal", "input", "option", "validation", "confirmation"]
 _Choice = DataAssetRef | StrictStr | StrictBool
-_GOAL_ISSUE = PlanIssue(
-    code="GOAL_AMBIGUOUS", field="goal.summary",
-    message="Describe the GIS result the task should produce.",
-)
 
 
 class ClarificationItem(BaseModel):
@@ -74,9 +70,10 @@ def require_goal_clarification(plan: AnalysisPlan) -> AnalysisPlan:
     """Add a local blocking issue when a planning flow determines the goal is unclear."""
     if plan.status is not PlanStatus.DRAFT:
         raise ValueError("Only a draft can require goal clarification")
-    if any(issue.code == _GOAL_ISSUE.code and issue.field == _GOAL_ISSUE.field for issue in plan.issues):
+    issue = GOAL_CLARIFICATION_ISSUE
+    if any((entry.code, entry.field) == (issue.code, issue.field) for entry in plan.issues):
         return plan
-    return plan.model_copy(update={"issues": (*plan.issues, _GOAL_ISSUE)})
+    return plan.model_copy(update={"issues": (*plan.issues, issue)})
 
 
 def _asset_options(context: TaskContext | None, role: str) -> tuple[DataAssetRef, ...]:

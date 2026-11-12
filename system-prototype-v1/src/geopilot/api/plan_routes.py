@@ -7,16 +7,19 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, ValidationError
 
+from geopilot.application.clarification_session import answer_clarification, read_clarification
 from geopilot.application.method_preconditions import METHOD_PRECONDITIONS
 from geopilot.application.remote_sensing_plan import remote_sensing_inputs_are_consistent
 from geopilot.data.assets import InputChangedError
 from geopilot.data.errors import SourceReadError
+from geopilot.llm.clarification import ClarificationReport
 from geopilot.methods.loader import MethodCatalog
 from geopilot.plans.compiler import PlanCompilationError
 from geopilot.plans.models import AnalysisPlan
 from geopilot.plans.service import PlanConfirmationError, confirm_plan, load_plan
+from geopilot.plans.versioning import PlanAnswerError, PlanDraftRequiredError, PlanVersionConflictError
 from geopilot.remote_sensing.config_registry import SensorConfigRegistry
 from geopilot.runs.service import create_run
 from geopilot.tools.registry import ToolRegistry
@@ -25,6 +28,11 @@ from geopilot.tools.registry import ToolRegistry
 class PlanVersionRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     plan_version: int = Field(strict=True, gt=0)
+
+
+class ClarificationAnswer(PlanVersionRequest):
+    field: str = Field(strict=True, min_length=1)
+    value: JsonValue
 
 
 class RunAccepted(BaseModel):
@@ -57,6 +65,41 @@ def plan_routes(
             raise _problem(404, "PLAN_NOT_FOUND", str(error)) from error
         except (sqlite3.Error, ValidationError) as error:
             raise _problem(500, "STORAGE_FAILED", "Could not read the plan.") from error
+
+    @router.get("/{plan_id}/clarification")
+    def clarification(plan_id: str, version: Annotated[int, Query(gt=0)]) -> ClarificationReport:
+        if catalog is None or registry is None:
+            raise _problem(503, "METHOD_CATALOG_UNAVAILABLE", "Configure the local method and tool catalogues.")
+        try:
+            return read_clarification(database_path, plan_id, version, catalog=catalog, registry=registry)
+        except KeyError as error:
+            raise _problem(404, "METHOD_NOT_FOUND", "The exact method version is unavailable.") from error
+        except LookupError as error:
+            raise _problem(404, "PLAN_NOT_FOUND", str(error)) from error
+        except (sqlite3.Error, ValueError) as error:
+            raise _problem(500, "STORAGE_FAILED", "Could not read the plan clarification.") from error
+
+    @router.post("/{plan_id}/clarification")
+    def answer(plan_id: str, request: ClarificationAnswer) -> AnalysisPlan:
+        if catalog is None or registry is None:
+            raise _problem(503, "METHOD_CATALOG_UNAVAILABLE", "Configure the local method and tool catalogues.")
+        try:
+            return answer_clarification(
+                database_path, plan_id, request.plan_version, request.field, request.value,
+                catalog=catalog, registry=registry, sensor_registry=sensor_registry,
+            )
+        except KeyError as error:
+            raise _problem(404, "METHOD_NOT_FOUND", "The exact method version is unavailable.") from error
+        except LookupError as error:
+            raise _problem(404, "PLAN_NOT_FOUND", str(error)) from error
+        except PlanVersionConflictError as error:
+            raise _problem(409, error.code, str(error), field=error.field, latest_version=error.latest_version) from error
+        except PlanDraftRequiredError as error:
+            raise _problem(409, "PLAN_DRAFT_REQUIRED", str(error), field="version") from error
+        except PlanAnswerError as error:
+            raise _problem(422, "INVALID_CLARIFICATION_ANSWER", str(error), field=request.field) from error
+        except (sqlite3.Error, ValueError) as error:
+            raise _problem(500, "STORAGE_FAILED", "Could not save the plan answer.") from error
 
     @router.post("/{plan_id}/confirm")
     def confirm(plan_id: str, request: PlanVersionRequest) -> AnalysisPlan:

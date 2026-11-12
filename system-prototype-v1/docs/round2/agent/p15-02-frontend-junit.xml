@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="15" failures="0" errors="0" time="1.773912167">
+    <testsuite name="src/App.clarification.test.tsx" timestamp="2026-11-12T05:45:52.766Z" hostname="mtd-4028GR" tests="1" failures="0" errors="0" skipped="0" time="0.694804035">
+        <testcase classname="src/App.clarification.test.tsx" name="answers one field per version, restores the current draft, and keeps explicit confirmation" time="0.692892542">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/method-form/MethodForm.test.tsx" timestamp="2026-11-12T05:45:52.767Z" hostname="mtd-4028GR" tests="7" failures="0" errors="0" skipped="0" time="0.762650175">
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="limits roles to compatible available versions and submits numeric values in the declared unit" time="0.293500359">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="derives required parameters from the selected tool variant" time="0.087592699">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="uses a new method definition and omits stale option keys on switch" time="0.041690774">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="keeps boolean, integer and JSON types and prevents invalid inputs from submitting" time="0.039554">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="keeps a restored explicit quantity and shows only matching server role evidence" time="0.041565614">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="allows a partial draft only after the goal is supplied" time="0.028348336">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="refreshes the scoped shortlist and preserves a selected asset with its concrete diagnosis" time="0.228333176">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/plans/PlanActions.test.tsx" timestamp="2026-11-12T05:45:52.769Z" hostname="mtd-4028GR" tests="2" failures="0" errors="0" skipped="0" time="0.297646666">
+        <testcase classname="src/features/plans/PlanActions.test.tsx" name="confirms the exact draft without starting its execution" time="0.246740284">
+        </testcase>
+        <testcase classname="src/features/plans/PlanActions.test.tsx" name="blocks unresolved, edited and pending snapshots" time="0.048753792">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/session/workbench-session.test.ts" timestamp="2026-11-12T05:45:52.770Z" hostname="mtd-4028GR" tests="5" failures="0" errors="0" skipped="0" time="0.018811291">
+        <testcase classname="src/features/session/workbench-session.test.ts" name="restores a run-only URL using its exact originating task and confirmed version" time="0.007833153">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="chooses the latest saved plan for a task-only URL and retains a separately specified run" time="0.001346794">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="rejects cross-task runs and foreign or incomplete plan links" time="0.003727418">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="writes exact links and preserves unrelated search entries" time="0.001653198">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="round trips exact visible asset versions independently of the active plan and run" time="0.001488678">
+        </testcase>
+    </testsuite>
+</testsuites>

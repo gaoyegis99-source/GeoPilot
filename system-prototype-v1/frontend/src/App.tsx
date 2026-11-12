@@ -9,6 +9,7 @@ import { MethodForm, type MethodFormRequest } from './features/method-form/Metho
 import { MapPanel, type MapPreviewLayer } from './features/map/MapPanel'
 import { ModelAssistPanel } from './features/model-assistance/ModelAssistPanel'
 import { ConfirmPlanButton, StartPlanButton } from './features/plans/PlanActions'
+import { ClarificationPanel } from './features/plans/ClarificationPanel'
 import { PlanPreview } from './features/plans/preview/PlanPreview'
 import { isRunActive, RunPanel } from './features/runs/RunPanel'
 import { ScriptRunsPage } from './features/scripts/ScriptRunsPage'
@@ -44,7 +45,7 @@ function AnalysisWorkbench() {
   const [draftDirty, setDraftDirty] = useState(false)
   const [preparing, setPreparing] = useState(false)
   const [taskError, setTaskError] = useState<Problem | null>(null)
-  const [actionPending, setActionPending] = useState<'confirm' | 'start' | null>(null)
+  const [actionPending, setActionPending] = useState<'confirm' | 'start' | 'answer' | null>(null)
   const [actionError, setActionError] = useState<Problem | null>(null)
   const methodForm = useRef<HTMLDivElement>(null)
   const methodCatalog = useRef<HTMLDivElement>(null)
@@ -335,6 +336,39 @@ function AnalysisWorkbench() {
     }
   }
 
+  async function answerClarification(ref: AnalysisPlan, field: string, value: Json) {
+    if (draftDirty || preparing || actionPending) return
+    setActionPending('answer')
+    setActionError(null)
+    try {
+      const next = await workbenchApi.answerClarification(ref.id, ref.version, field, value)
+      clearModelSuggestion()
+      setPlan(next)
+      setGoal(next.goal.summary)
+      setInputs(next.inputs)
+      setOptions(next.critical_options)
+      setContext(null)
+      setDraftDirty(false)
+      window.history.replaceState(null, '', workbenchLocation(new URL(window.location.href), {
+        taskId: next.task_id, plan: next, runId,
+      }))
+      try {
+        const task = await workbenchApi.task(next.task_id)
+        setTaskRecord(task)
+        if (task.plans[0]?.id === next.id && task.plans[0].version === next.version) {
+          setContext(task.context)
+          setCriteria(task.context?.criteria ?? {})
+        }
+      } catch (cause) {
+        setActionError(requestProblem(cause, 'plan', '回答已保存。请刷新页面以恢复任务记录。'))
+      }
+    } catch (cause) {
+      setActionError(requestProblem(cause, 'plan', '无法保存澄清回答。'))
+    } finally {
+      setActionPending(null)
+    }
+  }
+
   async function confirmPlan(ref: MethodRef) {
     setActionPending('confirm')
     setActionError(null)
@@ -469,11 +503,19 @@ function AnalysisWorkbench() {
       </>}
       plan={selectedPlan ? <>
         <PlanPreview plan={selectedPlan} assets={assets} onIssueSelect={editDraft} />
+        {selectedPlan.status === 'draft' && selectedPlan.issues.length > 0 && method?.available && <ClarificationPanel
+          key={`${selectedPlan.id}@${selectedPlan.version}`} plan={selectedPlan} method={method} assets={assets}
+          disabled={draftDirty || preparing || actionPending !== null}
+          onAnswer={(field, value) => { void answerClarification(selectedPlan, field, value) }}
+        />}
         {draftDirty && <p role="status">表单已修改，请先生成草稿。</p>}
         <ConfirmPlanButton plan={selectedPlan} dirty={draftDirty} busy={preparing || actionPending !== null}
           onConfirm={(ref) => { void confirmPlan(ref) }} />
         {actionPending === 'confirm' && <p role="status">正在确认方案…</p>}
+        {actionPending === 'answer' && <p role="status">正在保存回答…</p>}
         {actionError?.phase === 'plan' && <ProblemDetails problem={actionError} actions={{ edit: editDraft }} />}
+        {(actionError?.code === 'PLAN_VERSION_CONFLICT' || actionError?.code === 'PLAN_DRAFT_REQUIRED') && taskId && <a
+          href={workbenchLocation(new URL(window.location.href), { taskId }).href}>打开任务最新版本</a>}
       </> : undefined}
       run={<RunPanel
         runId={runId} onStatus={receiveStatus} pendingReportId={queuedReport}

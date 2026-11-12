@@ -36,6 +36,12 @@ class PlanIssue(_PlanModel):
     message: _Text
 
 
+GOAL_CLARIFICATION_ISSUE = PlanIssue(
+    code="GOAL_AMBIGUOUS", field="goal.summary",
+    message="Describe the GIS result the task should produce.",
+)
+
+
 class PlanOutput(_PlanModel):
     type: _Text
     target: _RunPath

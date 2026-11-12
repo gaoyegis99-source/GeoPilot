@@ -12,11 +12,12 @@ from geopilot.persistence.plan_repository import insert_draft, plan_from_row, ro
 from geopilot.persistence.schema import open_database
 from geopilot.plans.compiler import _same_json
 from geopilot.plans.draft_builder import build_draft
-from geopilot.plans.models import AnalysisPlan, PlanStatus
+from geopilot.plans.models import GOAL_CLARIFICATION_ISSUE, AnalysisPlan, PlanStatus
 from geopilot.tools.registry import ToolRegistry
 
 
 _EDITABLE_FIELDS = {"goal", "inputs", "critical_options", "method"}
+_DISCARDED_OPTION_ISSUES = {"INVALID_OPTION", "UNKNOWN_OPTION", "OPTION_NOT_APPLICABLE"}
 
 
 class PlanVersionConflictError(ValueError):
@@ -29,6 +30,14 @@ class PlanVersionConflictError(ValueError):
         self.latest_version = latest_version
         self.message = f"Plan {plan_id!r} version {version} is stale. Revise version {latest_version}."
         super().__init__(self.message)
+
+
+class PlanDraftRequiredError(ValueError):
+    """The answer did not target the task's active draft."""
+
+
+class PlanAnswerError(ValueError):
+    """The exact draft could not accept the proposed answer."""
 
 
 def _refresh_current_context(connection: sqlite3.Connection, plan: AnalysisPlan, context: TaskContext) -> None:
@@ -54,6 +63,7 @@ def revise_plan(
     method: MethodDefinition,
     options: Mapping[str, JsonValue] | None = None,
     registry: ToolRegistry | None = None,
+    answer_field: str | None = None,
 ) -> AnalysisPlan:
     """Build an edited draft against an exact baseline and allocate its next version."""
     if not isinstance(plan_id, str) or not plan_id.strip() or type(version) is not int or version < 1:
@@ -69,6 +79,13 @@ def revise_plan(
         baseline = plan_from_row(row)
         if context.task_id != baseline.task_id:
             raise ValueError("A revision must belong to the original task")
+        if answer_field is not None:
+            current_plan = connection.execute(
+                "SELECT id FROM analysis_plan WHERE task_id = ? ORDER BY created_at DESC, version DESC, id LIMIT 1",
+                (baseline.task_id,),
+            ).fetchone()
+            if baseline.status is not PlanStatus.DRAFT or current_plan["id"] != baseline.id:
+                raise PlanDraftRequiredError("Open the task's current draft before answering clarification.")
 
         latest_version = connection.execute(
             "SELECT max(version) FROM analysis_plan WHERE id = ?", (plan_id,),
@@ -81,6 +98,22 @@ def revise_plan(
         candidate = build_draft(
             context, method, plan_id=plan_id, version=latest_version + 1, options=options, registry=registry,
         )
+        if answer_field and answer_field.startswith("critical_options."):
+            name = answer_field.removeprefix("critical_options.")
+            if name not in candidate.critical_options:
+                issue = next((issue for issue in candidate.issues if issue.field == answer_field), None)
+                raise PlanAnswerError(issue.message if issue else "This option does not apply to the draft.")
+        goal_issue = GOAL_CLARIFICATION_ISSUE
+        inactive = {f"critical_options.{name}" for name in method.inactive_variant_options(candidate.critical_options)}
+        retained = tuple(
+            issue for issue in baseline.issues
+            if (issue.code == goal_issue.code and issue.field == goal_issue.field and context.goal == baseline.goal)
+            or (answer_field is not None and issue.field != answer_field
+                and issue.field not in inactive and issue.code in _DISCARDED_OPTION_ISSUES)
+        )
+        if retained:
+            issues = tuple(issue for issue in candidate.issues if issue not in retained)
+            candidate = candidate.model_copy(update={"issues": (*issues, *retained)})
 
         if latest.status is PlanStatus.DRAFT and _same_json(
             latest.model_dump(mode="json", exclude={"version"}), candidate.model_dump(mode="json", exclude={"version"}),
