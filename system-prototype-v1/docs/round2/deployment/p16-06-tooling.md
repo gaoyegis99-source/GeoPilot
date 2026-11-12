@@ -79,3 +79,41 @@ B 将后端 JUnit 与 2,171 个收集节点逐一核对，将固定 GIS JUnit �
 主控运行 `delivery_manifest.py --round2 --source-ref … --evidence-ref … --archive … --write` 生成清单与确定性归档。按提交核验与空目录解包后无 Git 核验均退出 0，JSON 字节一致。包内有 944 个源码范围文件、733 个证据文件，附版本、锁定依赖、测试、样本和离线复现文档。发布归档的 SHA-256 为 `7971fce3e321224a8a7dc6f9dc7c365ffd4cff90de79e18fec5e417b971cfbc3`。源码和证据文件按各自精确提交保存。可按固定引用重建；撤销本次交付文档和清单提交可从开发分支移除候选引用。 [复现说明](../../release/ROUND2_REPRODUCTION.md)
 
 P16-06 主控 ACCEPTED。该归档为已验证技术候选。真实用户观察与后续体验改进仍是 P16-07 发布决策的前置，若源码变化需对届时版本重跑并更新包。
+
+### 下一版候选的证据链接复查
+
+主控在 Python 3.13.13 读取净 Git 树，按复现说明、验收日志和并发决策三个入口调用发布生成器的 `_reproduction_links`。首次发现历史报告引用了可重新生成的清单路径，下一版打包会将清单自身列为证据。修复后旧回执从固定验证证据包查看，新一轮发布仍可引用旧证据和本轮受试演练。首次禁入清单检查退出 1。修复后从原型目录用以下命令比较两份 Git 树，退出 0。
+
+```bash
+PYTHONPATH=scripts/quality .venv/bin/python -B - <<'PYTHON'
+from pathlib import Path
+from build_source_inventory import git
+from round2_release_manifest import MANIFEST, _historical_links, _read_file, _reproduction_links, _scope
+from verify_delivery_manifest import committed_files
+
+root = Path.cwd().parent
+prefix = "system-prototype-v1/"
+roots = {prefix + path for path in (
+    "docs/release/ROUND2_REPRODUCTION.md", "plans-round2/06_PROGRESS/ACCEPTANCE_LOG.md",
+    "docs/round2/decisions/p13-08.md",
+)}
+for rev, expected in (("bbfc1d8", True), ("13b9b6c", False)):
+    commit = git(root, "rev-parse", rev).decode().strip()
+    tree = committed_files(root, commit)
+    audit = _read_file(root, tree, prefix + "docs/round2/audit/evidence-link-audit.csv")
+    links = _reproduction_links(roots, set(tree), _scope(tree, prefix),
+                                lambda path: _read_file(root, tree, path), _historical_links(audit))
+    circular = prefix + MANIFEST.as_posix() in links
+    print(f"{commit}: {len(links)} evidence links, generated manifest in evidence = {circular}")
+    assert circular is expected
+    assert prefix + "docs/round2/user-research/p16-03-rehearsal-evidence.tar.gz" in links
+    assert prefix + "docs/round2/deployment/p16-06-candidate-verification-evidence.tar.gz" in links
+PYTHON
+```
+
+```text
+bbfc1d8f6bca9259f004f6a95ca39dbe8a218dac: 1198 evidence links, generated manifest in evidence = True
+13b9b6c91fdf139798df3974b3eac94ed96633a3: 1196 evidence links, generated manifest in evidence = False
+```
+
+现有候选另用 `.venv/bin/python -B scripts/quality/verify_delivery_manifest.py --round2-manifest artifacts/reports/final/round2-delivery-manifest.json` 复核，退出 0，与封存核验 JSON 逐字节一致。候选归档与清单的 `sha256sum -c SHA256SUMS` 均退出 0。回滚可撤销历史链接修复和此记录。
