@@ -39,4 +39,4 @@ PY
 
 新增 [汇总工具](../../../scripts/quality/summarize_user_trials.py)、[专项测试](../../../tests/quality/test_summarize_user_trials.py)、[记录格式](observations.md)、[空白模板](observations.blank.json)、主持与受试材料及本目录原始证据。新增独立 JSON 输入输出 CLI。工作台、后端 API、数据库、生产配置和正式成果保持原样。回滚可撤销本批新增文件。
 
-实际研究需要确定招募渠道并安排目标 GIS 用户按主持手册完成独立会话，建议至少 5 人。当前没有真实会话，完成率、求助、错误和耗时没有可用于用户研究的观察值。任务总体保持待实测。
+用户已确认可以安排参与者。建议邀请至少 5 名平时使用 GIS、此前未使用 GeoPilot 的人员，每人独立完成约 30 分钟的浏览器任务。主持人准备运行 QGIS 的后端和样本，参与者从工作台登记、运行、检查并下载 CSV。实际会话结束后，提交匿名观察记录及对应的下载 CSV。当前为 0 个真实会话，任务待实测。 [任务单](participant-task.md) · [匿名记录模板](observations.blank.json)

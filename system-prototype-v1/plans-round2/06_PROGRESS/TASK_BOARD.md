@@ -40,7 +40,7 @@
 | P15-08 | P15 | Agent 行为评估集 | F/G/主控 | P15-01 至 P15-07 | ACCEPTED | 固定行为 18/18，本机建议严格 0/3、越权护栏 1/1。 [评估结果](../../docs/round2/agent/p15-08.md) |
 | P16-01 | P16 | 本机环境诊断命令 | 主控 | P12-05、P12-06 | ACCEPTED | [诊断 CLI、真实环境和失败路径](../../docs/round2/deployment/p16-01.md) |
 | P16-02 | P16 | 干净环境安装矩阵 | 主控/A/E/F | P16-01 | ACCEPTED | [两套 Linux 后端与独立 Chromium 实测](../../docs/round2/deployment/p16-02.md) |
-| P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 用户可安排参与者，待真实浏览器会话和匿名观察记录。[主持手册](../../docs/round2/user-research/moderator.md) |
+| P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 用户可安排参与者。由主持准备 GIS 后端，待真实浏览器会话、匿名记录和下载 CSV。 [主持手册](../../docs/round2/user-research/moderator.md) |
 | P16-04 | P16 | 错误信息与恢复路径优化 | E/D | P16-03 | BLOCKED | 待 P16-03 真实观察。 |
 | P16-05 | P16 | 长任务用户体验 | E/D | P13-02、P16-03 | BLOCKED | 待 P16-03 真实观察。 |
 | P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | BLOCKED | [验证与打包工具通过，正式包待 P13 基准及最终同提交证据](../../docs/round2/deployment/p16-06-tooling.md) |
