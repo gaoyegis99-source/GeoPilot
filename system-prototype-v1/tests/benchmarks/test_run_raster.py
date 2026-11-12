@@ -208,6 +208,8 @@ def test_status_observation_preserves_storage_error_body_and_limits_reads(bench_
     runner, _ = bench_modules
     workload = importlib.import_module("_raster_workloads")
     monkeypatch.setattr(workload.time, "sleep", lambda _: None)
+    clock = iter([100, 170, 200, 300, 310, 400, 440, 500, 620])
+    monkeypatch.setattr(workload.time, "monotonic_ns", lambda: next(clock))
     body = {"detail": {"code": "STORAGE_FAILED", "message": "Could not read the run record."}}
     terminal = {"execution_status": "SUCCEEDED", "check_status": "PASSED"}
 
@@ -224,13 +226,17 @@ def test_status_observation_preserves_storage_error_body_and_limits_reads(bench_
         Client(error, Response(200, json=terminal)), "/api/runs/example", trial, time.monotonic() + 1,
     )
     assert state == terminal
-    assert trial == {"run_state": terminal, "status_poll_errors": [{"http_status": 500, "body": body}]}
+    assert trial == {
+        "run_state": terminal, "status_poll_errors": [{"http_status": 500, "body": body, "elapsed_ns": 70}],
+    }
     trial = {}
     with pytest.raises(RuntimeError, match="Three consecutive"):
         workload._terminal_state(
             Client(error, error, error), "/api/runs/example", trial, time.monotonic() + 1,
         )
-    assert len(trial["status_poll_errors"]) == 3
+    assert trial["status_poll_errors"] == [
+        {"http_status": 500, "body": body, "elapsed_ns": elapsed} for elapsed in (10, 40, 120)
+    ]
     summary = runner.summarize_trials([{"kind": "measurement", "status": "FAIL", **trial}], ["method"])["method"]
     assert summary == {"passed": 0, "failed": 1, "missing": 4}
 
