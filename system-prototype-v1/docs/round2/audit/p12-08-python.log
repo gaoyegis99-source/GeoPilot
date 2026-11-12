@@ -1,0 +1,32 @@
+Python 3.13.13
+No broken requirements found.
+........................................................................ [ 37%]
+..................................F..................................... [ 74%]
+..................................................                       [100%]
+=================================== FAILURES ===================================
+___ test_restart_removes_uncommitted_artifact_manifest_and_keeps_diagnostics ___
+
+queued_run = (PosixPath('/tmp/geopilot-p12-08-python.uffuTe/pytest/test_restart_removes_uncommitt0/project.sqlite'), PosixPath('/tm...2-08-python.uffuTe/pytest/test_restart_removes_uncommitt0/workspace/tasks/task/runs/19cca9fea9d5424cbdbc234b61b9ee72'))
+tmp_path = PosixPath('/tmp/geopilot-p12-08-python.uffuTe/pytest/test_restart_removes_uncommitt0')
+
+    def test_restart_removes_uncommitted_artifact_manifest_and_keeps_diagnostics(queued_run, tmp_path):
+        database, workspace, _, _, run_id, workdir = queued_run
+        linked = tmp_path / "manifest-linked"
+        manifest = workdir / "outputs/manifest.json"
+        with _spawn_supervisor(database, workspace, WORKER, manifest_linked=linked) as process:
+            try:
+>               assert _wait_until(lambda: linked.is_file() or process.poll() is not None)
+E               assert False
+E                +  where False = _wait_until(<function test_restart_removes_uncommitted_artifact_manifest_and_keeps_diagnostics.<locals>.<lambda> at 0x7efd81d740e0>)
+
+tests/scheduler/test_restart_recovery.py:149: AssertionError
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/audit/p12-08-python-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/scheduler/test_restart_recovery.py::test_restart_removes_uncommitted_artifact_manifest_and_keeps_diagnostics
+1 failed, 193 passed, 1 warning in 60.18s (0:01:00)

@@ -1,0 +1,7 @@
+python-prepare-measurement-lines version 1 (python)
+input_check: {"rule":"source_is_readable","phase":"input","field":"inputs.source.path","severity":"blocking","passed":true,"observed":{"path":"inputs/0001/source.gpkg","layer":"roads"},"expected":"Readable local spatial input","message":"Input reopened"}
+input_check: {"rule":"input_type_matches","phase":"input","field":"inputs.source","severity":"blocking","passed":true,"observed":"LineString","expected":"vector_line","message":"Input type matches"}
+input_check: {"rule":"input_extent_is_valid","phase":"input","field":"inputs.source.bounds","severity":"blocking","passed":true,"observed":[500150.0,4401500.0,501850.0,4402650.0],"expected":"Finite ordered extent, with a positive raster footprint","message":"Input extent is usable"}
+input_check: {"rule":"crs_is_known","phase":"input","field":"inputs.source.crs","severity":"blocking","passed":true,"observed":"EPSG:32650","expected":"Known declared CRS","message":"Input CRS is known"}
+input_check: {"rule":"geometry_is_valid","phase":"input","field":"inputs.source.geometry","severity":"blocking","passed":true,"observed":{"feature_count":3,"invalid_count":0,"invalid_fids":[]},"expected":"Valid nonempty geometry in every feature","message":"Input feature geometries are valid"}
+$ /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/src/geopilot/gis/tools/prepare_measurement_lines.py --request steps/prepare/request.json --result steps/prepare/python-result.json

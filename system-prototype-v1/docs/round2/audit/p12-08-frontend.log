@@ -1,0 +1,67 @@
+v22.23.1
+10.9.8
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+
+added 128 packages in 2s
+
+> geopilot-workbench@1.0.0 test
+> vitest --run --reporter=default --reporter=junit --outputFile.junit=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/audit/p12-08-frontend-junit.xml
+
+
+ RUN  v5.0.5 /tmp/geopilot-p12-08-frontend.cs1LHF/system-prototype-v1/frontend
+
+ ✓ src/features/session/workbench-session.test.ts (5 tests) 19ms
+ ✓ src/features/plans/PlanActions.test.tsx (2 tests) 338ms
+ ✓ src/components/errors/ProblemDetails.test.tsx (4 tests) 433ms
+   ✓ keeps the diagnosis, relevant action and log available while details are collapsed 316ms
+ ✓ src/features/methods/MethodCatalogPanel.test.tsx (4 tests) 458ms
+   ✓ MethodCatalogPanel (4)
+     ✓ renders the supplied versions and selects an exact method reference 349ms
+ ✓ src/features/runs/RunPanel.test.tsx (3 tests) 498ms
+   ✓ polls actual statuses until both phases finish and allows a retained log to open 403ms
+ ✓ src/features/assets/AssetPanel.test.tsx (3 tests) 550ms
+   ✓ shows exact asset versions, assigned roles and controlled map visibility 312ms
+ ✓ src/features/plans/preview/PlanPreview.test.tsx (3 tests) 646ms
+   ✓ shows the exact plan and asset versions with all declared option values 499ms
+ ✓ src/features/artifacts/ArtifactsPanel.test.tsx (3 tests) 592ms
+   ✓ keeps formal downloads, source versions, map selection and diagnostics tied to the same run 456ms
+ ✓ src/features/checks/ChecksPanel.test.tsx (4 tests) 552ms
+   ✓ shows method failures alongside passing phase findings and the separate execution state 308ms
+ ✓ src/features/model-assistance/ModelAssistPanel.test.tsx (6 tests) 620ms
+   ✓ retains the existing goal and a manual entry when model assistance is unconfigured 389ms
+ ✓ src/pages/WorkbenchPage.test.tsx (4 tests) 773ms
+   ✓ WorkbenchPage (4)
+     ✓ shows the seven regions and distinct confirmation and execution actions 551ms
+ ✓ src/features/scripts/ScriptRunsPage.test.tsx (3 tests) 789ms
+   ✓ browses script state, actual log, indexed download and isolated vector preview 615ms
+ ✓ src/features/method-form/MethodForm.test.tsx (7 tests) 975ms
+   ✓ limits roles to compatible available versions and submits numeric values in the declared unit 484ms
+ ✓ src/features/map/MapPanel.test.tsx (17 tests) 1311ms
+   ✓ uses local source references, renders all three vector styles and picks the exact artifact ID 483ms
+
+ Test Files  14 passed (14)
+      Tests  68 passed (68)
+   Start at  11:29:23
+   Duration  2.65s (environment 41%, tests 37%, import 11%, transform 11%)
+
+JUNIT report written to /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/audit/p12-08-frontend-junit.xml
+
+> geopilot-workbench@1.0.0 build
+> tsc --noEmit && vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 53 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                  0.40 kB │ gzip:   0.29 kB
+dist/assets/maplibre-gl-worker-CZtFQQIV.mjs    520.11 kB
+dist/assets/index-D1WIAfsz.css                  96.06 kB │ gzip:  15.34 kB
+dist/assets/index-Do9nS5U6.js                1,374.27 kB │ gzip: 384.56 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 579ms

@@ -1,0 +1,161 @@
+name: GeoPilot CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, round2/ci-verify]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+    working-directory: system-prototype-v1
+
+jobs:
+  python:
+    name: Python and configuration
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13.13"
+      - name: Install locked Python dependencies
+        run: |
+          python --version
+          python -m pip install --only-binary=:all: -r requirements-test.txt
+          python -m pip check
+      - name: Compile and import
+        run: |
+          python -m compileall -q src scripts/quality
+          PYTHONPATH=src python -c 'from geopilot.api.server import create_local_app'
+      - name: Validate workflow and configuration schemas
+        run: |
+          python scripts/quality/validate_ci_matrix.py > "$RUNNER_TEMP/ci-matrix.json"
+          python scripts/quality/validate_config_schemas.py > "$RUNNER_TEMP/config-schemas.json"
+      - name: Run non-QGIS unit tests
+        run: |
+          python -m pytest -q -p no:cacheprovider \
+            tests/assets tests/contracts tests/scheduler tests/llm/test_data_boundary.py \
+            tests/quality/test_ci_matrix.py tests/quality/test_config_schemas.py \
+            --junitxml="$RUNNER_TEMP/python-junit.xml"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: python-evidence
+          path: |
+            ${{ runner.temp }}/ci-matrix.json
+            ${{ runner.temp }}/config-schemas.json
+            ${{ runner.temp }}/python-junit.xml
+
+  frontend:
+    name: Frontend test and build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: system-prototype-v1/frontend
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "22.23.1"
+      - name: Install locked frontend dependencies
+        run: |
+          npm install --global npm@10.9.8 --no-audit --no-fund
+          node --version
+          npm --version
+          npm ci --include=dev --no-audit --no-fund
+      - name: Run Vitest
+        run: |
+          npm test -- --run --reporter=default --reporter=junit \
+            --outputFile.junit="$RUNNER_TEMP/frontend-junit.xml"
+      - name: Type-check and build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee "$RUNNER_TEMP/frontend-build.log"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: frontend-evidence
+          path: |
+            ${{ runner.temp }}/frontend-junit.xml
+            ${{ runner.temp }}/frontend-build.log
+
+  gis:
+    name: Real QGIS regression
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/round2/ci-verify')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      QT_QPA_PLATFORM: offscreen
+      GEOPILOT_QGIS_PROCESS: /usr/bin/qgis_process
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: "1"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.13.13"
+      - name: Install locked Python dependencies
+        run: |
+          python --version
+          python -m pip install --only-binary=:all: -r requirements-test.txt
+          python -m pip check
+      - name: Install and probe signed QGIS LTR package
+        run: |
+          key="$RUNNER_TEMP/qgis-archive-keyring.gpg"
+          curl -fsSL --retry 3 -o "$key" https://download.qgis.org/downloads/qgis-archive-keyring.gpg
+          fingerprints="$(gpg --batch --show-keys --with-colons "$key" | awk -F: '
+            $1 == "pub" { primary = 1; next }
+            $1 == "fpr" && primary { print $10; primary = 0 }
+          ')"
+          test "$fingerprints" = "2D7E3441A707FDB3E7059441D155B8E6A419C5BE"
+          sudo install -m 0644 "$key" /usr/share/keyrings/geopilot-qgis.gpg
+          printf '%s\n' 'deb [signed-by=/usr/share/keyrings/geopilot-qgis.gpg] https://qgis.org/ubuntu-ltr noble main' \
+            | sudo tee /etc/apt/sources.list.d/geopilot-qgis.list
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends qgis=1:3.44.15+40noble
+          test -x "$GEOPILOT_QGIS_PROCESS"
+          "$GEOPILOT_QGIS_PROCESS" --version | tee "$RUNNER_TEMP/qgis-version.txt"
+          "$GEOPILOT_QGIS_PROCESS" --json help native:buffer > "$RUNNER_TEMP/qgis-buffer-help.json"
+      - name: Run GIS suites and fixed-case nodes
+        run: |
+          python -m pytest -q -p no:cacheprovider \
+            tests/smoke/test_qgis_smoke.py tests/golden tests/gis tests/methods \
+            tests/runners/test_measurement_steps.py \
+            tests/application/test_plan_run.py::test_road_workflow_passes_fixed_road_cases_and_reproduces_in_an_independent_run \
+            tests/llm/test_data_boundary.py \
+            tests/llm/test_error_handling.py::test_actual_http_retry_posts_exact_scanned_prompt_with_fixed_envelope \
+            tests/llm/test_error_handling.py::test_rejected_request_opens_no_socket_even_when_adapter_called_directly \
+            tests/api/test_check_reports.py::test_real_qgis_execution_status_is_independent_of_check_report \
+            --junitxml="$RUNNER_TEMP/gis-junit.xml"
+          python - "$RUNNER_TEMP/gis-junit.xml" <<'PY'
+          import sys
+          from xml.etree import ElementTree
+
+          report = ElementTree.parse(sys.argv[1])
+          if not list(report.iter("testcase")) or any(report.iter("skipped")):
+              sys.exit("Real QGIS CI requires executed cases and zero skips.")
+          PY
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        if: always()
+        with:
+          name: gis-evidence
+          path: |
+            ${{ runner.temp }}/qgis-version.txt
+            ${{ runner.temp }}/qgis-buffer-help.json
+            ${{ runner.temp }}/gis-junit.xml

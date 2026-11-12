@@ -9,7 +9,7 @@
 | P12-05 | P12 | 后端全量回归复跑 | 主控/F | P12-01、P12-02；QGIS CLI 可用 | ACCEPTED | [同提交 1,670 项全部通过](../../docs/round2/audit/p12-05.md) |
 | P12-06 | P12 | 前端测试与构建基线 | E/F | P12-01 | ACCEPTED | [同提交前端测试与构建](../../docs/round2/audit/p12-06.md) |
 | P12-07 | P12 | T01—T16 固定用例独立复跑 | B/F | P12-05；QGIS CLI 可用 | ACCEPTED | [独立 476 项与 T01–T16 映射](../../docs/round2/audit/p12-07.md) |
-| P12-08 | P12 | GitHub Actions 分层 CI | F/主控 | P12-05、P12-06；依赖策略冻结 | DOING | Agent F（工作流和验证器） |
+| P12-08 | P12 | GitHub Actions 分层 CI | F/主控 | P12-05、P12-06；依赖策略冻结 | REVIEW | [本地证据、托管两项通过，GIS 运行中](../../docs/round2/audit/p12-08.md) |
 | P12-09 | P12 | 配置与 Schema 漂移检查 | C/F | P12-01 | ACCEPTED | [本地回归及托管校验均通过](../../docs/round2/audit/p12-09.md) |
 | P12-10 | P12 | 调度单活动约束与并发安全审计 | D/F | P12-01 | ACCEPTED | [并发模型、专项回归与缺陷复现](../../docs/round2/audit/concurrency-model.md) |
 | P12-11 | P12 | 数据规模与性能基准方案 | B/F/A | P12-01、P12-05 | DOING | Agent A/F（基准协议与清单校验） |

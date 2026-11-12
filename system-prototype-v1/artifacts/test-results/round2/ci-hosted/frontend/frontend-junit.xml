@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="68" failures="0" errors="0" time="10.621959135">
+    <testsuite name="src/components/errors/ProblemDetails.test.tsx" timestamp="2026-11-12T03:30:23.389Z" hostname="runnervm7aw5e" tests="4" failures="0" errors="0" skipped="0" time="0.302211047">
+        <testcase classname="src/components/errors/ProblemDetails.test.tsx" name="keeps the diagnosis, relevant action and log available while details are collapsed" time="0.243204744">
+        </testcase>
+        <testcase classname="src/components/errors/ProblemDetails.test.tsx" name="offers the action that matches CHECK_INTERRUPTED" time="0.022453099">
+        </testcase>
+        <testcase classname="src/components/errors/ProblemDetails.test.tsx" name="offers the action that matches METHOD_PRECONDITION_FAILED" time="0.016808224">
+        </testcase>
+        <testcase classname="src/components/errors/ProblemDetails.test.tsx" name="offers the action that matches PREVIEW_FAILED" time="0.017791334">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/artifacts/ArtifactsPanel.test.tsx" timestamp="2026-11-12T03:30:23.391Z" hostname="runnervm7aw5e" tests="3" failures="0" errors="0" skipped="0" time="0.800595798">
+        <testcase classname="src/features/artifacts/ArtifactsPanel.test.tsx" name="keeps formal downloads, source versions, map selection and diagnostics tied to the same run" time="0.636230038">
+        </testcase>
+        <testcase classname="src/features/artifacts/ArtifactsPanel.test.tsx" name="reads the actual formal CSV values on demand" time="0.11305354">
+        </testcase>
+        <testcase classname="src/features/artifacts/ArtifactsPanel.test.tsx" name="locates a readable formal raster by artifact ID and retains the original download link" time="0.048754397">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/assets/AssetPanel.test.tsx" timestamp="2026-11-12T03:30:23.392Z" hostname="runnervm7aw5e" tests="3" failures="0" errors="0" skipped="0" time="0.629315809">
+        <testcase classname="src/features/assets/AssetPanel.test.tsx" name="shows exact asset versions, assigned roles and controlled map visibility" time="0.320330329">
+        </testcase>
+        <testcase classname="src/features/assets/AssetPanel.test.tsx" name="opens the actual layer choices before submitting an exact local registration" time="0.218577572">
+        </testcase>
+        <testcase classname="src/features/assets/AssetPanel.test.tsx" name="keeps a failing registration open and locates the server field" time="0.084795285">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/checks/ChecksPanel.test.tsx" timestamp="2026-11-12T03:30:23.393Z" hostname="runnervm7aw5e" tests="4" failures="0" errors="0" skipped="0" time="0.655292874">
+        <testcase classname="src/features/checks/ChecksPanel.test.tsx" name="shows method failures alongside passing phase findings and the separate execution state" time="0.27836807">
+        </testcase>
+        <testcase classname="src/features/checks/ChecksPanel.test.tsx" name="requests an exact historical report and keeps its verdict separate from the current status" time="0.164373289">
+        </testcase>
+        <testcase classname="src/features/checks/ChecksPanel.test.tsx" name="reloads when the current report pointer changes and discards obsolete run requests" time="0.069127912">
+        </testcase>
+        <testcase classname="src/features/checks/ChecksPanel.test.tsx" name="shows interruption, allows an authorized recheck and keeps retrieval retry separate" time="0.141727324">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/map/MapPanel.test.tsx" timestamp="2026-11-12T03:30:23.394Z" hostname="runnervm7aw5e" tests="17" failures="0" errors="0" skipped="0" time="1.828570633">
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="uses local source references, renders all three vector styles and picks the exact artifact ID" time="0.53135138">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="keeps the usable preview, download and log while retrying only the failed layer" time="0.228086503">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="cancels an obsolete request and uses the bounds of the requested version" time="0.070448915">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="handles an empty preview and rejects an external preview URL without sending a request" time="0.056361819">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="draws the exact registered raster under vector layers and keeps locate and visibility controls" time="0.106550575">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="keeps the newer palette and disposes a bitmap decoded after its request became obsolete" time="0.090567381">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="keeps a located raster on top when another raster finishes loading later" time="0.051933452">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="retries a failed raster PNG locally without reloading the usable vector preview" time="0.094032317">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="rejects a mismatched raster descriptor or image address before fetching image bytes" time="0.028850213">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="rejects a mismatched raster descriptor or image address before fetching image bytes" time="0.030718563">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="rejects a mismatched raster descriptor or image address before fetching image bytes" time="0.042393864">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="reads the located formal raster using the exact source and click coordinates, including zero" time="0.129390355">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="uses the actual topmost visible raster when no raster has been located" time="0.12119284">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="aborts obsolete clicks and a replaced raster selection without displaying their late values" time="0.113416483">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="shows distinct raw pixel states and preserves a large integer string" time="0.032653403">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="shows distinct raw pixel states and preserves a large integer string" time="0.053948821">
+        </testcase>
+        <testcase classname="src/features/map/MapPanel.test.tsx" name="shows distinct raw pixel states and preserves a large integer string" time="0.043633195">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/method-form/MethodForm.test.tsx" timestamp="2026-11-12T03:30:23.397Z" hostname="runnervm7aw5e" tests="7" failures="0" errors="0" skipped="0" time="1.145651064">
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="limits roles to compatible available versions and submits numeric values in the declared unit" time="0.498887892">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="derives required parameters from the selected tool variant" time="0.195475568">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="uses a new method definition and omits stale option keys on switch" time="0.069295434">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="keeps boolean, integer and JSON types and prevents invalid inputs from submitting" time="0.062598318">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="keeps a restored explicit quantity and shows only matching server role evidence" time="0.046173149">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="allows a partial draft only after the goal is supplied" time="0.045647447">
+        </testcase>
+        <testcase classname="src/features/method-form/MethodForm.test.tsx" name="refreshes the scoped shortlist and preserves a selected asset with its concrete diagnosis" time="0.225185217">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/methods/MethodCatalogPanel.test.tsx" timestamp="2026-11-12T03:30:23.399Z" hostname="runnervm7aw5e" tests="4" failures="0" errors="0" skipped="0" time="0.599596551">
+        <testcase classname="src/features/methods/MethodCatalogPanel.test.tsx" name="MethodCatalogPanel &gt; renders the supplied versions and selects an exact method reference" time="0.409797488">
+        </testcase>
+        <testcase classname="src/features/methods/MethodCatalogPanel.test.tsx" name="MethodCatalogPanel &gt; explains an unavailable method with its real dependency diagnostic" time="0.08362396">
+        </testcase>
+        <testcase classname="src/features/methods/MethodCatalogPanel.test.tsx" name="MethodCatalogPanel &gt; marks only the controlled version as selected" time="0.054684528">
+        </testcase>
+        <testcase classname="src/features/methods/MethodCatalogPanel.test.tsx" name="MethodCatalogPanel &gt; shows loading, fetch error and empty directory without adding entries" time="0.048993987">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/model-assistance/ModelAssistPanel.test.tsx" timestamp="2026-11-12T03:30:23.399Z" hostname="runnervm7aw5e" tests="6" failures="0" errors="0" skipped="0" time="0.936932839">
+        <testcase classname="src/features/model-assistance/ModelAssistPanel.test.tsx" name="retains the existing goal and a manual entry when model assistance is unconfigured" time="0.420507932">
+        </testcase>
+        <testcase classname="src/features/model-assistance/ModelAssistPanel.test.tsx" name="uses the shared controlled goal without submitting or duplicating the method form" time="0.101645922">
+        </testcase>
+        <testcase classname="src/features/model-assistance/ModelAssistPanel.test.tsx" name="keeps manual entry usable while a request is pending and avoids form submission" time="0.122064921">
+        </testcase>
+        <testcase classname="src/features/model-assistance/ModelAssistPanel.test.tsx" name="shows exact method version, safe explanation, checked values and gaps before explicit application" time="0.098275634">
+        </testcase>
+        <testcase classname="src/features/model-assistance/ModelAssistPanel.test.tsx" name="retains manual fallback after a model error and keeps valid suggestions when explanation fails" time="0.06849193">
+        </testcase>
+        <testcase classname="src/features/model-assistance/ModelAssistPanel.test.tsx" name="shows a distinct proposed goal while preserving the current goal input on application" time="0.119724108">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/plans/PlanActions.test.tsx" timestamp="2026-11-12T03:30:23.401Z" hostname="runnervm7aw5e" tests="2" failures="0" errors="0" skipped="0" time="0.40928109">
+        <testcase classname="src/features/plans/PlanActions.test.tsx" name="confirms the exact draft without starting its execution" time="0.343356739">
+        </testcase>
+        <testcase classname="src/features/plans/PlanActions.test.tsx" name="blocks unresolved, edited and pending snapshots" time="0.060752882">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/plans/preview/PlanPreview.test.tsx" timestamp="2026-11-12T03:30:23.401Z" hostname="runnervm7aw5e" tests="3" failures="0" errors="0" skipped="0" time="0.728802213">
+        <testcase classname="src/features/plans/preview/PlanPreview.test.tsx" name="shows the exact plan and asset versions with all declared option values" time="0.521736277">
+        </testcase>
+        <testcase classname="src/features/plans/preview/PlanPreview.test.tsx" name="preserves server step order and expands precise tools, parameters and output bindings" time="0.098127487">
+        </testcase>
+        <testcase classname="src/features/plans/preview/PlanPreview.test.tsx" name="shows issues with or without field paths and emits only an exact field on navigation" time="0.104319226">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/runs/RunPanel.test.tsx" timestamp="2026-11-12T03:30:23.402Z" hostname="runnervm7aw5e" tests="3" failures="0" errors="0" skipped="0" time="0.528583007">
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="polls actual statuses until both phases finish and allows a retained log to open" time="0.418785537">
+        </testcase>
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="shows a server cancellation request and waits for the terminal server state" time="0.099413474">
+        </testcase>
+        <testcase classname="src/features/runs/RunPanel.test.tsx" name="waits for a queued recheck to replace the previous report before stopping polling" time="0.007804543">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/scripts/ScriptRunsPage.test.tsx" timestamp="2026-11-12T03:30:23.402Z" hostname="runnervm7aw5e" tests="3" failures="0" errors="0" skipped="0" time="1.114423345">
+        <testcase classname="src/features/scripts/ScriptRunsPage.test.tsx" name="browses script state, actual log, indexed download and isolated vector preview" time="0.774474356">
+        </testcase>
+        <testcase classname="src/features/scripts/ScriptRunsPage.test.tsx" name="keeps the selected failed version, error and log separate from other script runs" time="0.182162915">
+        </testcase>
+        <testcase classname="src/features/scripts/ScriptRunsPage.test.tsx" name="refreshes a prepared snapshot without executing and keeps unreadable output metadata visible" time="0.152185389">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/features/session/workbench-session.test.ts" timestamp="2026-11-12T03:30:23.403Z" hostname="runnervm7aw5e" tests="5" failures="0" errors="0" skipped="0" time="0.029840751">
+        <testcase classname="src/features/session/workbench-session.test.ts" name="restores a run-only URL using its exact originating task and confirmed version" time="0.014894497">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="chooses the latest saved plan for a task-only URL and retains a separately specified run" time="0.001348657">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="rejects cross-task runs and foreign or incomplete plan links" time="0.006440006">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="writes exact links and preserves unrelated search entries" time="0.001370648">
+        </testcase>
+        <testcase classname="src/features/session/workbench-session.test.ts" name="round trips exact visible asset versions independently of the active plan and run" time="0.001281952">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/WorkbenchPage.test.tsx" timestamp="2026-11-12T03:30:23.404Z" hostname="runnervm7aw5e" tests="4" failures="0" errors="0" skipped="0" time="0.912862114">
+        <testcase classname="src/pages/WorkbenchPage.test.tsx" name="WorkbenchPage &gt; shows the seven regions and distinct confirmation and execution actions" time="0.601570598">
+        </testcase>
+        <testcase classname="src/pages/WorkbenchPage.test.tsx" name="WorkbenchPage &gt; places each supplied feature within its named region" time="0.146563769">
+        </testcase>
+        <testcase classname="src/pages/WorkbenchPage.test.tsx" name="WorkbenchPage &gt; shows WARNING in the closed summary independently of execution" time="0.082000828">
+        </testcase>
+        <testcase classname="src/pages/WorkbenchPage.test.tsx" name="WorkbenchPage &gt; shows FAILED in the closed summary independently of execution" time="0.077180437">
+        </testcase>
+    </testsuite>
+</testsuites>

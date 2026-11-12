@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "counts": {
+    "tools": 40,
+    "qgis_bindings": 5,
+    "methods": 9,
+    "sensors": 5,
+    "schemas_expected": 11,
+    "schemas_matching": 11
+  },
+  "qgis_executable_probed": false,
+  "draft_2020_12_validation": false,
+  "known_catalog_example_findings": [
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.0.tool",
+      "message": "Step 'expand_analysis_extent' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.1.tool",
+      "message": "Step 'select_roads_from_expanded_extent' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.2.tool",
+      "message": "Step 'choose_measurement_method' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.3.tool",
+      "message": "Step 'create_buffer' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.4.tool",
+      "message": "Step 'apply_spatial_relation' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.5.tool",
+      "message": "Step 'clip_back_to_analysis_extent' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_TOOL_BINDING",
+      "field": "steps.6.tool",
+      "message": "Step 'aggregate_by_zone' requires an exact tool reference",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_ARTIFACT_BINDING",
+      "field": "expected_artifacts.0",
+      "message": "Artifact role 'buffer_extent' requires a step, output and type",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_ARTIFACT_BINDING",
+      "field": "expected_artifacts.1",
+      "message": "Artifact role 'selected_targets' requires a step, output and type",
+      "subject": "road-buffer-statistics@1"
+    },
+    {
+      "path": "config/methods",
+      "code": "MISSING_ARTIFACT_BINDING",
+      "field": "expected_artifacts.2",
+      "message": "Artifact role 'zone_statistics' requires a step, output and type",
+      "subject": "road-buffer-statistics@1"
+    }
+  ],
+  "findings": []
+}
