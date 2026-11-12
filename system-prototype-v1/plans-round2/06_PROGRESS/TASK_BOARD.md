@@ -20,7 +20,7 @@
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
 | P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | DOING | DEM L 配对 28 轮面积超时。遥感 L 原版 14 轮超时，冻结修正版冷态 7 轮 GIS 与成果验算通过，暖态运行中。现行采集器已验证逐次状态查询失败耗时。 [配对资源复算](../../docs/round2/performance/p13-05-resource-coverage.md) · [矢量 M](../../docs/round2/performance/p13-05-vector-m-revised.md) · [矢量 L](../../docs/round2/performance/p13-05-vector-l.md) · [栅格 S](../../docs/round2/performance/p13-05-raster-s.md) · [栅格 M/L](../../docs/round2/performance/p13-05-raster-m-l.md) · [暂存复验](../../docs/round2/performance/p13-05-staging-resources.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已核对执行绑定和图层身份，重算 224 个正式栅格成果的文件组指纹，并验证辅助文件改变指纹。等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
-| P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | SQLite 锁恢复、队列取消与重启已验证。历史回滚页已复放，生产诊断可区分持续锁竞争与只读连接遇到热回滚日志。 [验收](../../docs/round2/performance/p13-07.md) |
+| P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | SQLite 锁恢复、队列取消与重启已验证。正常并发探针共 724 次状态 GET 成功，20 次实际提交锁窗口已复算，冻结批底层原因仍待记录。 [验收](../../docs/round2/performance/p13-07.md) |
 | P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待多档基准、内存与缓存验收。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |
 | P14-01 | P14 | 方法开发者 CLI 需求与接口设计 | C/F | P12-09 | ACCEPTED | [CLI 契约、实测和只读守卫](../../docs/round2/methods/p14-01.md) |
 | P14-02 | P14 | 方法配置模板生成 | C | P14-01 | ACCEPTED | [独立 Schema 核验与联合回归](../../docs/round2/methods/p14-02.md) |
@@ -43,5 +43,5 @@
 | P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 主持准备 GIS 后端，记录校验允许浏览器端 OS 按需填写。待真实浏览器会话、匿名记录和下载 CSV。 [主持手册](../../docs/round2/user-research/moderator.md) |
 | P16-04 | P16 | 错误信息与恢复路径优化 | E/D | P16-03 | BLOCKED | 待 P16-03 真实观察。 |
 | P16-05 | P16 | 长任务用户体验 | E/D | P13-02、P16-03 | BLOCKED | 待 P16-03 真实观察。 |
-| P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | BLOCKED | 原生镜像离线恢复、证据链接及最新预演收集通过，2,163 个后端节点包含全部 82 个固定节点。正式包待 P13 及最终同提交证据。 [打包验证](../../docs/round2/deployment/p16-06-tooling.md) |
+| P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | BLOCKED | 原生镜像离线恢复、证据链接及组合预演收集通过，2,178 个后端节点包含全部 82 个固定节点。正式包待 P13 及最终同提交证据。 [打包验证](../../docs/round2/deployment/p16-06-tooling.md) |
 | P16-07 | P16 | V2 产品范围与发布决策 | 主控 | P13-08、P14-08、P15-08、P16-01 至 P16-06 | BLOCKED | 待 P13-08 及 P16-03 至 P16-06 验收。 |

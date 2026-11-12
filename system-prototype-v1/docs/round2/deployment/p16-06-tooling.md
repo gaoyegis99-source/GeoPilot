@@ -42,4 +42,6 @@ A 在与正式基准不同的物理盘上归档 Python venv、QGIS CLI 和对应
 
 主控以 `3728ce4dbcf5394b7ebccf390a5691f5d9d95ca9` 为起点，在独立工作树应用两个已冻结的性能候选提交。预演提交 `092fb2d6d09cf45277bea62454e0cae266b50873` 用发布验证入口的后端环境运行 `.venv/bin/python -m pytest -q -p no:cacheprovider --collect-only tests`。Python 3.13.13 和 Psycopg 3.3.4 上收集到 2,145 个唯一节点，JUnit 节点名称也唯一。T01–T16 的 82 个固定节点逐项匹配，退出 0。正式后端、前端和固定 GIS 回归待最终提交执行。 [收集摘要](p16-06-collection-preview.json) · [原始收集日志](p16-06-collection-preview.log.gz)
 
-最新隔离预演 `96665d486bf32ae2ad711c50043f355e8f64bc74` 纳入局部裁回、分区重投影暂存及状态诊断。后端全量收集 2,163 个唯一节点，按发布校验器转换后的 JUnit 节点键也全部唯一，T01–T16 的 82 个节点均在集合中，退出 0。正式同源验证仍待发布提交。 [原始收集、JUnit 和预演提交](../performance/p13-05-current-integration-evidence.tar.gz)
+隔离预演 `96665d486bf32ae2ad711c50043f355e8f64bc74` 纳入局部裁回、分区重投影暂存及状态诊断。后端全量收集 2,163 个唯一节点，按发布校验器转换后的 JUnit 节点键也全部唯一，T01–T16 的 82 个节点均在集合中，退出 0。 [原始收集、JUnit 和预演提交](../performance/p13-05-current-integration-evidence.tar.gz)
+
+组合预演 `a131a5139093047b337302c893d12e709ed04d3b` 的后端收集退出 0，包含 2,178 个唯一节点及唯一 JUnit 键。T01–T16 的 84 条映射引用对应 82 个不同节点，全部逐项匹配。正式同源验证仍待发布提交。 [收集原始记录与准确源码](../performance/p13-05-combined-preview-evidence.tar.gz)
