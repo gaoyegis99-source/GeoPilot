@@ -40,3 +40,7 @@
 主控在净检出 `07d979d42510f5ffd7683bf69918353a08acbd99` 上运行前置核验、P12 看板和交付清单专项。Python 3.13.13、pytest 8.3.4，45 项通过，退出 0。P12 正式放行核验退出 0。范围调整后的首次发布前置退出 1，候选 `6961ee3` 匹配，当时唯一未齐的技术前置为 P16-04。P16-03 已移出依赖，P16-05 为 ACCEPTED。变更只影响发布依赖及验收记录，回滚可撤销范围调整提交。原始证据归档 SHA-256 为 `c23677cbda6eaf0c6ac7c7f4aae3370742a16cb4eb4ccc77787cf5f12602aa07`。 [命令、原始回执和 JUnit](p16-03-retirement-evidence.tar.gz)
 
 V2 等待上限、参考输入、精确候选的冷热实测与本机交付范围见签署记录。 [V2 发布范围与性能目标](v2-release-decision.md)
+
+## 签署后的前置核验
+
+候选 `f85c3c8` 包含范围决定和性能证据。主控在签署后的工作树运行前置核验，退出 0。八项技术前置均为 ACCEPTED，`blockers` 为空，`decision_status` 为 ACCEPTED。P16-03 在看板标为 NOT_APPLICABLE，独立候选审计同时验证其退出发布依赖。 [原始前置回执与候选验收](../deployment/p16-06-tooling.md#v2-本机交付候选)

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "release": "GeoPilot round2 candidate",
-  "source_commit": "6961ee3694694be24f58697fe666d8b0b67fee01",
-  "evidence_commit": "b9fb0a19ff414644a8297c03e79193a089962286",
-  "source_sha256": "04382470e5331ea1a4eb103e28d23c0b19ef81415fbb08caf9a8b8530452c357",
+  "source_commit": "f85c3c8b6f214840efd188d08409087c17668834",
+  "evidence_commit": "ad7a01b3994642aaf7d9c62b4b5065139f59bd0c",
+  "source_sha256": "9f99d570338b3af2ccbb1a95e2d2468f6ec8e4856393f7218e5731b33089a1fa",
   "source_files": [
     {
       "path": ".github/workflows/ci.yml",
@@ -818,12 +818,16 @@
       "sha256": "ad7e9228bcbd05b93eafd69240d2cb9d6571337cd6b194b46946cac057868d58"
     },
     {
+      "path": "system-prototype-v1/frontend/src/App.input-recovery.test.tsx",
+      "sha256": "db445e85de42e83300bea2a5193f5670100aba15f6138e0723f82622bd9be7b1"
+    },
+    {
       "path": "system-prototype-v1/frontend/src/App.recheck.test.tsx",
       "sha256": "1b00e0eafa6bc61f1f4758b5e8b55c898796663b010d31b0a37a632ac4e5dd7a"
     },
     {
       "path": "system-prototype-v1/frontend/src/App.tsx",
-      "sha256": "df676ec69a25b931273c4c69d107674245a0fb65cbda05a9d652f966fa610ca0"
+      "sha256": "2bb48ac0ff18e87ff126d3a9e83c1d7e6f0ddef93b08eb4093262219aae3ff2e"
     },
     {
       "path": "system-prototype-v1/frontend/src/api/plan-alternatives.ts",
@@ -835,11 +839,11 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/components/errors/ProblemDetails.test.tsx",
-      "sha256": "ab65d1b978df188b4a2db89c4c5b67df7402f45d9b48e5f7eb571d3114e90896"
+      "sha256": "0f26133cab97e06b7d3ec43a577c0333aceb5c7cb0a503650503c4f4790adf24"
     },
     {
       "path": "system-prototype-v1/frontend/src/components/errors/ProblemDetails.tsx",
-      "sha256": "b904d51d2a1241537ac454ad0b63222755d211a5b5a11d864c8900f348ed55ad"
+      "sha256": "2c4540d9114525df5c15f1ea4bee165f183366bd9c0cdc76ffab6928f104980a"
     },
     {
       "path": "system-prototype-v1/frontend/src/components/errors/problem.css",
@@ -863,7 +867,7 @@
     },
     {
       "path": "system-prototype-v1/frontend/src/features/assets/AssetPanel.tsx",
-      "sha256": "9df5724e449e3d8ad2dee1c749c78064e2252524cf4ac845eaf8e3586899349d"
+      "sha256": "dc2496d257f2743e1063b26889b5c31552b87cdc70c990ff53983d1df6762a60"
     },
     {
       "path": "system-prototype-v1/frontend/src/features/assets/assets.css",
@@ -1059,7 +1063,7 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/00_GOVERNANCE/00_MASTER_PLAN.md",
-      "sha256": "97f03589e6a1e5d24dbbd319200166d9c3f83fa629ed8219d052c284cbf0e896"
+      "sha256": "3e9e519b365f8ff3eef9c7e4f0edb17b933a7512036bb06b4337e448c5b87785"
     },
     {
       "path": "system-prototype-v1/plans-round2/00_GOVERNANCE/01_CODEX_START_PROMPT.md",
@@ -1087,31 +1091,31 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/02_ARCHITECTURE/03_PHASE_DEPENDENCIES.md",
-      "sha256": "f3d237415ce4eead6a2838723c53d1a4454e28ab8fc7c3b5a1c1a0e95e414943"
+      "sha256": "2be88d180923d3eb3ec4840e2c7a7e834dc24e62c4a818799844ebf8f0db771b"
     },
     {
       "path": "system-prototype-v1/plans-round2/03_PHASES/P12_审计闭环.md",
-      "sha256": "622f372ad0dea9eea98f99077531b23525aaf5450391b3797a8fbab4981e6bda"
+      "sha256": "138f863bbfee7cec8c844e93aadaa25333f0e2ee4d1598cf77e7d070bb78d8b3"
     },
     {
       "path": "system-prototype-v1/plans-round2/03_PHASES/P13_运行可靠性与性能.md",
-      "sha256": "f94638ea1ed880394636a41139c860536e55e251146b2149d554be9ed76a5dd1"
+      "sha256": "74905f5d3f460b4a0fa9f581ca5098095b437c9780c0b545dfd8975db1b112a2"
     },
     {
       "path": "system-prototype-v1/plans-round2/03_PHASES/P14_方法与工具生态.md",
-      "sha256": "3daebdf15637a94e3f44bbc158d4457fce1d34287605cd7c26cc883b1a03a682"
+      "sha256": "e21da86668831e737bced403daa06627a8ef11c3fb6105c5c1eff60ac0b58d2f"
     },
     {
       "path": "system-prototype-v1/plans-round2/03_PHASES/P15_Agent 自主分析.md",
-      "sha256": "6f92a9f20db13d0fac847ceefca9dbd996862277bfb020f55c4ff35036b7b281"
+      "sha256": "c5e206dad99add83e4d89ad539ca271606af0527624c26221bec5b7b487edd76"
     },
     {
       "path": "system-prototype-v1/plans-round2/03_PHASES/P16_产品化与用户验证.md",
-      "sha256": "12ed40800792d832a53683fe612c0d2f91479afb68c6f70e0712f7595ffb4324"
+      "sha256": "dc7e91828d2e6afcda2910c380bda85daeedb7de3ebfa77923c52ae9376a44a8"
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/INDEX.md",
-      "sha256": "be43ee2dc547108cf84dbcaa191f5d38a483e64882fbd748f47de117508d3447"
+      "sha256": "cc574de5a0500238e6ef98e9ac54e5a6cd195e5178670508b06602e32564e075"
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/P12/P12-01.md",
@@ -1267,15 +1271,15 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/P16/P16-03.md",
-      "sha256": "130d54dada156bfbd5dc6f992e92dfba973fa9708dcc902aa199038fd625d0e4"
+      "sha256": "d1f10a29612e1895a149d072036390d8a12610971e4a6bbf9e56d1b36186956f"
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/P16/P16-04.md",
-      "sha256": "ef16954b7e51ec8e2ead7d6426906f9265da936c805f4784ff57003cb7080668"
+      "sha256": "a9b88b596ecfa0aab656c5b21f750e8857e8b8e62a4b2a4917d25aaf0d854f17"
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/P16/P16-05.md",
-      "sha256": "f2dba9b57fb9e043f9b54317aebce05e839696fe54228d72f238bfd92578b23f"
+      "sha256": "60ce9a2f510dd0d01368d68325043643c7fd1b1d211980feb7c96a5d3531c3f6"
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/P16/P16-06.md",
@@ -1283,7 +1287,7 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/04_TASKS/P16/P16-07.md",
-      "sha256": "a84c8ba61799a4d3d736ea6788277af6e71cdebad64cc4983206c06fad2f9293"
+      "sha256": "284427777a4ad71b65631362df5b1ae1bf8d53cea5afbe9bc512eba87f805708"
     },
     {
       "path": "system-prototype-v1/plans-round2/05_ACCEPTANCE/01_TASK_ACCEPTANCE.md",
@@ -1303,23 +1307,23 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/ACCEPTANCE_LOG.md",
-      "sha256": "5a785c988f946d140119541bc4db6da6e10bc286e91a2be2af346f0cc0081acf"
+      "sha256": "3c8fc79c3c08f7a4e30f20f5b29cf4e7ad88a479b3cf9cc9795b6e660f8876cc"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/BLOCKERS.md",
-      "sha256": "862f666f1f96493dcfb1f702bba46cdc942e195fb809930eb2846e1254d64b10"
+      "sha256": "deeddd6e95200d699f426835e6db49da5eef013aeed73633d630698a3f0d837b"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/CHANGELOG.md",
-      "sha256": "63cc2f22a3bdeb5d21646754e287f533c367ae3e94ab3b487533536a3e9f1d30"
+      "sha256": "7efdea4a32ad830cebb98a77ed3bba0e9641654347a159f0dc85a52b35e24075"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/TASK_BOARD.md",
-      "sha256": "3d22b9069c82633f2085ce82a15e712548fb77eddc03340ccadcecfc00cd85ea"
+      "sha256": "efeaee495ac53020d3d30514435b51059f17b0268fde68d4a66f488aec8dfb3e"
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/task_inventory.json",
-      "sha256": "6a260422e51ed0218c0e4eb9104494fc86402c49891109b94ed61d13ca320048"
+      "sha256": "15ec01d534f06407d32361d1baddc2e24c19cd8f8e61760c386c332f002e6dfe"
     },
     {
       "path": "system-prototype-v1/plans-round2/README.md",
@@ -2135,7 +2139,7 @@
     },
     {
       "path": "system-prototype-v1/scripts/quality/validate_release_readiness.py",
-      "sha256": "29bc4483ad753677236cfc30eca3ceeb87fcef5f51658f173bf12f13f1f83ca0"
+      "sha256": "ec3eb61faa615214fae873264e3b3dfb0a783fb1746e44d873c006e13c11985c"
     },
     {
       "path": "system-prototype-v1/scripts/quality/validate_round2_status.py",
@@ -3591,7 +3595,7 @@
     },
     {
       "path": "system-prototype-v1/tests/quality/test_validate_release_readiness.py",
-      "sha256": "854f9beb7334d5a068e8f7b97e1091791803a42cce0fbe234936a9bc8a404f7c"
+      "sha256": "014378df4a0bf35c362b54a8e2b80eb673ee3cb674ffc14471258276aae96269"
     },
     {
       "path": "system-prototype-v1/tests/remote_sensing/conftest.py",
@@ -3805,8 +3809,8 @@
         "-p",
         "no:cacheprovider",
         "tests",
-        "--basetemp=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tmp/geopilot-round2-validation-rwd1og7y/backend",
-        "--junitxml=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/backend.xml"
+        "--basetemp=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tmp/geopilot-round2-validation-r7fcnjc9/backend",
+        "--junitxml=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/validation/round2-validation/backend.xml"
       ],
       "environment": {
         "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
@@ -3814,7 +3818,7 @@
         "pytest": "pytest 8.3.4",
         "qgis": "QGIS 3.44.15-Solothurn 'Solothurn' (44b4ef05178) QGIS code revision 44b4ef05178 Qt version 5.15.13 Python version 3.12.3 GDAL/OGR version 3.8.4 PROJ version 9.4.0 EPSG Registry database version v11.004 (2024-02-24) GEOS version 3.12.1-CAPI-1.18.1 SQLite version 3.45.1 OS Ubuntu 24.04.5 LTS",
         "qgis_executable": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
-        "pythonpath": "/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
+        "pythonpath": "/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
       },
       "exit_code": 0,
       "junit": "system-prototype-v1/artifacts/reports/final/round2-validation/backend.xml",
@@ -3931,8 +3935,8 @@
         "tests/runners/test_measurement_steps.py::test_fixed_T06_equal_area_polygons_match_manual_areas",
         "tests/runners/test_measurement_steps.py::test_fixed_distance_rejects_geographic_and_web_mercator_before_dispatch[T01-geographic]",
         "tests/runners/test_measurement_steps.py::test_fixed_distance_rejects_geographic_and_web_mercator_before_dispatch[T02-web-mercator]",
-        "--basetemp=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tmp/geopilot-round2-validation-rwd1og7y/fixed_gis",
-        "--junitxml=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/fixed_gis.xml"
+        "--basetemp=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tmp/geopilot-round2-validation-r7fcnjc9/fixed_gis",
+        "--junitxml=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/validation/round2-validation/fixed_gis.xml"
       ],
       "environment": {
         "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
@@ -3940,7 +3944,7 @@
         "pytest": "pytest 8.3.4",
         "qgis": "QGIS 3.44.15-Solothurn 'Solothurn' (44b4ef05178) QGIS code revision 44b4ef05178 Qt version 5.15.13 Python version 3.12.3 GDAL/OGR version 3.8.4 PROJ version 9.4.0 EPSG Registry database version v11.004 (2024-02-24) GEOS version 3.12.1-CAPI-1.18.1 SQLite version 3.45.1 OS Ubuntu 24.04.5 LTS",
         "qgis_executable": "/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/qgis-deb/qgis_process",
-        "pythonpath": "/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
+        "pythonpath": "/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/tree/system-prototype-v1/src:/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.environments/postgis-python"
       },
       "exit_code": 0,
       "junit": "system-prototype-v1/artifacts/reports/final/round2-validation/fixed_gis.xml",
@@ -3962,7 +3966,7 @@
         "--run",
         "--reporter=default",
         "--reporter=junit",
-        "--outputFile.junit=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/frontend.xml"
+        "--outputFile.junit=/dev/shm/geopilot-p16-scope-candidate.WAPmmvRl/validation/round2-validation/frontend.xml"
       ],
       "environment": {
         "os": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
@@ -3973,8 +3977,8 @@
       "junit": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.xml",
       "log": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.log",
       "counts": {
-        "passed": 76,
-        "tests": 76,
+        "passed": 78,
+        "tests": 78,
         "failures": 0,
         "errors": 0,
         "skipped": 0
@@ -4022,47 +4026,47 @@
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation.json",
-      "sha256": "d2605694e19579e966fc03cbafdd73a8a19c7969e173ee276022b0a911145b2a"
+      "sha256": "efa7d31a6cbc4912355bbfc7fae4e388bf65d41d89194a05c28ed5eccb2cd580"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend-collection.log",
-      "sha256": "b4ace6160bddc6380ee573687eb5f79b813c8454c872edd42aaf218f0eabe27b"
+      "sha256": "29fa7e46945fde208bfd7706c12ce1918ddca3ff20aed57e8f0fc8cb03341846"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend-dependencies.log",
-      "sha256": "43b04c6eb9b7b1dd02d8c75c5c06be1e7cf86bfaa9f9198d42ab4c6786bf9c30"
+      "sha256": "37704bb69c747b7f2f6ad1ec6385e3105e46acfc11ee8b6280c873f8880e72a7"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend.log",
-      "sha256": "2a36558c2bd0cf0995d8b3a39a8285fed442c5f25a7af7f2a53b9b0d4f83a4b2"
+      "sha256": "5b30ceb672a13cac2bcc643d07b0aff2ea11b0872cbfc980110f535073797bc9"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/backend.xml",
-      "sha256": "4d39202514f336d764ebac97e7456d2114b7ed8e488b1f4cb785a5b06ca03265"
+      "sha256": "8ae7a5e060633d44959b914bc5f9b9b9929b8a1e277f8b166bb96ef8fa2a0b94"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/fixed_gis.log",
-      "sha256": "53544543d4e720096145d3d4332c2afb91d92588b58d1ba46454cc57a7b05d66"
+      "sha256": "58351140a97a23cffa1af65414477a9fa20605165183beb0143149f1719b909f"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/fixed_gis.xml",
-      "sha256": "9a3bd76351b615a36b62204a26d79dc92feb452753eaacbce76443c3f926ca23"
+      "sha256": "4ed870cd6c6b27c543690536a91a5e6d834cf3b03f5017ccd377b601eec5304d"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend-build.log",
-      "sha256": "cdfb6afd435d63ae7ccca73562893286aa80b7165158725d5e995baa0f250611"
+      "sha256": "409a5fe15b789816ce35eb6a134b46d7456ceaba565a2068dab40c3acf74691f"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend-install.log",
-      "sha256": "3a4efc07547a677ac6da381de61bd34e50e85f05905f2ee84b66dab44453af51"
+      "sha256": "0622fb60200883cc9eacdcb5993f4d9bb426f10fea1dc159d5970356be6fafaf"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.log",
-      "sha256": "f4e3724c4ce78434ee50a3dd2b5f293c5e6f8b2b804dd3d980833d32272716e3"
+      "sha256": "e586c8d499dabf3135a3b2113d65d689ee3328acba80eb39403d7ef6b8b1f45f"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/final/round2-validation/frontend.xml",
-      "sha256": "66b92f1f3846d66d087afcda7260d952ddffff14d422474046097869e0700296"
+      "sha256": "e279c5b85ed840a20b493baa35a1ae04fb4f086c6bfd509521587ff4aaf4db6c"
     },
     {
       "path": "system-prototype-v1/artifacts/reports/methods/regression.md",
@@ -5001,6 +5005,10 @@
       "sha256": "57dfaf7f2190ea98d84502f93df27add9f11c0bce9d43ad7d1002be1bcafc5d5"
     },
     {
+      "path": "system-prototype-v1/docs/round2/deployment/p16-06-check-recovery-candidate-evidence.tar.gz",
+      "sha256": "ca47408a5fbdaf982fc2f27b4aa7263f3bd8d04b9bc33d91cadd3ca638779494"
+    },
+    {
       "path": "system-prototype-v1/docs/round2/deployment/p16-06-collection-preview.json",
       "sha256": "03ef352dfea5ef1fe9896cb3a9e93021075ea51e1ba7b85e837e9f5efd989553"
     },
@@ -5078,7 +5086,7 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/deployment/p16-06-tooling.md",
-      "sha256": "b07d4ffc3cc432439389ad3a7c459f84d631b52f71f2f91ad1e4675664799b33"
+      "sha256": "d4dc84a56cbcbc3eef804e084dee72b8e4106b4a9c7ddfff67f15216c0acf3f2"
     },
     {
       "path": "system-prototype-v1/docs/round2/deployment/p16-06-ux-candidate-evidence.tar.gz",
@@ -6877,24 +6885,36 @@
       "sha256": "5c104880892cdc4309baedcf196ccdcae99281486ac9d682ff4eb8abc346d852"
     },
     {
+      "path": "system-prototype-v1/docs/round2/release/p16-03-retirement-evidence.tar.gz",
+      "sha256": "c23677cbda6eaf0c6ac7c7f4aae3370742a16cb4eb4ccc77787cf5f12602aa07"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/release/p16-07-performance-evidence.tar.gz",
+      "sha256": "9075930e381235c82358f942d3b1103ffb8a02f83d33bb6528233c8a3a94cecf"
+    },
+    {
       "path": "system-prototype-v1/docs/round2/release/p16-07-preflight-evidence.tar.gz",
       "sha256": "6d1ebfbaa327bbf44f396538bf5f131f4f11380f3ce53404954df7a4e27cb7f3"
     },
     {
       "path": "system-prototype-v1/docs/round2/release/p16-07-preflight.md",
-      "sha256": "512e981d4c864c9440d69ad1e6266a54ca8d53244411cf55f2e8bba9a4576c1d"
+      "sha256": "51345e88edc7b1de5c7bd4eb1cfb44cec486c129e27726367dfba38fe3897a75"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/release/v2-release-decision.md",
+      "sha256": "03933b7961de10d830b0621edfc67beb17fdc3dcf61ecf04073bda73b6f2595b"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/moderator-ux-follow-up.md",
-      "sha256": "2a887aba729b1c1147a205b5ad110ea32a0d107bd09a2eb3155a094f57091c40"
+      "sha256": "d6bdfdb51f711c169aa4b21127e8dddf3bd94ba59a7d2ed6fe2243dc5503df32"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/moderator.md",
-      "sha256": "b558ca540e5757c5d00776f6683ca25b971bbefd21e863ca776a8e86fb0ae883"
+      "sha256": "1aceade3c70dbf77034b66ec3485a861b4c0c63099b06fd1faae32b276fa4e16"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/observations.md",
-      "sha256": "c9208d40f2117f4d0b0bbdae054aee5321830851c646a2c01942f19fa7bfd839"
+      "sha256": "1d48abf88c0875d3cf105cb179e35d84ef072ae9ba45760677b9195dea102e7e"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-browser-os-junit.xml",
@@ -6914,7 +6934,7 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-preparation.md",
-      "sha256": "0b20b8ce81d6cf7fcd31156940e2489b0e0b2a390647d3aec3a20faef253ab97"
+      "sha256": "161238a224d2d033566912b3c546b5cff72ece802533c84a67f661aa3a400960"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-03-pytest.log",
@@ -6950,7 +6970,7 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-05-long-task-verification.md",
-      "sha256": "23c6de9704d7978d24fe4f26275d871536611ca89c4107c13683e4fbf3a06474"
+      "sha256": "a7c2d1b529c2c33508fe3e0ed4c12de06e87b7fc49511d59c205a6f4c8094805"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-check-recovery-evidence.tar.gz",
@@ -6958,7 +6978,15 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-check-recovery.md",
-      "sha256": "6dd3cfa3bb03655889cb6aeda12499cf6dd89086d64963d86e816d1591a043b4"
+      "sha256": "115a204811ee8fff98ed2dad088a17d8893c67d8224c4c720fae84720be9697c"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-input-recovery-evidence.tar.gz",
+      "sha256": "27e982ef0b9f98bb372bef0561e823c0328006a2582d45f4c3008b204cf3af4c"
+    },
+    {
+      "path": "system-prototype-v1/docs/round2/user-research/p16-input-recovery.md",
+      "sha256": "8f837cf59ca46722266da833ab478031a63407b72f1939af8f2d7d907c04f526"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-ux-follow-up-evidence.tar.gz",
@@ -6966,11 +6994,11 @@
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/p16-ux-follow-up.md",
-      "sha256": "9c8a26743952f4182825cc54a56b2b8a4853267521cf238001dae2480ae84bf6"
+      "sha256": "0b84c7164f49e4a81f93b53266ecf197e515012e84642e8f2e9ff63f6aa77446"
     },
     {
       "path": "system-prototype-v1/docs/round2/user-research/participant-task.md",
-      "sha256": "235c9e3c89eecf9aacecbbd2c902791b2092882fee468d2955fb12ca4318f98a"
+      "sha256": "77a818220186c8b1d17dd3b583ea885e77f517966752b4254a5da8856177b1d0"
     },
     {
       "path": "system-prototype-v1/docs/user-guide/workbench.md",
@@ -6978,7 +7006,7 @@
     },
     {
       "path": "system-prototype-v1/plans-round2/06_PROGRESS/ACCEPTANCE_LOG.md",
-      "sha256": "5a785c988f946d140119541bc4db6da6e10bc286e91a2be2af346f0cc0081acf"
+      "sha256": "3c8fc79c3c08f7a4e30f20f5b29cf4e7ad88a479b3cf9cc9795b6e660f8876cc"
     }
   ]
 }

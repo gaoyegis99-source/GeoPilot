@@ -392,3 +392,8 @@
 ## P16-04 输入变更恢复验收
 
 - E 在 `2a34e96` 补齐 `INPUT_CHANGED` 的中文说明和登记入口。F 独立 Chromium 与实际 QGIS 验证旧方案被拒绝时不创建新运行，手动登记、改选并确认 v2 后新运行通过，旧记录、成果、日志及 33 份文件可核验。主控复核前端 78 项、生产构建和后端专项 24 项均通过，签收 ACCEPTED。 [证据与命令](../../docs/round2/user-research/p16-input-recovery.md)
+
+## P16-06／P16-07 V2 本机交付验收
+
+- 候选 `f85c3c8` 在净分离检出完成前端 78、后端 2,255、独立固定 GIS 82 项，零失败、错误或跳过。F 独立逐节点复核。证据提交 `ad7a01b` 的 Git 和解包核验输出逐字节相同，主控验收 ACCEPTED。 [交付验收](../../docs/round2/deployment/p16-06-tooling.md#v2-本机交付候选)
+- 主控、B、E 在同一源码完成道路缓冲、路网、DEM 和两期遥感七项参考负载。80 个正式样本和 32 次预热全部通过独立验算，各参考上限已复验。主控按用户委托签署 V2 本机技术交付范围，P16-07 为 ACCEPTED。P16-03 为 NOT_APPLICABLE。 [范围、阈值和证据](../../docs/round2/release/v2-release-decision.md)
