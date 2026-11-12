@@ -1,0 +1,3 @@
+Scheduler died while another writer held transaction: database is locked; wait=5.257s
+Writer committed; live HTTP returned 200 and queued run remained NOT_STARTED
+New service lifespan claimed the preserved queue entry

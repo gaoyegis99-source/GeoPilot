@@ -11,7 +11,7 @@
 | P12-07 | P12 | T01—T16 固定用例独立复跑 | B/F | P12-05；QGIS CLI 可用 | TODO | 待执行 |
 | P12-08 | P12 | GitHub Actions 分层 CI | F/主控 | P12-05、P12-06；依赖策略冻结 | TODO | 待执行 |
 | P12-09 | P12 | 配置与 Schema 漂移检查 | C/F | P12-01 | DOING | Agent C/F（配置与模型校验） |
-| P12-10 | P12 | 调度单活动约束与并发安全审计 | D/F | P12-01 | DOING | Agent D/F（源码审计与专项回归） |
+| P12-10 | P12 | 调度单活动约束与并发安全审计 | D/F | P12-01 | ACCEPTED | [并发模型、专项回归与缺陷复现](../../docs/round2/audit/concurrency-model.md) |
 | P12-11 | P12 | 数据规模与性能基准方案 | B/F/A | P12-01、P12-05 | TODO | 待执行 |
 | P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | TODO | 待执行 |
 | P13-01 | P13 | GIS 数据规模分级生成器 | B/F | P12-11 | TODO | 待执行 |

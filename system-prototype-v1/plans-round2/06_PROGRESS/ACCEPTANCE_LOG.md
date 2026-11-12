@@ -37,3 +37,9 @@
 - Agent E/F 在净 V1 提交 `80d724f35fba31cacb9d3f740265b2713c6be6f4` 完成锁定依赖安装、Vitest、TypeScript 检查和 Vite 生产构建，全部退出 0。
 - 主控核对原始 JUnit，14 套件、68 通过、0 失败、0 错误、0 跳过。保留原始 Vite 包体警告。
 - 状态 ACCEPTED。 [命令、版本、JUnit、构建日志和回滚](../../docs/round2/audit/p12-06.md)
+
+## P12-10 主控验收
+
+- Agent D/F 在 V1 提交 `80d724f35fba31cacb9d3f740265b2713c6be6f4` 复跑调度、运行和检查套件，178 项通过，0 失败、0 错误、0 跳过，退出 0。
+- 主控从报告提取并复跑隔离探测，退出 0。同路径第二个调度服务被拒。SQLite 写锁约 5 秒后调度线程退出，HTTP 仍响应且任务留在队列，新服务启动后领取。
+- 状态 ACCEPTED。保留 AUD-06 调度存活和并发容量的后续门禁。 [命令、状态图、JUnit、探测日志与回滚](../../docs/round2/audit/concurrency-model.md)

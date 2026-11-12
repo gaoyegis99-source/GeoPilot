@@ -1,0 +1,8 @@
+Python: 3.13.13 SQLite: 3.51.2
+Schema: 4
+PRAGMA busy_timeout: 5000
+PRAGMA journal_mode: delete
+Second service while first process owns same path: BlockingIOError errno 11
+Same-path service after owner shutdown: acquired
+Held writer, scheduler outcome: OperationalError database is locked elapsed=5.008s alive=False
+After writer release: database writable; scheduler thread remains stopped
