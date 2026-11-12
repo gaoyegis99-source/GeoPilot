@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 
@@ -95,7 +96,31 @@ def build_manifest() -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true", help="write the current manifest")
+    parser.add_argument("--round2", action="store_true", help="build the pinned second-round candidate manifest")
+    parser.add_argument("--source-ref", help="committed second-round source tree")
+    parser.add_argument("--evidence-ref", help="commit containing the second-round validation receipt")
+    parser.add_argument("--archive", type=Path, help="write a new deterministic second-round archive")
     args = parser.parse_args()
+    if args.round2:
+        if not args.source_ref or not args.evidence_ref:
+            parser.error("--round2 requires --source-ref and --evidence-ref")
+        sys.path.insert(0, str(ROOT / "scripts/quality"))
+        from round2_release_manifest import MANIFEST as ROUND2_MANIFEST, build_round2_manifest, write_round2_archive
+
+        try:
+            round2 = build_round2_manifest(ROOT, args.source_ref, args.evidence_ref)
+            output = json.dumps(round2, ensure_ascii=False, indent=2) + "\n"
+            if args.archive is not None:
+                write_round2_archive(ROOT, round2, args.archive)
+            if args.write:
+                (ROOT / ROUND2_MANIFEST).write_text(output, encoding="utf-8")
+            else:
+                sys.stdout.write(output)
+        except (OSError, ValueError) as error:
+            parser.exit(1, f"Round2 delivery manifest failed: {error}\n")
+        return
+    if args.source_ref or args.evidence_ref or args.archive is not None:
+        parser.error("--source-ref, --evidence-ref and --archive require --round2")
     try:
         manifest = build_manifest()
         path = ROOT / MANIFEST

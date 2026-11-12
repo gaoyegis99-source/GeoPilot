@@ -251,7 +251,25 @@ def main() -> int:
     parser.add_argument("--root", type=Path, default=ROOT, help="prototype directory")
     parser.add_argument("--ref", help="commit to audit; defaults to the P12-01 baseline")
     parser.add_argument("--evidence-audit", type=Path, help="P12-03 CSV used to annotate missing evidence")
+    parser.add_argument("--round2-manifest", type=Path, help="verify a pinned second-round candidate manifest")
+    parser.add_argument("--offline-root", type=Path, help="verify an extracted second-round package without Git")
     args = parser.parse_args()
+    if args.round2_manifest is not None:
+        if args.ref or args.evidence_audit:
+            parser.error("--round2-manifest uses the commits recorded in that manifest")
+        from round2_release_manifest import verify_round2_files, verify_round2_manifest
+
+        try:
+            if args.offline_root is not None:
+                report = verify_round2_files(args.offline_root, args.round2_manifest)
+            else:
+                report = verify_round2_manifest(args.root, args.round2_manifest)
+        except (OSError, ValueError) as error:
+            parser.exit(1, f"Round2 delivery manifest verification failed: {error}\n")
+        print(json.dumps(report, indent=2))
+        return 0
+    if args.offline_root is not None:
+        parser.error("--offline-root requires --round2-manifest")
     try:
         root = args.root.resolve(strict=True)
         ref = args.ref
