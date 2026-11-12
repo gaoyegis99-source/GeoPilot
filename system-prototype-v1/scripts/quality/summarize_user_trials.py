@@ -2,10 +2,13 @@
 
 import argparse
 from collections import Counter
+import csv
 from datetime import date
 import json
+import os
 from pathlib import Path
 import re
+from stat import S_ISREG
 from statistics import median
 import sys
 
@@ -14,6 +17,8 @@ TASKS = ("register_assets", "select_method", "confirm_plan", "run_plan", "inspec
 OUTCOMES = {"completed", "incomplete", "not_attempted"}
 RECOVERY = ("self_recovered", "assisted_recovery", "unresolved")
 RECOMMENDED_SESSIONS = 5
+EXPECTED_DOWNLOAD = Path(__file__).resolve().parents[2] / "tests/fixtures/vector/expected.json"
+DOWNLOAD_COLUMNS = ["zone_id", "assignment_status", "count", "source_feature_ids"]
 
 
 def strict_object(pairs):
@@ -186,15 +191,83 @@ def summarize(document):
     }
 
 
+def download_status(path, expected):
+    try:
+        if path.is_symlink():
+            return "mismatch"
+        flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0)
+        with os.fdopen(os.open(path, flags), encoding="utf-8", newline="") as stream:
+            if not S_ISREG(os.fstat(stream.fileno()).st_mode):
+                return "mismatch"
+            rows = csv.reader(stream, strict=True)
+            if next(rows, None) != DOWNLOAD_COLUMNS:
+                return "mismatch"
+            seen = set()
+            for row in rows:
+                if len(row) != len(DOWNLOAD_COLUMNS):
+                    return "mismatch"
+                zone, assignment, count, _ = row
+                if (
+                    zone not in expected or zone in seen or count != str(expected[zone])
+                    or assignment != ("assigned" if zone else "unassigned")
+                ):
+                    return "mismatch"
+                seen.add(zone)
+    except FileNotFoundError:
+        return "missing"
+    except (OSError, UnicodeError, csv.Error):
+        return "mismatch"
+    return "verified" if seen == expected.keys() else "mismatch"
+
+
+def summarize_downloads(sessions, directory):
+    with os.scandir(directory):
+        pass
+    with EXPECTED_DOWNLOAD.open(encoding="utf-8") as stream:
+        expected = json.load(stream, object_pairs_hook=strict_object)["relations"]["intersects"]["counts"]
+    expected[""] = expected.pop("unassigned")
+    if expected.pop("total") != sum(expected.values()):
+        raise ValueError("Independent reference has inconsistent zone counts")
+
+    completed = sorted(session["participant_id"] for session in sessions
+                       if session["tasks"]["download_result"]["outcome"] == "completed")
+    counts = Counter()
+    review = []
+    for participant in completed:
+        status = download_status(directory / f"{participant}.csv", expected)
+        counts[status] += 1
+        if status != "verified":
+            review.append({"participant_id": participant, "status": status})
+    status = "NOT_APPLICABLE"
+    if completed:
+        status = "REVIEW_REQUIRED" if review else "VERIFIED"
+    return {
+        "status": status,
+        "claimed_completed": len(completed),
+        "verified": counts["verified"],
+        "missing": counts["missing"],
+        "mismatch": counts["mismatch"],
+        "needs_review": review,
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("observations", type=Path, help="UTF-8 JSON observation file")
+    parser.add_argument("--downloads-dir", type=Path, help="directory containing downloaded U###.csv files")
     args = parser.parse_args()
     try:
-        report = summarize(load_observations(args.observations))
+        document = load_observations(args.observations)
+        report = summarize(document)
     except (OSError, ValueError, RecursionError) as error:
         print(f"Invalid observation file: {error}", file=sys.stderr)
         return 1
+    if args.downloads_dir is not None:
+        try:
+            report["download_evidence"] = summarize_downloads(document["sessions"], args.downloads_dir)
+        except (OSError, ValueError, KeyError, TypeError, RecursionError) as error:
+            print(f"Invalid download evidence: {error}", file=sys.stderr)
+            return 1
     print(json.dumps(report, allow_nan=False, indent=2))
     return 0
 
