@@ -1,0 +1,42 @@
+
+> geopilot-workbench@1.0.0 test
+> vitest --run --reporter=default --reporter=junit --outputFile.junit=/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/round2/frontend-vitest.xml
+
+
+ RUN  v5.0.5 /home/mtd/liweigis/GeoPilot-p12-v1/system-prototype-v1/frontend
+
+ ✓ src/features/session/workbench-session.test.ts (5 tests) 14ms
+ ✓ src/components/errors/ProblemDetails.test.tsx (4 tests) 308ms
+ ✓ src/features/plans/PlanActions.test.tsx (2 tests) 413ms
+   ✓ confirms the exact draft without starting its execution 346ms
+ ✓ src/features/methods/MethodCatalogPanel.test.tsx (4 tests) 493ms
+   ✓ MethodCatalogPanel (4)
+     ✓ renders the supplied versions and selects an exact method reference 372ms
+ ✓ src/features/artifacts/ArtifactsPanel.test.tsx (3 tests) 520ms
+   ✓ keeps formal downloads, source versions, map selection and diagnostics tied to the same run 374ms
+ ✓ src/features/plans/preview/PlanPreview.test.tsx (3 tests) 541ms
+   ✓ shows the exact plan and asset versions with all declared option values 412ms
+ ✓ src/features/runs/RunPanel.test.tsx (3 tests) 544ms
+   ✓ polls actual statuses until both phases finish and allows a retained log to open 446ms
+ ✓ src/features/checks/ChecksPanel.test.tsx (4 tests) 597ms
+   ✓ shows method failures alongside passing phase findings and the separate execution state 333ms
+ ✓ src/features/assets/AssetPanel.test.tsx (3 tests) 610ms
+   ✓ shows exact asset versions, assigned roles and controlled map visibility 313ms
+ ✓ src/pages/WorkbenchPage.test.tsx (4 tests) 695ms
+   ✓ WorkbenchPage (4)
+     ✓ shows the seven regions and distinct confirmation and execution actions 464ms
+ ✓ src/features/model-assistance/ModelAssistPanel.test.tsx (6 tests) 665ms
+   ✓ retains the existing goal and a manual entry when model assistance is unconfigured 381ms
+ ✓ src/features/scripts/ScriptRunsPage.test.tsx (3 tests) 792ms
+   ✓ browses script state, actual log, indexed download and isolated vector preview 630ms
+ ✓ src/features/method-form/MethodForm.test.tsx (7 tests) 931ms
+   ✓ limits roles to compatible available versions and submits numeric values in the declared unit 446ms
+ ✓ src/features/map/MapPanel.test.tsx (17 tests) 1242ms
+   ✓ uses local source references, renders all three vector styles and picks the exact artifact ID 416ms
+
+ Test Files  14 passed (14)
+      Tests  68 passed (68)
+   Start at  11:10:37
+   Duration  2.54s (environment 40%, tests 38%, transform 12%, import 10%)
+
+JUNIT report written to /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/artifacts/test-results/round2/frontend-vitest.xml
