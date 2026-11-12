@@ -38,7 +38,7 @@ tar -xzf docs/round2/performance/p13-06-raster-output-fingerprints-evidence.tar.
 
 L 点相交与线相交使用同一 `relations.gpkg` 文件和输入清单，同一方法、工具版本及记录的步骤参数。28 次实际输入检查日志分别记录打开 `points` 和 `lines`。两组独立验算分别确认保留 65,536 个点和 131,072 条线，后者总长 4,030,464 米。 [点相交原始样本](p13-05-vector-l-point-evidence.tar.gz) · [线相交原始样本](p13-05-vector-l-line-evidence.tar.gz) · [M 档原始样本](p13-05-vector-m-revised-evidence.tar.gz)
 
-缓存键需要包含每个输入角色的实际图层及文件组指纹。命中时可复用现有 `copy_file_group`，按缓存条目登记的物理指纹校验副本，再按本次运行重新打开成果、核验来源和独立正确性。运行日志证明图层与物理指纹存在差异，GeoPackage 中导致物理差异的字段未核对。P13-06 仍等待 P13-05 验收。 [文件组复制](../../../src/geopilot/data/fingerprint.py#L132) · [成果重新打开与登记](../../../src/geopilot/artifacts/service.py#L137)
+缓存键需要包含每个输入角色的实际图层及文件组指纹。命中时可复用现有 `copy_file_group`，按缓存条目登记的物理指纹校验副本，再按本次运行重新打开成果、核验来源和独立正确性。运行日志证明图层与物理指纹存在差异，正式矢量归档中各角色的 GeoPackage 物理差异来源尚未逐文件核对。P13-06 仍等待 P13-05 验收。 [文件组复制](../../../src/geopilot/data/fingerprint.py#L132) · [成果重新打开与登记](../../../src/geopilot/artifacts/service.py#L137)
 
 ```bash
 p13_fingerprints=$(mktemp -d)
@@ -49,3 +49,13 @@ done
 .venv/bin/python -B docs/round2/performance/p13-06-output-fingerprints-audit.py "$p13_fingerprints" \
   | cmp - docs/round2/performance/p13-06-output-fingerprints.json
 ```
+
+## GeoPackage 写入时间与物理文件身份
+
+主控在 `32c5a94` 用已集成的矢量裁回工具，两次读取同一个道路缓冲黄金样本。每个输出保留七个独立预期 ID，SQLite 完整性检查通过，两次的要素、几何字节、属性、CRS 与其余表均一致。两种输出各仅有 `gpkg_contents.last_change` 的四个字节不同，文件组指纹均改变。复制首份完整文件组到新目录后，原指纹及实际图层重开通过。用另一次写入的文件冒充首份物理指纹时复制被拒绝，目标得到清理。探针退出 0。 [四份原始 GeoPackage、源码提交和复算](p13-06-geopackage-physical-identity-evidence.tar.gz)
+
+## GDAL 实际配置与缓存回退
+
+A 在同一输入文件组、归一化请求、方法、工具、实际绑定和已记录依赖版本下运行四次真实 `run_step`，均为 `SUCCEEDED/0`。只切换 GDAL 目录查找选项使外部掩膜从生效变为隐藏，面积由 636 m² 变为 848 m²。只切换 `GTIFF_POINT_GEO_IGNORE` 则使生产生成的无旁车 PixelIsPoint TIFF 平移半个像元，面积变化 93,178.82 m²。原 JSON 按自身指纹复制后通过通用成果重开，得到与正确结果相同的通用元数据。首个 DEM 面积工具的键需绑定经验证的实际 GDAL/PROJ 配置。 [真实工具反例、复跑及命令](p13-06-cache-runtime-and-fallback-evidence.tar.gz)
+
+D 验证多输出回退。第二个文件组的指纹失配后，第一组主文件与 PAM 旁车仍占用目标，普通适配器准备返回 `INVALID_STEP_REQUEST`。清理本次保留的完整组后准备成功。独立嵌套 worker 租约实际返回 `EAGAIN`，释放外层后可重新取得。当前 `StepResult` 要求成功状态带子进程退出码 0。未来接入需要整批暂存或补偿，在释放复制租约后回退到正常计算，并为复用增加可验证的来源和专门的检查路径。A、D 与主控的隔离复跑均退出 0。P13-06 继续等待 P13-05 验收。

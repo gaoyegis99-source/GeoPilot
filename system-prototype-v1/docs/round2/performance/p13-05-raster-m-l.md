@@ -246,4 +246,35 @@ cmp "$p13_topology/replayed.log" "$p13_topology/independent/verify.log"
 
 单独排队的容量探针会让 `977ab41`、`a2d2e68` 和 `b490254` 各在一个原生容器中直接运行生产 `summarize_threshold_area`，输入为同一封存分类 TIFF。总墙钟预算 5,700 秒，单个 worker 上限 1,800 秒。记录完整分类、独立等积面积参考差、CPU、墙钟、峰值 RSS、实际退出和精确源码清单。探针在现行栅格、T14 及 DEM M 原版重试全部退出后取得共用锁，单独归档。正式方法配对继续使用生产 60 秒步骤限制。 [源码清单、启动器、预演及排队记录](p13-05-dem-l-capacity-plan-evidence.tar.gz)
 
-A 的三份源码准备和预演退出 0，忙锁、旧目录、输入或源码失配、子进程超时及收据六项小夹具通过。主控独立预演重放的三条容器命令与 A 记录逐字节相同，Docker 调用为 0，结果根尚未创建。整幅容量计算待正式队列完成。
+A 的三份源码准备和预演退出 0，忙锁、旧目录、输入或源码失配、子进程超时及收据六项小夹具通过。主控独立预演重放的三条容器命令与 A 记录逐字节相同，Docker 调用为 0，预演阶段未创建结果根。整幅实测见下节。
+
+### 原版与冻结修正版整幅结果
+
+`977ab41` 与 `a2d2e68` 的直接函数容器和 worker 均退出 0。两侧只读输入、运行时树和环境一致，619 字节的生产报告逐字节相同。主控对 EPSG:32650 的 8,190 × 8,190 格网逐块独立复算，类别 7 为 67,039,236 个像元，NoData 为 36,864 个，像元误差为 0。生产面积为 6,708,920,388.821660 m²，与 EPSG:6933 的独立边界参考相差 −0.012087 m²。B 复核源提交、运行时回执和测量。 [两侧原始报告、命令、回执与复算](p13-05-dem-l-capacity-first-two-evidence.tar.gz)
+
+| 直接函数单次测量 | 核心墙钟，秒 | 核心 CPU，秒 | 峰值 RSS，MiB |
+| --- | ---: | ---: | ---: |
+| 原版 | 1,040.467 | 1,039.090 | 225.605 |
+| 冻结修正版 | 549.545 | 548.678 | 226.742 |
+
+冻结修正版的核心墙钟下降 47.18%，峰值 RSS 增加 1,191,936 字节。两侧各有一次使用 1,800 秒预算的整幅测量。正式 60 秒方法配对仍为两侧全部面积超时。跨批投影复用候选已接续。主控从独立参考和回执复算退出 0，修改副本中面积后回执校验退出 1。
+
+```bash
+p13_dem_l_workers=$(mktemp -d)
+tar -xzf docs/round2/performance/p13-05-dem-l-capacity-first-two-evidence.tar.gz -C "$p13_dem_l_workers"
+(cd "$p13_dem_l_workers" && sha256sum -c SHA256SUMS)
+for worker in baseline frozen; do
+  env PYTHONPATH=scripts/bench PROJ_NETWORK=OFF OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+    .venv/bin/python -B "$p13_dem_l_workers/proof/verify.py" "$p13_dem_l_workers" \
+    benchmarks/raster/area-fixtures "$worker" > "$p13_dem_l_workers/$worker-replay.json"
+  cmp "$p13_dem_l_workers/$worker-replay.json" "$p13_dem_l_workers/proof/$worker-replayed.json" || exit 1
+done
+.venv/bin/python -B "$p13_dem_l_workers/proof/compare.py" "$p13_dem_l_workers" \
+  | cmp - "$p13_dem_l_workers/proof/comparison.json"
+```
+
+### 整幅分类边界积分预研
+
+主控在 `32c5a94`、Linux 5.15、Python 3.13.13 上，逐块保留同类像元外露的有向边，对实际 DEM L 分类执行三种固定密化。八段运行处理 1,097,472 条边及 9,877,248 个投影点，墙钟 4.656 秒，退出 0。全图像元计数与正式分类一致，积分面积与直接生产计算相差 −0.000192 m²。四段、十六段的实际墙钟为 3.608 和 6.909 秒。 [整幅代码、资源日志、夹具与反例](p13-05-dem-l-boundary-full-evidence.tar.gz)
+
+B 用六个小栅格核对适用范围，七项既有面积回归通过。100 km 单格在八段下多算 4,273.78 m²，超出逐格约 100.07 m² 容差。同类两格的合计变化可因正负抵消而连续两轮小于汇总容差，单格仍超差。绕开跨反经线护栏会产生约 2,214 亿 m² 的错误结果，超薄格网也可在个别像元面积为零时给出正的类总面积。生产候选须保留投影有效性和逐格收敛证据。此预研只在已封存 DEM L 样本验证整幅积分和时间。
