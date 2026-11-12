@@ -1,0 +1,21 @@
+5ef9b042528c1f6b55461b9ad5dffa8e24317fe2
+Python 3.13.13
+{"case": "coarse_sheared_grid", "identical_result": true, "refinement_segments": [256], "current_projection_points": 10200, "reused_projection_points": 4092, "error": null}
+{"case": "empty_selected", "identical_result": true, "refinement_segments": [], "current_projection_points": 0, "reused_projection_points": 0, "error": null}
+{"case": "actual_cut_8858_90e", "identical_result": true, "refinement_segments": [], "current_projection_points": 0, "reused_projection_points": 0, "error": "Measurement requires finite WGS84 bounds within a single longitude interval"}
+{"case": "actual_cut_8859_30w", "identical_result": true, "refinement_segments": [], "current_projection_points": 0, "reused_projection_points": 0, "error": "Measurement requires finite WGS84 bounds within a single longitude interval"}
+{"case": "inside_8858_near_cut", "identical_result": true, "refinement_segments": [8], "current_projection_points": 168, "reused_projection_points": 78, "error": null}
+{"case": "zero_projected_cell_with_positive_class_envelope", "identical_result": true, "refinement_segments": [], "current_projection_points": 64, "reused_projection_points": 37, "error": "A projected classification cell has no finite positive area"}
+{"case": "finite_positive_but_numerically_degenerate", "identical_result": true, "refinement_segments": [8], "current_projection_points": 224, "reused_projection_points": 93, "error": null}
+{"case": "flipped_affine_orientation", "identical_result": true, "refinement_segments": [8], "current_projection_points": 896, "reused_projection_points": 351, "error": null}
+{"case": "internal_cut_8858", "identical_result": true, "refinement_segments": [8], "current_projection_points": 168, "reused_projection_points": 78, "error": null}
+{"case": "internal_cut_8859", "identical_result": true, "refinement_segments": [8], "current_projection_points": 168, "reused_projection_points": 78, "error": null}
+{"case": "meridian_guard", "identical_result": true, "refinement_segments": [], "current_projection_points": 0, "reused_projection_points": 0, "error": "Measurement requires finite WGS84 bounds within a single longitude interval"}
+{"case": "rotated_sheared_classes_holes", "identical_result": true, "refinement_segments": [8], "current_projection_points": 896, "reused_projection_points": 351, "error": null}
+{"case": "same_equal_area_affine", "identical_result": true, "refinement_segments": [], "current_projection_points": 0, "reused_projection_points": 0, "error": null}
+{"case": "singular_affine", "identical_result": true, "refinement_segments": [], "current_projection_points": 0, "reused_projection_points": 0, "error": "Area statistics require a finite nondegenerate affine grid"}
+{"case": "two_adaptive_batches", "identical_result": true, "refinement_segments": [64, 32], "current_projection_points": 129272, "reused_projection_points": 49089, "error": null}
+{"case": "dem-m-window", "identical_result": true, "refinement_segments": [8, 8, 8, 8], "current_projection_points": 56840, "reused_projection_points": 16549, "error": null}
+{"case": "dem-l-window", "identical_result": true, "refinement_segments": [8, 8, 8, 8], "current_projection_points": 56840, "reused_projection_points": 16549, "error": null}
+{"case": "remote-l-window", "identical_result": true, "refinement_segments": [8, 8, 8], "current_projection_points": 30464, "reused_projection_points": 10138, "error": null}
+exit 0

@@ -166,6 +166,48 @@ def test_large_utm_cell_area_refines_curved_edges_against_independent_reference(
     assert abs(report["total_area_m2"] - 1e10) > 1e5
 
 
+def test_coarse_sheared_class_areas_match_independent_cell_footprints(tmp_path):
+    source = tmp_path / "coarse-sheared-classification.tif"
+    affine = Affine(90000, 15000, 420000, 20000, -95000, 4550000)
+    values = np.array([[7, 7, 2], [7, 255, 2]], dtype="uint8")
+    _write_classification(source, values, crs=UTM_CRS, transform=affine)
+    report = summarize_threshold_area(source, area_crs=TARGET_CRS)
+
+    assert report["nodata_pixel_count"] == 1
+    assert [(item["class_id"], item["pixel_count"]) for item in report["classes"]] == [(2, 2), (7, 3)]
+    for item in report["classes"]:
+        rows, columns = np.nonzero(values == item["class_id"])
+        reference = math.fsum(
+            _geodetic_cell_area(affine, row, col, segments=2048)
+            for row, col in zip(rows, columns, strict=True)
+        )
+        assert item["area_m2"] == pytest.approx(reference, rel=1e-8)
+
+
+def test_nonzero_affine_determinant_does_not_hide_collapsed_projected_cells(tmp_path):
+    source = tmp_path / "collapsed-classification.tif"
+    affine = Affine(10, 0, 500000, 0, -4.5e-10, 4400000)
+    assert affine.determinant != 0
+    _write_classification(source, np.full((4, 2), 7, dtype="uint8"), crs=UTM_CRS, transform=affine)
+
+    with pytest.raises(ValueError, match="A projected classification cell has no finite positive area"):
+        summarize_threshold_area(source, area_crs=TARGET_CRS)
+
+
+@pytest.mark.parametrize(("west", "target_crs"), [
+    (179.85, "EPSG:6933"), (89.85, "EPSG:8858"), (-30.15, "EPSG:8859"),
+])
+def test_rejects_classification_across_equal_area_projection_cut(tmp_path, west, target_crs):
+    source = tmp_path / "classification-across-cut.tif"
+    _write_classification(
+        source, np.full((1, 3), 7, dtype="uint8"), crs="EPSG:4326",
+        transform=Affine(0.1, 0, west, 0, -0.05, 0.03),
+    )
+
+    with pytest.raises(MeasurementPolicyError, match="within a single longitude interval"):
+        summarize_threshold_area(source, area_crs=target_crs)
+
+
 def test_zero_selected_area_keeps_background_and_nodata_counts(tmp_path):
     source = tmp_path / "empty-classification.tif"
     _write_classification(

@@ -1,0 +1,7 @@
+5ef9b042528c1f6b55461b9ad5dffa8e24317fe2
+Python 3.13.13
+{"case": "points", "area_count": 64, "target_count": 384, "candidate_pairs": 256, "selected_by_original_prepared_and_index": {"intersects": 256, "within": 64}}
+{"case": "lines", "area_count": 64, "target_count": 640, "candidate_pairs": 512, "selected_by_original_prepared_and_index": {"intersects": 512, "within": 192}}
+{"case": "polygons", "area_count": 64, "target_count": 768, "candidate_pairs": 640, "selected_by_original_prepared_and_index": {"intersects": 640, "within": 256}}
+{"case": "target crosses adjacent coverage features", "within_union": true, "within_any_one": false}
+exit 0
