@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "record_kind": "synthetic",
+  "sessions": [
+    {
+      "participant_id": "U001",
+      "trial_date": "2026-11-12",
+      "gis_use": "regular",
+      "environment": {"commit": "1111111111111111111111111111111111111111", "os": "Synthetic OS", "browser": "Synthetic Browser", "qgis": "Synthetic QGIS"},
+      "tasks": {
+        "register_assets": {"outcome": "completed", "elapsed_seconds": 20, "help_requests": 0, "assisted": false, "errors": []},
+        "select_method": {"outcome": "completed", "elapsed_seconds": 12.5, "help_requests": 1, "assisted": true, "errors": [{"code": "WRONG_METHOD_VERSION", "recovery": "assisted_recovery"}]},
+        "confirm_plan": {"outcome": "completed", "elapsed_seconds": 8, "help_requests": 0, "assisted": false, "errors": []},
+        "run_plan": {"outcome": "completed", "elapsed_seconds": 44, "help_requests": 0, "assisted": false, "errors": []},
+        "inspect_checks": {"outcome": "completed", "elapsed_seconds": 7, "help_requests": 0, "assisted": false, "errors": []},
+        "download_result": {"outcome": "completed", "elapsed_seconds": 10, "help_requests": 0, "assisted": false, "errors": []}
+      }
+    },
+    {
+      "participant_id": "U002",
+      "trial_date": "2026-11-12",
+      "gis_use": "occasional",
+      "environment": {"commit": "1111111111111111111111111111111111111111", "os": "Synthetic OS", "browser": "Synthetic Browser", "qgis": "Synthetic QGIS"},
+      "tasks": {
+        "register_assets": {"outcome": "completed", "elapsed_seconds": 40, "help_requests": 0, "assisted": false, "errors": [{"code": "WRONG_LAYER", "recovery": "self_recovered"}]},
+        "select_method": {"outcome": "incomplete", "elapsed_seconds": 37.5, "help_requests": 2, "assisted": true, "errors": [{"code": "WRONG_METHOD_VERSION", "recovery": "unresolved"}]},
+        "confirm_plan": {"outcome": "not_attempted", "elapsed_seconds": null, "help_requests": 0, "assisted": false, "errors": []},
+        "run_plan": {"outcome": "not_attempted", "elapsed_seconds": null, "help_requests": 0, "assisted": false, "errors": []},
+        "inspect_checks": {"outcome": "not_attempted", "elapsed_seconds": null, "help_requests": 0, "assisted": false, "errors": []},
+        "download_result": {"outcome": "not_attempted", "elapsed_seconds": null, "help_requests": 0, "assisted": false, "errors": []}
+      }
+    }
+  ]
+}
