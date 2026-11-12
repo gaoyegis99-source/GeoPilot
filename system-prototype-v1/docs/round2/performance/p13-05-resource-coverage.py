@@ -156,7 +156,7 @@ def read_pair(documents, case):
 
 
 def case_summary(documents, case):
-    raster = case in {"dem-s", "dem-l", "remote-s"}
+    raster = case in {"dem-s", "dem-l", "remote-s", "remote-l"}
     raw_pair, pair = read_pair(documents, case)
     series = {}
     ids = set()
@@ -200,7 +200,72 @@ def case_summary(documents, case):
     }, ids
 
 
-def summarize(directory):
+def l_followups(directory, historical, historical_ids):
+    remote_name = "p13-05-remote-l-pair-evidence.tar.gz"
+    remote_docs = archive_documents(directory / remote_name, {"remote-l"})
+    remote, remote_ids = case_summary(remote_docs, "remote-l")
+
+    t14_name = "p13-05-t14-local-clip-pair-evidence.tar.gz"
+    case = "t14-split_by_area"
+    frozen = archive_documents(directory / "p13-05-vector-l-area-evidence.tar.gz", {case})
+    t14_docs = {parts: raw for parts, raw in frozen.items() if parts[:2] == (case, "base")}
+    followup = archive_documents(directory / t14_name, {"candidate", "comparison"})
+    marker = followup["candidate", "COMPLETED"]
+    attempt = marker.decode("ascii").strip()
+    t14_docs[case, "candidate", "COMPLETED"] = marker
+    t14_docs[case, "candidate", attempt, "evidence", "samples.jsonl"] = followup["candidate", "evidence", "samples.jsonl"]
+    t14_docs[case, "comparison.followup", "result.json"] = followup["comparison", "result.json"]
+    t14, t14_ids = case_summary(t14_docs, case)
+    _, _, reused = side_groups(t14_docs, case, "base", raster=False)
+    expected_base = historical[f"vector-l-area/{case}"]["sides"]["base"]
+    if t14["sides"]["base"] != expected_base or (t14_ids & historical_ids) != reused:
+        raise ValueError("T14 follow-up does not reuse exactly the sealed original side")
+    if remote_ids & (historical_ids | t14_ids):
+        raise ValueError("Reused run identity in the remote L pair")
+
+    sides = [side for pair in historical.values() for side in pair["sides"].values()]
+    sides.extend((remote["sides"]["base"], remote["sides"]["candidate"], t14["sides"]["candidate"]))
+    distinct = len(historical_ids | remote_ids | t14_ids)
+    return {
+        "schema_version": 1,
+        "historical_pairs": len(historical),
+        "distinct_runs": distinct,
+        "reused_t14_original_runs": len(reused),
+        "unique_measurements": measurement_totals(sides),
+        "pairs": {
+            "remote-l-pair/remote-l": {"archive": remote_name, **remote},
+            f"t14-local-clip-pair/{case}": {"archive": t14_name, **t14},
+        },
+    }
+
+
+def measurement_totals(sides):
+    statuses = Counter()
+    terminal = Counter()
+    observation_failures = 0
+    verified = 0
+    coverage = {name: Counter() for name in RESOURCE_NAMES}
+    for side in sides:
+        for group in side["groups"].values():
+            for status, part in group["measurements"].items():
+                if part is None:
+                    continue
+                statuses[status] += part["rows"]
+                terminal.update(part["terminal_outcomes"])
+                observation_failures += part["status_observation_failures"]
+                verified += part["independent_verification_recorded"]
+                for name in RESOURCE_NAMES:
+                    coverage[name].update(part["resources"][name]["coverage"])
+    return {
+        "benchmark_outcomes": dict(sorted(statuses.items())),
+        "terminal_outcomes": dict(sorted(terminal.items())),
+        "status_observation_failures": observation_failures,
+        "independent_verification_recorded": verified,
+        "resources": {name: dict(sorted(counts.items())) for name, counts in coverage.items()},
+    }
+
+
+def summarize(directory, include_l_followups=False):
     output = {}
     ids = set()
     for name, cases in ARCHIVES.items():
@@ -212,14 +277,17 @@ def summarize(directory):
                 raise ValueError(f"Run identity reused across archives: {case}")
             ids.update(run_ids)
             output[f"{name}/{case}"] = {"archive": archive, **summary}
+    if include_l_followups:
+        return l_followups(directory, output, ids)
     return {"schema_version": 1, "distinct_runs": len(ids), "pairs": output}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("evidence_directory", type=Path)
+    parser.add_argument("--l-followups", action="store_true", help="Include remote L and the T14 local-clip comparison")
     args = parser.parse_args()
-    print(json.dumps(summarize(args.evidence_directory), indent=2, allow_nan=False))
+    print(json.dumps(summarize(args.evidence_directory, args.l_followups), indent=2, allow_nan=False))
 
 
 if __name__ == "__main__":

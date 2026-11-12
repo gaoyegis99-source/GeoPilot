@@ -74,7 +74,7 @@ P13-05 在回执写入异常和清理同时失败、或启动子进程前强制�
 
 遥感 L 正式配对完成。原版 14 轮均在变化计算步超时，冻结修正版 14 轮成果验算通过，冷暖正式计量合计 5 次基准通过、5 次状态观察失败。T14 局部裁回候选冷暖 14 轮通过，正式配对已复算。DEM M 原版重试运行中，随后为 DEM L 独立容量探针。 [遥感 L 正式配对](../../docs/round2/performance/p13-05-raster-m-l.md#遥感-l-正式配对) · [T14 正式配对](../../docs/round2/performance/p13-05-vector-l.md#t14-局部裁回候选完整配对)
 
-已封存 20 个冷热配对组的整轮 RSS 尚无可用成功样本差值。正式 CPU 与磁盘读写只有部分采样，容量判断须采用观测范围及其他实测证据。 [配对资源覆盖](../../docs/round2/performance/p13-05-resource-coverage.md)
+已封存 24 个冷热配对组的整轮 RSS 尚无可用成功样本差值。230 次唯一正式计量的 CPU 与磁盘读写均为采样下界，容量判断须采用观测范围及其他实测证据。 [配对资源覆盖](../../docs/round2/performance/p13-05-resource-coverage.md#遥感-l-与-t14-局部裁回配对补充)
 
 状态查询的同一 HTTP 500 在隔离探针中对应不同 SQLite 底层错误。冻结遥感批的状态查询根因仍缺底层证据。现行工具分别记录观察失败类别和逐次请求耗时，底层原因仍需生产日志。 [SQLite 诊断](../../docs/round2/performance/p13-07.md#热回滚日志下的只读状态查询) · [采集口径](../../docs/round2/performance/p13-05-runner-reproducibility.md#状态查询失败耗时采集)
 

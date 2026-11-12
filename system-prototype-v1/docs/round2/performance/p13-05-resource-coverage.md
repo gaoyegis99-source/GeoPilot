@@ -30,3 +30,24 @@ tar -xzf docs/round2/performance/p13-05-resource-coverage-independent.tar.gz -C 
   "$p13_resources_review/replayed.json"
 cmp "$p13_resources_review/replayed.json" "$p13_resources_review/independent.json"
 ```
+
+## 遥感 L 与 T14 局部裁回配对补充
+
+主控以 `f105388d11106cc2d866cafacafc9a632579d3f5` 中的归档复算新封存的遥感 L 和 T14 局部裁回配对。12 个正式配对有 322 个唯一运行和 230 次唯一正式计量。T14 局部裁回复用的原版 14 轮与首次冻结配对逐字节一致，汇总只计一次。 [补充逐组统计](p13-05-resource-coverage-l-followups.json) · [遥感 L 原始配对](p13-05-remote-l-pair-evidence.tar.gz) · [T14 原始配对](p13-05-t14-local-clip-pair-evidence.tar.gz)
+
+| 230 次唯一正式计量 | 数量 | 复核结果 |
+| --- | ---: | --- |
+| 基准通过 | 152 | 均为 `SUCCEEDED/PASSED` |
+| 状态观察失败 | 8 | 均为遥感，GIS 成果和独立验算通过 |
+| GIS 执行失败 | 70 | 均为 `FAILED/NOT_CHECKED` |
+| CPU、磁盘读与写 | 每项 230 | 均为已采样累计下界 |
+| 整轮 RSS | 78 完整、152 部分 | 24 个冷热配对组的成功样本 RSS 差值均为空 |
+
+遥感 L 两侧的正式计量中，原版 10 次均超时，候选 5 次基准通过、5 次状态观察失败，候选 10 次均通过独立成果验算。T14 局部裁回新增的 10 次正式计量全部通过。复算校验每侧的正式状态计数、RSS 覆盖及分位。另在内存副本中将候选运行 ID 改为已封存的原版 ID，或给遥感 L 暖态通过样本的 RSS 增加 1,000,000 字节。两种篡改分别触发重复运行和 RSS 校验拒绝。主控在 Linux 5.15、Python 3.13.13 下复算及比对退出 0，原十组复算仍与原 JSON 逐字节一致。
+
+```bash
+p13_l_resource=$(mktemp)
+.venv/bin/python -B docs/round2/performance/p13-05-resource-coverage.py --l-followups \
+  docs/round2/performance > "$p13_l_resource"
+cmp "$p13_l_resource" docs/round2/performance/p13-05-resource-coverage-l-followups.json
+```

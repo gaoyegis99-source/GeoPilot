@@ -1,0 +1,1042 @@
+{
+  "schema_version": 1,
+  "historical_pairs": 10,
+  "distinct_runs": 322,
+  "reused_t14_original_runs": 14,
+  "unique_measurements": {
+    "benchmark_outcomes": {
+      "FAIL": 78,
+      "PASS": 152
+    },
+    "terminal_outcomes": {
+      "FAILED/NOT_CHECKED": 70,
+      "SUCCEEDED/PASSED": 160
+    },
+    "status_observation_failures": 8,
+    "independent_verification_recorded": 160,
+    "resources": {
+      "cpu_ns": {
+        "partial": 230
+      },
+      "peak_rss_bytes": {
+        "partial": 152,
+        "sampled": 78
+      },
+      "disk_read_bytes": {
+        "partial": 230
+      },
+      "disk_write_bytes": {
+        "partial": 230
+      }
+    }
+  },
+  "pairs": {
+    "remote-l-pair/remote-l": {
+      "archive": "p13-05-remote-l-pair-evidence.tar.gz",
+      "strict_comparison_sha256": "56c6c4ee9822c9fe4c0303aa608b697bfcac7f6c9fb303ed7b1a497be2e06b19",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": false,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "8dc9f3b712a4d1c5a4e75849cb3e1e6a85a485dbf7dfc0e8ea88a531b183146b",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 100020000000,
+                      "median": 100290000000,
+                      "p95_nearest_rank": 100790000000,
+                      "maximum": 100790000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 264519680,
+                      "median": 265609216,
+                      "p95_nearest_rank": 265900032,
+                      "maximum": 265900032
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 638976,
+                      "maximum": 638976
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 20537344,
+                      "median": 20537344,
+                      "p95_nearest_rank": 20553728,
+                      "maximum": 20553728
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 613983333,
+                    "median": 613983333,
+                    "p95_nearest_rank": 613983333,
+                    "maximum": 613983333
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 585326616,
+                    "median": 585326616,
+                    "p95_nearest_rank": 585326616,
+                    "maximum": 585326616
+                  },
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 100540000000,
+                      "median": 100620000000,
+                      "p95_nearest_rank": 101030000000,
+                      "maximum": 101030000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 263733248,
+                      "median": 265396224,
+                      "p95_nearest_rank": 270077952,
+                      "maximum": 270077952
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 81920,
+                      "p95_nearest_rank": 458752,
+                      "maximum": 458752
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 20537344,
+                      "median": 20537344,
+                      "p95_nearest_rank": 20545536,
+                      "maximum": 20545536
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 613983333,
+                    "median": 613983333,
+                    "p95_nearest_rank": 613983333,
+                    "maximum": 613983333
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 5,
+                    "minimum": 585326616,
+                    "median": 585326616,
+                    "p95_nearest_rank": 585326616,
+                    "maximum": 585326616
+                  },
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+          "raw_rows_sha256": "a9f2d46fe9f2baea29cbca16d2982c763a5e5181c7ec308198f316476384fc4a",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 2,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 2
+                  },
+                  "independent_verification_recorded": 2,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 90550000000,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 91490000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 264937472,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 269004800
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 81920,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 143360
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 20545536,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 20545536
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 2,
+                    "minimum": 613983333,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 613983333
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 2,
+                    "minimum": 585326616,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 585326616
+                  },
+                  "output_bytes": {
+                    "recorded": 2,
+                    "minimum": 5054589,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 5054589
+                  }
+                },
+                "FAIL": {
+                  "rows": 3,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 3
+                  },
+                  "independent_verification_recorded": 3,
+                  "status_observation_failures": 3,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 91650000000,
+                      "median": 91660000000,
+                      "p95_nearest_rank": 92270000000,
+                      "maximum": 92270000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 264028160,
+                      "median": 265969664,
+                      "p95_nearest_rank": 266059776,
+                      "maximum": 266059776
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 81920,
+                      "median": 163840,
+                      "p95_nearest_rank": 172032,
+                      "maximum": 172032
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 20545536,
+                      "median": 20545536,
+                      "p95_nearest_rank": 20549632,
+                      "maximum": 20549632
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 3,
+                    "minimum": 613983333,
+                    "median": 613983333,
+                    "p95_nearest_rank": 613983333,
+                    "maximum": 613983333
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 3,
+                    "minimum": 585326616,
+                    "median": 585326616,
+                    "p95_nearest_rank": 585326616,
+                    "maximum": 585326616
+                  },
+                  "output_bytes": {
+                    "recorded": 3,
+                    "minimum": 5054589,
+                    "median": 5054589,
+                    "p95_nearest_rank": 5054589,
+                    "maximum": 5054589
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 3,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 3
+                  },
+                  "independent_verification_recorded": 3,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 91960000000,
+                      "median": 92020000000,
+                      "p95_nearest_rank": 92320000000,
+                      "maximum": 92320000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 262889472,
+                      "median": 263446528,
+                      "p95_nearest_rank": 267993088,
+                      "maximum": 267993088
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 45056,
+                      "maximum": 45056
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 3
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 20545536,
+                      "median": 20545536,
+                      "p95_nearest_rank": 20549632,
+                      "maximum": 20549632
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 3,
+                    "minimum": 613983333,
+                    "median": 613983333,
+                    "p95_nearest_rank": 613983333,
+                    "maximum": 613983333
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 3,
+                    "minimum": 585326616,
+                    "median": 585326616,
+                    "p95_nearest_rank": 585326616,
+                    "maximum": 585326616
+                  },
+                  "output_bytes": {
+                    "recorded": 3,
+                    "minimum": 5054589,
+                    "median": 5054589,
+                    "p95_nearest_rank": 5054589,
+                    "maximum": 5054589
+                  }
+                },
+                "FAIL": {
+                  "rows": 2,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 2
+                  },
+                  "independent_verification_recorded": 2,
+                  "status_observation_failures": 2,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 91310000000,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 92020000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 265359360,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 267722752
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          8,
+                          8
+                        ]
+                      ],
+                      "minimum": 20545536,
+                      "median": null,
+                      "p95_nearest_rank": null,
+                      "maximum": 20549632
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 2,
+                    "minimum": 613983333,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 613983333
+                  },
+                  "logical_source_input_bytes": {
+                    "recorded": 2,
+                    "minimum": 585326616,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 585326616
+                  },
+                  "output_bytes": {
+                    "recorded": 2,
+                    "minimum": 5054589,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": 5054589
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    },
+    "t14-local-clip-pair/t14-split_by_area": {
+      "archive": "p13-05-t14-local-clip-pair-evidence.tar.gz",
+      "strict_comparison_sha256": "b3c548b47fd1046eeb99a4403eeeedef115ae5940aedc4b0e43ec378ff7e3b9c",
+      "runtime_configuration_sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3",
+      "candidate_all_measurements_pass": true,
+      "successful_sample_deltas": {
+        "process_cold": {},
+        "warm": {}
+      },
+      "sides": {
+        "base": {
+          "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+          "raw_rows_sha256": "52f899e03926d5ecf24e4b1a12cc37777bd8dca8b1f6247685283a6693b7533a",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 59940000000,
+                      "median": 59960000000,
+                      "p95_nearest_rank": 59980000000,
+                      "maximum": 59980000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 328474624,
+                      "median": 334204928,
+                      "p95_nearest_rank": 334336000,
+                      "maximum": 334336000
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "FAIL": 2
+              },
+              "measurements": {
+                "PASS": null,
+                "FAIL": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "FAILED/NOT_CHECKED": 5
+                  },
+                  "independent_verification_recorded": 0,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 59970000000,
+                      "median": 59980000000,
+                      "p95_nearest_rank": 59990000000,
+                      "maximum": 59990000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 328048640,
+                      "median": 328798208,
+                      "p95_nearest_rank": 329035776,
+                      "maximum": 329035776
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          1,
+                          1
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 0,
+                    "minimum": null,
+                    "median": null,
+                    "p95_nearest_rank": null,
+                    "maximum": null
+                  }
+                },
+                "NOT_RUN": null
+              }
+            }
+          }
+        },
+        "candidate": {
+          "source_commit": "fff225f223568921ef2ac56f2b76ee9c4f8cbd29",
+          "raw_rows_sha256": "13130a23ca46a5fb5aec9ef169ed606282f159320eafdbbd1b4f91d4299ec978",
+          "groups": {
+            "process_cold": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 46890000000,
+                      "median": 47230000000,
+                      "p95_nearest_rank": 47700000000,
+                      "maximum": 47700000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 3,
+                        "sampled": 2
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 516521984,
+                      "median": 517484544,
+                      "p95_nearest_rank": 521101312,
+                      "maximum": 521101312
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 8192,
+                      "maximum": 8192
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 215580672,
+                      "median": 215580672,
+                      "p95_nearest_rank": 215580672,
+                      "maximum": 215580672
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 145531338,
+                    "median": 145531338,
+                    "p95_nearest_rank": 145531338,
+                    "maximum": 145531338
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            },
+            "warm": {
+              "warmups": {
+                "PASS": 2
+              },
+              "measurements": {
+                "PASS": {
+                  "rows": 5,
+                  "terminal_outcomes": {
+                    "SUCCEEDED/PASSED": 5
+                  },
+                  "independent_verification_recorded": 5,
+                  "status_observation_failures": 0,
+                  "resources": {
+                    "cpu_ns": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 46130000000,
+                      "median": 46960000000,
+                      "p95_nearest_rank": 48530000000,
+                      "maximum": 48530000000
+                    },
+                    "peak_rss_bytes": {
+                      "coverage": {
+                        "partial": 4,
+                        "sampled": 1
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 516411392,
+                      "median": 517513216,
+                      "p95_nearest_rank": 520974336,
+                      "maximum": 520974336
+                    },
+                    "disk_read_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 0,
+                      "median": 0,
+                      "p95_nearest_rank": 0,
+                      "maximum": 0
+                    },
+                    "disk_write_bytes": {
+                      "coverage": {
+                        "partial": 5
+                      },
+                      "observed_to_started_commands": [
+                        [
+                          3,
+                          3
+                        ]
+                      ],
+                      "minimum": 215580672,
+                      "median": 215580672,
+                      "p95_nearest_rank": 215580672,
+                      "maximum": 215580672
+                    }
+                  },
+                  "input_bytes": {
+                    "recorded": 5,
+                    "minimum": 121954304,
+                    "median": 121954304,
+                    "p95_nearest_rank": 121954304,
+                    "maximum": 121954304
+                  },
+                  "logical_source_input_bytes": null,
+                  "output_bytes": {
+                    "recorded": 5,
+                    "minimum": 145531338,
+                    "median": 145531338,
+                    "p95_nearest_rank": 145531338,
+                    "maximum": 145531338
+                  }
+                },
+                "FAIL": null,
+                "NOT_RUN": null
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
