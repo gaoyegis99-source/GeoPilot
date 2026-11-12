@@ -6,7 +6,7 @@ import time
 from contextlib import chdir
 from functools import partial
 from hashlib import sha256
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from shutil import copyfile
 
 import rasterio
@@ -14,12 +14,15 @@ from fastapi.testclient import TestClient
 from rasterio.windows import Window
 
 from geopilot.api.server import create_local_app
-from geopilot.domain.step_io import StepFileRef
+from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepRequest
+from geopilot.execution.step_support import resolve_step_path
 from geopilot.gis.raster.aspect import calculate_aspect
 from geopilot.gis.raster.dem_prepare import plan_dem_windows
 from geopilot.gis.raster.terrain import write_slope_raster
 from geopilot.gis.raster.window_io import read_raster_window
 from geopilot.observability.telemetry import SIDECAR_NAME
+from geopilot.persistence.run_repository import get_run, list_run_steps
+from geopilot.persistence.schema import open_database
 from geopilot.remote_sensing.alignment import align_ndvi
 from geopilot.remote_sensing.change import write_ndvi_change
 from geopilot.remote_sensing.config_models import SensorProductConfig
@@ -226,6 +229,38 @@ def _terminal_state(client, endpoint, trial, deadline):
     raise TimeoutError("Run did not reach an observable persisted terminal state by the deadline")
 
 
+def _executed_step_requests(database, workdir, run_id, state):
+    """Read adapter-normalized requests from the actual run after its terminal observation."""
+    with open_database(database, read_only=True) as connection:
+        connection.execute("BEGIN")
+        run = get_run(connection, run_id)
+        require(
+            run is not None and run.id == state["run_id"] and Path(run.workdir) == workdir
+            and (run.execution_status, run.check_status) == (state["execution_status"], state["check_status"]),
+            "Persisted method run differs from its observed terminal state",
+        )
+        records = list_run_steps(connection, run_id)
+    observed = []
+    for step in records:
+        result = step.result
+        if result is None or result.exit_code is None or (result.error and result.error.phase != "execute"):
+            continue
+        require(step.request is not None, f"Executed step {step.step_key} has no persisted request")
+        relative = PurePosixPath(step.request.log_path).with_name("request.json").as_posix()
+        path = resolve_step_path(workdir, relative, field=f"steps.{step.step_key}.request")
+        request = StepRequest.model_validate_json(path.read_bytes())
+        # The scheduler stores its compiled request before the adapter normalizes parameters.
+        require(
+            request.model_dump(exclude={"parameters"}) == step.request.model_dump(exclude={"parameters"}),
+            f"Normalized request identity differs for executed step {step.step_key}",
+        )
+        observed.append({
+            "step_key": step.step_key, "tool": request.tool.model_dump(mode="json"),
+            "parameters": request.parameters, "status": result.status.value, "exit_code": result.exit_code,
+        })
+    return observed
+
+
 class MethodWorkload:
     """The warm group retains one production API and scheduler with distinct tasks and runs."""
 
@@ -234,7 +269,8 @@ class MethodWorkload:
         self.fixture = fixture
         self.root = root
         self.workspace = directory / "workspace"
-        app = create_local_app(directory / "project.sqlite", self.workspace, config=root / "config")
+        self.database = directory / "project.sqlite"
+        app = create_local_app(self.database, self.workspace, config=root / "config")
         self.client = stack.enter_context(TestClient(app))
         self.initialization_ns = time.monotonic_ns() - started
         started = time.monotonic_ns()
@@ -301,6 +337,7 @@ class MethodWorkload:
             finally:
                 trial.setdefault("wall_ns", time.monotonic_ns() - started)
         trial["workspace_size"] = sampler.document()
+        trial["executed_steps"] = _executed_step_requests(self.database, directory, run_id, state)
         sidecar = directory / SIDECAR_NAME
         for _ in range(40):
             if sidecar.is_file():
@@ -313,13 +350,14 @@ class MethodWorkload:
         require((telemetry["schema_version"], telemetry["run_id"], telemetry["execution_status"],
                  telemetry["check_status"]) == (1, run_id, "SUCCEEDED", "PASSED"),
                 f"Run {run_id} did not pass execution/checks: {state}")
-        steps = _response(client.get(run_endpoint + "/steps"))["steps"]
         versions = [(item["key"], item["tool"]) for item in confirmed["steps"]]
         require(len(versions) == (7 if is_dem else 8) and
                 [(step["step_key"], {"id": step["tool"]["id"], "version": step["tool"]["version"]})
                  for step in telemetry["steps"]] == versions and
                 all(step["status"] == "SUCCEEDED" and step["exit_code"] == 0 for step in telemetry["steps"])
-                and [step["step_key"] for step in steps if step["status"] == "SUCCEEDED"] == [key for key, _ in versions],
+                and [(step["step_key"], step["tool"]) for step in trial["executed_steps"]] == versions
+                and all(step["status"] == ExecutionStatus.SUCCEEDED and step["exit_code"] == 0
+                        for step in trial["executed_steps"]),
                 "Registered or measured steps differ from the confirmed V1 method")
         check = _response(client.get(run_endpoint + "/checks"))["current_report"]
         require(check["status"] == "PASSED" and check["report"]["completed_rules"] == confirmed["check_rules"],

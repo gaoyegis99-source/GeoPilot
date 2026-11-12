@@ -59,6 +59,10 @@ def test_s_pilot_runs_real_tools_and_v1_with_independent_checks(tmp_path, profil
     assert method["wall_ns"] > 0 and method["pixels_per_second"] > 0
     assert method["correctness"]["area_statistics"]["observed"]["total_area_m2"] > 0
     assert len(method["telemetry"]["steps"]) == (7 if family == "raster" else 8)
+    assert [step["step_key"] for step in method["executed_steps"]] == [
+        step["step_key"] for step in method["telemetry"]["steps"]
+    ]
+    assert all(step["status"] == "SUCCEEDED" and step["exit_code"] == 0 for step in method["executed_steps"])
     for row in tools["steps"]:
         assert row["status"] == "PASS" and row["wall_ns"] > 0 and row["pre_read_bytes"] > 0
         assert row["resources"]["cpu_ns"]["value"] >= 0
@@ -206,3 +210,61 @@ def test_cold_operation_records_exit_when_worker_sends_no_result(bench_modules, 
     assert result is None and observed["step_worker_exit_code"] == 7
     assert observed["error"] == {"type": "EOFError", "message": "Cold worker sent no result"}
     assert observed["wall_with_process_startup_ns"] > 0
+
+
+@pytest.mark.parametrize("timeout", [False, True], ids=["passed", "timed-out-prefix"])
+def test_collects_actual_normalized_requests_for_executed_steps(bench_modules, tmp_path, timeout):
+    from geopilot.domain.step_io import StepRequest, StepResult
+    from geopilot.persistence.run_repository import insert_run, save_run_step
+    from geopilot.persistence.schema import initialize_database, open_database
+    from geopilot.runs.models import Run, RunStep
+
+    collector = importlib.import_module("_raster_workloads")
+    db = tmp_path / "project.sqlite"
+    workdir = tmp_path / "run"
+    stamp = "2026-11-12T00:00:00Z"
+    execution_status, check_status = ("FAILED", "NOT_CHECKED") if timeout else ("SUCCEEDED", "PASSED")
+    initialize_database(db)
+    with open_database(db) as connection, connection:
+        connection.execute("INSERT INTO task (id, goal_json, created_at) VALUES ('task', '{}', ?)", (stamp,))
+        connection.execute(
+            """INSERT INTO analysis_plan (id, version, task_id, status, plan_json, created_at)
+               VALUES ('plan', 1, 'task', 'confirmed', '{}', ?)""", (stamp,),
+        )
+        insert_run(connection, Run(id="run", plan_id="plan", plan_version=1, workdir=str(workdir), created_at=stamp,
+                                   execution_status=execution_status, check_status=check_status))
+        for position, key in enumerate(("prepare", "measure")):
+            log_path = f"steps/{key}/process.log"
+            request = StepRequest(
+                run_id="run", step_key=key, tool={"id": key, "version": 1}, workdir_ref="run",
+                inputs={}, parameters={"distance": {"value": 0.5, "unit": "kilometer"}}, output_targets={},
+                log_path=log_path, cancel_path="cancel.flag",
+            )
+            normalized = workdir / "steps" / key / "request.json"
+            normalized.parent.mkdir(parents=True)
+            normalized.write_text(request.model_copy(update={"parameters": {"distance": 500}}).model_dump_json())
+            failed = timeout and key == "measure"
+            error = {
+                "code": "PROCESS_TIMEOUT", "phase": "execute", "step_key": key, "field": None,
+                "message": "Process exceeded 60 seconds", "suggestion": "Read the process log.", "log_path": log_path,
+            } if failed else None
+            result = StepResult(
+                run_id="run", step_key=key, status="FAILED" if failed else "SUCCEEDED", exit_code=-15 if failed else 0,
+                outputs={}, log_path=log_path, warnings=[], error=error, started_at=stamp, finished_at=stamp, environment={},
+            )
+            save_run_step(connection, RunStep(run_id="run", step_key=key, position=position, status=result.status,
+                                             request=request, result=result, log_path=log_path))
+        if timeout:
+            save_run_step(connection, RunStep(run_id="run", step_key="pending", position=2))
+
+    state = {"run_id": "run", "execution_status": execution_status, "check_status": check_status}
+    observed = collector._executed_step_requests(db, workdir, "run", state)
+    assert [(step["step_key"], step["status"], step["exit_code"]) for step in observed] == [
+        ("prepare", "SUCCEEDED", 0), ("measure", execution_status, -15 if timeout else 0),
+    ]
+    assert all(step["parameters"] == {"distance": 500} for step in observed)
+    assert [step["tool"] for step in observed] == [{"id": "prepare", "version": 1}, {"id": "measure", "version": 1}]
+
+    normalized.write_text(request.model_copy(update={"run_id": "different-run"}).model_dump_json())
+    with pytest.raises(ValueError, match="Normalized request identity differs"):
+        collector._executed_step_requests(db, workdir, "run", state)
