@@ -16,9 +16,9 @@
 | P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | ACCEPTED | [最终审计与放行证据](../../docs/round2/audit/P12_FINAL_AUDIT.md) |
 | P13-01 | P13 | GIS 数据规模分级生成器 | B/A/F | P12-11 | ACCEPTED | [S/M/L 实际生成、独立参考和联合复验](../../docs/round2/performance/p13-01.md) |
 | P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | ACCEPTED | [旁路采样、真实运行及 T01–T16 复验](../../docs/round2/performance/p13-02.md) |
-| P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | DOING | S、M 各 20 组和 L 首批 42 轮已独立复算。L 后续批次完成五项 T13 的 70 轮，正在采样两项 T14。 [独立复算](../../docs/round2/performance/p13-03-SM-reproduction.md) · [道路修复](../../docs/round2/performance/p13-03-large-csv.md) |
+| P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | ACCEPTED | S/M/L 各完成 20 个冷热组。S/M 正式样本各 100 通过，L 140 次实际失败，保留失败分位及资源观测。 [基准报告](../../docs/round2/performance/p13-03.md) · [独立复算](../../docs/round2/performance/p13-03-L-final-audit.log) |
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | ACCEPTED | 工具 84 通过，完整方法 42 通过、42 超时。 [基准与原始证据](../../docs/round2/performance/p13-04.md) |
-| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | BLOCKED | 已固定前测及七补丁候选，104 项回归和四次原生 S 冒烟通过。配置采集和比较均已隔离验证，完整方法待 P13-03。 [复验准备](../../docs/round2/performance/p13-05-preflight.md) |
+| P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | DOING | 两项前置均已签收。固定前测与七补丁候选，首批 M 档前后测已放行。 [复验准备](../../docs/round2/performance/p13-05-preflight.md) |
 | P13-06 | P13 | 中间成果缓存与失效策略 | A/D | P13-02、P13-05 | BLOCKED | 已实测同请求绑定变化、文件组及图层身份边界，等待 P13-05 验收。 [复用证据准备](../../docs/round2/performance/p13-06-preflight.md) |
 | P13-07 | P13 | 运行队列与取消压力测试 | 主控/D/F | P12-10、P13-02 | ACCEPTED | [SQLite 锁恢复、队列取消与重启](../../docs/round2/performance/p13-07.md) |
 | P13-08 | P13 | 并发执行可行性决策 | 主控/D/F | P13-02 至 P13-07 | BLOCKED | 已验证外部容器在本地租约释放后仍可运行，待多档基准、内存与缓存验收。 [生命周期证据](../../docs/round2/decisions/p13-08-container-lifecycle-preflight.md) |
@@ -43,5 +43,5 @@
 | P16-03 | P16 | 工作台用户任务可用性测试 | E/F | P12-12、至少一个稳定方法 | DOING | 主持准备 GIS 后端，记录校验允许浏览器端 OS 按需填写。待真实浏览器会话、匿名记录和下载 CSV。 [主持手册](../../docs/round2/user-research/moderator.md) |
 | P16-04 | P16 | 错误信息与恢复路径优化 | E/D | P16-03 | BLOCKED | 待 P16-03 真实观察。 |
 | P16-05 | P16 | 长任务用户体验 | E/D | P13-02、P16-03 | BLOCKED | 待 P16-03 真实观察。 |
-| P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | BLOCKED | 证据链接离线复验通过，原生基准绑定文件已归档并恢复验证。正式包待 P13 及最终同提交证据。 [打包验证](../../docs/round2/deployment/p16-06-tooling.md) |
+| P16-06 | P16 | 交付包与复现材料整理 | 主控/F/A | P12-04 至 P12-08、已选 P13/P14 | BLOCKED | 原生镜像和绑定已归档，在空镜像库导入并断网复验通过。正式包待 P13 及最终同提交证据。 [打包验证](../../docs/round2/deployment/p16-06-tooling.md) |
 | P16-07 | P16 | V2 产品范围与发布决策 | 主控 | P13-08、P14-08、P15-08、P16-01 至 P16-06 | BLOCKED | 待 P13-08 及 P16-03 至 P16-06 验收。 |

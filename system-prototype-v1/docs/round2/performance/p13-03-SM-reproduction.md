@@ -34,3 +34,5 @@ nice -n 19 taskset -c 31 .venv/bin/python \
 同一批原始字节压缩归档后重跑输出一致。注入重复 run ID、移除实际进程超时标记，以及用未采完的样本执行正式审计，均退出 1。正式审计还要读取全部 98 条和最终汇总。当前输出状态为 `PREVIEW`。原始压缩样本和命令保存在 `artifacts/test-results/p13-03-L-continuation-audit.wnPNCG/`。 [复跑及异常验证](p13-03-L-continuation-audit.log)
 
 主控把实际 L 驱动及其独立参考代码叠加到 `37cb329` 的完整冻结原型快照，并复跑矢量专项。两次选择性导出分别缺少配方引用的夹具和测试源，均有 16 项通过、2 项失败。改用完整导出后 18 项通过、0 跳过，退出 0。复跑使用原生 QGIS 3.44.15、Python 3.12.3、tmpfs、CPU 31、nice 19 与 idle I/O 优先级。三次实际命令及报告保存在 `artifacts/test-results/p13-03-independent-native.uoGlWa/`。 [复跑日志](p13-03-independent-native-pytest.log) · [JUnit](p13-03-independent-native-junit.xml)
+
+正式容器退出 1，后续批次完整记录 98 个失败终态，0 次缺失。主控复跑正式审计，确认 14 个完整冷热组，原始 JSONL 与 gzip 归档解压后逐字节相同，最终汇总一致。两批 L 共 140 个不同的实际运行，均失败。成功样本的中位数和 P95 留空，失败阶段和资源观测保留。重跑此前四批复算也通过，五批合计 423 个不同运行，S、M、L 各覆盖计划的 20 个冷热组。 [正式复算](p13-03-L-continuation-audit-final.json) · [命令和退出码](p13-03-L-final-audit.log)

@@ -1,0 +1,7 @@
+Docker wait of actual L continuation container b7ff3961b29b returned container exit 1.
+L-remaining/evidence/summary.json retained PASS 0, FAIL 98, NOT_RUN 0.
+bash artifacts/test-results/p13-03-L-continuation-audit.wnPNCG/replay.sh /mnt/datab/geopilot-p13-03.KXUnnZ --summary /mnt/datab/geopilot-p13-03.KXUnnZ/L-remaining/evidence/summary.json
+Audit exit 0. 98 rows, 14 complete cold/warm groups, 140 distinct IDs in both L batches.
+Raw continuation and the gzip archive match after decompression, SHA-256 caf54ffa30b98b24265cf585b2039411ee64b4da4c1a51d5e3fcd23f074b36c8.
+Earlier archived S, M, M-cont and L-formal audit replay exit 0; byte-identical output.
+Independent ID check across all five batches exit 0, 423 distinct actual runs, 20 planned groups per tier.

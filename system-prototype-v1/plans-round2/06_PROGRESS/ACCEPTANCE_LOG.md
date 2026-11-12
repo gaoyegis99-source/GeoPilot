@@ -239,6 +239,7 @@
 - 主控从 `/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/evidence/samples.jsonl` 核对 42 个唯一运行及各组采样键。道路 14 次在成果登记报 `OUTPUT_INVALID`。T13 和 T14 各 14 次在 `apply_spatial_relation` 报 `PROCESS_TIMEOUT`，退出 -15。T14 的后续两步保持 `NOT_STARTED`。P13-03 仍为 DOING，余下七项继续正式采样。
 - 主控冻结 L 后续批次首 74 条原始样本，独立复核输入、终态、逐步超时及资源覆盖。压缩副本重跑一致，重复 run、无进程超时和正式复核缺样均拒绝。正式汇总待该批 98 次采样完成。 [复算与复跑](../../docs/round2/performance/p13-03-SM-reproduction.md#l-后续批次独立复核)
 - 主控使用完整冻结快照和实际 L 驱动独立复跑矢量专项，18 项通过、0 跳过，退出 0。选择性导出的两次失败及实际命令保留。 [复跑日志](../../docs/round2/performance/p13-03-independent-native-pytest.log) · [JUnit](../../docs/round2/performance/p13-03-independent-native-junit.xml)
+- 主控复核 B 提交 `3bf845880d7d43e567a6267ace4fabca0d6365c4`。五批共 423 个不同实际运行，三档各完整覆盖 20 个冷热组。L 两批 140 次失败，成功分位留空，失败分位与资源观测单独保留。P13-03 的多规模基准状态 ACCEPTED，放行 P13-05。 [报告](../../docs/round2/performance/p13-03.md) · [独立正式复算](../../docs/round2/performance/p13-03-L-final-audit.log)
 - F 独立复算 S、M、M 续段和首批 L 共 325 个唯一运行，分布及资源计数与归档一致。主控复跑结果逐字节一致，归档 S/M 实际使用的旧驱动并验证解包摘要及 CLI 入口。 [复算与旧驱动归档](../../docs/round2/performance/p13-03-SM-reproduction.md)
 
 ## P13-05 隔离候选检查
@@ -274,3 +275,4 @@
 - F 和主控独立复现原打包可遗漏选定 Markdown 间接引用的已跟踪原始证据，离线校验仍退出 0。候选递归收录同一夹具的报告和原始 JSON，离线重查回执可拒绝缺失证据、无效锚点和越界路径。
 - 主控联合 60 项通过，退出 0。P12-03 精确审计记录继续追踪历史缺链。P16-06 仍为 BLOCKED，正式同提交候选待阶段证据齐备。 [命令、输出与 JUnit](../../docs/round2/deployment/p16-06-tooling.md)
 - A 将原生 venv 和匹配 QGIS CLI 归档到另一物理盘并从空目录恢复。目录清单逐项相同，恢复绑定在同一镜像断网通过指纹和版本检查，退出 0。主控独立重算归档摘要。镜像导出和最终同提交包仍待完成。 [恢复报告](../../docs/round2/deployment/p16-06-native-bindings-verification.json)
+- 主控在正式矢量批次终态后导出固定镜像。在独立空镜像库导入后，镜像 ID、五个层及运行时绑定指纹一致，断网版本检查退出 0。P16-06 正式同提交包仍待阶段证据。 [离线导入报告](../../docs/round2/deployment/p16-06-native-image-verification.json)

@@ -30,4 +30,6 @@ export PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1
 
 A 在与正式基准不同的物理盘上归档 Python venv、QGIS CLI 和对应的 LTR Debian 包，解包到空的 tmpfs 目录。源和恢复目录的 7,493 项类型、权限、大小和符号链接逐项一致。恢复目录中的运行时与两份 QGIS CLI 以只读方式挂入已核验的本机镜像，断网启动版本与内容检查，退出 0。运行时 6,738 个条目的指纹及两份 QGIS CLI 摘要与原生环境证据一致。主控独立重算归档 SHA-256，与报告一致。 [恢复及复核报告](p16-06-native-bindings-verification.json) · [原生环境证据](../performance/p13-05-preflight-native-identity.json)
 
-归档为 `artifacts/test-results/p16-06-native-bindings.BdbMRw/p13-native-readonly-bindings.tar.gz`，共 142,078,689 字节，SHA-256 为 `e26482ebf553a85cb572a37fe9adc4bb0c224c4e096e7b2fbdf047dbd22bdef0`。同目录的 `proof/` 保留打包、恢复、容器命令与校验日志。本次验证覆盖外部绑定文件以及它们在现有镜像中的使用。镜像导出与跨机器恢复仍待执行，当前 Docker 镜像层和正式矢量基准位于同一物理盘。正式第二轮候选包仍待阶段证据和最终同提交回执。
+归档为 `artifacts/test-results/p16-06-native-bindings.BdbMRw/p13-native-readonly-bindings.tar.gz`，共 142,078,689 字节，SHA-256 为 `e26482ebf553a85cb572a37fe9adc4bb0c224c4e096e7b2fbdf047dbd22bdef0`。同目录的 `proof/` 保留打包、恢复、容器命令与校验日志。
+
+正式矢量基准结束后，主控用 `docker image save --platform linux/amd64` 导出该固定镜像，归档 `artifacts/test-results/p16-06-native-image.HGV83q/p13-native-image.tar` 共 1,720,453,120 字节，SHA-256 为 `db2d9f1e7e72a3d848a357df5c903278280b6e0d19156c84188e7d770ae41ec3`。同宿主启动初始镜像数为 0 的独立 rootless Docker，导入后镜像 ID 和五个层摘要一致。使用从绑定归档重新解包的文件，断网运行 QGIS/Python 版本及指纹检查，退出 0。宿主 rootless AppArmor 配置查询在合成夹具上报权限错误，隔离复验容器显式指定其 AppArmor 设置后通过。原生复验覆盖镜像、绑定和版本，正式第二轮候选包仍待阶段证据和最终同提交回执。 [离线导入和运行报告](p16-06-native-image-verification.json)
