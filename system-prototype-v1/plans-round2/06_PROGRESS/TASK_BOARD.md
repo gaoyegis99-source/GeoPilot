@@ -4,8 +4,8 @@
 |---|---|---|---|---|---|---|
 | P12-01 | P12 | 固定审计基线与仓库快照 | 主控 | 无 | ACCEPTED | [基线、命令与测试](../../docs/round2/audit/baseline.md) |
 | P12-02 | P12 | 需求矩阵与最终报告统计对账 | F | P12-01 | REVIEW | [对账通过，产品回归运行中](../../docs/round2/audit/p12-02.md) |
-| P12-03 | P12 | 文档与证据链接完整性扫描 | F | P12-01 | DOING | Agent F（证据扫描） |
-| P12-04 | P12 | 交付 Manifest 完整性校验 | F/A | P12-01、P12-03 | TODO | 待执行 |
+| P12-03 | P12 | 文档与证据链接完整性扫描 | F | P12-01 | ACCEPTED | [扫描与人工复核](../../docs/round2/audit/p12-03-review.md) |
+| P12-04 | P12 | 交付 Manifest 完整性校验 | A/F | P12-01、P12-03 | DOING | Agent A/F（清单验证） |
 | P12-05 | P12 | 后端全量回归复跑 | F | P12-01、P12-02；QGIS CLI 可用 | TODO | 待执行 |
 | P12-06 | P12 | 前端测试与构建基线 | E/F | P12-01 | TODO | 待执行 |
 | P12-07 | P12 | T01—T16 固定用例独立复跑 | B/F | P12-05；QGIS CLI 可用 | TODO | 待执行 |
