@@ -1,0 +1,202 @@
+{
+  "state": "COMPLETE",
+  "workload": "t13-points-intersects",
+  "side": "base",
+  "source_commit": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+  "observed_rows_sha256": "ec5dab4005f733d110032edbe462ae0e218f9df62a6a01cb6ca56bab2719f8f1",
+  "rows": 14,
+  "counts": {
+    "FAIL": 14,
+    "NOT_RUN": 0,
+    "PASS": 0
+  },
+  "historic_run_ids_excluded": 140,
+  "groups": {
+    "process_cold": {
+      "observed_slots": 7,
+      "measurement_slots": 5,
+      "measurement_complete": true,
+      "counts": {
+        "FAIL": 5,
+        "NOT_RUN": 0,
+        "PASS": 0
+      },
+      "failure_locations": {
+        "PROCESS_TIMEOUT/clip_back_to_analysis_extent": 5
+      },
+      "metrics": {
+        "wall_ns": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 96611953468,
+            "p95_nearest_rank": 97374468320
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 3,
+            "median": 341499904,
+            "p95_nearest_rank": 342380544
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 281319557,
+            "p95_nearest_rank": 281319593
+          }
+        }
+      },
+      "steps": {
+        "apply_spatial_relation": {
+          "SUCCEEDED": {
+            "count": 5,
+            "wall_ns": {
+              "samples": 5,
+              "partial": 0,
+              "median": 30313168612,
+              "p95_nearest_rank": 30981173758
+            },
+            "peak_rss_bytes": {
+              "samples": 5,
+              "partial": 2,
+              "median": 341499904,
+              "p95_nearest_rank": 342380544
+            }
+          }
+        },
+        "clip_back_to_analysis_extent": {
+          "FAILED": {
+            "count": 5,
+            "wall_ns": {
+              "samples": 5,
+              "partial": 0,
+              "median": 60666710063,
+              "p95_nearest_rank": 60681079693
+            },
+            "peak_rss_bytes": {
+              "samples": 5,
+              "partial": 3,
+              "median": 314974208,
+              "p95_nearest_rank": 316743680
+            }
+          }
+        }
+      }
+    },
+    "warm": {
+      "observed_slots": 7,
+      "measurement_slots": 5,
+      "measurement_complete": true,
+      "counts": {
+        "FAIL": 5,
+        "NOT_RUN": 0,
+        "PASS": 0
+      },
+      "failure_locations": {
+        "PROCESS_TIMEOUT/clip_back_to_analysis_extent": 5
+      },
+      "metrics": {
+        "wall_ns": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 96771830092,
+            "p95_nearest_rank": 97139499948
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 3,
+            "median": 341975040,
+            "p95_nearest_rank": 342507520
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 281319557,
+            "p95_nearest_rank": 281319593
+          }
+        }
+      },
+      "steps": {
+        "apply_spatial_relation": {
+          "SUCCEEDED": {
+            "count": 5,
+            "wall_ns": {
+              "samples": 5,
+              "partial": 0,
+              "median": 30242205184,
+              "p95_nearest_rank": 30620095130
+            },
+            "peak_rss_bytes": {
+              "samples": 5,
+              "partial": 2,
+              "median": 341975040,
+              "p95_nearest_rank": 342507520
+            }
+          }
+        },
+        "clip_back_to_analysis_extent": {
+          "FAILED": {
+            "count": 5,
+            "wall_ns": {
+              "samples": 5,
+              "partial": 0,
+              "median": 60688641781,
+              "p95_nearest_rank": 60812781806
+            },
+            "peak_rss_bytes": {
+              "samples": 5,
+              "partial": 2,
+              "median": 314990592,
+              "p95_nearest_rank": 315707392
+            }
+          }
+        }
+      }
+    }
+  }
+}
