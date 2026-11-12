@@ -66,7 +66,7 @@ B 将后端 JUnit 与 2,171 个收集节点逐一核对，将固定 GIS JUnit �
 
 ## 同提交技术候选包验收
 
-主控与 B 在净分离检出 `44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0` 验证，原始证据提交为 `9ea45ec991547adf0b70e16710efb8f789450183`。P13 与 P14 已选范围均已通过。验证使用 Linux 5.15、Python 3.13.13、pytest 8.3.4、QGIS 3.44.15、Psycopg 3.3.4、Node v22.23.1 和 npm 10.9.8，固定离线 npm 缓存，真实 QGIS 与 PostGIS。启动脚本、CPU 限制包装器和各套实际命令随证据封存。 [验证回执](../../../artifacts/reports/final/round2-validation.json)
+主控与 B 在净分离检出 `44b17fcd5dc09ec9d3d713f2dddf8fdbcf3600b0` 验证，原始证据提交为 `9ea45ec991547adf0b70e16710efb8f789450183`。P13 与 P14 已选范围均已通过。验证使用 Linux 5.15、Python 3.13.13、pytest 8.3.4、QGIS 3.44.15、Psycopg 3.3.4、Node v22.23.1 和 npm 10.9.8，固定离线 npm 缓存，真实 QGIS 与 PostGIS。启动脚本、CPU 限制包装器和各套实际命令随证据封存。 验证回执收录在本节原始证据中。
 
 | 套件 | 通过 | 失败／错误／跳过 | 退出码 |
 | --- | ---: | ---: | ---: |
@@ -76,6 +76,6 @@ B 将后端 JUnit 与 2,171 个收集节点逐一核对，将固定 GIS JUnit �
 
 独立复核逐项匹配 2,228 个唯一后端节点和 82 个唯一固定 GIS 节点。前端的两组参数化测试保留相同展示名称，按 Vitest 和 JUnit 的实际执行条数核对。Vite 保留构建体积提示，后端保留依赖弃用提示和地理数据写入警告。 [独立审计、原始命令和回执](p16-06-candidate-verification-evidence.tar.gz)
 
-主控运行 `delivery_manifest.py --round2 --source-ref … --evidence-ref … --archive … --write` 生成清单与确定性归档。按提交核验与空目录解包后无 Git 核验均退出 0，JSON 字节一致。包内有 944 个源码范围文件、733 个证据文件，附版本、锁定依赖、测试、样本和离线复现文档。发布归档的 SHA-256 为 `7971fce3e321224a8a7dc6f9dc7c365ffd4cff90de79e18fec5e417b971cfbc3`。源码和证据文件按各自精确提交保存。可按固定引用重建；撤销本次交付文档和清单提交可从开发分支移除候选引用。 [固定清单](../../../artifacts/reports/final/round2-delivery-manifest.json) · [复现说明](../../release/ROUND2_REPRODUCTION.md)
+主控运行 `delivery_manifest.py --round2 --source-ref … --evidence-ref … --archive … --write` 生成清单与确定性归档。按提交核验与空目录解包后无 Git 核验均退出 0，JSON 字节一致。包内有 944 个源码范围文件、733 个证据文件，附版本、锁定依赖、测试、样本和离线复现文档。发布归档的 SHA-256 为 `7971fce3e321224a8a7dc6f9dc7c365ffd4cff90de79e18fec5e417b971cfbc3`。源码和证据文件按各自精确提交保存。可按固定引用重建；撤销本次交付文档和清单提交可从开发分支移除候选引用。 [复现说明](../../release/ROUND2_REPRODUCTION.md)
 
 P16-06 主控 ACCEPTED。该归档为已验证技术候选。真实用户观察与后续体验改进仍是 P16-07 发布决策的前置，若源码变化需对届时版本重跑并更新包。
