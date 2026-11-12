@@ -2,4 +2,4 @@
 
 | ID | 任务 | 复现 | 影响 | 决策 | 状态 |
 |---|---|---|---|---|---|
-| ENV-QGIS | P12-05、P12-07 | 主机 PATH 无 `qgis_process`，本机有 V1 使用的 Docker 镜像 | 需验证实际 QGIS CLI 方可复跑完整 GIS 路径 | 按 V1 环境记录恢复隔离入口并探测版本 | 调查中 |
+| ENV-QGIS | P12-05、P12-07 | 主机 PATH 无 `qgis_process`。容器的默认配置目录对调用用户不可写 | 原入口不可用 | 恢复同版 CLI，改用临时配置目录并复跑真实缓冲测试。 [环境证据](../../docs/round2/audit/qgis-preflight.md) | 已关闭 |
