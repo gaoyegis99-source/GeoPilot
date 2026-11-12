@@ -9,6 +9,21 @@
 3. 将原型下的 `tests/fixtures/vector/road-buffer.gpkg` 绝对路径填进受试任务单。保持样例原件只读。开始前确认浏览器可下载，下载目录可读取 CSV。为主持准备计时器和观察记录。
 4. 将任务单交给参与者，读出目标即可。请其说出选择原因及对界面反馈的理解。主持手册和答案只供观察员使用。 [启动说明](../../../README.md#启动工作台) · [受试任务单](participant-task.md)
 
+## 现场浏览器会话
+
+主持人在已安装后端的电脑上准备工作台。参与者打开同一台电脑上的浏览器。每次会话结束后停掉后端，下次用新的会话目录重新启动。在本批次固定提交的原型目录运行下面的后端命令，前端沿用工作台启动说明。
+
+```bash
+git rev-parse HEAD
+trial_dir=$(mktemp -d "${TMPDIR:-/tmp}/geopilot-user-trial.XXXXXX")
+mkdir -p "$trial_dir/downloads"
+PYTHONPATH="$PWD/src" .venv/bin/python -m geopilot.api.server \
+  --database "$trial_dir/project.sqlite" --workspace "$trial_dir/workspace" \
+  --config "$PWD/config" --qgis-process "$GEOPILOT_QGIS_PROCESS" --port 8000
+```
+
+将前端回环地址和样例的后端绝对路径填入受试任务单。使用独立浏览器会话并把下载位置设为本次会话的 `downloads` 目录。留存实际下载的 CSV 和匿名观察表，按会话编号关联。 [工作台启动说明](../../../README.md#启动工作台) · [匿名记录填写规则](observations.md) · [两套后端和浏览器验证](../deployment/p16-02.md)
+
 ## 任务边界与答案
 
 | 记录键 | 开始与结束 | 完成条件 |
