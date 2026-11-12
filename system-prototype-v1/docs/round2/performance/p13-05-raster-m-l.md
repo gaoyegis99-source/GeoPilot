@@ -40,6 +40,33 @@ DEM L 于 14:53:29 UTC 开始。A 验证了在同一结果根复用封存的修�
 
 主控复验七份分类 GeoTIFF 的指纹、网格、类别 7 的 4,183,812 个像元和 2,304 个 NoData 像元，均与 P13-04 参考一致。B 独立对照旧原版和候选冷组，三侧 21 份分类 TIFF 字节相同。重试七个运行 ID 与此前 25 个 DEM M ID 无交集。重试冷组停在完整成果验算之前。暖组已接续，完整配对仍待暖态终态。 [冷态原始记录、GeoTIFF 和两份复算](p13-05-dem-m-retry-cold-evidence.tar.gz) · [封存分类参考](p13-04-dem-m-classification-source.json)
 
+## DEM M 原版重试正式配对
+
+重试启动器于 17:34:09 UTC 退出 0，原版容器以 1 报告完整失败组。原版冷暖 14 轮均在等积面积步骤触发 60 秒 `PROCESS_TIMEOUT`，全部持久终态为 `FAILED/NOT_CHECKED`，无状态 GET 错误。复用的修正版冷暖 14 轮均完成计算和独立验算，暖态两次预热和一次正式计量保留基准状态观察失败。配置回执一致，严格配对为 `MATCHED_EVIDENCE`，两侧各 14 个运行 ID 互异。 [正式比较、原始记录、分类和回执](p13-05-dem-m-retry-pair-evidence.tar.gz)
+
+| 正式计量 | 端到端中位数，秒 | P95，秒 | 基准结果 |
+| --- | ---: | ---: | --- |
+| 重试原版冷态 | 65.957 | 66.331 | 5 次面积超时 |
+| 重试原版暖态 | 65.874 | 66.081 | 5 次面积超时 |
+| 修正版冷态成功样本 | 46.168 | 48.919 | 5 次通过 |
+| 修正版暖态成功样本 | 49.798 | 52.816 | 4 次通过，1 次状态观察失败 |
+
+原版冷态整轮 RSS 五次部分采样，暖态两次完整、三次部分。两侧的成功样本差值留空。主控核验重试冷前缀、14 份分类 TIFF、原始 worker 日志与重复使用的修正版分片。每份分类与 P13-04 封存参考逐字节一致。B 独立验证两侧共 28 份分类、修正版完整成果和正式回执，复算退出 0。原版自比较、候选自比较及正式配对离线重放退出 0，结果逐字节一致。旧暖态 HTTP 500 中断继续保留，重试没有重现该错误。DEM L 整幅面积容量探针于 17:34:13 UTC 接续。
+
+```bash
+p13_dem_m=$(mktemp -d)
+mkdir "$p13_dem_m"/{cold,pair}
+tar -xzf docs/round2/performance/p13-05-dem-m-retry-cold-evidence.tar.gz -C "$p13_dem_m/cold"
+tar -xzf docs/round2/performance/p13-05-dem-m-retry-pair-evidence.tar.gz -C "$p13_dem_m/pair"
+(cd "$p13_dem_m/cold" && sha256sum -c SHA256SUMS)
+(cd "$p13_dem_m/pair" && sha256sum -c SHA256SUMS)
+.venv/bin/python -B "$p13_dem_m/pair/proof/replay.py" "$p13_dem_m/pair" dem-m
+.venv/bin/python -B "$p13_dem_m/pair/proof/verify-dem-m.py" \
+  "$p13_dem_m/pair" "$p13_dem_m/cold" docs/round2/performance/p13-04-dem-m-classification-source.json \
+  > "$p13_dem_m/replayed.json"
+cmp "$p13_dem_m/replayed.json" "$p13_dem_m/pair/proof/replayed.json"
+```
+
 ## DEM L 原版冷态
 
 两次预热和五次正式计量全部完成前六步，随后在等积面积步触发 60 秒 `PROCESS_TIMEOUT`，子进程退出 -15，终态为 `FAILED/NOT_CHECKED`。三轮曾出现状态查询错误，随后均读取到超时终态。五次正式计量截至失败的端到端中位数和 P95 为 86.145、98.954 秒，面积步为 60.049、60.051 秒。五次临时空间采样完整，峰值中位数为 1,843,780 字节。整轮 RSS 一次完整、四次部分采样，观察中位数为 249,741,312 字节。B 核对 7 个新运行 ID，与此前核对的 184 个 ID 无交集。 [原始样本、资源记录和两份复算](p13-05-dem-l-base-cold-evidence.tar.gz)
