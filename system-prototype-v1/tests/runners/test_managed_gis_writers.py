@@ -1,14 +1,19 @@
 import json
+import os
 import shutil
 import signal
+import subprocess
+import sys
 from pathlib import Path
 
+import geopandas as gpd
 import numpy as np
 import pyogrio
 import pytest
 import rasterio
 import yaml
 from rasterio.transform import from_origin
+from shapely.geometry import box
 
 from geopilot.domain.step_io import ExecutionStatus, StepRequest
 from geopilot.domain.tool_contract import ToolContract
@@ -23,6 +28,7 @@ CASES = {
     "vector": ("python-select-spatial-relation", "select_spatial_relation.py", ".vector-step-"),
     "raster": ("python-dem-threshold", "classify_dem_threshold.py", ".raster-threshold-"),
     "remote": ("python-remote-sensing-calculate-change", "remote_sensing_workflow.py", ".ndvi-change-"),
+    "land_use": ("python-land-use-assign", "land_use_transition.py", ".land-use-zones-"),
 }
 HOOK = '''
 import json
@@ -33,17 +39,25 @@ from pathlib import Path
 
 original_link = os.link
 
+def record_staged_file(path, destination, crs=None):
+    evidence = {{"source": str(path.absolute()), "destination": str(destination.absolute()),
+                 "bytes": path.stat().st_size, "projected_crs": crs,
+                 "same_device": path.stat().st_dev == destination.parent.stat().st_dev}}
+    Path("ready.tmp").write_text(json.dumps(evidence))
+    Path("ready.tmp").replace("ready.json")
+    if {interrupt!r}:
+        time.sleep(60)
+
 def observed_link(source, target, *args, **kwargs):
-    path = Path(source)
+    path, destination = Path(source), Path(target)
+    if destination.parent.name.startswith({prefix!r}):
+        import pyogrio
+
+        original_link(source, target, *args, **kwargs)
+        record_staged_file(destination, Path({declared!r}), pyogrio.read_info(destination, layer="zones")["crs"])
+        return
     if path.parent.name.startswith({prefix!r}):
-        destination = Path(target)
-        evidence = {{"source": str(path.absolute()), "destination": str(destination.absolute()),
-                     "bytes": path.stat().st_size,
-                     "same_device": path.stat().st_dev == destination.parent.stat().st_dev}}
-        Path("ready.tmp").write_text(json.dumps(evidence))
-        Path("ready.tmp").replace("ready.json")
-        if {interrupt!r}:
-            time.sleep(60)
+        record_staged_file(path, destination)
     return original_link(source, target, *args, **kwargs)
 
 os.link = observed_link
@@ -60,6 +74,35 @@ def _write_raster(path, values, *, descriptions, units):
         dataset.descriptions = descriptions
         dataset.units = units
         dataset.write(values)
+
+
+def _land_use_inputs(workdir):
+    fragment = box(1_000_000, 0, 1_000_010, 10)
+    parts = {
+        "overlay_polygons": {
+            "source_feature_id": ["fragment"], "first_period": ["2018"], "second_period": ["2024"],
+            "from_class": ["crop"], "to_class": ["forest"], "first_source_feature_id": ["first"],
+            "second_source_feature_id": ["second"], "first_source_code": ["1"], "second_source_code": ["2"],
+            "is_change": [True], "area_m2": [100.0],
+        },
+        "first_classes": {
+            "source_feature_id": ["first"], "period": ["2018"], "class_code": ["crop"], "source_class_code": ["1"],
+        },
+        "second_classes": {
+            "source_feature_id": ["second"], "period": ["2024"], "class_code": ["forest"], "source_class_code": ["2"],
+        },
+        "zones": {"source_feature_id": ["zone"]},
+    }
+    inputs = {}
+    for role, fields in parts.items():
+        path = f"inputs/{role}.gpkg"
+        frame = gpd.GeoDataFrame(fields, geometry=[fragment], crs="EPSG:6933")
+        if role == "zones":
+            frame.geometry = [box(999_990, -10, 1_000_020, 20)]
+            frame = frame.to_crs("EPSG:4326")
+        pyogrio.write_dataframe(frame, workdir / path, layer=role, driver="GPKG")
+        inputs[role] = {"path": path, "layer": role}
+    return inputs
 
 
 def _request(workdir, case, contract):
@@ -80,6 +123,14 @@ def _request(workdir, case, contract):
             {"class_id": 8, "lower": 1, "upper": None, "include_lower": False, "include_upper": False},
         ]}}
         outputs = {"threshold_regions": {"path": "outputs/threshold.tif"}}
+    elif case == "land_use":
+        inputs = _land_use_inputs(workdir)
+        source = workdir / inputs["zones"]["path"]
+        parameters = {
+            "area_crs": "EPSG:6933", "area_unit": "square_meter", "area_tolerance": 0.01,
+            "boundary_assignment": "split_by_area", "boundary_tie": "unassigned",
+        }
+        outputs = {"allocations": {"path": "outputs/allocations.json"}}
     else:
         source = workdir / "inputs/aligned.tif"
         values = np.asarray([[[0.5, 0.2, 0.25, np.nan]], [[0.25, 0.2, 0.75, np.nan]]])
@@ -110,6 +161,14 @@ def _verify_outputs(workdir, case, request, source):
         assert output.drop(columns="geometry").equals(expected.drop(columns="geometry"))
         assert output.geometry.to_wkb().tolist() == expected.geometry.to_wkb().tolist()
         return {"ids": output.source_feature_id.tolist(), "crs": output.crs.to_string()}
+    if case == "land_use":
+        assert pyogrio.read_info(source, layer="zones")["crs"] == "EPSG:4326"
+        allocations = json.loads(outputs["allocations"].read_text())
+        assert allocations == {
+            "area_crs": "EPSG:6933", "area_unit": "square_meter", "boundary_assignment": "split_by_area",
+            "zone_ids": ["zone"], "allocations": [{"fragment_id": "fragment", "zone_id": "zone", "area_m2": 100.0}],
+        }
+        return allocations
     role = "threshold_regions" if case == "raster" else "change_classes"
     expected = [[0, 7, 8, 255]] if case == "raster" else [[1, 2, 3, 255]]
     with rasterio.open(source) as original, rasterio.open(outputs[role]) as result:
@@ -135,10 +194,13 @@ def exercise_writer(workdir, case, *, interrupt, managed, source_root=ROOT):
     registry = ToolRegistry(python_implementations=(contract.implementation,))
     registry.register(contract)
     request, source = _request(workdir, case, contract)
-    before = source.read_bytes()
+    before = {ref.path: (workdir / ref.path).read_bytes() for ref in request.inputs.values()}
     probe = workdir / "probe.py"
     worker = source_root / "src/geopilot/gis/tools" / worker_name
-    probe.write_text(HOOK.format(prefix=prefix, interrupt=interrupt, script=str(worker)))
+    probe.write_text(HOOK.format(
+        prefix=prefix, interrupt=interrupt, script=str(worker),
+        declared=next(iter(request.output_targets.values())).path,
+    ))
     marker = workdir / "ready.json"
 
     result = run_step(
@@ -150,8 +212,19 @@ def exercise_writer(workdir, case, *, interrupt, managed, source_root=ROOT):
     staged = Path(observation["source"])
     destination = Path(observation["destination"])
     assert observation["bytes"] > 0 and observation["same_device"]
-    assert source.read_bytes() == before and sentinel.read_bytes() == b"retain"
+    assert all((workdir / path).read_bytes() == contents for path, contents in before.items())
+    assert sentinel.read_bytes() == b"retain"
+    if case == "land_use":
+        assert observation["projected_crs"] == "EPSG:6933"
+        print(json.dumps({
+            "projected": staged.relative_to(workdir).as_posix(), "projected_bytes": observation["bytes"],
+            "still_present": staged.exists(), "exit_code": result.exit_code, "status": result.status,
+        }))
     assert not list(workdir.rglob(".python-output-*"))
+    if case == "land_use":
+        assert staged.parent.name.startswith(".land-use-zones-")
+        if managed:
+            assert not staged.parent.exists()
     if case == "remote":
         assert staged.parent.parent == destination.parent
         assert destination.parent.name.startswith(".land-use-")
@@ -183,6 +256,33 @@ def exercise_writer(workdir, case, *, interrupt, managed, source_root=ROOT):
         "destination": destination.relative_to(workdir).as_posix(), "outputs": sorted(result.outputs),
         "independent_reference": details,
     }
+
+
+def test_land_use_reprojection_standalone_keeps_output_parent(tmp_path):
+    for folder in ("inputs", "outputs"):
+        (tmp_path / folder).mkdir()
+    tool_id, worker_name, prefix = CASES["land_use"]
+    contract = ToolContract.model_validate(yaml.safe_load((ROOT / f"config/tools/{tool_id}.yaml").read_text()))
+    request, source = _request(tmp_path, "land_use", contract)
+    (tmp_path / "request.json").write_text(request.model_dump_json())
+    probe = tmp_path / "probe.py"
+    probe.write_text(HOOK.format(
+        prefix=prefix, interrupt=False, script=str(ROOT / "src/geopilot/gis/tools" / worker_name),
+        declared=request.output_targets["allocations"].path,
+    ))
+    env = {**os.environ, "PYTHONPATH": str(ROOT / "src")}
+    env.pop(OUTPUT_STAGING_ENV, None)
+    result = subprocess.run(
+        [sys.executable, str(probe), "--request", "request.json", "--result", "result.json"],
+        cwd=tmp_path, env=env, capture_output=True, text=True, timeout=15, check=True,
+    )
+    observed = json.loads((tmp_path / "ready.json").read_text())
+    staged = Path(observed["source"])
+    assert observed["projected_crs"] == "EPSG:6933" and observed["bytes"] > 0
+    assert staged.parent.name.startswith(prefix) and staged.parent.parent == tmp_path / "outputs"
+    assert not staged.parent.exists()
+    assert "Projected zones to EPSG:6933" in result.stdout
+    print(json.dumps({"standalone": _verify_outputs(tmp_path, "land_use", request, source)}))
 
 
 @pytest.mark.parametrize("case", list(CASES))

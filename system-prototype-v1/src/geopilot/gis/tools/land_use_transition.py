@@ -2,12 +2,12 @@
 
 import json
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 from geopandas import GeoDataFrame
 from pyproj import CRS
 from shapely.errors import GEOSException
 
+from geopilot.execution.output_staging import temporary_output_directory
 from geopilot.gis.measurement.projection import reproject_vector
 from geopilot.gis.tools.tool_command import run_tool_command
 from geopilot.gis.tools.vector_step_files import read_vector, write_vector_outputs
@@ -57,7 +57,7 @@ def _read_zones(request: dict, area_crs: CRS) -> GeoDataFrame:
         return zones.to_crs(area_crs)
     reference = request["inputs"]["zones"]
     target = Path(request["output_targets"]["allocations"]["path"])
-    with TemporaryDirectory(prefix=".land-use-zones-", dir=target.parent) as directory:
+    with temporary_output_directory(target, prefix=".land-use-zones-") as directory:
         projected = reproject_vector(
             reference["path"], Path(directory) / "zones.gpkg", source_layer=reference.get("layer"),
             output_layer="zones", method="equal_area", target_crs=area_crs,
