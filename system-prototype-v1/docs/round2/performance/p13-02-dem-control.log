@@ -1,0 +1,10 @@
+mode=off node=tests/methods/test_dem_terrain_method.py::test_real_seven_step_terrain_method_derives_ratio_and_registers_results[slope-45-False] basetemp=/tmp/geopilot-p13-02-dem-off-_1b5i6w5/pytest
+.
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-02-dem-off-junit.xml -
+1 passed in 8.81s
+mode=off exit_code=0
+mode=on node=tests/methods/test_dem_terrain_method.py::test_real_seven_step_terrain_method_derives_ratio_and_registers_results[slope-45-False] basetemp=/tmp/geopilot-p13-02-dem-on-w5zm4vw0/pytest
+.
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-02-dem-on-junit.xml -
+1 passed in 9.00s
+mode=on exit_code=0

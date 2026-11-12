@@ -15,7 +15,7 @@
 | P12-11 | P12 | 数据规模与性能基准方案 | B/F/A | P12-01、P12-05 | ACCEPTED | [三档方案、样本探测与 13 项测试](../../docs/round2/audit/p12-11.md) |
 | P12-12 | P12 | P12 审计签收与第二轮放行 | 主控 | P12-01 至 P12-11 | ACCEPTED | [最终审计与放行证据](../../docs/round2/audit/P12_FINAL_AUDIT.md) |
 | P13-01 | P13 | GIS 数据规模分级生成器 | B/A/F | P12-11 | ACCEPTED | [S/M/L 实际生成、独立参考和联合复验](../../docs/round2/performance/p13-01.md) |
-| P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | DOING | D 负责 run/step 旁路采样与回归 |
+| P13-02 | P13 | 执行资源遥测 | D/F | P12-10、P13-01 | ACCEPTED | [旁路采样、真实运行及 T01–T16 复验](../../docs/round2/performance/p13-02.md) |
 | P13-03 | P13 | 矢量处理性能基线 | B/F | P13-01、P13-02 | TODO | 待执行 |
 | P13-04 | P13 | 栅格与遥感性能基线 | B/F | P13-01、P13-02 | TODO | 待执行 |
 | P13-05 | P13 | 大数据内存与临时文件控制 | A/B | P13-03、P13-04 | TODO | 待执行 |

@@ -33,6 +33,7 @@ from geopilot.checks.tool_checks import (
 from geopilot.domain.errors import ErrorDetail
 from geopilot.domain.step_io import ExecutionStatus, StepFileRef, StepOutput, StepRequest, StepResult
 from geopilot.execution.step_support import PreparedStep, resolve_step_path
+from geopilot.observability.telemetry import record_run
 from geopilot.persistence.asset_repository import asset_for_ref
 from geopilot.persistence.run_repository import get_run, list_run_steps, update_run
 from geopilot.persistence.schema import open_database
@@ -450,16 +451,22 @@ def run_confirmed_plan(
             error.add_note(f"Could not remove incomplete run directory {workdir}: {cleanup}")
         raise
 
-    results = execute_steps(
-        database_path, workspace, plan, asset_files, registry=registry, qgis_bindings=qgis_bindings,
-        python_implementations=python_implementations, qgis_process=qgis_process, timeout=timeout,
-        input_preflight=input_preflight,
-    )
-    return _finish_run(
-        database_path, run_id, workdir, plan, asset_files, results, check_rules, registry=registry,
-        qgis_bindings=qgis_bindings, python_implementations=python_implementations, artifact_rules=artifact_rules,
-        rule_versions=rule_versions,
-    )
+    with record_run(workdir, run_id) as telemetry:
+        results = execute_steps(
+            database_path, workspace, plan, asset_files, registry=registry, qgis_bindings=qgis_bindings,
+            python_implementations=python_implementations, qgis_process=qgis_process, timeout=timeout,
+            input_preflight=input_preflight,
+        )
+        if telemetry is not None:
+            telemetry.steps_finished()
+        result = _finish_run(
+            database_path, run_id, workdir, plan, asset_files, results, check_rules, registry=registry,
+            qgis_bindings=qgis_bindings, python_implementations=python_implementations, artifact_rules=artifact_rules,
+            rule_versions=rule_versions,
+        )
+        if telemetry is not None:
+            telemetry.complete(result.execution_status.value, result.check_status)
+        return result
 
 
 def execute_claimed_run(
@@ -487,16 +494,22 @@ def execute_claimed_run(
         raise ValueError("Claimed run workspace differs from its expected path")
     _check_record_paths(plan)
     asset_files = _read_run_snapshot(workdir, plan, run.id)
-    results = execute_steps(
-        database_path, workspace, plan, asset_files, registry=registry, qgis_bindings=qgis_bindings,
-        python_implementations=python_implementations, qgis_process=qgis_process, timeout=timeout,
-        input_preflight=input_preflight,
-    )
-    return _finish_run(
-        database_path, run.id, workdir, plan, asset_files, results, check_rules, registry=registry,
-        qgis_bindings=qgis_bindings, python_implementations=python_implementations, artifact_rules=artifact_rules,
-        rule_versions=rule_versions,
-    )
+    with record_run(workdir, run.id, created_at=run.created_at) as telemetry:
+        results = execute_steps(
+            database_path, workspace, plan, asset_files, registry=registry, qgis_bindings=qgis_bindings,
+            python_implementations=python_implementations, qgis_process=qgis_process, timeout=timeout,
+            input_preflight=input_preflight,
+        )
+        if telemetry is not None:
+            telemetry.steps_finished()
+        result = _finish_run(
+            database_path, run.id, workdir, plan, asset_files, results, check_rules, registry=registry,
+            qgis_bindings=qgis_bindings, python_implementations=python_implementations, artifact_rules=artifact_rules,
+            rule_versions=rule_versions,
+        )
+        if telemetry is not None:
+            telemetry.complete(result.execution_status.value, result.check_status)
+        return result
 
 
 def _read_run_snapshot(workdir: Path, plan: AnalysisPlan, run_id: str) -> dict[str, StepFileRef]:

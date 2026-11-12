@@ -21,3 +21,5 @@ P13-01 已核对各档生成物和独立参考。AUD-05 仍需执行资源遥测
 P14-02 模板生成与 P14-03 静态 lint 已通过。隔离试运行仍依赖独立参考样例包。 [模板验收](../../docs/round2/methods/p14-02.md) · [lint 验收](../../docs/round2/methods/p14-03.md)
 
 P16-03 已准备可复跑的主持流程和观察工具。真实会话为 0，P16-04 和 P16-05 仍依赖实际观察。 [准备证据](../../docs/round2/user-research/p16-03-preparation.md)
+
+P13-02 已通过固定用例门禁。首轮扩展 GIS 回归的单次 DEM 状态响应缺字段，根因未证实，保留至 P13-07 压力复验。外部容器实际资源不可见时标 unavailable，P13-03 优先使用原生 QGIS 采样。 [遥测结果与首次失败](../../docs/round2/performance/p13-02.md)

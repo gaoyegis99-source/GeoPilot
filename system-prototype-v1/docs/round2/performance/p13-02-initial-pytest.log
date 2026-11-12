@@ -1,0 +1,11 @@
+command: ['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-m', 'pytest', '-q', '-p', 'no:cacheprovider', 'tests/observability', '--basetemp', '/tmp/geopilot-p13-02-unit-1h7rftnk/pytest', '--junitxml=docs/round2/performance/p13-02-junit.xml']
+s.....s......                                                            [100%]
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-02-junit.xml -
+11 passed, 2 skipped, 1 warning in 5.92s
+exit_code: 0

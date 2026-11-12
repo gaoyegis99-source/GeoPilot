@@ -1,0 +1,72 @@
+command: ['/home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python', '-m', 'pytest', '-q', '-p', 'no:cacheprovider', 'tests/golden', 'tests/gis', 'tests/methods', 'tests/runners/test_measurement_steps.py', 'tests/application/test_plan_run.py::test_road_workflow_passes_fixed_road_cases_and_reproduces_in_an_independent_run', 'tests/llm/test_data_boundary.py', 'tests/llm/test_error_handling.py::test_actual_http_retry_posts_exact_scanned_prompt_with_fixed_envelope', 'tests/llm/test_error_handling.py::test_rejected_request_opens_no_socket_even_when_adapter_called_directly', 'tests/api/test_check_reports.py::test_real_qgis_execution_status_is_independent_of_check_report', '--basetemp', '/tmp/geopilot-p13-02-fixed-nnr7l1jo/pytest', '--junitxml=docs/round2/performance/p13-02-fixed-junit.xml']
+........................................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 45%]
+........................................................................ [ 60%]
+.....................F.................................................. [ 75%]
+........................................................................ [ 90%]
+............................................                             [100%]
+=================================== FAILURES ===================================
+_ test_real_seven_step_terrain_method_derives_ratio_and_registers_results[slope-45-False] _
+
+workbench = (<starlette.testclient.TestClient object at 0x7f9c052e9010>, PosixPath('/tmp/geopilot-p13-02-fixed-nnr7l1jo/pytest/test_real_seven_step_terrain_m0/analysis-extent.gpkg'))
+output = 'slope', angle = 45, interrupt = False
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f9c052baaf0>
+
+    @pytest.mark.parametrize(("output", "angle", "interrupt"), [
+        ("slope", 45, False), ("aspect", 270, False), ("slope", 45, True),
+    ])
+    def test_real_seven_step_terrain_method_derives_ratio_and_registers_results(
+        workbench, output, angle, interrupt, monkeypatch,
+    ):
+        client, _ = workbench
+        entered, resume = Event(), Event()
+        rule_name = "dem_covers_expanded_extent"
+        if interrupt:
+            check = DEM_ARTIFACT_RULES[rule_name]
+    
+            def pause_first_check(context):
+                findings = check(context)
+                entered.set()
+                assert resume.wait(20)
+                return findings
+    
+            monkeypatch.setitem(DEM_ARTIFACT_RULES, rule_name, pause_first_check)
+        entry, = [item for item in client.get("/api/methods").json()["methods"] if item["definition"]["id"] == METHOD["id"]]
+        assert entry["available"] is True and entry["derived_options"] == ["z_factor"]
+        interval = {**OPTIONS["threshold"]["intervals"][0], "lower": angle, "upper": angle}
+        draft, request = _draft(workbench, options={
+            **OPTIONS, "terrain_output": output, "z_factor": 999, "threshold": {"intervals": [interval]},
+        })
+        assert draft["issues"] == [] and draft["critical_options"]["z_factor"] == 1
+        assert [step["key"] for step in draft["steps"]] == STEPS
+        assert draft["inputs"] == request["inputs"]
+        plan_endpoint = f"/api/plans/{draft['id']}"
+        _post(client, plan_endpoint + "/confirm", {"plan_version": 1})
+        assert client.get(f"/api/tasks/{draft['task_id']}").json()["runs"] == []
+        run_id = _post(client, plan_endpoint + "/runs", {"plan_version": 1}, status=202)["run_id"]
+        run_endpoint = f"/api/runs/{run_id}"
+        if interrupt:
+            try:
+                assert entered.wait(90), client.get(run_endpoint).text
+                _post(client, run_endpoint + "/cancel", {}, status=202)
+            finally:
+                resume.set()
+        deadline = time.monotonic() + 90
+        while time.monotonic() < deadline:
+            state = client.get(run_endpoint).json()
+>           if state["execution_status"] in {"FAILED", "CANCELLED"} or state["current_report_id"]:
+E           KeyError: 'execution_status'
+
+tests/methods/test_dem_terrain_method.py:105: KeyError
+=============================== warnings summary ===============================
+.venv/lib/python3.13/site-packages/starlette/testclient.py:53
+  /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/lib/python3.13/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/docs/round2/performance/p13-02-fixed-junit.xml -
+=========================== short test summary info ============================
+FAILED tests/methods/test_dem_terrain_method.py::test_real_seven_step_terrain_method_derives_ratio_and_registers_results[slope-45-False]
+1 failed, 475 passed, 1 warning in 328.83s (0:05:28)
+exit_code: 1

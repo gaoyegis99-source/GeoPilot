@@ -207,7 +207,7 @@ def invoke_qgis(
     try:
         schema = run_process(
             step, [executable, "--json", "help", step.contract.implementation],
-            timeout=min(timeout, _DISCOVERY_TIMEOUT), env=env,
+            timeout=min(timeout, _DISCOVERY_TIMEOUT), env=env, phase="discovery",
         )
     except AdapterError as error:
         raise AdapterError(

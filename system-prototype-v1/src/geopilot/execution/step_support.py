@@ -5,7 +5,7 @@ import json
 import math
 import shlex
 from collections.abc import Callable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -15,6 +15,7 @@ from geopilot.data.vector_reader import read_vector_metadata
 from geopilot.domain.data_asset import TableMetadata, VectorMetadata
 from geopilot.domain.tool_contract import ToolContract, ToolRef
 from geopilot.execution.process_manager import capture_process
+from geopilot.observability.telemetry import StepTelemetry, start_step
 from geopilot.tools.parameter_normalizer import ParameterNormalizationError, normalize_parameters
 from geopilot.tools.registry import ToolRegistry
 
@@ -50,6 +51,7 @@ class PreparedStep:
     request_path: Path
     result_path: Path
     cancel_requested: Callable[[], bool] | None = None
+    telemetry: StepTelemetry | None = None
 
 
 def _invalid(message: str, field: str) -> AdapterError:
@@ -150,6 +152,7 @@ def prepare_step(
 def run_process(
     step: PreparedStep, argv: Sequence[str], *, timeout: float,
     stdin: str | None = None, env: Mapping[str, str] | None = None,
+    phase: str = "execute",
 ) -> str:
     """Capture a real child process and keep stdout/stderr in the step log."""
     if not math.isfinite(timeout) or timeout <= 0:
@@ -159,14 +162,18 @@ def run_process(
     with step.log_path.open("a", encoding="utf-8") as log:
         log.write(f"$ {shlex.join(argv)}\n")
         log.flush()
+        probe = None if step.telemetry is None else step.telemetry.start_process(phase)
         try:
             outcome = capture_process(
                 argv, cwd=step.workdir, env=env, stdin=stdin, timeout=timeout,
-                cancel_requested=step.cancel_requested,
+                cancel_requested=step.cancel_requested, probe=probe,
             )
         except OSError as error:
             log.write(f"Process could not start: {error}\n")
             raise AdapterError(str(error), code="PROCESS_START_FAILED", field="tool") from error
+        finally:
+            if probe is not None:
+                probe.finish(None)
 
         log.write(f"stdout:\n{outcome.stdout}\nstderr:\n{outcome.stderr}\nexit_code: {outcome.exit_code}\n")
         if outcome.cancelled:
@@ -272,6 +279,7 @@ def execute_adapter(
 ) -> dict:
     """Validate and record one adapter call using the common step result shape."""
     identifiers = request if isinstance(request, Mapping) else {}
+    telemetry = start_step(workdir, identifiers)
     result = {
         "run_id": identifiers.get("run_id"), "step_key": identifiers.get("step_key"),
         "status": "FAILED", "exit_code": None, "outputs": {}, "log_path": None,
@@ -284,6 +292,9 @@ def execute_adapter(
         step = prepare_step(
             request, registry=registry, workdir=workdir, runner=runner, cancel_requested=cancel_requested,
         )
+        if telemetry is not None:
+            telemetry.set_tool(step.contract.id, step.contract.version, step.contract.runner)
+            step = replace(step, telemetry=telemetry)
         _write_json(step.request_path, step.request)
         with step.log_path.open("x", encoding="utf-8") as log:
             log.write(f"{step.contract.id} version {step.contract.version} ({step.contract.runner})\n")
@@ -322,4 +333,6 @@ def execute_adapter(
             _record_failure(result, AdapterError(
                 str(error), code="STORAGE_FAILED", field="workdir_ref", exit_code=result["exit_code"]
             ))
+    if telemetry is not None:
+        telemetry.finish(result)
     return result

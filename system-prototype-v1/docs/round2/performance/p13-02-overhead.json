@@ -1,0 +1,485 @@
+{
+  "workload": "import time\nend = time.process_time() + 0.10\nwhile time.process_time() < end: pass\ntime.sleep(0.14)",
+  "iterations": [
+    {
+      "index": 0,
+      "warmup": true,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265076701,
+      "supervisor_cpu_ns": 831496,
+      "process": null
+    },
+    {
+      "index": 0,
+      "warmup": true,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 265925005,
+      "supervisor_cpu_ns": 7142662,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265570159,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 2707677,
+        "last_sample_ns": 257214183,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 100000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8728576,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "warmup": true,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 266075245,
+      "supervisor_cpu_ns": 6602608,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265731843,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 1979147,
+        "last_sample_ns": 256209328,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 110000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8794112,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "warmup": true,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265655756,
+      "supervisor_cpu_ns": 1335757,
+      "process": null
+    },
+    {
+      "index": 2,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265657582,
+      "supervisor_cpu_ns": 1241649,
+      "process": null
+    },
+    {
+      "index": 2,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 266320770,
+      "supervisor_cpu_ns": 6246931,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265974359,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 2277210,
+        "last_sample_ns": 256196528,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 110000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8802304,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 266164157,
+      "supervisor_cpu_ns": 6239924,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265796733,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 2088708,
+        "last_sample_ns": 256154744,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 110000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8724480,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265597966,
+      "supervisor_cpu_ns": 1162735,
+      "process": null
+    },
+    {
+      "index": 4,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265295327,
+      "supervisor_cpu_ns": 1180696,
+      "process": null
+    },
+    {
+      "index": 4,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 265892789,
+      "supervisor_cpu_ns": 6056661,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265684175,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 2128473,
+        "last_sample_ns": 256105044,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 110000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8654848,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 5,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 267058903,
+      "supervisor_cpu_ns": 6979420,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 266731625,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 2969787,
+        "last_sample_ns": 257037157,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 110000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8654848,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 5,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 534624901,
+      "supervisor_cpu_ns": 1136806,
+      "process": null
+    },
+    {
+      "index": 6,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265523204,
+      "supervisor_cpu_ns": 1315694,
+      "process": null
+    },
+    {
+      "index": 6,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 265964769,
+      "supervisor_cpu_ns": 5903023,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265669425,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 5,
+        "first_sample_ns": 2064174,
+        "last_sample_ns": 205253534,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 100000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8683520,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 7,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 265497040,
+      "supervisor_cpu_ns": 5654582,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265131513,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 5,
+        "first_sample_ns": 1838460,
+        "last_sample_ns": 205138327,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 100000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8638464,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    },
+    {
+      "index": 7,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265465142,
+      "supervisor_cpu_ns": 1205276,
+      "process": null
+    },
+    {
+      "index": 8,
+      "warmup": false,
+      "sampling": false,
+      "exit_code": 0,
+      "wall_ns": 265461999,
+      "supervisor_cpu_ns": 1160613,
+      "process": null
+    },
+    {
+      "index": 8,
+      "warmup": false,
+      "sampling": true,
+      "exit_code": 0,
+      "wall_ns": 266283001,
+      "supervisor_cpu_ns": 6563227,
+      "process": {
+        "phase": "execute",
+        "wall_ns": 265910133,
+        "exit_code": 0,
+        "cancelled": false,
+        "timed_out": false,
+        "resource_scope": "local_process_session",
+        "sample_interval_ns": 50000000,
+        "sample_count": 6,
+        "first_sample_ns": 2258182,
+        "last_sample_ns": 256547448,
+        "peak_sampled_processes": 1,
+        "resources": {
+          "cpu_ns": {
+            "status": "partial",
+            "value": 110000000,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "peak_rss_bytes": {
+            "status": "sampled",
+            "value": 8749056,
+            "reason": null
+          },
+          "disk_read_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          },
+          "disk_write_bytes": {
+            "status": "partial",
+            "value": 0,
+            "reason": "observed_cumulative_lower_bound"
+          }
+        }
+      }
+    }
+  ],
+  "medians": {
+    "false": {
+      "n": 7,
+      "wall_ns": 265523204,
+      "supervisor_cpu_ns": 1180696
+    },
+    "true": {
+      "n": 7,
+      "wall_ns": 266164157,
+      "supervisor_cpu_ns": 6239924
+    }
+  }
+}
