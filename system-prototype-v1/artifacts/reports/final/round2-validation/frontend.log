@@ -1,49 +1,51 @@
-commit 6ecdbca38671b28793244d90984d116411bb4e52
-cwd /dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tree/system-prototype-v1/frontend
-command npm test -- --run --reporter=default --reporter=junit --outputFile.junit=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/validation/round2-validation/frontend.xml
+commit 6961ee3694694be24f58697fe666d8b0b67fee01
+cwd /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1/frontend
+command npm test -- --run --reporter=default --reporter=junit --outputFile.junit=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/frontend.xml
 
 > geopilot-workbench@1.0.0 test
-> vitest --run --reporter=default --reporter=junit --outputFile.junit=/dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/validation/round2-validation/frontend.xml
+> vitest --run --reporter=default --reporter=junit --outputFile.junit=/dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/frontend.xml
 
 
- RUN  v5.0.5 /dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/tree/system-prototype-v1/frontend
+ RUN  v5.0.5 /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/tree/system-prototype-v1/frontend
 
- ✓ src/features/method-form/MethodForm.test.tsx (7 tests) 895ms
-   ✓ limits roles to compatible available versions and submits numeric values in the declared unit 352ms
- ✓ src/features/plans/AlternativePlansPanel.test.tsx (3 tests) 1105ms
-   ✓ compares inputs, parameters and tools, then waits for explicit draft selection 368ms
-   ✓ keeps the failed run linked while reviewing a revision and starts only after confirmation 461ms
- ✓ src/features/map/MapPanel.test.tsx (17 tests) 1365ms
-   ✓ uses local source references, renders all three vector styles and picks the exact artifact ID 454ms
- ✓ src/features/runs/RunPanel.test.tsx (6 tests) 522ms
- ✓ src/features/checks/ChecksPanel.test.tsx (4 tests) 522ms
- ✓ src/features/model-assistance/ModelAssistPanel.test.tsx (6 tests) 533ms
- ✓ src/features/scripts/ScriptRunsPage.test.tsx (3 tests) 622ms
-   ✓ browses script state, actual log, indexed download and isolated vector preview 438ms
- ✓ src/features/plans/preview/PlanPreview.test.tsx (3 tests) 500ms
-   ✓ shows the exact plan and asset versions with all declared option values 353ms
- ✓ src/App.clarification.test.tsx (1 test) 701ms
-   ✓ answers one field per version, restores the current draft, and keeps explicit confirmation 700ms
- ✓ src/features/session/workbench-session.test.ts (5 tests) 12ms
- ✓ src/features/methods/MethodCatalogPanel.test.tsx (4 tests) 382ms
+ ✓ src/features/method-form/MethodForm.test.tsx (7 tests) 908ms
+   ✓ limits roles to compatible available versions and submits numeric values in the declared unit 354ms
+ ✓ src/features/plans/AlternativePlansPanel.test.tsx (3 tests) 1123ms
+   ✓ compares inputs, parameters and tools, then waits for explicit draft selection 378ms
+   ✓ keeps the failed run linked while reviewing a revision and starts only after confirmation 470ms
+ ✓ src/features/map/MapPanel.test.tsx (17 tests) 1375ms
+   ✓ uses local source references, renders all three vector styles and picks the exact artifact ID 458ms
+ ✓ src/features/runs/RunPanel.test.tsx (6 tests) 443ms
+ ✓ src/features/checks/ChecksPanel.test.tsx (4 tests) 511ms
+ ✓ src/features/model-assistance/ModelAssistPanel.test.tsx (6 tests) 549ms
+ ✓ src/features/scripts/ScriptRunsPage.test.tsx (3 tests) 729ms
+   ✓ browses script state, actual log, indexed download and isolated vector preview 499ms
+ ✓ src/features/plans/preview/PlanPreview.test.tsx (3 tests) 543ms
+   ✓ shows the exact plan and asset versions with all declared option values 369ms
+ ✓ src/App.clarification.test.tsx (1 test) 726ms
+   ✓ answers one field per version, restores the current draft, and keeps explicit confirmation 724ms
+ ✓ src/features/session/workbench-session.test.ts (5 tests) 14ms
+ ✓ src/App.recheck.test.tsx (1 test) 652ms
+   ✓ offers one visible recovery action after cancelling a check and retains it if submission fails 650ms
+ ✓ src/features/methods/MethodCatalogPanel.test.tsx (4 tests) 383ms
  ✓ src/features/artifacts/ArtifactsPanel.test.tsx (3 tests) 463ms
-   ✓ keeps formal downloads, source versions, map selection and diagnostics tied to the same run 326ms
- ✓ src/features/assets/AssetPanel.test.tsx (3 tests) 438ms
- ✓ src/features/plans/PlanActions.test.tsx (2 tests) 301ms
- ✓ src/pages/WorkbenchPage.test.tsx (4 tests) 670ms
+   ✓ keeps formal downloads, source versions, map selection and diagnostics tied to the same run 334ms
+ ✓ src/features/assets/AssetPanel.test.tsx (3 tests) 462ms
+ ✓ src/pages/WorkbenchPage.test.tsx (4 tests) 639ms
    ✓ WorkbenchPage (4)
-     ✓ shows the seven regions and distinct confirmation and execution actions 407ms
- ✓ src/components/errors/ProblemDetails.test.tsx (4 tests) 272ms
+     ✓ shows the seven regions and distinct confirmation and execution actions 409ms
+ ✓ src/features/plans/PlanActions.test.tsx (2 tests) 269ms
+ ✓ src/components/errors/ProblemDetails.test.tsx (4 tests) 254ms
 
- Test Files  16 passed (16)
-      Tests  75 passed (75)
-   Start at  04:29:54
-   Duration  8.50s (environment 43%, tests 41%, import 11%, transform 6%)
+ Test Files  17 passed (17)
+      Tests  76 passed (76)
+   Start at  05:07:55
+   Duration  9.30s (environment 42%, tests 42%, import 11%, transform 5%)
 
-Environment  jsdom was created 16 times · 9.70s total, 43% of tracked time
+Environment  jsdom was created 17 times · 10.13s total, 42% of tracked time
              create it once per worker with pool: 'vmThreads' (keeps per-file isolation) or isolate: false (shares it across files)
              learn more: https://vitest.dev/guide/improving-performance#test-environments
 
-JUNIT report written to /dev/shm/geopilot-p16-ux-candidate.eNUiU7SX/validation/round2-validation/frontend.xml
+JUNIT report written to /dev/shm/geopilot-p16-check-fix-candidate.12rMXeZG/validation/round2-validation/frontend.xml
 
 exit 0
