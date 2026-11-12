@@ -54,7 +54,7 @@ P13-05 的原版 L 线相交 14 轮均在关系判定超时。局部裁剪候选
 
 P13-05 已分别验证逐步请求采集、原生环境指纹及计时外配置回执。正式复测需要使用同一包装方式采集，比较时强制回执。当前镜像只有本机 ID。 [请求采集](../../docs/round2/performance/p13-05-preflight-raster-step-requests.log) · [环境复验](../../docs/round2/performance/p13-05-preflight.md#原生运行时身份与配置对照)
 
-P13-05 修正版 M 矢量、DEM S 和遥感 S 配对已完成。DEM M 原版暖态第二次正式计量因连续状态查询失败及取消失败中止，缺完整回执，原版单侧重试已排在现行栅格与 T14 之后。状态查询诊断已集成，冻结批次的 HTTP 500 底层原因仍待确认。DEM L 已开始采样。 [遥感 S 重测](../../docs/round2/performance/p13-05-raster-s.md#遥感-s-重测) · [DEM M 中断及重试](../../docs/round2/performance/p13-05-raster-m-l.md#dem-m-原版暖态中断)
+P13-05 修正版 M 矢量、DEM S 和遥感 S 配对已完成。DEM M 原版暖态第二次正式计量因连续状态查询失败及取消失败中止，缺完整回执，原版单侧重试已排在现行栅格与 T14 之后。冻结批次的 HTTP 500 底层原因仍待确认，历史中断副本的恢复已复验。DEM L 原版冷态 7 轮均在面积步超时，暖态采样中。 [DEM M 中断及重试](../../docs/round2/performance/p13-05-raster-m-l.md#dem-m-原版暖态中断) · [DEM L 原版冷态](../../docs/round2/performance/p13-05-raster-m-l.md#dem-l-原版冷态)
 
 L 点、线相交配对已完成，两组修正版各 14 次通过。L 按面积分配原版 14 次空间关系判定超时，冻结修正版 14 次裁回超时。局部裁回候选通过隔离与组合回归，等待栅格释放测量窗口后正式复测。 [矢量 L 证据](../../docs/round2/performance/p13-05-vector-l.md)
 
