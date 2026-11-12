@@ -1,0 +1,236 @@
+{
+  "archive": {
+    "bytes": 142078689,
+    "filename": "p13-native-readonly-bindings.tar.gz",
+    "sha256": "e26482ebf553a85cb572a37fe9adc4bb0c224c4e096e7b2fbdf047dbd22bdef0"
+  },
+  "cli_sha256": {
+    "/usr/bin/qgis_process": "4d3593bac0500aaf4097b739052728aec92545c5a939e53d7b3cf0a63950c663",
+    "/usr/bin/qgis_process.bin": "7f5e51331df13a1b7ba2ff74002d4646a2f5b697beb8f6157b0bfa13b9f60b73"
+  },
+  "cpu": [
+    31
+  ],
+  "image_required": "sha256:c618d0d9d91d0cf473d61e5fc284aa335e87caabd51381b73cd61b2d0f93cb87",
+  "ionice": "idle",
+  "mount_options": {
+    "/runtime": [
+      "ro",
+      "nosuid",
+      "nodev"
+    ],
+    "/usr/bin/qgis_process": [
+      "ro",
+      "nosuid",
+      "nodev"
+    ],
+    "/usr/bin/qgis_process.bin": [
+      "ro",
+      "nosuid",
+      "nodev"
+    ]
+  },
+  "nice": 19,
+  "python": {
+    "distributions": [
+      [
+        "PyYAML",
+        "6.0.3"
+      ],
+      [
+        "affine",
+        "2.4.0"
+      ],
+      [
+        "annotated-doc",
+        "0.0.4"
+      ],
+      [
+        "annotated-types",
+        "0.6.0"
+      ],
+      [
+        "anyio",
+        "4.16.0"
+      ],
+      [
+        "attrs",
+        "26.1.0"
+      ],
+      [
+        "certifi",
+        "2026.10.23"
+      ],
+      [
+        "click",
+        "8.4.2"
+      ],
+      [
+        "click-plugins",
+        "1.1.1.2"
+      ],
+      [
+        "cligj",
+        "0.7.2"
+      ],
+      [
+        "fastapi",
+        "0.141.1"
+      ],
+      [
+        "geopandas",
+        "1.1.3"
+      ],
+      [
+        "h11",
+        "0.16.0"
+      ],
+      [
+        "httpcore2",
+        "2.13.0"
+      ],
+      [
+        "httpx2",
+        "2.13.0"
+      ],
+      [
+        "idna",
+        "3.20"
+      ],
+      [
+        "iniconfig",
+        "2.3.0"
+      ],
+      [
+        "numpy",
+        "2.4.4"
+      ],
+      [
+        "packaging",
+        "26.0"
+      ],
+      [
+        "pandas",
+        "3.0.2"
+      ],
+      [
+        "pluggy",
+        "1.6.0"
+      ],
+      [
+        "pydantic",
+        "2.13.5"
+      ],
+      [
+        "pydantic_core",
+        "2.46.5"
+      ],
+      [
+        "pyogrio",
+        "0.12.1"
+      ],
+      [
+        "pyparsing",
+        "3.3.2"
+      ],
+      [
+        "pyproj",
+        "3.7.2"
+      ],
+      [
+        "pytest",
+        "8.3.4"
+      ],
+      [
+        "python-dateutil",
+        "2.9.0.post0"
+      ],
+      [
+        "rasterio",
+        "1.4.3"
+      ],
+      [
+        "shapely",
+        "2.1.2"
+      ],
+      [
+        "six",
+        "1.17.0"
+      ],
+      [
+        "starlette",
+        "1.6.0"
+      ],
+      [
+        "truststore",
+        "0.10.1"
+      ],
+      [
+        "typing-inspection",
+        "0.4.2"
+      ],
+      [
+        "typing_extensions",
+        "4.16.0"
+      ],
+      [
+        "uvicorn",
+        "0.32.1"
+      ]
+    ],
+    "version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]"
+  },
+  "qgis_deb": {
+    "Architecture": "amd64",
+    "Package": "qgis",
+    "Version": "1:3.44.15+40noble",
+    "bytes": 8373292,
+    "cli_members": {
+      "/usr/bin/qgis_process": {
+        "mode": 493,
+        "sha256": "4d3593bac0500aaf4097b739052728aec92545c5a939e53d7b3cf0a63950c663"
+      },
+      "/usr/bin/qgis_process.bin": {
+        "mode": 493,
+        "sha256": "7f5e51331df13a1b7ba2ff74002d4646a2f5b697beb8f6157b0bfa13b9f60b73"
+      }
+    },
+    "filename": "qgis_3.44.15+40noble_amd64.deb",
+    "sha256": "4f92abee00069919d56b525e8f2d8d10b1e725649978d0ba7e6f8990ec7d094f"
+  },
+  "qgis_version": {
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "QGIS 3.44.15-Solothurn 'Solothurn' (44b4ef05178)\nQGIS code revision 44b4ef05178\nQt version 5.15.13\nPython version 3.12.3\nGDAL/OGR version 3.8.4\nPROJ version 9.4.0\nEPSG Registry database version v11.004 (2024-02-24)\nGEOS version 3.12.1-CAPI-1.18.1\nSQLite version 3.45.1\nOS Ubuntu 24.04.5 LTS"
+  },
+  "restored_inventory_entries": 7493,
+  "runtime_tree": {
+    "count": 6738,
+    "sha256": "3233f3636b55351dd81c67d07665f14ff2b7668e768ee3880859c9c9652efea9"
+  },
+  "runtime_variables": {
+    "GDAL_DATA": null,
+    "GDAL_DRIVER_PATH": null,
+    "GDAL_NUM_THREADS": "1",
+    "HOME": "/tmp",
+    "LD_LIBRARY_PATH": null,
+    "MKL_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PROJ_AUX_DB": null,
+    "PROJ_DATA": null,
+    "PROJ_LIB": null,
+    "PROJ_NETWORK": "OFF",
+    "QGIS_CUSTOM_CONFIG_PATH": "/tmp/geopilot-qgis",
+    "QGIS_PLUGINPATH": null,
+    "QT_QPA_PLATFORM": "offscreen"
+  },
+  "same_as_verified_native_bindings": true,
+  "status": "PASS",
+  "symlinks": {
+    "p13-native/venv/bin/python": "python3",
+    "p13-native/venv/bin/python3": "/usr/bin/python3",
+    "p13-native/venv/bin/python3.12": "python3",
+    "p13-native/venv/lib64": "lib"
+  }
+}

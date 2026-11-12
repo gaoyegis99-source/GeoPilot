@@ -1,0 +1,678 @@
+{
+  "status": "PREVIEW",
+  "source_commit": "37cb329be04eaddfeb23ac62789926d0fcdb63aa",
+  "complete_groups": 10,
+  "observed_records": 74,
+  "planned_records": 98,
+  "unique_run_ids_in_both_L_batches": 116,
+  "input_manifest_sha256": "ada61ccadb58accc19039b9f30c24db3d25ac0dc11d09987148105e10dac9c24",
+  "raw_sample_prefix_sha256": "a8ac12ab06dcf8b6cf4a31d45f4ca34f96e721ea7b631723086a19321b333a92",
+  "allowed_environment_differences": [
+    "argv",
+    "cgroup_membership",
+    "io_pressure",
+    "load_average",
+    "road_profile_sha256",
+    "started_utc"
+  ],
+  "groups": [
+    {
+      "workload": "t13-points-intersects",
+      "cache": "process_cold",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "clip_back_to_analysis_extent",
+      "failed_measurement_wall_ns_range": [
+        95569373901,
+        96743110995
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            88150000000,
+            89180000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 3,
+            "partial": 2
+          },
+          "observed_range": [
+            340688896,
+            342806528
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            30326784,
+            30326784
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            281319503,
+            281319557
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-points-intersects",
+      "cache": "warm",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "clip_back_to_analysis_extent",
+      "failed_measurement_wall_ns_range": [
+        95881008399,
+        96946140768
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            88310000000,
+            89430000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 2,
+            "partial": 3
+          },
+          "observed_range": [
+            341798912,
+            342454272
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            30326784,
+            30326784
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            281319502,
+            281319557
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-points-within",
+      "cache": "process_cold",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "clip_back_to_analysis_extent",
+      "failed_measurement_wall_ns_range": [
+        94828832078,
+        95096896521
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            87930000000,
+            88230000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "partial": 2,
+            "sampled": 3
+          },
+          "observed_range": [
+            342085632,
+            342937600
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            6889472,
+            6889472
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            257882167,
+            257882257
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-points-within",
+      "cache": "warm",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "clip_back_to_analysis_extent",
+      "failed_measurement_wall_ns_range": [
+        94782862422,
+        95394140608
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            88040000000,
+            88330000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 3,
+            "partial": 2
+          },
+          "observed_range": [
+            341491712,
+            342659072
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            6889472,
+            6889472
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            257882168,
+            257882258
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-lines-intersects",
+      "cache": "process_cold",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        66881225472,
+        67182621821
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            59940000000,
+            59980000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 3,
+            "partial": 2
+          },
+          "observed_range": [
+            410988544,
+            412463104
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            251173773,
+            251173826
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-lines-intersects",
+      "cache": "warm",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        66854233591,
+        67217256952
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            59940000000,
+            59970000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "partial": 3,
+            "sampled": 2
+          },
+          "observed_range": [
+            410435584,
+            412413952
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            251173773,
+            251173827
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-lines-within",
+      "cache": "process_cold",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        66859348167,
+        67264416349
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            59960000000,
+            59980000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 1,
+            "partial": 4
+          },
+          "observed_range": [
+            410677248,
+            412164096
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            251173757,
+            251173811
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-lines-within",
+      "cache": "warm",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        66903991174,
+        67166868300
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            59940000000,
+            59970000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 3,
+            "partial": 2
+          },
+          "observed_range": [
+            410521600,
+            412590080
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            251173757,
+            251173811
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-polygons-within",
+      "cache": "process_cold",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        67518381309,
+        68070968786
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            59960000000,
+            59980000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            473247744,
+            474570752
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            251173819,
+            251173820
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t13-polygons-within",
+      "cache": "warm",
+      "complete": true,
+      "warmup_fail": 2,
+      "measured_fail": 5,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        67732360872,
+        67944478904
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            59950000000,
+            59970000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            473104384,
+            473698304
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 5
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 5
+          },
+          "observed_range": [
+            251173820,
+            251173820
+          ]
+        }
+      }
+    },
+    {
+      "workload": "t14-centroid",
+      "cache": "process_cold",
+      "complete": false,
+      "warmup_fail": 2,
+      "measured_fail": 2,
+      "failed_step": "apply_spatial_relation",
+      "failed_measurement_wall_ns_range": [
+        65337418710,
+        65521957801
+      ],
+      "failed_measurement_resources": {
+        "cpu_ns": {
+          "coverage": {
+            "partial": 2
+          },
+          "observed_range": [
+            59950000000,
+            59960000000
+          ]
+        },
+        "peak_rss_bytes": {
+          "coverage": {
+            "sampled": 1,
+            "partial": 1
+          },
+          "observed_range": [
+            328736768,
+            334204928
+          ]
+        },
+        "disk_read_bytes": {
+          "coverage": {
+            "partial": 2
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "disk_write_bytes": {
+          "coverage": {
+            "partial": 2
+          },
+          "observed_range": [
+            0,
+            0
+          ]
+        },
+        "peak_temp_bytes": {
+          "coverage": {
+            "sampled": 2
+          },
+          "observed_range": [
+            121967313,
+            121967367
+          ]
+        }
+      }
+    }
+  ]
+}

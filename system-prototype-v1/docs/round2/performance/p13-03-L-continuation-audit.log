@@ -1,0 +1,9 @@
+23d08ab3dcf0942b3db592835a0f1898a84955d2
+Python 3.13.13
+actual live prefix and frozen gzip replay: exit 0, identical JSON
+duplicate-run: exit 1
+L continuation audit failed: Duplicate run 222b89de171a4adeab9b94ced0b22131
+inconsistent-timeout: exit 1
+L continuation audit failed: Missing process timeout evidence for 222b89de171a4adeab9b94ced0b22131
+incomplete strict audit: exit 1
+L continuation audit failed: Final audit requires all 98 records

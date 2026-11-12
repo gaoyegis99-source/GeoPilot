@@ -25,3 +25,9 @@ export PYTHONPATH=src PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1
 ```
 
 新增第二轮清单模块、候选验证入口、复现说明和专项测试。原生成器新增 `--round2`，原校验器新增 `--round2-manifest` 与可选 `--offline-root`。CI 增加新清单专项。撤销工具提交可撤回第二轮候选打包能力。
+
+## 原生基准绑定文件恢复
+
+A 在与正式基准不同的物理盘上归档 Python venv、QGIS CLI 和对应的 LTR Debian 包，解包到空的 tmpfs 目录。源和恢复目录的 7,493 项类型、权限、大小和符号链接逐项一致。恢复目录中的运行时与两份 QGIS CLI 以只读方式挂入已核验的本机镜像，断网启动版本与内容检查，退出 0。运行时 6,738 个条目的指纹及两份 QGIS CLI 摘要与原生环境证据一致。主控独立重算归档 SHA-256，与报告一致。 [恢复及复核报告](p16-06-native-bindings-verification.json) · [原生环境证据](../performance/p13-05-preflight-native-identity.json)
+
+归档为 `artifacts/test-results/p16-06-native-bindings.BdbMRw/p13-native-readonly-bindings.tar.gz`，共 142,078,689 字节，SHA-256 为 `e26482ebf553a85cb572a37fe9adc4bb0c224c4e096e7b2fbdf047dbd22bdef0`。同目录的 `proof/` 保留打包、恢复、容器命令与校验日志。本次验证覆盖外部绑定文件以及它们在现有镜像中的使用。镜像导出与跨机器恢复仍待执行，当前 Docker 镜像层和正式矢量基准位于同一物理盘。正式第二轮候选包仍待阶段证据和最终同提交回执。

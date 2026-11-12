@@ -26,3 +26,9 @@ F 从四批 gzip JSONL 重算组级与步骤级分布，主控复跑同一命令
 nice -n 19 taskset -c 31 .venv/bin/python \
   docs/round2/performance/p13-03-archive-audit.py docs/round2/performance
 ```
+
+## L 后续批次独立复核
+
+主控从正在写入的原始 JSONL 冻结前 74 条完整记录，与首批 L 的环境和输入清单对照。两批使用相同源提交、驱动、QGIS 和输入摘要。首批与后续记录共有 116 个唯一 run ID。后续的十组已完成全部冷热采样键，其余样本继续采集。点任务在裁剪超时，其余已观测任务在空间关系超时。逐条核对持久终态、计划步骤、进程退出码和资源观测覆盖。 [复核脚本](p13-03-L-continuation-audit.py) · [原始复算结果](p13-03-L-continuation-audit-preview.json)
+
+同一批原始字节压缩归档后重跑输出一致。注入重复 run ID、移除实际进程超时标记，以及用未采完的样本执行正式审计，均退出 1。正式审计还要读取全部 98 条和最终汇总。当前输出状态为 `PREVIEW`。原始压缩样本和命令保存在 `artifacts/test-results/p13-03-L-continuation-audit.wnPNCG/`。 [复跑及异常验证](p13-03-L-continuation-audit.log)

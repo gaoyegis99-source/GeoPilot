@@ -237,6 +237,7 @@
 
 - B 的原生批次使用冻结的生产提交 `37cb329be04eaddfeb23ac62789926d0fcdb63aa`。道路、T13 面相交和 T14 按面积分割分别完成冷热两类各 2 次预热和 5 次正式采样，批次退出 1，汇总为 42 FAIL、0 PASS、0 NOT_RUN。
 - 主控从 `/mnt/datab/geopilot-p13-03.KXUnnZ/L-formal/evidence/samples.jsonl` 核对 42 个唯一运行及各组采样键。道路 14 次在成果登记报 `OUTPUT_INVALID`。T13 和 T14 各 14 次在 `apply_spatial_relation` 报 `PROCESS_TIMEOUT`，退出 -15。T14 的后续两步保持 `NOT_STARTED`。P13-03 仍为 DOING，余下七项继续正式采样。
+- 主控冻结 L 后续批次首 74 条原始样本，独立复核输入、终态、逐步超时及资源覆盖。压缩副本重跑一致，重复 run、无进程超时和正式复核缺样均拒绝。正式汇总待该批 98 次采样完成。 [复算与复跑](../../docs/round2/performance/p13-03-SM-reproduction.md#l-后续批次独立复核)
 - F 独立复算 S、M、M 续段和首批 L 共 325 个唯一运行，分布及资源计数与归档一致。主控复跑结果逐字节一致，归档 S/M 实际使用的旧驱动并验证解包摘要及 CLI 入口。 [复算与旧驱动归档](../../docs/round2/performance/p13-03-SM-reproduction.md)
 
 ## P13-05 隔离候选检查
@@ -269,3 +270,4 @@
 
 - F 和主控独立复现原打包可遗漏选定 Markdown 间接引用的已跟踪原始证据，离线校验仍退出 0。候选递归收录同一夹具的报告和原始 JSON，离线重查回执可拒绝缺失证据、无效锚点和越界路径。
 - 主控联合 60 项通过，退出 0。P12-03 精确审计记录继续追踪历史缺链。P16-06 仍为 BLOCKED，正式同提交候选待阶段证据齐备。 [命令、输出与 JUnit](../../docs/round2/deployment/p16-06-tooling.md)
+- A 将原生 venv 和匹配 QGIS CLI 归档到另一物理盘并从空目录恢复。目录清单逐项相同，恢复绑定在同一镜像断网通过指纹和版本检查，退出 0。主控独立重算归档摘要。镜像导出和最终同提交包仍待完成。 [恢复报告](../../docs/round2/deployment/p16-06-native-bindings-verification.json)
