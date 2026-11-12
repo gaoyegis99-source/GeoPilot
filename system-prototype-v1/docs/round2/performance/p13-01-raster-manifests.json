@@ -1,0 +1,912 @@
+{
+  "commit": "9a862cd8d445827e3daf647134989a52f64ff1c1",
+  "environment": {
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "python": "3.13.13",
+    "numpy": "2.4.4",
+    "rasterio": "1.4.3",
+    "rasterio_gdal": "3.9.3",
+    "pyogrio": "0.12.1",
+    "pyogrio_gdal": [
+      3,
+      11,
+      4
+    ]
+  },
+  "runs": [
+    {
+      "exit_code": 0,
+      "manifest": {
+        "version": 1,
+        "family": "raster",
+        "tier": "S",
+        "files": [
+          {
+            "path": "analysis-extent.gpkg",
+            "role": "analysis_extent",
+            "bytes": 98304,
+            "sha256": "f34e0f9b9d86333c1dc93463ab7f97ea0971e735244a2a8f270ef49c78bb2b2c"
+          },
+          {
+            "path": "dem.tif",
+            "role": "dem",
+            "bytes": 1049176,
+            "sha256": "859d26a3f372d87e526765c516c1f2e7699aa69e359fd0520fcfee86c875d277"
+          }
+        ],
+        "reference": {
+          "crs": "EPSG:32650",
+          "transform": [
+            10.0,
+            0.0,
+            500000.0,
+            0.0,
+            -10.0,
+            4500000.0
+          ],
+          "shape": [
+            512,
+            512
+          ],
+          "bands": 1,
+          "dtype": "float32",
+          "compression": "none",
+          "nodata": -9999,
+          "halo_pixels": 1,
+          "analysis_extent": {
+            "layer": "analysis_extent",
+            "bounds": [
+              500010.0,
+              4494890.0,
+              505110.0,
+              4499990.0
+            ],
+            "shape": [
+              510,
+              510
+            ],
+            "transform": [
+              10.0,
+              0.0,
+              500010.0,
+              0.0,
+              -10.0,
+              4499990.0
+            ]
+          },
+          "pixels": 262144,
+          "input_nodata_pixels": 16,
+          "valid_terrain_pixels": 259956,
+          "raw_input_bytes": 1048576,
+          "terrain_nodata_pixels": 144,
+          "slope_degrees": 45,
+          "slope_percent": 100,
+          "aspect_degrees": 270,
+          "logical_pixel_sha256": "13eb8e4b77533ccb2d68ba1d3be7b22081377ba636d03948380ea55b7273d614"
+        }
+      }
+    },
+    {
+      "exit_code": 0,
+      "manifest": {
+        "version": 1,
+        "family": "raster",
+        "tier": "M",
+        "files": [
+          {
+            "path": "analysis-extent.gpkg",
+            "role": "analysis_extent",
+            "bytes": 98304,
+            "sha256": "0a44c3f6c80faeab2431e0cb0679d031b2b18979279458b410d45273de1a692f"
+          },
+          {
+            "path": "dem.tif",
+            "role": "dem",
+            "bytes": 16778296,
+            "sha256": "e1f671121d51c93f50d9f94eca7acd2bbb60975827d4a7e1bac0ee9b07597dd0"
+          }
+        ],
+        "reference": {
+          "crs": "EPSG:32650",
+          "transform": [
+            10.0,
+            0.0,
+            500000.0,
+            0.0,
+            -10.0,
+            4500000.0
+          ],
+          "shape": [
+            2048,
+            2048
+          ],
+          "bands": 1,
+          "dtype": "float32",
+          "compression": "none",
+          "nodata": -9999,
+          "halo_pixels": 1,
+          "analysis_extent": {
+            "layer": "analysis_extent",
+            "bounds": [
+              500010.0,
+              4479530.0,
+              520470.0,
+              4499990.0
+            ],
+            "shape": [
+              2046,
+              2046
+            ],
+            "transform": [
+              10.0,
+              0.0,
+              500010.0,
+              0.0,
+              -10.0,
+              4499990.0
+            ]
+          },
+          "pixels": 4194304,
+          "input_nodata_pixels": 256,
+          "valid_terrain_pixels": 4183812,
+          "raw_input_bytes": 16777216,
+          "terrain_nodata_pixels": 2304,
+          "slope_degrees": 45,
+          "slope_percent": 100,
+          "aspect_degrees": 270,
+          "logical_pixel_sha256": "8dbf18fd4f4c12bddfb5b6b6db679cdbd17be4746643036e1d359aaccb4cc879"
+        }
+      }
+    },
+    {
+      "exit_code": 0,
+      "manifest": {
+        "version": 1,
+        "family": "raster",
+        "tier": "L",
+        "files": [
+          {
+            "path": "analysis-extent.gpkg",
+            "role": "analysis_extent",
+            "bytes": 98304,
+            "sha256": "b54eea6153310e0b5ace5ac02b83fec2fdce0e3def3a5ceb25d8f4b61fcec33f"
+          },
+          {
+            "path": "dem.tif",
+            "role": "dem",
+            "bytes": 268444216,
+            "sha256": "ce40ca16068f49b09bcf4f96abf6f28daed46d08c1f13a47df589000c103169b"
+          }
+        ],
+        "reference": {
+          "crs": "EPSG:32650",
+          "transform": [
+            10.0,
+            0.0,
+            500000.0,
+            0.0,
+            -10.0,
+            4500000.0
+          ],
+          "shape": [
+            8192,
+            8192
+          ],
+          "bands": 1,
+          "dtype": "float32",
+          "compression": "none",
+          "nodata": -9999,
+          "halo_pixels": 1,
+          "analysis_extent": {
+            "layer": "analysis_extent",
+            "bounds": [
+              500010.0,
+              4418090.0,
+              581910.0,
+              4499990.0
+            ],
+            "shape": [
+              8190,
+              8190
+            ],
+            "transform": [
+              10.0,
+              0.0,
+              500010.0,
+              0.0,
+              -10.0,
+              4499990.0
+            ]
+          },
+          "pixels": 67108864,
+          "input_nodata_pixels": 4096,
+          "valid_terrain_pixels": 67039236,
+          "raw_input_bytes": 268435456,
+          "terrain_nodata_pixels": 36864,
+          "slope_degrees": 45,
+          "slope_percent": 100,
+          "aspect_degrees": 270,
+          "logical_pixel_sha256": "3dc72b72756ad447faa2c1138c181eb8a5cdaac677548e6f1e27a8ac7562088a"
+        }
+      }
+    },
+    {
+      "exit_code": 0,
+      "manifest": {
+        "version": 1,
+        "family": "remote_sensing",
+        "tier": "S",
+        "files": [
+          {
+            "path": "analysis-extent.gpkg",
+            "role": "analysis_extent",
+            "bytes": 98304,
+            "sha256": "c51830aa20f247da38514a805cc88b421822344d2cd7618a074bfbcc48002d51"
+          },
+          {
+            "path": "first-landsat.tif",
+            "role": "first_product",
+            "bytes": 527634,
+            "sha256": "043bbe96ff870a806ffb3d3e678341f22f99d326507d1ff6049184cfd2177b62"
+          },
+          {
+            "path": "second-sentinel.tif",
+            "role": "second_product",
+            "bytes": 3544107,
+            "sha256": "a235e72b7c0fa0ee9ab01d6ea21ebeac845a0296366154b0c80b6b8d3267784f"
+          },
+          {
+            "path": "sentinel-scl-20m.tif",
+            "role": "native_quality_reference",
+            "bytes": 524804,
+            "sha256": "9041efa651773421b2105126b3e97c1e793efe595a5d3dd17e97f5181afa8e8a"
+          }
+        ],
+        "reference": {
+          "crs": "EPSG:32632",
+          "transform": [
+            30.0,
+            0.0,
+            500000.0,
+            0.0,
+            -30.0,
+            5100000.0
+          ],
+          "compression": "none",
+          "grids": {
+            "landsat": {
+              "shape": [
+                192,
+                192
+              ],
+              "transform": [
+                30.0,
+                0.0,
+                500000.0,
+                0.0,
+                -30.0,
+                5100000.0
+              ],
+              "dtype": "uint16",
+              "bands": 4,
+              "nodata": null
+            },
+            "sentinel": {
+              "shape": [
+                578,
+                578
+              ],
+              "transform": [
+                10.0,
+                0.0,
+                499993.0,
+                0.0,
+                -10.0,
+                5100007.0
+              ],
+              "dtype": "uint16",
+              "bands": 3,
+              "nodata": null
+            },
+            "native_scl": {
+              "shape": [
+                289,
+                289
+              ],
+              "transform": [
+                20.0,
+                0.0,
+                499993.0,
+                0.0,
+                -20.0,
+                5100007.0
+              ],
+              "dtype": "uint16",
+              "bands": 1,
+              "nodata": null
+            }
+          },
+          "analysis_extent": {
+            "layer": "analysis_extent",
+            "bounds": [
+              500000.0,
+              5094240.0,
+              505760.0,
+              5100000.0
+            ]
+          },
+          "products": {
+            "landsat": {
+              "id": "LC08_L2SP_043035_20240701_20240703_02_T1",
+              "product_key": {
+                "sensor": "landsat-8-oli-tirs",
+                "product_level": "L2SP",
+                "processing_version": "02"
+              },
+              "configuration": {
+                "id": "landsat-8-c2-l2sp",
+                "version": 1
+              },
+              "bands": {
+                "red": {
+                  "index": 4,
+                  "code": "SR_B4",
+                  "native_resolution_m": 30,
+                  "nodata_dn": 0,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "nir": {
+                  "index": 2,
+                  "code": "SR_B5",
+                  "native_resolution_m": 30,
+                  "nodata_dn": 0,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "quality": {
+                  "index": 1,
+                  "code": "QA_PIXEL",
+                  "native_resolution_m": 30,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "saturation": {
+                  "index": 3,
+                  "code": "QA_RADSAT",
+                  "native_resolution_m": 30,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": null
+                }
+              },
+              "logical_pixel_sha256": "aa3aea1bdb92909260770262510cacbbe3a8161c72aa4c7bbc074ff02f1a4ac4"
+            },
+            "sentinel": {
+              "id": "S2A_MSIL2A_20240831T103021_N0511_R108_T32UMA_20240831T151747.SAFE",
+              "product_key": {
+                "sensor": "sentinel-2-msi",
+                "product_level": "L2A",
+                "processing_version": "05.11"
+              },
+              "configuration": {
+                "id": "sentinel-2-l2a-pb05-11",
+                "version": 1
+              },
+              "bands": {
+                "red": {
+                  "index": 3,
+                  "code": "B04",
+                  "native_resolution_m": 10,
+                  "nodata_dn": 0,
+                  "band_id": 3,
+                  "resampling": null
+                },
+                "nir": {
+                  "index": 2,
+                  "code": "B08",
+                  "native_resolution_m": 10,
+                  "nodata_dn": 0,
+                  "band_id": 7,
+                  "resampling": null
+                },
+                "quality": {
+                  "index": 1,
+                  "code": "SCL",
+                  "native_resolution_m": 20,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": "nearest"
+                }
+              },
+              "logical_pixel_sha256": "2039c09f5f8965f794c0fadf306f89d942f1ee46425f44588dbeef49e58b36b3"
+            }
+          },
+          "native_scl_logical_pixel_sha256": "98b815aa6c4a7ed858bf86e9883078402ad72d1bc2648e3f134df3d8194c9953",
+          "landsat_pixels": 36864,
+          "sentinel_pixels": 334084,
+          "native_scl_pixels": 83521,
+          "expected_pixels_per_phase": 6144,
+          "common_valid_pixels": 18432,
+          "raw_input_bytes": 2299416,
+          "resampling": "nearest",
+          "change_threshold": 0.1,
+          "change_direction": "second_minus_first",
+          "phase_counts": {
+            "increase": 6144,
+            "decrease": 6144,
+            "stable": 6144,
+            "first_cloud": 6144,
+            "second_cloud": 6144,
+            "first_fill": 6144
+          },
+          "change_counts": {
+            "increase": 6144,
+            "decrease": 6144,
+            "stable": 6144
+          },
+          "nodata_pixels": 18432,
+          "ndvi_delta_by_valid_phase": {
+            "increase": 0.5,
+            "decrease": -0.1470588235294118,
+            "stable": 0.0
+          },
+          "sentinel_shared_mask": "optical_pixel_center_inside_first_product_footprint"
+        }
+      }
+    },
+    {
+      "exit_code": 0,
+      "manifest": {
+        "version": 1,
+        "family": "remote_sensing",
+        "tier": "M",
+        "files": [
+          {
+            "path": "analysis-extent.gpkg",
+            "role": "analysis_extent",
+            "bytes": 98304,
+            "sha256": "a59efc372414036f96202c0027ab8ac9c53f6578b37e71267167567c6fb67e94"
+          },
+          {
+            "path": "first-landsat.tif",
+            "role": "first_product",
+            "bytes": 4722010,
+            "sha256": "20ba6872c09e3187eee7cb270505e8f2a431bc8c9fa12aa236027b72cd83b470"
+          },
+          {
+            "path": "second-sentinel.tif",
+            "role": "second_product",
+            "bytes": 39331286,
+            "sha256": "255ef4589ae52a495f866b1185a5d136abcf4eb749333eebf38cad9fd0749299"
+          },
+          {
+            "path": "sentinel-scl-20m.tif",
+            "role": "native_quality_reference",
+            "bytes": 3277484,
+            "sha256": "676fcd7aaea4df4d2725d87a2c410b7933d2ddcea04d7317fd9a2d8d5cec8f78"
+          }
+        ],
+        "reference": {
+          "crs": "EPSG:32632",
+          "transform": [
+            30.0,
+            0.0,
+            500000.0,
+            0.0,
+            -30.0,
+            5100000.0
+          ],
+          "compression": "none",
+          "grids": {
+            "landsat": {
+              "shape": [
+                768,
+                768
+              ],
+              "transform": [
+                30.0,
+                0.0,
+                500000.0,
+                0.0,
+                -30.0,
+                5100000.0
+              ],
+              "dtype": "uint16",
+              "bands": 4,
+              "nodata": null
+            },
+            "sentinel": {
+              "shape": [
+                2306,
+                2306
+              ],
+              "transform": [
+                10.0,
+                0.0,
+                499993.0,
+                0.0,
+                -10.0,
+                5100007.0
+              ],
+              "dtype": "uint16",
+              "bands": 3,
+              "nodata": null
+            },
+            "native_scl": {
+              "shape": [
+                1153,
+                1153
+              ],
+              "transform": [
+                20.0,
+                0.0,
+                499993.0,
+                0.0,
+                -20.0,
+                5100007.0
+              ],
+              "dtype": "uint16",
+              "bands": 1,
+              "nodata": null
+            }
+          },
+          "analysis_extent": {
+            "layer": "analysis_extent",
+            "bounds": [
+              500000.0,
+              5076960.0,
+              523040.0,
+              5100000.0
+            ]
+          },
+          "products": {
+            "landsat": {
+              "id": "LC08_L2SP_043035_20240701_20240703_02_T1",
+              "product_key": {
+                "sensor": "landsat-8-oli-tirs",
+                "product_level": "L2SP",
+                "processing_version": "02"
+              },
+              "configuration": {
+                "id": "landsat-8-c2-l2sp",
+                "version": 1
+              },
+              "bands": {
+                "red": {
+                  "index": 4,
+                  "code": "SR_B4",
+                  "native_resolution_m": 30,
+                  "nodata_dn": 0,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "nir": {
+                  "index": 2,
+                  "code": "SR_B5",
+                  "native_resolution_m": 30,
+                  "nodata_dn": 0,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "quality": {
+                  "index": 1,
+                  "code": "QA_PIXEL",
+                  "native_resolution_m": 30,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "saturation": {
+                  "index": 3,
+                  "code": "QA_RADSAT",
+                  "native_resolution_m": 30,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": null
+                }
+              },
+              "logical_pixel_sha256": "6bf56a13ae8053eae5a8ce142012bba087fe9ca12e88e20a945b45d7890365e3"
+            },
+            "sentinel": {
+              "id": "S2A_MSIL2A_20240831T103021_N0511_R108_T32UMA_20240831T151747.SAFE",
+              "product_key": {
+                "sensor": "sentinel-2-msi",
+                "product_level": "L2A",
+                "processing_version": "05.11"
+              },
+              "configuration": {
+                "id": "sentinel-2-l2a-pb05-11",
+                "version": 1
+              },
+              "bands": {
+                "red": {
+                  "index": 3,
+                  "code": "B04",
+                  "native_resolution_m": 10,
+                  "nodata_dn": 0,
+                  "band_id": 3,
+                  "resampling": null
+                },
+                "nir": {
+                  "index": 2,
+                  "code": "B08",
+                  "native_resolution_m": 10,
+                  "nodata_dn": 0,
+                  "band_id": 7,
+                  "resampling": null
+                },
+                "quality": {
+                  "index": 1,
+                  "code": "SCL",
+                  "native_resolution_m": 20,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": "nearest"
+                }
+              },
+              "logical_pixel_sha256": "e13e7fd91cdd8d62b0fc0b073138dbe18bef55b2e02e1b930ed7e465b459feee"
+            }
+          },
+          "native_scl_logical_pixel_sha256": "71d0bca9d7f547d7092d1619e444761a6749fb0a3208eb3f878ee9b864cbc1ad",
+          "landsat_pixels": 589824,
+          "sentinel_pixels": 5317636,
+          "native_scl_pixels": 1329409,
+          "expected_pixels_per_phase": 98304,
+          "common_valid_pixels": 294912,
+          "raw_input_bytes": 36624408,
+          "resampling": "nearest",
+          "change_threshold": 0.1,
+          "change_direction": "second_minus_first",
+          "phase_counts": {
+            "increase": 98304,
+            "decrease": 98304,
+            "stable": 98304,
+            "first_cloud": 98304,
+            "second_cloud": 98304,
+            "first_fill": 98304
+          },
+          "change_counts": {
+            "increase": 98304,
+            "decrease": 98304,
+            "stable": 98304
+          },
+          "nodata_pixels": 294912,
+          "ndvi_delta_by_valid_phase": {
+            "increase": 0.5,
+            "decrease": -0.1470588235294118,
+            "stable": 0.0
+          },
+          "sentinel_shared_mask": "optical_pixel_center_inside_first_product_footprint"
+        }
+      }
+    },
+    {
+      "exit_code": 0,
+      "manifest": {
+        "version": 1,
+        "family": "remote_sensing",
+        "tier": "L",
+        "files": [
+          {
+            "path": "analysis-extent.gpkg",
+            "role": "analysis_extent",
+            "bytes": 98304,
+            "sha256": "88d86e3e94688079fead93d504759e07909a4f2f70af93cfa28d87231ca4b121"
+          },
+          {
+            "path": "first-landsat.tif",
+            "role": "first_product",
+            "bytes": 75501970,
+            "sha256": "8d78992f466521a24b970446ee1cbdcd0f0d359967b566a5e675c05b9a145a70"
+          },
+          {
+            "path": "second-sentinel.tif",
+            "role": "second_product",
+            "bytes": 538383059,
+            "sha256": "ee101be1b5e8e246dc1afcfe912b73f5e0013635c3f72423c890277c6963addc"
+          },
+          {
+            "path": "sentinel-scl-20m.tif",
+            "role": "native_quality_reference",
+            "bytes": 47320364,
+            "sha256": "f471541d6145b27b3c5a89fc64bb5d61ab155dfbc8a831e097c1fcfe99ecc29e"
+          }
+        ],
+        "reference": {
+          "crs": "EPSG:32632",
+          "transform": [
+            30.0,
+            0.0,
+            500000.0,
+            0.0,
+            -30.0,
+            5100000.0
+          ],
+          "compression": "none",
+          "grids": {
+            "landsat": {
+              "shape": [
+                3072,
+                3072
+              ],
+              "transform": [
+                30.0,
+                0.0,
+                500000.0,
+                0.0,
+                -30.0,
+                5100000.0
+              ],
+              "dtype": "uint16",
+              "bands": 4,
+              "nodata": null
+            },
+            "sentinel": {
+              "shape": [
+                9218,
+                9218
+              ],
+              "transform": [
+                10.0,
+                0.0,
+                499993.0,
+                0.0,
+                -10.0,
+                5100007.0
+              ],
+              "dtype": "uint16",
+              "bands": 3,
+              "nodata": null
+            },
+            "native_scl": {
+              "shape": [
+                4609,
+                4609
+              ],
+              "transform": [
+                20.0,
+                0.0,
+                499993.0,
+                0.0,
+                -20.0,
+                5100007.0
+              ],
+              "dtype": "uint16",
+              "bands": 1,
+              "nodata": null
+            }
+          },
+          "analysis_extent": {
+            "layer": "analysis_extent",
+            "bounds": [
+              500000.0,
+              5007840.0,
+              592160.0,
+              5100000.0
+            ]
+          },
+          "products": {
+            "landsat": {
+              "id": "LC08_L2SP_043035_20240701_20240703_02_T1",
+              "product_key": {
+                "sensor": "landsat-8-oli-tirs",
+                "product_level": "L2SP",
+                "processing_version": "02"
+              },
+              "configuration": {
+                "id": "landsat-8-c2-l2sp",
+                "version": 1
+              },
+              "bands": {
+                "red": {
+                  "index": 4,
+                  "code": "SR_B4",
+                  "native_resolution_m": 30,
+                  "nodata_dn": 0,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "nir": {
+                  "index": 2,
+                  "code": "SR_B5",
+                  "native_resolution_m": 30,
+                  "nodata_dn": 0,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "quality": {
+                  "index": 1,
+                  "code": "QA_PIXEL",
+                  "native_resolution_m": 30,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": null
+                },
+                "saturation": {
+                  "index": 3,
+                  "code": "QA_RADSAT",
+                  "native_resolution_m": 30,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": null
+                }
+              },
+              "logical_pixel_sha256": "c15c6a4ce7dd2dfa7aa2fa51d1c2a433ab2fcac32ed612a594c97062c5aa0730"
+            },
+            "sentinel": {
+              "id": "S2A_MSIL2A_20240831T103021_N0511_R108_T32UMA_20240831T151747.SAFE",
+              "product_key": {
+                "sensor": "sentinel-2-msi",
+                "product_level": "L2A",
+                "processing_version": "05.11"
+              },
+              "configuration": {
+                "id": "sentinel-2-l2a-pb05-11",
+                "version": 1
+              },
+              "bands": {
+                "red": {
+                  "index": 3,
+                  "code": "B04",
+                  "native_resolution_m": 10,
+                  "nodata_dn": 0,
+                  "band_id": 3,
+                  "resampling": null
+                },
+                "nir": {
+                  "index": 2,
+                  "code": "B08",
+                  "native_resolution_m": 10,
+                  "nodata_dn": 0,
+                  "band_id": 7,
+                  "resampling": null
+                },
+                "quality": {
+                  "index": 1,
+                  "code": "SCL",
+                  "native_resolution_m": 20,
+                  "nodata_dn": null,
+                  "band_id": null,
+                  "resampling": "nearest"
+                }
+              },
+              "logical_pixel_sha256": "d50c2daca2353edde6d0b144391989d70b5dd816316834eaa99be4590a7a5e56"
+            }
+          },
+          "native_scl_logical_pixel_sha256": "0706a808f9ff0a49bccc6fcc087f0520f95154e077e1b495ec2fbd430edcd8c3",
+          "landsat_pixels": 9437184,
+          "sentinel_pixels": 84971524,
+          "native_scl_pixels": 21242881,
+          "expected_pixels_per_phase": 1572864,
+          "common_valid_pixels": 4718592,
+          "raw_input_bytes": 585326616,
+          "resampling": "nearest",
+          "change_threshold": 0.1,
+          "change_direction": "second_minus_first",
+          "phase_counts": {
+            "increase": 1572864,
+            "decrease": 1572864,
+            "stable": 1572864,
+            "first_cloud": 1572864,
+            "second_cloud": 1572864,
+            "first_fill": 1572864
+          },
+          "change_counts": {
+            "increase": 1572864,
+            "decrease": 1572864,
+            "stable": 1572864
+          },
+          "nodata_pixels": 4718592,
+          "ndvi_delta_by_valid_phase": {
+            "increase": 0.5,
+            "decrease": -0.1470588235294118,
+            "stable": 0.0
+          },
+          "sentinel_shared_mask": "optical_pixel_center_inside_first_product_footprint"
+        }
+      }
+    }
+  ]
+}

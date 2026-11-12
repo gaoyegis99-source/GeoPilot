@@ -1,0 +1,12 @@
+/usr/bin/time -f 'exit=%x max_rss_kib=%M elapsed_s=%e' /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/generate_raster.py --tier S --output /tmp/geopilot-p13-01-rasters-u27xcgoo/raster-S
+exit=0 max_rss_kib=175004 elapsed_s=0.71
+/usr/bin/time -f 'exit=%x max_rss_kib=%M elapsed_s=%e' /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/generate_raster.py --tier M --output /tmp/geopilot-p13-01-rasters-u27xcgoo/raster-M
+exit=0 max_rss_kib=189808 elapsed_s=0.83
+/usr/bin/time -f 'exit=%x max_rss_kib=%M elapsed_s=%e' /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/generate_raster.py --tier L --output /tmp/geopilot-p13-01-rasters-u27xcgoo/raster-L
+exit=0 max_rss_kib=205256 elapsed_s=3.34
+/usr/bin/time -f 'exit=%x max_rss_kib=%M elapsed_s=%e' /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/generate_remote_sensing.py --tier S --output /tmp/geopilot-p13-01-rasters-u27xcgoo/remote_sensing-S
+exit=0 max_rss_kib=184636 elapsed_s=0.82
+/usr/bin/time -f 'exit=%x max_rss_kib=%M elapsed_s=%e' /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/generate_remote_sensing.py --tier M --output /tmp/geopilot-p13-01-rasters-u27xcgoo/remote_sensing-M
+exit=0 max_rss_kib=218752 elapsed_s=1.27
+/usr/bin/time -f 'exit=%x max_rss_kib=%M elapsed_s=%e' /home/mtd/liweigis/GeoPilot-round2/system-prototype-v1/.venv/bin/python scripts/bench/generate_remote_sensing.py --tier L --output /tmp/geopilot-p13-01-rasters-u27xcgoo/remote_sensing-L
+exit=0 max_rss_kib=227652 elapsed_s=8.10

@@ -1,0 +1,271 @@
+{
+  "task_id": "P13-01",
+  "family": "vector",
+  "environment": {
+    "platform": "Linux-5.15.0-139-generic-x86_64-with-glibc2.31",
+    "python": "3.13.13",
+    "geopandas": "1.1.3",
+    "numpy": "2.4.4",
+    "pyogrio": "0.12.1",
+    "gdal": "3.11.4",
+    "shapely": "2.1.2",
+    "geos": "3.13.1",
+    "proj": "9.5.1"
+  },
+  "implementation_sha256": "4d1d15fab6803a011fe002aabec6b2845b41f52396a43f0ebab65c78f68d540c",
+  "test_sha256": "ba426f42f10c6a811151d0e450925811a5dcb3544f204b6e9658e8416e0ae16d",
+  "tiers": {
+    "S": {
+      "tiles": 16,
+      "road_vertices": 2,
+      "attribute_bytes": 16,
+      "road_intersects_retained": 96,
+      "road_within_retained": 80,
+      "t14_unique_targets": 96,
+      "t14_total_area_m2": 35200,
+      "t14_uncovered_area_m2": 4800,
+      "last_tile_sample": {
+        "tile_id": "r003c003",
+        "road_main_endpoints_xy_m": [
+          [
+            256500,
+            4157500
+          ],
+          [
+            257500,
+            4157500
+          ]
+        ],
+        "t13_hole_bounds_xy_m": [
+          256040,
+          4156040,
+          256060,
+          4156060
+        ],
+        "t14_crossing_rows": 2
+      },
+      "manifest_sha256": "2f3f54dd48ffe353a5c0b9f4ef2e5d62f2fe4aa8429d133b88bdb8d26efd05ea",
+      "files": {
+        "relations.gpkg": {
+          "bytes": 274432,
+          "sha256": "ec61bf63b999c2fb2ec6e2e21d1a41485769e0cc1d1db9b64fbf6782bdea179b",
+          "crs": "EPSG:32650",
+          "reopened_layers": {
+            "area": 16,
+            "points": 96,
+            "lines": 160,
+            "polygons": 192
+          },
+          "logical_sha256": {
+            "area": "74f764e64e8f453129d48d24e1f9c7a20b7f30f8a42bebdf5d172cfddc4ec717",
+            "lines": "736cd250af36e96b62c84df0f975585910191035c78739720990fbe54bd737dd",
+            "points": "0d2a30aa7199ddcd8655a66a2e29e894e6db41e8119bef5d831aff96d4f68015",
+            "polygons": "45fbf6d76d02adab709454148cd3968e9c6e48a93fcff797aa740e0a50d047ba"
+          }
+        },
+        "road.gpkg": {
+          "bytes": 204800,
+          "sha256": "2dc8036995e1385f710d429567bb59593ea23dab007671c94593213d1a1d1939",
+          "crs": "EPSG:32650",
+          "reopened_layers": {
+            "analysis_extent": 16,
+            "roads": 48,
+            "targets": 144,
+            "zones": 32
+          },
+          "logical_sha256": {
+            "analysis_extent": "f97ab0661f0a41c80493af9d549242af1d60d90df78ddc768e24c19b6819862c",
+            "roads": "19bcb0a6e62fb19ddbef49231197a36d481ec67c048b9c54731ef690c15df9b3",
+            "targets": "0fd06ef500875f26fe119ebe17c6b4767f9fd7102ea091f5f7e9835335d8b83e",
+            "zones": "48e6f28e851ec3e305adb803d4c52f98cfda31c760462065f281cbc0810aa56f"
+          }
+        },
+        "t14.gpkg": {
+          "bytes": 217088,
+          "sha256": "b661950112a53c1f2ccccccb6ac9d72adc18ef238849247416f74c80bc977b4e",
+          "crs": "EPSG:6933",
+          "reopened_layers": {
+            "targets": 128,
+            "relation_area": 16,
+            "analysis_extent": 48,
+            "zones": 32
+          },
+          "logical_sha256": {
+            "analysis_extent": "cd198161e970ec350947d9caac3d4801b83ec873f482ab94d0bdd407ee3d712c",
+            "relation_area": "3af6e43f1978a7d19005c35d76222e837b2e0904e16520b32ef6ae2d36d50bc7",
+            "targets": "3d524274e2c2cc3e224c8ee54f8b8b736a9695dd08df642f86a1ae3989765eb5",
+            "zones": "aa612430c0f661ff945e666b0eb2be5b5040bbbf2546d23cda348a0af6d00955"
+          }
+        }
+      }
+    },
+    "M": {
+      "tiles": 1024,
+      "road_vertices": 9,
+      "attribute_bytes": 64,
+      "road_intersects_retained": 6144,
+      "road_within_retained": 5120,
+      "t14_unique_targets": 6144,
+      "t14_total_area_m2": 2252800,
+      "t14_uncovered_area_m2": 307200,
+      "last_tile_sample": {
+        "tile_id": "r031c031",
+        "road_main_endpoints_xy_m": [
+          [
+            368500,
+            4269500
+          ],
+          [
+            369500,
+            4269500
+          ]
+        ],
+        "t13_hole_bounds_xy_m": [
+          368040,
+          4268040,
+          368060,
+          4268060
+        ],
+        "t14_crossing_rows": 2
+      },
+      "manifest_sha256": "4a2f4568b7b40227b028fb2d3505fdb9508144a446eb84c6f0e1bb9e5ff81cb2",
+      "files": {
+        "relations.gpkg": {
+          "bytes": 9469952,
+          "sha256": "c37a6af7665faf53281f35aff79aef9733264b8354768a30157ef5b915ad5975",
+          "crs": "EPSG:32650",
+          "reopened_layers": {
+            "area": 1024,
+            "points": 6144,
+            "lines": 10240,
+            "polygons": 12288
+          },
+          "logical_sha256": {
+            "area": "ef2ea667e183d60395913f6bffa1db5714bf96c9a93a1f90a968d9f70170bb61",
+            "lines": "1168b087b99222acddc582ae05e0641f28c9184407dfd5280a4578aa8faff979",
+            "points": "16fab1e253635319358a9ce19d63f564a82369d88088c6f3623dcd1046c85fbc",
+            "polygons": "3e2b87e8041aab673ca1a956efc8ea2901fe75eb07a02e6e0970848a71f22ada"
+          }
+        },
+        "road.gpkg": {
+          "bytes": 4493312,
+          "sha256": "9fd25ed1b20a1c6b8d1227661f5dc518d5f6f61da90cbbbe8c402f9c671c4df1",
+          "crs": "EPSG:32650",
+          "reopened_layers": {
+            "analysis_extent": 1024,
+            "roads": 3072,
+            "targets": 9216,
+            "zones": 2048
+          },
+          "logical_sha256": {
+            "analysis_extent": "755319f221ddbe45b0a6f7b23de5d8ad5db7b4922c45ec11071e5dd8ed025a5f",
+            "roads": "0a92e3bfe1c2673861020bbccbf77b525d83f35dbae8cdec9fe6b34a5e19a851",
+            "targets": "9eb13a906262dc27145d8b8cd77d1c5b860f6d8a981ee865a2765fe63328a316",
+            "zones": "b51a3954f69481b6bd1107f8cbf524ab7e68428c08f42ffada44e5c990462537"
+          }
+        },
+        "t14.gpkg": {
+          "bytes": 4730880,
+          "sha256": "cecddb1517de04c567488d2bbd0901afba4c3ee55d687ee08c054f089d4e0638",
+          "crs": "EPSG:6933",
+          "reopened_layers": {
+            "targets": 8192,
+            "relation_area": 1024,
+            "analysis_extent": 3072,
+            "zones": 2048
+          },
+          "logical_sha256": {
+            "analysis_extent": "73be638bf7e02e4c2f5c075d9e8d097bd21d9758381a686e987cbfbeb8a94841",
+            "relation_area": "fdeee4787eb33b58442048e608992caa38d179ff8b4bcdf5c926de97e1563241",
+            "targets": "30bada9d3fe496a6428bd4d41e3d83a1e5550c791f218ad166da1026f7443a18",
+            "zones": "1fae14af32035df324bf00a05707511946437e78b9bd559544300edee32d6a6f"
+          }
+        }
+      }
+    },
+    "L": {
+      "tiles": 16384,
+      "road_vertices": 33,
+      "attribute_bytes": 256,
+      "road_intersects_retained": 98304,
+      "road_within_retained": 81920,
+      "t14_unique_targets": 98304,
+      "t14_total_area_m2": 36044800,
+      "t14_uncovered_area_m2": 4915200,
+      "last_tile_sample": {
+        "tile_id": "r127c127",
+        "road_main_endpoints_xy_m": [
+          [
+            752500,
+            4653500
+          ],
+          [
+            753500,
+            4653500
+          ]
+        ],
+        "t13_hole_bounds_xy_m": [
+          752040,
+          4652040,
+          752060,
+          4652060
+        ],
+        "t14_crossing_rows": 2
+      },
+      "manifest_sha256": "ada61ccadb58accc19039b9f30c24db3d25ac0dc11d09987148105e10dac9c24",
+      "files": {
+        "relations.gpkg": {
+          "bytes": 251162624,
+          "sha256": "f11a95162d3136d020660d60d4641727ecefa0df171cf7f2e079205731d9cd3c",
+          "crs": "EPSG:32650",
+          "reopened_layers": {
+            "area": 16384,
+            "points": 98304,
+            "lines": 163840,
+            "polygons": 196608
+          },
+          "logical_sha256": {
+            "area": "efc1eda701c5acac8ebc2b7b563da31198328cb18f547b1490060c248a26f2c4",
+            "lines": "a708dd152f1845b18ae91e5f444e6d3e39d20ff5cc421c53d242ee5a22746bd9",
+            "points": "a479e359c8c831ed2993aa622e45e0f7a567801c513477a1d77c170dd0ceeba3",
+            "polygons": "93d8370d7ba38f55dc1aa63d8e554666300b16c17f4e44276bb404a2629c5408"
+          }
+        },
+        "road.gpkg": {
+          "bytes": 149028864,
+          "sha256": "01036320a6bb7184619ae31ac085b4470e7de8c2bb4547918e8fabd6578af5db",
+          "crs": "EPSG:32650",
+          "reopened_layers": {
+            "analysis_extent": 16384,
+            "roads": 49152,
+            "targets": 147456,
+            "zones": 32768
+          },
+          "logical_sha256": {
+            "analysis_extent": "03018f9a387563e66a5a75d748fd310269b8f5d6ec129c90342cd20873f3d2d1",
+            "roads": "c811fdc1bbfa531efbf7fb2566ad74c36e73fbdf78e58d1822325e2a727ac53d",
+            "targets": "08e51e26a6d75af37dc924df36b2917337a39421722e5d6e3ebeec3b9a21531e",
+            "zones": "8653a0a719885eb0162d2887e635688333b9108be0d76a3fed1c7e13ce8044af"
+          }
+        },
+        "t14.gpkg": {
+          "bytes": 121954304,
+          "sha256": "9ee3d0f247ef0fcc6db30af8595b02e8e675985fc08f41f486acc87612d424d5",
+          "crs": "EPSG:6933",
+          "reopened_layers": {
+            "targets": 131072,
+            "relation_area": 16384,
+            "analysis_extent": 49152,
+            "zones": 32768
+          },
+          "logical_sha256": {
+            "analysis_extent": "6f13cde1ae30a59edb5e4da282158fadb87a97e64ceb4b4d20f6d199697f30c8",
+            "relation_area": "482dcb234ad11eddab75c6635c51015ab1a68054d010d0f764a2b405dce34ee1",
+            "targets": "158c70f6f6915fb6e2149807e656863c4a840de0bef94dbfe50cc2cb8908370a",
+            "zones": "dfdc48feb6f6f21d21ccb88a790d4a01d1b65f871077c6dcf6be1ea2548e2c96"
+          }
+        }
+      }
+    }
+  }
+}
