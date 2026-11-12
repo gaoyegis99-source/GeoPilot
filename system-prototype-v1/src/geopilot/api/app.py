@@ -1,10 +1,13 @@
 """HTTP entry point for the local GeoPilot workbench."""
 
+import json
+import logging
 import sqlite3
 from collections.abc import Callable, Iterable, Mapping
 from contextlib import asynccontextmanager
 from pathlib import Path
 from threading import Event, Thread
+from time import monotonic_ns
 from typing import TYPE_CHECKING
 
 from fastapi import FastAPI, HTTPException, Response
@@ -32,6 +35,9 @@ from geopilot.tools.registry import ToolRegistry
 
 if TYPE_CHECKING:
     from geopilot.checks.recheck_service import CheckAttempt
+
+
+_LOGGER = logging.getLogger(__name__)
 
 
 def create_app(
@@ -91,6 +97,7 @@ def create_app(
 
     @app.get("/api/runs/{run_id}")
     def read_run(run_id: str) -> RunStatus:
+        started_ns = monotonic_ns()
         try:
             return get_run_status(database_path, run_id)
         except LookupError as error:
@@ -98,6 +105,16 @@ def create_app(
                 status_code=404, detail={"code": "RUN_NOT_FOUND", "message": str(error)},
             ) from error
         except (sqlite3.Error, ValidationError) as error:
+            event = {
+                "event": "run_status_read_failed",
+                "error_kind": "sqlite" if isinstance(error, sqlite3.Error) else "state_validation",
+                "elapsed_ms": round((monotonic_ns() - started_ns) / 1_000_000, 3),
+            }
+            extended_code = getattr(error, "sqlite_errorcode", None)
+            if isinstance(extended_code, int):
+                event["sqlite_primary_code"] = extended_code & 0xFF
+                event["sqlite_extended_code"] = extended_code
+            _LOGGER.warning("%s", json.dumps(event))
             raise HTTPException(
                 status_code=500, detail={"code": "STORAGE_FAILED", "message": "Could not read the run record."},
             ) from error
