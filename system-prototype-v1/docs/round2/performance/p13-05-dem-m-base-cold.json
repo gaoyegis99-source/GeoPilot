@@ -1,0 +1,22 @@
+{
+  "state": "VERIFIED_COLD_PREFIX",
+  "source": "artifacts/test-results/p13-05-raster-pairs.a2d2e68.after-vector-l/dem-m/base/attempt.5kzfg0pd/evidence/trials.jsonl",
+  "prefix_sha256": "5d7ccf42b87f53bdc5a0a394a998e8ea62a00a3bedbcd7bb7b7f8cbfb9a8d1c5",
+  "run_ids": [
+    "54412b2274c04764aaef017027660bdf",
+    "0dc1414c7e6942af9eae8cee85198293",
+    "546439af54cb405f82a0ac886b90a336",
+    "1a46ddfb347b4aeca04aca018bd2dd3a",
+    "8e38e8d0c46e432c94ab2a49f4d0e032",
+    "4d1133b3e42241b1ba3ba0b44601be6f",
+    "7d0fa4928a7641d582750a254f6b72c3"
+  ],
+  "warmups_failed": 2,
+  "measurements_failed": 5,
+  "failure_step_counts": {
+    "calculate_area_with_equal_area_projection": 7
+  },
+  "median_wall_ns": 65965718912,
+  "p95_nearest_rank_wall_ns": 67793991784,
+  "status_poll_errors": 1
+}
