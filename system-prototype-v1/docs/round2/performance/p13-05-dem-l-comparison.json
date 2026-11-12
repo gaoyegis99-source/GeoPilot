@@ -1,0 +1,244 @@
+{
+  "status": "MATCHED_EVIDENCE",
+  "before_source": "977ab412d9f6e7558d22a5c431fac0ada90b07be",
+  "after_source": "a2d2e6874fd7d5d2a239de9d95a927f8505e2ebc",
+  "same_source": false,
+  "runtime_configuration": {
+    "level": "application_config_and_python_proj",
+    "schema_version": 1,
+    "sha256": "f290b7d264577770445efb0ad192777294df5e9f230050edff595c05ce2455b3"
+  },
+  "candidate_all_measurements_pass": false,
+  "groups": [
+    {
+      "group": [
+        "L",
+        "method",
+        "process_cold",
+        "p13-01",
+        "method"
+      ],
+      "before": {
+        "counts": {
+          "FAIL": 5,
+          "NOT_RUN": 0,
+          "PASS": 0
+        },
+        "failure_codes": {
+          "PROCESS_TIMEOUT": 5
+        },
+        "wall_ns": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 86145140165,
+            "p95_nearest_rank": 98954395829
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 4,
+            "median": 249741312,
+            "p95_nearest_rank": 249843712
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 1843780,
+            "p95_nearest_rank": 1843780
+          }
+        }
+      },
+      "after": {
+        "counts": {
+          "FAIL": 5,
+          "NOT_RUN": 0,
+          "PASS": 0
+        },
+        "failure_codes": {
+          "PROCESS_TIMEOUT": 5
+        },
+        "wall_ns": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 98021320064,
+            "p95_nearest_rank": 105279716461
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 5,
+            "median": 249548800,
+            "p95_nearest_rank": 250314752
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 1843780,
+            "p95_nearest_rank": 1843780
+          }
+        }
+      },
+      "successful_sample_deltas": {},
+      "step_parameter_evidence": "normalized_step_requests"
+    },
+    {
+      "group": [
+        "L",
+        "method",
+        "warm",
+        "p13-01",
+        "method"
+      ],
+      "before": {
+        "counts": {
+          "FAIL": 5,
+          "NOT_RUN": 0,
+          "PASS": 0
+        },
+        "failure_codes": {
+          "PROCESS_TIMEOUT": 5
+        },
+        "wall_ns": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 95948308262,
+            "p95_nearest_rank": 114665019359
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 4,
+            "median": 250114048,
+            "p95_nearest_rank": 250601472
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 1778244,
+            "p95_nearest_rank": 1843780
+          }
+        }
+      },
+      "after": {
+        "counts": {
+          "FAIL": 5,
+          "NOT_RUN": 0,
+          "PASS": 0
+        },
+        "failure_codes": {
+          "PROCESS_TIMEOUT": 5
+        },
+        "wall_ns": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 134057737078,
+            "p95_nearest_rank": 156478892838
+          }
+        },
+        "peak_rss_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 5,
+            "median": 249335808,
+            "p95_nearest_rank": 249634816
+          }
+        },
+        "peak_temp_bytes": {
+          "PASS": {
+            "samples": 0,
+            "partial": 0,
+            "median": null,
+            "p95_nearest_rank": null
+          },
+          "FAIL": {
+            "samples": 5,
+            "partial": 0,
+            "median": 1778244,
+            "p95_nearest_rank": 1874308
+          }
+        }
+      },
+      "successful_sample_deltas": {},
+      "step_parameter_evidence": "normalized_step_requests"
+    }
+  ]
+}
